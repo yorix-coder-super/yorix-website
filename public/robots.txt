@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://baby-schedule.example/sitemap.xml
+Sitemap: https://yorix.website/sitemap.xml
