@@ -35,6 +35,8 @@ const benefits = [
   'Turn daily logs into a routine that actually fits your baby',
 ];
 
+const appDownloadUrl = 'https://gotoapp.store/yorix';
+
 const faqs = [
   {
     question: 'What is a baby schedule?',
@@ -76,7 +78,9 @@ export default function Home() {
         </nav>
         <a
           className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#20222a] px-5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#343744] focus:outline-none focus:ring-4 focus:ring-[#5f64f4]/25"
-          href="#download"
+          href={appDownloadUrl}
+          rel="noopener noreferrer"
+          target="_blank"
         >
           Get the app
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -102,7 +106,9 @@ export default function Home() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#5f64f4] px-6 text-base font-semibold text-white shadow-[0_16px_35px_rgb(95_100_244/24%)] transition hover:bg-[#4d52df] focus:outline-none focus:ring-4 focus:ring-[#5f64f4]/25"
-              href="#download"
+              href={appDownloadUrl}
+              rel="noopener noreferrer"
+              target="_blank"
             >
               Plan the next nap
               <ArrowRight className="h-5 w-5" aria-hidden="true" />
@@ -285,17 +291,17 @@ export default function Home() {
               Create your baby’s first calm schedule.
             </h2>
             <p className="mt-3 max-w-2xl text-base leading-7 text-[#d9dbe8]">
-              Download link goes here when the App Store page is ready. For now,
-              this CTA is prepared for tracking and replacement.
+              Open Yorix and start tracking naps, feeds, diapers, and daily
+              rhythm in a calmer way.
             </p>
           </div>
           <a
             className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-white px-6 text-base font-semibold text-[#20222a] transition hover:bg-[#f0f0f4] focus:outline-none focus:ring-4 focus:ring-white/25"
-            href="https://apps.apple.com/"
+            href={appDownloadUrl}
             rel="noopener noreferrer"
             target="_blank"
           >
-            App Store
+            Download Yorix
             <ArrowRight className="h-5 w-5" aria-hidden="true" />
           </a>
         </div>
