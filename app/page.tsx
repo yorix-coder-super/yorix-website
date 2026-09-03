@@ -26,7 +26,7 @@ const heroScreens = [
     src: '/screen-today.png',
     alt: 'Yorix today screen showing the next sleep window and quick baby care tracking',
     className:
-      'left-1/2 top-0 z-30 w-[76%] -translate-x-1/2 sm:w-[48%] lg:w-[50%]',
+      'left-1/2 top-0 z-30 w-[64%] -translate-x-1/2 sm:w-[48%] lg:w-[50%]',
     priority: true,
   },
   {
@@ -249,7 +249,7 @@ export default function Home() {
               <BookOpen className="h-5 w-5" aria-hidden="true" />
             </a>
           </div>
-          <div className="mt-9 grid max-w-xl gap-3 text-sm text-white/70 sm:grid-cols-3">
+          <div className="mt-9 hidden max-w-xl gap-3 text-sm text-white/70 sm:grid sm:grid-cols-3">
             <div className="rounded-lg border border-white/10 bg-white/10 p-4 backdrop-blur-xl">
               <strong className="block text-2xl text-white">14</strong>
               languages
@@ -265,7 +265,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="relative z-10 mx-auto h-[500px] w-full max-w-[620px] sm:h-[650px] lg:h-[760px]">
+        <div className="relative z-10 mx-auto h-[430px] w-full max-w-[620px] sm:h-[650px] lg:h-[760px]">
           <div className="absolute inset-x-4 bottom-12 top-20 rounded-full bg-[#6366F1]/25 blur-3xl" />
           {heroScreens.map((screen) => (
             <PhoneShot
