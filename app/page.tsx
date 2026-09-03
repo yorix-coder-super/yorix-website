@@ -25,8 +25,7 @@ const heroScreens = [
   {
     src: '/screen-today.png',
     alt: 'Yorix today screen showing the next sleep window and quick baby care tracking',
-    className:
-      'left-1/2 top-0 z-30 w-[64%] -translate-x-1/2 sm:w-[48%] lg:w-[50%]',
+    className: 'left-1/2 top-0 z-30 w-[48%] -translate-x-1/2 lg:w-[50%]',
     priority: true,
   },
   {
@@ -265,7 +264,19 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="relative z-10 mx-auto h-[430px] w-full max-w-[620px] sm:h-[650px] lg:h-[760px]">
+        <div className="relative z-10 mx-auto w-full max-w-[300px] sm:hidden">
+          <div className="absolute inset-6 rounded-full bg-[#6366F1]/30 blur-3xl" />
+          <img
+            src="/screen-today.png"
+            alt="Yorix today screen showing the next sleep window and quick baby care tracking"
+            className="relative h-auto w-full rounded-[2rem] shadow-[0_34px_90px_rgb(0_0_0/42%)] ring-1 ring-white/15"
+            width="1206"
+            height="2622"
+            fetchPriority="high"
+          />
+        </div>
+
+        <div className="relative z-10 mx-auto hidden h-[650px] w-full max-w-[620px] sm:block lg:h-[760px]">
           <div className="absolute inset-x-4 bottom-12 top-20 rounded-full bg-[#6366F1]/25 blur-3xl" />
           {heroScreens.map((screen) => (
             <PhoneShot
