@@ -20,26 +20,26 @@ const heroScreens = [
     src: '/screen-progress.png',
     alt: 'Yorix progress dashboard showing sleep, feeding, diaper, walk, bath, and play statistics',
     className:
-      'left-0 top-24 z-10 w-[38%] rotate-[-7deg] opacity-95 sm:w-[34%] lg:w-[37%]',
+      'left-0 top-24 z-10 hidden w-[38%] rotate-[-7deg] opacity-95 sm:block sm:w-[34%] lg:w-[37%]',
   },
   {
     src: '/screen-today.png',
     alt: 'Yorix today screen showing the next sleep window and quick baby care tracking',
     className:
-      'left-1/2 top-0 z-30 w-[58%] -translate-x-1/2 sm:w-[48%] lg:w-[50%]',
+      'left-1/2 top-0 z-30 w-[76%] -translate-x-1/2 sm:w-[48%] lg:w-[50%]',
     priority: true,
   },
   {
     src: '/screen-coach.png',
     alt: 'Yorix AI sleep coach chat screen',
     className:
-      'right-0 top-32 z-20 w-[38%] rotate-[6deg] opacity-95 sm:w-[34%] lg:w-[37%]',
+      'right-0 top-32 z-20 hidden w-[38%] rotate-[6deg] opacity-95 sm:block sm:w-[34%] lg:w-[37%]',
   },
   {
     src: '/screen-bedtime.png',
     alt: 'Yorix sleep sounds screen with white noise, rain, ocean waves, and heartbeat',
     className:
-      'bottom-0 right-[14%] z-0 w-[35%] rotate-[4deg] opacity-85 sm:w-[30%] lg:w-[32%]',
+      'bottom-0 right-[14%] z-0 hidden w-[35%] rotate-[4deg] opacity-85 sm:block sm:w-[30%] lg:w-[32%]',
   },
 ];
 
@@ -265,7 +265,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="relative z-10 mx-auto h-[540px] w-full max-w-[620px] sm:h-[650px] lg:h-[760px]">
+        <div className="relative z-10 mx-auto h-[500px] w-full max-w-[620px] sm:h-[650px] lg:h-[760px]">
           <div className="absolute inset-x-4 bottom-12 top-20 rounded-full bg-[#6366F1]/25 blur-3xl" />
           {heroScreens.map((screen) => (
             <PhoneShot
