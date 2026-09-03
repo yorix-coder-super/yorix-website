@@ -330,18 +330,25 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="guides" className="mx-auto max-w-6xl px-5 py-14 sm:px-8 lg:px-10">
+      <section id="guides" className="night-gradient text-white">
+        <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 lg:px-10">
         <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
-            <p className="mb-3 text-sm font-semibold uppercase text-[#8B5CF6]">
-              Baby sleep guides
+            <p className="mb-3 text-sm font-semibold uppercase text-[#C7D2FE]">
+              Yorix blog
             </p>
-            <h2 className="max-w-2xl text-3xl font-semibold leading-tight text-[#1E1B4B] sm:text-4xl">
-              Simple pages for the questions parents search first.
+            <h2 className="max-w-2xl text-3xl font-semibold leading-tight sm:text-4xl">
+              Baby sleep guides for the questions parents search first.
             </h2>
+            <div className="mt-8 flex flex-wrap gap-5 border-b border-white/15 pb-4 text-sm font-medium text-white/55">
+              <span className="border-b-2 border-white pb-4 text-white">All posts</span>
+              <span>Baby Sleep</span>
+              <span>Feeding</span>
+              <span>Routines</span>
+            </div>
           </div>
           <a
-            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-[#CBD5E1] bg-white px-5 text-sm font-semibold text-[#1E1B4B] transition hover:border-[#94A3B8] focus:outline-none focus:ring-4 focus:ring-[#C7D2FE]/35"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-[#1E1B4B] transition hover:bg-[#EEF2FF] focus:outline-none focus:ring-4 focus:ring-white/25"
             href={appDownloadUrl}
             rel="noopener noreferrer"
             target="_blank"
@@ -350,21 +357,39 @@ export default function Home() {
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </a>
         </div>
-        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {topicPages.map((page) => (
             <a
-              className="rounded-lg border border-[#E2E8F0] bg-white p-5 transition hover:border-[#C7D2FE] hover:shadow-sm"
+              className="overflow-hidden rounded-lg bg-[#161628] shadow-[0_20px_60px_rgb(0_0_0/18%)] transition hover:-translate-y-1 hover:shadow-[0_24px_70px_rgb(0_0_0/26%)]"
               href={`/${page.slug}`}
               key={page.slug}
             >
-              <h3 className="text-lg font-semibold text-[#1E1B4B]">
-                {page.shortTitle}
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-[#64748B]">
-                {page.description}
-              </p>
+              <div className={`bg-gradient-to-br ${page.coverClass} p-6`}>
+                <img
+                  src="/app-icon.png"
+                  alt=""
+                  className="h-24 w-24 rounded-[26px] shadow-2xl"
+                  width="1024"
+                  height="1024"
+                />
+              </div>
+              <div className="p-5">
+                <p className="text-sm font-medium text-[#C7D2FE]">
+                  {page.date} · {page.category}
+                </p>
+                <h3 className="mt-4 text-2xl font-semibold leading-tight text-white">
+                  {page.title}
+                </h3>
+                <p className="mt-4 text-sm leading-6 text-white/65">
+                  {page.description}
+                </p>
+                <p className="mt-5 text-sm font-semibold text-[#A78BFA]">
+                  {page.readTime}
+                </p>
+              </div>
             </a>
           ))}
+        </div>
         </div>
       </section>
 
