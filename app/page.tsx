@@ -7,6 +7,7 @@ import {
   ShieldCheck,
   Sparkles,
 } from 'lucide-react';
+import { appDownloadUrl, appFeatures, topicPages } from './content';
 
 const ageSchedules = [
   {
@@ -34,8 +35,6 @@ const benefits = [
   'Track sleep, feeding, diapers, and patterns in one calm place',
   'Turn daily logs into a routine that actually fits your baby',
 ];
-
-const appDownloadUrl = 'https://gotoapp.store/yorix';
 
 const faqs = [
   {
@@ -71,6 +70,12 @@ export default function Home() {
           </a>
           <a className="transition hover:text-[#20222a]" href="#how-it-helps">
             How it helps
+          </a>
+          <a className="transition hover:text-[#20222a]" href="#features">
+            Features
+          </a>
+          <a className="transition hover:text-[#20222a]" href="#guides">
+            Guides
           </a>
           <a className="transition hover:text-[#20222a]" href="#faq">
             FAQ
@@ -224,6 +229,75 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="features" className="border-y border-[#eee4d5] bg-white">
+        <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8 lg:px-10">
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+            <div>
+              <p className="mb-3 text-sm font-semibold uppercase text-[#777b5e]">
+                Why parents choose Yorix
+              </p>
+              <h2 className="text-3xl font-semibold leading-tight text-[#181a22] sm:text-4xl">
+                Finally understand your baby’s sleep and get your evenings back.
+              </h2>
+              <p className="mt-4 text-base leading-8 text-[#626575]">
+                Yorix is a personalized baby sleep tracker app that learns your
+                child’s unique rhythm. Track naps, wake windows, bedtime, night
+                wakings, feeding, and daily routines, then get a sleep schedule
+                that adapts to your baby instead of forcing your baby into a
+                generic chart.
+              </p>
+              <p className="mt-4 text-base leading-8 text-[#626575]">
+                No guesswork. No one-size-fits-all schedules. Just a clearer
+                answer to the question every tired parent asks: when should my
+                baby sleep next?
+              </p>
+              <a
+                className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#5f64f4] px-6 text-base font-semibold text-white shadow-[0_16px_35px_rgb(95_100_244/24%)] transition hover:bg-[#4d52df] focus:outline-none focus:ring-4 focus:ring-[#5f64f4]/25"
+                href={appDownloadUrl}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Try Yorix
+                <ArrowRight className="h-5 w-5" aria-hidden="true" />
+              </a>
+            </div>
+            <div className="rounded-lg border border-[#eee4d5] bg-[#fbfaf7] p-5 sm:p-6">
+              <h3 className="text-xl font-semibold text-[#181a22]">
+                Built for real family life
+              </h3>
+              <p className="mt-3 text-base leading-7 text-[#626575]">
+                Yorix combines baby sleep tracking, sleep schedule planning,
+                feeding logs, growth tracking, and an AI sleep coach in one app.
+                It is designed for families from the newborn stage through age 3
+                and is available in 14 languages.
+              </p>
+              <p className="mt-3 text-base leading-7 text-[#626575]">
+                Your data belongs to you. We do not sell your personal data.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {appFeatures.map((feature) => (
+              <article
+                className="rounded-lg border border-[#eee4d5] bg-[#fbfaf7] p-5"
+                key={feature.title}
+              >
+                <span className="mb-4 grid h-9 w-9 place-items-center rounded-full bg-[#e9f7ed] text-[#248047]">
+                  <Check className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <h3 className="text-lg font-semibold text-[#181a22]">
+                  {feature.title}
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-[#626575]">
+                  {feature.body}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="bg-[#e9f7ed]">
         <div className="mx-auto grid max-w-6xl gap-6 px-5 py-12 sm:px-8 md:grid-cols-3 lg:px-10">
           <div className="flex items-start gap-4">
@@ -256,6 +330,44 @@ export default function Home() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section id="guides" className="mx-auto max-w-6xl px-5 py-14 sm:px-8 lg:px-10">
+        <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+          <div>
+            <p className="mb-3 text-sm font-semibold uppercase text-[#777b5e]">
+              Baby sleep guides
+            </p>
+            <h2 className="max-w-2xl text-3xl font-semibold leading-tight text-[#181a22] sm:text-4xl">
+              Simple pages for the questions parents search first.
+            </h2>
+          </div>
+          <a
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-[#dcd7cd] bg-white px-5 text-sm font-semibold text-[#20222a] transition hover:border-[#bbb3a7] focus:outline-none focus:ring-4 focus:ring-[#d9c7aa]/35"
+            href={appDownloadUrl}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Download Yorix
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </a>
+        </div>
+        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {topicPages.map((page) => (
+            <a
+              className="rounded-lg border border-[#eee4d5] bg-white p-5 transition hover:border-[#cfc5b8] hover:shadow-sm"
+              href={`/${page.slug}`}
+              key={page.slug}
+            >
+              <h3 className="text-lg font-semibold text-[#181a22]">
+                {page.shortTitle}
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-[#626575]">
+                {page.description}
+              </p>
+            </a>
+          ))}
         </div>
       </section>
 
