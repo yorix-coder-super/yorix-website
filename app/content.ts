@@ -6,38 +6,47 @@ export const appFeatures = [
   {
     title: 'Personalized baby sleep tracker',
     body: 'Log daytime naps and nighttime sleep in seconds, build a simple sleep diary, and follow your baby’s changing routine from newborn through toddlerhood.',
+    tintClass: 'bg-[#EEF2FF] text-[#6366F1]',
   },
   {
     title: 'Smart sleep schedules',
     body: 'Get a newborn or infant sleep schedule based on age and real history. Yorix predicts the next nap, bedtime, and wake window, then adjusts when the day changes.',
+    tintClass: 'bg-[#F5F3FF] text-[#8B5CF6]',
   },
   {
     title: '24/7 AI sleep coach',
     body: 'Ask about short naps, night wakings, bedtime battles, nap transitions, wake windows, and sleep regressions, with guidance shaped by your baby’s data.',
+    tintClass: 'bg-[#DBEAFE] text-[#3B82F6]',
   },
   {
     title: 'One-tap tracking',
     body: 'Start and stop sleep, breastfeeding, and walk timers with Live Activities and Dynamic Island, including during middle-of-the-night feeds.',
+    tintClass: 'bg-[#E0E7FF] text-[#4F46E5]',
   },
   {
     title: 'Feeding and breastfeeding tracker',
     body: 'Track breastfeeding, bottle feeds, pumping, and feeding history alongside sleep so the whole day fits into one calm timeline.',
+    tintClass: 'bg-[#DCFCE7] text-[#22C55E]',
   },
   {
     title: 'Diapers, growth, and baby development',
     body: 'Log diapers, height, weight, symptoms, mood, and vaccinations. Follow growth with WHO percentiles and keep care notes in one place.',
+    tintClass: 'bg-[#FFF7ED] text-[#D9913F]',
   },
   {
     title: 'White noise and bedtime routines',
     body: 'Play white noise, rain, ocean sounds, and calming bedtime stories with a sleep timer for a more consistent bedtime routine.',
+    tintClass: 'bg-[#FEF3C7] text-[#F59E0B]',
   },
   {
     title: 'Insights and sleep analysis',
     body: 'See daily summaries, weekly reports, sleep trends, and practical insights instead of a long list of disconnected logs.',
+    tintClass: 'bg-[#CCFBF1] text-[#0D9488]',
   },
   {
     title: 'Widgets and family sharing',
     body: 'Log from the Home Screen and keep parents in sync with the same baby sleep, feeding, and care data in real time.',
+    tintClass: 'bg-[#FAE8FF] text-[#A855F7]',
   },
 ];
 

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
+import { siteUrl } from './content';
 import './globals.css';
-
-const siteUrl = 'https://www.yorix.website';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -24,19 +23,24 @@ export const metadata: Metadata = {
     locale: 'en_US',
     images: [
       {
-        url: '/app-screenshot.png',
-        width: 1242,
-        height: 2688,
-        alt: 'Yorix baby schedule app next nap screen',
+        url: '/og.png',
+        width: 1024,
+        height: 1024,
+        alt: 'Yorix app icon with a sleeping baby on a crescent moon',
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: 'summary',
     title: 'Baby Schedule App | Calm Nap and Feeding Routine',
     description:
       'Track sleep, feeds, diapers, and daily rhythm to create a baby schedule that follows your real day.',
-    images: ['/app-screenshot.png'],
+    images: ['/og.png'],
+  },
+  icons: {
+    icon: '/app-icon.png',
+    shortcut: '/app-icon.png',
+    apple: '/app-icon.png',
   },
   robots: {
     index: true,
