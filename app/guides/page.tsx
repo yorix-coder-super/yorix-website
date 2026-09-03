@@ -29,10 +29,10 @@ export const metadata: Metadata = {
 
 export default function GuidesPage() {
   return (
-    <main className="brand-page min-h-screen bg-[#0F1022] text-white">
+    <main className="guides-page min-h-screen text-white">
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-5 sm:px-8 lg:px-10">
         <a className="flex items-center gap-3" href="/" aria-label="Yorix home">
-          <BrandLogo size="sm" />
+          <BrandLogo size="sm" tone="dark" />
         </a>
         <nav className="hidden items-center gap-6 text-sm font-medium text-white/60 md:flex">
           <a className="transition hover:text-white" href="/">
