@@ -58,7 +58,11 @@ export default function Home() {
   return (
     <main className="brand-page min-h-screen text-[#1E1B4B]">
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-5 sm:px-8 lg:px-10">
-        <a className="flex items-center gap-3" href="#top" aria-label="Yorix home">
+        <a
+          className="flex items-center gap-3"
+          href="#top"
+          aria-label="Yorix home"
+        >
           <BrandLogo size="sm" />
         </a>
         <nav className="hidden items-center gap-6 text-sm font-medium text-[#64748B] md:flex">
@@ -71,7 +75,7 @@ export default function Home() {
           <a className="transition hover:text-[#1E1B4B]" href="#features">
             Features
           </a>
-          <a className="transition hover:text-[#1E1B4B]" href="#guides">
+          <a className="transition hover:text-[#1E1B4B]" href="/guides">
             Guides
           </a>
           <a className="transition hover:text-[#1E1B4B]" href="#faq">
@@ -280,7 +284,9 @@ export default function Home() {
                 className="rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-5"
                 key={feature.title}
               >
-                <span className={`mb-4 grid h-9 w-9 place-items-center rounded-full ${feature.tintClass}`}>
+                <span
+                  className={`mb-4 grid h-9 w-9 place-items-center rounded-full ${feature.tintClass}`}
+                >
                   <Check className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <h3 className="text-lg font-semibold text-[#1E1B4B]">
@@ -298,7 +304,10 @@ export default function Home() {
       <section className="bg-[#EEF2FF]">
         <div className="mx-auto grid max-w-6xl gap-6 px-5 py-12 sm:px-8 md:grid-cols-3 lg:px-10">
           <div className="flex items-start gap-4">
-            <Clock3 className="mt-1 h-6 w-6 text-[#6366F1]" aria-hidden="true" />
+            <Clock3
+              className="mt-1 h-6 w-6 text-[#6366F1]"
+              aria-hidden="true"
+            />
             <div>
               <h2 className="text-lg font-semibold">Wake windows</h2>
               <p className="mt-2 text-sm leading-6 text-[#64748B]">
@@ -323,7 +332,8 @@ export default function Home() {
             <div>
               <h2 className="text-lg font-semibold">Parent-safe guidance</h2>
               <p className="mt-2 text-sm leading-6 text-[#64748B]">
-                Helpful routine support, with clear boundaries around health advice.
+                Helpful routine support, with clear boundaries around health
+                advice.
               </p>
             </div>
           </div>
@@ -332,64 +342,64 @@ export default function Home() {
 
       <section id="guides" className="night-gradient text-white">
         <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 lg:px-10">
-        <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-          <div>
-            <p className="mb-3 text-sm font-semibold uppercase text-[#C7D2FE]">
-              Yorix blog
-            </p>
-            <h2 className="max-w-2xl text-3xl font-semibold leading-tight sm:text-4xl">
-              Baby sleep guides for the questions parents search first.
-            </h2>
-            <div className="mt-8 flex flex-wrap gap-5 border-b border-white/15 pb-4 text-sm font-medium text-white/55">
-              <span className="border-b-2 border-white pb-4 text-white">All posts</span>
-              <span>Baby Sleep</span>
-              <span>Feeding</span>
-              <span>Routines</span>
+          <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+            <div>
+              <p className="mb-3 text-sm font-semibold uppercase text-[#C7D2FE]">
+                Yorix blog
+              </p>
+              <h2 className="max-w-2xl text-3xl font-semibold leading-tight sm:text-4xl">
+                Baby sleep guides for the questions parents search first.
+              </h2>
+              <div className="mt-8 flex flex-wrap gap-5 border-b border-white/15 pb-4 text-sm font-medium text-white/55">
+                <span className="border-b-2 border-white pb-4 text-white">
+                  All posts
+                </span>
+                <span>Baby Sleep</span>
+                <span>Feeding</span>
+                <span>Routines</span>
+              </div>
             </div>
-          </div>
-          <a
-            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-[#1E1B4B] transition hover:bg-[#EEF2FF] focus:outline-none focus:ring-4 focus:ring-white/25"
-            href={appDownloadUrl}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Download Yorix
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </a>
-        </div>
-        <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {topicPages.map((page) => (
             <a
-              className="overflow-hidden rounded-lg bg-[#161628] shadow-[0_20px_60px_rgb(0_0_0/18%)] transition hover:-translate-y-1 hover:shadow-[0_24px_70px_rgb(0_0_0/26%)]"
-              href={`/${page.slug}`}
-              key={page.slug}
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-[#1E1B4B] transition hover:bg-[#EEF2FF] focus:outline-none focus:ring-4 focus:ring-white/25"
+              href="/guides"
             >
-              <div className={`bg-gradient-to-br ${page.coverClass} p-6`}>
-                <img
-                  src="/app-icon.png"
-                  alt=""
-                  className="h-24 w-24 rounded-[26px] shadow-2xl"
-                  width="1024"
-                  height="1024"
-                />
-              </div>
-              <div className="p-5">
-                <p className="text-sm font-medium text-[#C7D2FE]">
-                  {page.date} · {page.category}
-                </p>
-                <h3 className="mt-4 text-2xl font-semibold leading-tight text-white">
-                  {page.title}
-                </h3>
-                <p className="mt-4 text-sm leading-6 text-white/65">
-                  {page.description}
-                </p>
-                <p className="mt-5 text-sm font-semibold text-[#A78BFA]">
-                  {page.readTime}
-                </p>
-              </div>
+              View all guides
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </a>
-          ))}
-        </div>
+          </div>
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {topicPages.map((page) => (
+              <a
+                className="overflow-hidden rounded-lg bg-[#161628] shadow-[0_20px_60px_rgb(0_0_0/18%)] transition hover:-translate-y-1 hover:shadow-[0_24px_70px_rgb(0_0_0/26%)]"
+                href={`/${page.slug}`}
+                key={page.slug}
+              >
+                <div className={`bg-gradient-to-br ${page.coverClass} p-6`}>
+                  <img
+                    src="/app-icon.png"
+                    alt=""
+                    className="h-24 w-24 rounded-[26px] shadow-2xl"
+                    width="1024"
+                    height="1024"
+                  />
+                </div>
+                <div className="p-5">
+                  <p className="text-sm font-medium text-[#C7D2FE]">
+                    {page.date} · {page.category}
+                  </p>
+                  <h3 className="mt-4 text-2xl font-semibold leading-tight text-white">
+                    {page.title}
+                  </h3>
+                  <p className="mt-4 text-sm leading-6 text-white/65">
+                    {page.description}
+                  </p>
+                  <p className="mt-5 text-sm font-semibold text-[#A78BFA]">
+                    {page.readTime}
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -415,7 +425,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="download" className="mx-auto max-w-6xl px-5 pb-16 sm:px-8 lg:px-10">
+      <section
+        id="download"
+        className="mx-auto max-w-6xl px-5 pb-16 sm:px-8 lg:px-10"
+      >
         <div className="night-gradient grid gap-7 rounded-lg p-7 text-white shadow-[0_22px_70px_rgb(49_46_129/22%)] sm:p-9 md:grid-cols-[1fr_auto] md:items-center">
           <div>
             <p className="mb-2 text-sm font-semibold uppercase text-[#C7D2FE]">

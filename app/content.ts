@@ -1,3 +1,5 @@
+import { researchGuides } from './research-guides';
+
 export const siteUrl = 'https://www.yorix.website';
 
 export const appDownloadUrl = 'https://gotoapp.store/yorix';
@@ -75,9 +77,17 @@ export type TopicPage = {
     question: string;
     answer: string;
   }[];
+  appTieIn?: {
+    heading: string;
+    body: string[];
+  };
+  sources?: {
+    label: string;
+    href: string;
+  }[];
 };
 
-export const topicPages: TopicPage[] = [
+export const coreTopicPages: TopicPage[] = [
   {
     slug: 'baby-nap-schedule-by-age',
     title: 'Baby Nap Schedule by Age',
@@ -122,10 +132,26 @@ export const topicPages: TopicPage[] = [
       },
     ],
     sampleRows: [
-      { label: '0-3 months', value: '4-6+ naps', note: 'Flexible newborn rhythm' },
-      { label: '4-6 months', value: '3-4 naps', note: 'Wake windows become more useful' },
-      { label: '7-12 months', value: '2-3 naps', note: 'Many babies move toward two naps' },
-      { label: '12-18 months', value: '1-2 naps', note: 'Nap transitions can shift bedtime' },
+      {
+        label: '0-3 months',
+        value: '4-6+ naps',
+        note: 'Flexible newborn rhythm',
+      },
+      {
+        label: '4-6 months',
+        value: '3-4 naps',
+        note: 'Wake windows become more useful',
+      },
+      {
+        label: '7-12 months',
+        value: '2-3 naps',
+        note: 'Many babies move toward two naps',
+      },
+      {
+        label: '12-18 months',
+        value: '1-2 naps',
+        note: 'Nap transitions can shift bedtime',
+      },
     ],
     checklist: [
       'Track every nap start and end time for a few days.',
@@ -190,10 +216,26 @@ export const topicPages: TopicPage[] = [
       },
     ],
     sampleRows: [
-      { label: 'Sleep focus', value: 'Frequent naps', note: 'Follow cues more than the clock' },
-      { label: 'Wake time', value: 'Short and calm', note: 'Avoid overtired stretches' },
-      { label: 'Night rhythm', value: 'Low stimulation', note: 'Keep care simple and quiet' },
-      { label: 'Tracking', value: 'Sleep + feeds', note: 'Look for patterns, not perfection' },
+      {
+        label: 'Sleep focus',
+        value: 'Frequent naps',
+        note: 'Follow cues more than the clock',
+      },
+      {
+        label: 'Wake time',
+        value: 'Short and calm',
+        note: 'Avoid overtired stretches',
+      },
+      {
+        label: 'Night rhythm',
+        value: 'Low stimulation',
+        note: 'Keep care simple and quiet',
+      },
+      {
+        label: 'Tracking',
+        value: 'Sleep + feeds',
+        note: 'Look for patterns, not perfection',
+      },
     ],
     checklist: [
       'Track sleep and feeds without trying to force exact times.',
@@ -258,10 +300,26 @@ export const topicPages: TopicPage[] = [
       },
     ],
     sampleRows: [
-      { label: 'Nap count', value: '3-4 naps', note: 'Depends on nap length and wake time' },
-      { label: 'Routine focus', value: 'Consistent bedtime flow', note: 'Same order, flexible time' },
-      { label: 'Common challenge', value: 'Short naps', note: 'Next window may need to shorten' },
-      { label: 'Yorix helps with', value: 'Timing changes', note: 'Recalculates after real logs' },
+      {
+        label: 'Nap count',
+        value: '3-4 naps',
+        note: 'Depends on nap length and wake time',
+      },
+      {
+        label: 'Routine focus',
+        value: 'Consistent bedtime flow',
+        note: 'Same order, flexible time',
+      },
+      {
+        label: 'Common challenge',
+        value: 'Short naps',
+        note: 'Next window may need to shorten',
+      },
+      {
+        label: 'Yorix helps with',
+        value: 'Timing changes',
+        note: 'Recalculates after real logs',
+      },
     ],
     checklist: [
       'Watch for shorter naps and adjust the next sleep window.',
@@ -326,10 +384,26 @@ export const topicPages: TopicPage[] = [
       },
     ],
     sampleRows: [
-      { label: 'Breastfeeding', value: 'Timer + history', note: 'Useful for night feeds' },
-      { label: 'Bottle feeds', value: 'Amounts + times', note: 'Easy shared-care reference' },
-      { label: 'Pumping', value: 'Sessions logged', note: 'Keep supply notes organized' },
-      { label: 'Diapers', value: 'Context with feeds', note: 'Helpful for care discussions' },
+      {
+        label: 'Breastfeeding',
+        value: 'Timer + history',
+        note: 'Useful for night feeds',
+      },
+      {
+        label: 'Bottle feeds',
+        value: 'Amounts + times',
+        note: 'Easy shared-care reference',
+      },
+      {
+        label: 'Pumping',
+        value: 'Sessions logged',
+        note: 'Keep supply notes organized',
+      },
+      {
+        label: 'Diapers',
+        value: 'Context with feeds',
+        note: 'Helpful for care discussions',
+      },
     ],
     checklist: [
       'Log breastfeeding, bottles, and pumping in one place.',
@@ -394,10 +468,26 @@ export const topicPages: TopicPage[] = [
       },
     ],
     sampleRows: [
-      { label: 'Newborn', value: 'Very short windows', note: 'Follow sleepy cues closely' },
-      { label: '4-6 months', value: 'Growing windows', note: 'Nap rhythm starts to emerge' },
-      { label: '7-12 months', value: 'Longer awake time', note: 'Transitions can affect bedtime' },
-      { label: 'Toddler', value: 'One main nap', note: 'Evenings depend on nap quality' },
+      {
+        label: 'Newborn',
+        value: 'Very short windows',
+        note: 'Follow sleepy cues closely',
+      },
+      {
+        label: '4-6 months',
+        value: 'Growing windows',
+        note: 'Nap rhythm starts to emerge',
+      },
+      {
+        label: '7-12 months',
+        value: 'Longer awake time',
+        note: 'Transitions can affect bedtime',
+      },
+      {
+        label: 'Toddler',
+        value: 'One main nap',
+        note: 'Evenings depend on nap quality',
+      },
     ],
     checklist: [
       'Track wake time from the end of the last nap.',
@@ -419,6 +509,8 @@ export const topicPages: TopicPage[] = [
     ],
   },
 ];
+
+export const topicPages: TopicPage[] = [...coreTopicPages, ...researchGuides];
 
 export function getTopicPage(slug: string) {
   return topicPages.find((page) => page.slug === slug);
