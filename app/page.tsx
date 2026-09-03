@@ -1,89 +1,210 @@
 import {
   ArrowRight,
-  Baby,
+  Bell,
+  BookOpen,
   Check,
-  Clock3,
+  LineChart,
+  MessageCircle,
+  Moon,
   ShieldCheck,
   Sparkles,
+  Star,
+  Users,
+  Volume2,
 } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
-import { appDownloadUrl, appFeatures, topicPages } from './content';
+import { appDownloadUrl, topicPages } from './content';
 
-const ageSchedules = [
+const heroScreens = [
   {
-    age: '0-3 months',
-    sleep: '14-17 hours',
-    naps: '4-6 naps',
-    note: 'Follow sleepy cues and build gentle day-night rhythm.',
+    src: '/screen-progress.png',
+    alt: 'Yorix progress dashboard showing sleep, feeding, diaper, walk, bath, and play statistics',
+    className:
+      'left-0 top-24 z-10 w-[38%] rotate-[-7deg] opacity-95 sm:w-[34%] lg:w-[37%]',
   },
   {
-    age: '4-6 months',
-    sleep: '12-15 hours',
-    naps: '3-4 naps',
-    note: 'Start watching wake windows and predictable bedtime flow.',
+    src: '/screen-today.png',
+    alt: 'Yorix today screen showing the next sleep window and quick baby care tracking',
+    className:
+      'left-1/2 top-0 z-30 w-[58%] -translate-x-1/2 sm:w-[48%] lg:w-[50%]',
+    priority: true,
   },
   {
-    age: '7-12 months',
-    sleep: '11-14 hours',
-    naps: '2-3 naps',
-    note: 'Keep naps consistent while protecting overnight sleep.',
+    src: '/screen-coach.png',
+    alt: 'Yorix AI sleep coach chat screen',
+    className:
+      'right-0 top-32 z-20 w-[38%] rotate-[6deg] opacity-95 sm:w-[34%] lg:w-[37%]',
+  },
+  {
+    src: '/screen-bedtime.png',
+    alt: 'Yorix sleep sounds screen with white noise, rain, ocean waves, and heartbeat',
+    className:
+      'bottom-0 right-[14%] z-0 w-[35%] rotate-[4deg] opacity-85 sm:w-[30%] lg:w-[32%]',
   },
 ];
 
-const benefits = [
-  'See the next nap window before your baby gets overtired',
-  'Track sleep, feeding, diapers, and patterns in one calm place',
-  'Turn daily logs into a routine that actually fits your baby',
+const proofItems = [
+  {
+    icon: Moon,
+    label: 'Personal sleep schedule',
+    body: 'Next nap and bedtime adapt when real life changes the day.',
+  },
+  {
+    icon: MessageCircle,
+    label: '24/7 AI sleep coach',
+    body: 'Ask about wake windows, short naps, regressions, and routines.',
+  },
+  {
+    icon: ShieldCheck,
+    label: 'Private by design',
+    body: 'Your data belongs to you. We do not sell personal data.',
+  },
+];
+
+const productStories = [
+  {
+    eyebrow: 'Smart day plan',
+    title: 'Know when your baby should sleep next.',
+    body: 'Yorix studies naps, wake windows, bedtime, night wakings, and feeding rhythm, then turns the day into a flexible plan that updates as soon as a nap runs short.',
+    image: '/screen-plan.png',
+    alt: 'Yorix plan for today timeline with naps, wake windows, and bedtime',
+    icon: Bell,
+    points: [
+      'Adaptive wake windows',
+      'Short-nap recovery',
+      'Bedtime that moves with the day',
+    ],
+  },
+  {
+    eyebrow: 'Progress, not spreadsheets',
+    title: 'See patterns across sleep, feeding, growth, and care.',
+    body: 'Daily logs become clear weekly insights. Track sleep, breastfeeding, diapers, walks, bath, play, height, weight, and growth percentiles in one calm timeline.',
+    image: '/screen-growth.png',
+    alt: 'Yorix growth statistics screen with weight, height, and development cards',
+    icon: LineChart,
+    points: [
+      'Sleep and feeding trends',
+      'WHO growth percentiles',
+      'Shared care history',
+    ],
+  },
+  {
+    eyebrow: 'AI sleep coach',
+    title: 'Ask the question you are too tired to google.',
+    body: 'Yorix helps with short naps, night wakings, nap transitions, bedtime battles, white noise, regressions, and everyday baby care questions based on your baby’s routine.',
+    image: '/screen-coach.png',
+    alt: 'Yorix AI sleep coach welcome screen',
+    icon: MessageCircle,
+    points: ['Sleep school', 'Routine factors', 'Today’s plan'],
+  },
+  {
+    eyebrow: 'Bedtime sounds',
+    title: 'Build a sleep environment that feels familiar.',
+    body: 'Use white noise, pink noise, brown noise, rain, ocean waves, heartbeat, and bedtime stories with a simple sleep timer for calmer night routines.',
+    image: '/screen-bedtime.png',
+    alt: 'Yorix sleep sounds library with bedtime sounds',
+    icon: Volume2,
+    points: ['White noise and nature sounds', 'Bedtime stories', 'Sleep timer'],
+  },
+];
+
+const parentQuotes = [
+  {
+    title: 'Less guessing',
+    body: 'A calmer way to understand wake windows, naps, feeding, and the next best sleep moment.',
+  },
+  {
+    title: 'One shared memory',
+    body: 'Both parents can see the same baby sleep, feeding, diapers, growth, and care data.',
+  },
+  {
+    title: 'Made for real nights',
+    body: 'Quick logging, AI guidance, and sleep sounds when the whole house is tired.',
+  },
 ];
 
 const faqs = [
   {
-    question: 'What is a baby schedule?',
+    question: 'What makes Yorix different from a baby sleep chart?',
     answer:
-      'A baby schedule is a flexible daily rhythm for sleep, feeds, play, and bedtime. It should guide the day without forcing every baby into the same timetable.',
+      'A chart gives average ranges. Yorix uses your baby’s real naps, wake windows, night wakings, feeds, and routine history to adjust the next sleep window.',
   },
   {
-    question: 'When should I start using a schedule?',
+    question: 'Can I use Yorix with a newborn?',
     answer:
-      'Many parents begin with simple tracking in the newborn stage, then use wake windows and nap patterns more actively around 3-4 months.',
+      'Yes. In the newborn stage, Yorix is most useful as a simple sleep, feeding, diaper, and care log. The routine becomes more predictive as patterns emerge.',
   },
   {
-    question: 'Can an app replace medical advice?',
+    question: 'Does Yorix replace medical advice?',
     answer:
-      'No. A schedule app can help you notice patterns, but feeding, sleep, growth, and health concerns should be discussed with a qualified clinician.',
+      'No. Yorix is a routine helper, not a medical service. Feeding, growth, breathing, fever, symptoms, or safety concerns should be discussed with a qualified clinician.',
   },
 ];
 
-export default function Home() {
+function PhoneShot({
+  src,
+  alt,
+  className,
+  priority,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  priority?: boolean;
+}) {
   return (
-    <main className="brand-page min-h-screen text-[#1E1B4B]">
-      <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-5 sm:px-8 lg:px-10">
+    <img
+      src={src}
+      alt={alt}
+      className={`absolute h-auto rounded-[2rem] shadow-[0_34px_90px_rgb(0_0_0/42%)] ring-1 ring-white/15 ${className}`}
+      width="1206"
+      height="2622"
+      fetchPriority={priority ? 'high' : undefined}
+    />
+  );
+}
+
+export default function Home() {
+  const featuredGuides = topicPages.slice(0, 6);
+
+  return (
+    <main className="home-page min-h-screen overflow-hidden text-white">
+      <header className="relative z-50 mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-5 sm:px-8 lg:px-10">
         <a
           className="flex items-center gap-3"
           href="#top"
           aria-label="Yorix home"
         >
-          <BrandLogo size="sm" />
+          <BrandLogo size="sm" tone="dark" />
         </a>
-        <nav className="hidden items-center gap-6 text-sm font-medium text-[#64748B] md:flex">
-          <a className="transition hover:text-[#1E1B4B]" href="#schedule">
-            Schedule
+        <nav className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/10 p-2 text-sm font-semibold text-white/70 shadow-[0_18px_70px_rgb(0_0_0/18%)] backdrop-blur-xl md:flex">
+          <a
+            className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white"
+            href="#plan"
+          >
+            Plan
           </a>
-          <a className="transition hover:text-[#1E1B4B]" href="#how-it-helps">
-            How it helps
-          </a>
-          <a className="transition hover:text-[#1E1B4B]" href="#features">
+          <a
+            className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white"
+            href="#features"
+          >
             Features
           </a>
-          <a className="transition hover:text-[#1E1B4B]" href="/guides">
+          <a
+            className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white"
+            href="/guides"
+          >
             Guides
           </a>
-          <a className="transition hover:text-[#1E1B4B]" href="#faq">
+          <a
+            className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white"
+            href="#faq"
+          >
             FAQ
           </a>
         </nav>
         <a
-          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#1E1B4B] px-5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#312E81] focus:outline-none focus:ring-4 focus:ring-[#6366F1]/25"
+          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-[#1E1B4B] shadow-[0_18px_45px_rgb(255_255_255/18%)] transition hover:bg-[#EEF2FF] focus:outline-none focus:ring-4 focus:ring-white/25"
           href={appDownloadUrl}
           rel="noopener noreferrer"
           target="_blank"
@@ -95,23 +216,24 @@ export default function Home() {
 
       <section
         id="top"
-        className="mx-auto grid w-full max-w-6xl items-center gap-10 px-5 pb-12 pt-5 sm:px-8 md:grid-cols-[minmax(0,1fr)_420px] lg:px-10 lg:pb-20 lg:pt-10"
+        className="relative mx-auto grid min-h-[calc(100vh-5rem)] w-full max-w-7xl items-center gap-10 px-5 pb-16 pt-8 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:px-10 lg:pb-20"
       >
-        <div className="max-w-2xl">
-          <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#C7D2FE] bg-white px-4 py-2 text-sm font-semibold text-[#6366F1] shadow-sm">
+        <div className="relative z-20 max-w-2xl">
+          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-[#C7D2FE] shadow-sm backdrop-blur-xl">
             <Sparkles className="h-4 w-4" aria-hidden="true" />
-            Baby schedule app for calmer days
+            Baby sleep tracker and AI schedule app
           </p>
-          <h1 className="text-5xl font-semibold leading-[1.02] text-[#1E1B4B] sm:text-6xl lg:text-7xl">
-            Build a baby schedule that follows your real day.
+          <h1 className="max-w-3xl text-5xl font-semibold leading-[1.02] tracking-normal text-white sm:text-6xl lg:text-7xl">
+            Finally understand your baby’s sleep.
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-8 text-[#64748B]">
-            Yorix helps parents track sleep, feeds, and daily rhythm, then turns
-            patterns into a softer schedule for naps, bedtime, and busy days.
+          <p className="mt-6 max-w-xl text-lg leading-8 text-white/70">
+            Yorix learns your child’s rhythm and turns naps, wake windows,
+            bedtime, night wakings, feeding, growth, and daily care into a
+            schedule that adapts to real family life.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#6366F1] px-6 text-base font-semibold text-white shadow-[0_16px_35px_rgb(95_100_244/24%)] transition hover:bg-[#4F46E5] focus:outline-none focus:ring-4 focus:ring-[#6366F1]/25"
+              className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-full bg-[#6366F1] px-7 text-base font-semibold text-white shadow-[0_22px_55px_rgb(99_102_241/34%)] transition hover:bg-[#4F46E5] focus:outline-none focus:ring-4 focus:ring-[#818CF8]/30"
               href={appDownloadUrl}
               rel="noopener noreferrer"
               target="_blank"
@@ -120,180 +242,188 @@ export default function Home() {
               <ArrowRight className="h-5 w-5" aria-hidden="true" />
             </a>
             <a
-              className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#CBD5E1] bg-white px-6 text-base font-semibold text-[#1E1B4B] transition hover:border-[#94A3B8] focus:outline-none focus:ring-4 focus:ring-[#C7D2FE]/35"
-              href="#schedule"
+              className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-full border border-white/15 bg-white/10 px-7 text-base font-semibold text-white transition hover:bg-white/15 focus:outline-none focus:ring-4 focus:ring-white/20"
+              href="/guides"
             >
-              See sample schedule
+              Read sleep guides
+              <BookOpen className="h-5 w-5" aria-hidden="true" />
             </a>
           </div>
-          <div className="mt-8 grid max-w-xl grid-cols-3 gap-3 text-sm text-[#64748B]">
-            <div className="rounded-lg border border-[#E2E8F0] bg-white p-4">
-              <strong className="block text-xl text-[#1E1B4B]">3 min</strong>
-              to log a day
+          <div className="mt-9 grid max-w-xl gap-3 text-sm text-white/70 sm:grid-cols-3">
+            <div className="rounded-lg border border-white/10 bg-white/10 p-4 backdrop-blur-xl">
+              <strong className="block text-2xl text-white">14</strong>
+              languages
             </div>
-            <div className="rounded-lg border border-[#E2E8F0] bg-white p-4">
-              <strong className="block text-xl text-[#1E1B4B]">0 ads</strong>
-              in your routine
+            <div className="rounded-lg border border-white/10 bg-white/10 p-4 backdrop-blur-xl">
+              <strong className="block text-2xl text-white">0</strong>
+              ads in your routine
             </div>
-            <div className="rounded-lg border border-[#E2E8F0] bg-white p-4">
-              <strong className="block text-xl text-[#1E1B4B]">24/7</strong>
-              rhythm view
+            <div className="rounded-lg border border-white/10 bg-white/10 p-4 backdrop-blur-xl">
+              <strong className="block text-2xl text-white">24/7</strong>
+              AI coach
             </div>
           </div>
         </div>
 
-        <div className="mx-auto w-full max-w-[360px] md:max-w-none">
-          <div className="sky-gradient relative overflow-hidden rounded-[34px] p-3 shadow-[0_28px_80px_rgb(49_46_129/26%)]">
-            <img
-              src="/app-screenshot.png"
-              alt="Yorix app showing a next nap prediction and baby routine tracker"
-              className="h-auto w-full rounded-[26px]"
-              width="1242"
-              height="2688"
-              fetchPriority="high"
+        <div className="relative z-10 mx-auto h-[540px] w-full max-w-[620px] sm:h-[650px] lg:h-[760px]">
+          <div className="absolute inset-x-4 bottom-12 top-20 rounded-full bg-[#6366F1]/25 blur-3xl" />
+          {heroScreens.map((screen) => (
+            <PhoneShot
+              key={screen.src}
+              src={screen.src}
+              alt={screen.alt}
+              className={screen.className}
+              priority={screen.priority}
             />
-          </div>
-        </div>
-      </section>
-
-      <section id="schedule" className="border-y border-[#E2E8F0] bg-white">
-        <div className="mx-auto grid max-w-6xl gap-8 px-5 py-14 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:px-10">
-          <div>
-            <p className="mb-3 text-sm font-semibold uppercase text-[#8B5CF6]">
-              Gentle structure
-            </p>
-            <h2 className="text-3xl font-semibold leading-tight text-[#1E1B4B] sm:text-4xl">
-              A schedule should reduce guessing, not add pressure.
-            </h2>
-            <p className="mt-4 text-base leading-7 text-[#64748B]">
-              Start with age-aware guidance, then adjust around your baby’s
-              actual sleep, feeding, mood, and family routine.
-            </p>
-          </div>
-          <div className="grid gap-3">
-            {ageSchedules.map((item) => (
-              <article
-                className="grid gap-3 rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-5 sm:grid-cols-[120px_1fr]"
-                key={item.age}
-              >
-                <div>
-                  <h3 className="font-semibold text-[#1E1B4B]">{item.age}</h3>
-                  <p className="mt-1 text-sm text-[#64748B]">Sample range</p>
-                </div>
-                <dl className="grid gap-3 sm:grid-cols-2">
-                  <div>
-                    <dt className="text-xs font-semibold uppercase text-[#8B5CF6]">
-                      Sleep
-                    </dt>
-                    <dd className="mt-1 text-lg font-semibold">{item.sleep}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-xs font-semibold uppercase text-[#8B5CF6]">
-                      Naps
-                    </dt>
-                    <dd className="mt-1 text-lg font-semibold">{item.naps}</dd>
-                  </div>
-                  <p className="text-sm leading-6 text-[#64748B] sm:col-span-2">
-                    {item.note}
-                  </p>
-                </dl>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section
-        id="how-it-helps"
-        className="mx-auto grid max-w-6xl gap-8 px-5 py-14 sm:px-8 lg:grid-cols-3 lg:px-10"
-      >
-        <div className="lg:col-span-1">
-          <p className="mb-3 text-sm font-semibold uppercase text-[#8B5CF6]">
-            How Yorix helps
-          </p>
-          <h2 className="text-3xl font-semibold leading-tight text-[#1E1B4B]">
-            Made for parents who need a calmer rhythm.
-          </h2>
-        </div>
-        <div className="grid gap-4 lg:col-span-2">
-          {benefits.map((benefit) => (
-            <div
-              className="flex gap-4 rounded-lg border border-[#E2E8F0] bg-white p-5"
-              key={benefit}
-            >
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#EEF2FF] text-[#6366F1]">
-                <Check className="h-5 w-5" aria-hidden="true" />
-              </span>
-              <p className="text-base leading-7 text-[#1E1B4B]">{benefit}</p>
-            </div>
           ))}
         </div>
       </section>
 
-      <section id="features" className="border-y border-[#E2E8F0] bg-white">
-        <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8 lg:px-10">
-          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-            <div>
-              <p className="mb-3 text-sm font-semibold uppercase text-[#8B5CF6]">
-                Why parents choose Yorix
-              </p>
-              <h2 className="text-3xl font-semibold leading-tight text-[#1E1B4B] sm:text-4xl">
-                Finally understand your baby’s sleep and get your evenings back.
-              </h2>
-              <p className="mt-4 text-base leading-8 text-[#64748B]">
-                Yorix is a personalized baby sleep tracker app that learns your
-                child’s unique rhythm. Track naps, wake windows, bedtime, night
-                wakings, feeding, and daily routines, then get a sleep schedule
-                that adapts to your baby instead of forcing your baby into a
-                generic chart.
-              </p>
-              <p className="mt-4 text-base leading-8 text-[#64748B]">
-                No guesswork. No one-size-fits-all schedules. Just a clearer
-                answer to the question every tired parent asks: when should my
-                baby sleep next?
-              </p>
-              <a
-                className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#6366F1] px-6 text-base font-semibold text-white shadow-[0_16px_35px_rgb(95_100_244/24%)] transition hover:bg-[#4F46E5] focus:outline-none focus:ring-4 focus:ring-[#6366F1]/25"
-                href={appDownloadUrl}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                Try Yorix
-                <ArrowRight className="h-5 w-5" aria-hidden="true" />
-              </a>
-            </div>
-            <div className="rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-5 sm:p-6">
-              <h3 className="text-xl font-semibold text-[#1E1B4B]">
-                Built for real family life
-              </h3>
-              <p className="mt-3 text-base leading-7 text-[#64748B]">
-                Yorix combines baby sleep tracking, sleep schedule planning,
-                feeding logs, growth tracking, and an AI sleep coach in one app.
-                It is designed for families from the newborn stage through age 3
-                and is available in 14 languages.
-              </p>
-              <p className="mt-3 text-base leading-7 text-[#64748B]">
-                Your data belongs to you. We do not sell your personal data.
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {appFeatures.map((feature) => (
+      <section className="relative border-y border-white/10 bg-[#161628]/70">
+        <div className="mx-auto grid max-w-7xl gap-4 px-5 py-8 sm:px-8 md:grid-cols-3 lg:px-10">
+          {proofItems.map((item) => {
+            const Icon = item.icon;
+            return (
               <article
-                className="rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-5"
-                key={feature.title}
+                className="flex gap-4 rounded-lg border border-white/10 bg-white/10 p-5 backdrop-blur-xl"
+                key={item.label}
               >
-                <span
-                  className={`mb-4 grid h-9 w-9 place-items-center rounded-full ${feature.tintClass}`}
-                >
-                  <Check className="h-5 w-5" aria-hidden="true" />
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#EEF2FF] text-[#6366F1]">
+                  <Icon className="h-5 w-5" aria-hidden="true" />
                 </span>
-                <h3 className="text-lg font-semibold text-[#1E1B4B]">
-                  {feature.title}
+                <div>
+                  <h2 className="font-semibold text-white">{item.label}</h2>
+                  <p className="mt-2 text-sm leading-6 text-white/60">
+                    {item.body}
+                  </p>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section
+        id="plan"
+        className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10"
+      >
+        <div className="grid gap-9 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
+          <div>
+            <p className="mb-3 text-sm font-semibold uppercase text-[#A78BFA]">
+              Your baby has a plan
+            </p>
+            <h2 className="max-w-2xl text-4xl font-semibold leading-tight text-white sm:text-5xl">
+              From sleepy cues to a clear next step.
+            </h2>
+          </div>
+          <p className="max-w-2xl text-lg leading-8 text-white/65">
+            Yorix is built around the question every tired parent asks: when
+            should my baby sleep next? The app watches the day unfold and keeps
+            the plan flexible.
+          </p>
+        </div>
+
+        <div className="mt-10 grid gap-5 lg:grid-cols-3">
+          {[
+            'Build a routine that works for everyone',
+            'Prevent overtired meltdowns before bedtime',
+            'Learn from real sleep, feeding, and care patterns',
+          ].map((item, index) => (
+            <article
+              className="rounded-lg border border-white/10 bg-white/10 p-6 backdrop-blur-xl"
+              key={item}
+            >
+              <span className="grid h-10 w-10 place-items-center rounded-full bg-[#6366F1] text-sm font-bold text-white">
+                {index + 1}
+              </span>
+              <h3 className="mt-5 text-xl font-semibold text-white">{item}</h3>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="features" className="grid gap-8 px-5 pb-12 sm:px-8 lg:px-10">
+        {productStories.map((story, index) => {
+          const Icon = story.icon;
+          return (
+            <article
+              className="mx-auto grid w-full max-w-7xl gap-8 overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.07] p-5 shadow-[0_24px_90px_rgb(0_0_0/18%)] backdrop-blur-xl md:grid-cols-[0.92fr_1.08fr] md:p-8 lg:p-10"
+              key={story.title}
+            >
+              <div className={index % 2 === 1 ? 'md:order-2' : ''}>
+                <p className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-[#C7D2FE]">
+                  <Icon className="h-4 w-4" aria-hidden="true" />
+                  {story.eyebrow}
+                </p>
+                <h2 className="max-w-xl text-4xl font-semibold leading-tight text-white sm:text-5xl">
+                  {story.title}
+                </h2>
+                <p className="mt-5 max-w-xl text-lg leading-8 text-white/65">
+                  {story.body}
+                </p>
+                <ul className="mt-7 grid gap-3">
+                  {story.points.map((point) => (
+                    <li
+                      className="flex items-center gap-3 text-base font-semibold text-white"
+                      key={point}
+                    >
+                      <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#22C55E] text-white">
+                        <Check className="h-4 w-4" aria-hidden="true" />
+                      </span>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="relative min-h-[520px] overflow-hidden rounded-[1.5rem] bg-[#1E1B4B] sm:min-h-[650px] md:min-h-[590px]">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgb(129_140_248/0.35),transparent_24rem)]" />
+                <img
+                  src={story.image}
+                  alt={story.alt}
+                  className="absolute left-1/2 top-8 w-[70%] max-w-[330px] -translate-x-1/2 rounded-[2rem] shadow-[0_32px_85px_rgb(0_0_0/42%)] ring-1 ring-white/15"
+                  width="1206"
+                  height="2622"
+                />
+              </div>
+            </article>
+          );
+        })}
+      </section>
+
+      <section className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:px-10">
+        <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <div>
+            <p className="mb-3 text-sm font-semibold uppercase text-[#A78BFA]">
+              Loved by tired parents
+            </p>
+            <h2 className="max-w-xl text-4xl font-semibold leading-tight text-white sm:text-5xl">
+              Less sleep math. More confidence.
+            </h2>
+            <p className="mt-5 max-w-xl text-lg leading-8 text-white/65">
+              Yorix gives families the calm structure they need without turning
+              every nap, feed, or diaper into a spreadsheet.
+            </p>
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {parentQuotes.map((item) => (
+              <article
+                className="rounded-lg border border-white/10 bg-white/10 p-5 backdrop-blur-xl"
+                key={item.title}
+              >
+                <div className="mb-5 flex gap-1 text-[#F59E0B]">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <Star
+                      className="h-4 w-4 fill-current"
+                      aria-hidden="true"
+                      key={index}
+                    />
+                  ))}
+                </div>
+                <h3 className="text-xl font-semibold text-white">
+                  {item.title}
                 </h3>
-                <p className="mt-2 text-sm leading-6 text-[#64748B]">
-                  {feature.body}
+                <p className="mt-3 text-sm leading-6 text-white/60">
+                  {item.body}
                 </p>
               </article>
             ))}
@@ -301,123 +431,69 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#EEF2FF]">
-        <div className="mx-auto grid max-w-6xl gap-6 px-5 py-12 sm:px-8 md:grid-cols-3 lg:px-10">
-          <div className="flex items-start gap-4">
-            <Clock3
-              className="mt-1 h-6 w-6 text-[#6366F1]"
-              aria-hidden="true"
-            />
+      <section id="guides" className="border-y border-white/10 bg-[#0F1022]">
+        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10">
+          <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
             <div>
-              <h2 className="text-lg font-semibold">Wake windows</h2>
-              <p className="mt-2 text-sm leading-6 text-[#64748B]">
-                Keep naps close to the moment your baby is ready for sleep.
+              <p className="mb-3 text-sm font-semibold uppercase text-[#A78BFA]">
+                Yorix guides
               </p>
-            </div>
-          </div>
-          <div className="flex items-start gap-4">
-            <Baby className="mt-1 h-6 w-6 text-[#6366F1]" aria-hidden="true" />
-            <div>
-              <h2 className="text-lg font-semibold">Daily tracking</h2>
-              <p className="mt-2 text-sm leading-6 text-[#64748B]">
-                Log sleep, feeding, diapers, and notes without spreadsheet work.
-              </p>
-            </div>
-          </div>
-          <div className="flex items-start gap-4">
-            <ShieldCheck
-              className="mt-1 h-6 w-6 text-[#6366F1]"
-              aria-hidden="true"
-            />
-            <div>
-              <h2 className="text-lg font-semibold">Parent-safe guidance</h2>
-              <p className="mt-2 text-sm leading-6 text-[#64748B]">
-                Helpful routine support, with clear boundaries around health
-                advice.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="guides" className="night-gradient text-white">
-        <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 lg:px-10">
-          <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-            <div>
-              <p className="mb-3 text-sm font-semibold uppercase text-[#C7D2FE]">
-                Yorix blog
-              </p>
-              <h2 className="max-w-2xl text-3xl font-semibold leading-tight sm:text-4xl">
-                Baby sleep guides for the questions parents search first.
+              <h2 className="max-w-2xl text-4xl font-semibold leading-tight text-white sm:text-5xl">
+                Sleep knowledge is sleep power.
               </h2>
-              <div className="mt-8 flex flex-wrap gap-5 border-b border-white/15 pb-4 text-sm font-medium text-white/55">
-                <span className="border-b-2 border-white pb-4 text-white">
-                  All posts
-                </span>
-                <span>Baby Sleep</span>
-                <span>Feeding</span>
-                <span>Routines</span>
-              </div>
+              <p className="mt-4 max-w-2xl text-base leading-7 text-white/60">
+                Evidence-aware guides for night wakings, wake windows, white
+                noise, sleep regressions, feeding rhythm, and age-based
+                schedules.
+              </p>
             </div>
             <a
-              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-[#1E1B4B] transition hover:bg-[#EEF2FF] focus:outline-none focus:ring-4 focus:ring-white/25"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-white px-6 text-base font-semibold text-[#1E1B4B] transition hover:bg-[#EEF2FF] focus:outline-none focus:ring-4 focus:ring-white/25"
               href="/guides"
             >
               View all guides
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              <ArrowRight className="h-5 w-5" aria-hidden="true" />
             </a>
           </div>
-          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {topicPages.map((page) => (
+          <div className="mt-9 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {featuredGuides.map((page) => (
               <a
-                className="overflow-hidden rounded-lg bg-[#161628] shadow-[0_20px_60px_rgb(0_0_0/18%)] transition hover:-translate-y-1 hover:shadow-[0_24px_70px_rgb(0_0_0/26%)]"
+                className="rounded-lg border border-white/10 bg-white/10 p-5 transition hover:-translate-y-1 hover:bg-white/10"
                 href={`/${page.slug}`}
                 key={page.slug}
               >
-                <div className={`bg-gradient-to-br ${page.coverClass} p-6`}>
-                  <img
-                    src="/app-icon.png"
-                    alt=""
-                    className="h-24 w-24 rounded-[26px] shadow-2xl"
-                    width="1024"
-                    height="1024"
-                  />
-                </div>
-                <div className="p-5">
-                  <p className="text-sm font-medium text-[#C7D2FE]">
-                    {page.date} · {page.category}
-                  </p>
-                  <h3 className="mt-4 text-2xl font-semibold leading-tight text-white">
-                    {page.title}
-                  </h3>
-                  <p className="mt-4 text-sm leading-6 text-white/65">
-                    {page.description}
-                  </p>
-                  <p className="mt-5 text-sm font-semibold text-[#A78BFA]">
-                    {page.readTime}
-                  </p>
-                </div>
+                <p className="text-sm font-semibold text-[#C7D2FE]">
+                  {page.category} · {page.readTime}
+                </p>
+                <h3 className="mt-4 text-xl font-semibold leading-tight text-white">
+                  {page.title}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-white/60">
+                  {page.description}
+                </p>
               </a>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="faq" className="mx-auto max-w-4xl px-5 py-14 sm:px-8">
-        <p className="mb-3 text-center text-sm font-semibold uppercase text-[#8B5CF6]">
+      <section id="faq" className="mx-auto max-w-5xl px-5 py-16 sm:px-8">
+        <p className="mb-3 text-center text-sm font-semibold uppercase text-[#A78BFA]">
           FAQ
         </p>
-        <h2 className="text-center text-3xl font-semibold text-[#1E1B4B] sm:text-4xl">
-          Baby schedule questions, answered simply.
+        <h2 className="text-center text-4xl font-semibold text-white sm:text-5xl">
+          Baby sleep questions, answered calmly.
         </h2>
         <div className="mt-8 grid gap-4">
           {faqs.map((faq) => (
             <article
-              className="rounded-lg border border-[#E2E8F0] bg-white p-5"
+              className="rounded-lg border border-white/10 bg-white/10 p-6 backdrop-blur-xl"
               key={faq.question}
             >
-              <h3 className="text-lg font-semibold">{faq.question}</h3>
-              <p className="mt-2 text-base leading-7 text-[#64748B]">
+              <h3 className="text-xl font-semibold text-white">
+                {faq.question}
+              </h3>
+              <p className="mt-3 text-base leading-7 text-white/65">
                 {faq.answer}
               </p>
             </article>
@@ -427,23 +503,24 @@ export default function Home() {
 
       <section
         id="download"
-        className="mx-auto max-w-6xl px-5 pb-16 sm:px-8 lg:px-10"
+        className="mx-auto max-w-7xl px-5 pb-16 sm:px-8 lg:px-10"
       >
-        <div className="night-gradient grid gap-7 rounded-lg p-7 text-white shadow-[0_22px_70px_rgb(49_46_129/22%)] sm:p-9 md:grid-cols-[1fr_auto] md:items-center">
+        <div className="grid gap-8 overflow-hidden rounded-[2rem] border border-white/10 bg-[#EEF2FF] p-6 text-[#1E1B4B] shadow-[0_28px_90px_rgb(0_0_0/22%)] md:grid-cols-[1fr_260px] md:items-center md:p-9">
           <div>
-            <p className="mb-2 text-sm font-semibold uppercase text-[#C7D2FE]">
-              Start small today
+            <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#6366F1]">
+              <Users className="h-4 w-4" aria-hidden="true" />
+              Built for real family life
             </p>
-            <h2 className="text-3xl font-semibold">
-              Create your baby’s first calm schedule.
+            <h2 className="max-w-3xl text-4xl font-semibold leading-tight sm:text-5xl">
+              Start with one nap. Let Yorix learn the rhythm.
             </h2>
-            <p className="mt-3 max-w-2xl text-base leading-7 text-[#E0E7FF]">
-              Open Yorix and start tracking naps, feeds, diapers, and daily
-              rhythm in a calmer way.
+            <p className="mt-4 max-w-2xl text-lg leading-8 text-[#64748B]">
+              Track today’s sleep, feeds, diapers, growth, symptoms, mood, and
+              routines, then get a clearer plan for the day ahead.
             </p>
           </div>
           <a
-            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-white px-6 text-base font-semibold text-[#1E1B4B] transition hover:bg-[#EEF2FF] focus:outline-none focus:ring-4 focus:ring-white/25"
+            className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-full bg-[#6366F1] px-7 text-base font-semibold text-white shadow-[0_18px_42px_rgb(99_102_241/30%)] transition hover:bg-[#4F46E5] focus:outline-none focus:ring-4 focus:ring-[#6366F1]/25"
             href={appDownloadUrl}
             rel="noopener noreferrer"
             target="_blank"
@@ -454,7 +531,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="border-t border-[#E2E8F0] px-5 py-8 text-center text-sm text-[#64748B] sm:px-8">
+      <footer className="border-t border-white/10 px-5 py-8 text-center text-sm text-white/50 sm:px-8">
         <p>
           Yorix is a routine helper for parents. It does not provide medical
           diagnosis or emergency advice.

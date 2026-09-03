@@ -73,6 +73,38 @@ body {
     linear-gradient(180deg, #1c1832 0%, #18182e 42%, #0f1022 100%);
 }
 
+.home-page {
+  background:
+    radial-gradient(
+      circle at 82% 7%,
+      rgb(129 140 248 / 0.22),
+      transparent 25rem
+    ),
+    radial-gradient(
+      circle at 12% 18%,
+      rgb(167 139 250 / 0.18),
+      transparent 26rem
+    ),
+    linear-gradient(180deg, #1c1832 0%, #1e1b4b 30%, #312e81 62%, #17172d 100%);
+}
+
+.home-page::before {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+  opacity: 0.5;
+  background-image:
+    radial-gradient(circle, rgb(255 255 255 / 0.5) 0 1px, transparent 1.5px),
+    radial-gradient(circle, rgb(199 210 254 / 0.45) 0 1px, transparent 1.5px);
+  background-position:
+    30px 60px,
+    110px 155px;
+  background-size:
+    180px 220px,
+    260px 300px;
+}
+
 .night-gradient {
   background: linear-gradient(180deg, #1e1b4b 0%, #312e81 52%, #4f46e5 100%);
 }
