@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.yorix.website/sitemap.xml
+Sitemap: https://yorix.website/sitemap.xml

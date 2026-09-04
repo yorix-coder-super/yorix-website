@@ -1,6 +1,6 @@
 import { researchGuides } from './research-guides';
 
-export const siteUrl = 'https://www.yorix.website';
+export const siteUrl = 'https://yorix.website';
 
 export const appDownloadUrl = 'https://gotoapp.store/yorix';
 
