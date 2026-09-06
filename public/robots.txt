@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://yorix.website/sitemap.xml
+Sitemap: https://yorix.website/sitemap-pages.xml
