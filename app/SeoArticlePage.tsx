@@ -1,13 +1,20 @@
 import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
+import { getArticleUiCopy, getLocalizedTopicPages, type ArticleUiCopy } from './article-localizations';
 import { BrandLogo } from './BrandLogo';
 import { appDownloadUrl, type TopicPage, topicPages } from './content';
+import { type Locale } from './locales';
 
 type SeoArticlePageProps = {
   page: TopicPage;
+  locale?: Locale;
+  ui?: ArticleUiCopy;
 };
 
-export function SeoArticlePage({ page }: SeoArticlePageProps) {
-  const relatedPages = topicPages
+export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: SeoArticlePageProps) {
+  const guidePath = locale ? `/${locale}/guides` : '/guides';
+  const homePath = locale ? `/${locale}` : '/';
+  const relatedSource = locale ? getLocalizedTopicPages(locale) : topicPages;
+  const relatedPages = relatedSource
     .filter((item) => item.slug !== page.slug)
     .slice(0, 3);
   const articleAnchors = page.sections.map((section) => ({
@@ -23,7 +30,7 @@ export function SeoArticlePage({ page }: SeoArticlePageProps) {
       <header className="mx-auto flex w-full max-w-5xl items-center justify-between px-5 py-5 sm:px-8 lg:px-10">
         <a
           className="flex items-center gap-3 text-sm font-semibold text-[#1E1B4B]"
-          href="/"
+          href={homePath}
           aria-label="Back to Yorix home"
         >
           <BrandLogo size="sm" />
@@ -34,7 +41,7 @@ export function SeoArticlePage({ page }: SeoArticlePageProps) {
           rel="noopener noreferrer"
           target="_blank"
         >
-          Get the app
+          {ui.getApp}
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </a>
       </header>
@@ -43,10 +50,10 @@ export function SeoArticlePage({ page }: SeoArticlePageProps) {
         <section className="mx-auto max-w-5xl px-5 pb-10 pt-6 sm:px-8 lg:px-10">
           <a
             className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-[#6366F1] transition hover:text-[#4F46E5]"
-            href="/guides"
+            href={guidePath}
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-            Back to all guides
+            {ui.backToGuides}
           </a>
           <p className="mb-4 text-sm font-semibold uppercase text-[#8B5CF6]">
             {page.category} · {page.readTime}
@@ -55,7 +62,7 @@ export function SeoArticlePage({ page }: SeoArticlePageProps) {
             {page.title}
           </h1>
           <p className="mt-5 text-sm font-medium text-[#64748B]">
-            Published {page.date}
+            {ui.published} {page.date}
           </p>
           <p className="mt-6 max-w-3xl text-xl leading-9 text-[#64748B]">
             {page.intro}
@@ -72,7 +79,7 @@ export function SeoArticlePage({ page }: SeoArticlePageProps) {
                   {page.eyebrow}
                 </p>
                 <h2 className="mt-3 max-w-2xl text-3xl font-semibold leading-tight">
-                  A practical guide for tired parents who want less guessing.
+                  {ui.practicalGuide}
                 </h2>
               </div>
               <img
@@ -91,7 +98,7 @@ export function SeoArticlePage({ page }: SeoArticlePageProps) {
             <div className="grid gap-7">
               <div className="rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-5">
                 <h2 className="text-xl font-semibold text-[#1E1B4B]">
-                  In this article
+                  {ui.inThisArticle}
                 </h2>
                 <ol className="mt-4 grid gap-2">
                   {articleAnchors.map((anchor) => (
@@ -108,10 +115,7 @@ export function SeoArticlePage({ page }: SeoArticlePageProps) {
               </div>
 
               <p className="rounded-lg border border-[#C7D2FE] bg-[#EEF2FF] p-5 text-sm leading-7 text-[#1E1B4B]">
-                This guide is for general routine support for healthy babies and
-                families. It does not replace medical advice. If you are worried
-                about feeding, growth, breathing, fever, symptoms, or your own
-                wellbeing, contact a qualified healthcare professional.
+                {ui.disclaimer}
               </p>
 
               {page.sections.map((section, index) => (
@@ -132,7 +136,7 @@ export function SeoArticlePage({ page }: SeoArticlePageProps) {
 
               <section>
                 <h2 className="text-2xl font-semibold text-[#1E1B4B]">
-                  Quick reference
+                  {ui.quickReference}
                 </h2>
                 <div className="mt-4 overflow-hidden rounded-lg border border-[#E2E8F0]">
                   {page.sampleRows.map((row) => (
@@ -173,7 +177,7 @@ export function SeoArticlePage({ page }: SeoArticlePageProps) {
               {page.sources?.length ? (
                 <section>
                   <h2 className="text-2xl font-semibold text-[#1E1B4B]">
-                    Sources and further reading
+                    {ui.sources}
                   </h2>
                   <ul className="mt-4 grid gap-2">
                     {page.sources.map((source) => (
@@ -194,7 +198,7 @@ export function SeoArticlePage({ page }: SeoArticlePageProps) {
 
               <section>
                 <h2 className="text-2xl font-semibold text-[#1E1B4B]">
-                  Common questions
+                  {ui.commonQuestions}
                 </h2>
                 <div className="mt-4 grid gap-3">
                   {page.faqs.map((faq) => (
@@ -215,7 +219,7 @@ export function SeoArticlePage({ page }: SeoArticlePageProps) {
             </div>
 
             <aside className="h-fit rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-5">
-              <h2 className="text-lg font-semibold">Quick routine checklist</h2>
+              <h2 className="text-lg font-semibold">{ui.checklist}</h2>
               <ul className="mt-4 grid gap-3">
                 {page.checklist.map((item) => (
                   <li
@@ -236,16 +240,13 @@ export function SeoArticlePage({ page }: SeoArticlePageProps) {
         <section className="mx-auto max-w-5xl px-5 py-12 sm:px-8 lg:px-10">
           <div className="night-gradient rounded-lg p-7 text-white shadow-[0_22px_70px_rgb(49_46_129/22%)] sm:p-9">
             <p className="mb-2 text-sm font-semibold uppercase text-[#C7D2FE]">
-              Personalized support
+              {ui.personalizedSupport}
             </p>
             <h2 className="max-w-3xl text-3xl font-semibold">
-              Yorix turns baby sleep and feeding logs into a schedule that
-              adapts.
+              {ui.ctaTitle}
             </h2>
             <p className="mt-3 max-w-3xl text-base leading-7 text-[#E0E7FF]">
-              Track naps, wake windows, night wakings, feeds, diapers, and
-              routines in one app, then get clearer next steps for the day
-              ahead.
+              {ui.ctaBody}
             </p>
             <a
               className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-white px-6 text-base font-semibold text-[#1E1B4B] transition hover:bg-[#EEF2FF] focus:outline-none focus:ring-4 focus:ring-white/25"
@@ -253,7 +254,7 @@ export function SeoArticlePage({ page }: SeoArticlePageProps) {
               rel="noopener noreferrer"
               target="_blank"
             >
-              Download Yorix
+              {ui.download}
               <ArrowRight className="h-5 w-5" aria-hidden="true" />
             </a>
           </div>
@@ -261,13 +262,13 @@ export function SeoArticlePage({ page }: SeoArticlePageProps) {
 
         <section className="mx-auto max-w-5xl px-5 pb-14 sm:px-8 lg:px-10">
           <h2 className="text-2xl font-semibold text-[#1E1B4B]">
-            Related guides
+            {ui.relatedGuides}
           </h2>
           <div className="mt-5 grid gap-3 md:grid-cols-3">
             {relatedPages.map((related) => (
               <a
                 className="rounded-lg border border-[#E2E8F0] bg-white p-5 transition hover:border-[#C7D2FE] hover:shadow-sm"
-                href={`/${related.slug}`}
+                href={locale ? `/${locale}/${related.slug}` : `/${related.slug}`}
                 key={related.slug}
               >
                 <h3 className="font-semibold text-[#1E1B4B]">
@@ -284,8 +285,7 @@ export function SeoArticlePage({ page }: SeoArticlePageProps) {
 
       <footer className="border-t border-[#E2E8F0] px-5 py-8 text-center text-sm text-[#64748B] sm:px-8">
         <p>
-          Yorix is a routine helper for parents. It does not provide medical
-          diagnosis or emergency advice.
+          {ui.footer}
         </p>
       </footer>
     </main>

@@ -13,6 +13,7 @@ import {
   Users,
   Volume2,
 } from 'lucide-react';
+import { getLocalizedTopicPage, isTranslatedArticleSlug } from './article-localizations';
 import { BrandLogo } from './BrandLogo';
 import { appDownloadUrl, topicPages } from './content';
 import { localeCopy, locales, type Locale } from './locales';
@@ -29,6 +30,10 @@ const proofIcons = [Moon, MessageCircle, ShieldCheck];
 export function LocalizedHome({ locale }: { locale: Locale }) {
   const copy = localeCopy[locale];
   const guidePages = topicPages.slice(0, 6);
+  const guideHref = (slug: string) =>
+    isTranslatedArticleSlug(slug) && getLocalizedTopicPage(locale, slug)
+      ? `/${locale}/${slug}`
+      : `/${slug}`;
 
   return (
     <main className="home-page min-h-screen overflow-hidden text-white" lang={locale} dir={locale === 'ar' || locale === 'he' ? 'rtl' : undefined}>
@@ -39,7 +44,7 @@ export function LocalizedHome({ locale }: { locale: Locale }) {
         <nav className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/10 p-2 text-sm font-semibold text-white/70 shadow-[0_18px_70px_rgb(0_0_0/18%)] backdrop-blur-xl md:flex">
           <a className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white" href="#plan">{copy.nav.plan}</a>
           <a className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white" href="#features">{copy.nav.features}</a>
-          <a className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white" href="#guides">{copy.nav.guides}</a>
+          <a className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white" href={`/${locale}/guides`}>{copy.nav.guides}</a>
           <a className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white" href="#faq">{copy.nav.faq}</a>
         </nav>
         <div className="flex items-center gap-2">
@@ -67,7 +72,7 @@ export function LocalizedHome({ locale }: { locale: Locale }) {
           <p className="mt-6 max-w-xl text-lg leading-8 text-white/70">{copy.hero.body}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-full bg-[#6366F1] px-7 text-base font-semibold text-white shadow-[0_22px_55px_rgb(99_102_241/34%)] transition hover:bg-[#4F46E5]" href={appDownloadUrl} rel="noopener noreferrer" target="_blank">{copy.hero.primary}<ArrowRight className="h-5 w-5" aria-hidden="true" /></a>
-            <a className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-full border border-white/15 bg-white/10 px-7 text-base font-semibold text-white transition hover:bg-white/15" href="#guides">{copy.hero.secondary}<BookOpen className="h-5 w-5" aria-hidden="true" /></a>
+            <a className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-full border border-white/15 bg-white/10 px-7 text-base font-semibold text-white transition hover:bg-white/15" href={`/${locale}/guides`}>{copy.hero.secondary}<BookOpen className="h-5 w-5" aria-hidden="true" /></a>
           </div>
           <div className="mt-9 hidden max-w-xl gap-3 text-sm text-white/70 sm:grid sm:grid-cols-3">
             <div className="rounded-lg border border-white/10 bg-white/10 p-4 backdrop-blur-xl"><strong className="block text-2xl text-white">14</strong>{copy.stats[0]}</div>
@@ -92,7 +97,7 @@ export function LocalizedHome({ locale }: { locale: Locale }) {
 
       <section className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:px-10"><div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start"><div><p className="mb-3 text-sm font-semibold uppercase text-[#A78BFA]">{copy.trust.eyebrow}</p><h2 className="max-w-xl text-4xl font-semibold leading-tight text-white sm:text-5xl">{copy.trust.title}</h2><p className="mt-5 max-w-xl text-lg leading-8 text-white/65">{copy.trust.body}</p></div><div className="grid gap-4 md:grid-cols-3">{copy.trust.cards.map((item) => <article className="rounded-lg border border-white/10 bg-white/10 p-5 backdrop-blur-xl" key={item.title}><div className="mb-5 flex gap-1 text-[#F59E0B]">{Array.from({ length: 5 }).map((_, index) => <Star className="h-4 w-4 fill-current" aria-hidden="true" key={index} />)}</div><h3 className="text-xl font-semibold text-white">{item.title}</h3><p className="mt-3 text-sm leading-6 text-white/60">{item.body}</p></article>)}</div></div></section>
 
-      <section id="guides" className="border-y border-white/10 bg-[#0F1022]"><div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10"><div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end"><div><p className="mb-3 text-sm font-semibold uppercase text-[#A78BFA]">{copy.guides.eyebrow}</p><h2 className="max-w-2xl text-4xl font-semibold leading-tight text-white sm:text-5xl">{copy.guides.title}</h2><p className="mt-4 max-w-2xl text-base leading-7 text-white/60">{copy.guides.body}</p></div><a className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-white px-6 text-base font-semibold text-[#1E1B4B] transition hover:bg-[#EEF2FF]" href="/guides">{copy.guides.action}<ArrowRight className="h-5 w-5" aria-hidden="true" /></a></div><div className="mt-9 grid gap-4 md:grid-cols-2 lg:grid-cols-3">{guidePages.map((page, index) => <a className="rounded-lg border border-white/10 bg-white/10 p-5 transition hover:-translate-y-1 hover:bg-white/10" href={`/${page.slug}`} key={page.slug}><p className="text-sm font-semibold text-[#C7D2FE]">{page.category} · {page.readTime}</p><h3 className="mt-4 text-xl font-semibold leading-tight text-white">{copy.guides.articles[index].title}</h3><p className="mt-3 text-sm leading-6 text-white/60">{copy.guides.articles[index].body}</p></a>)}</div></div></section>
+      <section id="guides" className="border-y border-white/10 bg-[#0F1022]"><div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10"><div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end"><div><p className="mb-3 text-sm font-semibold uppercase text-[#A78BFA]">{copy.guides.eyebrow}</p><h2 className="max-w-2xl text-4xl font-semibold leading-tight text-white sm:text-5xl">{copy.guides.title}</h2><p className="mt-4 max-w-2xl text-base leading-7 text-white/60">{copy.guides.body}</p></div><a className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-white px-6 text-base font-semibold text-[#1E1B4B] transition hover:bg-[#EEF2FF]" href={`/${locale}/guides`}>{copy.guides.action}<ArrowRight className="h-5 w-5" aria-hidden="true" /></a></div><div className="mt-9 grid gap-4 md:grid-cols-2 lg:grid-cols-3">{guidePages.map((page, index) => { const translated = isTranslatedArticleSlug(page.slug) ? getLocalizedTopicPage(locale, page.slug) : undefined; return <a className="rounded-lg border border-white/10 bg-white/10 p-5 transition hover:-translate-y-1 hover:bg-white/10" href={guideHref(page.slug)} key={page.slug}><p className="text-sm font-semibold text-[#C7D2FE]">{translated?.category ?? page.category} · {translated?.readTime ?? page.readTime}</p><h3 className="mt-4 text-xl font-semibold leading-tight text-white">{translated?.title ?? copy.guides.articles[index].title}</h3><p className="mt-3 text-sm leading-6 text-white/60">{translated?.description ?? copy.guides.articles[index].body}</p></a>; })}</div></div></section>
 
       <section id="faq" className="mx-auto max-w-5xl px-5 py-16 sm:px-8"><p className="mb-3 text-center text-sm font-semibold uppercase text-[#A78BFA]">{copy.faq.eyebrow}</p><h2 className="text-center text-4xl font-semibold text-white sm:text-5xl">{copy.faq.title}</h2><div className="mt-8 grid gap-4">{copy.faq.items.map((item) => <article className="rounded-lg border border-white/10 bg-white/10 p-6 backdrop-blur-xl" key={item.question}><h3 className="text-xl font-semibold text-white">{item.question}</h3><p className="mt-3 text-base leading-7 text-white/65">{item.answer}</p></article>)}</div></section>
 

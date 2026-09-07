@@ -8,26 +8,26 @@ import { researchGuides } from '../research-guides';
 
 type ArticleRouteProps = {
   params: {
-    slug: string;
+    locale: string;
   };
 };
 
 export function generateStaticParams() {
   return [
-    ...researchGuides.map((page) => ({ slug: page.slug })),
-    ...locales.map((slug) => ({ slug })),
+    ...researchGuides.map((page) => ({ locale: page.slug })),
+    ...locales.map((locale) => ({ locale })),
   ];
 }
 
 export function generateMetadata({ params }: ArticleRouteProps): Metadata {
-  if (isLocale(params.slug)) {
-    const copy = localeCopy[params.slug];
+  if (isLocale(params.locale)) {
+    const copy = localeCopy[params.locale];
 
     return {
       title: `Yorix | ${copy.hero.title}`,
       description: copy.hero.body,
       alternates: {
-        canonical: `/${params.slug}`,
+        canonical: `/${params.locale}`,
         languages: {
           en: '/',
           ...localeAlternates(),
@@ -36,14 +36,14 @@ export function generateMetadata({ params }: ArticleRouteProps): Metadata {
       openGraph: {
         title: `Yorix | ${copy.hero.title}`,
         description: copy.hero.body,
-        url: `${siteUrl}/${params.slug}`,
+        url: `${siteUrl}/${params.locale}`,
         type: 'website',
         locale: copy.ogLocale,
       },
     };
   }
 
-  const page = getTopicPage(params.slug);
+  const page = getTopicPage(params.locale);
 
   if (!page) {
     return {};
@@ -65,11 +65,11 @@ export function generateMetadata({ params }: ArticleRouteProps): Metadata {
 }
 
 export default function ArticleRoute({ params }: ArticleRouteProps) {
-  if (isLocale(params.slug)) {
-    return <LocalizedHome locale={params.slug} />;
+  if (isLocale(params.locale)) {
+    return <LocalizedHome locale={params.locale} />;
   }
 
-  const page = getTopicPage(params.slug);
+  const page = getTopicPage(params.locale);
 
   if (!page) {
     notFound();
