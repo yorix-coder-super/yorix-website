@@ -2,10 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://yorix.website/</loc>
-    <lastmod>2026-09-04</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  <url><loc>https://yorix.website/tr</loc><lastmod>2026-09-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yorix.website/fr</loc><lastmod>2026-09-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yorix.website/de</loc><lastmod>2026-09-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yorix.website/ru</loc><lastmod>2026-09-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yorix.website/nl</loc><lastmod>2026-09-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yorix.website/it</loc><lastmod>2026-09-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yorix.website/pt</loc><lastmod>2026-09-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yorix.website/es</loc><lastmod>2026-09-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yorix.website/th</loc><lastmod>2026-09-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yorix.website/sv</loc><lastmod>2026-09-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yorix.website/id</loc><lastmod>2026-09-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yorix.website/ja</loc><lastmod>2026-09-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yorix.website/pl</loc><lastmod>2026-09-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yorix.website/cs</loc><lastmod>2026-09-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yorix.website/no</loc><lastmod>2026-09-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yorix.website/ar</loc><lastmod>2026-09-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yorix.website/da</loc><lastmod>2026-09-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yorix.website/he</loc><lastmod>2026-09-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yorix.website/uk</loc><lastmod>2026-09-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yorix.website/vi</loc><lastmod>2026-09-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yorix.website/ms</loc><lastmod>2026-09-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://yorix.website/hi</loc><lastmod>2026-09-07</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url>
     <loc>https://yorix.website/guides</loc>
     <lastmod>2026-09-04</lastmod>

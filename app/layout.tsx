@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { siteUrl } from './content';
+import { localeAlternates } from './locales';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -12,6 +13,10 @@ export const metadata: Metadata = {
     'Build a calmer baby schedule with nap windows, feeding rhythm, sleep tracking, and gentle routine support for parents.',
   alternates: {
     canonical: '/',
+    languages: {
+      en: '/',
+      ...localeAlternates(),
+    },
   },
   openGraph: {
     title: 'Baby Schedule App | Calm Nap and Feeding Routine',
