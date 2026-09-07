@@ -2,13 +2,14 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import {
   getLocalizedTopicPage,
+  getTranslatedLocalesForArticle,
   isTranslatedArticleSlug,
   translatedArticleAlternates,
   translatedArticleSlugs,
 } from '../../article-localizations';
 import { SeoArticlePage } from '../../SeoArticlePage';
 import { siteUrl } from '../../content';
-import { isLocale, localeCopy, locales, type Locale } from '../../locales';
+import { isLocale, localeCopy, type Locale } from '../../locales';
 
 type LocalizedArticleRouteProps = {
   params: {
@@ -18,8 +19,8 @@ type LocalizedArticleRouteProps = {
 };
 
 export function generateStaticParams() {
-  return locales.flatMap((locale) =>
-    translatedArticleSlugs.map((slug) => ({ locale, slug })),
+  return translatedArticleSlugs.flatMap((slug) =>
+    getTranslatedLocalesForArticle(slug).map((locale) => ({ locale, slug })),
   );
 }
 

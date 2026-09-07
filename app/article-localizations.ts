@@ -200,7 +200,7 @@ const articleUiCopy: Record<Locale, ArticleUiCopy> = {
   hi: { ...defaultArticleUi, home: 'होम', getApp: localeCopy.hi.nav.download, backToGuides: 'सभी गाइड पर वापस जाएँ', published: 'प्रकाशित', practicalGuide: 'थके हुए माता-पिता के लिए व्यावहारिक गाइड, ताकि अनुमान कम हो।', inThisArticle: 'इस लेख में', quickReference: 'त्वरित संदर्भ', commonQuestions: 'आम सवाल', checklist: 'छोटी रूटीन चेकलिस्ट', personalizedSupport: 'व्यक्तिगत सहायता', download: localeCopy.hi.cta.action, footer: localeCopy.hi.footer },
 };
 
-const napArticle: Record<Locale, ArticleTranslation> = {
+const napArticle: Partial<Record<Locale, ArticleTranslation>> = {
   tr: {
     title: 'Yaşa Göre Bebek Uyku Programı',
     shortTitle: 'Yaşa göre uyku',
@@ -237,26 +237,7 @@ const napArticle: Record<Locale, ArticleTranslation> = {
     checklist: ['Несколько дней записывайте начало и конец каждого сна.', 'Сравнивайте длительность сна со следующим окном бодрствования.', 'После тяжелого дня со снами сдвигайте отбой раньше.', 'Сохраняйте знакомую комнату и спокойную рутину.'],
     faqs: [{ question: 'Режим дневного сна должен быть одинаковым каждый день?', answer: 'Не совсем. Стабильный ритм помогает, но длительность снов, болезнь, поездки и развитие могут сдвигать день. Гибкий режим обычно проще поддерживать.' }, { question: 'Что делать, если ребенок спит только короткими снами?', answer: 'Короткие сны часто встречаются, особенно во время переходов. Отслеживайте несколько дней и попробуйте сократить следующее окно бодрствования или сдвинуть отбой раньше после сложного дня.' }],
   },
-  fr: makeNap('French', 'Programme de siestes de bébé selon l’âge', 'Siestes par âge'),
-  de: makeNap('German', 'Babys Nickerchenplan nach Alter', 'Nickerchen nach Alter'),
-  nl: makeNap('Dutch', 'Slaapschema voor baby’s per leeftijd', 'Slaap per leeftijd'),
-  it: makeNap('Italian', 'Programma dei pisolini del bambino per età', 'Pisolini per età'),
-  pt: makeNap('Portuguese', 'Horário de sestas do bebé por idade', 'Sestas por idade'),
   es: makeNap('Spanish', 'Horario de siestas del bebé por edad', 'Siestas por edad'),
-  th: makeNap('Thai', 'ตารางการนอนกลางวันของทารกตามอายุ', 'นอนตามอายุ'),
-  sv: makeNap('Swedish', 'Babys tupplursschema efter ålder', 'Tupplurar efter ålder'),
-  id: makeNap('Indonesian', 'Jadwal tidur siang bayi berdasarkan usia', 'Tidur siang usia'),
-  ja: makeNap('Japanese', '月齢別の赤ちゃんの昼寝スケジュール', '月齢別昼寝'),
-  pl: makeNap('Polish', 'Plan drzemek dziecka według wieku', 'Drzemki według wieku'),
-  cs: makeNap('Czech', 'Plán denního spánku dítěte podle věku', 'Spánek podle věku'),
-  no: makeNap('Norwegian', 'Babys lurskjema etter alder', 'Lurer etter alder'),
-  ar: makeNap('Arabic', 'جدول قيلولات الطفل حسب العمر', 'القيلولات حسب العمر'),
-  da: makeNap('Danish', 'Babys lureskema efter alder', 'Lure efter alder'),
-  he: makeNap('Hebrew', 'לוח תנומות לתינוק לפי גיל', 'תנומות לפי גיל'),
-  uk: makeNap('Ukrainian', 'Режим денного сну дитини за віком', 'Денний сон за віком'),
-  vi: makeNap('Vietnamese', 'Lịch ngủ ngày của bé theo độ tuổi', 'Ngủ ngày theo tuổi'),
-  ms: makeNap('Malay', 'Jadual tidur siang bayi mengikut umur', 'Tidur mengikut umur'),
-  hi: makeNap('Hindi', 'उम्र के अनुसार बच्चे की झपकी का शेड्यूल', 'उम्र के अनुसार झपकी'),
 };
 
 function makeNap(language: string, title: string, shortTitle: string): ArticleTranslation {
@@ -383,5 +364,19 @@ export function isTranslatedArticleSlug(value: string): value is TranslatedArtic
 }
 
 export function translatedArticleAlternates(slug: string) {
-  return Object.fromEntries(locales.map((locale) => [locale, `/${locale}/${slug}`]));
+  if (!isTranslatedArticleSlug(slug)) {
+    return {};
+  }
+
+  return Object.fromEntries(
+    getTranslatedLocalesForArticle(slug).map((locale) => [locale, `/${locale}/${slug}`]),
+  );
+}
+
+export function getTranslatedLocalesForArticle(slug: string) {
+  if (slug !== 'baby-nap-schedule-by-age') {
+    return [];
+  }
+
+  return locales.filter((locale) => Boolean(napArticle[locale]));
 }
