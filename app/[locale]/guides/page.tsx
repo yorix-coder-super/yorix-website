@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { getLocalizedTopicPages } from '../../article-localizations';
 import { LocalizedGuidesPage } from '../../LocalizedGuidesPage';
 import { siteUrl } from '../../content';
 import { isLocale, localeAlternates, localeCopy, locales, type Locale } from '../../locales';
@@ -21,6 +22,7 @@ export function generateMetadata({ params }: LocalizedGuidesRouteProps): Metadat
 
   const locale = params.locale;
   const copy = localeCopy[locale];
+  const translatedPages = getLocalizedTopicPages(locale);
 
   return {
     title: `${copy.guides.title} | Yorix`,
@@ -39,6 +41,7 @@ export function generateMetadata({ params }: LocalizedGuidesRouteProps): Metadat
       type: 'website',
       locale: copy.ogLocale,
     },
+    robots: translatedPages.length ? undefined : { index: false, follow: true },
   };
 }
 
