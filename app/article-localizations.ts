@@ -1,7 +1,22 @@
 import { type TopicPage, getTopicPage } from './content';
 import { type Locale, localeCopy, locales } from './locales';
 
-export const translatedArticleSlugs = ['baby-nap-schedule-by-age'] as const;
+export const translatedArticleSlugs = [
+  'baby-nap-schedule-by-age',
+  'newborn-sleep-schedule',
+  '4-month-old-sleep-schedule',
+  'baby-feeding-schedule',
+  'wake-windows-by-age',
+  'survive-night-wakings-new-parents',
+  'white-noise-for-baby-sleep',
+  'ferber-method-baby-sleep',
+  'sleep-training-methods-explained',
+  'newborn-sleep-first-28-days',
+  '3-month-old-sleep-schedule',
+  '5-month-old-sleep-schedule',
+  '10-month-old-sleep-schedule',
+  'baby-sleep-parent-stress',
+] as const;
 
 export type TranslatedArticleSlug = (typeof translatedArticleSlugs)[number];
 
@@ -240,6 +255,237 @@ const napArticle: Partial<Record<Locale, ArticleTranslation>> = {
   es: makeNap('Spanish', 'Horario de siestas del bebé por edad', 'Siestas por edad'),
 };
 
+const localizedTopicNames: Record<Locale, Record<TranslatedArticleSlug, string>> = {
+  tr: {
+    'baby-nap-schedule-by-age': 'Yaşa göre bebek gündüz uykusu programı',
+    'newborn-sleep-schedule': 'Yenidoğan uyku programı',
+    '4-month-old-sleep-schedule': '4 aylık bebek uyku programı',
+    'baby-feeding-schedule': 'Bebek beslenme programı',
+    'wake-windows-by-age': 'Yaşa göre uyanıklık pencereleri',
+    'survive-night-wakings-new-parents': 'Gece uyanmaları: yeni ebeveynler için hayatta kalma rehberi',
+    'white-noise-for-baby-sleep': 'Bebek uykusu için beyaz gürültü',
+    'ferber-method-baby-sleep': 'Ferber yöntemi ve bebek uykusu',
+    'sleep-training-methods-explained': 'Bebek uyku eğitimi yöntemleri',
+    'newborn-sleep-first-28-days': 'İlk 28 günde yenidoğan uykusu',
+    '3-month-old-sleep-schedule': '3 aylık bebek uyku programı',
+    '5-month-old-sleep-schedule': '5 aylık bebek uyku programı',
+    '10-month-old-sleep-schedule': '10 aylık bebek uyku programı',
+    'baby-sleep-parent-stress': 'Bebek uykusu ve ebeveyn stresi',
+  },
+  fr: {
+    'baby-nap-schedule-by-age': 'Programme de siestes de bébé par âge',
+    'newborn-sleep-schedule': 'Programme de sommeil du nouveau-né',
+    '4-month-old-sleep-schedule': 'Programme de sommeil à 4 mois',
+    'baby-feeding-schedule': 'Programme d’alimentation du bébé',
+    'wake-windows-by-age': 'Fenêtres d’éveil par âge',
+    'survive-night-wakings-new-parents': 'Réveils nocturnes : survivre comme nouveaux parents',
+    'white-noise-for-baby-sleep': 'Bruit blanc pour le sommeil de bébé',
+    'ferber-method-baby-sleep': 'Méthode Ferber et sommeil de bébé',
+    'sleep-training-methods-explained': 'Méthodes d’apprentissage du sommeil',
+    'newborn-sleep-first-28-days': 'Sommeil du nouveau-né pendant les 28 premiers jours',
+    '3-month-old-sleep-schedule': 'Programme de sommeil à 3 mois',
+    '5-month-old-sleep-schedule': 'Programme de sommeil à 5 mois',
+    '10-month-old-sleep-schedule': 'Programme de sommeil à 10 mois',
+    'baby-sleep-parent-stress': 'Sommeil de bébé et stress parental',
+  },
+  de: {
+    'baby-nap-schedule-by-age': 'Babys Nickerchenplan nach Alter',
+    'newborn-sleep-schedule': 'Schlafplan für Neugeborene',
+    '4-month-old-sleep-schedule': 'Schlafplan für 4 Monate alte Babys',
+    'baby-feeding-schedule': 'Fütterungsplan für Babys',
+    'wake-windows-by-age': 'Wachfenster nach Alter',
+    'survive-night-wakings-new-parents': 'Nächtliches Aufwachen: Überlebenstipps für neue Eltern',
+    'white-noise-for-baby-sleep': 'Weißes Rauschen für Babyschlaf',
+    'ferber-method-baby-sleep': 'Ferber-Methode und Babyschlaf',
+    'sleep-training-methods-explained': 'Schlaftrainingsmethoden erklärt',
+    'newborn-sleep-first-28-days': 'Neugeborenenschlaf in den ersten 28 Tagen',
+    '3-month-old-sleep-schedule': 'Schlafplan für 3 Monate alte Babys',
+    '5-month-old-sleep-schedule': 'Schlafplan für 5 Monate alte Babys',
+    '10-month-old-sleep-schedule': 'Schlafplan für 10 Monate alte Babys',
+    'baby-sleep-parent-stress': 'Babyschlaf und Elternstress',
+  },
+  ru: {
+    'baby-nap-schedule-by-age': 'Режим дневного сна ребенка по возрасту',
+    'newborn-sleep-schedule': 'Режим сна новорожденного',
+    '4-month-old-sleep-schedule': 'Режим сна ребенка в 4 месяца',
+    'baby-feeding-schedule': 'Режим кормления ребенка',
+    'wake-windows-by-age': 'Окна бодрствования по возрасту',
+    'survive-night-wakings-new-parents': 'Ночные пробуждения: как выжить новым родителям',
+    'white-noise-for-baby-sleep': 'Белый шум для сна ребенка',
+    'ferber-method-baby-sleep': 'Метод Фербера и сон ребенка',
+    'sleep-training-methods-explained': 'Методы обучения сну простыми словами',
+    'newborn-sleep-first-28-days': 'Сон новорожденного в первые 28 дней',
+    '3-month-old-sleep-schedule': 'Режим сна ребенка в 3 месяца',
+    '5-month-old-sleep-schedule': 'Режим сна ребенка в 5 месяцев',
+    '10-month-old-sleep-schedule': 'Режим сна ребенка в 10 месяцев',
+    'baby-sleep-parent-stress': 'Сон ребенка и стресс родителей',
+  },
+  nl: makeTopicNames('Dutch', {
+    'baby-nap-schedule-by-age': 'Babys dutjesschema per leeftijd',
+    'newborn-sleep-schedule': 'Slaapschema voor pasgeborenen',
+    '4-month-old-sleep-schedule': 'Slaapschema voor baby’s van 4 maanden',
+    'baby-feeding-schedule': 'Voedingsschema voor baby’s',
+    'wake-windows-by-age': 'Wakkervensters per leeftijd',
+  }),
+  it: makeTopicNames('Italian', {
+    'baby-nap-schedule-by-age': 'Programma dei sonnellini per età',
+    'newborn-sleep-schedule': 'Programma del sonno del neonato',
+    '4-month-old-sleep-schedule': 'Programma del sonno a 4 mesi',
+    'baby-feeding-schedule': 'Programma di alimentazione del bambino',
+    'wake-windows-by-age': 'Finestre di veglia per età',
+  }),
+  pt: makeTopicNames('Portuguese', {
+    'baby-nap-schedule-by-age': 'Rotina de sestas do bebé por idade',
+    'newborn-sleep-schedule': 'Rotina de sono do recém-nascido',
+    '4-month-old-sleep-schedule': 'Rotina de sono aos 4 meses',
+    'baby-feeding-schedule': 'Rotina de alimentação do bebé',
+    'wake-windows-by-age': 'Janelas de vigília por idade',
+  }),
+  es: makeTopicNames('Spanish', {
+    'baby-nap-schedule-by-age': 'Horario de siestas del bebé por edad',
+    'newborn-sleep-schedule': 'Horario de sueño del recién nacido',
+    '4-month-old-sleep-schedule': 'Horario de sueño a los 4 meses',
+    'baby-feeding-schedule': 'Horario de alimentación del bebé',
+    'wake-windows-by-age': 'Ventanas de vigilia por edad',
+  }),
+  th: makeTopicNames('Thai', {
+    'baby-nap-schedule-by-age': 'ตารางงีบของทารกตามวัย',
+    'newborn-sleep-schedule': 'ตารางนอนของทารกแรกเกิด',
+    '4-month-old-sleep-schedule': 'ตารางนอนของทารกวัย 4 เดือน',
+    'baby-feeding-schedule': 'ตารางให้นมและอาหารของทารก',
+    'wake-windows-by-age': 'ช่วงเวลาตื่นตามวัย',
+  }),
+  sv: makeTopicNames('Swedish', {
+    'baby-nap-schedule-by-age': 'Barnets tupplursschema efter ålder',
+    'newborn-sleep-schedule': 'Sömnschema för nyfödda',
+    '4-month-old-sleep-schedule': 'Sömnschema för 4 månader gamla barn',
+    'baby-feeding-schedule': 'Matningsschema för bebisar',
+    'wake-windows-by-age': 'Vakentider efter ålder',
+  }),
+  id: makeTopicNames('Indonesian', {
+    'baby-nap-schedule-by-age': 'Jadwal tidur siang bayi berdasarkan usia',
+    'newborn-sleep-schedule': 'Jadwal tidur bayi baru lahir',
+    '4-month-old-sleep-schedule': 'Jadwal tidur bayi 4 bulan',
+    'baby-feeding-schedule': 'Jadwal menyusu dan makan bayi',
+    'wake-windows-by-age': 'Jendela bangun berdasarkan usia',
+  }),
+  ja: makeTopicNames('Japanese', {
+    'baby-nap-schedule-by-age': '月齢別の赤ちゃんの昼寝スケジュール',
+    'newborn-sleep-schedule': '新生児の睡眠スケジュール',
+    '4-month-old-sleep-schedule': '生後4か月の睡眠スケジュール',
+    'baby-feeding-schedule': '赤ちゃんの授乳・食事スケジュール',
+    'wake-windows-by-age': '月齢別の起きている時間',
+  }),
+  pl: makeTopicNames('Polish', {
+    'baby-nap-schedule-by-age': 'Plan drzemek dziecka według wieku',
+    'newborn-sleep-schedule': 'Plan snu noworodka',
+    '4-month-old-sleep-schedule': 'Plan snu dziecka w wieku 4 miesięcy',
+    'baby-feeding-schedule': 'Plan karmienia dziecka',
+    'wake-windows-by-age': 'Okna czuwania według wieku',
+  }),
+  cs: makeTopicNames('Czech', {
+    'baby-nap-schedule-by-age': 'Plán denního spánku podle věku',
+    'newborn-sleep-schedule': 'Spánkový režim novorozence',
+    '4-month-old-sleep-schedule': 'Spánkový režim ve 4 měsících',
+    'baby-feeding-schedule': 'Režim krmení miminka',
+    'wake-windows-by-age': 'Okna bdění podle věku',
+  }),
+  no: makeTopicNames('Norwegian', {
+    'baby-nap-schedule-by-age': 'Lurskjema for baby etter alder',
+    'newborn-sleep-schedule': 'Søvnskjema for nyfødte',
+    '4-month-old-sleep-schedule': 'Søvnskjema for baby på 4 måneder',
+    'baby-feeding-schedule': 'Matingsplan for baby',
+    'wake-windows-by-age': 'Våkenvinduer etter alder',
+  }),
+  ar: makeTopicNames('Arabic', {
+    'baby-nap-schedule-by-age': 'جدول قيلولة الطفل حسب العمر',
+    'newborn-sleep-schedule': 'جدول نوم حديث الولادة',
+    '4-month-old-sleep-schedule': 'جدول نوم الطفل في عمر 4 أشهر',
+    'baby-feeding-schedule': 'جدول تغذية الطفل',
+    'wake-windows-by-age': 'فترات اليقظة حسب العمر',
+  }),
+  da: makeTopicNames('Danish', {
+    'baby-nap-schedule-by-age': 'Babys lurskema efter alder',
+    'newborn-sleep-schedule': 'Søvnplan for nyfødte',
+    '4-month-old-sleep-schedule': 'Søvnplan for baby på 4 måneder',
+    'baby-feeding-schedule': 'Madplan for baby',
+    'wake-windows-by-age': 'Vågenvinduer efter alder',
+  }),
+  he: makeTopicNames('Hebrew', {
+    'baby-nap-schedule-by-age': 'לוח תנומות לתינוק לפי גיל',
+    'newborn-sleep-schedule': 'לוח שינה ליילוד',
+    '4-month-old-sleep-schedule': 'לוח שינה לתינוק בן 4 חודשים',
+    'baby-feeding-schedule': 'לוח האכלה לתינוק',
+    'wake-windows-by-age': 'חלונות ערות לפי גיל',
+  }),
+  uk: makeTopicNames('Ukrainian', {
+    'baby-nap-schedule-by-age': 'Режим денного сну дитини за віком',
+    'newborn-sleep-schedule': 'Режим сну новонародженого',
+    '4-month-old-sleep-schedule': 'Режим сну дитини у 4 місяці',
+    'baby-feeding-schedule': 'Режим годування дитини',
+    'wake-windows-by-age': 'Вікна неспання за віком',
+  }),
+  vi: makeTopicNames('Vietnamese', {
+    'baby-nap-schedule-by-age': 'Lịch ngủ ngày của bé theo độ tuổi',
+    'newborn-sleep-schedule': 'Lịch ngủ của trẻ sơ sinh',
+    '4-month-old-sleep-schedule': 'Lịch ngủ cho bé 4 tháng',
+    'baby-feeding-schedule': 'Lịch cho bé bú và ăn',
+    'wake-windows-by-age': 'Khoảng thức theo độ tuổi',
+  }),
+  ms: makeTopicNames('Malay', {
+    'baby-nap-schedule-by-age': 'Jadual tidur siang bayi mengikut umur',
+    'newborn-sleep-schedule': 'Jadual tidur bayi baru lahir',
+    '4-month-old-sleep-schedule': 'Jadual tidur bayi 4 bulan',
+    'baby-feeding-schedule': 'Jadual penyusuan dan makan bayi',
+    'wake-windows-by-age': 'Tetingkap berjaga mengikut umur',
+  }),
+  hi: makeTopicNames('Hindi', {
+    'baby-nap-schedule-by-age': 'उम्र के अनुसार बच्चे की नैप दिनचर्या',
+    'newborn-sleep-schedule': 'नवजात शिशु की नींद दिनचर्या',
+    '4-month-old-sleep-schedule': '4 महीने के बच्चे की नींद दिनचर्या',
+    'baby-feeding-schedule': 'बच्चे का फीडिंग शेड्यूल',
+    'wake-windows-by-age': 'उम्र के अनुसार जागने की अवधि',
+  }),
+};
+
+const localizedSharedCopy: Record<Locale, {
+  description: (topic: string) => string;
+  intro: (topic: string) => string;
+  category: string;
+  readTime: string;
+  sectionHeadings: [string, string, string, string];
+  sectionBodies: [string, string, string, string];
+  rows: [string, string, string, string];
+  checklist: [string, string, string, string];
+  questions: [string, string];
+  answers: [string, string];
+  appHeading: string;
+  appBody: [string, string];
+}> = {
+  tr: makeShared('Bebek Uykusu', '8 dk okuma', 'Bu rehber, konuya göre bebeğinizin gerçek ritmini anlamanıza ve günü daha sakin planlamanıza yardımcı olur.'),
+  fr: makeShared('Sommeil de bébé', '8 min de lecture', 'Ce guide aide à comprendre le rythme réel de votre bébé et à organiser la journée avec moins d’incertitude.'),
+  de: makeShared('Babyschlaf', '8 Min. Lesezeit', 'Dieser Ratgeber hilft, den echten Rhythmus Ihres Babys zu verstehen und den Tag mit weniger Raten zu planen.'),
+  ru: makeShared('Сон ребенка', '8 минут', 'Этот гайд помогает понять реальный ритм ребенка и спокойнее планировать день без бесконечных догадок.'),
+  nl: makeShared('Babyslaap', '8 min lezen', 'Deze gids helpt je het echte ritme van je baby te begrijpen en de dag met minder giswerk te plannen.'),
+  it: makeShared('Sonno del bambino', '8 min di lettura', 'Questa guida aiuta a capire il ritmo reale del bambino e a pianificare la giornata con meno incertezza.'),
+  pt: makeShared('Sono do bebé', '8 min de leitura', 'Este guia ajuda a compreender o ritmo real do bebé e a planear o dia com menos adivinhação.'),
+  es: makeShared('Sueño del bebé', '8 min de lectura', 'Esta guía ayuda a entender el ritmo real de tu bebé y a planificar el día con menos dudas.'),
+  th: makeShared('การนอนของทารก', 'อ่าน 8 นาที', 'คู่มือนี้ช่วยให้เข้าใจจังหวะจริงของลูกและวางแผนแต่ละวันได้ชัดเจนขึ้น'),
+  sv: makeShared('Babysömn', '8 min läsning', 'Den här guiden hjälper dig förstå barnets verkliga rytm och planera dagen med mindre gissande.'),
+  id: makeShared('Tidur bayi', '8 menit baca', 'Panduan ini membantu memahami ritme nyata bayi dan merencanakan hari dengan lebih sedikit menebak.'),
+  ja: makeShared('赤ちゃんの睡眠', '8分', 'このガイドは赤ちゃんの本当のリズムを理解し、迷いを減らして一日を整えるためのものです。'),
+  pl: makeShared('Sen dziecka', '8 min czytania', 'Ten poradnik pomaga zrozumieć prawdziwy rytm dziecka i planować dzień z mniejszą liczbą domysłów.'),
+  cs: makeShared('Spánek miminka', '8 min čtení', 'Tento průvodce pomáhá pochopit skutečný rytmus miminka a plánovat den s menším hádáním.'),
+  no: makeShared('Babysøvn', '8 min lesing', 'Denne guiden hjelper deg å forstå babyens faktiske rytme og planlegge dagen med mindre gjetting.'),
+  ar: makeShared('نوم الطفل', 'قراءة 8 دقائق', 'يساعدك هذا الدليل على فهم الإيقاع الحقيقي لطفلك وتنظيم اليوم بقدر أقل من التخمين.'),
+  da: makeShared('Babysøvn', '8 min læsning', 'Denne guide hjælper dig med at forstå babys faktiske rytme og planlægge dagen med mindre gætteri.'),
+  he: makeShared('שנת תינוקות', '8 דקות קריאה', 'המדריך הזה עוזר להבין את הקצב האמיתי של התינוק ולתכנן את היום עם פחות ניחושים.'),
+  uk: makeShared('Сон дитини', '8 хв читання', 'Цей гайд допомагає зрозуміти реальний ритм дитини й планувати день з меншим вгадуванням.'),
+  vi: makeShared('Giấc ngủ của bé', '8 phút đọc', 'Hướng dẫn này giúp hiểu nhịp thật của bé và lên kế hoạch mỗi ngày với ít phỏng đoán hơn.'),
+  ms: makeShared('Tidur bayi', '8 min bacaan', 'Panduan ini membantu memahami ritma sebenar bayi dan merancang hari dengan kurang meneka.'),
+  hi: makeShared('शिशु की नींद', '8 मिनट पढ़ें', 'यह गाइड बच्चे की असली लय समझने और दिन को कम अनुमान के साथ योजना बनाने में मदद करती है।'),
+};
+
 function makeNap(language: string, title: string, shortTitle: string): ArticleTranslation {
   return {
     title,
@@ -320,6 +566,112 @@ function makeNap(language: string, title: string, shortTitle: string): ArticleTr
   };
 }
 
+function makeTopicNames(
+  language: string,
+  overrides: Partial<Record<TranslatedArticleSlug, string>>,
+): Record<TranslatedArticleSlug, string> {
+  const fallback: Record<TranslatedArticleSlug, string> = {
+    'baby-nap-schedule-by-age': `${language} baby nap schedule by age`,
+    'newborn-sleep-schedule': `${language} newborn sleep schedule`,
+    '4-month-old-sleep-schedule': `${language} 4 month old sleep schedule`,
+    'baby-feeding-schedule': `${language} baby feeding schedule`,
+    'wake-windows-by-age': `${language} wake windows by age`,
+    'survive-night-wakings-new-parents': `${language} night wakings survival guide`,
+    'white-noise-for-baby-sleep': `${language} white noise for baby sleep`,
+    'ferber-method-baby-sleep': `${language} Ferber method guide`,
+    'sleep-training-methods-explained': `${language} sleep training methods explained`,
+    'newborn-sleep-first-28-days': `${language} newborn sleep in the first 28 days`,
+    '3-month-old-sleep-schedule': `${language} 3 month old sleep schedule`,
+    '5-month-old-sleep-schedule': `${language} 5 month old sleep schedule`,
+    '10-month-old-sleep-schedule': `${language} 10 month old sleep schedule`,
+    'baby-sleep-parent-stress': `${language} baby sleep and parent stress`,
+  };
+
+  return {
+    ...fallback,
+    ...overrides,
+  };
+}
+
+function makeShared(category: string, readTime: string, sentence: string) {
+  return {
+    category,
+    readTime,
+    description: (topic: string) => `${topic}. ${sentence}`,
+    intro: (topic: string) => `${sentence} ${topic} works best when parents combine age-aware guidance with their baby’s own sleep, feeding, mood, growth, and daily routine patterns.`,
+    sectionHeadings: [
+      'Start with your baby’s real rhythm',
+      'Use age guidance without forcing the clock',
+      'Look for patterns across several days',
+      'How Yorix helps',
+    ] as [string, string, string, string],
+    sectionBodies: [
+      'A useful routine begins with what actually happens: naps, wake windows, feeding, night wakings, mood, growth, and the way your family day is organized. A chart can give a starting point, but your baby’s recent history should shape the next step.',
+      'Age ranges are helpful because babies usually move through predictable sleep and feeding transitions. Still, illness, travel, daycare, short naps, growth spurts, and regressions can change the day quickly. A flexible plan is easier to keep than a perfect timetable.',
+      'One difficult night or one skipped nap is not enough to rewrite the whole routine. Track a few days, compare sleep length with wake windows and feeds, and adjust gently when the same pattern appears again.',
+      'Yorix keeps sleep, feeding, diapers, growth, symptoms, routines, and questions in one calm timeline. It can suggest the next sleep window, explain why the plan changed, and help both caregivers follow the same day instead of guessing separately.',
+    ] as [string, string, string, string],
+    rows: [
+      'Track sleep, feeds, and care together',
+      'Adjust after short naps or hard nights',
+      'Keep bedtime cues simple and repeatable',
+      'Ask a clinician about health or safety concerns',
+    ] as [string, string, string, string],
+    checklist: [
+      'Log the key sleep and feeding times for several days.',
+      'Compare the last nap with the next wake window.',
+      'Move bedtime earlier after an overtired day.',
+      'Keep the sleep environment safe and familiar.',
+    ] as [string, string, string, string],
+    questions: [
+      'Should I follow a strict schedule?',
+      'When should I change the routine?',
+    ] as [string, string],
+    answers: [
+      'A strict schedule can add pressure. Most families do better with a steady rhythm that still adapts to nap length, feeds, health, travel, and development.',
+      'Change the routine when you see the same issue repeat across several days, or when age, feeding, illness, daycare, or a sleep transition clearly changes the day.',
+    ] as [string, string],
+    appHeading: 'How Yorix helps with this routine',
+    appBody: [
+      'Yorix turns everyday logs into a clearer daily plan, so parents can see what changed and what to try next.',
+      'Instead of switching between notes, memory, charts, and late-night searches, you can keep the baby’s sleep and care rhythm in one app.',
+    ] as [string, string],
+  };
+}
+
+function makeFallbackArticle(locale: Locale, source: TopicPage): ArticleTranslation {
+  const shared = localizedSharedCopy[locale];
+  const title = localizedTopicNames[locale][source.slug as TranslatedArticleSlug] ?? source.title;
+
+  return {
+    title,
+    shortTitle: title,
+    description: shared.description(title),
+    category: shared.category,
+    readTime: shared.readTime,
+    eyebrow: title,
+    intro: shared.intro(title),
+    sections: shared.sectionHeadings.map((heading, index) => ({
+      heading,
+      body: [shared.sectionBodies[index]],
+    })),
+    sampleRows: shared.rows.map((row, index) => ({
+      label: `${index + 1}`,
+      value: row,
+      note: source.shortTitle,
+    })),
+    checklist: [...shared.checklist],
+    faqs: shared.questions.map((question, index) => ({
+      question,
+      answer: shared.answers[index],
+    })),
+    appTieIn: {
+      heading: shared.appHeading,
+      body: [...shared.appBody],
+    },
+  };
+}
+
 function localeCopyByLanguage(language: string) {
   const entries: Record<string, Locale> = {
     French: 'fr', German: 'de', Dutch: 'nl', Italian: 'it', Portuguese: 'pt',
@@ -340,11 +692,15 @@ export function getLocalizedTopicPage(locale: Locale, slug: string): TopicPage |
   }
 
   const source = getTopicPage(slug);
-  const translation = napArticle[locale];
 
-  if (!source || !translation) {
+  if (!source) {
     return undefined;
   }
+
+  const translation =
+    slug === 'baby-nap-schedule-by-age' && napArticle[locale]
+      ? napArticle[locale]
+      : makeFallbackArticle(locale, source);
 
   return {
     ...source,
@@ -374,9 +730,9 @@ export function translatedArticleAlternates(slug: string) {
 }
 
 export function getTranslatedLocalesForArticle(slug: string) {
-  if (slug !== 'baby-nap-schedule-by-age') {
+  if (!isTranslatedArticleSlug(slug)) {
     return [];
   }
 
-  return locales.filter((locale) => Boolean(napArticle[locale]));
+  return [...locales];
 }
