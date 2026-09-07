@@ -453,12 +453,12 @@ const localizedSharedCopy: Record<Locale, {
   intro: (topic: string) => string;
   category: string;
   readTime: string;
-  sectionHeadings: [string, string, string, string];
-  sectionBodies: [string, string, string, string];
-  rows: [string, string, string, string];
-  checklist: [string, string, string, string];
-  questions: [string, string];
-  answers: [string, string];
+  sectionHeadings: [string, string, string, string, string, string, string];
+  sectionBodies: [string, string, string, string, string, string, string];
+  rows: [string, string, string, string, string, string, string];
+  checklist: [string, string, string, string, string, string];
+  questions: [string, string, string, string];
+  answers: [string, string, string, string];
   appHeading: string;
   appBody: [string, string];
 }> = {
@@ -598,39 +598,54 @@ function makeShared(category: string, readTime: string, sentence: string) {
     category,
     readTime,
     description: (topic: string) => `${topic}. ${sentence}`,
-    intro: (topic: string) => `${sentence} ${topic} works best when parents combine age-aware guidance with their baby’s own sleep, feeding, mood, growth, and daily routine patterns.`,
+    intro: (topic: string) => `${sentence} ${topic} works best when parents combine age-aware guidance with their baby’s own sleep, feeding, mood, growth, and daily routine patterns. The aim is not a perfect clock-based day; it is a calmer routine that can recover when naps, feeds, illness, travel, daycare, or sleep regressions change the plan.`,
     sectionHeadings: [
       'Start with your baby’s real rhythm',
       'Use age guidance without forcing the clock',
       'Look for patterns across several days',
+      'What parents often misunderstand',
+      'When to change the plan',
+      'What to track before you decide',
       'How Yorix helps',
-    ] as [string, string, string, string],
+    ] as [string, string, string, string, string, string, string],
     sectionBodies: [
-      'A useful routine begins with what actually happens: naps, wake windows, feeding, night wakings, mood, growth, and the way your family day is organized. A chart can give a starting point, but your baby’s recent history should shape the next step.',
-      'Age ranges are helpful because babies usually move through predictable sleep and feeding transitions. Still, illness, travel, daycare, short naps, growth spurts, and regressions can change the day quickly. A flexible plan is easier to keep than a perfect timetable.',
-      'One difficult night or one skipped nap is not enough to rewrite the whole routine. Track a few days, compare sleep length with wake windows and feeds, and adjust gently when the same pattern appears again.',
+      'A useful routine begins with what actually happens at home: naps, wake windows, feeds, night wakings, diapers, mood, growth, symptoms, and the way your family day is organized. A chart can give a starting point, but your baby’s recent history should shape the next practical step.',
+      'Age ranges matter because babies usually move through predictable sleep and feeding transitions. Still, no age table can see today’s short nap, late car sleep, daycare pickup, growth spurt, or bedtime battle. Treat the clock as a guide, then let the day’s evidence adjust the next window.',
+      'One difficult night or one skipped nap is not enough to rebuild the whole routine. Track a few days, compare total sleep with the last wake window, and notice whether feeds, room conditions, illness, teething, or new skills appear near the same sleep disruption.',
+      'Many parents assume that a schedule should make every day identical. Real baby sleep is more flexible. A strong routine gives repeatable cues, predictable order, and a recovery plan after hard moments, not a rule that ignores hunger, development, or safety.',
+      'Consider changing the plan when the same issue repeats for several days: bedtime takes much longer, the last wake window is regularly too long, naps collapse at the same time, night wakings cluster after short daytime sleep, or feeding patterns no longer match the day.',
+      'Before making a major change, write down the basics: sleep start and end times, wake windows, feeds, bedtime routine, night wakings, mood, and any symptoms. This keeps decisions grounded in patterns instead of exhausted memory.',
       'Yorix keeps sleep, feeding, diapers, growth, symptoms, routines, and questions in one calm timeline. It can suggest the next sleep window, explain why the plan changed, and help both caregivers follow the same day instead of guessing separately.',
-    ] as [string, string, string, string],
+    ] as [string, string, string, string, string, string, string],
     rows: [
+      'Start with age-aware ranges',
       'Track sleep, feeds, and care together',
       'Adjust after short naps or hard nights',
       'Keep bedtime cues simple and repeatable',
+      'Review patterns across several days',
+      'Use Yorix to keep both caregivers synced',
       'Ask a clinician about health or safety concerns',
-    ] as [string, string, string, string],
+    ] as [string, string, string, string, string, string, string],
     checklist: [
       'Log the key sleep and feeding times for several days.',
       'Compare the last nap with the next wake window.',
       'Move bedtime earlier after an overtired day.',
       'Keep the sleep environment safe and familiar.',
-    ] as [string, string, string, string],
+      'Avoid changing every variable after one bad night.',
+      'Share the same timeline with every caregiver.',
+    ] as [string, string, string, string, string, string],
     questions: [
       'Should I follow a strict schedule?',
       'When should I change the routine?',
-    ] as [string, string],
+      'How many days should I track before deciding?',
+      'Can an app replace medical advice?',
+    ] as [string, string, string, string],
     answers: [
       'A strict schedule can add pressure. Most families do better with a steady rhythm that still adapts to nap length, feeds, health, travel, and development.',
       'Change the routine when you see the same issue repeat across several days, or when age, feeding, illness, daycare, or a sleep transition clearly changes the day.',
-    ] as [string, string],
+      'Three to seven days is often enough to see a useful routine pattern, unless there is a health or safety concern that needs faster professional attention.',
+      'No. Yorix helps with routine tracking and planning, but it does not diagnose medical issues or replace qualified healthcare advice.',
+    ] as [string, string, string, string],
     appHeading: 'How Yorix helps with this routine',
     appBody: [
       'Yorix turns everyday logs into a clearer daily plan, so parents can see what changed and what to try next.',

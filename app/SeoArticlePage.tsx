@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, Check, Clock, Moon, Sparkles } from 'lucide-react';
 import { getArticleUiCopy, getLocalizedTopicPages, type ArticleUiCopy } from './article-localizations';
 import { BrandLogo } from './BrandLogo';
 import { appDownloadUrl, type TopicPage, topicPages } from './content';
@@ -26,7 +26,7 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
   }));
 
   return (
-    <main className="brand-page min-h-screen text-[#1E1B4B]">
+    <main className="brand-page article-page min-h-screen text-[#1E1B4B]">
       <header className="mx-auto flex w-full max-w-5xl items-center justify-between px-5 py-5 sm:px-8 lg:px-10">
         <a
           className="flex items-center gap-3 text-sm font-semibold text-[#1E1B4B]"
@@ -47,7 +47,7 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
       </header>
 
       <article>
-        <section className="mx-auto max-w-5xl px-5 pb-10 pt-6 sm:px-8 lg:px-10">
+        <section className="mx-auto max-w-6xl px-5 pb-10 pt-6 sm:px-8 lg:px-10">
           <a
             className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-[#6366F1] transition hover:text-[#4F46E5]"
             href={guidePath}
@@ -55,32 +55,75 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             {ui.backToGuides}
           </a>
-          <p className="mb-4 text-sm font-semibold uppercase text-[#8B5CF6]">
-            {page.category} · {page.readTime}
-          </p>
-          <h1 className="max-w-3xl text-5xl font-semibold leading-[1.04] text-[#1E1B4B] sm:text-6xl">
-            {page.title}
-          </h1>
-          <p className="mt-5 text-sm font-medium text-[#64748B]">
-            {ui.published} {page.date}
-          </p>
-          <p className="mt-6 max-w-3xl text-xl leading-9 text-[#64748B]">
-            {page.intro}
-          </p>
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_330px] lg:items-end">
+            <div>
+              <div className="mb-5 flex flex-wrap gap-2 text-sm font-semibold">
+                <span className="inline-flex items-center gap-2 rounded-full bg-[#EEF2FF] px-4 py-2 text-[#4F46E5]">
+                  <Moon className="h-4 w-4" aria-hidden="true" />
+                  {page.category}
+                </span>
+                <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[#64748B] ring-1 ring-[#E2E8F0]">
+                  <Clock className="h-4 w-4" aria-hidden="true" />
+                  {page.readTime}
+                </span>
+              </div>
+              <h1 className="max-w-4xl text-5xl font-semibold leading-[1.04] text-[#1E1B4B] sm:text-6xl">
+                {page.title}
+              </h1>
+              <p className="mt-5 text-sm font-medium text-[#64748B]">
+                {ui.published} {page.date}
+              </p>
+              <p className="mt-6 max-w-3xl text-xl leading-9 text-[#64748B]">
+                {page.intro}
+              </p>
+            </div>
+
+            <div className="rounded-lg border border-[#C7D2FE] bg-white/78 p-5 shadow-[0_20px_60px_rgb(99_102_241/12%)] backdrop-blur">
+              <p className="inline-flex items-center gap-2 text-sm font-semibold text-[#4F46E5]">
+                <Sparkles className="h-4 w-4" aria-hidden="true" />
+                {ui.personalizedSupport}
+              </p>
+              <p className="mt-3 text-sm leading-6 text-[#64748B]">
+                {ui.ctaBody}
+              </p>
+              <a
+                className="mt-5 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-[#4F46E5] px-5 text-sm font-semibold text-white transition hover:bg-[#312E81] focus:outline-none focus:ring-4 focus:ring-[#6366F1]/25"
+                href={appDownloadUrl}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                {ui.download}
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </div>
+          </div>
         </section>
 
-        <section className="mx-auto max-w-5xl px-5 pb-10 sm:px-8 lg:px-10">
+        <section className="mx-auto max-w-6xl px-5 pb-10 sm:px-8 lg:px-10">
           <div
-            className={`relative overflow-hidden rounded-lg bg-gradient-to-br ${page.coverClass} p-6 text-white shadow-[0_24px_80px_rgb(49_46_129/20%)] sm:p-8`}
+            className={`article-hero-card relative overflow-hidden rounded-lg bg-gradient-to-br ${page.coverClass} p-6 text-white shadow-[0_24px_80px_rgb(49_46_129/20%)] sm:p-8`}
           >
-            <div className="grid gap-8 md:grid-cols-[1fr_190px] md:items-center">
+            <div className="grid gap-8 md:grid-cols-[1fr_220px] md:items-center">
               <div>
-                <p className="text-sm font-semibold uppercase text-white/70">
+                <p className="inline-flex items-center gap-2 text-sm font-semibold uppercase text-white/70">
+                  <BookOpen className="h-4 w-4" aria-hidden="true" />
                   {page.eyebrow}
                 </p>
-                <h2 className="mt-3 max-w-2xl text-3xl font-semibold leading-tight">
+                <h2 className="mt-3 max-w-3xl text-3xl font-semibold leading-tight sm:text-4xl">
                   {ui.practicalGuide}
                 </h2>
+                <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                  {page.sampleRows.slice(0, 3).map((row) => (
+                    <div className="rounded-lg bg-white/10 p-4 ring-1 ring-white/15" key={row.label}>
+                      <p className="text-xs font-semibold uppercase text-[#C7D2FE]">
+                        {row.label}
+                      </p>
+                      <p className="mt-2 text-lg font-semibold text-white">
+                        {row.value}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
               <img
                 src="/app-icon.png"
@@ -94,9 +137,9 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
         </section>
 
         <section className="border-y border-[#E2E8F0] bg-white">
-          <div className="mx-auto grid max-w-5xl gap-8 px-5 py-12 sm:px-8 lg:grid-cols-[minmax(0,1fr)_310px] lg:px-10">
+          <div className="mx-auto grid max-w-6xl gap-8 px-5 py-12 sm:px-8 lg:grid-cols-[minmax(0,1fr)_330px] lg:px-10">
             <div className="grid gap-7">
-              <div className="rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-5">
+              <div className="rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-5 shadow-sm">
                 <h2 className="text-xl font-semibold text-[#1E1B4B]">
                   {ui.inThisArticle}
                 </h2>
@@ -114,7 +157,7 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
                 </ol>
               </div>
 
-              <p className="rounded-lg border border-[#C7D2FE] bg-[#EEF2FF] p-5 text-sm leading-7 text-[#1E1B4B]">
+              <p className="rounded-lg border border-[#C7D2FE] bg-[#EEF2FF] p-5 text-sm leading-7 text-[#1E1B4B] shadow-sm">
                 {ui.disclaimer}
               </p>
 
@@ -218,7 +261,7 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
               </section>
             </div>
 
-            <aside className="h-fit rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-5">
+            <aside className="h-fit rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-5 shadow-sm lg:sticky lg:top-6">
               <h2 className="text-lg font-semibold">{ui.checklist}</h2>
               <ul className="mt-4 grid gap-3">
                 {page.checklist.map((item) => (

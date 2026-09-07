@@ -113,6 +113,32 @@ body {
   background: linear-gradient(180deg, #1c1832 0%, #18182e 50%, #161628 100%);
 }
 
+.article-page {
+  background:
+    linear-gradient(180deg, #eef2ff 0%, #f8fafc 18rem, #ffffff 45rem);
+}
+
+.article-hero-card::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+  background-image:
+    radial-gradient(circle, rgb(255 255 255 / 0.55) 0 1px, transparent 1.7px),
+    linear-gradient(135deg, rgb(255 255 255 / 0.18), transparent 42%);
+  background-position:
+    22px 28px,
+    0 0;
+  background-size:
+    110px 120px,
+    100% 100%;
+}
+
+.article-hero-card > * {
+  position: relative;
+  z-index: 1;
+}
+
 :root {
   --background: oklch(0.985 0.008 80);
   --foreground: oklch(0.18 0.025 270);
