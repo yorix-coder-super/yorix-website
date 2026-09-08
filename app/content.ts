@@ -52,6 +52,25 @@ export const appFeatures = [
   },
 ];
 
+const officialSleepSources = [
+  {
+    label: 'American Academy of Pediatrics: Safe Sleep',
+    href: 'https://www.aap.org/en/patient-care/safe-sleep/',
+  },
+  {
+    label: 'CDC: Providing Care for Babies to Sleep Safely',
+    href: 'https://www.cdc.gov/sudden-infant-death/sleep-safely/',
+  },
+  {
+    label: 'American Academy of Sleep Medicine: recommended sleep duration',
+    href: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4877308/',
+  },
+  {
+    label: 'NHS: Helping your baby to sleep',
+    href: 'https://www.nhs.uk/conditions/baby/caring-for-a-newborn/helping-your-baby-to-sleep/',
+  },
+];
+
 export type TopicPage = {
   slug: string;
   title: string;
@@ -72,6 +91,21 @@ export type TopicPage = {
     value: string;
     note: string;
   }[];
+  quickAnswer?: string[];
+  scenarioRows?: {
+    time: string;
+    event: string;
+    watch: string;
+    yorix: string;
+  }[];
+  diagnosticRows?: {
+    observation: string;
+    explanation: string;
+    action: string;
+    check: string;
+  }[];
+  actionPlan?: string[];
+  safetyNote?: string;
   checklist: string[];
   faqs: {
     question: string;
@@ -510,7 +544,101 @@ export const coreTopicPages: TopicPage[] = [
   },
 ];
 
-export const topicPages: TopicPage[] = [...coreTopicPages, ...researchGuides];
+function enrichTopicPage(page: TopicPage): TopicPage {
+  const sharedSources = page.sources?.length ? page.sources : officialSleepSources;
+
+  if (page.slug === '4-month-old-sleep-schedule') {
+    return {
+      ...page,
+      quickAnswer: [
+        'At 4 months, many babies still need a flexible day built around wake windows, naps, feeds, and a repeatable bedtime routine. The exact clock time matters less than the pattern across several days.',
+        'A useful starting point is 3-4 naps, a protected bedtime routine, and shorter next wake windows after short naps. Treat this as a scenario, not a rule.',
+        'If sleep suddenly gets worse, compare the last 3-7 days before changing everything. Look at nap length, last wake window, bedtime, feeding, illness, and room conditions together.',
+      ],
+      scenarioRows: [
+        { time: '7:00', event: 'Wake up and feed', watch: 'Actual morning wake time and mood', yorix: 'Anchors the first wake window to the real start of the day.' },
+        { time: '8:30-9:15', event: 'Nap 1', watch: 'Sleep cues and nap length', yorix: 'Short nap can make the next window earlier.' },
+        { time: '11:00-12:00', event: 'Nap 2', watch: 'Total daytime sleep building up', yorix: 'Updates the midday plan from the first two naps.' },
+        { time: '14:00-15:00', event: 'Nap 3', watch: 'Whether the day still needs a fourth nap', yorix: 'Flags overtired risk when afternoon sleep is low.' },
+        { time: '17:00', event: 'Optional short nap', watch: 'Late nap ending too close to bedtime', yorix: 'Helps protect bedtime from a long late nap.' },
+        { time: '19:00-20:00', event: 'Bedtime routine', watch: 'Settling time and night wakings', yorix: 'Compares nights after short-nap and normal-nap days.' },
+      ],
+      diagnosticRows: [
+        { observation: 'Naps are suddenly 30-45 minutes.', explanation: 'Sleep cycles are changing and the baby may need help bridging transitions.', action: 'Keep the next wake window conservative and repeat the same wind-down.', check: 'Look for improvement across 3-5 days.' },
+        { observation: 'Bedtime takes much longer than before.', explanation: 'The last wake window may be too short, too long, or affected by a late final nap.', action: 'Compare the last nap end time with bedtime settling.', check: 'Track settling time for several evenings.' },
+        { observation: 'Night wakings increased this week.', explanation: 'A 4-month sleep change, feeding need, illness, or overtired day can all look similar.', action: 'Review daytime sleep, feeds, symptoms, and bedtime together.', check: 'Change one routine variable at a time.' },
+      ],
+      actionPlan: [
+        'Track nap start and end times for at least 3 days.',
+        'Check whether short naps are followed by wake windows that are too long.',
+        'Keep the bedtime routine repeatable even if bedtime moves earlier.',
+        'Avoid treating one rough night as proof that the whole schedule failed.',
+        'Use Yorix to compare nap totals, wake windows, feeds, and night wakings in one view.',
+      ],
+      sources: sharedSources,
+    };
+  }
+
+  if (page.slug === 'baby-nap-schedule-by-age' || page.slug === 'wake-windows-by-age') {
+    return {
+      ...page,
+      quickAnswer: [
+        'Use age-based nap and wake-window ranges as a starting point, then adjust the next sleep time from the previous nap and the baby’s real morning wake time.',
+        'A short nap should usually make the next wake window gentler. A long restorative nap may allow a little more awake time.',
+        'The best schedule is not the neatest chart. It is the one that protects total sleep, feeds, safe sleep, and a calmer bedtime across several days.',
+      ],
+      scenarioRows: [
+        { time: 'Morning', event: 'Wake and first feed', watch: 'The real wake-up time, not yesterday’s plan', yorix: 'Starts the day from the actual log.' },
+        { time: 'Nap 1', event: 'First sleep window', watch: 'Sleep cues and how quickly baby settles', yorix: 'Learns whether the first window is too short or too long.' },
+        { time: 'Midday', event: 'Second nap and feeds', watch: 'Total daytime sleep and feeding rhythm', yorix: 'Connects naps and feeds in one timeline.' },
+        { time: 'Afternoon', event: 'Final nap decision', watch: 'Risk of a too-late nap', yorix: 'Suggests a shorter nap or earlier bedtime when needed.' },
+        { time: 'Evening', event: 'Bedtime anchor', watch: 'Settling time and overnight waking', yorix: 'Shows how the day affected the night.' },
+      ],
+      diagnosticRows: [
+        { observation: 'The schedule works for a few days, then breaks.', explanation: 'Nap needs change gradually with age, but daily variation still matters.', action: 'Review the last week instead of copying one perfect day.', check: 'Look for the most common pattern, not the best day.' },
+        { observation: 'The final nap keeps pushing bedtime late.', explanation: 'The baby may be ready for a transition or a capped last nap.', action: 'Shorten the final nap or protect an earlier bedtime.', check: 'Compare bedtime settling for 3 evenings.' },
+        { observation: 'Baby seems tired before the suggested time.', explanation: 'Previous nap quality, illness, feeding, or stimulation may have shortened tolerance.', action: 'Start wind-down earlier and keep the room calm.', check: 'Track whether settling is easier.' },
+      ],
+      sources: sharedSources,
+    };
+  }
+
+  if (page.slug === 'newborn-sleep-schedule') {
+    return {
+      ...page,
+      quickAnswer: [
+        'A newborn schedule should be flexible. Focus on safe sleep, frequent feeds, short calm awake periods, and a simple day-night rhythm instead of fixed nap times.',
+        'Tracking is useful because it supports memory and handoffs, not because newborn days should look identical.',
+        'If feeding, weight, breathing, fever, dehydration, or unusual sleepiness worries you, contact a qualified healthcare professional.',
+      ],
+      scenarioRows: [
+        { time: 'Morning', event: 'Light, feed, change', watch: 'Wakefulness and feeding cues', yorix: 'Keeps sleep, feeds, and diapers together.' },
+        { time: 'Daytime', event: 'Short awake period', watch: 'Early tired cues', yorix: 'Shows how quickly sleep pressure builds.' },
+        { time: 'Afternoon', event: 'Flexible naps', watch: 'Cluster feeds and short sleeps', yorix: 'Helps caregivers see the whole day.' },
+        { time: 'Evening', event: 'Simple wind-down', watch: 'Low light and calmer care', yorix: 'Tracks whether the same routine is easier to repeat.' },
+        { time: 'Night', event: 'Quiet care and safe sleep', watch: 'Feeds, diapers, and safe sleep setup', yorix: 'Preserves a shared night log for both caregivers.' },
+      ],
+      diagnosticRows: [
+        { observation: 'The baby sleeps at unpredictable times.', explanation: 'Newborn circadian rhythm is still developing.', action: 'Use light daytime cues and quiet nighttime care.', check: 'Look for gradual rhythm, not a strict schedule.' },
+        { observation: 'Parents cannot remember the last feed or diaper.', explanation: 'Sleep deprivation makes memory unreliable.', action: 'Use a simple shared log.', check: 'Care handoffs become easier.' },
+        { observation: 'The baby seems unusually sleepy or feeds poorly.', explanation: 'This can require medical attention depending on context.', action: 'Contact a clinician for feeding, growth, or health concerns.', check: 'Do not rely on an app for urgent symptoms.' },
+      ],
+      sources: sharedSources,
+    };
+  }
+
+  return {
+    ...page,
+    quickAnswer: page.quickAnswer ?? [
+      page.description,
+      'Start with the safest and simplest explanation, then look for a pattern across several days before changing the whole routine.',
+      'Yorix helps by keeping sleep, feeds, wake windows, diapers, growth, and night wakings in one timeline, so the next step is based on real logs.',
+    ],
+    sources: sharedSources,
+  };
+}
+
+export const topicPages: TopicPage[] = [...coreTopicPages, ...researchGuides].map(enrichTopicPage);
 
 export function getTopicPage(slug: string) {
   return topicPages.find((page) => page.slug === slug);

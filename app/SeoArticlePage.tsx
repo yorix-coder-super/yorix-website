@@ -1,4 +1,16 @@
-import { ArrowLeft, ArrowRight, BookOpen, Check, Clock, Moon, Sparkles } from 'lucide-react';
+import {
+  ArrowLeft,
+  ArrowRight,
+  BookOpen,
+  Check,
+  Clock,
+  ListChecks,
+  Moon,
+  SearchCheck,
+  ShieldCheck,
+  Sparkles,
+  Table2,
+} from 'lucide-react';
 import { getArticleUiCopy, getLocalizedTopicPages, type ArticleUiCopy } from './article-localizations';
 import { BrandLogo } from './BrandLogo';
 import { appDownloadUrl, type TopicPage, topicPages } from './content';
@@ -17,13 +29,49 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
   const relatedPages = relatedSource
     .filter((item) => item.slug !== page.slug)
     .slice(0, 3);
-  const articleAnchors = page.sections.map((section) => ({
-    id: section.heading
+  const articleAnchors = page.sections.map((section, index) => {
+    const id = section.heading
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
-      .replace(/(^-|-$)/g, ''),
-    label: section.heading,
+      .replace(/(^-|-$)/g, '');
+
+    return {
+      id: id || `section-${index + 1}`,
+      label: section.heading,
+    };
+  });
+  const quickAnswer = page.quickAnswer ?? [
+    page.description,
+    ...page.checklist.slice(0, 3),
+  ];
+  const scenarioRows = page.scenarioRows ?? page.sampleRows.slice(0, 5).map((row, index) => ({
+    time: index === 0 ? 'Morning' : index === 1 ? 'First nap' : index === 2 ? 'Midday' : index === 3 ? 'Evening' : 'Bedtime',
+    event: row.label,
+    watch: row.note,
+    yorix: `Uses ${row.value.toLowerCase()} as context for the next plan.`,
   }));
+  const diagnosticRows = page.diagnosticRows ?? [
+    {
+      observation: 'The day changes after a short nap.',
+      explanation: 'The next wake window may need to shorten.',
+      action: 'Move the next wind-down earlier.',
+      check: 'Compare the next 3 days, not one nap.',
+    },
+    {
+      observation: 'Bedtime becomes harder after a late final nap.',
+      explanation: 'Sleep pressure may be too low or the last window may be off.',
+      action: 'Protect the bedtime anchor and adjust the final nap.',
+      check: 'Watch bedtime settling time for several evenings.',
+    },
+    {
+      observation: 'Night wakings increase suddenly.',
+      explanation: 'Schedule, feeding, illness, development, or environment may have changed.',
+      action: 'Review sleep, feeds, symptoms, and room conditions together.',
+      check: 'Look for the same pattern across 3-7 days.',
+    },
+  ];
+  const actionPlan = page.actionPlan ?? page.checklist;
+  const safetyNote = page.safetyNote ?? ui.disclaimer;
 
   return (
     <main className="brand-page article-page min-h-screen text-[#1E1B4B]">
@@ -158,8 +206,25 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
               </div>
 
               <p className="rounded-lg border border-[#C7D2FE] bg-[#EEF2FF] p-5 text-sm leading-7 text-[#1E1B4B] shadow-sm">
-                {ui.disclaimer}
+                {safetyNote}
               </p>
+
+              <section className="rounded-lg border border-[#C7D2FE] bg-[#F5F3FF] p-6 shadow-sm">
+                <p className="inline-flex items-center gap-2 text-sm font-semibold uppercase text-[#4F46E5]">
+                  <Sparkles className="h-4 w-4" aria-hidden="true" />
+                  Quick answer
+                </p>
+                <div className="mt-4 grid gap-3">
+                  {quickAnswer.slice(0, 4).map((answer, index) => (
+                    <p
+                      className="rounded-lg bg-white p-4 text-sm leading-7 text-[#1E1B4B] ring-1 ring-[#E0E7FF]"
+                      key={`${answer}-${index}`}
+                    >
+                      {answer}
+                    </p>
+                  ))}
+                </div>
+              </section>
 
               {page.sections.map((section, index) => (
                 <section key={section.heading} id={articleAnchors[index].id}>
@@ -199,6 +264,84 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
                     </div>
                   ))}
                 </div>
+              </section>
+
+              <section>
+                <h2 className="inline-flex items-center gap-2 text-2xl font-semibold text-[#1E1B4B]">
+                  <Table2 className="h-6 w-6 text-[#6366F1]" aria-hidden="true" />
+                  Example day scenario
+                </h2>
+                <div className="mt-4 overflow-hidden rounded-lg border border-[#E2E8F0] bg-white shadow-sm">
+                  <div className="hidden grid-cols-[120px_1fr_1fr_1fr] gap-4 border-b border-[#E2E8F0] bg-[#F8FAFC] p-4 text-xs font-semibold uppercase text-[#64748B] md:grid">
+                    <span>Time</span>
+                    <span>Event</span>
+                    <span>What to watch</span>
+                    <span>How Yorix adapts</span>
+                  </div>
+                  {scenarioRows.map((row) => (
+                    <div
+                      className="grid gap-3 border-b border-[#E2E8F0] p-4 last:border-b-0 md:grid-cols-[120px_1fr_1fr_1fr]"
+                      key={`${row.time}-${row.event}`}
+                    >
+                      <strong className="text-sm text-[#4F46E5]">{row.time}</strong>
+                      <span className="text-sm font-semibold text-[#1E1B4B]">{row.event}</span>
+                      <span className="text-sm leading-6 text-[#64748B]">{row.watch}</span>
+                      <span className="text-sm leading-6 text-[#64748B]">{row.yorix}</span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section>
+                <h2 className="inline-flex items-center gap-2 text-2xl font-semibold text-[#1E1B4B]">
+                  <SearchCheck className="h-6 w-6 text-[#6366F1]" aria-hidden="true" />
+                  Diagnostic matrix
+                </h2>
+                <div className="mt-4 grid gap-3">
+                  {diagnosticRows.map((row) => (
+                    <article
+                      className="rounded-lg border border-[#E2E8F0] bg-white p-5 shadow-sm"
+                      key={row.observation}
+                    >
+                      <h3 className="font-semibold text-[#1E1B4B]">{row.observation}</h3>
+                      <div className="mt-3 grid gap-3 text-sm leading-6 text-[#64748B] md:grid-cols-3">
+                        <p><strong className="block text-[#4F46E5]">Likely explanation</strong>{row.explanation}</p>
+                        <p><strong className="block text-[#4F46E5]">First action</strong>{row.action}</p>
+                        <p><strong className="block text-[#4F46E5]">Check result</strong>{row.check}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+
+              <section className="rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-6 shadow-sm">
+                <h2 className="inline-flex items-center gap-2 text-2xl font-semibold text-[#1E1B4B]">
+                  <ListChecks className="h-6 w-6 text-[#6366F1]" aria-hidden="true" />
+                  Plan for today
+                </h2>
+                <ol className="mt-4 grid gap-3">
+                  {actionPlan.slice(0, 6).map((item, index) => (
+                    <li
+                      className="grid grid-cols-[2rem_1fr] gap-3 text-sm leading-7 text-[#1E1B4B]"
+                      key={item}
+                    >
+                      <span className="grid h-8 w-8 place-items-center rounded-full bg-[#EEF2FF] text-sm font-semibold text-[#4F46E5]">
+                        {index + 1}
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ol>
+              </section>
+
+              <section className="rounded-lg border border-[#CBD5E1] bg-white p-6 shadow-sm">
+                <h2 className="inline-flex items-center gap-2 text-2xl font-semibold text-[#1E1B4B]">
+                  <ShieldCheck className="h-6 w-6 text-[#22C55E]" aria-hidden="true" />
+                  Safety note
+                </h2>
+                <p className="mt-3 text-sm leading-7 text-[#64748B]">
+                  {ui.disclaimer}
+                </p>
               </section>
 
               {page.appTieIn ? (
