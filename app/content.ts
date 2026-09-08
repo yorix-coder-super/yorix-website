@@ -2,7 +2,7 @@ import { researchGuides } from './research-guides';
 
 export const siteUrl = 'https://yorix.website';
 
-export const appDownloadUrl = 'https://gotoapp.store/yorix';
+export const appDownloadUrl = 'https://apps.apple.com/app/apple-store/id6788705252?pt=129050076&ct=SEO&mt=8';
 
 export const appFeatures = [
   {
