@@ -9,14 +9,17 @@ export function MoonPhase({ plan, className }: { plan: PlanId; className?: strin
         <g className="moon-slow-spin">
         {Array.from({ length: 12 }).map((_, index) => {
           const angle = (index / 12) * Math.PI * 2 - Math.PI / 2;
+          // Rounded so the server and the browser serialise the same string;
+          // raw doubles differed in the last digits and broke hydration.
+          const round = (value: number) => Math.round(value * 100) / 100;
           return (
             <circle
               key={index}
-              cx={32 + Math.cos(angle) * 26}
-              cy={32 + Math.sin(angle) * 26}
+              cx={round(32 + Math.cos(angle) * 26)}
+              cy={round(32 + Math.sin(angle) * 26)}
               r="3.2"
               fill="#FDE68A"
-              opacity={0.55 + (index / 12) * 0.45}
+              opacity={round(0.55 + (index / 12) * 0.45)}
             />
           );
         })}

@@ -144,11 +144,9 @@ body {
   --animate-delay: 0.12s;
 }
 
-/* Reveal: hide only when a script can reveal; no-JS readers see everything. */
-@media (scripting: enabled) {
-  [data-reveal]:not(.animated) {
-    opacity: 0;
-  }
+/* Reveal: only a block the script has decided to animate later is hidden. */
+.reveal-pending {
+  opacity: 0;
 }
 
 .moon-slow-spin {

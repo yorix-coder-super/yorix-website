@@ -4,9 +4,10 @@ import { useEffect, useRef, type ReactNode } from 'react';
 
 type Animation = 'fadeInUp' | 'fadeIn' | 'zoomIn';
 
-// Entrance animation from animate.css, played once when the element scrolls
-// into view. Without JavaScript the element is simply visible: the hiding
-// rule in globals.css is gated on `@media (scripting: enabled)`.
+// Entrance animation for content below the fold. Nothing is hidden before
+// JavaScript runs, and nothing already on screen when it runs is hidden
+// either: only sections the reader has not scrolled to yet get the entrance,
+// and a timeout guarantees a stalled observer can never leave one blank.
 export function Reveal({
   children,
   animation = 'fadeInUp',
@@ -23,22 +24,32 @@ export function Reveal({
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
-    const show = () => node.classList.add('animated', animation);
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
-      show();
-      return;
-    }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+    if (node.getBoundingClientRect().top < window.innerHeight * 0.9) return;
+
+    node.classList.add('reveal-pending');
+    let done = false;
+    const show = () => {
+      if (done) return;
+      done = true;
+      node.classList.remove('reveal-pending');
+      node.classList.add('animated', animation);
+      observer.disconnect();
+      window.clearTimeout(timer);
+    };
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          show();
-          observer.disconnect();
-        }
+        if (entries.some((entry) => entry.isIntersecting)) show();
       },
-      { threshold: 0.15, rootMargin: '0px 0px -8% 0px' },
+      { threshold: 0.1, rootMargin: '0px 0px 5% 0px' },
     );
     observer.observe(node);
-    return () => observer.disconnect();
+    const timer = window.setTimeout(show, 3000);
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(timer);
+      node.classList.remove('reveal-pending');
+    };
   }, [animation]);
 
   return (
