@@ -4,6 +4,7 @@ import { AccountPanel, AccountProvider, FlowNote, ManualOrder, PlanCard, Request
 import { premiumCopy } from './copy';
 import { premiumPath, type Lang } from './i18n';
 import { formatByn, plans } from './merchant';
+import { Money } from './Money';
 import { PremiumShell } from './PremiumShell';
 import { Parallax } from './Parallax';
 import { Reveal } from './Reveal';
@@ -41,7 +42,7 @@ export async function PremiumStorefront({ lang }: { lang: Lang }) {
               <Reveal load delay={400}>
                 <div className="mt-8 flex flex-wrap items-center gap-3">
                   <Button href="#tarify">
-                    {copy.hero.primary(formatByn(week.priceByn, lang))}
+                    <Money text={copy.hero.primary(formatByn(week.priceByn, lang))} />
                     <ArrowRight className="h-5 w-5" aria-hidden="true" />
                   </Button>
                   <span className="inline-flex items-center gap-2 text-sm text-white/65">

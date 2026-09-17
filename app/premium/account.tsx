@@ -9,6 +9,7 @@ import { convert, currencyForCountry, displayPrice, fallbackRates, formatMoney, 
 import { useCurrency } from './currencyStore';
 import { formatDate, premiumPath, type Lang } from './i18n';
 import { formatByn, mailtoOrder, orderTemplate, planCopy, plans, type Plan } from './merchant';
+import { Money } from './Money';
 import { MoonPhase } from './MoonPhase';
 import { Button, Spinner } from './ui';
 
@@ -367,11 +368,11 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
         <MoonPhase plan={plan.id} className="h-14 w-14 shrink-0" />
       </div>
       <p className={`mt-4 text-sm leading-6 ${featured ? 'text-[#1E1B4B]/80' : 'text-white/75'}`}>{text.purpose}</p>
-      <p className={`mt-6 text-4xl font-semibold tabular-nums sm:text-5xl ${strong}`}>{price}</p>
+      <p className={`mt-6 text-4xl font-semibold tabular-nums sm:text-5xl ${strong}`}>
+        <Money text={price} />
+      </p>
       <p className={`mt-2 min-h-6 text-sm leading-6 ${muted}`}>
-        {charge ? copy.plans.charged(charge) : ''}
-        {charge && plan.id !== 'week' ? ' · ' : ''}
-        {plan.id === 'week' ? (charge ? '' : '\u00A0') : `${copy.plans.perWeek(perWeek)} · ${copy.plans.cheaper(cheaper)}`}
+        <Money text={[charge ? copy.plans.charged(charge) : '', plan.id === 'week' ? '' : `${copy.plans.perWeek(perWeek)} · ${copy.plans.cheaper(cheaper)}`].filter(Boolean).join(' · ') || '\u00A0'} />
       </p>
       <div className="mt-auto pt-6">
         <Button
@@ -540,8 +541,7 @@ export function RequestForm() {
               </select>
             </label>
             <p className="mt-1.5 text-sm text-white/60">
-              {local}
-              {charge ? ` · ${copy.plans.charged(charge)}` : ''}
+              <Money text={`${local}${charge ? ` · ${copy.plans.charged(charge)}` : ''}`} />
             </p>
             <label className="mt-4 block text-sm font-semibold">
               {copy.request.email}
