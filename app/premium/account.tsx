@@ -53,6 +53,17 @@ async function getAuthInstance(): Promise<Auth> {
   return auth;
 }
 
+// Updater factories live outside the components so no catch-block local is
+// captured by a closure (the React Compiler lint rejects that shape).
+const settled = (error: ErrorKey | null) => (s: State): State => ({ ...s, busy: null, error });
+
+function orderErrorFor(status: number, code: string | undefined, mode: CheckoutMode | undefined): ErrorKey {
+  if (status === 429) return 'rateLimited';
+  if (code === 'checkout_unavailable') return mode === 'test' ? 'testOnly' : 'unavailable';
+  if (code === 'account_blocked') return 'blocked';
+  return 'error';
+}
+
 function signInErrorFor(code: string): ErrorKey | null {
   if (code === 'auth/popup-blocked') return 'popupBlocked';
   if (code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request') return null;
@@ -142,8 +153,7 @@ export function AccountProvider({ lang, children }: { lang: Lang; children: Reac
         void loadMe();
         return account;
       } catch (err) {
-        const code = (err as { code?: string }).code ?? '';
-        setState((s) => ({ ...s, busy: null, error: signInErrorFor(code) }));
+        setState(settled(signInErrorFor((err as { code?: string }).code ?? '')));
         return null;
       }
     },
@@ -158,6 +168,7 @@ export function AccountProvider({ lang, children }: { lang: Lang; children: Reac
     setState((s) => ({ ...s, user: null, me: null, error: null }));
   }, []);
 
+  const checkoutMode = state.config?.checkoutMode;
   const createOrder = useCallback(
     async (planId: string) => {
       const token = await getToken();
@@ -174,14 +185,12 @@ export function AccountProvider({ lang, children }: { lang: Lang; children: Reac
           window.location.assign(body.redirectUrl);
           return;
         }
-        const nextError: ErrorKey =
-          res.status === 429 ? 'rateLimited' : body.error === 'checkout_unavailable' ? (state.config?.checkoutMode === 'test' ? 'testOnly' : 'unavailable') : body.error === 'account_blocked' ? 'blocked' : 'error';
-        setState((s) => ({ ...s, busy: null, error: nextError }));
+        setState(settled(orderErrorFor(res.status, body.error, checkoutMode)));
       } catch {
-        setState((s) => ({ ...s, busy: null, error: 'error' }));
+        setState(settled('error'));
       }
     },
-    [getToken, lang, state.config?.checkoutMode],
+    [getToken, lang, checkoutMode],
   );
 
   const clearError = useCallback(() => setState((s) => ({ ...s, error: null })), []);
