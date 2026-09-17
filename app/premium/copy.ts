@@ -80,6 +80,8 @@ export type PremiumCopy = {
   cancel: { title: string; body: string; back: string };
   footer: {
     seller: string;
+    tagline: string;
+    subscription: string;
     requisites: string;
     documents: string;
     medical: string;
@@ -249,7 +251,9 @@ const ru: PremiumCopy = {
   },
   footer: {
     seller: 'Продавец и контакты',
-    requisites: 'Реквизиты продавца',
+    tagline: 'Дневник, прогноз сна и коуч для родителей малышей.',
+    subscription: 'Подписка',
+    requisites: 'Все реквизиты',
     documents: 'Документы',
     medical: 'Yorix помогает с режимом дня и не оказывает медицинских услуг.',
     rows: { seller: 'Продавец', status: 'Статус', unp: 'УНП', address: 'Адрес', register: 'Регистрация в Торговом реестре', email: 'E-mail', phone: 'Телефон', hours: 'Режим работы' },
@@ -429,7 +433,9 @@ const en: PremiumCopy = {
   },
   footer: {
     seller: 'Seller and contacts',
-    requisites: 'Seller details',
+    tagline: 'Diary, sleep forecast and a coach for parents of little ones.',
+    subscription: 'Subscription',
+    requisites: 'Full seller details',
     documents: 'Documents',
     medical: 'Yorix helps with the daily routine and does not provide medical services.',
     rows: { seller: 'Seller', status: 'Status', unp: 'Taxpayer number (УНП)', address: 'Address', register: 'Trade register', email: 'E-mail', phone: 'Phone', hours: 'Working hours' },

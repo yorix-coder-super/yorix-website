@@ -15,7 +15,7 @@ export function PaymentTerms({ lang }: { lang: Lang }) {
       {plans.map((plan) => (
         <li key={plan.id}>
           {lang === 'ru' ? `Подписка ${planCopy.ru[plan.id].forPeriod} (${planCopy.ru[plan.id].days})` : `Subscription ${planCopy.en[plan.id].forPeriod} (${planCopy.en[plan.id].days})`} —{' '}
-          {formatByn(plan.priceByn, lang)}
+          {formatByn(plan.priceByn, lang, 'code')}
         </li>
       ))}
     </ul>

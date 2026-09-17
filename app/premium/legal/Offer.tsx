@@ -36,7 +36,7 @@ export function Offer({ lang }: { lang: Lang }) {
     <ul>
       {plans.map((plan) => (
         <li key={plan.id}>
-          {lang === 'ru' ? `на ${planCopy.ru[plan.id].days}` : `for ${planCopy.en[plan.id].days}`} — {formatByn(plan.priceByn, lang)}
+          {lang === 'ru' ? `на ${planCopy.ru[plan.id].days}` : `for ${planCopy.en[plan.id].days}`} — {formatByn(plan.priceByn, lang, 'code')}
         </li>
       ))}
     </ul>

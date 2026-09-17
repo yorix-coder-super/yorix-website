@@ -46,7 +46,7 @@ export function formatMoney(amount: number, currency: Currency, lang: Lang, appr
     text = `${Math.round(amount).toLocaleString(locale)} ₽`;
   } else if (currency === 'BYN') {
     const hasKopecks = Math.round(amount * 100) % 100 !== 0;
-    text = `${amount.toLocaleString(locale, { minimumFractionDigits: hasKopecks ? 2 : 0, maximumFractionDigits: 2 })} BYN`;
+    text = `${amount.toLocaleString(locale, { minimumFractionDigits: hasKopecks ? 2 : 0, maximumFractionDigits: 2 })} Br`;
   } else {
     const rounded = Math.round(amount * 100) / 100;
     const hasCents = Math.round(rounded * 100) % 100 !== 0;

@@ -58,13 +58,13 @@ export const planCopy: Record<Lang, Record<PlanId, { title: string; forPeriod: s
   },
 };
 
-export function formatByn(value: number, lang: Lang) {
+export function formatByn(value: number, lang: Lang, unit: 'sign' | 'code' = 'sign') {
   const hasKopecks = Math.round(value * 100) % 100 !== 0;
   const amount = value.toLocaleString(lang === 'ru' ? 'ru-RU' : 'en-US', {
     minimumFractionDigits: hasKopecks ? 2 : 0,
     maximumFractionDigits: 2,
   });
-  return `${amount} BYN`;
+  return `${amount} ${unit === 'code' ? 'BYN' : 'Br'}`;
 }
 
 export function perWeek(plan: Plan) {
@@ -83,14 +83,14 @@ export function orderTemplate(lang: Lang, plan?: Plan, accountCode?: string) {
     return [
       'Hello!',
       '',
-      `I would like a Yorix subscription ${plan ? `${planCopy.en[plan.id].forPeriod} — ${formatByn(plan.priceByn, 'en')}` : '(week / month / year)'}`,
+      `I would like a Yorix subscription ${plan ? `${planCopy.en[plan.id].forPeriod} — ${formatByn(plan.priceByn, 'en', 'code')}` : '(week / month / year)'}`,
       `Account code (Settings → Account in the app): ${code}`,
     ].join('\n');
   }
   return [
     'Здравствуйте!',
     '',
-    `Хочу подписку Yorix ${plan ? `${planCopy.ru[plan.id].forPeriod} — ${formatByn(plan.priceByn, 'ru')}` : '(неделя / месяц / год)'}`,
+    `Хочу подписку Yorix ${plan ? `${planCopy.ru[plan.id].forPeriod} — ${formatByn(plan.priceByn, 'ru', 'code')}` : '(неделя / месяц / год)'}`,
     `Код аккаунта (Настройки → Аккаунт в приложении): ${code}`,
   ].join('\n');
 }
