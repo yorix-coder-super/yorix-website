@@ -140,13 +140,56 @@ body {
 }
 
 :root {
-  --animate-duration: 0.7s;
+  --animate-duration: 0.85s;
   --animate-delay: 0.12s;
 }
 
 /* Reveal: only a block the script has decided to animate later is hidden. */
 .reveal-pending {
   opacity: 0;
+}
+
+/* A gentler rise than animate.css's fadeInUp (which travels the element's full height). */
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 36px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.riseIn {
+  animation-name: riseIn;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* The live star field replaces the static dots while it runs. */
+.home-page::before {
+  transition: opacity 1.2s ease;
+}
+
+.home-page.starfield-live::before {
+  opacity: 0;
+}
+
+/* Hero phones drift up a little as the reader scrolls (scroll-driven, no JS). */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-parallax {
+      animation: hero-drift linear both;
+      animation-timeline: scroll();
+      animation-range: 0 70vh;
+    }
+  }
+}
+
+@keyframes hero-drift {
+  to {
+    transform: translate3d(0, -56px, 0) scale(0.97);
+  }
 }
 
 .moon-slow-spin {

@@ -5,6 +5,7 @@ import { premiumCopy } from './copy';
 import { premiumLangs, premiumPath, type Lang, type PremiumPage } from './i18n';
 import { merchant } from './merchant';
 import { PaymentLogos } from './PaymentLogos';
+import { StarField } from './StarField';
 import { Button } from './ui';
 
 export function documentLinks(lang: Lang) {
@@ -27,7 +28,8 @@ export function PremiumShell({ lang, page = '', children }: { lang: Lang; page?:
   ];
 
   return (
-    <main className="home-page min-h-screen overflow-hidden text-white" lang={lang}>
+    <main className="home-page relative min-h-screen overflow-hidden text-white" lang={lang}>
+      <StarField />
       <header className="relative z-50 mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-5 py-5 sm:px-8">
         <a href={home} aria-label="Yorix Premium">
           <BrandLogo size="sm" tone="dark" />
@@ -76,7 +78,7 @@ export function PremiumShell({ lang, page = '', children }: { lang: Lang; page?:
         </div>
       </header>
 
-      {children}
+      <div className="relative z-10">{children}</div>
 
       <MerchantFooter lang={lang} />
     </main>
@@ -119,7 +121,7 @@ function MerchantRequisites({ lang }: { lang: Lang }) {
 function MerchantFooter({ lang }: { lang: Lang }) {
   const copy = premiumCopy[lang];
   return (
-    <footer id="kontakty" className="relative scroll-mt-6 border-t border-white/10 bg-[#0F1022]/80">
+    <footer id="kontakty" className="relative z-10 scroll-mt-6 border-t border-white/10 bg-[#0F1022]/80">
       <div className="mx-auto grid max-w-6xl gap-8 px-5 py-10 sm:px-8 lg:grid-cols-[1.4fr_1fr]">
         <div>
           <p className="mb-4 text-sm font-semibold text-white">{copy.footer.seller}</p>

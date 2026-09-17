@@ -5,7 +5,6 @@ import { premiumPath, type Lang } from './i18n';
 import { formatByn, plans } from './merchant';
 import { PremiumShell } from './PremiumShell';
 import { Reveal } from './Reveal';
-import { StarField } from './StarField';
 import { Button, Eyebrow, SectionTitle } from './ui';
 
 const featureIcons = [Sparkles, MessageCircle, BarChart3, Sun];
@@ -19,28 +18,35 @@ export function PremiumStorefront({ lang }: { lang: Lang }) {
     <PremiumShell lang={lang}>
       <AccountProvider lang={lang}>
         <section className="relative">
-          <StarField />
           <div className="relative mx-auto grid w-full max-w-6xl items-center gap-10 px-5 pb-14 pt-6 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:pb-20">
             <div className="relative z-10 min-w-0">
-              <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-[#C7D2FE] backdrop-blur-xl">
-                <Sparkles className="h-4 w-4" aria-hidden="true" />
-                {copy.hero.badge}
-              </p>
-              <h1 className="max-w-2xl text-[2.35rem] font-semibold leading-[1.06] text-white sm:text-6xl">{copy.hero.title}</h1>
-              <p className="mt-6 max-w-xl text-lg leading-8 text-white/70">{copy.hero.body}</p>
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <Button href="#tarify">
-                  {copy.hero.primary(formatByn(week.priceByn, lang))}
-                  <ArrowRight className="h-5 w-5" aria-hidden="true" />
-                </Button>
-                <span className="inline-flex items-center gap-2 text-sm text-white/65">
-                  <RotateCcw className="h-4 w-4" aria-hidden="true" />
-                  {copy.hero.oneOff}
-                </span>
-              </div>
-              <AccountPanel />
+              <Reveal load animation="fadeIn">
+                <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-[#C7D2FE] backdrop-blur-xl">
+                  <Sparkles className="h-4 w-4" aria-hidden="true" />
+                  {copy.hero.badge}
+                </p>
+              </Reveal>
+              <Reveal load delay={120}>
+                <h1 className="max-w-2xl text-[2.35rem] font-semibold leading-[1.06] text-white sm:text-6xl">{copy.hero.title}</h1>
+              </Reveal>
+              <Reveal load delay={260}>
+                <p className="mt-6 max-w-xl text-lg leading-8 text-white/70">{copy.hero.body}</p>
+              </Reveal>
+              <Reveal load delay={400}>
+                <div className="mt-8 flex flex-wrap items-center gap-3">
+                  <Button href="#tarify">
+                    {copy.hero.primary(formatByn(week.priceByn, lang))}
+                    <ArrowRight className="h-5 w-5" aria-hidden="true" />
+                  </Button>
+                  <span className="inline-flex items-center gap-2 text-sm text-white/65">
+                    <RotateCcw className="h-4 w-4" aria-hidden="true" />
+                    {copy.hero.oneOff}
+                  </span>
+                </div>
+                <AccountPanel />
+              </Reveal>
             </div>
-            <div className="relative z-0 mx-auto hidden h-[560px] w-full max-w-[460px] sm:block">
+            <Reveal load animation="zoomIn" delay={200} className="hero-parallax relative z-0 mx-auto hidden h-[560px] w-full max-w-[460px] sm:block">
               <div className="absolute inset-x-6 bottom-10 top-16 rounded-full bg-[#6366F1]/25 blur-3xl" />
               <img
                 src="/screen-coach.png"
@@ -57,7 +63,7 @@ export function PremiumStorefront({ lang }: { lang: Lang }) {
                 height="2622"
                 fetchPriority="high"
               />
-            </div>
+            </Reveal>
           </div>
         </section>
 
