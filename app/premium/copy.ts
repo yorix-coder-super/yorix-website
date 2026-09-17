@@ -14,10 +14,8 @@ export type PremiumCopy = {
     bestValue: string;
     perWeek: (price: string) => string;
     cheaper: (pct: number) => string;
-    pay: (price: string) => string;
-    signInToPay: string;
+    pay: string;
     order: string;
-    request: string;
     charged: (byn: string) => string;
     perDay: (price: string) => string;
     perMonth: (price: string) => string;
@@ -82,6 +80,7 @@ export type PremiumCopy = {
   cancel: { title: string; body: string; back: string };
   footer: {
     seller: string;
+    requisites: string;
     documents: string;
     medical: string;
     rows: { seller: string; status: string; unp: string; address: string; register: string; email: string; phone: string; hours: string };
@@ -150,10 +149,8 @@ const ru: PremiumCopy = {
     bestValue: 'Выгоднее всего',
     perWeek: (price) => `${price} в неделю`,
     cheaper: (pct) => `на ${pct}% дешевле недели`,
-    pay: (price) => `Оформить подписку — ${price}`,
-    signInToPay: 'Войти и оформить подписку',
+    pay: 'Оформить подписку',
     order: 'Заказать письмом',
-    request: 'Прислать ссылку на оплату',
     charged: (byn) => `списание ${byn}`,
     perDay: (price) => `${price} в день`,
     perMonth: (price) => `${price} в месяц`,
@@ -252,6 +249,7 @@ const ru: PremiumCopy = {
   },
   footer: {
     seller: 'Продавец и контакты',
+    requisites: 'Реквизиты продавца',
     documents: 'Документы',
     medical: 'Yorix помогает с режимом дня и не оказывает медицинских услуг.',
     rows: { seller: 'Продавец', status: 'Статус', unp: 'УНП', address: 'Адрес', register: 'Регистрация в Торговом реестре', email: 'E-mail', phone: 'Телефон', hours: 'Режим работы' },
@@ -331,10 +329,8 @@ const en: PremiumCopy = {
     bestValue: 'Best value',
     perWeek: (price) => `${price} a week`,
     cheaper: (pct) => `${pct}% less than weekly`,
-    pay: (price) => `Subscribe — ${price}`,
-    signInToPay: 'Sign in and subscribe',
+    pay: 'Subscribe',
     order: 'Order by e-mail',
-    request: 'Send me the payment link',
     charged: (byn) => `charged ${byn}`,
     perDay: (price) => `${price} a day`,
     perMonth: (price) => `${price} a month`,
@@ -433,6 +429,7 @@ const en: PremiumCopy = {
   },
   footer: {
     seller: 'Seller and contacts',
+    requisites: 'Seller details',
     documents: 'Documents',
     medical: 'Yorix helps with the daily routine and does not provide medical services.',
     rows: { seller: 'Seller', status: 'Status', unp: 'Taxpayer number (УНП)', address: 'Address', register: 'Trade register', email: 'E-mail', phone: 'Phone', hours: 'Working hours' },

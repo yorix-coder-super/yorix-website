@@ -27,6 +27,7 @@ type State = {
   me: Me | null;
   busy: 'signin' | 'order' | null;
   error: ErrorKey | null;
+  errorOrigin: string | null;
   requestPlan: Plan | null;
 };
 
@@ -35,7 +36,7 @@ type Api = State & {
   copy: PremiumCopy;
   rates: Rates;
   currency: Currency;
-  signIn: (provider: Provider) => Promise<Account | null>;
+  signIn: (provider: Provider, origin?: string) => Promise<Account | null>;
   signOut: () => Promise<void>;
   createOrder: (planId: string) => Promise<void>;
   getToken: () => Promise<string | null>;
@@ -61,7 +62,7 @@ async function getAuthInstance(): Promise<Auth> {
 
 // Updater factories live outside the components so no catch-block local is
 // captured by a closure (the React Compiler lint rejects that shape).
-const settled = (error: ErrorKey | null) => (s: State): State => ({ ...s, busy: null, error });
+const settled = (error: ErrorKey | null, origin: string) => (s: State): State => ({ ...s, busy: null, error, errorOrigin: error ? origin : null });
 
 function orderErrorFor(status: number, code: string | undefined, mode: CheckoutMode | undefined): ErrorKey {
   if (status === 429) return 'rateLimited';
@@ -92,6 +93,7 @@ export function AccountProvider({ lang, country, children }: { lang: Lang; count
     me: null,
     busy: null,
     error: null,
+    errorOrigin: null,
     requestPlan: null,
   });
   const currency = useCurrency(currencyForCountry(country));
@@ -143,10 +145,10 @@ export function AccountProvider({ lang, country, children }: { lang: Lang; count
   }, [loadMe]);
 
   const signIn = useCallback(
-    async (providerId: Provider) => {
+    async (providerId: Provider, origin = 'panel') => {
       const auth = authRef.current;
       if (!auth) return null;
-      setState((s) => ({ ...s, busy: 'signin', error: null }));
+      setState((s) => ({ ...s, busy: 'signin', error: null, errorOrigin: null }));
       try {
         const { GoogleAuthProvider, OAuthProvider, signInWithPopup } = await import('firebase/auth');
         const provider = providerId === 'apple.com' ? new OAuthProvider('apple.com') : new GoogleAuthProvider();
@@ -161,7 +163,7 @@ export function AccountProvider({ lang, country, children }: { lang: Lang; count
         void loadMe();
         return account;
       } catch (err) {
-        setState(settled(signInErrorFor((err as { code?: string }).code ?? '')));
+        setState(settled(signInErrorFor((err as { code?: string }).code ?? ''), origin));
         return null;
       }
     },
@@ -181,7 +183,7 @@ export function AccountProvider({ lang, country, children }: { lang: Lang; count
     async (planId: string) => {
       const token = await getToken();
       if (!token) return;
-      setState((s) => ({ ...s, busy: 'order', error: null }));
+      setState((s) => ({ ...s, busy: 'order', error: null, errorOrigin: null }));
       try {
         const res = await fetch(`${API_BASE}/v1/web/orders`, {
           method: 'POST',
@@ -193,16 +195,16 @@ export function AccountProvider({ lang, country, children }: { lang: Lang; count
           window.location.assign(body.redirectUrl);
           return;
         }
-        setState(settled(orderErrorFor(res.status, body.error, checkoutMode)));
+        setState(settled(orderErrorFor(res.status, body.error, checkoutMode), planId));
       } catch {
-        setState(settled('error'));
+        setState(settled('error', planId));
       }
     },
     [getToken, lang, checkoutMode],
   );
 
-  const clearError = useCallback(() => setState((s) => ({ ...s, error: null })), []);
-  const openRequest = useCallback((plan: Plan | null) => setState((s) => ({ ...s, requestPlan: plan, error: null })), []);
+  const clearError = useCallback(() => setState((s) => ({ ...s, error: null, errorOrigin: null })), []);
+  const openRequest = useCallback((plan: Plan | null) => setState((s) => ({ ...s, requestPlan: plan, error: null, errorOrigin: null })), []);
 
   const rates = state.config?.rates ?? fallbackRates;
   const api = useMemo<Api>(
@@ -246,7 +248,7 @@ function CopyInline({ value, label, done }: { value: string; label: string; done
 }
 
 export function AccountPanel() {
-  const { ready, configured, user, me, busy, error, copy, lang, signIn, signOut } = useAccount();
+  const { ready, configured, user, me, busy, error, errorOrigin, copy, lang, signIn, signOut } = useAccount();
 
   // Until sign-in is configured the request form is the whole funnel; the
   // page already says what happens next, so the panel stays out of the way.
@@ -271,7 +273,7 @@ export function AccountPanel() {
           </Button>
         </div>
         <p className="mt-3 text-sm leading-6 text-white/55">{copy.account.why}</p>
-        {error === 'popupBlocked' || error === 'signInError' ? (
+        {errorOrigin === 'panel' && (error === 'popupBlocked' || error === 'signInError') ? (
           <p className="mt-2 text-sm text-[#FCA5A5]" role="alert">
             {copy.account[error]}
           </p>
@@ -319,7 +321,7 @@ function AppleMark() {
 }
 
 export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) {
-  const { ready, configured, config, user, busy, error, copy, lang, currency, rates, signIn, createOrder, openRequest } = useAccount();
+  const { ready, configured, config, user, busy, error, errorOrigin, copy, lang, currency, rates, signIn, createOrder, openRequest } = useAccount();
   const text = planCopy[lang][plan.id];
   const kopecks = Math.round(plan.priceByn * 100);
   const { local: price, charge } = displayPrice(kopecks, currency, rates, lang);
@@ -327,14 +329,13 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
   const perWeekByn = (plan.priceByn / plan.days) * 7;
   const perWeek = formatMoney(convert(Math.round(perWeekByn * 100), currency, rates), currency, lang, currency !== 'BYN');
   const cheaper = Math.round((1 - perWeekByn / weekPriceByn) * 100);
-  const mode: CheckoutMode = config?.checkoutMode ?? 'off';
-  const canPay = configured && mode !== 'off';
+  const live = configured && (config?.checkoutMode ?? 'off') !== 'off';
   const [pending, setPending] = useState(false);
 
   const pay = async () => {
     setPending(true);
     try {
-      const account = user ?? (await signIn('apple.com'));
+      const account = user ?? (await signIn('apple.com', plan.id));
       if (account) await createOrder(plan.id);
     } finally {
       setPending(false);
@@ -344,7 +345,7 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
   const variant = featured ? 'dark' : 'light';
   const muted = featured ? 'text-[#1E1B4B]/65' : 'text-white/65';
   const strong = featured ? 'text-[#1E1B4B]' : 'text-white';
-  const showError = pending || busy === 'order' ? null : error;
+  const showError = pending || busy === 'order' || errorOrigin !== plan.id ? null : error;
   const fallbackNeeded = showError === 'unavailable' || showError === 'testOnly' || showError === 'blocked' || showError === 'error';
 
   return (
@@ -373,19 +374,20 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
         {plan.id === 'week' ? (charge ? '' : '\u00A0') : `${copy.plans.perWeek(perWeek)} · ${copy.plans.cheaper(cheaper)}`}
       </p>
       <div className="mt-auto pt-6">
-        {canPay ? (
-          <Button className="w-full" disabled={!ready || pending || busy !== null} onClick={() => void pay()} variant={variant}>
-            {pending || busy === 'order' ? <Spinner /> : null}
-            {pending || busy === 'order' ? copy.checkout.creating : user ? copy.plans.pay(price) : copy.plans.signInToPay}
-          </Button>
-        ) : (
-          <Button className="w-full" onClick={() => openRequest(plan)} variant={variant}>
-            {copy.plans.request}
-          </Button>
-        )}
+        <Button
+          className="w-full"
+          disabled={live && (!ready || pending || busy !== null)}
+          onClick={() => (live ? void pay() : openRequest(plan))}
+          variant={variant}
+        >
+          {pending || busy === 'order' ? <Spinner /> : null}
+          {pending || busy === 'order' ? copy.checkout.creating : copy.plans.pay}
+        </Button>
         {showError ? (
           <p className={`mt-3 text-sm leading-5 ${featured ? 'text-[#B45309]' : 'text-[#FCA5A5]'}`} role="alert">
-            {copy.checkout[showError as keyof PremiumCopy['checkout']] ?? copy.checkout.error}
+            {showError === 'popupBlocked' || showError === 'signInError'
+              ? copy.account[showError]
+              : copy.checkout[showError as keyof PremiumCopy['checkout']] ?? copy.checkout.error}
             {fallbackNeeded ? (
               <>
                 {' '}
@@ -399,6 +401,14 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
       </div>
     </article>
   );
+}
+
+// What happens after the button: the live sequence once sign-in and checkout
+// are configured, the request-form sequence until then.
+export function FlowNote({ className }: { className?: string }) {
+  const { configured, config, copy } = useAccount();
+  const live = configured && (config ? config.checkoutMode !== 'off' : true);
+  return <p className={className}>{live ? copy.hero.nextLive : copy.hero.nextRequest}</p>;
 }
 
 export function ManualOrder() {

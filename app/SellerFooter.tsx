@@ -4,43 +4,28 @@ import { premiumPath, type Lang } from './premium/i18n';
 import { documentLinks } from './premium/PremiumShell';
 import { merchant } from './premium/merchant';
 
-// The acquiring bank checks the domain's home page for the seller's
-// requisites and card logos, so every home variant carries this block. The
-// requisites stay in Russian (that is what the bank reads); labels follow
-// the page language.
+// The acquiring bank looks for the seller and the card logos on the home
+// page, so every home variant names the seller in one line and links to
+// the full requisites on the subscription page. The name and status stay
+// in Russian (that is what the bank reads); labels follow the page language.
 export function SellerFooter({ note, lang = 'en' }: { note: string; lang?: Lang }) {
   const copy = premiumCopy[lang];
-  const requisites = [
-    lang === 'ru' ? merchant.fullName : `${merchant.fullName} (${merchant.latinName})`,
-    merchant.status.ru.toLowerCase(),
-    merchant.unp && `УНП ${merchant.unp}`,
-    [merchant.country.ru, merchant.postalAddress].filter(Boolean).join(', '),
-    merchant.tradeRegister,
-  ].filter(Boolean);
-  const contacts = [merchant.email, merchant.phone, merchant.hours.ru].filter(Boolean);
+  const seller = [merchant.fullName, merchant.status.ru.toLowerCase(), merchant.unp && `УНП ${merchant.unp}`].filter(Boolean).join(', ');
 
   return (
-    <footer className="relative border-t border-white/10 bg-[#0F1022]/80 text-sm text-white/60">
-      <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 sm:px-8 lg:grid-cols-[1.3fr_1fr] lg:px-10">
-        <div className="grid content-start gap-3" lang="ru">
-          <p className="font-semibold text-white">{copy.footer.rows.seller}</p>
-          <p className="leading-6">{requisites.join(' · ')}</p>
-          <p className="leading-6">
-            {contacts.map((item, index) => (
-              <span key={item}>
-                {index > 0 ? ' · ' : null}
-                {item === merchant.email ? (
-                  <a className="underline decoration-white/25 hover:text-white" href={`mailto:${item}`}>
-                    {item}
-                  </a>
-                ) : (
-                  item
-                )}
-              </span>
-            ))}
+    <footer className="relative border-t border-white/10 bg-[#0F1022]/80 text-sm text-white/55">
+      <div className="mx-auto grid max-w-7xl gap-6 px-5 py-8 sm:px-8 lg:grid-cols-[1fr_auto] lg:items-center lg:px-10">
+        <div className="grid gap-3">
+          <p className="leading-6" lang="ru">
+            {copy.footer.rows.seller}: {seller} ·{' '}
+            <a className="underline decoration-white/25 hover:text-white" href={`mailto:${merchant.email}`}>
+              {merchant.email}
+            </a>{' '}
+            ·{' '}
+            <a className="underline decoration-white/25 hover:text-white" href={`${premiumPath(lang)}#kontakty`} lang={lang}>
+              {copy.footer.requisites}
+            </a>
           </p>
-        </div>
-        <div className="grid content-start gap-4">
           <ul className="flex flex-wrap gap-x-5 gap-y-2">
             <li>
               <a className="font-semibold text-white underline decoration-white/30 hover:decoration-white" href={premiumPath(lang)}>
@@ -55,6 +40,8 @@ export function SellerFooter({ note, lang = 'en' }: { note: string; lang?: Lang 
               </li>
             ))}
           </ul>
+        </div>
+        <div className="w-full max-w-[320px]">
           <PaymentLogos />
         </div>
       </div>

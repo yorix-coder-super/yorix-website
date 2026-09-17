@@ -1,6 +1,6 @@
 import { ArrowRight, ShieldCheck } from 'lucide-react';
 import { headers } from 'next/headers';
-import { AccountPanel, AccountProvider, PlanCard, RequestForm } from './account';
+import { AccountPanel, AccountProvider, FlowNote, PlanCard, RequestForm } from './account';
 import { premiumCopy } from './copy';
 import { premiumPath, type Lang } from './i18n';
 import { plans } from './merchant';
@@ -23,7 +23,7 @@ export async function HomePremiumSection({ lang }: { lang: Lang }) {
             <Eyebrow>{copy.home.eyebrow}</Eyebrow>
             <SectionTitle className="max-w-2xl">{copy.home.title}</SectionTitle>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-white/65">{copy.home.body}</p>
-            <p className="mt-4 max-w-2xl text-sm leading-6 text-white/55">{copy.hero.nextRequest}</p>
+            <FlowNote className="mt-4 max-w-2xl text-sm leading-6 text-white/55" />
           </Reveal>
           <Reveal delay={140}>
             <AccountPanel />

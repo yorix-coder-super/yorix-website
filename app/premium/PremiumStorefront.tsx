@@ -1,6 +1,6 @@
 import { ArrowRight, BarChart3, CalendarClock, LockKeyhole, MessageCircle, RotateCcw, ShieldCheck, Smartphone, Sparkles, Sun, UserRound } from 'lucide-react';
 import { headers } from 'next/headers';
-import { AccountPanel, AccountProvider, ManualOrder, PlanCard, RequestForm } from './account';
+import { AccountPanel, AccountProvider, FlowNote, ManualOrder, PlanCard, RequestForm } from './account';
 import { premiumCopy } from './copy';
 import { premiumPath, type Lang } from './i18n';
 import { formatByn, plans } from './merchant';
@@ -49,7 +49,7 @@ export async function PremiumStorefront({ lang }: { lang: Lang }) {
                     {copy.hero.oneOff}
                   </span>
                 </div>
-                <p className="mt-4 max-w-xl text-sm leading-6 text-white/55">{copy.hero.nextRequest}</p>
+                <FlowNote className="mt-4 max-w-xl text-sm leading-6 text-white/55" />
                 <AccountPanel />
               </Reveal>
             </div>
