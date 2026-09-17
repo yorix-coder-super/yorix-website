@@ -15,20 +15,22 @@ export function HomePremiumSection({ lang }: { lang: Lang }) {
   return (
     <section id="premium" className="mx-auto max-w-7xl scroll-mt-6 px-5 py-16 sm:px-8 lg:px-10" lang={lang}>
       <AccountProvider lang={lang}>
-        <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
           <Reveal>
             <Eyebrow>{copy.home.eyebrow}</Eyebrow>
-            <SectionTitle>{copy.home.title}</SectionTitle>
-            <p className="mt-5 max-w-xl text-lg leading-8 text-white/65">{copy.home.body}</p>
+            <SectionTitle className="max-w-2xl">{copy.home.title}</SectionTitle>
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-white/65">{copy.home.body}</p>
+          </Reveal>
+          <Reveal delay={140}>
             <AccountPanel />
           </Reveal>
-          <div className="grid gap-5 md:grid-cols-3">
-            {plans.map((plan, index) => (
-              <Reveal className={`flex ${plan.id === 'year' ? 'order-first md:order-none' : ''}`} delay={index * 120} key={plan.id}>
-                <PlanCard featured={plan.id === 'year'} plan={plan} />
-              </Reveal>
-            ))}
-          </div>
+        </div>
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {plans.map((plan, index) => (
+            <Reveal className={`flex min-w-0 ${plan.id === 'year' ? 'order-first md:order-none' : ''}`} delay={index * 120} key={plan.id}>
+              <PlanCard featured={plan.id === 'year'} plan={plan} />
+            </Reveal>
+          ))}
         </div>
         <p className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm leading-6 text-white/60">
           <span>{copy.home.note}</span>

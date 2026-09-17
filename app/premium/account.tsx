@@ -337,7 +337,7 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
 
   return (
     <article
-      className={`relative flex flex-col rounded-[1.75rem] border p-6 transition hover:-translate-y-1 ${
+      className={`relative flex w-full min-w-0 flex-col rounded-[1.75rem] border p-6 transition hover:-translate-y-1 ${
         featured
           ? 'order-first border-[#FDE68A]/60 bg-[#EEF2FF] text-[#1E1B4B] shadow-[0_28px_80px_rgb(99_102_241/30%)] md:order-none md:-mt-3 md:mb-3'
           : 'border-white/20 bg-white/[0.12] backdrop-blur-xl hover:border-white/35 md:mt-3'
@@ -354,7 +354,7 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
         <MoonPhase plan={plan.id} className="h-14 w-14 shrink-0" />
       </div>
       <p className={`mt-4 text-sm leading-6 ${featured ? 'text-[#1E1B4B]/80' : 'text-white/75'}`}>{text.purpose}</p>
-      <p className={`mt-6 text-5xl font-semibold tabular-nums ${strong}`}>{price}</p>
+      <p className={`mt-6 text-4xl font-semibold tabular-nums sm:text-5xl ${strong}`}>{price}</p>
       <p className={`mt-2 min-h-6 text-sm leading-6 ${muted}`}>
         {plan.id === 'week' ? ' ' : `${copy.plans.perWeek(formatByn(perWeek, lang))} · ${copy.plans.cheaper(cheaper)}`}
       </p>
