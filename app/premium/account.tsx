@@ -272,9 +272,9 @@ function CopyInline({ value, label, done }: { value: string; label: string; done
 export function AccountPanel() {
   const { ready, configured, user, me, busy, error, copy, lang, signIn, signOut } = useAccount();
 
-  if (!configured) {
-    return <p className="mt-7 max-w-xl text-sm leading-6 text-white/55">{copy.account.notConfigured}</p>;
-  }
+  // Until sign-in is configured the request form is the whole funnel; the
+  // page already says what happens next, so the panel stays out of the way.
+  if (!configured) return null;
   if (!ready) {
     return (
       <p className="mt-7 inline-flex items-center gap-2 text-sm text-white/60">
