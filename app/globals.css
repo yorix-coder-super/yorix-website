@@ -1,11 +1,6 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
-@import 'animate.css/source/_vars.css';
-@import 'animate.css/source/_base.css';
-@import 'animate.css/source/fading_entrances/fadeInUp.css';
-@import 'animate.css/source/fading_entrances/fadeIn.css';
-@import 'animate.css/source/zooming_entrances/zoomIn.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -139,31 +134,22 @@ body {
     100% 100%;
 }
 
-:root {
-  --animate-duration: 0.85s;
-  --animate-delay: 0.12s;
+/* Lenis smooth scrolling (see app/SmoothScroll.tsx). */
+html.lenis,
+html.lenis body {
+  height: auto;
 }
 
-/* Reveal: only a block the script has decided to animate later is hidden. */
-.reveal-pending {
-  opacity: 0;
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
 
-/* A gentler rise than animate.css's fadeInUp (which travels the element's full height). */
-@keyframes riseIn {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 36px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
 
-.riseIn {
-  animation-name: riseIn;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 /* The live star field replaces the static dots while it runs. */
@@ -173,23 +159,6 @@ body {
 
 .home-page.starfield-live::before {
   opacity: 0;
-}
-
-/* Hero phones drift up a little as the reader scrolls (scroll-driven, no JS). */
-@supports (animation-timeline: scroll()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .hero-parallax {
-      animation: hero-drift linear both;
-      animation-timeline: scroll();
-      animation-range: 0 70vh;
-    }
-  }
-}
-
-@keyframes hero-drift {
-  to {
-    transform: translate3d(0, -56px, 0) scale(0.97);
-  }
 }
 
 .moon-slow-spin {

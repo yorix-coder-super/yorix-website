@@ -4,6 +4,7 @@ import { premiumCopy } from './copy';
 import { premiumPath, type Lang } from './i18n';
 import { formatByn, plans } from './merchant';
 import { PremiumShell } from './PremiumShell';
+import { Parallax } from './Parallax';
 import { Reveal } from './Reveal';
 import { Button, Eyebrow, SectionTitle } from './ui';
 
@@ -46,7 +47,8 @@ export function PremiumStorefront({ lang }: { lang: Lang }) {
                 <AccountPanel />
               </Reveal>
             </div>
-            <Reveal load animation="zoomIn" delay={200} className="hero-parallax relative z-0 mx-auto hidden h-[560px] w-full max-w-[460px] sm:block">
+            <Reveal load animation="zoomIn" delay={200} className="relative z-0 mx-auto hidden w-full max-w-[460px] sm:block">
+              <Parallax className="relative h-[560px]" offset={['start start', 'end start']} scale={[1, 0.97]} y={[0, -70]}>
               <div className="absolute inset-x-6 bottom-10 top-16 rounded-full bg-[#6366F1]/25 blur-3xl" />
               <img
                 src="/screen-coach.png"
@@ -63,6 +65,7 @@ export function PremiumStorefront({ lang }: { lang: Lang }) {
                 height="2622"
                 fetchPriority="high"
               />
+              </Parallax>
             </Reveal>
           </div>
         </section>

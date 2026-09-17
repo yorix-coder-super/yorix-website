@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { siteUrl } from './content';
 import { localeAlternates } from './locales';
+import { SmoothScroll } from './SmoothScroll';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -60,7 +61,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <SmoothScroll />
+        {children}
+      </body>
     </html>
   );
 }

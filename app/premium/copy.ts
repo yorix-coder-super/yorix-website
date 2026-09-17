@@ -80,6 +80,7 @@ export type PremiumCopy = {
   };
   docs: { offer: string; payment: string; privacy: string };
   legal: { eyebrow: string; updated: (date: string) => string; binding: string };
+  home: { nav: string; eyebrow: string; title: string; body: string; note: string; details: string };
 };
 
 const ru: PremiumCopy = {
@@ -207,6 +208,14 @@ const ru: PremiumCopy = {
   },
   docs: { offer: 'Публичный договор (оферта)', payment: 'Оплата, доставка и возврат', privacy: 'Политика обработки персональных данных' },
   legal: { eyebrow: 'Документы', updated: (date) => `Редакция от ${date}`, binding: '' },
+  home: {
+    nav: 'Premium',
+    eyebrow: 'Premium без App Store',
+    title: 'Оплатите Premium картой — прямо здесь.',
+    body: 'Если оплата в App Store недоступна: войдите с тем же Apple ID, что и в приложении, выберите срок и оплатите картой через WebPay. Premium включится на вашем аккаунте сразу после оплаты.',
+    note: 'Разовый платёж без автопродления, цены в белорусских рублях. Все тарифы — полный Premium.',
+    details: 'Условия, возврат и реквизиты продавца',
+  },
 };
 
 const en: PremiumCopy = {
@@ -337,6 +346,14 @@ const en: PremiumCopy = {
     eyebrow: 'Documents',
     updated: (date) => `Version of ${date}`,
     binding: 'This translation is provided for convenience. The Russian version is the legally binding one.',
+  },
+  home: {
+    nav: 'Premium',
+    eyebrow: 'Premium without the App Store',
+    title: 'Pay for Premium by card — right here.',
+    body: 'If App Store payments are not available to you: sign in with the same Apple ID you use in the app, choose a period and pay by card via WebPay. Premium switches on for your account right after payment.',
+    note: 'One-off payment, no auto-renewal; prices in Belarusian rubles. Every plan is the full Premium.',
+    details: 'Terms, refunds and seller details',
   },
 };
 

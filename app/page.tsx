@@ -13,6 +13,10 @@ import {
   Volume2,
 } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
+import { HomePremiumSection } from './premium/HomePremiumSection';
+import { Parallax } from './premium/Parallax';
+import { Reveal } from './premium/Reveal';
+import { StarField } from './premium/StarField';
 import { SellerFooter } from './SellerFooter';
 import { appDownloadUrl, topicPages } from './content';
 
@@ -168,7 +172,9 @@ export default function Home() {
   const featuredGuides = topicPages.slice(0, 6);
 
   return (
-    <main className="home-page min-h-screen overflow-hidden text-white">
+    <main className="home-page relative min-h-screen overflow-hidden text-white">
+      <StarField />
+      <div className="relative z-10">
       <header className="relative z-50 mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-5 sm:px-8 lg:px-10">
         <a
           className="flex items-center gap-3"
@@ -198,6 +204,12 @@ export default function Home() {
           </a>
           <a
             className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white"
+            href="#premium"
+          >
+            Premium
+          </a>
+          <a
+            className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white"
             href="#faq"
           >
             FAQ
@@ -219,18 +231,25 @@ export default function Home() {
         className="relative mx-auto grid min-h-[calc(100vh-5rem)] w-full max-w-7xl items-center gap-10 px-5 pb-16 pt-8 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:px-10 lg:pb-20"
       >
         <div className="relative z-20 max-w-2xl">
-          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-[#C7D2FE] shadow-sm backdrop-blur-xl">
-            <Sparkles className="h-4 w-4" aria-hidden="true" />
-            Baby sleep tracker and AI schedule app
-          </p>
-          <h1 className="max-w-3xl text-5xl font-semibold leading-[1.02] tracking-normal text-white sm:text-6xl lg:text-7xl">
-            Finally understand your baby’s sleep.
-          </h1>
-          <p className="mt-6 max-w-xl text-lg leading-8 text-white/70">
-            Yorix learns your child’s rhythm and turns naps, wake windows,
-            bedtime, night wakings, feeding, growth, and daily care into a
-            schedule that adapts to real family life.
-          </p>
+          <Reveal load animation="fadeIn">
+            <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-[#C7D2FE] shadow-sm backdrop-blur-xl">
+              <Sparkles className="h-4 w-4" aria-hidden="true" />
+              Baby sleep tracker and AI schedule app
+            </p>
+          </Reveal>
+          <Reveal load delay={120}>
+            <h1 className="max-w-3xl text-5xl font-semibold leading-[1.02] tracking-normal text-white sm:text-6xl lg:text-7xl">
+              Finally understand your baby’s sleep.
+            </h1>
+          </Reveal>
+          <Reveal load delay={260}>
+            <p className="mt-6 max-w-xl text-lg leading-8 text-white/70">
+              Yorix learns your child’s rhythm and turns naps, wake windows,
+              bedtime, night wakings, feeding, growth, and daily care into a
+              schedule that adapts to real family life.
+            </p>
+          </Reveal>
+          <Reveal load delay={400}>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
               className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-full bg-[#6366F1] px-7 text-base font-semibold text-white shadow-[0_22px_55px_rgb(99_102_241/34%)] transition hover:bg-[#4F46E5] focus:outline-none focus:ring-4 focus:ring-[#818CF8]/30"
@@ -249,6 +268,8 @@ export default function Home() {
               <BookOpen className="h-5 w-5" aria-hidden="true" />
             </a>
           </div>
+          </Reveal>
+          <Reveal load delay={540}>
           <div className="mt-9 hidden max-w-xl gap-3 text-sm text-white/70 sm:grid sm:grid-cols-3">
             <div className="rounded-lg border border-white/10 bg-white/10 p-4 backdrop-blur-xl">
               <strong className="block text-2xl text-white">14</strong>
@@ -263,9 +284,11 @@ export default function Home() {
               AI coach
             </div>
           </div>
+          </Reveal>
         </div>
 
-        <div className="relative z-10 mx-auto w-full max-w-[300px] sm:hidden">
+        <Reveal load animation="zoomIn" delay={160} className="sm:hidden">
+        <div className="relative z-10 mx-auto w-full max-w-[300px]">
           <div className="absolute inset-6 rounded-full bg-[#6366F1]/30 blur-3xl" />
           <img
             src="/screen-today.png"
@@ -276,8 +299,11 @@ export default function Home() {
             fetchPriority="high"
           />
         </div>
+        </Reveal>
 
-        <div className="relative z-10 mx-auto hidden h-[650px] w-full max-w-[620px] sm:block lg:h-[760px]">
+        <Reveal load animation="zoomIn" delay={200} className="hidden sm:block">
+        <Parallax offset={['start start', 'end start']} scale={[1, 0.96]} y={[0, -80]}>
+        <div className="relative z-10 mx-auto h-[650px] w-full max-w-[620px] lg:h-[760px]">
           <div className="absolute inset-x-4 bottom-12 top-20 rounded-full bg-[#6366F1]/25 blur-3xl" />
           {heroScreens.map((screen) => (
             <PhoneShot
@@ -289,16 +315,18 @@ export default function Home() {
             />
           ))}
         </div>
+        </Parallax>
+        </Reveal>
       </section>
 
       <section className="relative border-y border-white/10 bg-[#161628]/70">
         <div className="mx-auto grid max-w-7xl gap-4 px-5 py-8 sm:px-8 md:grid-cols-3 lg:px-10">
-          {proofItems.map((item) => {
+          {proofItems.map((item, index) => {
             const Icon = item.icon;
             return (
+              <Reveal className="flex" delay={index * 120} key={item.label}>
               <article
-                className="flex gap-4 rounded-lg border border-white/10 bg-white/10 p-5 backdrop-blur-xl"
-                key={item.label}
+                className="flex w-full gap-4 rounded-lg border border-white/10 bg-white/10 p-5 backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/25"
               >
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#EEF2FF] text-[#6366F1]">
                   <Icon className="h-5 w-5" aria-hidden="true" />
@@ -310,6 +338,7 @@ export default function Home() {
                   </p>
                 </div>
               </article>
+              </Reveal>
             );
           })}
         </div>
@@ -320,19 +349,21 @@ export default function Home() {
         className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10"
       >
         <div className="grid gap-9 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
-          <div>
+          <Reveal>
             <p className="mb-3 text-sm font-semibold uppercase text-[#A78BFA]">
               Your baby has a plan
             </p>
             <h2 className="max-w-2xl text-4xl font-semibold leading-tight text-white sm:text-5xl">
               From sleepy cues to a clear next step.
             </h2>
-          </div>
-          <p className="max-w-2xl text-lg leading-8 text-white/65">
-            Yorix is built around the question every tired parent asks: when
-            should my baby sleep next? The app watches the day unfold and keeps
-            the plan flexible.
-          </p>
+          </Reveal>
+          <Reveal delay={140}>
+            <p className="max-w-2xl text-lg leading-8 text-white/65">
+              Yorix is built around the question every tired parent asks: when
+              should my baby sleep next? The app watches the day unfold and keeps
+              the plan flexible.
+            </p>
+          </Reveal>
         </div>
 
         <div className="mt-10 grid gap-5 lg:grid-cols-3">
@@ -341,15 +372,14 @@ export default function Home() {
             'Prevent overtired meltdowns before bedtime',
             'Learn from real sleep, feeding, and care patterns',
           ].map((item, index) => (
-            <article
-              className="rounded-lg border border-white/10 bg-white/10 p-6 backdrop-blur-xl"
-              key={item}
-            >
+            <Reveal className="flex" delay={index * 130} key={item}>
+            <article className="w-full rounded-lg border border-white/10 bg-white/10 p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/25">
               <span className="grid h-10 w-10 place-items-center rounded-full bg-[#6366F1] text-sm font-bold text-white">
                 {index + 1}
               </span>
               <h3 className="mt-5 text-xl font-semibold text-white">{item}</h3>
             </article>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -358,9 +388,9 @@ export default function Home() {
         {productStories.map((story, index) => {
           const Icon = story.icon;
           return (
+            <Reveal animation={index % 2 === 1 ? 'driftInRight' : 'driftInLeft'} className="mx-auto w-full max-w-7xl" key={story.title}>
             <article
-              className="mx-auto grid w-full max-w-7xl gap-8 overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.07] p-5 shadow-[0_24px_90px_rgb(0_0_0/18%)] backdrop-blur-xl md:grid-cols-[0.92fr_1.08fr] md:p-8 lg:p-10"
-              key={story.title}
+              className="grid w-full gap-8 overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.07] p-5 shadow-[0_24px_90px_rgb(0_0_0/18%)] backdrop-blur-xl md:grid-cols-[0.92fr_1.08fr] md:p-8 lg:p-10"
             >
               <div className={index % 2 === 1 ? 'md:order-2' : ''}>
                 <p className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-[#C7D2FE]">
@@ -389,22 +419,25 @@ export default function Home() {
               </div>
               <div className="relative min-h-[520px] overflow-hidden rounded-[1.5rem] bg-[#1E1B4B] sm:min-h-[650px] md:min-h-[590px]">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgb(129_140_248/0.35),transparent_24rem)]" />
-                <img
-                  src={story.image}
-                  alt={story.alt}
-                  className="absolute left-1/2 top-8 w-[70%] max-w-[330px] -translate-x-1/2 rounded-[2rem] shadow-[0_32px_85px_rgb(0_0_0/42%)] ring-1 ring-white/15"
-                  width="1206"
-                  height="2622"
-                />
+                <Parallax className="absolute left-1/2 top-8 w-[70%] max-w-[330px] -translate-x-1/2" scale={[0.94, 1]} y={[72, -48]}>
+                  <img
+                    src={story.image}
+                    alt={story.alt}
+                    className="h-auto w-full rounded-[2rem] shadow-[0_32px_85px_rgb(0_0_0/42%)] ring-1 ring-white/15"
+                    width="1206"
+                    height="2622"
+                  />
+                </Parallax>
               </div>
             </article>
+            </Reveal>
           );
         })}
       </section>
 
       <section className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:px-10">
         <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-          <div>
+          <Reveal>
             <p className="mb-3 text-sm font-semibold uppercase text-[#A78BFA]">
               Loved by tired parents
             </p>
@@ -415,13 +448,11 @@ export default function Home() {
               Yorix gives families the calm structure they need without turning
               every nap, feed, or diaper into a spreadsheet.
             </p>
-          </div>
+          </Reveal>
           <div className="grid gap-4 md:grid-cols-3">
-            {parentQuotes.map((item) => (
-              <article
-                className="rounded-lg border border-white/10 bg-white/10 p-5 backdrop-blur-xl"
-                key={item.title}
-              >
+            {parentQuotes.map((item, index) => (
+              <Reveal className="flex" delay={index * 120} key={item.title}>
+              <article className="w-full rounded-lg border border-white/10 bg-white/10 p-5 backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/25">
                 <div className="mb-5 flex gap-1 text-[#F59E0B]">
                   {Array.from({ length: 5 }).map((_, index) => (
                     <Star
@@ -438,6 +469,7 @@ export default function Home() {
                   {item.body}
                 </p>
               </article>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -445,6 +477,7 @@ export default function Home() {
 
       <section id="guides" className="border-y border-white/10 bg-[#0F1022]">
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10">
+          <Reveal>
           <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
             <div>
               <p className="mb-3 text-sm font-semibold uppercase text-[#A78BFA]">
@@ -467,12 +500,13 @@ export default function Home() {
               <ArrowRight className="h-5 w-5" aria-hidden="true" />
             </a>
           </div>
+          </Reveal>
           <div className="mt-9 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {featuredGuides.map((page) => (
+            {featuredGuides.map((page, index) => (
+              <Reveal className="flex" delay={index * 80} key={page.slug}>
               <a
-                className="rounded-lg border border-white/10 bg-white/10 p-5 transition hover:-translate-y-1 hover:bg-white/10"
+                className="w-full rounded-lg border border-white/10 bg-white/10 p-5 transition hover:-translate-y-1 hover:border-white/25 hover:bg-white/15"
                 href={`/${page.slug}`}
-                key={page.slug}
               >
                 <p className="text-sm font-semibold text-[#C7D2FE]">
                   {page.category} · {page.readTime}
@@ -484,24 +518,27 @@ export default function Home() {
                   {page.description}
                 </p>
               </a>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
+      <HomePremiumSection lang="en" />
+
       <section id="faq" className="mx-auto max-w-5xl px-5 py-16 sm:px-8">
-        <p className="mb-3 text-center text-sm font-semibold uppercase text-[#A78BFA]">
-          FAQ
-        </p>
-        <h2 className="text-center text-4xl font-semibold text-white sm:text-5xl">
-          Baby sleep questions, answered calmly.
-        </h2>
+        <Reveal>
+          <p className="mb-3 text-center text-sm font-semibold uppercase text-[#A78BFA]">
+            FAQ
+          </p>
+          <h2 className="text-center text-4xl font-semibold text-white sm:text-5xl">
+            Baby sleep questions, answered calmly.
+          </h2>
+        </Reveal>
         <div className="mt-8 grid gap-4">
-          {faqs.map((faq) => (
-            <article
-              className="rounded-lg border border-white/10 bg-white/10 p-6 backdrop-blur-xl"
-              key={faq.question}
-            >
+          {faqs.map((faq, index) => (
+            <Reveal animation="fadeIn" delay={index * 90} key={faq.question}>
+            <article className="rounded-lg border border-white/10 bg-white/10 p-6 backdrop-blur-xl">
               <h3 className="text-xl font-semibold text-white">
                 {faq.question}
               </h3>
@@ -509,6 +546,7 @@ export default function Home() {
                 {faq.answer}
               </p>
             </article>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -517,6 +555,7 @@ export default function Home() {
         id="download"
         className="mx-auto max-w-7xl px-5 pb-16 sm:px-8 lg:px-10"
       >
+        <Reveal animation="zoomIn">
         <div className="grid gap-8 overflow-hidden rounded-[2rem] border border-white/10 bg-[#EEF2FF] p-6 text-[#1E1B4B] shadow-[0_28px_90px_rgb(0_0_0/22%)] md:grid-cols-[1fr_260px] md:items-center md:p-9">
           <div>
             <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#6366F1]">
@@ -541,9 +580,11 @@ export default function Home() {
             <ArrowRight className="h-5 w-5" aria-hidden="true" />
           </a>
         </div>
+        </Reveal>
       </section>
 
       <SellerFooter note="Yorix is a routine helper for parents. It does not provide medical diagnosis or emergency advice." />
+      </div>
     </main>
   );
 }

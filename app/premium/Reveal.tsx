@@ -1,16 +1,26 @@
 'use client';
 
-import { useEffect, useRef, type ReactNode } from 'react';
+import { motion, useInView, useReducedMotion, type Variants } from 'motion/react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 
-type Animation = 'riseIn' | 'fadeIn' | 'zoomIn';
+type Animation = 'riseIn' | 'fadeIn' | 'zoomIn' | 'driftInLeft' | 'driftInRight';
 
-// Entrance animation. Nothing is hidden before JavaScript runs, and nothing
-// already on screen when it runs is hidden either: sections the reader has
-// not scrolled to yet get the entrance when they arrive, and a long safety
-// timer guarantees a stalled observer can never leave one blank.
-//
-// `load` plays the entrance at once (the hero's opening sequence) — only
-// when hydration was quick, so a slow load never re-animates visible text.
+const hiddenBy: Record<Animation, Record<string, number>> = {
+  riseIn: { opacity: 0, y: 36 },
+  fadeIn: { opacity: 0 },
+  zoomIn: { opacity: 0, scale: 0.92 },
+  driftInLeft: { opacity: 0, x: -48 },
+  driftInRight: { opacity: 0, x: 48 },
+};
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+// Entrance animation on Motion. The server renders every block visible and
+// nothing is hidden until React has mounted; then a block still below the
+// fold is parked (instantly, off-screen) and plays its entrance the moment
+// it scrolls into view. `load` plays the hero's opening sequence at once —
+// only when hydration was quick, so a slow load never re-animates visible
+// text. Reduced motion: no hiding, no movement.
 export function Reveal({
   children,
   animation = 'riseIn',
@@ -25,47 +35,46 @@ export function Reveal({
   load?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
+  const inView = useInView(ref, { once: true, amount: 0.2, margin: '0px 0px -5% 0px' });
+  const [mode, setMode] = useState<'static' | 'pending' | 'load'>('static');
 
   useEffect(() => {
     const node = ref.current;
-    if (!node) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+    if (!node || reduced) return;
+    // Decide on the next frame: the block is measured after layout, and the
+    // state change is not synchronous with the effect body.
+    const frame = requestAnimationFrame(() => {
+      if (load) {
+        if (performance.now() < 2500) setMode('load');
+        return;
+      }
+      if (node.getBoundingClientRect().top >= window.innerHeight * 0.9) setMode('pending');
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [load, reduced]);
 
-    if (load) {
-      if (performance.now() > 2500) return;
-      node.classList.add('animated', animation);
-      return () => node.classList.remove('animated', animation);
-    }
-    if (node.getBoundingClientRect().top < window.innerHeight * 0.9) return;
-
-    node.classList.add('reveal-pending');
-    let done = false;
-    const show = () => {
-      if (done) return;
-      done = true;
-      node.classList.remove('reveal-pending');
-      node.classList.add('animated', animation);
-      observer.disconnect();
-      window.clearTimeout(timer);
-    };
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) show();
-      },
-      { threshold: 0.1, rootMargin: '0px 0px 5% 0px' },
-    );
-    observer.observe(node);
-    const timer = window.setTimeout(show, 15000);
-    return () => {
-      observer.disconnect();
-      window.clearTimeout(timer);
-      node.classList.remove('reveal-pending');
-    };
-  }, [animation, load]);
+  const variants: Variants = {
+    hidden: hiddenBy[animation],
+    visible: { opacity: 1, x: 0, y: 0, scale: 1 },
+  };
+  const shown = mode === 'static' || (mode === 'pending' && inView) || mode === 'load';
+  // A parked block jumps to its hidden pose with no transition; the entrance
+  // itself is the only thing that eases.
+  const transition = shown ? { duration: 0.8, ease: EASE, delay: delay / 1000 } : { duration: 0 };
 
   return (
-    <div className={className} data-reveal="" ref={ref} style={delay ? { animationDelay: `${delay}ms` } : undefined}>
+    <motion.div
+      animate={shown ? 'visible' : 'hidden'}
+      className={className}
+      data-reveal=""
+      data-reveal-state={mode === 'static' ? 'static' : shown ? 'shown' : 'pending'}
+      initial={false}
+      ref={ref}
+      transition={transition}
+      variants={variants}
+    >
       {children}
-    </div>
+    </motion.div>
   );
 }
