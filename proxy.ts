@@ -20,10 +20,13 @@ const reportOnlyPolicy = [
   "frame-ancestors 'self'",
   "base-uri 'self'",
   "object-src 'none'",
+  'report-uri /csp-report',
+  'report-to csp',
 ].join('; ');
 
 function withSecurityHeaders(response: NextResponse) {
   response.headers.set('Content-Security-Policy', enforcedPolicy);
+  response.headers.set('Reporting-Endpoints', 'csp="/csp-report"');
   response.headers.set('Content-Security-Policy-Report-Only', reportOnlyPolicy);
   response.headers.set('X-Frame-Options', 'SAMEORIGIN');
   response.headers.set('X-Content-Type-Options', 'nosniff');
