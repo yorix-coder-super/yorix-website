@@ -53,6 +53,12 @@ async function getAuthInstance(): Promise<Auth> {
   return auth;
 }
 
+function signInErrorFor(code: string): ErrorKey | null {
+  if (code === 'auth/popup-blocked') return 'popupBlocked';
+  if (code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request') return null;
+  return 'signInError';
+}
+
 function toAccount(user: FirebaseUser): Account {
   const provider = user.providerData[0]?.providerId ?? 'apple.com';
   return { uid: user.uid, email: user.email, provider };
@@ -137,9 +143,7 @@ export function AccountProvider({ lang, children }: { lang: Lang; children: Reac
         return account;
       } catch (err) {
         const code = (err as { code?: string }).code ?? '';
-        const nextError: ErrorKey | null =
-          code === 'auth/popup-blocked' ? 'popupBlocked' : code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request' ? null : 'signInError';
-        setState((s) => ({ ...s, busy: null, error: nextError }));
+        setState((s) => ({ ...s, busy: null, error: signInErrorFor(code) }));
         return null;
       }
     },
