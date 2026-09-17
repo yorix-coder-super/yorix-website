@@ -13,6 +13,7 @@ import {
   Volume2,
 } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
+import { SellerFooter } from './SellerFooter';
 import { appDownloadUrl, topicPages } from './content';
 
 const heroScreens = [
@@ -542,12 +543,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="border-t border-white/10 px-5 py-8 text-center text-sm text-white/50 sm:px-8">
-        <p>
-          Yorix is a routine helper for parents. It does not provide medical
-          diagnosis or emergency advice.
-        </p>
-      </footer>
+      <SellerFooter note="Yorix is a routine helper for parents. It does not provide medical diagnosis or emergency advice." />
     </main>
   );
 }

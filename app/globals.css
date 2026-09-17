@@ -134,6 +134,56 @@ body {
     100% 100%;
 }
 
+.legal-document h2 {
+  margin-top: 2.25rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #1e1b4b;
+}
+
+.legal-document h2:first-child {
+  margin-top: 0;
+}
+
+.legal-document p,
+.legal-document li {
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #334155;
+}
+
+.legal-document ul,
+.legal-document ol {
+  padding-left: 1.25rem;
+}
+
+.legal-document ul {
+  list-style: disc;
+}
+
+.legal-document ol {
+  list-style: decimal;
+}
+
+.legal-document a {
+  color: #4f46e5;
+  text-decoration: underline;
+}
+
+.legal-document blockquote {
+  margin-top: 1rem;
+  border-left: 3px solid #6366f1;
+  border-radius: 0 0.75rem 0.75rem 0;
+  background: #eef2ff;
+  padding: 1rem 1.25rem;
+}
+
+.legal-document blockquote p:first-child {
+  margin-top: 0;
+}
+
 .article-hero-card > * {
   position: relative;
   z-index: 1;

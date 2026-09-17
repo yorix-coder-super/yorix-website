@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { getLocalizedTopicPage, isTranslatedArticleSlug } from './article-localizations';
 import { BrandLogo } from './BrandLogo';
+import { SellerFooter } from './SellerFooter';
 import { appDownloadUrl, topicPages } from './content';
 import { localeCopy, locales, type Locale } from './locales';
 
@@ -102,7 +103,7 @@ export function LocalizedHome({ locale }: { locale: Locale }) {
       <section id="faq" className="mx-auto max-w-5xl px-5 py-16 sm:px-8"><p className="mb-3 text-center text-sm font-semibold uppercase text-[#A78BFA]">{copy.faq.eyebrow}</p><h2 className="text-center text-4xl font-semibold text-white sm:text-5xl">{copy.faq.title}</h2><div className="mt-8 grid gap-4">{copy.faq.items.map((item) => <article className="rounded-lg border border-white/10 bg-white/10 p-6 backdrop-blur-xl" key={item.question}><h3 className="text-xl font-semibold text-white">{item.question}</h3><p className="mt-3 text-base leading-7 text-white/65">{item.answer}</p></article>)}</div></section>
 
       <section className="mx-auto max-w-7xl px-5 pb-16 sm:px-8 lg:px-10"><div className="grid gap-8 overflow-hidden rounded-[2rem] border border-white/10 bg-[#EEF2FF] p-6 text-[#1E1B4B] shadow-[0_28px_90px_rgb(0_0_0/22%)] md:grid-cols-[1fr_260px] md:items-center md:p-9"><div><p className="mb-3 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#6366F1]"><Users className="h-4 w-4" aria-hidden="true" />{copy.cta.badge}</p><h2 className="max-w-3xl text-4xl font-semibold leading-tight sm:text-5xl">{copy.cta.title}</h2><p className="mt-4 max-w-2xl text-lg leading-8 text-[#64748B]">{copy.cta.body}</p></div><a className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-full bg-[#6366F1] px-7 text-base font-semibold text-white shadow-[0_18px_42px_rgb(99_102_241/30%)] transition hover:bg-[#4F46E5]" href={appDownloadUrl} rel="noopener noreferrer" target="_blank">{copy.cta.action}<ArrowRight className="h-5 w-5" aria-hidden="true" /></a></div></section>
-      <footer className="border-t border-white/10 px-5 py-8 text-center text-sm text-white/50 sm:px-8"><p>{copy.footer}</p></footer>
+      <SellerFooter note={copy.footer} />
     </main>
   );
 }
