@@ -1,0 +1,343 @@
+import type { Lang } from './i18n';
+
+export type PremiumCopy = {
+  meta: { title: string; description: string; ogLocale: string };
+  nav: { plans: string; howToBuy: string; payment: string; contacts: string; choosePlan: string; language: string };
+  hero: { badge: string; title: string; body: string; primary: (price: string) => string; oneOff: string };
+  plans: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    bestValue: string;
+    perWeek: (price: string) => string;
+    cheaper: (pct: number) => string;
+    pay: (price: string) => string;
+    signInToPay: string;
+    order: string;
+    footnote: string;
+    acceptBefore: string;
+    offer: string;
+    and: string;
+    refundTerms: string;
+  };
+  account: {
+    title: string;
+    signInApple: string;
+    signInGoogle: string;
+    signedInAs: string;
+    via: (provider: string) => string;
+    premiumUntil: (date: string) => string;
+    noPremium: string;
+    accountCode: string;
+    copy: string;
+    copied: string;
+    signOut: string;
+    checking: string;
+    notConfigured: string;
+    popupBlocked: string;
+    signInError: string;
+    why: string;
+  };
+  checkout: {
+    creating: string;
+    redirecting: string;
+    unavailable: string;
+    testOnly: string;
+    error: string;
+    blocked: string;
+    rateLimited: string;
+    manualHint: string;
+  };
+  features: { eyebrow: string; title: string; body: string; device: string; items: { title: string; body: string }[] };
+  steps: {
+    eyebrow: string;
+    title: string;
+    items: { title: string; body: string }[];
+    manualTitle: string;
+    manualBody: string;
+    manualCode: string;
+    copyAddress: string;
+    copyTemplate: string;
+    writeToUs: string;
+  };
+  faq: { eyebrow: string; title: string; items: { q: string; a: string }[] };
+  ret: {
+    title: string;
+    checking: string;
+    paid: (date: string) => string;
+    openApp: string;
+    pending: string;
+    failed: string;
+    signIn: string;
+    back: string;
+  };
+  cancel: { title: string; body: string; back: string };
+  footer: {
+    seller: string;
+    documents: string;
+    medical: string;
+    rows: { seller: string; status: string; unp: string; address: string; register: string; email: string; phone: string; hours: string };
+  };
+  docs: { offer: string; payment: string; privacy: string };
+  legal: { eyebrow: string; updated: (date: string) => string; binding: string };
+};
+
+const ru: PremiumCopy = {
+  meta: {
+    title: 'Yorix Premium — тарифы и оплата картой',
+    description:
+      'Yorix Premium на неделю, месяц или год: персональный прогноз сна, ИИ-коуч и аналитика. Цены в белорусских рублях, оплата картой через WebPay.',
+    ogLocale: 'ru_RU',
+  },
+  nav: { plans: 'Тарифы', howToBuy: 'Как купить', payment: 'Оплата и возврат', contacts: 'Контакты', choosePlan: 'Выбрать тариф', language: 'Язык' },
+  hero: {
+    badge: 'Yorix Premium · оплата банковской картой',
+    title: 'Режим сна малыша, который подстраивается под ваш день.',
+    body: 'Premium открывает в приложении Yorix персональный прогноз сна, ИИ-коуча и аналитику. Войдите с тем же Apple ID, что и в приложении, выберите срок и оплатите картой — Premium включится на вашем аккаунте.',
+    primary: (price) => `Тарифы от ${price}`,
+    oneOff: 'Разовый платёж, без автопродления',
+  },
+  plans: {
+    eyebrow: 'Тарифы',
+    title: 'Один Premium — три срока.',
+    body: 'Возможности одинаковые, отличаются срок и цена. Разовый платёж без автопродления, цены в белорусских рублях.',
+    bestValue: 'Выгоднее всего',
+    perWeek: (price) => `≈ ${price} в неделю`,
+    cheaper: (pct) => `на ${pct}% дешевле недели`,
+    pay: (price) => `Оплатить ${price}`,
+    signInToPay: 'Войти и оплатить',
+    order: 'Заказать письмом',
+    footnote: 'Срок начинается с момента включения Premium на аккаунте.',
+    acceptBefore: 'Оплачивая заказ, вы принимаете',
+    offer: 'публичный договор',
+    and: 'и',
+    refundTerms: 'условия возврата',
+  },
+  account: {
+    title: 'Аккаунт',
+    signInApple: 'Войти через Apple',
+    signInGoogle: 'Войти через Google',
+    signedInAs: 'Вы вошли как',
+    via: (provider) => `через ${provider}`,
+    premiumUntil: (date) => `Premium до ${date}`,
+    noPremium: 'Premium не активен',
+    accountCode: 'Код аккаунта',
+    copy: 'Скопировать',
+    copied: 'Скопировано',
+    signOut: 'Выйти',
+    checking: 'Проверяем аккаунт…',
+    notConfigured: 'Вход на сайте подключается. Пока заказ оформляется письмом.',
+    popupBlocked: 'Браузер закрыл окно входа. Разрешите всплывающие окна для этого сайта и попробуйте снова.',
+    signInError: 'Не удалось войти. Попробуйте ещё раз.',
+    why: 'Войдите с тем же аккаунтом, что и в приложении: так Premium включится именно там.',
+  },
+  checkout: {
+    creating: 'Создаём оплату…',
+    redirecting: 'Переходим на страницу WebPay…',
+    unavailable: 'Оплата картой на сайте пока не открыта — закажите письмом.',
+    testOnly: 'Оплата на сайте сейчас открыта только тестировщикам — закажите письмом.',
+    error: 'Не удалось создать оплату. Попробуйте ещё раз или напишите нам.',
+    blocked: 'Оплата для этого аккаунта недоступна. Напишите нам.',
+    rateLimited: 'Слишком много попыток. Подождите минуту и попробуйте снова.',
+    manualHint: 'Если оплатить на сайте не получается, закажите письмом — укажите срок и код аккаунта.',
+  },
+  features: {
+    eyebrow: 'Что входит',
+    title: 'Что откроется в приложении.',
+    body: 'Premium превращает дневник сна, кормлений и ухода в план на сегодня: прогноз, коуч и аналитика в одном приложении.',
+    device: 'Для iPhone и iPad с iOS 18 и новее. Premium привязан к аккаунту Yorix и работает на всех устройствах, где выполнен вход.',
+    items: [
+      { title: 'Персональный прогноз сна', body: 'Следующий дневной сон и отбой рассчитываются по реальным снам, окнам бодрствования и возрасту малыша и пересчитываются, когда день идёт не по плану.' },
+      { title: 'ИИ-коуч по сну 24/7', body: 'Ответы на вопросы о коротких снах, ночных пробуждениях, переходах между снами и режиме — с учётом дневника вашего малыша.' },
+      { title: 'Аналитика и тренды', body: 'Недельная картина сна, кормлений и ухода: как меняется ночной сон, сколько длятся окна бодрствования, что влияет на отбой.' },
+      { title: 'Рекомендации на каждый день', body: 'Короткие подсказки на сегодня: когда начинать укладывание, как восстановиться после короткого сна, что поменять в ритуале.' },
+    ],
+  },
+  steps: {
+    eyebrow: 'Как купить',
+    title: 'Четыре шага до Premium.',
+    items: [
+      { title: 'Войдите через Apple', body: 'С тем же Apple ID, которым вы входите в Yorix на iPhone. Так мы точно знаем, на каком аккаунте включать Premium.' },
+      { title: 'Выберите срок', body: 'Неделя, месяц или год. Нажмите «Оплатить» — мы создадим заказ и откроем защищённую страницу WebPay.' },
+      { title: 'Оплатите картой', body: 'Данные карты вводятся только на странице WebPay. Мы их не видим и не храним.' },
+      { title: 'Откройте приложение', body: 'Premium включается на аккаунте сразу после оплаты. Письмо с датой окончания срока и чек придут на e-mail.' },
+    ],
+    manualTitle: 'Оплата на сайте недоступна?',
+    manualBody: 'Напишите нам письмом: укажите срок и код аккаунта из блока «Аккаунт» выше или из приложения (Настройки → Аккаунт). В ответ пришлём ссылку на оплату, а после оплаты включим Premium в течение 24 часов.',
+    manualCode: 'Код аккаунта',
+    copyAddress: 'Скопировать адрес',
+    copyTemplate: 'Скопировать шаблон',
+    writeToUs: 'Написать письмо',
+  },
+  faq: {
+    eyebrow: 'Вопросы',
+    title: 'Частые вопросы об оплате.',
+    items: [
+      { q: 'Что будет, когда срок закончится?', a: 'Premium отключится, а все записи о малыше останутся в приложении. Карта не привязывается, автоматических списаний нет. Продлить можно новым заказом — дни добавятся к текущему сроку.' },
+      { q: 'Зачем входить через Apple?', a: 'Premium привязывается к аккаунту Yorix, а не к телефону или карте. Вход с тем же Apple ID, что и в приложении, гарантирует, что оплата попадёт на ваш аккаунт и будет работать на всех ваших устройствах. Если вы вошли в приложение через Google — войдите через Google и здесь.' },
+      { q: 'С какого момента считается срок?', a: 'С момента включения Premium на аккаунте: при оплате на сайте — сразу после оплаты, при заказе письмом — когда мы его включим. Дату окончания видно в блоке «Аккаунт» и в письме-подтверждении.' },
+      { q: 'Как убедиться, что страница оплаты настоящая?', a: 'Страница оплаты открывается в домене webpay.by, а письма мы отправляем только с адреса, указанного в подвале сайта. Мы никогда не просим прислать данные карты в письме или мессенджере.' },
+      { q: 'Какие карты принимаются?', a: 'Visa, Mastercard и Белкарт — через процессинговую систему WebPay. Цена указана в белорусских рублях; если счёт карты в другой валюте, сумму пересчитает ваш банк по своему курсу.' },
+      { q: 'У меня уже есть подписка в App Store. Что делать?', a: 'Premium, купленный на сайте, не отменяет подписку Apple. Чтобы не платить дважды, отключите автопродление: «Настройки → ваше имя → Подписки». Подписка Apple будет работать до конца оплаченного периода, а срок с сайта добавится к нему.' },
+      { q: 'Оплатил, а Premium не появился. Что делать?', a: 'Перезапустите приложение: оно проверяет аккаунт при каждом открытии. Если Premium не появился в течение часа, напишите нам — укажите дату и сумму оплаты. Проверьте также папку «Спам», если ждёте письмо от нас.' },
+      { q: 'Можно ли вернуть деньги?', a: 'Да. До включения Premium — всю сумму, после — стоимость неиспользованных дней. Деньги возвращаются на ту же карту. Подробные условия и пример расчёта — на странице «Оплата, доставка и возврат».' },
+      { q: 'Входят ли в Premium программы из раздела «Программы»?', a: 'Нет. Программы покупаются отдельно в приложении и в Premium не входят.' },
+    ],
+  },
+  ret: {
+    title: 'Спасибо за оплату!',
+    checking: 'Проверяем оплату…',
+    paid: (date) => `Premium активен до ${date}`,
+    openApp: 'Откройте Yorix на iPhone — Premium уже включён. Письмо с подтверждением и чек придут на e-mail.',
+    pending: 'Платёж ещё обрабатывается. Обычно это занимает меньше минуты — страница обновится сама.',
+    failed: 'Мы не нашли оплаченный заказ. Если деньги списаны, напишите нам — укажите дату и сумму оплаты.',
+    signIn: 'Войдите, чтобы увидеть статус заказа.',
+    back: 'К тарифам',
+  },
+  cancel: {
+    title: 'Оплата отменена',
+    body: 'Деньги не списаны. Вы можете вернуться к тарифам и попробовать снова в любой момент.',
+    back: 'К тарифам',
+  },
+  footer: {
+    seller: 'Продавец и контакты',
+    documents: 'Документы',
+    medical: 'Yorix помогает с режимом дня и не оказывает медицинских услуг.',
+    rows: { seller: 'Продавец', status: 'Статус', unp: 'УНП', address: 'Адрес', register: 'Регистрация в Торговом реестре', email: 'E-mail', phone: 'Телефон', hours: 'Режим работы' },
+  },
+  docs: { offer: 'Публичный договор (оферта)', payment: 'Оплата, доставка и возврат', privacy: 'Политика обработки персональных данных' },
+  legal: { eyebrow: 'Документы', updated: (date) => `Редакция от ${date}`, binding: '' },
+};
+
+const en: PremiumCopy = {
+  meta: {
+    title: 'Yorix Premium — plans and card payment',
+    description:
+      'Yorix Premium for a week, a month or a year: a personal sleep forecast, the AI coach and analytics. Prices in Belarusian rubles, card payment via WebPay.',
+    ogLocale: 'en_US',
+  },
+  nav: { plans: 'Plans', howToBuy: 'How to buy', payment: 'Payment & refunds', contacts: 'Contacts', choosePlan: 'Choose a plan', language: 'Language' },
+  hero: {
+    badge: 'Yorix Premium · pay by bank card',
+    title: 'A baby sleep routine that adapts to your day.',
+    body: 'Premium unlocks the personal sleep forecast, the AI coach and analytics in the Yorix app. Sign in with the same Apple ID you use in the app, pick a period and pay by card — Premium switches on for your account.',
+    primary: (price) => `Plans from ${price}`,
+    oneOff: 'One-off payment, no auto-renewal',
+  },
+  plans: {
+    eyebrow: 'Plans',
+    title: 'One Premium — three periods.',
+    body: 'Same features, different length and price. One-off payment without auto-renewal; prices in Belarusian rubles.',
+    bestValue: 'Best value',
+    perWeek: (price) => `≈ ${price} per week`,
+    cheaper: (pct) => `${pct}% cheaper than weekly`,
+    pay: (price) => `Pay ${price}`,
+    signInToPay: 'Sign in and pay',
+    order: 'Order by e-mail',
+    footnote: 'The period starts when Premium is switched on for the account.',
+    acceptBefore: 'By paying you accept the',
+    offer: 'public offer',
+    and: 'and the',
+    refundTerms: 'refund terms',
+  },
+  account: {
+    title: 'Account',
+    signInApple: 'Sign in with Apple',
+    signInGoogle: 'Sign in with Google',
+    signedInAs: 'Signed in as',
+    via: (provider) => `via ${provider}`,
+    premiumUntil: (date) => `Premium until ${date}`,
+    noPremium: 'Premium is not active',
+    accountCode: 'Account code',
+    copy: 'Copy',
+    copied: 'Copied',
+    signOut: 'Sign out',
+    checking: 'Checking your account…',
+    notConfigured: 'Sign-in on the site is being connected. For now, order by e-mail.',
+    popupBlocked: 'The browser closed the sign-in window. Allow pop-ups for this site and try again.',
+    signInError: 'Sign-in failed. Please try again.',
+    why: 'Sign in with the account you use in the app, so Premium switches on right there.',
+  },
+  checkout: {
+    creating: 'Creating your payment…',
+    redirecting: 'Taking you to the WebPay page…',
+    unavailable: 'Card payment on the site is not open yet — order by e-mail.',
+    testOnly: 'Card payment on the site is currently open to testers only — order by e-mail.',
+    error: 'Could not create the payment. Try again or write to us.',
+    blocked: 'Payment is unavailable for this account. Please write to us.',
+    rateLimited: 'Too many attempts. Wait a minute and try again.',
+    manualHint: 'If paying on the site does not work, order by e-mail — state the period and your account code.',
+  },
+  features: {
+    eyebrow: "What's included",
+    title: 'What opens up in the app.',
+    body: 'Premium turns the sleep, feeding and care diary into a plan for today: forecast, coach and analytics in one app.',
+    device: 'For iPhone and iPad on iOS 18 or later. Premium is tied to your Yorix account and works on every device where you are signed in.',
+    items: [
+      { title: 'Personal sleep forecast', body: 'The next nap and bedtime are computed from real naps, wake windows and your baby’s age, and recomputed when the day goes off plan.' },
+      { title: '24/7 AI sleep coach', body: 'Answers about short naps, night wakings, nap transitions and routine — informed by your baby’s diary.' },
+      { title: 'Analytics and trends', body: 'A weekly picture of sleep, feeding and care: how night sleep changes, how long wake windows last, what affects bedtime.' },
+      { title: 'Daily recommendations', body: 'Short tips for today: when to start winding down, how to recover after a short nap, what to change in the ritual.' },
+    ],
+  },
+  steps: {
+    eyebrow: 'How to buy',
+    title: 'Four steps to Premium.',
+    items: [
+      { title: 'Sign in with Apple', body: 'With the same Apple ID you use in Yorix on your iPhone, so we know exactly which account gets Premium.' },
+      { title: 'Choose a period', body: 'A week, a month or a year. Press “Pay” — we create the order and open the secure WebPay page.' },
+      { title: 'Pay by card', body: 'Card details are entered only on the WebPay page. We never see or store them.' },
+      { title: 'Open the app', body: 'Premium switches on for your account right after payment. A confirmation with the end date and a receipt arrive by e-mail.' },
+    ],
+    manualTitle: 'Payment on the site unavailable?',
+    manualBody: 'Write to us by e-mail: state the period and the account code from the “Account” block above or from the app (Settings → Account). We reply with a payment link and switch Premium on within 24 hours of payment.',
+    manualCode: 'Account code',
+    copyAddress: 'Copy address',
+    copyTemplate: 'Copy template',
+    writeToUs: 'Write to us',
+  },
+  faq: {
+    eyebrow: 'FAQ',
+    title: 'Common questions about payment.',
+    items: [
+      { q: 'What happens when the period ends?', a: 'Premium switches off and every record about your baby stays in the app. No card is stored and nothing is charged automatically. To extend, place a new order — the days are added to the current period.' },
+      { q: 'Why sign in with Apple?', a: 'Premium is tied to your Yorix account, not to a phone or a card. Signing in with the same Apple ID as in the app guarantees the payment lands on your account and works on all your devices. If you signed in to the app with Google, sign in with Google here as well.' },
+      { q: 'When does the period start?', a: 'When Premium is switched on for the account: immediately after paying on the site, or when we switch it on for an e-mail order. The end date is shown in the “Account” block and in the confirmation e-mail.' },
+      { q: 'How do I know the payment page is genuine?', a: 'The payment page opens on the webpay.by domain, and our e-mails come only from the address in the site footer. We never ask for card details by e-mail or messenger.' },
+      { q: 'Which cards are accepted?', a: 'Visa, Mastercard and Belkart, through the WebPay processing system. The price is in Belarusian rubles; if your card is in another currency, your bank converts the amount at its own rate.' },
+      { q: 'I already have an App Store subscription. What now?', a: 'Premium bought on the site does not cancel the Apple subscription. To avoid paying twice, turn off auto-renewal: Settings → your name → Subscriptions. The Apple subscription runs until the end of the paid period, and the site period is added after it.' },
+      { q: 'I paid but Premium did not appear. What should I do?', a: 'Restart the app: it checks the account every time it opens. If Premium is still missing after an hour, write to us with the date and amount of the payment. Check the spam folder too if you are waiting for our e-mail.' },
+      { q: 'Can I get a refund?', a: 'Yes. Before Premium is switched on — the full amount; after that — the unused days. Money goes back to the same card. Full terms and a worked example are on the “Payment, delivery and refunds” page.' },
+      { q: 'Are the programs from the “Programs” section included?', a: 'No. Programs are bought separately in the app and are not part of Premium.' },
+    ],
+  },
+  ret: {
+    title: 'Thank you for your payment!',
+    checking: 'Checking the payment…',
+    paid: (date) => `Premium is active until ${date}`,
+    openApp: 'Open Yorix on your iPhone — Premium is already on. A confirmation and receipt will arrive by e-mail.',
+    pending: 'The payment is still being processed. It usually takes under a minute — this page refreshes by itself.',
+    failed: 'We could not find a paid order. If money was charged, write to us with the date and amount.',
+    signIn: 'Sign in to see the order status.',
+    back: 'Back to plans',
+  },
+  cancel: {
+    title: 'Payment cancelled',
+    body: 'Nothing was charged. You can go back to the plans and try again any time.',
+    back: 'Back to plans',
+  },
+  footer: {
+    seller: 'Seller and contacts',
+    documents: 'Documents',
+    medical: 'Yorix helps with the daily routine and does not provide medical services.',
+    rows: { seller: 'Seller', status: 'Status', unp: 'Taxpayer number (УНП)', address: 'Address', register: 'Trade register', email: 'E-mail', phone: 'Phone', hours: 'Working hours' },
+  },
+  docs: { offer: 'Public offer agreement', payment: 'Payment, delivery and refunds', privacy: 'Personal data policy' },
+  legal: {
+    eyebrow: 'Documents',
+    updated: (date) => `Version of ${date}`,
+    binding: 'This translation is provided for convenience. The Russian version is the legally binding one.',
+  },
+};
+
+export const premiumCopy: Record<Lang, PremiumCopy> = { ru, en };

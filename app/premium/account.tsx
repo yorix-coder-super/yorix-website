@@ -1,0 +1,423 @@
+'use client';
+
+import { Check, Copy, LogOut } from 'lucide-react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import type { Auth, User as FirebaseUser } from 'firebase/auth';
+import { API_BASE, firebaseConfig, isFirebaseConfigured } from './config';
+import { premiumCopy, type PremiumCopy } from './copy';
+import { formatDate, type Lang } from './i18n';
+import { formatByn, mailtoOrder, orderTemplate, planCopy, type Plan } from './merchant';
+import { MoonPhase } from './MoonPhase';
+import { Button, Spinner } from './ui';
+
+type Provider = 'apple.com' | 'google.com';
+type CheckoutMode = 'off' | 'test' | 'prod';
+type WebConfig = { checkoutMode: CheckoutMode; plans: { id: string; days: number; priceByn: number }[] };
+type Me = { premiumUntil: string | null; blocked: boolean };
+type Account = { uid: string; email: string | null; provider: string };
+type ErrorKey = keyof PremiumCopy['checkout'] | 'popupBlocked' | 'signInError';
+
+type State = {
+  ready: boolean;
+  configured: boolean;
+  config: WebConfig | null;
+  user: Account | null;
+  me: Me | null;
+  busy: 'signin' | 'order' | null;
+  error: ErrorKey | null;
+};
+
+type Api = State & {
+  lang: Lang;
+  copy: PremiumCopy;
+  signIn: (provider: Provider) => Promise<Account | null>;
+  signOut: () => Promise<void>;
+  createOrder: (planId: string) => Promise<void>;
+  getToken: () => Promise<string | null>;
+  clearError: () => void;
+};
+
+const Ctx = createContext<Api | null>(null);
+
+async function getAuthInstance(): Promise<Auth> {
+  const [{ getApps, initializeApp }, { getAuth, browserSessionPersistence, setPersistence }] = await Promise.all([
+    import('firebase/app'),
+    import('firebase/auth'),
+  ]);
+  const app = getApps()[0] ?? initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  // Session persistence: a token stolen from storage is worth nothing once
+  // the tab closes, and a shared family computer never keeps the parent
+  // signed in by accident.
+  await setPersistence(auth, browserSessionPersistence).catch(() => {});
+  return auth;
+}
+
+function toAccount(user: FirebaseUser): Account {
+  const provider = user.providerData[0]?.providerId ?? 'apple.com';
+  return { uid: user.uid, email: user.email, provider };
+}
+
+export function AccountProvider({ lang, children }: { lang: Lang; children: ReactNode }) {
+  const copy = premiumCopy[lang];
+  const authRef = useRef<Auth | null>(null);
+  const [state, setState] = useState<State>({
+    ready: !isFirebaseConfigured,
+    configured: isFirebaseConfigured,
+    config: null,
+    user: null,
+    me: null,
+    busy: null,
+    error: null,
+  });
+
+  const getToken = useCallback(async () => {
+    const user = authRef.current?.currentUser;
+    if (!user) return null;
+    return user.getIdToken().catch(() => null);
+  }, []);
+
+  const loadMe = useCallback(async () => {
+    const token = await getToken();
+    if (!token) return;
+    try {
+      const res = await fetch(`${API_BASE}/v1/web/me`, { headers: { 'X-Firebase-Token': token } });
+      if (!res.ok) return;
+      const me = (await res.json()) as Me;
+      setState((s) => ({ ...s, me }));
+    } catch {
+      // The account still works without the entitlement line.
+    }
+  }, [getToken]);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch(`${API_BASE}/v1/web/config`)
+      .then((res) => (res.ok ? (res.json() as Promise<WebConfig>) : null))
+      .then((config) => {
+        if (!cancelled && config) setState((s) => ({ ...s, config }));
+      })
+      .catch(() => {});
+    if (!isFirebaseConfigured) return () => { cancelled = true; };
+
+    let unsubscribe = () => {};
+    (async () => {
+      const auth = await getAuthInstance();
+      if (cancelled) return;
+      authRef.current = auth;
+      const { onAuthStateChanged } = await import('firebase/auth');
+      unsubscribe = onAuthStateChanged(auth, (user) => {
+        setState((s) => ({ ...s, ready: true, user: user ? toAccount(user) : null, me: user ? s.me : null }));
+        if (user) void loadMe();
+      });
+    })().catch(() => setState((s) => ({ ...s, ready: true })));
+    return () => {
+      cancelled = true;
+      unsubscribe();
+    };
+  }, [loadMe]);
+
+  const signIn = useCallback(
+    async (providerId: Provider) => {
+      const auth = authRef.current;
+      if (!auth) return null;
+      setState((s) => ({ ...s, busy: 'signin', error: null }));
+      try {
+        const { GoogleAuthProvider, OAuthProvider, signInWithPopup } = await import('firebase/auth');
+        const provider = providerId === 'apple.com' ? new OAuthProvider('apple.com') : new GoogleAuthProvider();
+        if (provider instanceof OAuthProvider) {
+          provider.addScope('email');
+          provider.addScope('name');
+          provider.setCustomParameters({ locale: lang });
+        }
+        const result = await signInWithPopup(auth, provider);
+        const account = toAccount(result.user);
+        setState((s) => ({ ...s, busy: null, user: account }));
+        void loadMe();
+        return account;
+      } catch (err) {
+        const code = (err as { code?: string }).code ?? '';
+        const nextError: ErrorKey | null =
+          code === 'auth/popup-blocked' ? 'popupBlocked' : code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request' ? null : 'signInError';
+        setState((s) => ({ ...s, busy: null, error: nextError }));
+        return null;
+      }
+    },
+    [lang, loadMe],
+  );
+
+  const signOut = useCallback(async () => {
+    const auth = authRef.current;
+    if (!auth) return;
+    const { signOut: fbSignOut } = await import('firebase/auth');
+    await fbSignOut(auth);
+    setState((s) => ({ ...s, user: null, me: null, error: null }));
+  }, []);
+
+  const createOrder = useCallback(
+    async (planId: string) => {
+      const token = await getToken();
+      if (!token) return;
+      setState((s) => ({ ...s, busy: 'order', error: null }));
+      try {
+        const res = await fetch(`${API_BASE}/v1/web/orders`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-Firebase-Token': token },
+          body: JSON.stringify({ planId, lang }),
+        });
+        const body = (await res.json().catch(() => ({}))) as { redirectUrl?: string; error?: string };
+        if (res.ok && body.redirectUrl && /^https:\/\/(securesandbox|payment)\.webpay\.by\//.test(body.redirectUrl)) {
+          window.location.assign(body.redirectUrl);
+          return;
+        }
+        const nextError: ErrorKey =
+          res.status === 429 ? 'rateLimited' : body.error === 'checkout_unavailable' ? (state.config?.checkoutMode === 'test' ? 'testOnly' : 'unavailable') : body.error === 'account_blocked' ? 'blocked' : 'error';
+        setState((s) => ({ ...s, busy: null, error: nextError }));
+      } catch {
+        setState((s) => ({ ...s, busy: null, error: 'error' }));
+      }
+    },
+    [getToken, lang, state.config?.checkoutMode],
+  );
+
+  const clearError = useCallback(() => setState((s) => ({ ...s, error: null })), []);
+
+  const api = useMemo<Api>(
+    () => ({ ...state, lang, copy, signIn, signOut, createOrder, getToken, clearError }),
+    [state, lang, copy, signIn, signOut, createOrder, getToken, clearError],
+  );
+
+  return <Ctx.Provider value={api}>{children}</Ctx.Provider>;
+}
+
+export function useAccount() {
+  const api = useContext(Ctx);
+  if (!api) throw new Error('useAccount outside AccountProvider');
+  return api;
+}
+
+function providerName(id: string) {
+  return id === 'google.com' ? 'Google' : id === 'apple.com' ? 'Apple' : id;
+}
+
+function CopyInline({ value, label, done }: { value: string; label: string; done: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <button
+      className="inline-flex min-h-8 items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 text-xs font-semibold text-white transition hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+      onClick={async () => {
+        try {
+          await navigator.clipboard.writeText(value);
+          setCopied(true);
+          window.setTimeout(() => setCopied(false), 2000);
+        } catch {
+          setCopied(false);
+        }
+      }}
+      type="button"
+    >
+      {copied ? <Check className="h-3.5 w-3.5" aria-hidden="true" /> : <Copy className="h-3.5 w-3.5" aria-hidden="true" />}
+      <span aria-live="polite">{copied ? done : label}</span>
+    </button>
+  );
+}
+
+export function AccountPanel() {
+  const { ready, configured, user, me, busy, error, copy, lang, signIn, signOut } = useAccount();
+
+  if (!configured) {
+    return <p className="mt-7 max-w-xl text-sm leading-6 text-white/55">{copy.account.notConfigured}</p>;
+  }
+  if (!ready) {
+    return (
+      <p className="mt-7 inline-flex items-center gap-2 text-sm text-white/60">
+        <Spinner /> {copy.account.checking}
+      </p>
+    );
+  }
+  if (!user) {
+    return (
+      <div className="mt-7 max-w-xl">
+        <div className="flex flex-wrap gap-2">
+          <Button disabled={busy === 'signin'} onClick={() => void signIn('apple.com')} variant="light">
+            {busy === 'signin' ? <Spinner /> : <AppleMark />}
+            {copy.account.signInApple}
+          </Button>
+          <Button disabled={busy === 'signin'} onClick={() => void signIn('google.com')} variant="ghost">
+            {copy.account.signInGoogle}
+          </Button>
+        </div>
+        <p className="mt-3 text-sm leading-6 text-white/55">{copy.account.why}</p>
+        {error === 'popupBlocked' || error === 'signInError' ? (
+          <p className="mt-2 text-sm text-[#FCA5A5]" role="alert">
+            {copy.account[error]}
+          </p>
+        ) : null}
+      </div>
+    );
+  }
+
+  const active = me?.premiumUntil && new Date(me.premiumUntil) > new Date();
+  return (
+    <div className="mt-7 grid max-w-xl gap-3 rounded-[1.5rem] border border-white/15 bg-white/[0.08] p-4 backdrop-blur-xl sm:grid-cols-[auto_1fr_auto] sm:items-center">
+      <span className="grid h-11 w-11 place-items-center rounded-full bg-[#EEF2FF] text-base font-bold text-[#1E1B4B]" aria-hidden="true">
+        {(user.email ?? user.uid).slice(0, 1).toUpperCase()}
+      </span>
+      <div className="min-w-0">
+        <p className="truncate text-sm text-white/60">
+          {copy.account.signedInAs} <span className="text-white">{user.email ?? '—'}</span> · {copy.account.via(providerName(user.provider))}
+        </p>
+        <p className={`mt-0.5 text-sm font-semibold ${active ? 'text-[#FDE68A]' : 'text-white/70'}`}>
+          {active && me?.premiumUntil ? copy.account.premiumUntil(formatDate(me.premiumUntil, lang)) : copy.account.noPremium}
+        </p>
+        <p className="mt-2 flex flex-wrap items-center gap-2 text-xs text-white/50">
+          {copy.account.accountCode}: <code className="rounded bg-black/20 px-1.5 py-0.5 text-white/80">{user.uid}</code>
+          <CopyInline done={copy.account.copied} label={copy.account.copy} value={user.uid} />
+        </p>
+      </div>
+      <button
+        className="inline-flex min-h-10 items-center gap-2 self-start rounded-full px-3 text-sm font-semibold text-white/70 transition hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 sm:self-center"
+        onClick={() => void signOut()}
+        type="button"
+      >
+        <LogOut className="h-4 w-4" aria-hidden="true" />
+        {copy.account.signOut}
+      </button>
+    </div>
+  );
+}
+
+function AppleMark() {
+  return (
+    <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M16.37 12.64c0-2.4 1.96-3.55 2.05-3.6-1.12-1.64-2.86-1.86-3.47-1.89-1.48-.15-2.88.87-3.63.87-.75 0-1.9-.85-3.13-.83-1.61.02-3.09.94-3.92 2.38-1.67 2.9-.43 7.2 1.2 9.55.8 1.15 1.74 2.45 2.98 2.4 1.2-.05 1.65-.78 3.1-.78 1.44 0 1.85.78 3.12.75 1.29-.02 2.1-1.17 2.89-2.33.91-1.34 1.29-2.63 1.31-2.7-.03-.01-2.51-.96-2.5-3.82ZM14 5.6c.66-.8 1.1-1.9.98-3-.95.04-2.1.63-2.78 1.43-.61.7-1.14 1.83-1 2.9 1.06.08 2.14-.54 2.8-1.33Z" />
+    </svg>
+  );
+}
+
+export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) {
+  const { ready, configured, config, user, busy, error, copy, lang, signIn, createOrder } = useAccount();
+  const text = planCopy[lang][plan.id];
+  const price = formatByn(plan.priceByn, lang);
+  const perWeek = Math.round((plan.priceByn / plan.days) * 7 * 100) / 100;
+  const weekPrice = config?.plans.find((p) => p.id === 'week')?.priceByn ?? 11.9;
+  const cheaper = Math.round((1 - perWeek / weekPrice) * 100);
+  const mode: CheckoutMode = config?.checkoutMode ?? 'off';
+  const canPay = configured && mode !== 'off';
+  const [pending, setPending] = useState(false);
+
+  const pay = async () => {
+    setPending(true);
+    try {
+      const account = user ?? (await signIn('apple.com'));
+      if (account) await createOrder(plan.id);
+    } finally {
+      setPending(false);
+    }
+  };
+
+  const variant = featured ? 'dark' : 'light';
+  const muted = featured ? 'text-[#1E1B4B]/65' : 'text-white/65';
+  const strong = featured ? 'text-[#1E1B4B]' : 'text-white';
+  const showError = pending || busy === 'order' ? null : error;
+  const fallbackNeeded = showError === 'unavailable' || showError === 'testOnly' || showError === 'blocked' || showError === 'error';
+
+  return (
+    <article
+      className={`relative flex flex-col rounded-[1.75rem] border p-6 transition hover:-translate-y-1 ${
+        featured
+          ? 'order-first border-[#FDE68A]/60 bg-[#EEF2FF] text-[#1E1B4B] shadow-[0_28px_80px_rgb(99_102_241/30%)] md:order-none md:-mt-3 md:mb-3'
+          : 'border-white/20 bg-white/[0.12] backdrop-blur-xl hover:border-white/35 md:mt-3'
+      }`}
+    >
+      {featured ? (
+        <span className="absolute -top-3 left-6 rounded-full bg-[#FDE68A] px-3 py-1 text-xs font-bold text-[#1E1B4B]">{copy.plans.bestValue}</span>
+      ) : null}
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h3 className={`text-2xl font-semibold ${strong}`}>{text.title}</h3>
+          <p className={`mt-1 text-sm ${muted}`}>{text.days}</p>
+        </div>
+        <MoonPhase plan={plan.id} className="h-14 w-14 shrink-0" />
+      </div>
+      <p className={`mt-4 text-sm leading-6 ${featured ? 'text-[#1E1B4B]/80' : 'text-white/75'}`}>{text.purpose}</p>
+      <p className={`mt-6 text-5xl font-semibold tabular-nums ${strong}`}>{price}</p>
+      <p className={`mt-2 min-h-6 text-sm leading-6 ${muted}`}>
+        {plan.id === 'week' ? ' ' : `${copy.plans.perWeek(formatByn(perWeek, lang))} · ${copy.plans.cheaper(cheaper)}`}
+      </p>
+      <div className="mt-auto pt-6">
+        {canPay ? (
+          <Button className="w-full" disabled={!ready || pending || busy !== null} onClick={() => void pay()} variant={variant}>
+            {pending || busy === 'order' ? <Spinner /> : null}
+            {pending || busy === 'order' ? copy.checkout.creating : user ? copy.plans.pay(price) : copy.plans.signInToPay}
+          </Button>
+        ) : (
+          <Button className="w-full" href={mailtoOrder(lang, plan, user?.uid)} variant={variant}>
+            {copy.plans.order}
+          </Button>
+        )}
+        {showError ? (
+          <p className={`mt-3 text-sm leading-5 ${featured ? 'text-[#B45309]' : 'text-[#FCA5A5]'}`} role="alert">
+            {copy.checkout[showError as keyof PremiumCopy['checkout']] ?? copy.checkout.error}
+            {fallbackNeeded ? (
+              <>
+                {' '}
+                <a className="underline" href={mailtoOrder(lang, plan, user?.uid)}>
+                  {copy.plans.order}
+                </a>
+              </>
+            ) : null}
+          </p>
+        ) : null}
+      </div>
+    </article>
+  );
+}
+
+export function ManualOrder() {
+  const { user, copy, lang } = useAccount();
+  const template = orderTemplate(lang, undefined, user?.uid);
+  return (
+    <div className="mt-8 grid gap-6 rounded-[1.5rem] border border-white/10 bg-white/[0.05] p-6 lg:grid-cols-[1fr_auto] lg:items-center">
+      <div className="grid gap-2 text-sm leading-6 text-white/65">
+        <p className="text-base font-semibold text-white">{copy.steps.manualTitle}</p>
+        <p>{copy.steps.manualBody}</p>
+        {user ? (
+          <p className="flex flex-wrap items-center gap-2 text-xs text-white/50">
+            {copy.steps.manualCode}: <code className="rounded bg-black/20 px-1.5 py-0.5 text-white/80">{user.uid}</code>
+            <CopyInline done={copy.account.copied} label={copy.account.copy} value={user.uid} />
+          </p>
+        ) : null}
+      </div>
+      <div className="flex flex-wrap gap-2 lg:flex-col">
+        <Button href={mailtoOrder(lang, undefined, user?.uid)} size="sm" variant="light">
+          {copy.steps.writeToUs}
+        </Button>
+        <CopyButton label={copy.steps.copyAddress} done={copy.account.copied} value={mailtoOrder(lang).replace(/^mailto:([^?]+).*$/, '$1')} />
+        <CopyButton label={copy.steps.copyTemplate} done={copy.account.copied} value={template} />
+      </div>
+    </div>
+  );
+}
+
+function CopyButton({ value, label, done }: { value: string; label: string; done: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <Button
+      onClick={async () => {
+        try {
+          await navigator.clipboard.writeText(value);
+          setCopied(true);
+          window.setTimeout(() => setCopied(false), 2000);
+        } catch {
+          setCopied(false);
+        }
+      }}
+      size="sm"
+      variant="ghost"
+    >
+      {copied ? <Check className="h-4 w-4" aria-hidden="true" /> : <Copy className="h-4 w-4" aria-hidden="true" />}
+      <span aria-live="polite">{copied ? done : label}</span>
+    </Button>
+  );
+}

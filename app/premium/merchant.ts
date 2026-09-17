@@ -1,18 +1,29 @@
+import type { Lang } from './i18n';
+
 // Single source for everything the acquiring bank checks on the site:
 // seller requisites, plan prices and the support promise. Empty fields are
 // not rendered, so the page never shows a placeholder to a buyer.
 export const merchant = {
   fullName: 'Базык Егор Юрьевич',
-  shortName: 'Базык Е. Ю.',
-  status: 'Физическое лицо — плательщик налога на профессиональный доход',
+  latinName: 'Yahor Bazyk',
+  status: {
+    ru: 'Физическое лицо — плательщик налога на профессиональный доход',
+    en: 'Individual registered as a professional income tax payer',
+  },
   unp: '',
-  country: 'Республика Беларусь',
+  country: { ru: 'Республика Беларусь', en: 'Republic of Belarus' },
   postalAddress: '',
   phone: '',
   email: 'yorix2026@outlook.com',
-  hours: 'Ежедневно с 10:00 до 20:00 (время минское)',
-  hoursNote: 'Заявки по e-mail принимаются круглосуточно',
-  activationWindow: 'в течение 24 часов',
+  hours: {
+    ru: 'Ежедневно с 10:00 до 20:00 (время минское)',
+    en: 'Daily, 10:00–20:00 Minsk time',
+  },
+  hoursNote: {
+    ru: 'заявки по e-mail принимаются круглосуточно',
+    en: 'orders by e-mail are accepted around the clock',
+  },
+  activationHours: 24,
   tradeRegister: '',
   // WebPay ships a separate logo strip for МТБанк; every other acquirer uses the generic one.
   acquirer: 'other' as 'mtbank' | 'other',
@@ -24,47 +35,32 @@ export type PlanId = 'week' | 'month' | 'year';
 
 export type Plan = {
   id: PlanId;
-  title: string;
-  accusative: string;
-  period: string;
   days: number;
   priceByn: number;
-  useCase: string;
 };
 
 export const plans: Plan[] = [
-  {
-    id: 'week',
-    title: 'Неделя',
-    accusative: 'неделю',
-    period: '7 дней',
-    days: 7,
-    priceByn: 11.9,
-    useCase: 'Попробовать Premium или пережить скачок и регресс сна',
-  },
-  {
-    id: 'month',
-    title: 'Месяц',
-    accusative: 'месяц',
-    period: '30 дней',
-    days: 30,
-    priceByn: 22.9,
-    useCase: 'Спокойно наладить режим дня и ночной сон',
-  },
-  {
-    id: 'year',
-    title: 'Год',
-    accusative: 'год',
-    period: '365 дней',
-    days: 365,
-    priceByn: 109,
-    useCase: 'Весь год малыша: переходы между снами, прикорм, регрессы',
-  },
+  { id: 'week', days: 7, priceByn: 11.9 },
+  { id: 'month', days: 30, priceByn: 22.9 },
+  { id: 'year', days: 365, priceByn: 109 },
 ];
 
-export function formatByn(value: number) {
+export const planCopy: Record<Lang, Record<PlanId, { title: string; forPeriod: string; days: string; purpose: string }>> = {
+  ru: {
+    week: { title: 'Неделя', forPeriod: 'на неделю', days: '7 дней', purpose: 'Попробовать Premium или пережить скачок и регресс сна' },
+    month: { title: 'Месяц', forPeriod: 'на месяц', days: '30 дней', purpose: 'Спокойно наладить режим дня и ночной сон' },
+    year: { title: 'Год', forPeriod: 'на год', days: '365 дней', purpose: 'Весь год малыша: переходы между снами, прикорм, регрессы' },
+  },
+  en: {
+    week: { title: 'Week', forPeriod: 'for a week', days: '7 days', purpose: 'Try Premium or get through a growth spurt or sleep regression' },
+    month: { title: 'Month', forPeriod: 'for a month', days: '30 days', purpose: 'Settle the daily rhythm and night sleep' },
+    year: { title: 'Year', forPeriod: 'for a year', days: '365 days', purpose: 'A whole year of nap transitions, solids and regressions' },
+  },
+};
+
+export function formatByn(value: number, lang: Lang) {
   const hasKopecks = Math.round(value * 100) % 100 !== 0;
-  const amount = value.toLocaleString('ru-RU', {
+  const amount = value.toLocaleString(lang === 'ru' ? 'ru-RU' : 'en-US', {
     minimumFractionDigits: hasKopecks ? 2 : 0,
     maximumFractionDigits: 2,
   });
@@ -72,32 +68,42 @@ export function formatByn(value: number) {
 }
 
 export function perWeek(plan: Plan) {
-  return (plan.priceByn / plan.days) * 7;
+  return Math.round((plan.priceByn / plan.days) * 7 * 100) / 100;
 }
 
-export function perMonth(plan: Plan) {
-  return (plan.priceByn / plan.days) * 30;
+export function savingVsWeek(plan: Plan) {
+  return Math.round((1 - perWeek(plan) / plans[0].priceByn) * 100);
 }
 
-export function roundByn(value: number) {
-  return Math.round(value * 100) / 100;
-}
-
-export function orderSubject(plan?: Plan) {
-  return plan
-    ? `Заказ Yorix Premium на ${plan.accusative} (${formatByn(plan.priceByn)})`
-    : 'Заказ Yorix Premium';
-}
-
-export function orderTemplate(plan?: Plan) {
+// The account code is the Firebase uid the buyer sees after signing in; it
+// names the account to grant without asking for an e-mail address.
+export function orderTemplate(lang: Lang, plan?: Plan, accountCode?: string) {
+  const code = accountCode ?? '';
+  if (lang === 'en') {
+    return [
+      'Hello!',
+      '',
+      `I would like Yorix Premium ${plan ? `${planCopy.en[plan.id].forPeriod} — ${formatByn(plan.priceByn, 'en')}` : '(week / month / year)'}`,
+      `Account code (Settings → Account in the app): ${code}`,
+    ].join('\n');
+  }
   return [
     'Здравствуйте!',
     '',
-    `Хочу Yorix Premium: ${plan ? `на ${plan.accusative} — ${formatByn(plan.priceByn)}` : 'неделя / месяц / год'}`,
-    'Apple ID для входа в Yorix: ',
+    `Хочу Yorix Premium ${plan ? `${planCopy.ru[plan.id].forPeriod} — ${formatByn(plan.priceByn, 'ru')}` : '(неделя / месяц / год)'}`,
+    `Код аккаунта (Настройки → Аккаунт в приложении): ${code}`,
   ].join('\n');
 }
 
-export function mailtoOrder(plan?: Plan) {
-  return `mailto:${merchant.email}?subject=${encodeURIComponent(orderSubject(plan))}&body=${encodeURIComponent(orderTemplate(plan))}`;
+export function mailtoOrder(lang: Lang, plan?: Plan, accountCode?: string) {
+  const subject =
+    lang === 'en'
+      ? `Yorix Premium order${plan ? ` ${planCopy.en[plan.id].forPeriod}` : ''}`
+      : `Заказ Yorix Premium${plan ? ` ${planCopy.ru[plan.id].forPeriod}` : ''}`;
+  return `mailto:${merchant.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(orderTemplate(lang, plan, accountCode))}`;
+}
+
+export function listJoin(items: string[], lang: Lang) {
+  if (items.length < 2) return items.join('');
+  return `${items.slice(0, -1).join(', ')} ${lang === 'ru' ? 'и' : 'and'} ${items[items.length - 1]}`;
 }

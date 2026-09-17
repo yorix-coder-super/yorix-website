@@ -6,6 +6,7 @@ export function MoonPhase({ plan, className }: { plan: PlanId; className?: strin
   if (plan === 'year') {
     return (
       <svg viewBox="0 0 64 64" className={className} aria-hidden="true">
+        <g className="moon-slow-spin">
         {Array.from({ length: 12 }).map((_, index) => {
           const angle = (index / 12) * Math.PI * 2 - Math.PI / 2;
           return (
@@ -19,6 +20,7 @@ export function MoonPhase({ plan, className }: { plan: PlanId; className?: strin
             />
           );
         })}
+        </g>
         <circle cx="32" cy="32" r="13" fill="#FEF3C7" />
         <circle cx="27" cy="29" r="2.4" fill="#FDE68A" />
         <circle cx="36" cy="36" r="1.8" fill="#FDE68A" />

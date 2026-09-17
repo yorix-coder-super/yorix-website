@@ -1,6 +1,11 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
+@import 'animate.css/source/_vars.css';
+@import 'animate.css/source/_base.css';
+@import 'animate.css/source/fading_entrances/fadeInUp.css';
+@import 'animate.css/source/fading_entrances/fadeIn.css';
+@import 'animate.css/source/zooming_entrances/zoomIn.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -132,6 +137,36 @@ body {
   background-size:
     110px 120px,
     100% 100%;
+}
+
+:root {
+  --animate-duration: 0.7s;
+  --animate-delay: 0.12s;
+}
+
+/* Reveal: hide only when a script can reveal; no-JS readers see everything. */
+@media (scripting: enabled) {
+  [data-reveal]:not(.animated) {
+    opacity: 0;
+  }
+}
+
+.moon-slow-spin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: moon-spin 60s linear infinite;
+}
+
+@keyframes moon-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moon-slow-spin {
+    animation: none;
+  }
 }
 
 .legal-document h2 {

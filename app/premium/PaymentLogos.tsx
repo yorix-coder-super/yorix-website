@@ -6,7 +6,7 @@ export function PaymentLogos() {
   return (
     <img
       src={`/payments/webpay-${bank}-white.svg`}
-      alt={`Оплата через WebPay: ${merchant.cards.join(', ')}`}
+      alt={`WebPay: ${merchant.cards.join(', ')}`}
       className="h-auto w-full max-w-[420px]"
       width="7944"
       height="550"
