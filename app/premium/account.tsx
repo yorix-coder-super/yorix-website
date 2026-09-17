@@ -5,14 +5,15 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import type { Auth, User as FirebaseUser } from 'firebase/auth';
 import { API_BASE, firebaseConfig, isFirebaseConfigured } from './config';
 import { premiumCopy, type PremiumCopy } from './copy';
-import { formatDate, type Lang } from './i18n';
-import { formatByn, mailtoOrder, orderTemplate, planCopy, type Plan } from './merchant';
+import { convert, currencyForCountry, displayPrice, fallbackRates, formatMoney, isCurrency, type Currency, type Rates } from './currency';
+import { formatDate, premiumPath, type Lang } from './i18n';
+import { formatByn, mailtoOrder, orderTemplate, planCopy, plans, type Plan } from './merchant';
 import { MoonPhase } from './MoonPhase';
 import { Button, Spinner } from './ui';
 
 type Provider = 'apple.com' | 'google.com';
 type CheckoutMode = 'off' | 'test' | 'prod';
-type WebConfig = { checkoutMode: CheckoutMode; plans: { id: string; days: number; priceByn: number }[] };
+type WebConfig = { checkoutMode: CheckoutMode; plans: { id: string; days: number; priceByn: number }[]; rates?: Rates };
 type Me = { premiumUntil: string | null; blocked: boolean };
 type Account = { uid: string; email: string | null; provider: string };
 type ErrorKey = keyof PremiumCopy['checkout'] | 'popupBlocked' | 'signInError';
@@ -25,17 +26,24 @@ type State = {
   me: Me | null;
   busy: 'signin' | 'order' | null;
   error: ErrorKey | null;
+  currency: Currency;
+  requestPlan: Plan | null;
 };
 
 type Api = State & {
   lang: Lang;
   copy: PremiumCopy;
+  rates: Rates;
   signIn: (provider: Provider) => Promise<Account | null>;
   signOut: () => Promise<void>;
   createOrder: (planId: string) => Promise<void>;
   getToken: () => Promise<string | null>;
   clearError: () => void;
+  setCurrency: (currency: Currency) => void;
+  openRequest: (plan: Plan | null) => void;
 };
+
+const CURRENCY_KEY = 'yx_currency';
 
 const Ctx = createContext<Api | null>(null);
 
@@ -75,7 +83,7 @@ function toAccount(user: FirebaseUser): Account {
   return { uid: user.uid, email: user.email, provider };
 }
 
-export function AccountProvider({ lang, children }: { lang: Lang; children: ReactNode }) {
+export function AccountProvider({ lang, country, children }: { lang: Lang; country?: string | null; children: ReactNode }) {
   const copy = premiumCopy[lang];
   const authRef = useRef<Auth | null>(null);
   const [state, setState] = useState<State>({
@@ -86,6 +94,8 @@ export function AccountProvider({ lang, children }: { lang: Lang; children: Reac
     me: null,
     busy: null,
     error: null,
+    currency: currencyForCountry(country),
+    requestPlan: null,
   });
 
   const getToken = useCallback(async () => {
@@ -106,6 +116,20 @@ export function AccountProvider({ lang, children }: { lang: Lang; children: Reac
       // The account still works without the entitlement line.
     }
   }, [getToken]);
+
+  useEffect(() => {
+    // A currency the visitor picked by hand outranks the guess from their
+    // country; read after paint so the server-rendered guess hydrates cleanly.
+    const frame = requestAnimationFrame(() => {
+      try {
+        const saved = window.localStorage.getItem(CURRENCY_KEY);
+        if (isCurrency(saved)) setState((s) => (s.currency === saved ? s : { ...s, currency: saved }));
+      } catch {
+        // Storage may be blocked; the geo guess stands.
+      }
+    });
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -194,10 +218,20 @@ export function AccountProvider({ lang, children }: { lang: Lang; children: Reac
   );
 
   const clearError = useCallback(() => setState((s) => ({ ...s, error: null })), []);
+  const setCurrency = useCallback((currency: Currency) => {
+    setState((s) => ({ ...s, currency }));
+    try {
+      window.localStorage.setItem(CURRENCY_KEY, currency);
+    } catch {
+      // Not persisted; the choice still applies to this page.
+    }
+  }, []);
+  const openRequest = useCallback((plan: Plan | null) => setState((s) => ({ ...s, requestPlan: plan, error: null })), []);
 
+  const rates = state.config?.rates ?? fallbackRates;
   const api = useMemo<Api>(
-    () => ({ ...state, lang, copy, signIn, signOut, createOrder, getToken, clearError }),
-    [state, lang, copy, signIn, signOut, createOrder, getToken, clearError],
+    () => ({ ...state, lang, copy, rates, signIn, signOut, createOrder, getToken, clearError, setCurrency, openRequest }),
+    [state, lang, copy, rates, signIn, signOut, createOrder, getToken, clearError, setCurrency, openRequest],
   );
 
   return <Ctx.Provider value={api}>{children}</Ctx.Provider>;
@@ -309,12 +343,14 @@ function AppleMark() {
 }
 
 export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) {
-  const { ready, configured, config, user, busy, error, copy, lang, signIn, createOrder } = useAccount();
+  const { ready, configured, config, user, busy, error, copy, lang, currency, rates, signIn, createOrder, openRequest } = useAccount();
   const text = planCopy[lang][plan.id];
-  const price = formatByn(plan.priceByn, lang);
-  const perWeek = Math.round((plan.priceByn / plan.days) * 7 * 100) / 100;
-  const weekPrice = config?.plans.find((p) => p.id === 'week')?.priceByn ?? 11.9;
-  const cheaper = Math.round((1 - perWeek / weekPrice) * 100);
+  const kopecks = Math.round(plan.priceByn * 100);
+  const { local: price, charge } = displayPrice(kopecks, currency, rates, lang);
+  const weekPriceByn = config?.plans.find((p) => p.id === 'week')?.priceByn ?? plans[0].priceByn;
+  const perWeekByn = (plan.priceByn / plan.days) * 7;
+  const perWeek = formatMoney(convert(Math.round(perWeekByn * 100), currency, rates), currency, lang, currency !== 'BYN');
+  const cheaper = Math.round((1 - perWeekByn / weekPriceByn) * 100);
   const mode: CheckoutMode = config?.checkoutMode ?? 'off';
   const canPay = configured && mode !== 'off';
   const [pending, setPending] = useState(false);
@@ -356,7 +392,9 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
       <p className={`mt-4 text-sm leading-6 ${featured ? 'text-[#1E1B4B]/80' : 'text-white/75'}`}>{text.purpose}</p>
       <p className={`mt-6 text-4xl font-semibold tabular-nums sm:text-5xl ${strong}`}>{price}</p>
       <p className={`mt-2 min-h-6 text-sm leading-6 ${muted}`}>
-        {plan.id === 'week' ? ' ' : `${copy.plans.perWeek(formatByn(perWeek, lang))} · ${copy.plans.cheaper(cheaper)}`}
+        {charge ? copy.plans.charged(charge) : ''}
+        {charge && plan.id !== 'week' ? ' · ' : ''}
+        {plan.id === 'week' ? (charge ? '' : '\u00A0') : `${copy.plans.perWeek(perWeek)} · ${copy.plans.cheaper(cheaper)}`}
       </p>
       <div className="mt-auto pt-6">
         {canPay ? (
@@ -365,8 +403,8 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
             {pending || busy === 'order' ? copy.checkout.creating : user ? copy.plans.pay(price) : copy.plans.signInToPay}
           </Button>
         ) : (
-          <Button className="w-full" href={mailtoOrder(lang, plan, user?.uid)} variant={variant}>
-            {copy.plans.order}
+          <Button className="w-full" onClick={() => openRequest(plan)} variant={variant}>
+            {copy.plans.request}
           </Button>
         )}
         {showError ? (
@@ -388,7 +426,7 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
 }
 
 export function ManualOrder() {
-  const { user, copy, lang } = useAccount();
+  const { user, copy, lang, openRequest } = useAccount();
   const template = orderTemplate(lang, undefined, user?.uid);
   return (
     <div className="mt-8 grid gap-6 rounded-[1.5rem] border border-white/10 bg-white/[0.05] p-6 lg:grid-cols-[1fr_auto] lg:items-center">
@@ -403,7 +441,7 @@ export function ManualOrder() {
         ) : null}
       </div>
       <div className="flex flex-wrap gap-2 lg:flex-col">
-        <Button href={mailtoOrder(lang, undefined, user?.uid)} size="sm" variant="light">
+        <Button onClick={() => openRequest(null)} size="sm" variant="light">
           {copy.steps.writeToUs}
         </Button>
         <CopyButton label={copy.steps.copyAddress} done={copy.account.copied} value={mailtoOrder(lang).replace(/^mailto:([^?]+).*$/, '$1')} />
@@ -432,5 +470,158 @@ function CopyButton({ value, label, done }: { value: string; label: string; done
       {copied ? <Check className="h-4 w-4" aria-hidden="true" /> : <Copy className="h-4 w-4" aria-hidden="true" />}
       <span aria-live="polite">{copied ? done : label}</span>
     </Button>
+  );
+}
+
+export function CurrencySwitcher() {
+  const { currency, setCurrency, copy } = useAccount();
+  return (
+    <div className="flex flex-wrap items-center gap-2 text-sm text-white/60">
+      <span>{copy.currency.label}</span>
+      <fieldset className="inline-flex rounded-full border border-white/15 bg-white/10 p-1">
+        <legend className="sr-only">{copy.currency.label}</legend>
+        {(['BYN', 'RUB', 'EUR', 'USD'] as const).map((code) => (
+          <button
+            aria-pressed={currency === code}
+            className={`min-h-8 rounded-full px-3 text-xs font-semibold transition ${currency === code ? 'bg-white text-[#1E1B4B]' : 'text-white/70 hover:text-white'}`}
+            key={code}
+            onClick={() => setCurrency(code)}
+            type="button"
+          >
+            {code}
+          </button>
+        ))}
+      </fieldset>
+      {currency !== 'BYN' ? <span>{copy.currency.note}</span> : null}
+    </div>
+  );
+}
+
+// The fallback funnel step: a request instead of a mailto. The plan comes
+// pre-selected, the account code is optional, and the owner answers with a
+// payment link. If the worker is unreachable the form falls back to e-mail.
+export function RequestForm() {
+  const { requestPlan, openRequest, user, copy, lang, currency, rates } = useAccount();
+  const [planId, setPlanId] = useState<Plan['id']>('year');
+  const [email, setEmail] = useState('');
+  const [code, setCode] = useState('');
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error' | 'rate_limited'>('idle');
+  const open = requestPlan !== null;
+  const openedFor = requestPlan?.id ?? null;
+
+  useEffect(() => {
+    if (!open) return;
+    const frame = requestAnimationFrame(() => {
+      setPlanId(openedFor ?? 'year');
+      setStatus('idle');
+      if (user?.uid) setCode(user.uid);
+      if (user?.email) setEmail((current) => current || user.email || '');
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [open, openedFor, user]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') openRequest(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open, openRequest]);
+
+  if (!open) return null;
+  const plan = plans.find((p) => p.id === planId) ?? plans[2];
+  const { local, charge } = displayPrice(Math.round(plan.priceByn * 100), currency, rates, lang);
+
+  const submit = async (event: React.SubmitEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const honeypot = new FormData(event.currentTarget).get('website');
+    setStatus('sending');
+    try {
+      const res = await fetch(`${API_BASE}/v1/web/requests`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ planId, email: email.trim(), accountCode: code.trim() || undefined, lang, website: typeof honeypot === 'string' ? honeypot : '' }),
+      });
+      setStatus(res.status === 429 ? 'rate_limited' : res.ok ? 'sent' : 'error');
+    } catch {
+      setStatus('error');
+    }
+  };
+
+  const field = 'mt-1.5 w-full rounded-xl border border-white/15 bg-white/10 px-3 py-2.5 text-base text-white outline-none placeholder:text-white/35 focus:ring-4 focus:ring-white/20';
+
+  return (
+    <div className="fixed inset-0 z-[100] grid place-items-center p-4">
+      <button aria-label={copy.request.cancel} className="absolute inset-0 bg-[#0B0B1E]/70 backdrop-blur-sm" onClick={() => openRequest(null)} type="button" />
+      <dialog aria-labelledby="request-title" className="relative z-10 m-0 w-full max-w-md rounded-[1.75rem] border border-white/15 bg-[#1E1B4B] p-6 text-white shadow-[0_40px_120px_rgb(0_0_0/50%)]" open>
+        {status === 'sent' ? (
+          <>
+            <p className="text-2xl font-semibold" id="request-title">{copy.request.sentTitle}</p>
+            <p className="mt-3 text-base leading-7 text-white/75">{copy.request.sentBody}</p>
+            <Button className="mt-6 w-full" onClick={() => openRequest(null)} variant="light">
+              {copy.request.close}
+            </Button>
+          </>
+        ) : (
+          <form onSubmit={submit}>
+            <p className="text-2xl font-semibold" id="request-title">{copy.request.title}</p>
+            <p className="mt-2 text-sm leading-6 text-white/65">{copy.request.body}</p>
+            <label className="mt-5 block text-sm font-semibold">
+              {copy.request.plan}
+              <select className={field} onChange={(e) => setPlanId(e.target.value as Plan['id'])} value={planId}>
+                {plans.map((p) => (
+                  <option className="text-[#1E1B4B]" key={p.id} value={p.id}>
+                    {planCopy[lang][p.id].title} — {formatByn(p.priceByn, lang)}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <p className="mt-1.5 text-sm text-white/60">
+              {local}
+              {charge ? ` · ${copy.plans.charged(charge)}` : ''}
+            </p>
+            <label className="mt-4 block text-sm font-semibold">
+              {copy.request.email}
+              <input autoComplete="email" className={field} inputMode="email" onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" required type="email" value={email} />
+            </label>
+            <label className="mt-4 block text-sm font-semibold">
+              {copy.request.code} <span className="font-normal text-white/50">{copy.request.optional}</span>
+              <input className={`${field} font-mono text-sm`} onChange={(e) => setCode(e.target.value)} pattern="[A-Za-z0-9_\-]{6,64}" placeholder="Xy12…" value={code} />
+              <span className="mt-1 block text-xs font-normal leading-5 text-white/50">{copy.request.codeHint}</span>
+            </label>
+            <input aria-hidden="true" autoComplete="off" className="hidden" name="website" tabIndex={-1} />
+            {status === 'error' ? (
+              <p className="mt-3 text-sm text-[#FCA5A5]" role="alert">
+                {copy.request.error}{' '}
+                <a className="underline" href={mailtoOrder(lang, plan, code || user?.uid)}>
+                  {copy.request.errorMail}
+                </a>
+              </p>
+            ) : null}
+            {status === 'rate_limited' ? (
+              <p className="mt-3 text-sm text-[#FCA5A5]" role="alert">
+                {copy.checkout.rateLimited}
+              </p>
+            ) : null}
+            <div className="mt-6 flex flex-col gap-2 sm:flex-row">
+              <Button className="flex-1" disabled={status === 'sending'} type="submit">
+                {status === 'sending' ? <Spinner /> : null}
+                {copy.request.submit}
+              </Button>
+              <Button onClick={() => openRequest(null)} variant="ghost">
+                {copy.request.cancel}
+              </Button>
+            </div>
+            <p className="mt-3 text-xs leading-5 text-white/45">
+              {copy.request.consent}{' '}
+              <a className="underline" href={premiumPath(lang, '/konfidencialnost')}>
+                {copy.docs.privacy}
+              </a>
+            </p>
+          </form>
+        )}
+      </dialog>
+    </div>
   );
 }

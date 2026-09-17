@@ -88,7 +88,7 @@ export function LocalizedHome({ locale }: { locale: Locale }) {
           </Reveal>
           <Reveal load delay={540}>
           <div className="mt-9 hidden max-w-xl gap-3 text-sm text-white/70 sm:grid sm:grid-cols-3">
-            <div className="rounded-lg border border-white/10 bg-white/10 p-4 backdrop-blur-xl"><strong className="block text-2xl text-white">14</strong>{copy.stats[0]}</div>
+            <div className="rounded-lg border border-white/10 bg-white/10 p-4 backdrop-blur-xl"><strong className="block text-2xl text-white">20</strong>{copy.stats[0]}</div>
             <div className="rounded-lg border border-white/10 bg-white/10 p-4 backdrop-blur-xl"><strong className="block text-2xl text-white">0</strong>{copy.stats[1]}</div>
             <div className="rounded-lg border border-white/10 bg-white/10 p-4 backdrop-blur-xl"><strong className="block text-2xl text-white">24/7</strong>{copy.stats[2]}</div>
           </div>

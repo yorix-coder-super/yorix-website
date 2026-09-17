@@ -1,23 +1,28 @@
-import { ArrowRight, BarChart3, CreditCard, LockKeyhole, MessageCircle, RotateCcw, Smartphone, Sparkles, Sun, UserRound } from 'lucide-react';
-import { AccountPanel, AccountProvider, ManualOrder, PlanCard } from './account';
+import { ArrowRight, BarChart3, CalendarClock, LockKeyhole, MessageCircle, RotateCcw, ShieldCheck, Smartphone, Sparkles, Sun, UserRound } from 'lucide-react';
+import { headers } from 'next/headers';
+import { AccountPanel, AccountProvider, CurrencySwitcher, ManualOrder, PlanCard, RequestForm } from './account';
 import { premiumCopy } from './copy';
 import { premiumPath, type Lang } from './i18n';
 import { formatByn, plans } from './merchant';
 import { PremiumShell } from './PremiumShell';
 import { Parallax } from './Parallax';
 import { Reveal } from './Reveal';
+import { SocialProof } from './SocialProof';
 import { Button, Eyebrow, SectionTitle } from './ui';
 
 const featureIcons = [Sparkles, MessageCircle, BarChart3, Sun];
-const stepIcons = [UserRound, CreditCard, LockKeyhole, Smartphone];
+const outcomeIcons = [CalendarClock, RotateCcw, MessageCircle];
+const stepIcons = [UserRound, LockKeyhole, Smartphone];
 
-export function PremiumStorefront({ lang }: { lang: Lang }) {
+export async function PremiumStorefront({ lang }: { lang: Lang }) {
   const copy = premiumCopy[lang];
   const week = plans[0];
+  const country = (await headers()).get('cf-ipcountry');
 
   return (
     <PremiumShell lang={lang}>
-      <AccountProvider lang={lang}>
+      <AccountProvider country={country} lang={lang}>
+        <RequestForm />
         <section className="relative">
           <div className="relative mx-auto grid w-full max-w-6xl items-center gap-10 px-5 pb-14 pt-6 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:pb-20">
             <div className="relative z-10 min-w-0">
@@ -44,6 +49,7 @@ export function PremiumStorefront({ lang }: { lang: Lang }) {
                     {copy.hero.oneOff}
                   </span>
                 </div>
+                <p className="mt-4 max-w-xl text-sm leading-6 text-white/55">{copy.hero.nextRequest}</p>
                 <AccountPanel />
               </Reveal>
             </div>
@@ -70,6 +76,29 @@ export function PremiumStorefront({ lang }: { lang: Lang }) {
           </div>
         </section>
 
+        <section className="relative mx-auto max-w-6xl px-5 pt-4 pb-10 sm:px-8">
+          <Reveal>
+            <Eyebrow>{copy.outcomes.eyebrow}</Eyebrow>
+            <SectionTitle className="max-w-2xl">{copy.outcomes.title}</SectionTitle>
+          </Reveal>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {copy.outcomes.items.map((item, index) => {
+              const Icon = outcomeIcons[index];
+              return (
+                <Reveal className="flex" delay={index * 120} key={item.title}>
+                  <article className="w-full rounded-[1.5rem] border border-white/15 bg-white/[0.1] p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/30">
+                    <span className="grid h-11 w-11 place-items-center rounded-full bg-[#FDE68A] text-[#1E1B4B]">
+                      <Icon className="h-5 w-5" aria-hidden="true" />
+                    </span>
+                    <h3 className="mt-5 text-lg font-semibold text-white">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-white/65">{item.body}</p>
+                  </article>
+                </Reveal>
+              );
+            })}
+          </div>
+        </section>
+
         <section id="tarify" className="relative mx-auto max-w-6xl scroll-mt-6 px-5 py-14 sm:px-8">
           <Reveal>
             <div className="max-w-2xl">
@@ -85,7 +114,14 @@ export function PremiumStorefront({ lang }: { lang: Lang }) {
               </Reveal>
             ))}
           </div>
-          <p className="mt-6 text-sm leading-6 text-white/60">
+          <p className="mt-6 flex items-start gap-3 rounded-[1.25rem] border border-[#FDE68A]/30 bg-[#FDE68A]/10 px-5 py-4 text-base leading-7 text-white">
+            <ShieldCheck className="mt-1 h-5 w-5 shrink-0 text-[#FDE68A]" aria-hidden="true" />
+            {copy.guarantee}
+          </p>
+          <div className="mt-6">
+            <CurrencySwitcher />
+          </div>
+          <p className="mt-4 text-sm leading-6 text-white/60">
             {copy.plans.footnote} {copy.plans.acceptBefore}{' '}
             <a className="text-white underline decoration-white/30 hover:decoration-white" href={premiumPath(lang, '/oferta')}>
               {copy.plans.offer}
@@ -97,6 +133,8 @@ export function PremiumStorefront({ lang }: { lang: Lang }) {
             .
           </p>
         </section>
+
+        <SocialProof lang={lang} />
 
         <section className="relative mx-auto max-w-6xl px-5 py-14 sm:px-8">
           <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
@@ -134,7 +172,7 @@ export function PremiumStorefront({ lang }: { lang: Lang }) {
               <Eyebrow>{copy.steps.eyebrow}</Eyebrow>
               <SectionTitle className="max-w-2xl">{copy.steps.title}</SectionTitle>
             </Reveal>
-            <ol className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <ol className="mt-10 grid gap-4 md:grid-cols-3">
               {copy.steps.items.map((step, index) => {
                 const Icon = stepIcons[index];
                 return (

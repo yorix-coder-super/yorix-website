@@ -47,14 +47,14 @@ export const plans: Plan[] = [
 
 export const planCopy: Record<Lang, Record<PlanId, { title: string; forPeriod: string; days: string; purpose: string }>> = {
   ru: {
-    week: { title: 'Неделя', forPeriod: 'на неделю', days: '7 дней', purpose: 'Попробовать Premium или пережить скачок и регресс сна' },
-    month: { title: 'Месяц', forPeriod: 'на месяц', days: '30 дней', purpose: 'Спокойно наладить режим дня и ночной сон' },
-    year: { title: 'Год', forPeriod: 'на год', days: '365 дней', purpose: 'Весь год малыша: переходы между снами, прикорм, регрессы' },
+    week: { title: 'Неделя', forPeriod: 'на неделю', days: '7 дней', purpose: 'Проверить прогноз на своём малыше' },
+    month: { title: 'Месяц', forPeriod: 'на месяц', days: '30 дней', purpose: 'Пройти регресс или переход на один сон' },
+    year: { title: 'Год', forPeriod: 'на год', days: '365 дней', purpose: 'От первых снов до режима с одним сном' },
   },
   en: {
-    week: { title: 'Week', forPeriod: 'for a week', days: '7 days', purpose: 'Try Premium or get through a growth spurt or sleep regression' },
-    month: { title: 'Month', forPeriod: 'for a month', days: '30 days', purpose: 'Settle the daily rhythm and night sleep' },
-    year: { title: 'Year', forPeriod: 'for a year', days: '365 days', purpose: 'A whole year of nap transitions, solids and regressions' },
+    week: { title: 'Week', forPeriod: 'for a week', days: '7 days', purpose: 'Test the forecast on your own baby' },
+    month: { title: 'Month', forPeriod: 'for a month', days: '30 days', purpose: 'Get through a regression or the two-to-one nap switch' },
+    year: { title: 'Year', forPeriod: 'for a year', days: '365 days', purpose: 'From newborn naps to the one-nap routine' },
   },
 };
 

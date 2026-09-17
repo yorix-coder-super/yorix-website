@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 import { HomePremiumSection } from './premium/HomePremiumSection';
+import { testimonials } from './premium/testimonials';
 import { Parallax } from './premium/Parallax';
 import { Reveal } from './premium/Reveal';
 import { StarField } from './premium/StarField';
@@ -112,20 +113,12 @@ const productStories = [
   },
 ];
 
-const parentQuotes = [
-  {
-    title: 'Less guessing',
-    body: 'A calmer way to understand wake windows, naps, feeding, and the next best sleep moment.',
-  },
-  {
-    title: 'One shared memory',
-    body: 'Both parents can see the same baby sleep, feeding, diapers, growth, and care data.',
-  },
-  {
-    title: 'Made for real nights',
-    body: 'Quick logging, AI guidance, and sleep sounds when the whole house is tired.',
-  },
-];
+const parentQuotes = testimonials.map((t) => ({
+  title: t.author,
+  body: t.translations.en,
+  source: t.source === 'appstore' ? 'App Store review' : 'parent feedback',
+  translated: t.locale !== 'en',
+}));
 
 const faqs = [
   {
@@ -234,19 +227,20 @@ export default function Home() {
           <Reveal load animation="fadeIn">
             <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-[#C7D2FE] shadow-sm backdrop-blur-xl">
               <Sparkles className="h-4 w-4" aria-hidden="true" />
-              Baby sleep tracker and AI schedule app
+              Baby sleep tracker with a plan that re-plans itself
             </p>
           </Reveal>
           <Reveal load delay={120}>
             <h1 className="max-w-3xl text-5xl font-semibold leading-[1.02] tracking-normal text-white sm:text-6xl lg:text-7xl">
-              Finally understand your baby’s sleep.
+              Know when your baby’s next sleep is due — before the fussing starts.
             </h1>
           </Reveal>
           <Reveal load delay={260}>
             <p className="mt-6 max-w-xl text-lg leading-8 text-white/70">
-              Yorix learns your child’s rhythm and turns naps, wake windows,
-              bedtime, night wakings, feeding, growth, and daily care into a
-              schedule that adapts to real family life.
+              Yorix computes the next nap window and bedtime from your baby’s
+              real day and re-plans the moment a nap runs short. Log sleep,
+              feeds and care in one tap, and ask the coach that knows your
+              diary — any hour of the night.
             </p>
           </Reveal>
           <Reveal load delay={400}>
@@ -257,7 +251,7 @@ export default function Home() {
               rel="noopener noreferrer"
               target="_blank"
             >
-              Plan the next nap
+              Get my baby’s plan
               <ArrowRight className="h-5 w-5" aria-hidden="true" />
             </a>
             <a
@@ -272,7 +266,7 @@ export default function Home() {
           <Reveal load delay={540}>
           <div className="mt-9 hidden max-w-xl gap-3 text-sm text-white/70 sm:grid sm:grid-cols-3">
             <div className="rounded-lg border border-white/10 bg-white/10 p-4 backdrop-blur-xl">
-              <strong className="block text-2xl text-white">14</strong>
+              <strong className="block text-2xl text-white">20</strong>
               languages
             </div>
             <div className="rounded-lg border border-white/10 bg-white/10 p-4 backdrop-blur-xl">
@@ -439,14 +433,14 @@ export default function Home() {
         <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <Reveal>
             <p className="mb-3 text-sm font-semibold uppercase text-[#A78BFA]">
-              Loved by tired parents
+              What parents write — unedited
             </p>
             <h2 className="max-w-xl text-4xl font-semibold leading-tight text-white sm:text-5xl">
-              Less sleep math. More confidence.
+              They weren’t sleeping either.
             </h2>
             <p className="mt-5 max-w-xl text-lg leading-8 text-white/65">
-              Yorix gives families the calm structure they need without turning
-              every nap, feed, or diaper into a spreadsheet.
+              Real words from a published App Store review and from parents who
+              wrote to support. Nothing polished, nothing invented.
             </p>
           </Reveal>
           <div className="grid gap-4 md:grid-cols-3">
@@ -462,11 +456,10 @@ export default function Home() {
                     />
                   ))}
                 </div>
-                <h3 className="text-xl font-semibold text-white">
-                  {item.title}
-                </h3>
-                <p className="mt-3 text-sm leading-6 text-white/60">
-                  {item.body}
+                <p className="text-base leading-7 text-white/85">“{item.body}”</p>
+                <p className="mt-4 text-sm text-white/55">
+                  <span className="font-semibold text-white">{item.title}</span> · {item.source}
+                  {item.translated ? ' · translated' : ''}
                 </p>
               </article>
               </Reveal>
@@ -563,11 +556,11 @@ export default function Home() {
               Built for real family life
             </p>
             <h2 className="max-w-3xl text-4xl font-semibold leading-tight sm:text-5xl">
-              Start with one nap. Let Yorix learn the rhythm.
+              Log one nap tonight. Tomorrow’s plan is already there.
             </h2>
             <p className="mt-4 max-w-2xl text-lg leading-8 text-[#64748B]">
-              Track today’s sleep, feeds, diapers, growth, symptoms, mood, and
-              routines, then get a clearer plan for the day ahead.
+              The diary is free forever. Sleep, feeds, diapers, growth and care
+              in one tap — and a plan for tomorrow built from what you logged.
             </p>
           </div>
           <a
