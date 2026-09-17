@@ -15,8 +15,7 @@ import {
 import type { Metadata } from 'next';
 import { CopyButton } from './CopyButton';
 import { MoonPhase } from './MoonPhase';
-import { PaymentLogos } from './PaymentLogos';
-import { MerchantRequisites, PremiumShell, documentLinks } from './PremiumShell';
+import { PremiumShell } from './PremiumShell';
 import { formatByn, mailtoOrder, merchant, orderTemplate, perMonth, perWeek, plans, roundByn } from './merchant';
 
 export const metadata: Metadata = {
@@ -117,8 +116,8 @@ const faqs = [
       'Premium, купленный на сайте, не отменяет подписку Apple. Чтобы не платить дважды, отключите автопродление в настройках iPhone: «Настройки → ваше имя → Подписки». Подписка Apple будет работать до конца оплаченного периода.',
   },
   {
-    question: 'Письмо со ссылкой не пришло. Что делать?',
-    answer: `Проверьте папку «Спам» и «Промоакции». Если письма нет дольше суток, напишите ещё раз на ${merchant.email} — ответим в первую очередь.`,
+    question: 'Не пришло письмо или Premium не включился. Что делать?',
+    answer: `Проверьте папки «Спам» и «Промоакции». Если ответа нет дольше суток или после оплаты Premium не появился, напишите на ${merchant.email}: укажите дату и сумму оплаты — ответим в первую очередь.`,
   },
   {
     question: 'Можно ли вернуть деньги?',
@@ -360,9 +359,6 @@ export default function PremiumPage() {
               . Соединение шифруется по протоколу TLS, данные карты получает только WebPay. Сохраняйте карт-чек после оплаты
               для сверки с выпиской по карт-счёту.
             </p>
-            <div className="mt-6">
-              <PaymentLogos />
-            </div>
           </article>
           <article className="rounded-[1.75rem] border border-white/10 bg-white/[0.07] p-6 backdrop-blur-xl">
             <p className="mb-3 text-sm font-semibold uppercase text-[#A78BFA]">Возврат</p>
@@ -379,7 +375,7 @@ export default function PremiumPage() {
         </div>
       </section>
 
-      <section id="voprosy" className="relative mx-auto max-w-4xl px-5 py-10 sm:px-8">
+      <section id="voprosy" className="relative mx-auto max-w-4xl px-5 pb-20 pt-10 sm:px-8">
         <p className="mb-3 text-center text-sm font-semibold uppercase text-[#A78BFA]">Вопросы</p>
         <h2 className="text-center text-4xl font-semibold text-white sm:text-5xl">Частые вопросы об оплате.</h2>
         <div className="mt-8 grid gap-3">
@@ -394,28 +390,6 @@ export default function PremiumPage() {
         </div>
       </section>
 
-      <section id="kontakty" className="relative mx-auto max-w-6xl scroll-mt-6 px-5 pb-20 pt-10 sm:px-8">
-        <div className="grid gap-8 rounded-[2rem] border border-white/10 bg-white/[0.07] p-6 backdrop-blur-xl md:p-10 lg:grid-cols-[0.8fr_1.2fr]">
-          <div>
-            <p className="mb-3 text-sm font-semibold uppercase text-[#A78BFA]">Контакты</p>
-            <h2 className="text-3xl font-semibold leading-tight text-white sm:text-4xl">Продавец и поддержка.</h2>
-            <p className="mt-4 text-base leading-7 text-white/65">
-              Если вы оплатили заказ, но Premium не появился, напишите нам — укажите дату оплаты и e-mail, с которым
-              входите в Yorix.
-            </p>
-            <ul className="mt-6 grid gap-2 text-sm">
-              {documentLinks.map((link) => (
-                <li key={link.href}>
-                  <a className="text-white/75 underline decoration-white/25 hover:text-white" href={link.href}>
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <MerchantRequisites />
-        </div>
-      </section>
     </PremiumShell>
   );
 }

@@ -8,7 +8,7 @@ const navItems = [
   { href: '/premium#tarify', label: 'Тарифы' },
   { href: '/premium#kak-kupit', label: 'Как купить' },
   { href: '/premium/oplata', label: 'Оплата и возврат' },
-  { href: '/premium#kontakty', label: 'Контакты' },
+  { href: '#kontakty', label: 'Контакты' },
 ];
 
 export const documentLinks = [
@@ -54,7 +54,7 @@ export function PremiumShell({ children }: { children: ReactNode }) {
   );
 }
 
-export function MerchantRequisites({ compact = false }: { compact?: boolean }) {
+function MerchantRequisites() {
   const rows = [
     { label: 'Продавец', value: merchant.fullName },
     { label: 'Статус', value: merchant.status },
@@ -70,11 +70,11 @@ export function MerchantRequisites({ compact = false }: { compact?: boolean }) {
   ].filter((row) => row.value);
 
   return (
-    <dl className={compact ? 'grid gap-x-8 gap-y-3 text-sm sm:grid-cols-2' : 'grid gap-x-10 gap-y-4 sm:grid-cols-2'}>
+    <dl className="grid gap-x-8 gap-y-3 text-sm sm:grid-cols-2">
       {rows.map((row) => (
         <div key={row.label}>
           <dt className="text-xs font-semibold uppercase tracking-wide text-white/45">{row.label}</dt>
-          <dd className={compact ? 'mt-0.5 text-white/80' : 'mt-1 text-base text-white'}>
+          <dd className="mt-0.5 text-white/80">
             {row.href ? (
               <a className="underline decoration-white/30 hover:decoration-white" href={row.href}>
                 {row.value}
@@ -91,11 +91,11 @@ export function MerchantRequisites({ compact = false }: { compact?: boolean }) {
 
 function MerchantFooter() {
   return (
-    <footer className="relative border-t border-white/10 bg-[#0F1022]/80">
+    <footer id="kontakty" className="relative scroll-mt-6 border-t border-white/10 bg-[#0F1022]/80">
       <div className="mx-auto grid max-w-6xl gap-8 px-5 py-10 sm:px-8 lg:grid-cols-[1.4fr_1fr]">
         <div>
-          <p className="mb-4 text-sm font-semibold text-white">Сведения о продавце</p>
-          <MerchantRequisites compact />
+          <p className="mb-4 text-sm font-semibold text-white">Продавец и контакты</p>
+          <MerchantRequisites />
         </div>
         <div className="grid content-start gap-6">
           <div>
