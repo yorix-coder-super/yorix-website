@@ -83,14 +83,14 @@ export function orderTemplate(lang: Lang, plan?: Plan, accountCode?: string) {
     return [
       'Hello!',
       '',
-      `I would like Yorix Premium ${plan ? `${planCopy.en[plan.id].forPeriod} — ${formatByn(plan.priceByn, 'en')}` : '(week / month / year)'}`,
+      `I would like a Yorix subscription ${plan ? `${planCopy.en[plan.id].forPeriod} — ${formatByn(plan.priceByn, 'en')}` : '(week / month / year)'}`,
       `Account code (Settings → Account in the app): ${code}`,
     ].join('\n');
   }
   return [
     'Здравствуйте!',
     '',
-    `Хочу Yorix Premium ${plan ? `${planCopy.ru[plan.id].forPeriod} — ${formatByn(plan.priceByn, 'ru')}` : '(неделя / месяц / год)'}`,
+    `Хочу подписку Yorix ${plan ? `${planCopy.ru[plan.id].forPeriod} — ${formatByn(plan.priceByn, 'ru')}` : '(неделя / месяц / год)'}`,
     `Код аккаунта (Настройки → Аккаунт в приложении): ${code}`,
   ].join('\n');
 }
@@ -98,8 +98,8 @@ export function orderTemplate(lang: Lang, plan?: Plan, accountCode?: string) {
 export function mailtoOrder(lang: Lang, plan?: Plan, accountCode?: string) {
   const subject =
     lang === 'en'
-      ? `Yorix Premium order${plan ? ` ${planCopy.en[plan.id].forPeriod}` : ''}`
-      : `Заказ Yorix Premium${plan ? ` ${planCopy.ru[plan.id].forPeriod}` : ''}`;
+      ? `Yorix subscription order${plan ? ` ${planCopy.en[plan.id].forPeriod}` : ''}`
+      : `Заказ подписки Yorix${plan ? ` ${planCopy.ru[plan.id].forPeriod}` : ''}`;
   return `mailto:${merchant.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(orderTemplate(lang, plan, accountCode))}`;
 }
 

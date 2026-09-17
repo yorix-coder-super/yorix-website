@@ -12,7 +12,9 @@ import {
   Users,
   Volume2,
 } from 'lucide-react';
+import { headers } from 'next/headers';
 import { BrandLogo } from './BrandLogo';
+import { HeaderMenus } from './premium/HeaderMenus';
 import { HomePremiumSection } from './premium/HomePremiumSection';
 import { testimonials } from './premium/testimonials';
 import { Parallax } from './premium/Parallax';
@@ -20,6 +22,7 @@ import { Reveal } from './premium/Reveal';
 import { StarField } from './premium/StarField';
 import { SellerFooter } from './SellerFooter';
 import { appDownloadUrl, topicPages } from './content';
+import { localeCopy, locales } from './locales';
 
 const heroScreens = [
   {
@@ -161,8 +164,10 @@ function PhoneShot({
   );
 }
 
-export default function Home() {
+export default async function Home() {
   const featuredGuides = topicPages.slice(0, 6);
+  const country = (await headers()).get('cf-ipcountry');
+  const languages = [{ code: 'en', label: 'English', href: '/' }, ...locales.map((item) => ({ code: item, label: localeCopy[item].nativeName, href: `/${item}` }))];
 
   return (
     <main className="home-page relative min-h-screen overflow-hidden text-white">
@@ -199,7 +204,7 @@ export default function Home() {
             className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white"
             href="#premium"
           >
-            Premium
+            Subscription
           </a>
           <a
             className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white"
@@ -208,15 +213,18 @@ export default function Home() {
             FAQ
           </a>
         </nav>
-        <a
-          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-[#1E1B4B] shadow-[0_18px_45px_rgb(255_255_255/18%)] transition hover:bg-[#EEF2FF] focus:outline-none focus:ring-4 focus:ring-white/25"
-          href={appDownloadUrl}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Get the app
-          <ArrowRight className="h-4 w-4" aria-hidden="true" />
-        </a>
+        <div className="flex items-center gap-2">
+          <HeaderMenus country={country} current="EN" lang="en" languages={languages} />
+          <a
+            className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-[#1E1B4B] shadow-[0_18px_45px_rgb(255_255_255/18%)] transition hover:bg-[#EEF2FF] focus:outline-none focus:ring-4 focus:ring-white/25 sm:px-5"
+            href={appDownloadUrl}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <span className="hidden lg:inline">Get the app</span>
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </a>
+        </div>
       </header>
 
       <section

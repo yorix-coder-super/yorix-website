@@ -44,7 +44,7 @@ export function SellerFooter({ note, lang = 'en' }: { note: string; lang?: Lang 
           <ul className="flex flex-wrap gap-x-5 gap-y-2">
             <li>
               <a className="font-semibold text-white underline decoration-white/30 hover:decoration-white" href={premiumPath(lang)}>
-                {lang === 'ru' ? 'Yorix Premium: тарифы и оплата картой' : 'Yorix Premium: plans and card payment'}
+                {lang === 'ru' ? 'Подписка Yorix: тарифы и оплата картой' : 'Yorix subscription: plans and card payment'}
               </a>
             </li>
             {documentLinks(lang).map((link) => (

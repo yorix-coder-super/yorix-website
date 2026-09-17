@@ -13,7 +13,7 @@ export function Privacy({ lang }: { lang: Lang }) {
       <DocumentPage lang={lang} page="/konfidencialnost" title={privacyTitle.en} updated={privacyUpdated.en}>
         <h2>1. Scope</h2>
         <p>
-          This policy describes how buyers’ personal data is processed when ordering and paying for Yorix Premium on yorix.website, under the Law of
+          This policy describes how buyers’ personal data is processed when ordering and paying for a Yorix subscription on yorix.website, under the Law of
           the Republic of Belarus of 7 May 2021 No. 99-З “On personal data protection”. Data processing inside the Yorix app is described in the app’s
           privacy policy, linked from the app itself.
         </p>
@@ -32,7 +32,7 @@ export function Privacy({ lang }: { lang: Lang }) {
         <p>Bank card details (number, expiry date, CVC/CVC2) are entered only on the WebPay page. We never receive or store them.</p>
         <h2>4. Purposes and legal basis</h2>
         <ul>
-          <li>concluding and performing the agreement: identifying the account, issuing the order, switching Premium on, support, refunds;</li>
+          <li>concluding and performing the agreement: identifying the account, issuing the order, switching the subscription on, support, refunds;</li>
           <li>meeting legal obligations: accounting for income and issuing a receipt in the “Professional income tax” app;</li>
           <li>answering your requests and protecting the service from abuse.</li>
         </ul>
@@ -46,7 +46,7 @@ export function Privacy({ lang }: { lang: Lang }) {
         </ul>
         <h2>6. Retention</h2>
         <p>
-          Correspondence and order records — for the Premium period and three years after it, to resolve possible disputes. Documents related to income
+          Correspondence and order records — for the subscription period and three years after it, to resolve possible disputes. Documents related to income
           accounting — for the periods set by tax law. Technical data — up to 30 days.
         </p>
         <h2>7. Your rights</h2>
@@ -67,7 +67,7 @@ export function Privacy({ lang }: { lang: Lang }) {
     <DocumentPage lang={lang} page="/konfidencialnost" title={privacyTitle.ru} updated={privacyUpdated.ru}>
       <h2>1. О чём эта политика</h2>
       <p>
-        Политика описывает, как обрабатываются персональные данные покупателей при заказе и оплате Yorix Premium на сайте yorix.website, в
+        Политика описывает, как обрабатываются персональные данные покупателей при заказе и оплате подписки Yorix на сайте yorix.website, в
         соответствии с Законом Республики Беларусь от 7 мая 2021 г. № 99-З «О защите персональных данных». Обработка данных внутри приложения Yorix
         описана в политике конфиденциальности, ссылка на которую есть в самом приложении.
       </p>
@@ -86,7 +86,7 @@ export function Privacy({ lang }: { lang: Lang }) {
       <p>Данные платёжной карты (номер, срок действия, CVC/CVC2) вводятся только на странице WebPay. Мы их не получаем и не храним.</p>
       <h2>4. Зачем мы обрабатываем данные и на каком основании</h2>
       <ul>
-        <li>заключение и исполнение договора: определение аккаунта, оформление заказа, включение Premium, поддержка, возврат платежа;</li>
+        <li>заключение и исполнение договора: определение аккаунта, оформление заказа, включение подписки, поддержка, возврат платежа;</li>
         <li>исполнение обязанностей по законодательству: учёт дохода и формирование чека в приложении «Налог на профессиональный доход»;</li>
         <li>ответы на ваши обращения и защита сервиса от злоупотреблений.</li>
       </ul>
@@ -106,7 +106,7 @@ export function Privacy({ lang }: { lang: Lang }) {
       </ul>
       <h2>6. Сколько храним</h2>
       <p>
-        Переписку и сведения о заказе — в течение срока действия Premium и трёх лет после него для разрешения возможных споров. Документы, связанные
+        Переписку и сведения о заказе — в течение срока действия подписки и трёх лет после него для разрешения возможных споров. Документы, связанные
         с учётом дохода, — в сроки, установленные налоговым законодательством. Технические данные — до 30 дней.
       </p>
       <h2>7. Ваши права</h2>

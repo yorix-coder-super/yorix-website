@@ -1,6 +1,6 @@
 import { ArrowRight, ShieldCheck } from 'lucide-react';
 import { headers } from 'next/headers';
-import { AccountPanel, AccountProvider, CurrencySwitcher, PlanCard, RequestForm } from './account';
+import { AccountPanel, AccountProvider, PlanCard, RequestForm } from './account';
 import { premiumCopy } from './copy';
 import { premiumPath, type Lang } from './i18n';
 import { plans } from './merchant';
@@ -36,10 +36,7 @@ export async function HomePremiumSection({ lang }: { lang: Lang }) {
             </Reveal>
           ))}
         </div>
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
-          <CurrencySwitcher />
-        </div>
-        <p className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm leading-6 text-white/70">
+        <p className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm leading-6 text-white/70">
           <ShieldCheck className="h-5 w-5 text-[#FDE68A]" aria-hidden="true" />
           <span>{copy.home.note}</span>
           <a className="inline-flex items-center gap-1 font-semibold text-white underline decoration-white/30 hover:decoration-white" href={premiumPath(lang, '/oplata')}>

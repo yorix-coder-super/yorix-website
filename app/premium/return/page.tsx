@@ -5,7 +5,7 @@ import { ReturnPage } from '../ReturnPage';
 
 export const metadata: Metadata = {
   title: premiumCopy['ru'].ret.title,
-  description: 'Статус оплаты Yorix Premium.',
+  description: 'Статус оплаты подписки Yorix.',
   alternates: { canonical: premiumPath('ru', '/return'), languages: premiumAlternates('/return') },
   robots: { index: false, follow: false },
 };

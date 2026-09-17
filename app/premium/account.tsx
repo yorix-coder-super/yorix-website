@@ -5,7 +5,8 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import type { Auth, User as FirebaseUser } from 'firebase/auth';
 import { API_BASE, firebaseConfig, isFirebaseConfigured } from './config';
 import { premiumCopy, type PremiumCopy } from './copy';
-import { convert, currencyForCountry, displayPrice, fallbackRates, formatMoney, isCurrency, type Currency, type Rates } from './currency';
+import { convert, currencyForCountry, displayPrice, fallbackRates, formatMoney, type Currency, type Rates } from './currency';
+import { useCurrency } from './currencyStore';
 import { formatDate, premiumPath, type Lang } from './i18n';
 import { formatByn, mailtoOrder, orderTemplate, planCopy, plans, type Plan } from './merchant';
 import { MoonPhase } from './MoonPhase';
@@ -26,7 +27,6 @@ type State = {
   me: Me | null;
   busy: 'signin' | 'order' | null;
   error: ErrorKey | null;
-  currency: Currency;
   requestPlan: Plan | null;
 };
 
@@ -34,16 +34,14 @@ type Api = State & {
   lang: Lang;
   copy: PremiumCopy;
   rates: Rates;
+  currency: Currency;
   signIn: (provider: Provider) => Promise<Account | null>;
   signOut: () => Promise<void>;
   createOrder: (planId: string) => Promise<void>;
   getToken: () => Promise<string | null>;
   clearError: () => void;
-  setCurrency: (currency: Currency) => void;
   openRequest: (plan: Plan | null) => void;
 };
-
-const CURRENCY_KEY = 'yx_currency';
 
 const Ctx = createContext<Api | null>(null);
 
@@ -94,9 +92,9 @@ export function AccountProvider({ lang, country, children }: { lang: Lang; count
     me: null,
     busy: null,
     error: null,
-    currency: currencyForCountry(country),
     requestPlan: null,
   });
+  const currency = useCurrency(currencyForCountry(country));
 
   const getToken = useCallback(async () => {
     const user = authRef.current?.currentUser;
@@ -116,20 +114,6 @@ export function AccountProvider({ lang, country, children }: { lang: Lang; count
       // The account still works without the entitlement line.
     }
   }, [getToken]);
-
-  useEffect(() => {
-    // A currency the visitor picked by hand outranks the guess from their
-    // country; read after paint so the server-rendered guess hydrates cleanly.
-    const frame = requestAnimationFrame(() => {
-      try {
-        const saved = window.localStorage.getItem(CURRENCY_KEY);
-        if (isCurrency(saved)) setState((s) => (s.currency === saved ? s : { ...s, currency: saved }));
-      } catch {
-        // Storage may be blocked; the geo guess stands.
-      }
-    });
-    return () => cancelAnimationFrame(frame);
-  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -218,20 +202,12 @@ export function AccountProvider({ lang, country, children }: { lang: Lang; count
   );
 
   const clearError = useCallback(() => setState((s) => ({ ...s, error: null })), []);
-  const setCurrency = useCallback((currency: Currency) => {
-    setState((s) => ({ ...s, currency }));
-    try {
-      window.localStorage.setItem(CURRENCY_KEY, currency);
-    } catch {
-      // Not persisted; the choice still applies to this page.
-    }
-  }, []);
   const openRequest = useCallback((plan: Plan | null) => setState((s) => ({ ...s, requestPlan: plan, error: null })), []);
 
   const rates = state.config?.rates ?? fallbackRates;
   const api = useMemo<Api>(
-    () => ({ ...state, lang, copy, rates, signIn, signOut, createOrder, getToken, clearError, setCurrency, openRequest }),
-    [state, lang, copy, rates, signIn, signOut, createOrder, getToken, clearError, setCurrency, openRequest],
+    () => ({ ...state, lang, copy, rates, currency, signIn, signOut, createOrder, getToken, clearError, openRequest }),
+    [state, lang, copy, rates, currency, signIn, signOut, createOrder, getToken, clearError, openRequest],
   );
 
   return <Ctx.Provider value={api}>{children}</Ctx.Provider>;
@@ -375,8 +351,8 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
     <article
       className={`relative flex w-full min-w-0 flex-col rounded-[1.75rem] border p-6 transition hover:-translate-y-1 ${
         featured
-          ? 'order-first border-[#FDE68A]/60 bg-[#EEF2FF] text-[#1E1B4B] shadow-[0_28px_80px_rgb(99_102_241/30%)] md:order-none md:-mt-3 md:mb-3'
-          : 'border-white/20 bg-white/[0.12] backdrop-blur-xl hover:border-white/35 md:mt-3'
+          ? 'order-first border-[#FDE68A]/60 bg-[#EEF2FF] text-[#1E1B4B] shadow-[0_28px_80px_rgb(99_102_241/30%)] md:order-none'
+          : 'border-white/20 bg-white/[0.12] backdrop-blur-xl hover:border-white/35'
       }`}
     >
       {featured ? (
@@ -470,30 +446,6 @@ function CopyButton({ value, label, done }: { value: string; label: string; done
       {copied ? <Check className="h-4 w-4" aria-hidden="true" /> : <Copy className="h-4 w-4" aria-hidden="true" />}
       <span aria-live="polite">{copied ? done : label}</span>
     </Button>
-  );
-}
-
-export function CurrencySwitcher() {
-  const { currency, setCurrency, copy } = useAccount();
-  return (
-    <div className="flex flex-wrap items-center gap-2 text-sm text-white/60">
-      <span>{copy.currency.label}</span>
-      <fieldset className="inline-flex rounded-full border border-white/15 bg-white/10 p-1">
-        <legend className="sr-only">{copy.currency.label}</legend>
-        {(['BYN', 'RUB', 'EUR', 'USD'] as const).map((code) => (
-          <button
-            aria-pressed={currency === code}
-            className={`min-h-8 rounded-full px-3 text-xs font-semibold transition ${currency === code ? 'bg-white text-[#1E1B4B]' : 'text-white/70 hover:text-white'}`}
-            key={code}
-            onClick={() => setCurrency(code)}
-            type="button"
-          >
-            {code}
-          </button>
-        ))}
-      </fieldset>
-      {currency !== 'BYN' ? <span>{copy.currency.note}</span> : null}
-    </div>
   );
 }
 

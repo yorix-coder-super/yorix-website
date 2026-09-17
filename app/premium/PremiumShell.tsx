@@ -1,7 +1,9 @@
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { headers } from 'next/headers';
 import type { ReactNode } from 'react';
 import { BrandLogo } from '../BrandLogo';
 import { premiumCopy } from './copy';
+import { HeaderMenus } from './HeaderMenus';
 import { premiumLangs, premiumPath, type Lang, type PremiumPage } from './i18n';
 import { merchant } from './merchant';
 import { PaymentLogos } from './PaymentLogos';
@@ -17,9 +19,10 @@ export function documentLinks(lang: Lang) {
   ];
 }
 
-export function PremiumShell({ lang, page = '', children }: { lang: Lang; page?: PremiumPage; children: ReactNode }) {
+export async function PremiumShell({ lang, page = '', children }: { lang: Lang; page?: PremiumPage; children: ReactNode }) {
   const copy = premiumCopy[lang];
   const home = premiumPath(lang);
+  const country = (await headers()).get('cf-ipcountry');
   const navItems = [
     { href: `${home}#tarify`, label: copy.nav.plans },
     { href: `${home}#kak-kupit`, label: copy.nav.howToBuy },
@@ -31,7 +34,7 @@ export function PremiumShell({ lang, page = '', children }: { lang: Lang; page?:
     <main className="home-page relative min-h-screen overflow-hidden text-white" lang={lang}>
       <StarField />
       <header className="relative z-50 mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-5 py-5 sm:px-8">
-        <a href={home} aria-label="Yorix Premium">
+        <a href={home} aria-label={`Yorix — ${copy.home.nav}`}>
           <BrandLogo size="sm" tone="dark" />
         </a>
         <nav
@@ -49,28 +52,12 @@ export function PremiumShell({ lang, page = '', children }: { lang: Lang; page?:
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <details className="relative">
-            <summary
-              aria-label={copy.nav.language}
-              className="flex min-h-10 cursor-pointer list-none items-center gap-1 rounded-full border border-white/15 bg-white/10 px-3 text-sm font-semibold text-white transition hover:bg-white/15 [&::-webkit-details-marker]:hidden"
-            >
-              {lang.toUpperCase()}
-              <ChevronDown className="h-4 w-4" aria-hidden="true" />
-            </summary>
-            <div className="absolute right-0 top-12 grid w-40 overflow-hidden rounded-lg border border-white/10 bg-[#1E1B4B] p-1 shadow-2xl">
-              {premiumLangs.map((item) => (
-                <a
-                  aria-current={item.code === lang ? 'page' : undefined}
-                  className={`rounded-md px-3 py-2 text-sm hover:bg-white/10 ${item.code === lang ? 'text-white' : 'text-white/80'}`}
-                  href={premiumPath(item.code, page)}
-                  hrefLang={item.code}
-                  key={item.code}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
-          </details>
+          <HeaderMenus
+            country={country}
+            current={lang.toUpperCase()}
+            lang={lang}
+            languages={premiumLangs.map((item) => ({ code: item.code, label: item.label, href: premiumPath(item.code, page) }))}
+          />
           <Button href={`${home}#tarify`} size="sm" variant="light">
             <span className="hidden sm:inline">{copy.nav.choosePlan}</span>
             <ArrowRight className="h-4 w-4" aria-hidden="true" />

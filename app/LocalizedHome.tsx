@@ -3,7 +3,6 @@ import {
   Bell,
   BookOpen,
   Check,
-  ChevronDown,
   LineChart,
   MessageCircle,
   Moon,
@@ -15,6 +14,8 @@ import {
 } from 'lucide-react';
 import { getLocalizedTopicPage, isTranslatedArticleSlug } from './article-localizations';
 import { BrandLogo } from './BrandLogo';
+import { headers } from 'next/headers';
+import { HeaderMenus } from './premium/HeaderMenus';
 import { HomePremiumSection } from './premium/HomePremiumSection';
 import { premiumCopy } from './premium/copy';
 import { Parallax } from './premium/Parallax';
@@ -33,9 +34,11 @@ const storyAssets = [
 
 const proofIcons = [Moon, MessageCircle, ShieldCheck];
 
-export function LocalizedHome({ locale }: { locale: Locale }) {
+export async function LocalizedHome({ locale }: { locale: Locale }) {
   const copy = localeCopy[locale];
   const premiumLang = locale === 'ru' ? 'ru' : 'en';
+  const country = (await headers()).get('cf-ipcountry');
+  const languages = [{ code: 'en', label: 'English', href: '/' }, ...locales.map((item) => ({ code: item, label: localeCopy[item].nativeName, href: `/${item}` }))];
   const guidePages = topicPages.slice(0, 6);
   const guideHref = (slug: string) =>
     isTranslatedArticleSlug(slug) && getLocalizedTopicPage(locale, slug)
@@ -58,18 +61,8 @@ export function LocalizedHome({ locale }: { locale: Locale }) {
           <a className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white" href="#faq">{copy.nav.faq}</a>
         </nav>
         <div className="flex items-center gap-2">
-          <details className="relative">
-            <summary className="flex h-11 cursor-pointer list-none items-center gap-1 rounded-full border border-white/15 bg-white/10 px-3 text-sm font-semibold text-white transition hover:bg-white/15">
-              <span className="sm:hidden">{locale.toUpperCase()}</span><span className="hidden sm:inline">{copy.nativeName}</span><ChevronDown className="h-4 w-4" aria-hidden="true" />
-            </summary>
-            <div className="absolute right-0 top-12 grid w-40 overflow-hidden rounded-lg border border-white/10 bg-[#1E1B4B] p-1 shadow-2xl">
-              <a className="rounded-md px-3 py-2 text-sm text-white/80 hover:bg-white/10" href="/">English</a>
-              {locales.filter((item) => item !== locale).map((item) => (
-                <a className="rounded-md px-3 py-2 text-sm text-white/80 hover:bg-white/10" href={`/${item}`} key={item}>{localeCopy[item].nativeName}</a>
-              ))}
-            </div>
-          </details>
-          <a className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-[#1E1B4B] shadow-[0_18px_45px_rgb(255_255_255/18%)] transition hover:bg-[#EEF2FF] sm:px-5" href={appDownloadUrl} rel="noopener noreferrer" target="_blank">
+          <HeaderMenus country={country} current={locale.toUpperCase()} lang={premiumLang} languages={languages} />
+          <a className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-[#1E1B4B] shadow-[0_18px_45px_rgb(255_255_255/18%)] transition hover:bg-[#EEF2FF] sm:px-5" href={appDownloadUrl} rel="noopener noreferrer" target="_blank">
             <span className="hidden lg:inline">{copy.nav.download}</span><ArrowRight className="h-4 w-4" aria-hidden="true" />
           </a>
         </div>

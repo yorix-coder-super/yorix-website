@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 
-// Live night sky behind every Premium page: a fixed layer of drifting,
+// Live night sky behind every subscription page: a fixed layer of drifting,
 // twinkling stars from tsParticles. Loaded after the page is idle so it never
 // competes with the content, skipped entirely for reduced-motion readers,
 // and while it runs the static CSS star dots fade out so the sky is one.

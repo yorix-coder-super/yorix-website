@@ -1,6 +1,6 @@
 import { ArrowRight, BarChart3, CalendarClock, LockKeyhole, MessageCircle, RotateCcw, ShieldCheck, Smartphone, Sparkles, Sun, UserRound } from 'lucide-react';
 import { headers } from 'next/headers';
-import { AccountPanel, AccountProvider, CurrencySwitcher, ManualOrder, PlanCard, RequestForm } from './account';
+import { AccountPanel, AccountProvider, ManualOrder, PlanCard, RequestForm } from './account';
 import { premiumCopy } from './copy';
 import { premiumPath, type Lang } from './i18n';
 import { formatByn, plans } from './merchant';
@@ -118,9 +118,6 @@ export async function PremiumStorefront({ lang }: { lang: Lang }) {
             <ShieldCheck className="mt-1 h-5 w-5 shrink-0 text-[#FDE68A]" aria-hidden="true" />
             {copy.guarantee}
           </p>
-          <div className="mt-6">
-            <CurrencySwitcher />
-          </div>
           <p className="mt-4 text-sm leading-6 text-white/60">
             {copy.plans.footnote} {copy.plans.acceptBefore}{' '}
             <a className="text-white underline decoration-white/30 hover:decoration-white" href={premiumPath(lang, '/oferta')}>

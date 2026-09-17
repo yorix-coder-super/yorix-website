@@ -5,7 +5,7 @@ import { premiumCopy } from '../../../premium/copy';
 
 export const metadata: Metadata = {
   title: premiumCopy['en'].cancel.title,
-  description: 'Yorix Premium payment cancelled.',
+  description: 'Yorix subscription payment cancelled.',
   alternates: { canonical: premiumPath('en', '/cancel'), languages: premiumAlternates('/cancel') },
   robots: { index: false, follow: false },
 };

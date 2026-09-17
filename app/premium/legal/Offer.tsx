@@ -51,7 +51,7 @@ export function Offer({ lang }: { lang: Lang }) {
         <p>
           1.1. This document is a public offer by {merchant.fullName} ({merchant.latinName}), {merchant.status.en.toLowerCase()}, {merchant.country.en}
           {merchant.unp ? `, taxpayer number ${merchant.unp}` : ''} (the Provider), addressed to any individual (the Customer), to conclude an agreement on
-          access to Yorix Premium on the terms below.
+          a Yorix Subscription on the terms below.
         </p>
         <p>
           1.2. The agreement is concluded when the order is paid (acceptance of the offer) under Article 408(3) of the Civil Code of the Republic of
@@ -61,12 +61,12 @@ export function Offer({ lang }: { lang: Lang }) {
         <p>2.1. App — the Yorix mobile app for iPhone and iPad, distributed through the App Store.</p>
         <p>2.2. Account — the Customer’s account in the App, created by signing in with Apple or Google; on the website it is identified by the same sign-in.</p>
         <p>
-          2.3. Premium — the paid features of the App: the personal sleep forecast, the AI sleep coach, analytics and daily recommendations. Programs
-          from the “Programs” section are not part of Premium.
+          2.3. Subscription — the paid features of the App for a chosen Period: the personal sleep forecast, the AI sleep coach, analytics and daily
+          recommendations. Programs from the “Programs” section are not part of the Subscription.
         </p>
-        <p>2.4. Period — the length of access to Premium: 7, 30 or 365 calendar days.</p>
+        <p>2.4. Period — the length of the Subscription: 7, 30 or 365 calendar days.</p>
         <h2>3. Subject</h2>
-        <p>3.1. The Provider grants the Customer access to Premium on the Account for the chosen Period, and the Customer pays for the access.</p>
+        <p>3.1. The Provider grants the Customer the Subscription on the Account for the chosen Period, and the Customer pays for it.</p>
         <p>3.2. The service is provided remotely over the Internet. No physical media are delivered.</p>
         <h2>4. Price and payment</h2>
         <p>4.1. Price of access:</p>
@@ -79,29 +79,30 @@ export function Offer({ lang }: { lang: Lang }) {
         <p>4.3. The payment is one-off. No automatic charges or renewals are made. To extend access the Customer places a new order.</p>
         <p>4.4. The payment confirmation document is the receipt issued by the Provider in the “Professional income tax” app and sent to the Customer by e-mail.</p>
         <h2>5. Provision of the service</h2>
-        <p>5.1. The Provider switches Premium on for the Account immediately after the payment is received, and no later than 24 hours after it.</p>
-        <p>5.2. The Period runs from the moment Premium is switched on. The Provider informs the Customer of the end date by e-mail.</p>
-        <p>5.3. The service is deemed duly provided when the Premium features are available on the Customer’s Account during the Period.</p>
-        <p>5.4. When the Period ends, access to Premium stops. The data the Customer entered in the App is kept.</p>
+        <p>5.1. The Provider switches the Subscription on for the Account immediately after the payment is received, and no later than 24 hours after it.</p>
+        <p>5.2. The Period runs from the moment the Subscription is switched on. The Provider informs the Customer of the end date by e-mail.</p>
+        <p>5.3. The service is deemed duly provided when the Subscription features are available on the Customer’s Account during the Period.</p>
+        <p>5.4. When the Period ends, the Subscription stops; it does not renew and nothing is charged. The data the Customer entered in the App is kept.</p>
         <h2>6. Rights and obligations</h2>
         <p>6.1. The Provider shall:</p>
         <ul>
-          <li>switch Premium on within the time stated in clause 5.1;</li>
-          <li>keep the Premium features available during the Period, except for the interruptions described in clause 8.2;</li>
+          <li>switch the Subscription on within the time stated in clause 5.1;</li>
+          <li>keep the Subscription features available during the Period, except for the interruptions described in clause 8.2;</li>
           <li>answer the Customer’s requests sent to {merchant.email}.</li>
         </ul>
         <p>6.2. The Customer shall:</p>
         <ul>
-          <li>sign in with the Account that is to receive Premium;</li>
-          <li>not hand the Account to third parties in order to resell Premium.</li>
+          <li>sign in with the Account that is to receive the Subscription;</li>
+          <li>not hand the Account to third parties in order to resell the Subscription.</li>
         </ul>
-        <p>6.3. The Provider may change and develop the App’s features while keeping the essential purpose of Premium.</p>
+        <p>6.3. The Provider may change and develop the App’s features while keeping the essential purpose of the Subscription.</p>
         <h2>7. Withdrawal and refunds</h2>
         <p>
-          7.1. The Customer may withdraw from the agreement at any time. Before Premium is switched on, the full amount is refunded; afterwards, the
-          unused full days of the Period are refunded.
+          7.1. Before the Subscription is switched on, the Customer may withdraw from the agreement at any time and the full amount is refunded. After
+          the Subscription is switched on, the paid Period is not refunded, except in the cases provided for by the legislation of the Republic of
+          Belarus.
         </p>
-        <p>7.2. If Premium was unavailable through the Provider’s fault, the Customer may claim a refund for the unavailable time or a proportional extension.</p>
+        <p>7.2. If the Subscription was unavailable through the Provider’s fault, the Customer may claim a refund for the unavailable time or a proportional extension.</p>
         <p>
           7.3. Refunds go to the bank card used for the payment. The procedure and timing are described on the <a href={payment}>“Payment, delivery and refunds”</a> page.
         </p>
@@ -136,7 +137,7 @@ export function Offer({ lang }: { lang: Lang }) {
       <p>
         1.1. Настоящий документ является публичной офертой {merchant.fullName}, {merchant.status.ru.toLowerCase()}, {merchant.country.ru}
         {merchant.unp ? `, УНП ${merchant.unp}` : ''} (далее — Исполнитель), адресованной любому физическому лицу (далее — Заказчик), заключить договор на
-        предоставление доступа к Yorix Premium на условиях, изложенных ниже.
+        предоставление Подписки Yorix на условиях, изложенных ниже.
       </p>
       <p>
         1.2. Договор считается заключённым с момента оплаты заказа (акцепта оферты) в соответствии с пунктом 3 статьи 408 Гражданского кодекса
@@ -147,12 +148,12 @@ export function Offer({ lang }: { lang: Lang }) {
       <p>2.1. Приложение — мобильное приложение Yorix для iPhone и iPad, распространяемое через App Store.</p>
       <p>2.2. Аккаунт — учётная запись Заказчика в Приложении, созданная при входе через Apple или Google; на сайте определяется тем же входом.</p>
       <p>
-        2.3. Premium — набор платных функций Приложения: персональный прогноз сна, ИИ-коуч по сну, аналитика и ежедневные рекомендации. Отдельные
-        программы из раздела «Программы» в Premium не входят.
+        2.3. Подписка — доступ к платным функциям Приложения на выбранный Срок: персональный прогноз сна, ИИ-коуч по сну, аналитика и ежедневные
+        рекомендации. Отдельные программы из раздела «Программы» в Подписку не входят.
       </p>
-      <p>2.4. Срок — период, на который предоставляется доступ к Premium: 7, 30 или 365 календарных дней.</p>
+      <p>2.4. Срок — период действия Подписки: 7, 30 или 365 календарных дней.</p>
       <h2>3. Предмет договора</h2>
-      <p>3.1. Исполнитель предоставляет Заказчику доступ к Premium на Аккаунте на выбранный Срок, а Заказчик оплачивает доступ.</p>
+      <p>3.1. Исполнитель предоставляет Заказчику Подписку на Аккаунте на выбранный Срок, а Заказчик оплачивает её.</p>
       <p>3.2. Услуга оказывается дистанционно, через сеть Интернет. Физические носители не передаются.</p>
       <h2>4. Стоимость и порядок оплаты</h2>
       <p>4.1. Стоимость доступа:</p>
@@ -168,29 +169,29 @@ export function Offer({ lang }: { lang: Lang }) {
         направленный Заказчику по e-mail.
       </p>
       <h2>5. Порядок оказания услуги</h2>
-      <p>5.1. Исполнитель включает Premium на Аккаунте Заказчика сразу после поступления оплаты и не позднее 24 часов после него.</p>
-      <p>5.2. Срок исчисляется с момента включения Premium. Дату окончания Срока Исполнитель сообщает Заказчику по e-mail.</p>
-      <p>5.3. Услуга считается оказанной надлежащим образом, если в течение Срока функции Premium доступны на Аккаунте Заказчика.</p>
-      <p>5.4. По окончании Срока доступ к Premium прекращается. Данные, внесённые Заказчиком в Приложение, сохраняются.</p>
+      <p>5.1. Исполнитель включает Подписку на Аккаунте Заказчика сразу после поступления оплаты и не позднее 24 часов после него.</p>
+      <p>5.2. Срок исчисляется с момента включения Подписки. Дату окончания Срока Исполнитель сообщает Заказчику по e-mail.</p>
+      <p>5.3. Услуга считается оказанной надлежащим образом, если в течение Срока функции Подписки доступны на Аккаунте Заказчика.</p>
+      <p>5.4. По окончании Срока Подписка прекращается; она не продлевается, и оплата не списывается. Данные, внесённые Заказчиком в Приложение, сохраняются.</p>
       <h2>6. Права и обязанности сторон</h2>
       <p>6.1. Исполнитель обязуется:</p>
       <ul>
-        <li>включить Premium в срок, указанный в пункте 5.1;</li>
-        <li>обеспечивать доступ к функциям Premium в течение Срока, за исключением перерывов, указанных в пункте 8.2;</li>
+        <li>включить Подписку в срок, указанный в пункте 5.1;</li>
+        <li>обеспечивать доступ к функциям Подписки в течение Срока, за исключением перерывов, указанных в пункте 8.2;</li>
         <li>отвечать на обращения Заказчика по e-mail {merchant.email}.</li>
       </ul>
       <p>6.2. Заказчик обязуется:</p>
       <ul>
-        <li>входить с тем Аккаунтом, на котором должен быть включён Premium;</li>
-        <li>не передавать доступ к Аккаунту третьим лицам с целью перепродажи Premium.</li>
+        <li>входить с тем Аккаунтом, на котором должна быть включена Подписка;</li>
+        <li>не передавать доступ к Аккаунту третьим лицам с целью перепродажи Подписки.</li>
       </ul>
-      <p>6.3. Исполнитель вправе изменять и развивать функции Приложения, сохраняя основное назначение Premium.</p>
+      <p>6.3. Исполнитель вправе изменять и развивать функции Приложения, сохраняя основное назначение Подписки.</p>
       <h2>7. Отказ от договора и возврат</h2>
       <p>
-        7.1. Заказчик вправе отказаться от договора в любое время. До включения Premium возвращается вся уплаченная сумма. После включения
-        возвращается стоимость неиспользованных полных дней Срока.
+        7.1. До включения Подписки Заказчик вправе отказаться от договора в любое время — уплаченная сумма возвращается полностью. После включения
+        Подписки оплаченный Срок не возвращается, за исключением случаев, предусмотренных законодательством Республики Беларусь.
       </p>
-      <p>7.2. Если Premium был недоступен по вине Исполнителя, Заказчик вправе потребовать возврата стоимости периода недоступности или соразмерного продления Срока.</p>
+      <p>7.2. Если Подписка была недоступна по вине Исполнителя, Заказчик вправе потребовать возврата стоимости периода недоступности или соразмерного продления Срока.</p>
       <p>
         7.3. Возврат производится на банковскую карту, с которой была произведена оплата. Порядок и сроки возврата указаны на странице{' '}
         <a href={payment}>«Оплата, доставка и возврат»</a>.
