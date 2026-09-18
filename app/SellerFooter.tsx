@@ -23,6 +23,8 @@ export function SellerFooter({ note, lang = 'en', home }: { note: string; lang?:
   const text = labels[lang];
   const homePath = home ?? (lang === 'ru' ? '/ru' : '/');
   const subscription = subscriptionPath(lang);
+  const year = new Date().getFullYear();
+  const years = year > 2026 ? `2026–${year}` : '2026';
   const columns = [
     {
       title: text.product,
@@ -86,7 +88,7 @@ export function SellerFooter({ note, lang = 'en', home }: { note: string; lang?:
             <PaymentLogos />
           </div>
           <p className="text-xs leading-5 text-white/45 lg:max-w-xl lg:text-right">
-            {note} © 2024–2026 Yorix.
+            {note} © {years} Yorix.
           </p>
         </div>
       </div>
