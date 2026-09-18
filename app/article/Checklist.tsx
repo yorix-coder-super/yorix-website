@@ -32,20 +32,20 @@ export function Checklist({ title, items, storageKey }: { title: string; items: 
   };
 
   return (
-    <section className="rounded-3xl border border-[#E7E5FB] bg-white p-5 shadow-[0_10px_40px_rgb(30_27_75/6%)]">
-      <h2 className="text-base font-semibold text-[#1E1B4B]">{title}</h2>
+    <section className="rounded-3xl border border-white/10 bg-white/[0.05] p-5 backdrop-blur-xl">
+      <h2 className="text-base font-semibold text-white">{title}</h2>
       <ul className="mt-4 grid gap-3">
         {items.map((item, index) => (
           <li key={item}>
-            <label className="flex cursor-pointer items-start gap-3 text-sm leading-6 text-[#334155]">
+            <label className="flex cursor-pointer items-start gap-3 text-sm leading-6 text-white/80">
               <input checked={done[index]} className="peer sr-only" onChange={() => toggle(index)} type="checkbox" />
               <span
                 aria-hidden="true"
-                className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-md border-2 border-[#C7D2FE] bg-white text-white transition peer-checked:border-[#6366F1] peer-checked:bg-[#6366F1] peer-focus-visible:ring-4 peer-focus-visible:ring-[#6366F1]/25"
+                className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-md border-2 border-white/35 text-transparent transition peer-checked:border-[#6366F1] peer-checked:bg-[#6366F1] peer-checked:text-white peer-focus-visible:ring-4 peer-focus-visible:ring-[#6366F1]/40"
               >
                 <Check className="h-3.5 w-3.5" strokeWidth={3} />
               </span>
-              <span className="transition peer-checked:text-[#94A3B8] peer-checked:line-through">{item}</span>
+              <span className="transition peer-checked:text-white/40 peer-checked:line-through">{item}</span>
             </label>
           </li>
         ))}
