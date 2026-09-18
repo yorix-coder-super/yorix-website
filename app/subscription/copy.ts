@@ -54,7 +54,7 @@ export type SubscriptionCopy = {
   docs: { offer: string; payment: string; privacy: string };
   legal: { eyebrow: string; updated: (date: string) => string; binding: string };
   home: { nav: string; eyebrow: string; title: string; body: string; more: string };
-  currency: { label: string; note: string; names: Record<'BYN' | 'RUB' | 'EUR' | 'USD', string> };
+  currency: { note: (amounts: string) => string };
   request: {
     title: string;
     body: string;
@@ -172,11 +172,7 @@ const ru: SubscriptionCopy = {
     body: 'Прогноз следующего сна, коуч 24/7, аналитика и советы на день — на неделю, месяц или год.',
     more: 'Всё о подписке: условия, возврат, вопросы',
   },
-  currency: {
-    label: 'Валюта',
-    note: 'Оплата проходит в BYN, банк карты пересчитает по своему курсу',
-    names: { BYN: 'Белорусский рубль', RUB: 'Российский рубль', EUR: 'Евро', USD: 'Доллар США' },
-  },
+  currency: { note: (amounts) => `Оплата проходит в белорусских рублях: ${amounts}. Банк карты пересчитает по своему курсу.` },
   request: {
     title: 'Заявка на подписку',
     body: 'Оставьте e-mail — в течение дня пришлём ссылку на оплату. Платить пока не нужно.',
@@ -298,11 +294,7 @@ const en: SubscriptionCopy = {
     body: 'Next-nap forecast, 24/7 coach, analytics and daily advice — for a week, a month or a year.',
     more: 'All about the subscription: terms, refunds, FAQ',
   },
-  currency: {
-    label: 'Currency',
-    note: 'The card is charged in BYN; your bank converts at its own rate',
-    names: { BYN: 'Belarusian ruble', RUB: 'Russian ruble', EUR: 'Euro', USD: 'US dollar' },
-  },
+  currency: { note: (amounts) => `The card is charged in Belarusian rubles: ${amounts}. Your bank converts at its own rate.` },
   request: {
     title: 'Subscription request',
     body: "Leave your e-mail — we'll send a payment link within a day. Nothing to pay yet.",

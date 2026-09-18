@@ -13,20 +13,16 @@ import {
   Volume2,
 } from 'lucide-react';
 import { getLocalizedTopicPage, isTranslatedArticleSlug } from './article-localizations';
-import { BrandLogo } from './BrandLogo';
-import { headers } from 'next/headers';
 import { SiteHeader } from './SiteHeader';
-import { subscriptionPath } from './subscription/i18n';
 import { Magnetic } from './subscription/Magnetic';
 import { WordReveal } from './subscription/WordReveal';
 import { HomeSubscriptionSection } from './subscription/HomeSubscriptionSection';
-import { subscriptionCopy } from './subscription/copy';
 import { Parallax } from './subscription/Parallax';
 import { Reveal } from './subscription/Reveal';
 import { StarField } from './subscription/StarField';
 import { SellerFooter } from './SellerFooter';
 import { appDownloadUrl, topicPages } from './content';
-import { localeCopy, locales, type Locale } from './locales';
+import { localeCopy, type Locale } from './locales';
 
 const storyAssets = [
   { image: '/screen-plan.png', icon: Bell },
@@ -40,9 +36,6 @@ const proofIcons = [Moon, MessageCircle, ShieldCheck];
 export async function LocalizedHome({ locale }: { locale: Locale }) {
   const copy = localeCopy[locale];
   const subscriptionLang = locale === 'ru' ? 'ru' : 'en';
-  const requestHeaders = await headers();
-  const country = requestHeaders.get('cf-ipcountry');
-  const acceptLanguage = requestHeaders.get('accept-language');
   const guidePages = topicPages.slice(0, 6);
   const guideHref = (slug: string) =>
     isTranslatedArticleSlug(slug) && getLocalizedTopicPage(locale, slug)
@@ -53,7 +46,7 @@ export async function LocalizedHome({ locale }: { locale: Locale }) {
     <main className="home-page relative min-h-screen overflow-hidden text-white" lang={locale} dir={locale === 'ar' || locale === 'he' ? 'rtl' : undefined}>
       <StarField />
       <div className="relative z-10">
-      <SiteHeader acceptLanguage={acceptLanguage} country={country} locale={locale} />
+      <SiteHeader locale={locale} />
 
       <section className="relative mx-auto grid min-h-[calc(100vh-5rem)] w-full max-w-7xl items-center gap-10 px-5 pb-16 pt-8 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:px-10 lg:pb-20">
         <div className="relative z-20 max-w-2xl">

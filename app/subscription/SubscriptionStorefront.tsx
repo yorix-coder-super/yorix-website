@@ -1,11 +1,10 @@
 import { ArrowRight, CalendarClock, MessageCircle, RotateCcw, Sparkles } from 'lucide-react';
 import { headers } from 'next/headers';
-import { AccountLine, AccountProvider, PlanCard, RequestForm } from './account';
+import { AccountLine, AccountProvider, ChargeNote, HeroCta, PlanCard, RequestForm } from './account';
 import { subscriptionCopy } from './copy';
 import { subscriptionPath, type Lang } from './i18n';
 import { Magnetic } from './Magnetic';
-import { formatByn, merchant, plans } from './merchant';
-import { Money } from './Money';
+import { merchant, plans } from './merchant';
 import { Parallax } from './Parallax';
 import { Reveal } from './Reveal';
 import { SocialProof } from './SocialProof';
@@ -21,7 +20,6 @@ const outcomeIcons = [CalendarClock, RotateCcw, MessageCircle];
 // plan button; the bank-facing texts live on /payment and in the footer.
 export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
   const copy = subscriptionCopy[lang];
-  const week = plans[0];
   const requestHeaders = await headers();
   const country = requestHeaders.get('cf-ipcountry');
   const acceptLanguage = requestHeaders.get('accept-language');
@@ -52,7 +50,7 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
                 <div className="mt-8">
                   <Magnetic className="flex sm:inline-flex">
                     <Button className="flex-1" href="#plans">
-                      <Money text={copy.hero.primary(formatByn(week.priceByn, lang))} />
+                      <HeroCta />
                       <ArrowRight className="h-5 w-5" aria-hidden="true" />
                     </Button>
                   </Magnetic>
@@ -137,6 +135,7 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
             </a>
             . {copy.plans.device}
           </p>
+          <ChargeNote className="mt-2 text-sm leading-6 text-white/50" />
         </section>
 
         <SocialProof lang={lang} />

@@ -13,17 +13,7 @@ const item = 'rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-whi
 // One header for every page: the same five items, the same menus and the
 // same app button whether the visitor is on a home page, a guide or the
 // subscription page — so the site never feels like two sites.
-export function SiteHeader({
-  locale,
-  current,
-  country,
-  acceptLanguage,
-}: {
-  locale: Locale | 'en';
-  current?: 'subscription';
-  country: string | null;
-  acceptLanguage: string | null;
-}) {
+export function SiteHeader({ locale, current }: { locale: Locale | 'en'; current?: 'subscription' }) {
   const isRoot = locale === 'en';
   const nav = isRoot ? enNav : localeCopy[locale].nav;
   const home = isRoot ? '/' : `/${locale}`;
@@ -58,7 +48,7 @@ export function SiteHeader({
         ))}
       </nav>
       <div className="flex items-center gap-2">
-        <HeaderMenus acceptLanguage={acceptLanguage} country={country} current={locale.toUpperCase()} lang={lang} languages={languages} />
+        <HeaderMenus current={locale.toUpperCase()} lang={lang} languages={languages} />
         <a
           className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-[#1E1B4B] shadow-[0_18px_45px_rgb(255_255_255/18%)] transition hover:bg-[#EEF2FF] focus:outline-none focus:ring-4 focus:ring-white/25 sm:px-5"
           href={appDownloadUrl}

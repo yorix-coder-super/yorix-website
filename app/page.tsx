@@ -12,8 +12,6 @@ import {
   Users,
   Volume2,
 } from 'lucide-react';
-import { headers } from 'next/headers';
-import { BrandLogo } from './BrandLogo';
 import { SiteHeader } from './SiteHeader';
 import { Magnetic } from './subscription/Magnetic';
 import { WordReveal } from './subscription/WordReveal';
@@ -167,15 +165,12 @@ function PhoneShot({
 
 export default async function Home() {
   const featuredGuides = topicPages.slice(0, 6);
-  const requestHeaders = await headers();
-  const country = requestHeaders.get('cf-ipcountry');
-  const acceptLanguage = requestHeaders.get('accept-language');
 
   return (
     <main className="home-page relative min-h-screen overflow-hidden text-white">
       <StarField />
       <div className="relative z-10">
-      <SiteHeader acceptLanguage={acceptLanguage} country={country} locale="en" />
+      <SiteHeader locale="en" />
 
       <section
         id="top"

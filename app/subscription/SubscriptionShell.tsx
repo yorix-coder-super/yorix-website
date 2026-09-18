@@ -1,4 +1,3 @@
-import { headers } from 'next/headers';
 import type { ReactNode } from 'react';
 import { SellerFooter } from '../SellerFooter';
 import { SiteHeader } from '../SiteHeader';
@@ -19,14 +18,11 @@ export function documentLinks(lang: Lang) {
 
 export async function SubscriptionShell({ lang, page = '', children }: { lang: Lang; page?: SubscriptionPage; children: ReactNode }) {
   const copy = subscriptionCopy[lang];
-  const requestHeaders = await headers();
-  const country = requestHeaders.get('cf-ipcountry');
-  const acceptLanguage = requestHeaders.get('accept-language');
 
   return (
     <main className="home-page relative min-h-screen overflow-hidden text-white" lang={lang}>
       <StarField />
-      <SiteHeader acceptLanguage={acceptLanguage} country={country} current="subscription" locale={lang} />
+      <SiteHeader current="subscription" locale={lang} />
 
       <div className="relative z-10">{children}</div>
 

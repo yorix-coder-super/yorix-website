@@ -1,11 +1,10 @@
 import type { Lang } from './i18n';
 
-// The card is charged in BYN by WebPay. Every visitor sees the plan's fixed
-// price in their own currency (merchant.ts); the currency menu says the
-// charge itself is in BYN.
+// Regional pricing, like the App Store: the visitor's country decides which
+// price list they see (merchant.ts), and WebPay charges the BYN equivalent
+// of exactly that price. The visitor cannot switch the currency by hand —
+// that would be a price-shopping tool.
 export type Currency = 'BYN' | 'RUB' | 'EUR' | 'USD';
-
-export const currencies: Currency[] = ['BYN', 'RUB', 'EUR', 'USD'];
 
 const EURO_COUNTRIES = new Set([
   'AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE',
@@ -26,10 +25,6 @@ export function currencyForVisitor(country: string | null | undefined, acceptLan
   if (/(^|,)\s*ru(;|,|$)/.test(langs)) return 'BYN';
   if (EURO_COUNTRIES.has(cc)) return 'EUR';
   return 'USD';
-}
-
-export function isCurrency(value: unknown): value is Currency {
-  return typeof value === 'string' && (currencies as string[]).includes(value);
 }
 
 const symbol: Record<Currency, string> = { BYN: 'BYN', RUB: '₽', EUR: '€', USD: '$' };

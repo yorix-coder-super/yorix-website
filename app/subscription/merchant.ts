@@ -46,15 +46,23 @@ export const plans: Plan[] = [
   { id: 'year', days: 365, priceByn: 119.9 },
 ];
 
-// What the visitor sees in each currency: the App Store's CIS price points
-// (weekly 3.99 · monthly 7.99 · annual 39.99 USD; 299 · 599 · 2 990 RUB,
-// since 2026-09-16) — the web must never look dearer than the store. The
-// card is always charged priceByn through WebPay, the BYN column at the
-// NBRB rate of those dollars.
+// Regional pricing mirrored from the App Store (verified 2026-09-18):
+// Belarus $3.99 / $7.99 / $39.99, Russia 299 / 599 / 2 990 ₽, euro zone
+// €5.99 / €17.99 / €55.99, the rest $5.99 / $14.99 / $59.99. The web never
+// looks dearer than the store the buyer could have used.
 export const prices: Record<PlanId, Record<Currency, number>> = {
-  week: { BYN: 11.9, RUB: 299, EUR: 3.99, USD: 3.99 },
-  month: { BYN: 23.9, RUB: 599, EUR: 7.99, USD: 7.99 },
-  year: { BYN: 119.9, RUB: 2990, EUR: 39.99, USD: 39.99 },
+  week: { BYN: 11.9, RUB: 299, EUR: 5.99, USD: 5.99 },
+  month: { BYN: 23.9, RUB: 599, EUR: 17.99, USD: 14.99 },
+  year: { BYN: 119.9, RUB: 2990, EUR: 55.99, USD: 59.99 },
+};
+
+// What WebPay actually charges for that price, in BYN — the receipt says
+// this number, so the page says it too before the buyer leaves. Mirrors
+// `amounts` in the worker's src/web/plans.ts; the worker is the authority.
+export const charges: Record<PlanId, Record<Currency, number>> = {
+  week: { BYN: 11.9, RUB: 10.5, EUR: 20.4, USD: 17.6 },
+  month: { BYN: 23.9, RUB: 21, EUR: 61.2, USD: 44.2 },
+  year: { BYN: 119.9, RUB: 104.9, EUR: 190.4, USD: 176.8 },
 };
 
 export const planCopy: Record<Lang, Record<PlanId, { title: string; forPeriod: string; days: string; purpose: string }>> = {

@@ -5,9 +5,8 @@ import type { Auth, User as FirebaseUser } from 'firebase/auth';
 import { API_BASE, firebaseConfig, isFirebaseConfigured } from './config';
 import { subscriptionCopy, type SubscriptionCopy } from './copy';
 import { currencyForVisitor, formatMoney, type Currency } from './currency';
-import { useCurrency } from './currencyStore';
 import { formatDate, subscriptionPath, type Lang } from './i18n';
-import { formatByn, mailtoOrder, merchant, planCopy, plans, prices, type Plan } from './merchant';
+import { charges, formatByn, mailtoOrder, merchant, planCopy, plans, prices, type Plan } from './merchant';
 import { Money } from './Money';
 import { MoonPhase } from './MoonPhase';
 import { Button, Spinner } from './ui';
@@ -98,7 +97,7 @@ export function AccountProvider({ lang, country, acceptLanguage, children }: { l
     errorOrigin: null,
     requestPlan: null,
   });
-  const currency = useCurrency(currencyForVisitor(country, acceptLanguage));
+  const currency = currencyForVisitor(country, acceptLanguage);
 
   const getToken = useCallback(async () => {
     const user = authRef.current?.currentUser;
@@ -357,6 +356,27 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
         ) : null}
       </div>
     </article>
+  );
+}
+
+// The hero's price anchor, in the visitor's own currency. It renders the
+// whole label: a render prop cannot cross the server-component boundary.
+export function HeroCta() {
+  const { currency, lang, copy } = useAccount();
+  return <Money text={copy.hero.primary(formatMoney(prices.week[currency], currency, lang))} />;
+}
+
+// WebPay charges in BYN, so a buyer outside Belarus sees those amounts once,
+// under the plans, before they leave for the bank's page — the screen must
+// never disagree with the receipt.
+export function ChargeNote({ className = '' }: { className?: string }) {
+  const { currency, copy, lang } = useAccount();
+  if (currency === 'BYN') return null;
+  const amounts = plans.map((plan) => formatMoney(charges[plan.id][currency], 'BYN', lang)).join(' · ');
+  return (
+    <p className={className}>
+      <Money text={copy.currency.note(amounts)} />
+    </p>
   );
 }
 
