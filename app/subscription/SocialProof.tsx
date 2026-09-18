@@ -16,7 +16,7 @@ export function SocialProof({ lang, compact = false }: { lang: Lang; compact?: b
   }));
 
   return (
-    <section className={`relative mx-auto max-w-6xl px-5 ${compact ? 'py-10' : 'py-16'} sm:px-8`} id="reviews">
+    <section className={`relative mx-auto max-w-7xl px-5 ${compact ? 'py-10' : 'py-16'} sm:px-8 lg:px-10`} id="reviews">
       <Reveal>
         <Eyebrow>{copy.proof.eyebrow}</Eyebrow>
         <SectionTitle className="max-w-2xl">{copy.proof.title}</SectionTitle>
@@ -24,7 +24,7 @@ export function SocialProof({ lang, compact = false }: { lang: Lang; compact?: b
       <div className="mt-8 grid gap-4 md:grid-cols-3">
         {items.map((item, index) => (
           <Reveal className="flex" delay={index * 120} key={item.author}>
-            <figure className="flex w-full flex-col rounded-[1.5rem] border border-white/15 bg-white/[0.1] p-6 backdrop-blur-xl">
+            <figure className="spotlight flex w-full flex-col rounded-lg border border-white/10 bg-white/10 p-6 backdrop-blur-xl">
               <div className="flex gap-1 text-[#F59E0B]" aria-label={`${item.stars}/5`}>
                 {Array.from({ length: item.stars }).map((_, i) => (
                   <Star className="h-4 w-4 fill-current" aria-hidden="true" key={i} />

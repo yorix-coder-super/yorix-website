@@ -1,4 +1,4 @@
-import { ArrowRight, CalendarClock, MessageCircle, RotateCcw } from 'lucide-react';
+import { ArrowRight, CalendarClock, MessageCircle, RotateCcw, Sparkles } from 'lucide-react';
 import { headers } from 'next/headers';
 import { AccountLine, AccountProvider, PlanCard, RequestForm } from './account';
 import { subscriptionCopy } from './copy';
@@ -34,12 +34,15 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
       <AccountProvider acceptLanguage={acceptLanguage} country={country} lang={lang}>
         <RequestForm />
         <section className="relative">
-          <div className="relative mx-auto grid w-full max-w-6xl items-center gap-10 px-5 pb-14 pt-6 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:pb-20">
+          <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 px-5 pb-16 pt-8 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:px-10 lg:pb-20">
             <div className="relative z-10 min-w-0">
               <Reveal load animation="fadeIn">
-                <p className="mb-6 text-sm font-semibold uppercase tracking-wide text-[#A78BFA]">{copy.hero.eyebrow}</p>
+                <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-[#C7D2FE] shadow-sm backdrop-blur-xl">
+                  <Sparkles className="h-4 w-4" aria-hidden="true" />
+                  {copy.hero.eyebrow}
+                </p>
               </Reveal>
-              <h1 className="max-w-2xl text-[2.35rem] font-semibold leading-[1.06] text-white sm:text-6xl">
+              <h1 className="max-w-3xl text-5xl font-semibold leading-[1.02] text-white sm:text-6xl lg:text-7xl">
                 <WordReveal delay={120} text={copy.hero.title} />
               </h1>
               <Reveal load delay={260}>
@@ -82,7 +85,7 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
           </div>
         </section>
 
-        <section className="relative mx-auto max-w-6xl px-5 pb-10 pt-2 sm:px-8">
+        <section className="relative mx-auto max-w-7xl px-5 pb-10 pt-2 sm:px-8 lg:px-10">
           <Reveal>
             <SectionTitle className="max-w-2xl">{copy.outcomes.title}</SectionTitle>
           </Reveal>
@@ -91,7 +94,7 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
               const Icon = outcomeIcons[index];
               return (
                 <Reveal className="flex" delay={index * 120} key={item.lead}>
-                  <li className="group spotlight flex w-full items-start gap-4 rounded-[1.5rem] border border-white/15 bg-white/[0.1] p-5 backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/30">
+                  <li className="group spotlight flex w-full items-start gap-4 rounded-lg border border-white/10 bg-white/10 p-5 backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/25">
                     <span className="relative inline-grid shrink-0">
                       <span aria-hidden="true" className="absolute inset-0 rounded-full bg-[#FDE68A] opacity-30 blur-xl transition duration-500 group-hover:opacity-80" />
                       <span className="relative grid h-11 w-11 place-items-center rounded-full bg-[#FDE68A] text-[#1E1B4B]">
@@ -108,7 +111,7 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
           </ul>
         </section>
 
-        <section id="plans" className="relative mx-auto max-w-6xl scroll-mt-6 px-5 py-14 sm:px-8">
+        <section id="plans" className="relative mx-auto max-w-7xl scroll-mt-6 px-5 py-14 sm:px-8 lg:px-10">
           <Reveal>
             <SectionTitle className="max-w-2xl">{copy.plans.title}</SectionTitle>
             <p className="mt-4 text-base leading-7 text-white/65">{copy.plans.included}</p>
@@ -138,7 +141,7 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
 
         <SocialProof lang={lang} />
 
-        <section id="faq" className="relative mx-auto max-w-4xl scroll-mt-6 px-5 pb-20 pt-10 sm:px-8">
+        <section id="faq" className="relative mx-auto max-w-5xl scroll-mt-6 px-5 pb-20 pt-10 sm:px-8">
           <Reveal>
             <Eyebrow center>{copy.nav.faq}</Eyebrow>
             <SectionTitle center>{copy.faq.title}</SectionTitle>
@@ -146,7 +149,7 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
           <div className="mt-8 grid gap-3">
             {copy.faq.items.map((item, index) => (
               <Reveal animation="fadeIn" delay={index * 40} key={item.q}>
-                <details className="group rounded-[1.25rem] border border-white/15 bg-white/[0.1] p-5 backdrop-blur-xl open:bg-white/[0.14]">
+                <details className="group rounded-lg border border-white/10 bg-white/10 p-6 backdrop-blur-xl open:bg-white/[0.14]">
                   <summary className="cursor-pointer list-none text-lg font-semibold text-white focus:outline-none focus-visible:underline [&::-webkit-details-marker]:hidden">
                     {item.q}
                   </summary>

@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { headers } from 'next/headers';
 import { BrandLogo } from './BrandLogo';
-import { HeaderMenus } from './subscription/HeaderMenus';
+import { SiteHeader } from './SiteHeader';
 import { Magnetic } from './subscription/Magnetic';
 import { WordReveal } from './subscription/WordReveal';
 import { HomeSubscriptionSection } from './subscription/HomeSubscriptionSection';
@@ -24,7 +24,6 @@ import { Reveal } from './subscription/Reveal';
 import { StarField } from './subscription/StarField';
 import { SellerFooter } from './SellerFooter';
 import { appDownloadUrl, topicPages } from './content';
-import { localeCopy, locales } from './locales';
 
 const heroScreens = [
   {
@@ -171,65 +170,12 @@ export default async function Home() {
   const requestHeaders = await headers();
   const country = requestHeaders.get('cf-ipcountry');
   const acceptLanguage = requestHeaders.get('accept-language');
-  const languages = [{ code: 'en', label: 'English', href: '/' }, ...locales.map((item) => ({ code: item, label: localeCopy[item].nativeName, href: `/${item}` }))];
 
   return (
     <main className="home-page relative min-h-screen overflow-hidden text-white">
       <StarField />
       <div className="relative z-10">
-      <header className="relative z-50 mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-5 sm:px-8 lg:px-10">
-        <a
-          className="flex items-center gap-3"
-          href="#top"
-          aria-label="Yorix home"
-        >
-          <BrandLogo size="sm" tone="dark" />
-        </a>
-        <nav className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/10 p-2 text-sm font-semibold text-white/70 shadow-[0_18px_70px_rgb(0_0_0/18%)] backdrop-blur-xl md:flex">
-          <a
-            className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white"
-            href="#plan"
-          >
-            Plan
-          </a>
-          <a
-            className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white"
-            href="#features"
-          >
-            Features
-          </a>
-          <a
-            className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white"
-            href="/guides"
-          >
-            Guides
-          </a>
-          <a
-            className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white"
-            href="/subscription"
-          >
-            Subscription
-          </a>
-          <a
-            className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white"
-            href="#faq"
-          >
-            FAQ
-          </a>
-        </nav>
-        <div className="flex items-center gap-2">
-          <HeaderMenus acceptLanguage={acceptLanguage} country={country} current="EN" lang="en" languages={languages} />
-          <a
-            className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-[#1E1B4B] shadow-[0_18px_45px_rgb(255_255_255/18%)] transition hover:bg-[#EEF2FF] focus:outline-none focus:ring-4 focus:ring-white/25 sm:px-5"
-            href={appDownloadUrl}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <span className="hidden lg:inline">Get the app</span>
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </a>
-        </div>
-      </header>
+      <SiteHeader acceptLanguage={acceptLanguage} country={country} locale="en" />
 
       <section
         id="top"

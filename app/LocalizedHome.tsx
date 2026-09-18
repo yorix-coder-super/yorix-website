@@ -15,7 +15,7 @@ import {
 import { getLocalizedTopicPage, isTranslatedArticleSlug } from './article-localizations';
 import { BrandLogo } from './BrandLogo';
 import { headers } from 'next/headers';
-import { HeaderMenus } from './subscription/HeaderMenus';
+import { SiteHeader } from './SiteHeader';
 import { subscriptionPath } from './subscription/i18n';
 import { Magnetic } from './subscription/Magnetic';
 import { WordReveal } from './subscription/WordReveal';
@@ -43,7 +43,6 @@ export async function LocalizedHome({ locale }: { locale: Locale }) {
   const requestHeaders = await headers();
   const country = requestHeaders.get('cf-ipcountry');
   const acceptLanguage = requestHeaders.get('accept-language');
-  const languages = [{ code: 'en', label: 'English', href: '/' }, ...locales.map((item) => ({ code: item, label: localeCopy[item].nativeName, href: `/${item}` }))];
   const guidePages = topicPages.slice(0, 6);
   const guideHref = (slug: string) =>
     isTranslatedArticleSlug(slug) && getLocalizedTopicPage(locale, slug)
@@ -54,24 +53,7 @@ export async function LocalizedHome({ locale }: { locale: Locale }) {
     <main className="home-page relative min-h-screen overflow-hidden text-white" lang={locale} dir={locale === 'ar' || locale === 'he' ? 'rtl' : undefined}>
       <StarField />
       <div className="relative z-10">
-      <header className="relative z-50 mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-5 py-5 sm:px-8 lg:px-10">
-        <a className="flex items-center gap-3" href={`/${locale}`} aria-label="Yorix home">
-          <BrandLogo size="sm" tone="dark" />
-        </a>
-        <nav className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/10 p-2 text-sm font-semibold text-white/70 shadow-[0_18px_70px_rgb(0_0_0/18%)] backdrop-blur-xl md:flex">
-          <a className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white" href="#plan">{copy.nav.plan}</a>
-          <a className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white" href="#features">{copy.nav.features}</a>
-          <a className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white" href={`/${locale}/guides`}>{copy.nav.guides}</a>
-          <a className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white" href={subscriptionPath(subscriptionLang)}>{subscriptionCopy[subscriptionLang].home.nav}</a>
-          <a className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white" href="#faq">{copy.nav.faq}</a>
-        </nav>
-        <div className="flex items-center gap-2">
-          <HeaderMenus acceptLanguage={acceptLanguage} country={country} current={locale.toUpperCase()} lang={subscriptionLang} languages={languages} />
-          <a className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-[#1E1B4B] shadow-[0_18px_45px_rgb(255_255_255/18%)] transition hover:bg-[#EEF2FF] sm:px-5" href={appDownloadUrl} rel="noopener noreferrer" target="_blank">
-            <span className="hidden lg:inline">{copy.nav.download}</span><ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </a>
-        </div>
-      </header>
+      <SiteHeader acceptLanguage={acceptLanguage} country={country} locale={locale} />
 
       <section className="relative mx-auto grid min-h-[calc(100vh-5rem)] w-full max-w-7xl items-center gap-10 px-5 pb-16 pt-8 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:px-10 lg:pb-20">
         <div className="relative z-20 max-w-2xl">
