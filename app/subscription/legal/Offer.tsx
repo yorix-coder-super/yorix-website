@@ -189,7 +189,7 @@ function ru({ email, payment, privacy, seller }: Ctx): LegalSection[] {
       blocks: [
         '15.1. К Договору применяется право Республики Беларусь (ст. 1124 ГК). Если Пользователь — потребитель, постоянно проживающий в другой стране, этот выбор не лишает его защиты, предоставляемой императивными нормами права страны его проживания, если такие нормы подлежат применению (Приложение 1).',
         `15.2. Претензии направляются на ${email} или по почтовому адресу Исполнителя (раздел 17). Исполнитель рассматривает претензию и направляет ответ в течение 10 дней со дня её получения, если законодательством не установлен более короткий срок. Претензионный порядок не является обязательным условием обращения потребителя в суд.`,
-        '15.3. Споры рассматриваются судами в соответствии с законодательством о гражданском судопроизводстве. Потребитель вправе предъявить иск по своему месту жительства или месту пребывания, по месту нахождения Исполнителя, по месту заключения или исполнения Договора (ч. 16 ст. 48 Гражданского процессуального кодекса Республики Беларусь).',
+        '15.3. Споры рассматриваются судами в соответствии с законодательством о гражданском судопроизводстве. Потребитель вправе предъявить иск по своему месту жительства или по месту исполнения Договора (ч. 16 ст. 48 Кодекса гражданского судопроизводства Республики Беларусь), а также по месту жительства Исполнителя.',
       ],
     },
     {
@@ -432,7 +432,7 @@ function en({ email, payment, privacy, seller }: Ctx): LegalSection[] {
       blocks: [
         '15.1. The Agreement is governed by the law of the Republic of Belarus (Article 1124 of the Civil Code). If the User is a consumer habitually resident in another country, this choice does not deprive them of the protection of the mandatory rules of that country where they apply (Annex 1).',
         `15.2. Claims are sent to ${email} or to the Provider’s postal address (section 17). The Provider considers a claim and replies within 10 days of receipt unless the law sets a shorter time. The claims procedure is not a precondition for a consumer to go to court.`,
-        '15.3. Disputes are heard by the courts under the law on civil procedure. A consumer may sue at their place of residence or stay, at the Provider’s location, or where the Agreement was concluded or performed (Article 48, part 16, of the Belarusian Code of Civil Procedure).',
+        '15.3. Disputes are heard by the courts under the law on civil proceedings. A consumer may sue at their place of residence or where the Agreement is performed (Article 48, part 16, of the Belarusian Code of Civil Proceedings), as well as at the Provider’s place of residence.',
       ],
     },
     {
