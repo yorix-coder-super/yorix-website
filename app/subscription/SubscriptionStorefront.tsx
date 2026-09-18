@@ -44,7 +44,7 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
               <Reveal load delay={400}>
                 <div className="mt-8 flex flex-wrap items-center gap-3">
                   <Magnetic className="flex">
-                    <Button className="flex-1" href="#tarify">
+                    <Button className="flex-1" href="#plans">
                       <Money text={copy.hero.primary(formatByn(week.priceByn, lang))} />
                       <ArrowRight className="h-5 w-5" aria-hidden="true" />
                     </Button>
@@ -107,7 +107,7 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
           </div>
         </section>
 
-        <section id="tarify" className="relative mx-auto max-w-6xl scroll-mt-6 px-5 py-14 sm:px-8">
+        <section id="plans" className="relative mx-auto max-w-6xl scroll-mt-6 px-5 py-14 sm:px-8">
           <Reveal>
             <div className="max-w-2xl">
               <Eyebrow>{copy.plans.eyebrow}</Eyebrow>
@@ -128,11 +128,11 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
           </p>
           <p className="mt-4 text-sm leading-6 text-white/60">
             {copy.plans.footnote} {copy.plans.acceptBefore}{' '}
-            <a className="text-white underline decoration-white/30 hover:decoration-white" href={subscriptionPath(lang, '/oferta')}>
+            <a className="text-white underline decoration-white/30 hover:decoration-white" href={subscriptionPath(lang, '/offer')}>
               {copy.plans.offer}
             </a>{' '}
             {copy.plans.and}{' '}
-            <a className="text-white underline decoration-white/30 hover:decoration-white" href={subscriptionPath(lang, '/oplata')}>
+            <a className="text-white underline decoration-white/30 hover:decoration-white" href={subscriptionPath(lang, '/payment')}>
               {copy.plans.refundTerms}
             </a>
             .
@@ -174,7 +174,7 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
           </div>
         </section>
 
-        <section id="kak-kupit" className="relative scroll-mt-6 border-y border-white/10 bg-[#161628]/70">
+        <section id="how-to-buy" className="relative scroll-mt-6 border-y border-white/10 bg-[#161628]/70">
           <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
             <Reveal>
               <Eyebrow>{copy.steps.eyebrow}</Eyebrow>
@@ -201,7 +201,7 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
           </div>
         </section>
 
-        <section id="voprosy" className="relative mx-auto max-w-4xl px-5 pb-20 pt-14 sm:px-8">
+        <section id="faq" className="relative mx-auto max-w-4xl px-5 pb-20 pt-14 sm:px-8">
           <Reveal>
             <Eyebrow center>{copy.faq.eyebrow}</Eyebrow>
             <SectionTitle center>{copy.faq.title}</SectionTitle>

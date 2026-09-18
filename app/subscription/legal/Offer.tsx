@@ -41,12 +41,12 @@ export function Offer({ lang }: { lang: Lang }) {
       ))}
     </ul>
   );
-  const payment = subscriptionPath(lang, '/oplata');
-  const privacy = subscriptionPath(lang, '/konfidencialnost');
+  const payment = subscriptionPath(lang, '/payment');
+  const privacy = subscriptionPath(lang, '/privacy');
 
   if (lang === 'en') {
     return (
-      <DocumentPage lang={lang} page="/oferta" title={offerTitle.en} updated={offerUpdated.en}>
+      <DocumentPage lang={lang} page="/offer" title={offerTitle.en} updated={offerUpdated.en}>
         <h2>1. General</h2>
         <p>
           1.1. This document is a public offer by {merchant.fullName} ({merchant.latinName}), {merchant.status.en.toLowerCase()}, {merchant.country.en}
@@ -122,7 +122,7 @@ export function Offer({ lang }: { lang: Lang }) {
         <p>10.2. Disputes not settled by claim are resolved in court under the law of the Republic of Belarus.</p>
         <h2>11. Term and changes</h2>
         <p>
-          11.1. The offer is valid from its publication at yorix.website/subscription/oferta until withdrawn. Changes do not apply to orders paid before they
+          11.1. The offer is valid from its publication at yorix.website/subscription/offer until withdrawn. Changes do not apply to orders paid before they
           were published.
         </p>
         <h2>12. Provider</h2>
@@ -132,7 +132,7 @@ export function Offer({ lang }: { lang: Lang }) {
   }
 
   return (
-    <DocumentPage lang={lang} page="/oferta" title={offerTitle.ru} updated={offerUpdated.ru}>
+    <DocumentPage lang={lang} page="/offer" title={offerTitle.ru} updated={offerUpdated.ru}>
       <h2>1. Общие положения</h2>
       <p>
         1.1. Настоящий документ является публичной офертой {merchant.fullName}, {merchant.status.ru.toLowerCase()}, {merchant.country.ru}
@@ -213,7 +213,7 @@ export function Offer({ lang }: { lang: Lang }) {
       <p>10.2. Споры, не урегулированные в претензионном порядке, разрешаются в суде по законодательству Республики Беларусь.</p>
       <h2>11. Срок действия и изменение оферты</h2>
       <p>
-        11.1. Оферта действует с даты публикации на странице yorix.website/ru/subscription/oferta до её отзыва. Изменения не распространяются на заказы,
+        11.1. Оферта действует с даты публикации на странице yorix.website/ru/subscription/offer до её отзыва. Изменения не распространяются на заказы,
         оплаченные до их публикации.
       </p>
       <h2>12. Исполнитель</h2>

@@ -597,7 +597,7 @@ export function RequestForm() {
             </div>
             <p className="mt-3 text-xs leading-5 text-white/45">
               {copy.request.consent}{' '}
-              <a className="underline" href={subscriptionPath(lang, '/konfidencialnost')}>
+              <a className="underline" href={subscriptionPath(lang, '/privacy')}>
                 {copy.docs.privacy}
               </a>
             </p>

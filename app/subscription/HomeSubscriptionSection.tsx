@@ -43,7 +43,7 @@ export async function HomeSubscriptionSection({ lang }: { lang: Lang }) {
         <p className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm leading-6 text-white/70">
           <ShieldCheck className="h-5 w-5 text-[#FDE68A]" aria-hidden="true" />
           <span>{copy.home.note}</span>
-          <a className="inline-flex items-center gap-1 font-semibold text-white underline decoration-white/30 hover:decoration-white" href={subscriptionPath(lang, '/oplata')}>
+          <a className="inline-flex items-center gap-1 font-semibold text-white underline decoration-white/30 hover:decoration-white" href={subscriptionPath(lang, '/payment')}>
             {copy.home.details}
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </a>

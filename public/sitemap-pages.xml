@@ -2215,19 +2215,19 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yorix.website/ru/subscription/oplata</loc>
+    <loc>https://yorix.website/ru/subscription/payment</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://yorix.website/ru/subscription/oferta</loc>
+    <loc>https://yorix.website/ru/subscription/offer</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://yorix.website/ru/subscription/konfidencialnost</loc>
+    <loc>https://yorix.website/ru/subscription/privacy</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
@@ -2239,19 +2239,19 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yorix.website/subscription/oplata</loc>
+    <loc>https://yorix.website/subscription/payment</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://yorix.website/subscription/oferta</loc>
+    <loc>https://yorix.website/subscription/offer</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://yorix.website/subscription/konfidencialnost</loc>
+    <loc>https://yorix.website/subscription/privacy</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>

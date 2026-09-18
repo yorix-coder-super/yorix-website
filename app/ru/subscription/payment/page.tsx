@@ -5,11 +5,11 @@ import { subscriptionAlternates, subscriptionPath } from '../../../subscription/
 export const metadata: Metadata = {
   title: paymentTermsTitle['ru'],
   description: 'Как заказать и оплатить подписку Yorix картой через WebPay, когда она включается, условия возврата и как выглядит чек.',
-  alternates: { canonical: subscriptionPath('ru', '/oplata'), languages: subscriptionAlternates('/oplata') },
+  alternates: { canonical: subscriptionPath('ru', '/payment'), languages: subscriptionAlternates('/payment') },
   openGraph: {
     title: paymentTermsTitle['ru'],
     description: 'Как заказать и оплатить подписку Yorix картой через WebPay, когда она включается, условия возврата и как выглядит чек.',
-    url: subscriptionPath('ru', '/oplata'),
+    url: subscriptionPath('ru', '/payment'),
     type: 'website',
     locale: 'ru_RU',
   },

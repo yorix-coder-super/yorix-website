@@ -13,9 +13,9 @@ import { Button } from './ui';
 export function documentLinks(lang: Lang) {
   const copy = subscriptionCopy[lang];
   return [
-    { href: subscriptionPath(lang, '/oferta'), label: copy.docs.offer },
-    { href: subscriptionPath(lang, '/oplata'), label: copy.docs.payment },
-    { href: subscriptionPath(lang, '/konfidencialnost'), label: copy.docs.privacy },
+    { href: subscriptionPath(lang, '/offer'), label: copy.docs.offer },
+    { href: subscriptionPath(lang, '/payment'), label: copy.docs.payment },
+    { href: subscriptionPath(lang, '/privacy'), label: copy.docs.privacy },
   ];
 }
 
@@ -25,10 +25,10 @@ export async function SubscriptionShell({ lang, page = '', children }: { lang: L
   const siteHome = lang === 'ru' ? '/ru' : '/';
   const country = (await headers()).get('cf-ipcountry');
   const navItems = [
-    { href: `${home}#tarify`, label: copy.nav.plans },
-    { href: `${home}#kak-kupit`, label: copy.nav.howToBuy },
-    { href: subscriptionPath(lang, '/oplata'), label: copy.nav.payment },
-    { href: '#kontakty', label: copy.nav.contacts },
+    { href: `${home}#plans`, label: copy.nav.plans },
+    { href: `${home}#how-to-buy`, label: copy.nav.howToBuy },
+    { href: subscriptionPath(lang, '/payment'), label: copy.nav.payment },
+    { href: '#contacts', label: copy.nav.contacts },
   ];
 
   return (
@@ -59,7 +59,7 @@ export async function SubscriptionShell({ lang, page = '', children }: { lang: L
             lang={lang}
             languages={subscriptionLangs.map((item) => ({ code: item.code, label: item.label, href: subscriptionPath(item.code, page) }))}
           />
-          <Button href={`${home}#tarify`} size="sm" variant="light">
+          <Button href={`${home}#plans`} size="sm" variant="light">
             <span className="hidden sm:inline">{copy.nav.choosePlan}</span>
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Button>
@@ -109,7 +109,7 @@ function MerchantRequisites({ lang }: { lang: Lang }) {
 function MerchantFooter({ lang }: { lang: Lang }) {
   const copy = subscriptionCopy[lang];
   return (
-    <footer id="kontakty" className="relative z-10 scroll-mt-6 border-t border-white/10 bg-[#0F1022]/80">
+    <footer id="contacts" className="relative z-10 scroll-mt-6 border-t border-white/10 bg-[#0F1022]/80">
       <div className="mx-auto grid max-w-6xl gap-8 px-5 py-10 sm:px-8 lg:grid-cols-[1.4fr_1fr]">
         <div>
           <p className="mb-4 text-sm font-semibold text-white">{copy.footer.seller}</p>

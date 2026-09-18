@@ -28,7 +28,7 @@ export function PaymentTerms({ lang }: { lang: Lang }) {
 
   if (lang === 'en') {
     return (
-      <DocumentPage lang={lang} page="/oplata" title={paymentTermsTitle.en} updated={paymentTermsUpdated.en}>
+      <DocumentPage lang={lang} page="/payment" title={paymentTermsTitle.en} updated={paymentTermsUpdated.en}>
         <h2>What you buy</h2>
         <p>
           A Yorix subscription is access to the paid features of the Yorix app for iPhone and iPad for a chosen period: the personal sleep forecast,
@@ -41,7 +41,7 @@ export function PaymentTerms({ lang }: { lang: Lang }) {
         <h2>Order procedure</h2>
         <ol>
           <li>
-            On the <a href={`${subscriptionPath(lang)}#tarify`}>plans page</a>, sign in with the Apple ID or Google account you use in the Yorix app. The subscription is
+            On the <a href={`${subscriptionPath(lang)}#plans`}>plans page</a>, sign in with the Apple ID or Google account you use in the Yorix app. The subscription is
             tied to that account.
           </li>
           <li>Choose a period and press “Pay”. We create the order and open the secure payment page of the WebPay processing system.</li>
@@ -135,7 +135,7 @@ export function PaymentTerms({ lang }: { lang: Lang }) {
   }
 
   return (
-    <DocumentPage lang={lang} page="/oplata" title={paymentTermsTitle.ru} updated={paymentTermsUpdated.ru}>
+    <DocumentPage lang={lang} page="/payment" title={paymentTermsTitle.ru} updated={paymentTermsUpdated.ru}>
       <h2>Что вы покупаете</h2>
       <p>
         Подписка Yorix — доступ к платным функциям приложения Yorix для iPhone и iPad на выбранный срок: персональный прогноз сна, ИИ-коуч по сну,
@@ -147,7 +147,7 @@ export function PaymentTerms({ lang }: { lang: Lang }) {
       <h2>Процедура оформления заказа</h2>
       <ol>
         <li>
-          На странице <a href={`${subscriptionPath(lang)}#tarify`}>тарифов</a> войдите с тем Apple ID или аккаунтом Google, которым вы пользуетесь в
+          На странице <a href={`${subscriptionPath(lang)}#plans`}>тарифов</a> войдите с тем Apple ID или аккаунтом Google, которым вы пользуетесь в
           приложении Yorix. Подписка привязывается к этому аккаунту.
         </li>
         <li>Выберите срок и нажмите «Оплатить». Мы создадим заказ и откроем защищённую платёжную страницу процессинговой системы WebPay.</li>

@@ -18,9 +18,9 @@ export function SellerFooter({ note, lang = 'en' }: { note: string; lang?: Lang 
   const copy = subscriptionCopy[lang];
   const home = subscriptionPath(lang);
   const subscriptionLinks = [
-    { href: `${home}#tarify`, label: copy.nav.plans },
-    { href: `${home}#kak-kupit`, label: copy.nav.howToBuy },
-    { href: `${home}#voprosy`, label: copy.faq.eyebrow },
+    { href: `${home}#plans`, label: copy.nav.plans },
+    { href: `${home}#how-to-buy`, label: copy.nav.howToBuy },
+    { href: `${home}#faq`, label: copy.faq.eyebrow },
   ];
 
   return (
@@ -66,7 +66,7 @@ export function SellerFooter({ note, lang = 'en' }: { note: string; lang?: Lang 
           <a className={`mt-2 block ${link}`} href={`mailto:${merchant.email}`}>
             {merchant.email}
           </a>
-          <a className="mt-4 inline-flex items-center gap-1 font-semibold text-white" href={`${home}#kontakty`}>
+          <a className="mt-4 inline-flex items-center gap-1 font-semibold text-white" href={`${home}#contacts`}>
             {copy.footer.requisites}
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </a>

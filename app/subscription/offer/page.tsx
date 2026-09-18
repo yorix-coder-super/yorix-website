@@ -5,11 +5,11 @@ import { subscriptionAlternates, subscriptionPath } from '../i18n';
 export const metadata: Metadata = {
   title: offerTitle['en'],
   description: 'Terms of the Yorix subscription for a week, a month or a year: payment, timing, withdrawal and refunds.',
-  alternates: { canonical: subscriptionPath('en', '/oferta'), languages: subscriptionAlternates('/oferta') },
+  alternates: { canonical: subscriptionPath('en', '/offer'), languages: subscriptionAlternates('/offer') },
   openGraph: {
     title: offerTitle['en'],
     description: 'Terms of the Yorix subscription for a week, a month or a year: payment, timing, withdrawal and refunds.',
-    url: subscriptionPath('en', '/oferta'),
+    url: subscriptionPath('en', '/offer'),
     type: 'website',
     locale: 'en_US',
   },

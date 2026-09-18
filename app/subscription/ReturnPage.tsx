@@ -94,7 +94,7 @@ function ReturnStatus() {
           </>
         ) : null}
       </div>
-      <Button className="mt-8" href={`${subscriptionPath(lang)}#tarify`} variant="ghost">
+      <Button className="mt-8" href={`${subscriptionPath(lang)}#plans`} variant="ghost">
         {copy.ret.back}
       </Button>
     </section>

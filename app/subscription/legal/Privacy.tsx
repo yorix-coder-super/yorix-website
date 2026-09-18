@@ -10,7 +10,7 @@ export function Privacy({ lang }: { lang: Lang }) {
 
   if (lang === 'en') {
     return (
-      <DocumentPage lang={lang} page="/konfidencialnost" title={privacyTitle.en} updated={privacyUpdated.en}>
+      <DocumentPage lang={lang} page="/privacy" title={privacyTitle.en} updated={privacyUpdated.en}>
         <h2>1. Scope</h2>
         <p>
           This policy describes how buyers’ personal data is processed when ordering and paying for a Yorix subscription on yorix.website, under the Law of
@@ -64,7 +64,7 @@ export function Privacy({ lang }: { lang: Lang }) {
   }
 
   return (
-    <DocumentPage lang={lang} page="/konfidencialnost" title={privacyTitle.ru} updated={privacyUpdated.ru}>
+    <DocumentPage lang={lang} page="/privacy" title={privacyTitle.ru} updated={privacyUpdated.ru}>
       <h2>1. О чём эта политика</h2>
       <p>
         Политика описывает, как обрабатываются персональные данные покупателей при заказе и оплате подписки Yorix на сайте yorix.website, в
