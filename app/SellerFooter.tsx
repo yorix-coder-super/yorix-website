@@ -9,11 +9,9 @@ import { merchant } from './subscription/merchant';
 const heading = 'text-xs font-semibold uppercase tracking-wide text-white/45';
 const link = 'text-white/70 transition hover:text-white';
 
-// The acquiring bank looks for the seller and the card logos on the home
-// page, so every home variant carries them — as one column of a normal site
-// footer, with the full requisites one link away on the subscription page.
-// The seller's name and status stay in Russian (that is what the bank
-// reads); everything else follows the page language.
+// The acquiring bank looks for the card logos and a way to the seller's
+// requisites; the requisites themselves live in the public offer, so the
+// footer links there instead of repeating them on every page.
 export function SellerFooter({ note, lang = 'en' }: { note: string; lang?: Lang }) {
   const copy = subscriptionCopy[lang];
   const home = subscriptionPath(lang);
@@ -55,18 +53,11 @@ export function SellerFooter({ note, lang = 'en' }: { note: string; lang?: Lang 
           </ul>
         </div>
         <div>
-          <p className={heading}>{copy.footer.rows.seller}</p>
-          <p className="mt-4 font-semibold text-white" lang="ru">
-            {merchant.fullName}
-          </p>
-          <p className="mt-1 leading-6" lang="ru">
-            {merchant.status.ru}
-            {merchant.unp ? `, УНП ${merchant.unp}` : ''}
-          </p>
-          <a className={`mt-2 block ${link}`} href={`mailto:${merchant.email}`}>
+          <p className={heading}>{copy.footer.seller}</p>
+          <a className={`mt-4 block ${link}`} href={`mailto:${merchant.email}`}>
             {merchant.email}
           </a>
-          <a className="mt-4 inline-flex items-center gap-1 font-semibold text-white" href={`${home}#contacts`}>
+          <a className="mt-3 inline-flex items-center gap-1 font-semibold text-white" href={subscriptionPath(lang, '/offer')}>
             {copy.footer.requisites}
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </a>

@@ -4,7 +4,7 @@ import { appDownloadUrl } from './content';
 import { localeCopy, locales, type Locale } from './locales';
 import { subscriptionCopy } from './subscription/copy';
 import { HeaderMenus, type LanguageItem } from './subscription/HeaderMenus';
-import { subscriptionPath, type Lang } from './subscription/i18n';
+import { subscriptionPath, type Lang, type SubscriptionPage } from './subscription/i18n';
 
 const enNav = { plan: 'Plan', features: 'Features', guides: 'Guides', faq: 'FAQ', download: 'Get the app' };
 
@@ -13,18 +13,20 @@ const item = 'rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-whi
 // One header for every page: the same five items, the same menus and the
 // same app button whether the visitor is on a home page, a guide or the
 // subscription page — so the site never feels like two sites.
-export function SiteHeader({ locale, current }: { locale: Locale | 'en'; current?: 'subscription' }) {
+export function SiteHeader({ locale, current, page = '' }: { locale: Locale | 'en'; current?: 'subscription'; page?: SubscriptionPage }) {
   const isRoot = locale === 'en';
   const nav = isRoot ? enNav : localeCopy[locale].nav;
   const home = isRoot ? '/' : `/${locale}`;
   const lang: Lang = locale === 'ru' ? 'ru' : 'en';
   const subscription = subscriptionPath(lang);
+  // On a subscription page the language links keep the visitor on the same
+  // document; everywhere else they go to that language's home.
   const languages: LanguageItem[] = [
-    { code: 'en', label: 'English', href: current === 'subscription' ? subscriptionPath('en') : '/' },
+    { code: 'en', label: 'English', href: current === 'subscription' ? subscriptionPath('en', page) : '/' },
     ...locales.map((code) => ({
       code,
       label: localeCopy[code].nativeName,
-      href: current === 'subscription' && code === 'ru' ? subscriptionPath('ru') : `/${code}`,
+      href: current === 'subscription' && code === 'ru' ? subscriptionPath('ru', page) : `/${code}`,
     })),
   ];
   const links = [
