@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { HomeLanding } from '../home/HomeLanding';
 import { LocalizedHome } from '../LocalizedHome';
 import { SeoArticlePage } from '../SeoArticlePage';
 import { getTopicPage, siteUrl, topicPages } from '../content';
@@ -65,6 +66,10 @@ export function generateMetadata({ params }: ArticleRouteProps): Metadata {
 }
 
 export default function ArticleRoute({ params }: ArticleRouteProps) {
+  if (params.locale === 'ru') {
+    return <HomeLanding locale="ru" />;
+  }
+
   if (isLocale(params.locale)) {
     return <LocalizedHome locale={params.locale} />;
   }

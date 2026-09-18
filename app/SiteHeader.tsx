@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
+import { AppleGlyph } from './home/art';
 import { appDownloadUrl } from './content';
 import { localeCopy, locales, type Locale } from './locales';
 import { subscriptionCopy } from './subscription/copy';
@@ -8,7 +9,7 @@ import { subscriptionPath, type Lang, type SubscriptionPage } from './subscripti
 
 const enNav = { plan: 'Plan', features: 'Features', guides: 'Guides', faq: 'FAQ', download: 'Get the app' };
 
-const item = 'rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white';
+const item = 'rounded-full px-3.5 py-2 transition hover:text-white';
 
 // One header for every page: the same five items, the same menus and the
 // same app button whether the visitor is on a home page, a guide or the
@@ -42,9 +43,9 @@ export function SiteHeader({ locale, current, page = '' }: { locale: Locale | 'e
       <a className="flex items-center gap-3" href={home} aria-label="Yorix home">
         <BrandLogo size="sm" tone="dark" />
       </a>
-      <nav className="glass hidden items-center gap-2 rounded-full border border-white/10 bg-white/10 p-2 text-sm font-semibold text-white/70 shadow-[0_18px_70px_rgb(0_0_0/18%)] backdrop-blur-xl md:flex">
+      <nav className="hidden items-center gap-1 text-sm font-medium text-white/75 md:flex">
         {links.map((link) => (
-          <a aria-current={link.current ? 'page' : undefined} className={`${item} ${link.current ? 'bg-white/10 text-white' : ''}`} href={link.href} key={link.href}>
+          <a aria-current={link.current ? 'page' : undefined} className={`${item} ${link.current ? 'text-white underline decoration-[#A78BFA] decoration-2 underline-offset-8' : ''}`} href={link.href} key={link.href}>
             {link.label}
           </a>
         ))}
@@ -57,6 +58,7 @@ export function SiteHeader({ locale, current, page = '' }: { locale: Locale | 'e
           rel="noopener noreferrer"
           target="_blank"
         >
+          <AppleGlyph className="h-4 w-4" />
           <span className="hidden lg:inline">{nav.download}</span>
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </a>

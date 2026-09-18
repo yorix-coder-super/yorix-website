@@ -8,7 +8,6 @@ import { currencyForVisitor, formatMoney, type Currency } from './currency';
 import { formatDate, subscriptionPath, type Lang } from './i18n';
 import { charges, formatByn, mailtoOrder, merchant, planCopy, plans, prices, type Plan } from './merchant';
 import { Money } from './Money';
-import { MoonPhase } from './MoonPhase';
 import { Button, Spinner } from './ui';
 
 type Provider = 'apple.com' | 'google.com';
@@ -261,6 +260,8 @@ export function AccountLine({ className = '' }: { className?: string }) {
   );
 }
 
+const planIcon = { week: 'icon-moon-crescent', month: 'icon-moon-full', year: 'icon-sun' } as const;
+
 export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) {
   const { ready, configured, config, user, me, busy, error, errorOrigin, copy, lang, currency, signIn, createOrder, openRequest } = useAccount();
   const text = planCopy[lang][plan.id];
@@ -322,7 +323,7 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
           <h3 className={`text-2xl font-semibold ${strong}`}>{text.title}</h3>
           <p className={`mt-1 text-sm ${muted}`}>{text.days}</p>
         </div>
-        <MoonPhase plan={plan.id} className="h-14 w-14 shrink-0" />
+        <img alt="" aria-hidden="true" className="h-14 w-14 shrink-0 object-contain" height="192" src={`/art/${planIcon[plan.id]}.webp`} width="192" />
       </div>
       <p className={`mt-4 text-sm leading-6 ${featured ? 'text-[#1E1B4B]/80' : 'text-white/75'}`}>{text.purpose}</p>
       <p className={`mt-6 text-4xl font-semibold tabular-nums sm:text-5xl ${strong}`}>

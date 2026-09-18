@@ -70,9 +70,9 @@ export async function LocalizedHome({ locale }: { locale: Locale }) {
         <Reveal load animation="zoomIn" delay={160} className="sm:hidden"><div className="relative z-10 mx-auto w-full max-w-[300px]"><img src="/screen-today.png" alt="Yorix baby sleep schedule" className="h-auto w-full rounded-[2rem] shadow-[0_34px_90px_rgb(0_0_0/42%)] ring-1 ring-white/15" width="1206" height="2622" /></div></Reveal>
         <Reveal load animation="zoomIn" delay={200} className="hidden sm:block"><Parallax offset={['start start', 'end start']} scale={[1, 0.96]} y={[0, -80]}><div className="relative z-10 mx-auto h-[650px] w-full max-w-[620px] lg:h-[760px]">
           <div className="absolute inset-x-4 bottom-12 top-20 rounded-full bg-[#6366F1]/25 blur-3xl" />
-          <img src="/screen-progress.png" alt="Yorix progress" className="absolute left-0 top-24 z-10 w-[34%] rotate-[-7deg] rounded-[2rem] shadow-2xl ring-1 ring-white/15" width="1206" height="2622" />
-          <img src="/screen-today.png" alt="Yorix today" className="absolute left-1/2 top-0 z-30 w-[50%] -translate-x-1/2 rounded-[2rem] shadow-2xl ring-1 ring-white/15" width="1206" height="2622" fetchPriority="high" />
-          <img src="/screen-coach.png" alt="Yorix AI coach" className="absolute right-0 top-32 z-20 w-[34%] rotate-[6deg] rounded-[2rem] shadow-2xl ring-1 ring-white/15" width="1206" height="2622" />
+          <img src="/screen-progress.png" alt="Yorix progress" className="absolute left-0 top-24 z-10 h-auto w-[34%] rotate-[-7deg] rounded-[2rem] shadow-2xl ring-1 ring-white/15" width="1206" height="2622" />
+          <img src="/screen-today.png" alt="Yorix today" className="absolute left-1/2 top-0 z-30 h-auto w-[50%] -translate-x-1/2 rounded-[2rem] shadow-2xl ring-1 ring-white/15" width="1206" height="2622" fetchPriority="high" />
+          <img src="/screen-coach.png" alt="Yorix AI coach" className="absolute right-0 top-32 z-20 h-auto w-[34%] rotate-[6deg] rounded-[2rem] shadow-2xl ring-1 ring-white/15" width="1206" height="2622" />
         </div></Parallax></Reveal>
       </section>
 

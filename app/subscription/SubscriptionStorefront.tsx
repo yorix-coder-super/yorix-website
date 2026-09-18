@@ -66,14 +66,14 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
                 <img
                   src="/screen-coach.png"
                   alt=""
-                  className="absolute left-0 top-16 z-10 w-[46%] rotate-[-6deg] rounded-[2rem] shadow-[0_34px_90px_rgb(0_0_0/42%)] ring-1 ring-white/15"
+                  className="absolute left-0 top-16 z-10 h-auto w-[46%] rotate-[-6deg] rounded-[2rem] shadow-[0_34px_90px_rgb(0_0_0/42%)] ring-1 ring-white/15"
                   width="1206"
                   height="2622"
                 />
                 <img
                   src="/screen-plan.png"
                   alt=""
-                  className="absolute right-0 top-0 z-20 w-[54%] rounded-[2rem] shadow-[0_34px_90px_rgb(0_0_0/42%)] ring-1 ring-white/15"
+                  className="absolute right-0 top-0 z-20 h-auto w-[54%] rounded-[2rem] shadow-[0_34px_90px_rgb(0_0_0/42%)] ring-1 ring-white/15"
                   width="1206"
                   height="2622"
                   fetchPriority="high"
