@@ -59,20 +59,6 @@ body {
     sans-serif;
 }
 
-.brand-page {
-  background: linear-gradient(180deg, #eef2ff 0%, #f8fafc 30%, #ffffff 100%);
-}
-
-.guides-page {
-  background:
-    radial-gradient(
-      circle at 20% 0%,
-      rgb(99 102 241 / 0.28),
-      transparent 34rem
-    ),
-    linear-gradient(180deg, #1c1832 0%, #18182e 42%, #0f1022 100%);
-}
-
 .home-page {
   background:
     radial-gradient(
@@ -103,19 +89,6 @@ body {
   background-size:
     180px 220px,
     260px 300px;
-}
-
-.night-gradient {
-  background: linear-gradient(180deg, #1e1b4b 0%, #312e81 52%, #4f46e5 100%);
-}
-
-.sky-gradient {
-  background: linear-gradient(180deg, #1c1832 0%, #18182e 50%, #161628 100%);
-}
-
-.article-page {
-  background:
-    linear-gradient(180deg, #eef2ff 0%, #f8fafc 18rem, #ffffff 45rem);
 }
 
 .article-hero-card::before {
@@ -160,7 +133,6 @@ html.lenis body {
 .home-page.starfield-live::before {
   opacity: 0;
 }
-
 
 .legal-document h2 {
   margin-top: 2.25rem;

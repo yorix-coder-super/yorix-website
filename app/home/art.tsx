@@ -70,3 +70,21 @@ export function DoodleArrow({ className = '' }: { className?: string }) {
     </svg>
   );
 }
+
+// Cover art for a guide, picked from its slug so every locale's copy of an
+// article gets the same picture.
+const guideRules: [RegExp, string][] = [
+  [/feed/, 'icon-heart'],
+  [/wake/, 'icon-sun'],
+  [/night/, 'icon-moon-crescent'],
+  [/noise|sound/, 'icon-play'],
+  [/ferber|train/, 'icon-book'],
+  [/newborn/, 'star'],
+  [/nap/, 'icon-moon-full'],
+  [/month-old/, 'icon-calendar'],
+  [/stress/, 'icon-chat'],
+];
+
+export function guideIcon(slug: string) {
+  return guideRules.find(([pattern]) => pattern.test(slug))?.[1] ?? 'icon-moon-crescent';
+}

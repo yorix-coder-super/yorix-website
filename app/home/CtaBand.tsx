@@ -1,0 +1,62 @@
+import { ArrowRight, Plus } from 'lucide-react';
+import { appDownloadUrl } from '../content';
+import { Reveal } from '../subscription/Reveal';
+import { AppleGlyph, Art, DoodleHeart, Hand, Sparkle } from './art';
+
+export const whitePill =
+  'inline-flex min-h-[3.25rem] items-center justify-center gap-2.5 whitespace-nowrap rounded-full bg-white px-6 text-base font-semibold text-[#1E1B4B] shadow-[0_18px_50px_rgb(255_255_255/14%)] transition hover:bg-[#EEF2FF] focus:outline-none focus-visible:ring-4 focus-visible:ring-white/30';
+
+// The closing band shared by the home page, guides and articles: the baby
+// hugging a star breaks out of the top edge, clouds drift along the bottom.
+export function CtaBand({ title, body, action, note }: { title: string; body: string; action: string; note?: string }) {
+  return (
+    <section className="mx-auto max-w-7xl px-5 pb-16 pt-24 sm:px-8 lg:px-10">
+      <Reveal animation="zoomIn">
+        <div className="relative rounded-[2rem] bg-[linear-gradient(100deg,#4F46E5_0%,#6D6AF0_48%,#A5B4FC_100%)] shadow-[0_30px_90px_rgb(79_70_229/35%)]">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden rounded-[2rem]">
+            <Art className="drift absolute bottom-[-38%] left-[-5%] w-[110%] max-w-none opacity-45" height={511} name="cloud-bank" width={1536} />
+            <Sparkle className="left-[34%] top-[16%] w-3" delay={300} tone="lavender" />
+            <Sparkle className="right-[30%] top-[62%] w-2.5" delay={1200} />
+            <Sparkle className="bottom-[18%] right-[7%] w-4" delay={700} />
+          </div>
+          <div className="relative grid items-center gap-6 px-6 pb-8 pt-2 sm:px-10 md:grid-cols-[230px_1fr_auto] md:py-10 lg:grid-cols-[260px_1fr_auto]">
+            <div className="relative mx-auto -mt-24 w-[200px] md:absolute md:-top-16 md:left-6 md:mx-0 md:mt-0 md:w-[230px] lg:w-[250px]">
+              <div className="float-slow">
+                <Art className="h-auto w-full drop-shadow-[0_24px_40px_rgb(30_27_75/35%)]" height={560} name="cta-baby-star" width={503} />
+              </div>
+            </div>
+            <div className="hidden md:block" />
+            <div className="text-center md:text-left">
+              <h2 className="text-[1.65rem] font-semibold leading-[1.2] text-white sm:text-[1.9rem]">{title}</h2>
+              <p className="mt-2 max-w-xl text-[15px] leading-6 text-white/85">{body}</p>
+            </div>
+            <div className="flex justify-center md:justify-end">
+              <a className={whitePill} href={appDownloadUrl} rel="noopener noreferrer" target="_blank">
+                <AppleGlyph />
+                {action}
+                <ArrowRight className="h-5 w-5" aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+          {note ? (
+            <Hand className="absolute right-8 top-[-2.4rem] hidden rotate-[-8deg] text-[1.9rem] text-[#FDE68A] lg:block">
+              {note} <DoodleHeart className="h-6 w-6" />
+            </Hand>
+          ) : null}
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
+export function FaqItem({ question, answer }: { question: string; answer: string }) {
+  return (
+    <details className="group rounded-2xl border border-white/12 bg-white/[0.06] backdrop-blur-xl transition open:bg-white/[0.09] hover:border-white/25">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-[15px] font-medium leading-6 text-white focus:outline-none focus-visible:underline [&::-webkit-details-marker]:hidden">
+        {question}
+        <Plus className="h-5 w-5 shrink-0 text-white/70 transition duration-300 group-open:rotate-45" aria-hidden="true" />
+      </summary>
+      <p className="px-5 pb-5 text-sm leading-6 text-white/65">{answer}</p>
+    </details>
+  );
+}

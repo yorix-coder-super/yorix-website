@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { Art, Sparkle } from '../home/art';
 import { AccountProvider, useAccount } from './account';
 import { API_BASE } from './config';
 import { formatDate, subscriptionPath, type Lang } from './i18n';
@@ -67,11 +68,24 @@ function ReturnStatus() {
   }, [ready, configured, user, getToken]);
 
   return (
-    <section className="relative mx-auto max-w-2xl px-5 pb-24 pt-10 text-center sm:px-8">
-      <h1 className="text-4xl font-semibold leading-tight text-white sm:text-5xl">
+    <section className="relative mx-auto max-w-2xl px-5 pb-24 pt-6 text-center sm:px-8">
+      <div className="relative mx-auto w-40 sm:w-48">
+        {status === 'paid' ? (
+          <div className="float-slow">
+            <Art className="h-auto w-full drop-shadow-[0_24px_40px_rgb(15_16_34/40%)]" height={560} name="cta-baby-star" priority width={503} />
+          </div>
+        ) : (
+          <div className="bob">
+            <Art className="h-auto w-full drop-shadow-[0_24px_40px_rgb(15_16_34/40%)]" height={420} name="star-mascot" priority width={410} />
+          </div>
+        )}
+        <Sparkle className="-left-6 top-4 w-3" delay={300} tone="lavender" />
+        <Sparkle className="-right-4 top-10 w-4" delay={1100} />
+      </div>
+      <h1 className="mt-6 text-4xl font-semibold leading-tight text-white sm:text-5xl">
         {status === 'paid' && until ? copy.ret.paid(formatDate(until, lang)) : copy.ret.checking}
       </h1>
-      <div className="mt-8 rounded-[1.75rem] border border-white/15 bg-white/[0.1] p-8 backdrop-blur-xl">
+      <div className="mt-8 rounded-[2rem] border border-white/12 bg-white/[0.06] p-8 backdrop-blur-xl">
         {!needsSignIn && (status === 'checking' || status === 'pending') ? (
           <p className="inline-flex items-center gap-3 text-lg text-white/80">
             <Spinner className="h-5 w-5" />

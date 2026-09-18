@@ -1,16 +1,16 @@
-import { ArrowRight, BookOpen, Plus, Star } from 'lucide-react';
+import { ArrowRight, BookOpen } from 'lucide-react';
 import { SellerFooter } from '../SellerFooter';
 import { SiteHeader } from '../SiteHeader';
 import { appDownloadUrl } from '../content';
-import { subscriptionCopy } from '../subscription/copy';
 import { subscriptionPath } from '../subscription/i18n';
 import { Parallax } from '../subscription/Parallax';
 import { Reveal } from '../subscription/Reveal';
+import { SocialProof } from '../subscription/SocialProof';
 import { StarField } from '../subscription/StarField';
-import { testimonials } from '../subscription/testimonials';
 import { WordReveal } from '../subscription/WordReveal';
 import { AppleGlyph, Art, DoodleArrow, DoodleHeart, Hand, PhoneFrame, Sparkle } from './art';
 import { headlineTones, homeCopy, type HomeLocale } from './copy';
+import { CtaBand, FaqItem, whitePill } from './CtaBand';
 import { HomePricing } from './HomePricing';
 
 const featureIcons = ['icon-bolt', 'icon-chart', 'icon-chat', 'icon-heart'];
@@ -22,19 +22,10 @@ const showcase = [
   { name: 'coach', alt: { en: 'Yorix AI coach chat', ru: 'Чат с ИИ-коучем Yorix' } },
 ];
 
-const whitePill =
-  'inline-flex min-h-[3.25rem] items-center justify-center gap-2.5 whitespace-nowrap rounded-full bg-white px-6 text-base font-semibold text-[#1E1B4B] shadow-[0_18px_50px_rgb(255_255_255/14%)] transition hover:bg-[#EEF2FF] focus:outline-none focus-visible:ring-4 focus-visible:ring-white/30';
-
 export async function HomeLanding({ locale }: { locale: HomeLocale }) {
   const copy = homeCopy(locale);
-  const sub = subscriptionCopy[locale];
   const home = locale === 'en' ? '/' : `/${locale}`;
   const guides = locale === 'en' ? '/guides' : `/${locale}/guides`;
-  const reviews = testimonials.map((t) => ({
-    ...t,
-    text: t.locale === locale ? t.quote : t.translations[locale],
-    translated: t.locale !== locale,
-  }));
 
   return (
     <main className="home-page relative min-h-screen overflow-hidden text-white" lang={locale}>
@@ -152,38 +143,7 @@ export async function HomeLanding({ locale }: { locale: HomeLocale }) {
           </Reveal>
         </section>
 
-        <section className="mx-auto max-w-7xl px-5 py-8 sm:px-8 lg:px-10" id="reviews">
-          <div className="grid gap-5 rounded-[2rem] border border-white/10 bg-white/[0.05] p-5 backdrop-blur-xl sm:p-7 lg:grid-cols-[1.2fr_1fr_1fr_1fr] lg:gap-4">
-            <Reveal className="flex flex-col justify-center lg:pr-4">
-              <h2 className="text-[1.75rem] font-semibold leading-[1.15] text-white sm:text-[2rem] lg:text-[1.7rem]">{copy.reviews.title}</h2>
-              <p className="mt-4 text-[15px] leading-6 text-white/65">{copy.reviews.body}</p>
-            </Reveal>
-            {reviews.map((review, index) => (
-              <Reveal className="flex" delay={index * 120} key={review.author}>
-                <figure className="flex w-full flex-col rounded-2xl border border-white/12 bg-white/[0.07] p-5 transition hover:border-white/25">
-                  <div aria-label={`${review.stars}/5`} className="flex gap-1 text-[#FBBF24]">
-                    {Array.from({ length: review.stars }).map((_, i) => (
-                      <Star className="h-4 w-4 fill-current" aria-hidden="true" key={i} />
-                    ))}
-                  </div>
-                  <blockquote className="mt-3 text-[15px] leading-6 text-white/85">“{review.text}”</blockquote>
-                  <figcaption className="mt-auto flex items-center gap-3 pt-5">
-                    <span aria-hidden="true" className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[linear-gradient(135deg,#A78BFA,#6366F1)] text-sm font-semibold text-white">
-                      {review.author.charAt(0)}
-                    </span>
-                    <span className="text-sm leading-5">
-                      <span className="block font-semibold text-white">{review.author}</span>
-                      <span className="text-xs text-white/55">
-                        {review.source === 'appstore' ? sub.proof.source : sub.proof.parents}
-                        {review.translated ? ` · ${sub.proof.translated}` : ''}
-                      </span>
-                    </span>
-                  </figcaption>
-                </figure>
-              </Reveal>
-            ))}
-          </div>
-        </section>
+        <SocialProof body={copy.reviews.body} lang={locale} title={copy.reviews.title} />
 
         <HomePricing lang={locale} />
 
@@ -200,52 +160,13 @@ export async function HomeLanding({ locale }: { locale: HomeLocale }) {
           <div className="mt-5 grid items-start gap-3 md:grid-cols-3">
             {copy.faq.items.map((item, index) => (
               <Reveal animation="fadeIn" delay={index * 90} key={item.question}>
-                <details className="group rounded-2xl border border-white/12 bg-white/[0.06] backdrop-blur-xl transition open:bg-white/[0.09] hover:border-white/25">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-[15px] font-medium leading-6 text-white [&::-webkit-details-marker]:hidden">
-                    {item.question}
-                    <Plus className="h-5 w-5 shrink-0 text-white/70 transition duration-300 group-open:rotate-45" aria-hidden="true" />
-                  </summary>
-                  <p className="px-5 pb-5 text-sm leading-6 text-white/65">{item.answer}</p>
-                </details>
+                <FaqItem answer={item.answer} question={item.question} />
               </Reveal>
             ))}
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-5 pb-16 pt-24 sm:px-8 lg:px-10">
-          <Reveal animation="zoomIn">
-            <div className="relative rounded-[2rem] bg-[linear-gradient(100deg,#4F46E5_0%,#6D6AF0_48%,#A5B4FC_100%)] shadow-[0_30px_90px_rgb(79_70_229/35%)]">
-              <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden rounded-[2rem]">
-                <Art className="drift absolute bottom-[-38%] left-[-5%] w-[110%] max-w-none opacity-45" height={511} name="cloud-bank" width={1536} />
-                <Sparkle className="left-[34%] top-[16%] w-3" delay={300} tone="lavender" />
-                <Sparkle className="right-[30%] top-[62%] w-2.5" delay={1200} />
-                <Sparkle className="right-[7%] bottom-[18%] w-4" delay={700} />
-              </div>
-              <div className="relative grid items-center gap-6 px-6 pb-8 pt-2 sm:px-10 md:grid-cols-[230px_1fr_auto] md:py-10 lg:grid-cols-[260px_1fr_auto]">
-                <div className="relative mx-auto -mt-24 w-[200px] md:absolute md:-top-16 md:left-6 md:mx-0 md:mt-0 md:w-[230px] lg:w-[250px]">
-                  <div className="float-slow">
-                    <Art className="h-auto w-full drop-shadow-[0_24px_40px_rgb(30_27_75/35%)]" height={560} name="cta-baby-star" width={503} />
-                  </div>
-                </div>
-                <div className="hidden md:block" />
-                <div className="text-center md:text-left">
-                  <h2 className="text-[1.65rem] font-semibold leading-[1.2] text-white sm:text-[1.9rem]">{copy.cta.title}</h2>
-                  <p className="mt-2 max-w-xl text-[15px] leading-6 text-white/85">{copy.cta.body}</p>
-                </div>
-                <div className="flex justify-center md:justify-end">
-                  <a className={whitePill} href={appDownloadUrl} rel="noopener noreferrer" target="_blank">
-                    <AppleGlyph />
-                    {copy.cta.action}
-                    <ArrowRight className="h-5 w-5" aria-hidden="true" />
-                  </a>
-                </div>
-              </div>
-              <Hand className="absolute right-8 top-[-2.4rem] hidden rotate-[-8deg] text-[1.9rem] text-[#FDE68A] lg:block">
-                {copy.notes.cta} <DoodleHeart className="h-6 w-6" />
-              </Hand>
-            </div>
-          </Reveal>
-        </section>
+        <CtaBand action={copy.cta.action} body={copy.cta.body} note={copy.notes.cta} title={copy.cta.title} />
 
         <SellerFooter home={home} lang={locale} note={copy.footer} />
       </div>
