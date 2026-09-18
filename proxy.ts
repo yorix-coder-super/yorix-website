@@ -24,8 +24,6 @@ const reportOnlyPolicy = [
   'report-to csp',
 ].join('; ');
 
-const legacyPages: Record<string, string> = { oplata: '/payment', oferta: '/offer', konfidencialnost: '/privacy' };
-
 function withSecurityHeaders(response: NextResponse) {
   response.headers.set('Content-Security-Policy', enforcedPolicy);
   response.headers.set('Reporting-Endpoints', 'csp="/csp-report"');
@@ -48,21 +46,6 @@ export function proxy(request: NextRequest) {
     url.hostname = 'yorix.website';
 
     return withSecurityHeaders(NextResponse.redirect(url, 308));
-  }
-
-  // The subscription section was called «Premium» until 2026-09-18; the old
-  // links live in mails and the app store review notes.
-  const renamed = pathname.match(/^\/(?:(en|ru)\/)?(premium|podpiska|subscription)(\/.*)?$/);
-  if (renamed) {
-    const rest = (renamed[3] ?? '').replace(/^\/(oplata|oferta|konfidencialnost)$/, (_, page: string) => legacyPages[page]);
-    const russian = renamed[1] === 'ru' || (!renamed[1] && renamed[2] !== 'subscription');
-    const target = `${russian ? '/ru/subscription' : '/subscription'}${rest}`;
-    if (target !== pathname) {
-      const url = request.nextUrl.clone();
-      url.pathname = target;
-
-      return withSecurityHeaders(NextResponse.redirect(url, 308));
-    }
   }
 
   return withSecurityHeaders(NextResponse.next());
