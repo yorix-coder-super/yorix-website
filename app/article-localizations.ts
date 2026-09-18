@@ -673,7 +673,7 @@ function makeFallbackArticle(locale: Locale, source: TopicPage): ArticleTranslat
     sampleRows: shared.rows.map((row, index) => ({
       label: `${index + 1}`,
       value: row,
-      note: source.shortTitle,
+      note: title,
     })),
     checklist: [...shared.checklist],
     faqs: shared.questions.map((question, index) => ({
@@ -717,8 +717,16 @@ export function getLocalizedTopicPage(locale: Locale, slug: string): TopicPage |
       ? napArticle[locale]
       : makeFallbackArticle(locale, source);
 
+  // Blocks written only in English never leak into a translation: a locale
+  // shows them only when its own translation provides them.
   return {
     ...source,
+    quickAnswer: undefined,
+    scenarioRows: undefined,
+    diagnosticRows: undefined,
+    actionPlan: undefined,
+    safetyNote: undefined,
+    appTieIn: undefined,
     ...translation,
     slug,
   };

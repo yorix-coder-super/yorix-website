@@ -1,4 +1,5 @@
 import { ArrowRight } from 'lucide-react';
+import { formatArticleDate } from '../article-ui';
 import type { Locale } from '../locales';
 import { SellerFooter } from '../SellerFooter';
 import { SiteHeader } from '../SiteHeader';
@@ -78,7 +79,7 @@ export function GuidesIndex({
                   </div>
                   <div className="flex flex-1 flex-col p-5">
                     <p className="text-sm text-white/55">
-                      {guide.date} · {guide.readTime}
+                      {formatArticleDate(guide.date, locale === 'en' ? undefined : locale)} · {guide.readTime}
                     </p>
                     <h2 className="mt-3 text-xl font-semibold leading-tight text-white">{guide.title}</h2>
                     <p className="mt-3 text-sm leading-6 text-white/65">{guide.description}</p>
