@@ -42,17 +42,19 @@ export type Plan = {
 
 export const plans: Plan[] = [
   { id: 'week', days: 7, priceByn: 11.9 },
-  { id: 'month', days: 30, priceByn: 22.9 },
-  { id: 'year', days: 365, priceByn: 109 },
+  { id: 'month', days: 30, priceByn: 23.9 },
+  { id: 'year', days: 365, priceByn: 119.9 },
 ];
 
-// What the visitor sees in each currency. The card is always charged
-// priceByn through WebPay; the other columns sit a little above the NBRB
-// conversion so the charge never exceeds the price on the screen.
+// What the visitor sees in each currency: the App Store's CIS price points
+// (weekly 3.99 · monthly 7.99 · annual 39.99 USD; 299 · 599 · 2 990 RUB,
+// since 2026-09-16) — the web must never look dearer than the store. The
+// card is always charged priceByn through WebPay, the BYN column at the
+// NBRB rate of those dollars.
 export const prices: Record<PlanId, Record<Currency, number>> = {
-  week: { BYN: 11.9, RUB: 349, EUR: 3.49, USD: 3.99 },
-  month: { BYN: 22.9, RUB: 649, EUR: 6.99, USD: 7.99 },
-  year: { BYN: 109, RUB: 3090, EUR: 32.99, USD: 36.99 },
+  week: { BYN: 11.9, RUB: 299, EUR: 3.99, USD: 3.99 },
+  month: { BYN: 23.9, RUB: 599, EUR: 7.99, USD: 7.99 },
+  year: { BYN: 119.9, RUB: 2990, EUR: 39.99, USD: 39.99 },
 };
 
 export const planCopy: Record<Lang, Record<PlanId, { title: string; forPeriod: string; days: string; purpose: string }>> = {
