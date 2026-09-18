@@ -43,7 +43,7 @@ export function ArticleToc({ items, title, progressLabel, bodyId, children }: { 
   }, [items, bodyId]);
 
   return (
-    <div className="rounded-[1.75rem] border border-white/10 bg-white/[0.05] p-6 shadow-[0_30px_80px_rgb(0_0_0/25%)] backdrop-blur-xl">
+    <div className="rounded-[1.75rem] border border-white/10 bg-white/[0.05] p-5 shadow-[0_30px_80px_rgb(0_0_0/25%)] backdrop-blur-xl">
       <p className="flex justify-between text-sm text-white/75">
         <span>{progressLabel}</span>
         <span className="font-semibold tabular-nums text-white">{progress}%</span>
@@ -51,22 +51,22 @@ export function ArticleToc({ items, title, progressLabel, bodyId, children }: { 
       <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/10">
         <div className="h-full origin-left rounded-full bg-[linear-gradient(90deg,#6366F1,#A78BFA)] transition-transform duration-300" style={{ transform: `scaleX(${progress / 100})` }} />
       </div>
-      <div className="my-6 h-px bg-white/10" />
+      <div className="my-4 h-px bg-white/10" />
       <nav aria-label={title}>
-        <p className="text-lg font-semibold text-white">{title}</p>
-        <ol className="mt-4 grid gap-0.5">
+        <p className="text-base font-semibold text-white">{title}</p>
+        <ol className="mt-2 grid">
           {items.map((item) => {
             const on = active === item.id;
             return (
               <li key={item.id}>
                 <a
                   aria-current={on ? 'location' : undefined}
-                  className="relative flex items-center gap-4 rounded-xl py-2 pl-1 pr-2 text-sm leading-5 transition hover:bg-white/[0.05]"
+                  className="relative flex items-center gap-3 rounded-xl py-1.5 pl-1 pr-2 text-[13px] leading-5 transition hover:bg-white/[0.05]"
                   href={`#${item.id}`}
                 >
-                  {on ? <span aria-hidden="true" className="absolute -left-6 top-1/2 h-8 w-1 -translate-y-1/2 rounded-r-full bg-[#818CF8]" /> : null}
+                  {on ? <span aria-hidden="true" className="absolute -left-5 top-1/2 h-7 w-1 -translate-y-1/2 rounded-r-full bg-[#818CF8]" /> : null}
                   <span
-                    className={`grid h-8 w-8 shrink-0 place-items-center rounded-full text-xs font-semibold transition ${
+                    className={`grid h-7 w-7 shrink-0 place-items-center rounded-full text-xs font-semibold transition ${
                       on ? 'bg-[#6366F1] text-white shadow-[0_0_20px_rgb(99_102_241/55%)]' : 'border border-white/30 text-white/70'
                     }`}
                   >

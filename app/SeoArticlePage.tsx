@@ -90,7 +90,7 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
   );
 
   return (
-    <main className="home-page relative min-h-screen overflow-hidden text-white">
+    <main className="home-page relative min-h-screen overflow-x-clip text-white">
       <ScrollProgress />
       <StarField />
       <SiteHeader locale={locale ?? 'en'} />
@@ -421,7 +421,7 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
         </article>
 
         <aside className="hidden lg:block">
-          <div className="sticky top-6">
+          <div className="sticky top-4 max-h-[calc(100vh-2rem)] overflow-y-auto overscroll-contain rounded-[1.75rem] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <ArticleToc bodyId="article-body" items={toc} progressLabel={extra.readingProgress} title={guideTitle}>
               <PromoCard action={ui.download} body={promo.body} shot={`/shots/${shotLang}-today.webp`} tagline={promo.tagline} title={promo.title} />
             </ArticleToc>
@@ -453,17 +453,17 @@ function Callout({ tone, icon, title, children }: { tone: 'important' | 'tip'; i
 
 function PromoCard({ title, body, tagline, action, shot }: { title: string; body: string; tagline: string | null; action: string; shot: string }) {
   return (
-    <div className="relative mt-6 overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(160deg,rgb(99_102_241/0.38),rgb(30_27_75/0.35))] p-5 pb-4">
+    <div className="relative mt-5 overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(160deg,rgb(99_102_241/0.38),rgb(30_27_75/0.35))] p-4">
       <p className="flex items-start gap-2 pr-24 text-[15px] font-semibold leading-5 text-white">
         <Art className="h-6 w-6 shrink-0 object-contain" height={127} name="star" width={128} />
         {title}
       </p>
-      <p className="mt-3 pr-20 text-sm leading-6 text-white/75">{body}</p>
-      <div aria-hidden="true" className="pointer-events-none absolute -right-7 top-4 w-28 rotate-[12deg]">
+      <p className="mt-2 pr-16 text-[13px] leading-5 text-white/75">{body}</p>
+      <div aria-hidden="true" className="pointer-events-none absolute -right-6 top-3 w-24 rotate-[12deg]">
         <PhoneFrame alt="" src={shot} />
       </div>
       <a
-        className="relative mt-6 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-[#1E1B4B] shadow-[0_18px_40px_rgb(0_0_0/25%)] transition hover:bg-[#EEF2FF]"
+        className="relative mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-[#1E1B4B] shadow-[0_18px_40px_rgb(0_0_0/25%)] transition hover:bg-[#EEF2FF]"
         href={appDownloadUrl}
         rel="noopener noreferrer"
         target="_blank"
