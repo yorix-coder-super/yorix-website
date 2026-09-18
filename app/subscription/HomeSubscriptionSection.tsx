@@ -25,9 +25,9 @@ export async function HomeSubscriptionSection({ lang }: { lang: Lang }) {
           <SectionTitle className="max-w-2xl">{copy.home.title}</SectionTitle>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-white/65">{copy.home.body}</p>
         </Reveal>
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
+        <div className="mt-10 grid gap-5 lg:grid-cols-3">
           {plans.map((plan, index) => (
-            <Reveal className={`flex min-w-0 ${plan.id === 'year' ? 'order-first md:order-none' : ''}`} delay={index * 120} key={plan.id}>
+            <Reveal className={`flex min-w-0 ${plan.id === 'year' ? 'order-first lg:order-none' : ''}`} delay={index * 120} key={plan.id}>
               <PlanCard featured={plan.id === 'year'} plan={plan} />
             </Reveal>
           ))}

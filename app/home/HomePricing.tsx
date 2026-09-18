@@ -48,14 +48,14 @@ export function PlanGrid({ lang }: { lang: HomeLocale }) {
   ];
 
   return (
-    <div className="mt-8 grid gap-5 md:grid-cols-3 lg:grid-cols-[1fr_1fr_1fr_0.95fr] lg:items-stretch">
+    <div className="mt-8 grid gap-5 lg:grid-cols-3 xl:grid-cols-[1fr_1fr_1fr_0.95fr] xl:items-stretch">
       {plans.map((plan, index) => (
-        <Reveal className={`flex min-w-0 ${plan.id === 'year' ? 'order-first md:order-none' : ''}`} delay={index * 110} key={plan.id}>
+        <Reveal className={`flex min-w-0 ${plan.id === 'year' ? 'order-first lg:order-none' : ''}`} delay={index * 110} key={plan.id}>
           <PlanCard featured={plan.id === 'year'} plan={plan} />
         </Reveal>
       ))}
-      <Reveal className="md:col-span-3 lg:col-span-1" delay={360}>
-        <ul className="grid h-full content-center gap-5 sm:grid-cols-2 lg:grid-cols-1 lg:pl-2">
+      <Reveal className="lg:col-span-3 xl:col-span-1" delay={360}>
+        <ul className="grid h-full content-center gap-5 sm:grid-cols-2 xl:grid-cols-1 xl:pl-2">
           {points.map((point) => (
             <li className="flex items-center gap-3.5 text-sm leading-5 text-white/80" key={point.icon}>
               <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/[0.08] ring-1 ring-white/15">
@@ -68,10 +68,10 @@ export function PlanGrid({ lang }: { lang: HomeLocale }) {
             <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/[0.08] ring-1 ring-white/15">
               <Art className="h-7 w-7 object-contain" height={192} name="icon-question" width={192} />
             </span>
-            <span>
+            <span className="min-w-0">
               {home.pricing.questions}
               <br />
-              <a className="font-semibold text-white underline decoration-white/30 underline-offset-2 hover:decoration-white" href={`mailto:${merchant.email}`}>
+              <a className="font-semibold text-white underline decoration-white/30 underline-offset-2 [overflow-wrap:anywhere] hover:decoration-white" href={`mailto:${merchant.email}`}>
                 {merchant.email}
               </a>
             </span>

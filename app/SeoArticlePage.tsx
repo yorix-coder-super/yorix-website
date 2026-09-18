@@ -22,7 +22,14 @@ type SeoArticlePageProps = {
 };
 
 const takeawayIcons = ['icon-moon-crescent', 'icon-sun', 'icon-heart', 'icon-chart'];
-const takeawayColumns: Record<number, string> = { 2: 'md:grid-cols-2', 3: 'md:grid-cols-3', 4: 'md:grid-cols-2 xl:grid-cols-4' };
+// The article column is ~560–860px wide next to the rail, so four cards in a
+// row leave ~100px for text and long Russian words spill out: never more than
+// two per row, except three on the widest screens.
+const takeawayColumns: Record<number, string> = {
+  2: 'sm:grid-cols-2',
+  3: 'sm:grid-cols-2 xl:grid-cols-3 [&>*:last-child]:sm:col-span-2 [&>*:last-child]:xl:col-span-1',
+  4: 'sm:grid-cols-2',
+};
 const glass = 'rounded-3xl border border-white/10 bg-white/[0.05] backdrop-blur-xl';
 const h2 = 'text-[1.5rem] font-semibold leading-snug tracking-[-0.01em] text-white sm:text-[1.75rem]';
 const para = 'mt-4 text-[17px] leading-8 text-white/75';
@@ -152,9 +159,9 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
               </div>
               <div className={`mt-5 grid gap-3 ${takeawayColumns[takeaways.length] ?? ''}`}>
                 {takeaways.map((item, index) => (
-                  <div className="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4" key={`${index}-${item.body}`}>
+                  <div className="flex min-w-0 items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4" key={`${index}-${item.body}`}>
                     <Art className="h-12 w-12 shrink-0 object-contain" height={192} name={takeawayIcons[index % takeawayIcons.length]} width={192} />
-                    <div>
+                    <div className="min-w-0 break-words">
                       {item.title ? <p className="text-[15px] font-semibold leading-5 text-white">{item.title}</p> : null}
                       <p className={`${item.title ? 'mt-1.5' : ''} text-sm leading-6 text-white/70`}>{item.body}</p>
                     </div>
