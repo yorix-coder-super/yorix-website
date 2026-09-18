@@ -53,18 +53,18 @@ export function GuidesIndex({
           </div>
           <div aria-hidden="true" className="relative mx-auto hidden h-[300px] w-full max-w-[420px] sm:block">
             <div className="absolute inset-x-10 top-10 h-48 rounded-full bg-[#6366F1]/30 blur-3xl" />
-            <Reveal animation="zoomIn" className="absolute left-[14%] top-[8%] w-[52%]" delay={160} load>
+            <Reveal animation="zoomIn" className="absolute start-[14%] top-[8%] w-[52%]" delay={160} load>
               <div className="float-slow">
                 <Art className="h-auto w-full drop-shadow-[0_28px_50px_rgb(15_16_34/45%)]" height={192} name="icon-book" priority width={191} />
               </div>
             </Reveal>
-            <Reveal animation="zoomIn" className="absolute bottom-[4%] right-[6%] w-[36%]" delay={360} load>
+            <Reveal animation="zoomIn" className="absolute bottom-[4%] end-[6%] w-[36%]" delay={360} load>
               <div className="bob">
-                <Art className="h-auto w-full" height={420} name="star-mascot" width={410} />
+                <Art className="h-auto w-full rtl:-scale-x-100" height={420} name="star-mascot" width={410} />
               </div>
             </Reveal>
-            <Sparkle className="right-[22%] top-[6%] w-4" delay={0} />
-            <Sparkle className="bottom-[20%] left-[8%] w-3" delay={900} tone="lavender" />
+            <Sparkle className="end-[22%] top-[6%] w-4" delay={0} />
+            <Sparkle className="bottom-[20%] start-[8%] w-3" delay={900} tone="lavender" />
           </div>
         </section>
 
@@ -74,8 +74,8 @@ export function GuidesIndex({
               <Reveal className="flex" delay={(index % 3) * 90} key={guide.slug}>
                 <a className="group flex w-full flex-col overflow-hidden rounded-[1.75rem] border border-white/12 bg-white/[0.06] backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/25" href={guide.href}>
                   <div className={`relative h-36 overflow-hidden bg-gradient-to-br ${guide.coverClass}`}>
-                    <Art className="absolute right-6 top-1/2 h-24 w-24 -translate-y-1/2 object-contain drop-shadow-[0_16px_30px_rgb(15_16_34/40%)] transition duration-500 group-hover:scale-110" height={192} name={guideIcon(guide.slug)} width={192} />
-                    <span className="absolute bottom-4 left-5 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold text-white backdrop-blur">{guide.category}</span>
+                    <Art className="absolute end-6 top-1/2 h-24 w-24 -translate-y-1/2 object-contain drop-shadow-[0_16px_30px_rgb(15_16_34/40%)] transition duration-500 group-hover:scale-110" height={192} name={guideIcon(guide.slug)} width={192} />
+                    <span className="absolute bottom-4 start-5 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold text-white backdrop-blur">{guide.category}</span>
                   </div>
                   <div className="flex flex-1 flex-col p-5">
                     <p className="text-sm text-white/55">
@@ -85,7 +85,7 @@ export function GuidesIndex({
                     <p className="mt-3 text-sm leading-6 text-white/65">{guide.description}</p>
                     <span className="mt-auto flex justify-end pt-4">
                       <span className="grid h-9 w-9 place-items-center rounded-full bg-white/10 text-white/80 transition group-hover:bg-white group-hover:text-[#1E1B4B]">
-                        <ArrowRight className="h-4 w-4 rtl:rotate-180" aria-hidden="true" />
+                        <ArrowRight className="h-4 w-4 rtl:-scale-x-100" aria-hidden="true" />
                       </span>
                     </span>
                   </div>
@@ -96,7 +96,7 @@ export function GuidesIndex({
         </section>
 
         <CtaBand action={cta.action} body={cta.body} title={cta.title} />
-        <SellerFooter home={home} lang={locale === 'ru' ? 'ru' : 'en'} note={footer} />
+        <SellerFooter home={home} locale={locale} note={footer} />
       </div>
     </main>
   );

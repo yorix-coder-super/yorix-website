@@ -59,6 +59,31 @@ body {
     sans-serif;
 }
 
+/* Scripts beyond Latin and Cyrillic. Caveat has no glyphs for them, so a
+   hand-written note falls back to the page font — a little smaller, it
+   still reads as an aside. Arabic letters join, so no letter-spacing there;
+   Devanagari and Thai stack marks above and below the line, so headings get
+   more line height. */
+:is(:lang(ar), :lang(he), :lang(hi), :lang(th), :lang(ja)) .font-hand {
+  font-family: inherit;
+  font-weight: 600;
+  scale: 0.78;
+}
+
+:lang(ar),
+:lang(ar) * {
+  letter-spacing: 0 !important;
+}
+
+:is(:lang(hi), :lang(th)) :is(h1, h2, h3) {
+  line-height: 1.35 !important;
+}
+
+/* Japanese headings break between phrases, not inside words (Chrome). */
+:lang(ja) :is(h1, h2, h3) {
+  word-break: auto-phrase;
+}
+
 /* Night-sky pages: a scroll jump that outruns painting, or an iOS overscroll
    bounce, shows the body — so it takes the sky's colour, not the cream. */
 body:has(.home-page) {

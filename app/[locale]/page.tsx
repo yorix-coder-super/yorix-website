@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { HomeLanding } from '../home/HomeLanding';
-import { LocalizedHome } from '../LocalizedHome';
 import { SeoArticlePage } from '../SeoArticlePage';
 import { getTopicPage, siteUrl, topicPages } from '../content';
+import { siteCopy } from '../i18n';
 import { isLocale, localeAlternates, localeCopy, locales } from '../locales';
 import { researchGuides } from '../research-guides';
 
@@ -22,7 +22,7 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: ArticleRouteProps): Metadata {
   if (isLocale(params.locale)) {
-    const copy = localeCopy[params.locale];
+    const copy = { ...siteCopy(params.locale).home, ogLocale: localeCopy[params.locale].ogLocale };
 
     return {
       title: `Yorix | ${copy.hero.title}`,
@@ -67,12 +67,8 @@ export function generateMetadata({ params }: ArticleRouteProps): Metadata {
 }
 
 export default function ArticleRoute({ params }: ArticleRouteProps) {
-  if (params.locale === 'ru') {
-    return <HomeLanding locale="ru" />;
-  }
-
   if (isLocale(params.locale)) {
-    return <LocalizedHome locale={params.locale} />;
+    return <HomeLanding locale={params.locale} />;
   }
 
   const page = getTopicPage(params.locale);

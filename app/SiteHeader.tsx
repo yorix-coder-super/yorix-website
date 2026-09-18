@@ -2,24 +2,22 @@ import { ArrowRight } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 import { AppleGlyph } from './home/art';
 import { appDownloadUrl } from './content';
-import { localeCopy, locales, type Locale } from './locales';
-import { subscriptionCopy } from './subscription/copy';
+import { docsLang, siteCopy, type SiteLocale } from './i18n';
+import { localeCopy, locales } from './locales';
 import { HeaderMenus, type LanguageItem } from './subscription/HeaderMenus';
-import { subscriptionPath, type Lang, type SubscriptionPage } from './subscription/i18n';
-
-const enNav = { plan: 'Plan', features: 'Features', guides: 'Guides', faq: 'FAQ', download: 'Get the app' };
+import { subscriptionPath, type SubscriptionPage } from './subscription/i18n';
 
 const item = 'rounded-full px-3.5 py-2 transition hover:text-white';
 
 // One header for every page: the same five items, the same menus and the
 // same app button whether the visitor is on a home page, a guide or the
 // subscription page — so the site never feels like two sites.
-export function SiteHeader({ locale, current, page = '' }: { locale: Locale | 'en'; current?: 'subscription'; page?: SubscriptionPage }) {
+export function SiteHeader({ locale, current, page = '' }: { locale: SiteLocale; current?: 'subscription'; page?: SubscriptionPage }) {
   const isRoot = locale === 'en';
-  const nav = isRoot ? enNav : localeCopy[locale].nav;
+  const site = siteCopy(locale);
+  const nav = site.home.nav;
   const home = isRoot ? '/' : `/${locale}`;
-  const lang: Lang = locale === 'ru' ? 'ru' : 'en';
-  const subscription = subscriptionPath(lang);
+  const subscription = subscriptionPath(docsLang(locale));
   // On a subscription page the language links keep the visitor on the same
   // document; everywhere else they go to that language's home. `?lang=` makes
   // the choice stick over the automatic one (see proxy.ts).
@@ -35,7 +33,7 @@ export function SiteHeader({ locale, current, page = '' }: { locale: Locale | 'e
     { href: `${home}#plan`, label: nav.plan },
     { href: `${home}#features`, label: nav.features },
     { href: isRoot ? '/guides' : `/${locale}/guides`, label: nav.guides },
-    { href: subscription, label: subscriptionCopy[lang].home.nav, current: current === 'subscription' },
+    { href: subscription, label: site.subscription.home.nav, current: current === 'subscription' },
     { href: `${home}#faq`, label: nav.faq },
   ];
 
@@ -52,7 +50,7 @@ export function SiteHeader({ locale, current, page = '' }: { locale: Locale | 'e
         ))}
       </nav>
       <div className="flex items-center gap-2">
-        <HeaderMenus current={locale.toUpperCase()} lang={lang} languages={languages} />
+        <HeaderMenus current={locale.toUpperCase()} label={site.subscription.nav.language} languages={languages} />
         <a
           className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-[#1E1B4B] shadow-[0_18px_45px_rgb(255_255_255/18%)] transition hover:bg-[#EEF2FF] focus:outline-none focus:ring-4 focus:ring-white/25 sm:px-5"
           href={appDownloadUrl}
@@ -61,7 +59,7 @@ export function SiteHeader({ locale, current, page = '' }: { locale: Locale | 'e
         >
           <AppleGlyph className="h-4 w-4" />
           <span className="hidden lg:inline">{nav.download}</span>
-          <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          <ArrowRight className="h-4 w-4 rtl:-scale-x-100" aria-hidden="true" />
         </a>
       </div>
     </header>

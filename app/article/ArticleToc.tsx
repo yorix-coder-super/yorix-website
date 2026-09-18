@@ -49,7 +49,7 @@ export function ArticleToc({ items, title, progressLabel, bodyId, children }: { 
         <span className="font-semibold tabular-nums text-white">{progress}%</span>
       </p>
       <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/10">
-        <div className="h-full origin-left rounded-full bg-[linear-gradient(90deg,#6366F1,#A78BFA)] transition-transform duration-300" style={{ transform: `scaleX(${progress / 100})` }} />
+        <div className="h-full origin-left rounded-full rtl:origin-right bg-[linear-gradient(90deg,#6366F1,#A78BFA)] transition-transform duration-300" style={{ transform: `scaleX(${progress / 100})` }} />
       </div>
       <div className="my-4 h-px bg-white/10" />
       <nav aria-label={title}>
@@ -61,10 +61,10 @@ export function ArticleToc({ items, title, progressLabel, bodyId, children }: { 
               <li key={item.id}>
                 <a
                   aria-current={on ? 'location' : undefined}
-                  className="relative flex items-center gap-3 rounded-xl py-1.5 pl-1 pr-2 text-[13px] leading-5 transition hover:bg-white/[0.05]"
+                  className="relative flex items-center gap-3 rounded-xl py-1.5 ps-1 pe-2 text-[13px] leading-5 transition hover:bg-white/[0.05]"
                   href={`#${item.id}`}
                 >
-                  {on ? <span aria-hidden="true" className="absolute -left-5 top-1/2 h-7 w-1 -translate-y-1/2 rounded-r-full bg-[#818CF8]" /> : null}
+                  {on ? <span aria-hidden="true" className="absolute -start-5 top-1/2 h-7 w-1 -translate-y-1/2 rounded-e-full bg-[#818CF8]" /> : null}
                   <span
                     className={`grid h-7 w-7 shrink-0 place-items-center rounded-full text-xs font-semibold transition ${
                       on ? 'bg-[#6366F1] text-white shadow-[0_0_20px_rgb(99_102_241/55%)]' : 'border border-white/30 text-white/70'

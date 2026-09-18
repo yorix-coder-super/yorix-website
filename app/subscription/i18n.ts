@@ -15,8 +15,8 @@ export function subscriptionAlternates(page: SubscriptionPage) {
   return { ru: subscriptionPath('ru', page), en: subscriptionPath('en', page) };
 }
 
-export function formatDate(iso: string, lang: Lang) {
-  return new Intl.DateTimeFormat(lang === 'ru' ? 'ru-RU' : 'en-GB', {
+export function formatDate(iso: string, locale: string) {
+  return new Intl.DateTimeFormat(locale === 'ru' ? 'ru-RU' : locale === 'en' ? 'en-GB' : locale, {
     day: 'numeric',
     month: 'long',
     year: 'numeric',

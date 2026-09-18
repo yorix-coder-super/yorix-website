@@ -1,28 +1,25 @@
 import { BrandLogo } from './BrandLogo';
 import { appDownloadUrl } from './content';
 import { AppleGlyph } from './home/art';
+import { docsLang, siteCopy, type SiteLocale } from './i18n';
 import { PaymentLogos } from './subscription/PaymentLogos';
-import { subscriptionCopy } from './subscription/copy';
-import { subscriptionPath, type Lang } from './subscription/i18n';
-import { documentLinks } from './subscription/SubscriptionShell';
+import { subscriptionPath } from './subscription/i18n';
 import { merchant } from './subscription/merchant';
 
 const heading = 'text-xs font-semibold uppercase tracking-wide text-white/45';
 const link = 'text-white/70 transition hover:text-white';
 
-const labels: Record<Lang, { product: string; features: string; guides: string; support: string; write: string; badgeTop: string }> = {
-  ru: { product: 'Продукт', features: 'Возможности', guides: 'Гайды', support: 'Поддержка', write: 'Написать нам', badgeTop: 'Загрузите в' },
-  en: { product: 'Product', features: 'Features', guides: 'Guides', support: 'Support', write: 'Write to us', badgeTop: 'Download on the' },
-};
-
 // The acquiring bank looks for the card logos and a way to the seller's
 // requisites; the requisites themselves live in the public offer, so the
-// footer links there instead of repeating them on every page.
-export function SellerFooter({ note, lang = 'en', home }: { note: string; lang?: Lang; home?: string }) {
-  const copy = subscriptionCopy[lang];
-  const text = labels[lang];
-  const homePath = home ?? (lang === 'ru' ? '/ru' : '/');
-  const subscription = subscriptionPath(lang);
+// footer links there instead of repeating them on every page. The documents
+// exist in Russian and English; every other language links the English ones.
+export function SellerFooter({ note, locale = 'en', home }: { note: string; locale?: SiteLocale; home?: string }) {
+  const site = siteCopy(locale);
+  const copy = site.subscription;
+  const text = site.footerLabels;
+  const docs = docsLang(locale);
+  const homePath = home ?? (locale === 'en' ? '/' : `/${locale}`);
+  const subscription = subscriptionPath(docs);
   const year = new Date().getFullYear();
   const years = year > 2026 ? `2026–${year}` : '2026';
   const columns = [
@@ -30,7 +27,7 @@ export function SellerFooter({ note, lang = 'en', home }: { note: string; lang?:
       title: text.product,
       links: [
         { href: homePath === '/' ? '/#features' : `${homePath}#features`, label: text.features },
-        { href: lang === 'ru' ? '/ru/guides' : '/guides', label: text.guides },
+        { href: locale === 'en' ? '/guides' : `/${locale}/guides`, label: text.guides },
         { href: `${subscription}#plans`, label: copy.nav.plans },
         { href: `${subscription}#reviews`, label: copy.nav.reviews },
       ],
@@ -40,10 +37,17 @@ export function SellerFooter({ note, lang = 'en', home }: { note: string; lang?:
       links: [
         { href: `${subscription}#faq`, label: copy.nav.faq },
         { href: `mailto:${merchant.email}`, label: text.write },
-        { href: subscriptionPath(lang, '/offer'), label: copy.footer.requisites },
+        { href: subscriptionPath(docs, '/offer'), label: copy.footer.requisites },
       ],
     },
-    { title: copy.footer.documents, links: documentLinks(lang) },
+    {
+      title: copy.footer.documents,
+      links: [
+        { href: subscriptionPath(docs, '/offer'), label: copy.docs.offer },
+        { href: subscriptionPath(docs, '/payment'), label: copy.docs.payment },
+        { href: subscriptionPath(docs, '/privacy'), label: copy.docs.privacy },
+      ],
+    },
   ];
 
   return (
@@ -87,7 +91,7 @@ export function SellerFooter({ note, lang = 'en', home }: { note: string; lang?:
           <div className="w-full max-w-[300px]">
             <PaymentLogos />
           </div>
-          <p className="text-xs leading-5 text-white/45 lg:max-w-xl lg:text-right">
+          <p className="text-xs leading-5 text-white/45 lg:max-w-xl lg:text-end">
             {note} © {years} Yorix.
           </p>
         </div>

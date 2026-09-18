@@ -14,19 +14,19 @@ export function CtaBand({ title, body, action, note }: { title: string; body: st
       <Reveal animation="zoomIn">
         <div className="relative rounded-[2rem] bg-[linear-gradient(100deg,#4F46E5_0%,#6D6AF0_48%,#A5B4FC_100%)] shadow-[0_30px_90px_rgb(79_70_229/35%)]">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden rounded-[2rem]">
-            <Art className="drift absolute bottom-[-38%] left-[-5%] w-[110%] max-w-none opacity-45" height={511} name="cloud-bank" width={1536} />
-            <Sparkle className="left-[34%] top-[16%] w-3" delay={300} tone="lavender" />
-            <Sparkle className="right-[30%] top-[62%] w-2.5" delay={1200} />
-            <Sparkle className="bottom-[18%] right-[7%] w-4" delay={700} />
+            <Art className="drift absolute bottom-[-38%] start-[-5%] w-[110%] max-w-none opacity-45 rtl:-scale-x-100" height={511} name="cloud-bank" width={1536} />
+            <Sparkle className="start-[34%] top-[16%] w-3" delay={300} tone="lavender" />
+            <Sparkle className="end-[30%] top-[62%] w-2.5" delay={1200} />
+            <Sparkle className="bottom-[18%] end-[7%] w-4" delay={700} />
           </div>
           <div className="relative grid items-center gap-6 px-6 pb-8 pt-2 sm:px-10 md:grid-cols-[230px_1fr_auto] md:py-10 lg:grid-cols-[260px_1fr_auto]">
-            <div className="relative mx-auto -mt-24 w-[200px] md:absolute md:-top-16 md:left-6 md:mx-0 md:mt-0 md:w-[230px] lg:w-[250px]">
+            <div className="relative mx-auto -mt-24 w-[200px] md:absolute md:-top-16 md:start-6 md:mx-0 md:mt-0 md:w-[230px] lg:w-[250px]">
               <div className="float-slow">
-                <Art className="h-auto w-full drop-shadow-[0_24px_40px_rgb(30_27_75/35%)]" height={560} name="cta-baby-star" width={503} />
+                <Art className="h-auto w-full drop-shadow-[0_24px_40px_rgb(30_27_75/35%)] rtl:-scale-x-100" height={560} name="cta-baby-star" width={503} />
               </div>
             </div>
             <div className="hidden md:block" />
-            <div className="text-center md:text-left">
+            <div className="text-center md:text-start">
               <h2 className="text-[1.65rem] font-semibold leading-[1.2] text-white sm:text-[1.9rem]">{title}</h2>
               <p className="mt-2 max-w-xl text-[15px] leading-6 text-white/85">{body}</p>
             </div>
@@ -34,12 +34,12 @@ export function CtaBand({ title, body, action, note }: { title: string; body: st
               <a className={whitePill} href={appDownloadUrl} rel="noopener noreferrer" target="_blank">
                 <AppleGlyph />
                 {action}
-                <ArrowRight className="h-5 w-5" aria-hidden="true" />
+                <ArrowRight className="h-5 w-5 rtl:-scale-x-100" aria-hidden="true" />
               </a>
             </div>
           </div>
           {note ? (
-            <Hand className="absolute right-8 top-[-2.4rem] hidden rotate-[-8deg] text-[1.9rem] text-[#FDE68A] lg:block">
+            <Hand className="absolute end-8 top-[-2.4rem] hidden rotate-[-8deg] rtl:rotate-[8deg] text-[1.9rem] text-[#FDE68A] lg:block">
               {note} <DoodleHeart className="h-6 w-6" />
             </Hand>
           ) : null}

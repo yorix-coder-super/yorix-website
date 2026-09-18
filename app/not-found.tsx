@@ -38,7 +38,7 @@ export default function NotFound() {
           </a>
         </div>
       </section>
-      <SellerFooter lang="ru" note={homeCopy('ru').footer} />
+      <SellerFooter locale="ru" note={homeCopy('ru').footer} />
     </main>
   );
 }

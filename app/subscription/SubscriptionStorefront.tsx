@@ -97,7 +97,7 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
               <h2 className="text-2xl font-semibold text-white sm:text-[1.9rem]">{copy.plans.title}</h2>
               <p className="mt-3 text-[15px] leading-6 text-white/65">{copy.plans.included}</p>
             </Reveal>
-            <PlanGrid lang={lang} />
+            <PlanGrid locale={lang} />
             <p className="mt-6 text-sm leading-6 text-white/60">{copy.plans.steps}</p>
             <AccountLine className="mt-2 text-sm leading-6 text-white/60" />
             <p className="mt-3 text-sm leading-6 text-white/50">
@@ -115,7 +115,7 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
           </div>
         </section>
 
-        <SocialProof lang={lang} />
+        <SocialProof locale={lang} />
 
         <section className="relative mx-auto max-w-7xl scroll-mt-6 px-5 pb-20 pt-8 sm:px-8 lg:px-10" id="faq">
           <Reveal>

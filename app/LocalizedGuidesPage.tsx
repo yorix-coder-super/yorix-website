@@ -1,17 +1,17 @@
-import { getArticleUiCopy, getLocalizedTopicPages } from './article-localizations';
+import { getLocalizedTopicPages } from './article-localizations';
 import { GuidesIndex } from './home/GuidesIndex';
-import { type Locale, localeCopy } from './locales';
+import { siteCopy } from './i18n';
+import type { Locale } from './locales';
 
 export function LocalizedGuidesPage({ locale }: { locale: Locale }) {
-  const copy = localeCopy[locale];
-  const ui = getArticleUiCopy(locale);
+  const copy = siteCopy(locale);
 
   return (
     <GuidesIndex
       body={copy.guides.body}
-      cta={copy.cta}
+      cta={copy.home.cta}
       eyebrow={copy.guides.eyebrow}
-      footer={ui.footer}
+      footer={copy.articleUi.footer}
       guides={getLocalizedTopicPages(locale).map((page) => ({ ...page, href: `/${locale}/${page.slug}` }))}
       home={`/${locale}`}
       locale={locale}

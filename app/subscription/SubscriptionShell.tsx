@@ -24,7 +24,7 @@ export async function SubscriptionShell({ lang, page = '', children }: { lang: L
 
       <div className="relative z-10">{children}</div>
 
-      <SellerFooter lang={lang} note={copy.footer.medical} />
+      <SellerFooter locale={lang} note={copy.footer.medical} />
     </main>
   );
 }

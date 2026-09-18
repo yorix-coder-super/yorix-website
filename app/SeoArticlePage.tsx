@@ -2,6 +2,7 @@ import { ArrowLeft, ArrowRight, BookOpen, Clock, ExternalLink, Plus } from 'luci
 import type { ReactNode } from 'react';
 import { getArticleUiCopy, getLocalizedTopicPages, type ArticleUiCopy } from './article-localizations';
 import { articleExtras, articleHero, formatArticleDate, itemIcon, sectionScenes, splitLead, timelineIcon } from './article-ui';
+import { isRtl, shotLocale } from './i18n';
 import { ArticleToc, type TocItem } from './article/ArticleToc';
 import { Checklist } from './article/Checklist';
 import { appDownloadUrl, type TopicPage, topicPages } from './content';
@@ -51,14 +52,13 @@ function anchorId(text: string, fallback: string) {
 // Blocks without real content are left out.
 export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: SeoArticlePageProps) {
   const extra = articleExtras(locale);
-  const own = !locale || locale === 'ru';
-  const shotLang = locale === 'ru' ? 'ru' : 'en';
+  const shotLang = shotLocale(locale ?? 'en');
   const guidePath = locale ? `/${locale}/guides` : '/guides';
   const homePath = locale ? `/${locale}` : '/';
   const relatedSource = locale ? getLocalizedTopicPages(locale) : topicPages;
   const relatedPages = relatedSource.filter((item) => item.slug !== page.slug).slice(0, 3);
   const sections = page.sections.map((section, index) => ({ ...section, id: anchorId(section.heading, `section-${index + 1}`) }));
-  const scenes = sectionScenes(page.sections.map((section) => section.heading), locale);
+  const scenes = sectionScenes(page.sections.map((section) => section.heading), locale, page.sceneHeadings);
   const hero = articleHero(page.slug);
   const takeaways = (page.quickAnswer ?? [page.description, ...page.checklist.slice(0, 3)]).slice(0, 4).map(splitLead);
   // Generic fallback articles number their reference rows; those rows carry
@@ -79,8 +79,8 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
   const challenges = diagnosticRows.slice(1);
   const actionPlan = (page.actionPlan ?? page.checklist).slice(0, 6);
   const safetyNote = page.safetyNote ?? ui.disclaimer;
-  const promo = own ? { title: extra.promoTitle, body: extra.promoBody, tagline: extra.promoTagline } : { title: ui.personalizedSupport, body: ui.ctaBody, tagline: null };
-  const guideTitle = own ? extra.inThisGuide : ui.inThisArticle;
+  const promo = { title: extra.promoTitle, body: extra.promoBody, tagline: extra.promoTagline };
+  const guideTitle = extra.inThisGuide;
   const toc: TocItem[] = [
     ...sections.map((section, index) => ({ id: section.id, label: section.heading, number: index + 1 })),
     { id: 'reference', label: ui.quickReference },
@@ -97,7 +97,7 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
   );
 
   return (
-    <main className="home-page relative min-h-screen overflow-x-clip text-white">
+    <main className="home-page relative min-h-screen overflow-x-clip text-white" dir={isRtl(locale ?? 'en') ? 'rtl' : undefined} lang={locale ?? 'en'}>
       <ScrollProgress />
       <StarField />
       <SiteHeader locale={locale ?? 'en'} />
@@ -111,7 +111,7 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
                 {ui.backToGuides}
               </a>
               <div className="mb-5 flex flex-wrap gap-2 text-sm font-medium">
-                <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.08] py-1 pl-1.5 pr-3.5 text-white">
+                <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.08] py-1 ps-1.5 pe-3.5 text-white">
                   <Art className="h-6 w-6 object-contain" height={192} name={guideIcon(page.slug)} width={192} />
                   {page.category}
                 </span>
@@ -133,18 +133,18 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
               <div aria-hidden="true" className="absolute inset-x-[10%] top-[16%] h-[62%] rounded-full bg-[#FDE68A]/15 blur-3xl" />
               <Reveal animation="zoomIn" className="absolute inset-x-[2%] top-[2%]" delay={120} load>
                 <div className="float-slow">
-                  <Art className="h-auto w-full drop-shadow-[0_30px_60px_rgb(15_16_34/45%)]" height={hero.height} name={hero.name} priority width={hero.width} />
+                  <Art className="h-auto w-full drop-shadow-[0_30px_60px_rgb(15_16_34/45%)] rtl:-scale-x-100" height={hero.height} name={hero.name} priority width={hero.width} />
                 </div>
               </Reveal>
               {extra.notes ? (
-                <Reveal animation="fadeIn" className="absolute right-[-4%] top-[2%] z-10 hidden w-[32%] sm:block" delay={600} load>
-                  <Hand className="rotate-[-10deg] text-right text-[1.6rem] text-[#C7D2FE] lg:text-[1.75rem]">
+                <Reveal animation="fadeIn" className="absolute end-[-4%] top-[2%] z-10 hidden w-[32%] sm:block" delay={600} load>
+                  <Hand className="rotate-[-10deg] rtl:rotate-[10deg] text-end text-[1.6rem] text-[#C7D2FE] lg:text-[1.75rem]">
                     {extra.notes.hero} <DoodleHeart className="h-5 w-5 text-[#FDE68A]" />
                   </Hand>
                 </Reveal>
               ) : null}
-              <Sparkle className="left-[2%] top-[14%] w-4" delay={0} />
-              <Sparkle className="bottom-[16%] right-[4%] w-3" delay={900} tone="lavender" />
+              <Sparkle className="start-[2%] top-[14%] w-4" delay={0} />
+              <Sparkle className="bottom-[16%] end-[4%] w-3" delay={900} tone="lavender" />
             </div>
           </header>
 
@@ -155,7 +155,7 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
                   <Art className="h-8 w-8 object-contain" height={192} name="icon-bolt" width={152} />
                   {extra.shortAnswer}
                 </h2>
-                {extra.notes ? <Hand className="hidden max-w-[15rem] rotate-[-4deg] text-right text-[1.4rem] text-[#C7D2FE] sm:block">{extra.notes.shortAnswer}</Hand> : null}
+                {extra.notes ? <Hand className="hidden max-w-[15rem] rotate-[-4deg] rtl:rotate-[4deg] text-end text-[1.4rem] text-[#C7D2FE] sm:block">{extra.notes.shortAnswer}</Hand> : null}
               </div>
               <div className={`mt-5 grid gap-3 ${takeawayColumns[takeaways.length] ?? ''}`}>
                 {takeaways.map((item, index) => (
@@ -183,7 +183,7 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
               {toc.map((item) => (
                 <li key={item.id}>
                   <a className="flex gap-3 py-1 text-sm text-white/75 hover:text-white" href={`#${item.id}`}>
-                    <span className="w-5 text-right text-[#A5B4FC]">{item.number ?? '·'}</span>
+                    <span className="w-5 text-end text-[#A5B4FC]">{item.number ?? '·'}</span>
                     {item.label}
                   </a>
                 </li>
@@ -203,7 +203,7 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
                       </span>
                       <span className="pt-1.5">{section.heading}</span>
                     </h2>
-                    <div className="md:pl-16">
+                    <div className="md:ps-16">
                       {section.body.map((paragraph) => (
                         <p className={para} key={paragraph}>
                           {paragraph}
@@ -224,14 +224,14 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
                     <Parallax y={[36, -36]}>
                     <figure aria-hidden="true" className="relative">
                       {scene.note ? (
-                        <Hand className="mb-1 rotate-[-8deg] text-right text-[1.35rem] text-[#C7D2FE]">
+                        <Hand className="mb-1 rotate-[-8deg] rtl:rotate-[8deg] text-end text-[1.35rem] text-[#C7D2FE]">
                           {scene.note} <DoodleHeart className="h-4 w-4 text-[#FDE68A]" />
                         </Hand>
                       ) : null}
                       <div className="float-slow">
-                        <Art className="h-auto w-full" height={scene.height} name={scene.name} width={scene.width} />
+                        <Art className="h-auto w-full rtl:-scale-x-100" height={scene.height} name={scene.name} width={scene.width} />
                       </div>
-                      <Sparkle className="-left-2 top-1/2 w-3" delay={index * 500} />
+                      <Sparkle className="-start-2 top-1/2 w-3" delay={index * 500} />
                     </figure>
                     </Parallax>
                     </Reveal>
@@ -248,12 +248,12 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
               </Reveal>
               <Reveal delay={120}>
               <ol className="mt-5 grid gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(150px,1fr))]">
-                {page.sampleRows.map((row) => (
+                {page.sampleRows.map((row, index) => (
                   <li className="flex flex-col items-center bg-[#1B1947] p-5 text-center" key={`${row.label}-${row.value}`}>
-                    <Art className="h-12 w-12 object-contain" height={192} name={namedRows ? itemIcon(row.label, row.value) : 'icon-sparkle'} width={192} />
+                    <Art className="h-12 w-12 object-contain" height={192} name={page.rowIcons?.[index] ?? (namedRows ? itemIcon(row.label, row.value) : 'icon-sparkle')} width={192} />
                     <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-[#A5B4FC]">{row.label}</p>
-                    <p className="mt-1 text-lg font-semibold leading-6 text-white">{row.value}</p>
-                    <p className="mt-1.5 text-xs leading-5 text-white/55">{row.note}</p>
+                    <p className="mt-1 max-w-full text-lg font-semibold leading-6 text-white hyphens-auto break-words">{row.value}</p>
+                    <p className="mt-1.5 max-w-full text-xs leading-5 text-white/55 hyphens-auto break-words">{row.note}</p>
                   </li>
                 ))}
               </ol>
@@ -327,7 +327,7 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
                 <h2 className={h2}>{extra.planToday}</h2>
               </Reveal>
               <div className="mt-5 grid gap-6 md:grid-cols-[minmax(0,1fr)_280px] md:items-start">
-                <ol className="relative grid gap-5 before:absolute before:bottom-5 before:left-[19px] before:top-5 before:w-0.5 before:bg-white/15">
+                <ol className="relative grid gap-5 before:absolute before:bottom-5 before:start-[19px] before:top-5 before:w-0.5 before:bg-white/15">
                   {actionPlan.map((item, index) => (
                     <li className="relative" key={item}>
                       <Reveal className="grid grid-cols-[40px_1fr] items-start gap-4" delay={index * 90}>
@@ -340,21 +340,21 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
                   ))}
                 </ol>
                 <Reveal animation="driftInRight" delay={200}>
-                <Checklist items={page.checklist} storageKey={`yorix-checklist:${locale ?? 'en'}:${page.slug}`} title={own ? extra.checklist : ui.checklist} />
+                <Checklist items={page.checklist} storageKey={`yorix-checklist:${locale ?? 'en'}:${page.slug}`} title={extra.checklist} />
                 </Reveal>
               </div>
             </section>
 
             {page.appTieIn ? (
               <Reveal>
-              <section className="relative overflow-hidden rounded-3xl border border-white/12 bg-[linear-gradient(135deg,rgb(99_102_241/0.28),rgb(167_139_250/0.10))] p-6 sm:p-8 sm:pr-64">
+              <section className="relative overflow-hidden rounded-3xl border border-white/12 bg-[linear-gradient(135deg,rgb(99_102_241/0.28),rgb(167_139_250/0.10))] p-6 sm:p-8 sm:pe-64">
                 <h2 className={h2}>{page.appTieIn.heading}</h2>
                 {page.appTieIn.body.map((paragraph) => (
                   <p className={para} key={paragraph}>
                     {paragraph}
                   </p>
                 ))}
-                <div aria-hidden="true" className="pointer-events-none absolute -bottom-28 right-10 hidden w-44 rotate-[6deg] sm:block">
+                <div aria-hidden="true" className="pointer-events-none absolute -bottom-28 end-10 hidden w-44 rotate-[6deg] rtl:-rotate-[6deg] sm:block">
                   <PhoneFrame alt="" src={`/shots/${shotLang}-progress.webp`} />
                 </div>
               </section>
@@ -437,7 +437,7 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
       </div>
 
       <CtaBand action={ui.download} body={ui.ctaBody} title={ui.ctaTitle} />
-      <SellerFooter home={homePath} lang={locale === 'ru' ? 'ru' : 'en'} note={ui.footer} />
+      <SellerFooter home={homePath} locale={locale ?? 'en'} note={ui.footer} />
     </main>
   );
 }
@@ -461,12 +461,12 @@ function Callout({ tone, icon, title, children }: { tone: 'important' | 'tip'; i
 function PromoCard({ title, body, tagline, action, shot }: { title: string; body: string; tagline: string | null; action: string; shot: string }) {
   return (
     <div className="relative mt-5 overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(160deg,rgb(99_102_241/0.38),rgb(30_27_75/0.35))] p-4">
-      <p className="flex items-start gap-2 pr-24 text-[15px] font-semibold leading-5 text-white">
+      <p className="flex items-start gap-2 pe-24 text-[15px] font-semibold leading-5 text-white">
         <Art className="h-6 w-6 shrink-0 object-contain" height={127} name="star" width={128} />
         {title}
       </p>
-      <p className="mt-2 pr-16 text-[13px] leading-5 text-white/75">{body}</p>
-      <div aria-hidden="true" className="pointer-events-none absolute -right-6 top-3 w-24 rotate-[12deg]">
+      <p className="mt-2 pe-16 text-[13px] leading-5 text-white/75">{body}</p>
+      <div aria-hidden="true" className="pointer-events-none absolute -end-6 top-3 w-24 rotate-[12deg] rtl:-rotate-[12deg]">
         <PhoneFrame alt="" src={shot} />
       </div>
       <a
@@ -477,7 +477,7 @@ function PromoCard({ title, body, tagline, action, shot }: { title: string; body
       >
         <AppleGlyph className="h-4 w-4" />
         {action}
-        <ArrowRight className="h-4 w-4" aria-hidden="true" />
+        <ArrowRight className="h-4 w-4 rtl:-scale-x-100" aria-hidden="true" />
       </a>
       {tagline ? <p className="relative mt-3 text-center text-xs text-white/65">{tagline}</p> : null}
     </div>

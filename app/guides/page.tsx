@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { siteUrl, topicPages } from '../content';
-import { homeCopy } from '../home/copy';
+import { siteCopy } from '../i18n';
 import { GuidesIndex } from '../home/GuidesIndex';
 
 export const metadata: Metadata = {
@@ -20,17 +20,17 @@ export const metadata: Metadata = {
 };
 
 export default function GuidesPage() {
-  const copy = homeCopy('en');
+  const copy = siteCopy('en');
   return (
     <GuidesIndex
-      body="Practical, evidence-aware guides about newborn sleep, naps, wake windows, night wakings, feeding routines, white noise, regressions, and sleep training decisions."
-      cta={copy.cta}
-      eyebrow="Yorix guides"
-      footer={copy.footer}
+      body={copy.guides.body}
+      cta={copy.home.cta}
+      eyebrow={copy.guides.eyebrow}
+      footer={copy.home.footer}
       guides={topicPages.map((page) => ({ ...page, href: `/${page.slug}` }))}
       home="/"
       locale="en"
-      title="Baby sleep answers parents search for at 3 a.m."
+      title={copy.guides.title}
     />
   );
 }

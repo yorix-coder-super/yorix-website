@@ -91,6 +91,11 @@ export type TopicPage = {
     value: string;
     note: string;
   }[];
+  // Translations of the generic article share one structure; icons and
+  // section pictures are picked from its English wording, the same for every
+  // language.
+  rowIcons?: string[];
+  sceneHeadings?: string[];
   quickAnswer?: string[];
   scenarioRows?: {
     time: string;

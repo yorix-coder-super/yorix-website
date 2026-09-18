@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { getLocalizedTopicPages } from '../../article-localizations';
 import { LocalizedGuidesPage } from '../../LocalizedGuidesPage';
 import { siteUrl } from '../../content';
+import { siteCopy } from '../../i18n';
 import { isLocale, localeAlternates, localeCopy, locales, type Locale } from '../../locales';
 
 type LocalizedGuidesRouteProps = {
@@ -21,7 +22,7 @@ export function generateMetadata({ params }: LocalizedGuidesRouteProps): Metadat
   }
 
   const locale = params.locale;
-  const copy = localeCopy[locale];
+  const copy = { ...siteCopy(locale), ogLocale: localeCopy[locale].ogLocale };
   const translatedPages = getLocalizedTopicPages(locale);
 
   return {

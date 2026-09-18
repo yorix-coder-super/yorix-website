@@ -2,8 +2,6 @@
 
 import { ChevronDown } from 'lucide-react';
 import { useEffect, useRef } from 'react';
-import { subscriptionCopy } from './copy';
-import type { Lang } from './i18n';
 
 export type LanguageItem = { code: string; label: string; href: string };
 
@@ -12,8 +10,7 @@ export type LanguageItem = { code: string; label: string; href: string };
 // currency menu: the price list follows the visitor's country (the same way
 // the App Store does it), and letting anyone pick a cheaper region by hand
 // would be a price-shopping tool.
-export function HeaderMenus({ lang, current, languages }: { lang: Lang; current: string; languages: LanguageItem[] }) {
-  const copy = subscriptionCopy[lang];
+export function HeaderMenus({ label, current, languages }: { label: string; current: string; languages: LanguageItem[] }) {
   const root = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,13 +27,13 @@ export function HeaderMenus({ lang, current, languages }: { lang: Lang; current:
     <div className="flex items-center gap-2" ref={root}>
       <details className="relative">
         <summary
-          aria-label={copy.nav.language}
+          aria-label={label}
           className="flex min-h-10 cursor-pointer list-none items-center gap-1 rounded-full border border-white/15 bg-white/10 px-3 text-sm font-semibold uppercase text-white transition hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 [&::-webkit-details-marker]:hidden"
         >
           {current}
           <ChevronDown className="h-4 w-4" aria-hidden="true" />
         </summary>
-        <div className="absolute right-0 top-12 z-50 grid w-44 overflow-hidden rounded-xl border border-white/10 bg-[#1E1B4B] p-1 shadow-2xl">
+        <div className="absolute end-0 top-12 z-50 grid max-h-[70vh] w-44 overflow-y-auto overscroll-contain rounded-xl border border-white/10 bg-[#1E1B4B] p-1 shadow-2xl">
           {languages.map((item) => (
             <a
               aria-current={item.code === current.toLowerCase() ? 'page' : undefined}

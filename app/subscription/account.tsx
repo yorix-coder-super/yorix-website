@@ -4,6 +4,9 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import type { Auth, User as FirebaseUser } from 'firebase/auth';
 import { AppleGlyph } from '../home/art';
 import { API_BASE, firebaseConfig, isFirebaseConfigured } from './config';
+import type { SiteLocale } from '../i18n';
+import type { SiteTranslation } from '../i18n/types';
+import { fromWire, type Wire } from '../i18n/wire';
 import { subscriptionCopy, type SubscriptionCopy } from './copy';
 import { currencyForVisitor, formatMoney, type Currency } from './currency';
 import { formatDate, subscriptionPath, type Lang } from './i18n';
@@ -36,9 +39,18 @@ type State = {
   requestTerms: Terms | null;
 };
 
+// The subscription UI in the page's language; the storefront adds its hero.
+export type ClientCopy = SiteTranslation['subscription'] & { hero?: SubscriptionCopy['hero'] };
+type PlanTexts = SiteTranslation['plans'];
+
 type Api = State & {
+  // `lang` is the language of the documents and of the order e-mails (Russian
+  // or English); `locale` is the language the page is written in.
   lang: Lang;
-  copy: SubscriptionCopy;
+  locale: SiteLocale;
+  copy: ClientCopy;
+  plans: PlanTexts;
+  docsNote: string;
   currency: Currency;
   signIn: (provider: Provider, origin?: string) => Promise<Account | null>;
   signOut: () => Promise<void>;
@@ -87,8 +99,27 @@ function toAccount(user: FirebaseUser): Account {
   return { uid: user.uid, email: user.email, provider };
 }
 
-export function AccountProvider({ lang, country, acceptLanguage, children }: { lang: Lang; country?: string | null; acceptLanguage?: string | null; children: ReactNode }) {
-  const copy = subscriptionCopy[lang];
+export function AccountProvider({
+  lang,
+  locale = lang,
+  copy: wire,
+  plans,
+  docsNote = '',
+  country,
+  acceptLanguage,
+  children,
+}: {
+  lang: Lang;
+  locale?: SiteLocale;
+  copy?: Wire<ClientCopy>;
+  plans?: PlanTexts;
+  docsNote?: string;
+  country?: string | null;
+  acceptLanguage?: string | null;
+  children: ReactNode;
+}) {
+  const copy = useMemo<ClientCopy>(() => (wire ? fromWire<ClientCopy>(wire) : subscriptionCopy[lang]), [wire, lang]);
+  const planTexts = plans ?? planCopy[lang];
   const authRef = useRef<Auth | null>(null);
   // Kept from initialisation so sign-in opens its popup synchronously inside
   // the click — Safari blocks a window opened after an awaited import.
@@ -225,8 +256,8 @@ export function AccountProvider({ lang, country, acceptLanguage, children }: { l
   );
 
   const api = useMemo<Api>(
-    () => ({ ...state, lang, copy, currency, signIn, signOut, createOrder, getToken, clearError, openTerms, openRequest }),
-    [state, lang, copy, currency, signIn, signOut, createOrder, getToken, clearError, openTerms, openRequest],
+    () => ({ ...state, lang, locale, copy, plans: planTexts, docsNote, currency, signIn, signOut, createOrder, getToken, clearError, openTerms, openRequest }),
+    [state, lang, locale, copy, planTexts, docsNote, currency, signIn, signOut, createOrder, getToken, clearError, openTerms, openRequest],
   );
 
   return <Ctx.Provider value={api}>{children}</Ctx.Provider>;
@@ -243,7 +274,7 @@ export function useAccount() {
 // use Google in the app. Shown whenever sign-in is available — the request
 // form credits the same account as the live checkout.
 export function AccountLine({ className = '' }: { className?: string }) {
-  const { ready, configured, user, me, busy, error, errorOrigin, copy, lang, signIn, signOut } = useAccount();
+  const { ready, configured, user, me, busy, error, errorOrigin, copy, locale, signIn, signOut } = useAccount();
   if (!configured || !ready) return null;
   const link = 'font-semibold text-white underline decoration-white/30 hover:decoration-white disabled:opacity-60';
   if (!user) {
@@ -266,7 +297,7 @@ export function AccountLine({ className = '' }: { className?: string }) {
   const email = user.email ?? user.uid;
   return (
     <p className={className}>
-      {active && me?.premiumUntil ? copy.plans.activeUntil(email, formatDate(me.premiumUntil, lang)) : copy.plans.goesTo(email)}{' '}
+      {active && me?.premiumUntil ? copy.plans.activeUntil(email, formatDate(me.premiumUntil, locale)) : copy.plans.goesTo(email)}{' '}
       {active ? null : `${copy.plans.wrongAccount} `}
       <button className={link} onClick={() => void signOut()} type="button">
         {copy.plans.signOut}
@@ -283,8 +314,8 @@ const planIcon = { week: 'icon-moon-crescent', month: 'icon-moon-full', year: 'i
 const dialogFrame = 'pointer-events-none relative grid min-h-full grid-cols-[minmax(0,1fr)] place-items-center p-4';
 
 export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) {
-  const { me, copy, lang, currency, openTerms } = useAccount();
-  const text = planCopy[lang][plan.id];
+  const { me, copy, lang, plans, currency, openTerms } = useAccount();
+  const text = plans[plan.id];
   const amount = prices[plan.id][currency];
   const price = formatMoney(amount, currency, lang);
   const perWeek = formatMoney((amount / plan.days) * 7, currency, lang);
@@ -305,7 +336,7 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
       }`}
     >
       {featured ? (
-        <span className="absolute -top-3 left-6 rounded-full bg-[#FDE68A] px-3 py-1 text-xs font-bold text-[#1E1B4B]">{copy.plans.bestValue}</span>
+        <span className="absolute -top-3 start-6 rounded-full bg-[#FDE68A] px-3 py-1 text-xs font-bold text-[#1E1B4B]">{copy.plans.bestValue}</span>
       ) : null}
       <div className="flex items-start justify-between gap-4">
         <div>
@@ -333,8 +364,8 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
 // The hero's price anchor, in the visitor's own currency. It renders the
 // whole label: a render prop cannot cross the server-component boundary.
 export function HeroCta() {
-  const { currency, lang, copy } = useAccount();
-  return <Money text={copy.hero.primary(formatMoney(prices.week[currency], currency, lang))} />;
+  const { currency, lang } = useAccount();
+  return <Money text={subscriptionCopy[lang].hero.primary(formatMoney(prices.week[currency], currency, lang))} />;
 }
 
 // WebPay charges in BYN, so a buyer outside Belarus sees those amounts once,
@@ -358,7 +389,7 @@ export function ChargeNote({ className = '' }: { className?: string }) {
 // the order both start from this dialog's button, inside the click, so
 // Safari keeps the Apple window.
 function TermsDialog() {
-  const { termsPlan, openTerms, openRequest, user, me, ready, configured, config, currency, lang, copy, busy, error, errorOrigin, signIn, createOrder, clearError } = useAccount();
+  const { termsPlan, openTerms, openRequest, user, me, ready, configured, config, currency, lang, locale, copy, plans, docsNote, busy, error, errorOrigin, signIn, createOrder, clearError } = useAccount();
   const [accepted, setAccepted] = useState(false);
   const [immediate, setImmediate] = useState(false);
   const [missing, setMissing] = useState<'accept' | 'immediate' | null>(null);
@@ -391,7 +422,7 @@ function TermsDialog() {
 
   if (!termsPlan) return null;
   const plan = termsPlan;
-  const text = planCopy[lang][plan.id];
+  const text = plans[plan.id];
   const europe = currency === 'EUR';
   const live = configured && (config?.checkoutMode ?? 'off') !== 'off';
   const price = formatMoney(prices[plan.id][currency], currency, lang);
@@ -490,7 +521,7 @@ function TermsDialog() {
           <li>
             {user
               ? active && me?.premiumUntil
-                ? copy.plans.activeUntil(user.email ?? user.uid, formatDate(me.premiumUntil, lang))
+                ? copy.plans.activeUntil(user.email ?? user.uid, formatDate(me.premiumUntil, locale))
                 : copy.terms.goesTo(user.email ?? user.uid)
               : copy.terms.signInNote}
           </li>
@@ -538,6 +569,7 @@ function TermsDialog() {
             <span>{copy.terms.immediate}</span>
           </label>
         ) : null}
+        {docsNote ? <p className="mt-2 ps-8 text-xs leading-5 text-white/55">{docsNote}</p> : null}
         {missing ? (
           <p className="mt-3 text-sm leading-5 text-[#FCA5A5]" id="terms-missing" role="alert">
             {missing === 'accept' ? copy.terms.required : copy.terms.requiredImmediate}
@@ -609,7 +641,7 @@ export function RequestForm() {
 }
 
 function RequestDialog() {
-  const { requestPlan, requestTerms, openRequest, user, copy, lang, currency } = useAccount();
+  const { requestPlan, requestTerms, openRequest, user, copy, lang, plans: planTexts, currency } = useAccount();
   const [planId, setPlanId] = useState<Plan['id']>('year');
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
@@ -688,7 +720,7 @@ function RequestDialog() {
               <select className={field} onChange={(e) => setPlanId(e.target.value as Plan['id'])} value={planId}>
                 {plans.map((p) => (
                   <option className="text-[#1E1B4B]" key={p.id} value={p.id}>
-                    {planCopy[lang][p.id].title} — {formatByn(p.priceByn, lang)}
+                    {planTexts[p.id].title} — {formatByn(p.priceByn, lang)}
                   </option>
                 ))}
               </select>

@@ -1,23 +1,23 @@
 import { Star } from 'lucide-react';
-import { subscriptionCopy } from './copy';
-import type { Lang } from './i18n';
+import { siteCopy, type SiteLocale } from '../i18n';
 import { Reveal } from './Reveal';
 import { testimonials } from './testimonials';
 
 // Real words only: each card names its source (a published App Store review
 // or parent feedback collected by support) and says when it is a translation.
-export function SocialProof({ lang, title, body }: { lang: Lang; title?: string; body?: string }) {
-  const copy = subscriptionCopy[lang];
-  const items = testimonials.map((t) => ({
+export function SocialProof({ locale, title, body }: { locale: SiteLocale; title?: string; body?: string }) {
+  const site = siteCopy(locale);
+  const copy = site.subscription;
+  const items = testimonials.map((t, index) => ({
     ...t,
-    text: t.locale === lang ? t.quote : t.translations[lang],
-    isTranslation: t.locale !== lang,
+    text: t.locale === locale ? t.quote : site.testimonials[index],
+    isTranslation: t.locale !== locale,
   }));
 
   return (
     <section className="relative mx-auto max-w-7xl scroll-mt-6 px-5 py-8 sm:px-8 lg:px-10" id="reviews">
       <div className="grid gap-5 rounded-[2rem] border border-white/10 bg-white/[0.05] p-5 backdrop-blur-xl sm:p-7 lg:grid-cols-[1.2fr_1fr_1fr_1fr] lg:gap-4">
-        <Reveal className="flex flex-col justify-center lg:pr-4">
+        <Reveal className="flex flex-col justify-center lg:pe-4">
           <h2 className="text-[1.75rem] font-semibold leading-[1.15] text-white sm:text-[2rem] lg:text-[1.7rem]">{title ?? copy.proof.title}</h2>
           <p className="mt-4 text-[15px] leading-6 text-white/65">{body ?? copy.proof.eyebrow}</p>
         </Reveal>
