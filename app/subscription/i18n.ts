@@ -8,7 +8,7 @@ export const subscriptionLangs: { code: Lang; label: string; short: string }[] =
 export type SubscriptionPage = '' | '/oplata' | '/oferta' | '/konfidencialnost' | '/return' | '/cancel';
 
 export function subscriptionPath(lang: Lang, page: SubscriptionPage = '') {
-  return lang === 'ru' ? `/podpiska${page}` : `/en/subscription${page}`;
+  return lang === 'ru' ? `/ru/subscription${page}` : `/subscription${page}`;
 }
 
 export function subscriptionAlternates(page: SubscriptionPage) {

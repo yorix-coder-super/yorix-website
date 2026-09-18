@@ -6,17 +6,17 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import type { Auth, User as FirebaseUser } from 'firebase/auth';
 import { API_BASE, firebaseConfig, isFirebaseConfigured } from './config';
 import { subscriptionCopy, type SubscriptionCopy } from './copy';
-import { convert, currencyForCountry, displayPrice, fallbackRates, formatMoney, type Currency, type Rates } from './currency';
+import { currencyForCountry, formatMoney, type Currency } from './currency';
 import { useCurrency } from './currencyStore';
 import { formatDate, subscriptionPath, type Lang } from './i18n';
-import { formatByn, mailtoOrder, orderTemplate, planCopy, plans, type Plan } from './merchant';
+import { formatByn, mailtoOrder, orderTemplate, planCopy, plans, prices, type Plan } from './merchant';
 import { Money } from './Money';
 import { MoonPhase } from './MoonPhase';
 import { Button, Spinner } from './ui';
 
 type Provider = 'apple.com' | 'google.com';
 type CheckoutMode = 'off' | 'test' | 'prod';
-type WebConfig = { checkoutMode: CheckoutMode; plans: { id: string; days: number; priceByn: number }[]; rates?: Rates };
+type WebConfig = { checkoutMode: CheckoutMode; plans: { id: string; days: number; priceByn: number }[] };
 type Me = { premiumUntil: string | null; blocked: boolean };
 type Account = { uid: string; email: string | null; provider: string };
 type ErrorKey = keyof SubscriptionCopy['checkout'] | 'popupBlocked' | 'signInError';
@@ -36,7 +36,6 @@ type State = {
 type Api = State & {
   lang: Lang;
   copy: SubscriptionCopy;
-  rates: Rates;
   currency: Currency;
   signIn: (provider: Provider, origin?: string) => Promise<Account | null>;
   signOut: () => Promise<void>;
@@ -212,10 +211,9 @@ export function AccountProvider({ lang, country, children }: { lang: Lang; count
   const clearError = useCallback(() => setState((s) => ({ ...s, error: null, errorOrigin: null })), []);
   const openRequest = useCallback((plan: Plan | null) => setState((s) => ({ ...s, requestPlan: plan, error: null, errorOrigin: null })), []);
 
-  const rates = state.config?.rates ?? fallbackRates;
   const api = useMemo<Api>(
-    () => ({ ...state, lang, copy, rates, currency, signIn, signOut, createOrder, getToken, clearError, openRequest }),
-    [state, lang, copy, rates, currency, signIn, signOut, createOrder, getToken, clearError, openRequest],
+    () => ({ ...state, lang, copy, currency, signIn, signOut, createOrder, getToken, clearError, openRequest }),
+    [state, lang, copy, currency, signIn, signOut, createOrder, getToken, clearError, openRequest],
   );
 
   return <Ctx.Provider value={api}>{children}</Ctx.Provider>;
@@ -345,14 +343,13 @@ function AppleMark() {
 }
 
 export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) {
-  const { ready, configured, config, user, busy, error, errorOrigin, copy, lang, currency, rates, signIn, createOrder, openRequest } = useAccount();
+  const { ready, configured, config, user, busy, error, errorOrigin, copy, lang, currency, signIn, createOrder, openRequest } = useAccount();
   const text = planCopy[lang][plan.id];
-  const kopecks = Math.round(plan.priceByn * 100);
-  const { local: price, charge } = displayPrice(kopecks, currency, rates, lang);
-  const weekPriceByn = config?.plans.find((p) => p.id === 'week')?.priceByn ?? plans[0].priceByn;
-  const perWeekByn = (plan.priceByn / plan.days) * 7;
-  const perWeek = formatMoney(convert(Math.round(perWeekByn * 100), currency, rates), currency, lang, currency !== 'BYN');
-  const cheaper = Math.round((1 - perWeekByn / weekPriceByn) * 100);
+  const amount = prices[plan.id][currency];
+  const price = formatMoney(amount, currency, lang);
+  const perWeekAmount = (amount / plan.days) * 7;
+  const perWeek = formatMoney(perWeekAmount, currency, lang);
+  const cheaper = Math.round((1 - perWeekAmount / prices.week[currency]) * 100);
   const live = configured && (config?.checkoutMode ?? 'off') !== 'off';
   const [pending, setPending] = useState(false);
 
@@ -395,7 +392,7 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
         <Money text={price} />
       </p>
       <p className={`mt-2 min-h-6 text-sm leading-6 ${muted}`}>
-        <Money text={[charge ? copy.plans.charged(charge) : '', plan.id === 'week' ? '' : `${copy.plans.perWeek(perWeek)} · ${copy.plans.cheaper(cheaper)}`].filter(Boolean).join(' · ') || '\u00A0'} />
+        <Money text={plan.id === 'week' ? '\u00A0' : `${copy.plans.perWeek(perWeek)} · ${copy.plans.cheaper(cheaper)}`} />
       </p>
       <div className="mt-auto pt-6">
         <Button
@@ -487,7 +484,7 @@ function CopyButton({ value, label, done }: { value: string; label: string; done
 // pre-selected, the account code is optional, and the owner answers with a
 // payment link. If the worker is unreachable the form falls back to e-mail.
 export function RequestForm() {
-  const { requestPlan, openRequest, user, copy, lang, currency, rates } = useAccount();
+  const { requestPlan, openRequest, user, copy, lang, currency } = useAccount();
   const [planId, setPlanId] = useState<Plan['id']>('year');
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
@@ -517,7 +514,7 @@ export function RequestForm() {
 
   if (!open) return null;
   const plan = plans.find((p) => p.id === planId) ?? plans[2];
-  const { local, charge } = displayPrice(Math.round(plan.priceByn * 100), currency, rates, lang);
+  const local = formatMoney(prices[plan.id][currency], currency, lang);
 
   const submit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -564,7 +561,7 @@ export function RequestForm() {
               </select>
             </label>
             <p className="mt-1.5 text-sm text-white/60">
-              <Money text={`${local}${charge ? ` · ${copy.plans.charged(charge)}` : ''}`} />
+              <Money text={local} />
             </p>
             <label className="mt-4 block text-sm font-semibold">
               {copy.request.email}

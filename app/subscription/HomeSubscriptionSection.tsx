@@ -8,14 +8,14 @@ import { Reveal } from './Reveal';
 import { Eyebrow, SectionTitle } from './ui';
 
 // The purchase, on the landing page itself: the same account panel and plan
-// cards as /podpiska, so a visitor buys without leaving the page they came
+// cards as /subscription, so a visitor buys without leaving the page they came
 // to. The full page keeps the bank-facing texts and the legal documents.
 export async function HomeSubscriptionSection({ lang }: { lang: Lang }) {
   const copy = subscriptionCopy[lang];
   const country = (await headers()).get('cf-ipcountry');
 
   return (
-    <section id="podpiska" className="mx-auto max-w-7xl scroll-mt-6 px-5 py-16 sm:px-8 lg:px-10" lang={lang}>
+    <section id="subscription" className="mx-auto max-w-7xl scroll-mt-6 px-5 py-16 sm:px-8 lg:px-10" lang={lang}>
       <AccountProvider country={country} lang={lang}>
         <RequestForm />
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">

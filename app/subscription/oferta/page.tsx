@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { Offer, offerTitle } from '../../../subscription/legal/Offer';
-import { subscriptionAlternates, subscriptionPath } from '../../../subscription/i18n';
+import { Offer, offerTitle } from '../legal/Offer';
+import { subscriptionAlternates, subscriptionPath } from '../i18n';
 
 export const metadata: Metadata = {
   title: offerTitle['en'],

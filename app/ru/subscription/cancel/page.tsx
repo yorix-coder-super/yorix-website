@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import { CancelPage } from '../../subscription/CancelPage';
-import { subscriptionAlternates, subscriptionPath } from '../../subscription/i18n';
-import { subscriptionCopy } from '../../subscription/copy';
+import { CancelPage } from '../../../subscription/CancelPage';
+import { subscriptionAlternates, subscriptionPath } from '../../../subscription/i18n';
+import { subscriptionCopy } from '../../../subscription/copy';
 
 export const metadata: Metadata = {
   title: subscriptionCopy['ru'].cancel.title,

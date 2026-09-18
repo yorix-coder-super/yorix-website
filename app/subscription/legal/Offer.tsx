@@ -122,7 +122,7 @@ export function Offer({ lang }: { lang: Lang }) {
         <p>10.2. Disputes not settled by claim are resolved in court under the law of the Republic of Belarus.</p>
         <h2>11. Term and changes</h2>
         <p>
-          11.1. The offer is valid from its publication at yorix.website/en/subscription/oferta until withdrawn. Changes do not apply to orders paid before they
+          11.1. The offer is valid from its publication at yorix.website/subscription/oferta until withdrawn. Changes do not apply to orders paid before they
           were published.
         </p>
         <h2>12. Provider</h2>
@@ -213,7 +213,7 @@ export function Offer({ lang }: { lang: Lang }) {
       <p>10.2. Споры, не урегулированные в претензионном порядке, разрешаются в суде по законодательству Республики Беларусь.</p>
       <h2>11. Срок действия и изменение оферты</h2>
       <p>
-        11.1. Оферта действует с даты публикации на странице yorix.website/podpiska/oferta до её отзыва. Изменения не распространяются на заказы,
+        11.1. Оферта действует с даты публикации на странице yorix.website/ru/subscription/oferta до её отзыва. Изменения не распространяются на заказы,
         оплаченные до их публикации.
       </p>
       <h2>12. Исполнитель</h2>

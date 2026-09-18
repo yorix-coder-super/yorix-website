@@ -16,7 +16,6 @@ export type SubscriptionCopy = {
     cheaper: (pct: number) => string;
     pay: string;
     order: string;
-    charged: (byn: string) => string;
     perDay: (price: string) => string;
     perMonth: (price: string) => string;
     yearSaving: (pct: number) => string;
@@ -153,7 +152,6 @@ const ru: SubscriptionCopy = {
     cheaper: (pct) => `на ${pct}% дешевле недели`,
     pay: 'Оформить подписку',
     order: 'Заказать письмом',
-    charged: (byn) => `списание ${byn}`,
     perDay: (price) => `${price} в день`,
     perMonth: (price) => `${price} в месяц`,
     yearSaving: (pct) => `на ${pct}% дешевле, чем 12 месяцев по отдельности`,
@@ -336,7 +334,6 @@ const en: SubscriptionCopy = {
     cheaper: (pct) => `${pct}% less than weekly`,
     pay: 'Subscribe',
     order: 'Order by e-mail',
-    charged: (byn) => `charged ${byn}`,
     perDay: (price) => `${price} a day`,
     perMonth: (price) => `${price} a month`,
     yearSaving: (pct) => `${pct}% less than 12 separate months`,

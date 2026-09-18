@@ -50,10 +50,10 @@ export function proxy(request: NextRequest) {
 
   // The subscription section was called «Premium» until 2026-09-18; the old
   // links live in mails and the app store review notes.
-  const renamed = pathname.match(/^\/(en\/)?premium(\/.*)?$/);
-  if (renamed) {
+  const renamed = pathname.match(/^\/(?:(en)\/)?(premium|podpiska|subscription)(\/.*)?$/);
+  if (renamed && (renamed[1] || renamed[2] !== 'subscription')) {
     const url = request.nextUrl.clone();
-    url.pathname = `${renamed[1] ? '/en/subscription' : '/podpiska'}${renamed[2] ?? ''}`;
+    url.pathname = `${renamed[1] ? '/subscription' : '/ru/subscription'}${renamed[3] ?? ''}`;
 
     return withSecurityHeaders(NextResponse.redirect(url, 308));
   }

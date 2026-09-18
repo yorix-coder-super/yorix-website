@@ -204,7 +204,7 @@ export default async function Home() {
           </a>
           <a
             className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white"
-            href="/en/subscription"
+            href="/subscription"
           >
             Subscription
           </a>

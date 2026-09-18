@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { subscriptionAlternates, subscriptionPath } from '../../../subscription/i18n';
-import { Privacy, privacyTitle } from '../../../subscription/legal/Privacy';
+import { subscriptionAlternates, subscriptionPath } from '../i18n';
+import { Privacy, privacyTitle } from '../legal/Privacy';
 
 export const metadata: Metadata = {
   title: privacyTitle['en'],

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { PaymentTerms, paymentTermsTitle } from '../../../subscription/legal/PaymentTerms';
-import { subscriptionAlternates, subscriptionPath } from '../../../subscription/i18n';
+import { PaymentTerms, paymentTermsTitle } from '../legal/PaymentTerms';
+import { subscriptionAlternates, subscriptionPath } from '../i18n';
 
 export const metadata: Metadata = {
   title: paymentTermsTitle['en'],

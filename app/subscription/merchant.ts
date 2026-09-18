@@ -1,3 +1,4 @@
+import type { Currency } from './currency';
 import type { Lang } from './i18n';
 
 // Single source for everything the acquiring bank checks on the site:
@@ -44,6 +45,15 @@ export const plans: Plan[] = [
   { id: 'month', days: 30, priceByn: 22.9 },
   { id: 'year', days: 365, priceByn: 109 },
 ];
+
+// What the visitor sees in each currency. The card is always charged
+// priceByn through WebPay; the other columns sit a little above the NBRB
+// conversion so the charge never exceeds the price on the screen.
+export const prices: Record<PlanId, Record<Currency, number>> = {
+  week: { BYN: 11.9, RUB: 349, EUR: 3.49, USD: 3.99 },
+  month: { BYN: 22.9, RUB: 649, EUR: 6.99, USD: 7.99 },
+  year: { BYN: 109, RUB: 3090, EUR: 32.99, USD: 36.99 },
+};
 
 export const planCopy: Record<Lang, Record<PlanId, { title: string; forPeriod: string; days: string; purpose: string }>> = {
   ru: {

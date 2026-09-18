@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import { subscriptionAlternates, subscriptionPath } from '../../../subscription/i18n';
-import { subscriptionCopy } from '../../../subscription/copy';
-import { ReturnPage } from '../../../subscription/ReturnPage';
+import { subscriptionAlternates, subscriptionPath } from '../i18n';
+import { subscriptionCopy } from '../copy';
+import { ReturnPage } from '../ReturnPage';
 
 export const metadata: Metadata = {
   title: subscriptionCopy['en'].ret.title,
