@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
+import { isSiteLang, LANG_COOKIE, localizedPath, preferredLanguage, type SiteLang } from './app/language';
 
 const apiHost = process.env.NEXT_PUBLIC_YORIX_API ?? 'https://babysleepcoach-ai-proxy.babysleepcoach.workers.dev';
 
@@ -36,6 +37,45 @@ function withSecurityHeaders(response: NextResponse) {
   return response;
 }
 
+// Crawlers index every language on its own URL (hreflang); they are never
+// redirected by what their Accept-Language happens to say.
+const CRAWLER = /bot|crawl|spider|slurp|mediapartners|facebookexternalhit|embedly|whatsapp|telegram|vkshare|preview|lighthouse|headless/i;
+
+// English default URLs send the visitor to the same page in their language
+// (browser first, then country — see app/language.ts). A `?lang=` from the
+// header menu is stored and wins from then on, so switching back sticks.
+function languageRedirect(request: NextRequest): NextResponse | null {
+  if (request.method !== 'GET' && request.method !== 'HEAD') return null;
+  const url = request.nextUrl;
+  if (url.pathname.includes('.') || url.pathname.startsWith('/_next') || url.pathname === '/csp-report') return null;
+
+  const choice = url.searchParams.get('lang');
+  if (isSiteLang(choice)) {
+    const clean = url.clone();
+    clean.searchParams.delete('lang');
+    const response = NextResponse.redirect(clean, 302);
+    response.cookies.set(LANG_COOKIE, choice, { path: '/', maxAge: 60 * 60 * 24 * 365, sameSite: 'lax', secure: url.protocol === 'https:' });
+    response.headers.set('Cache-Control', 'private, no-store');
+    return response;
+  }
+
+  const saved = request.cookies.get(LANG_COOKIE)?.value;
+  let lang: SiteLang;
+  if (isSiteLang(saved)) lang = saved;
+  else if (CRAWLER.test(request.headers.get('user-agent') ?? '')) return null;
+  else lang = preferredLanguage(request.headers.get('accept-language'), request.headers.get('cf-ipcountry'));
+  if (lang === 'en') return null;
+
+  const target = localizedPath(url.pathname, lang);
+  if (!target) return null;
+  const next = url.clone();
+  next.pathname = target;
+  const response = NextResponse.redirect(next, 302);
+  response.headers.set('Vary', 'Accept-Language, Cookie');
+  response.headers.set('Cache-Control', 'private, no-store');
+  return response;
+}
+
 export function proxy(request: NextRequest) {
   const hostname = request.nextUrl.hostname.toLowerCase();
   const pathname = request.nextUrl.pathname;
@@ -47,6 +87,9 @@ export function proxy(request: NextRequest) {
 
     return withSecurityHeaders(NextResponse.redirect(url, 308));
   }
+
+  const redirect = languageRedirect(request);
+  if (redirect) return withSecurityHeaders(redirect);
 
   return withSecurityHeaders(NextResponse.next());
 }

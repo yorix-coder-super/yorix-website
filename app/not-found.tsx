@@ -33,7 +33,7 @@ export default function NotFound() {
             На главную
             <ArrowRight className="h-5 w-5" aria-hidden="true" />
           </a>
-          <a className="inline-flex min-h-[3.25rem] items-center justify-center rounded-full border border-white/20 bg-white/[0.06] px-6 text-base font-semibold text-white transition hover:bg-white/[0.12]" href="/" lang="en">
+          <a className="inline-flex min-h-[3.25rem] items-center justify-center rounded-full border border-white/20 bg-white/[0.06] px-6 text-base font-semibold text-white transition hover:bg-white/[0.12]" href="/?lang=en" lang="en">
             Home in English
           </a>
         </div>

@@ -41,6 +41,7 @@ export function generateMetadata({ params }: LocalizedArticleRouteProps): Metada
     alternates: {
       canonical: `/${params.locale}/${page.slug}`,
       languages: {
+        'x-default': `/${page.slug}`,
         en: `/${page.slug}`,
         ...translatedArticleAlternates(page.slug),
       },

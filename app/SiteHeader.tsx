@@ -21,13 +21,14 @@ export function SiteHeader({ locale, current, page = '' }: { locale: Locale | 'e
   const lang: Lang = locale === 'ru' ? 'ru' : 'en';
   const subscription = subscriptionPath(lang);
   // On a subscription page the language links keep the visitor on the same
-  // document; everywhere else they go to that language's home.
+  // document; everywhere else they go to that language's home. `?lang=` makes
+  // the choice stick over the automatic one (see proxy.ts).
   const languages: LanguageItem[] = [
-    { code: 'en', label: 'English', href: current === 'subscription' ? subscriptionPath('en', page) : '/' },
+    { code: 'en', label: 'English', href: `${current === 'subscription' ? subscriptionPath('en', page) : '/'}?lang=en` },
     ...locales.map((code) => ({
       code,
       label: localeCopy[code].nativeName,
-      href: current === 'subscription' && code === 'ru' ? subscriptionPath('ru', page) : `/${code}`,
+      href: `${current === 'subscription' && code === 'ru' ? subscriptionPath('ru', page) : `/${code}`}?lang=${code}`,
     })),
   ];
   const links = [

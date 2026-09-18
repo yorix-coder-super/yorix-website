@@ -30,6 +30,7 @@ export function generateMetadata({ params }: ArticleRouteProps): Metadata {
       alternates: {
         canonical: `/${params.locale}`,
         languages: {
+          'x-default': '/',
           en: '/',
           ...localeAlternates(),
         },

@@ -30,6 +30,7 @@ export function generateMetadata({ params }: LocalizedGuidesRouteProps): Metadat
     alternates: {
       canonical: `/${locale}/guides`,
       languages: {
+        'x-default': '/guides',
         en: '/guides',
         ...localeAlternates('/guides'),
       },
