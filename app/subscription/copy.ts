@@ -2,80 +2,45 @@ import type { Lang } from './i18n';
 
 export type SubscriptionCopy = {
   meta: { title: string; description: string; ogLocale: string };
-  nav: { plans: string; howToBuy: string; payment: string; contacts: string; choosePlan: string; language: string };
-  hero: { badge: string; title: string; body: string; primary: (price: string) => string; oneOff: string; nextLive: string; nextRequest: string };
-  outcomes: { eyebrow: string; title: string; items: { title: string; body: string }[] };
-  guarantee: string;
+  nav: { plans: string; reviews: string; faq: string; documents: string; choosePlan: string; language: string };
+  hero: { eyebrow: string; title: string; subline: string; primary: (price: string) => string };
+  outcomes: { title: string; items: { lead: string; rest: string }[] };
   proof: { eyebrow: string; title: string; translated: string; source: string; parents: string };
   plans: {
-    eyebrow: string;
     title: string;
-    body: string;
+    included: string;
     bestValue: string;
-    perWeek: (price: string) => string;
-    cheaper: (pct: number) => string;
-    pay: string;
-    order: string;
-    perDay: (price: string) => string;
-    perMonth: (price: string) => string;
-    yearSaving: (pct: number) => string;
-    footnote: string;
+    perWeek: (perWeek: string, base: string) => string;
+    subscribe: (period: string) => string;
+    extend: (period: string) => string;
+    trust: string;
+    steps: string;
+    googleQuestion: string;
+    googleLink: string;
+    goesTo: (email: string) => string;
+    activeUntil: (email: string, date: string) => string;
+    wrongAccount: string;
+    signOut: string;
     acceptBefore: string;
     offer: string;
     and: string;
     refundTerms: string;
+    device: string;
   };
-  account: {
-    title: string;
-    signInApple: string;
-    signInGoogle: string;
-    signedInAs: string;
-    via: (provider: string) => string;
-    activeUntil: (date: string) => string;
-    noSubscription: string;
-    accountCode: string;
-    copy: string;
-    copied: string;
-    signOut: string;
-    checking: string;
-    notConfigured: string;
-    popupBlocked: string;
-    signInError: string;
-    why: string;
-  };
+  account: { signInApple: string; signInGoogle: string; popupBlocked: string; signInError: string };
   checkout: {
+    signingIn: string;
     creating: string;
     redirecting: string;
     unavailable: string;
     testOnly: string;
     error: string;
-    blocked: string;
+    blocked: (email: string) => string;
     rateLimited: string;
-    manualHint: string;
+    request: string;
   };
-  features: { eyebrow: string; title: string; body: string; device: string; items: { title: string; body: string }[] };
-  steps: {
-    eyebrow: string;
-    title: string;
-    items: { title: string; body: string }[];
-    manualTitle: string;
-    manualBody: string;
-    manualCode: string;
-    copyAddress: string;
-    copyTemplate: string;
-    writeToUs: string;
-  };
-  faq: { eyebrow: string; title: string; items: { q: string; a: string }[] };
-  ret: {
-    title: string;
-    checking: string;
-    paid: (date: string) => string;
-    openApp: string;
-    pending: string;
-    failed: string;
-    signIn: string;
-    back: string;
-  };
+  faq: { title: string; items: { q: string; a: string }[]; more: string };
+  ret: { checking: string; paid: (date: string) => string; openApp: string; pending: string; failed: string; signIn: string; back: string };
   cancel: { title: string; body: string; back: string };
   footer: {
     seller: string;
@@ -88,7 +53,7 @@ export type SubscriptionCopy = {
   };
   docs: { offer: string; payment: string; privacy: string };
   legal: { eyebrow: string; updated: (date: string) => string; binding: string };
-  home: { nav: string; eyebrow: string; title: string; body: string; note: string; details: string; more: string };
+  home: { nav: string; eyebrow: string; title: string; body: string; more: string };
   currency: { label: string; note: string; names: Record<'BYN' | 'RUB' | 'EUR' | 'USD', string> };
   request: {
     title: string;
@@ -111,142 +76,84 @@ export type SubscriptionCopy = {
 
 const ru: SubscriptionCopy = {
   meta: {
-    title: 'Подписка Yorix — тарифы и оплата картой',
-    description:
-      'Подписка Yorix на неделю, месяц или год: персональный прогноз сна, ИИ-коуч и аналитика. Цены в белорусских рублях, оплата картой через WebPay.',
+    title: 'Подписка Yorix — оплата картой, без App Store',
+    description: 'Прогноз сна, коуч 24/7 и аналитика на неделю, месяц или год. Одна оплата картой через WebPay, без автопродления.',
     ogLocale: 'ru_RU',
   },
-  nav: { plans: 'Тарифы', howToBuy: 'Как купить', payment: 'Оплата и возврат', contacts: 'Контакты', choosePlan: 'Выбрать тариф', language: 'Язык' },
+  nav: { plans: 'Тарифы', reviews: 'Отзывы', faq: 'Вопросы', documents: 'Документы', choosePlan: 'Выбрать тариф', language: 'Язык' },
   hero: {
-    badge: 'Подписка Yorix · на неделю, месяц или год',
-    title: 'Вы будете знать, когда малышу пора спать, — раньше, чем он начнёт капризничать.',
-    body: 'Yorix считает окно следующего сна и время укладывания по дневнику вашего малыша и пересчитывает план, если день пошёл не так. Рядом — коуч по сну, который знает ваш дневник, в любой час ночи.',
-    primary: (price) => `Оформить подписку от ${price}`,
-    oneOff: 'Разовая оплата, без автопродления',
-    nextLive: 'Вход через Apple → карта на защищённой странице WebPay → подписка включится в приложении сразу. Списаний потом не будет.',
-    nextRequest: 'Оставьте почту — в течение дня пришлём ссылку на оплату. До этого платить ничего не нужно.',
+    eyebrow: 'Подписка Yorix · оплата картой, без App Store',
+    title: 'Сегодня вечером вы уже будете знать, когда укладывать.',
+    subline: 'Прогноз следующего сна по дневнику вашего малыша, план, который пересчитывается сам, и коуч, который знает ваш день.',
+    primary: (price) => `Оформить подписку · от ${price}`,
   },
   outcomes: {
-    eyebrow: 'Что изменится уже сегодня вечером',
-    title: 'Три вещи, которые подписка делает за вас.',
+    title: 'Что изменится уже сегодня',
     items: [
-      { title: 'Вы видите, во сколько начинать укладывание', body: 'До переутомления, а не после. Окно сна считается по реальным снам и возрасту малыша, а не по таблице из интернета.' },
-      { title: 'Сон сбился на час? План пересчитался сам', body: 'Один короткий сон — и весь день сдвигается вместе с отбоем. Считать в уме ничего не нужно.' },
-      { title: 'В три ночи есть кого спросить', body: 'Коуч отвечает по вашему дневнику, а не общими фразами: что происходит с ночным сном, что поменять в ритуале, когда ждать переход на один сон.' },
+      { lead: 'Видите,', rest: 'во сколько начинать укладывание — до переутомления.' },
+      { lead: 'Сон вышел коротким', rest: '— план пересчитался сам.' },
+      { lead: 'Коуч отвечает в три ночи', rest: '— по вашему дневнику.' },
     ],
   },
-  guarantee: 'Платите один раз за выбранный срок: карта не сохраняется, ничего не продлевается и не списывается само. Когда срок закончится — просто оформите новый.',
-  proof: {
-    eyebrow: 'Отзывы',
-    title: 'Что пишут родители — без правок.',
-    translated: 'перевод',
-    source: 'отзыв в App Store',
-    parents: 'отзыв родителей',
-  },
+  proof: { eyebrow: 'Отзывы · без правок', title: 'Что пишут родители', translated: 'перевод', source: 'отзыв в App Store', parents: 'отзыв родителей' },
   plans: {
-    eyebrow: 'Доступ',
-    title: 'Выберите срок. Всё остальное одинаково.',
-    body: 'В каждом тарифе — полная подписка: прогноз сна, коуч, аналитика и советы на день.',
+    title: 'Выберите срок. Остальное одинаково.',
+    included: 'В каждом тарифе: прогноз сна · коуч 24/7 · аналитика · советы на день',
     bestValue: 'Выгоднее всего',
-    perWeek: (price) => `${price} в неделю`,
-    cheaper: (pct) => `на ${pct}% дешевле недели`,
-    pay: 'Оформить подписку',
-    order: 'Заказать письмом',
-    perDay: (price) => `${price} в день`,
-    perMonth: (price) => `${price} в месяц`,
-    yearSaving: (pct) => `на ${pct}% дешевле, чем 12 месяцев по отдельности`,
-    footnote: 'Срок начинается с момента включения подписки на аккаунте.',
-    acceptBefore: 'Оплачивая заказ, вы принимаете',
+    perWeek: (perWeek, base) => `${perWeek} в неделю вместо ${base}`,
+    subscribe: (period) => `Оформить ${period}`,
+    extend: (period) => `Продлить ${period}`,
+    trust: 'Одна оплата за выбранный срок. Без автопродления, карту не сохраняем.',
+    steps: 'Apple ID из приложения → карта на WebPay → подписка включена',
+    googleQuestion: 'В приложении вошли через Google?',
+    googleLink: 'Войти через Google',
+    goesTo: (email) => `Подписка включится на ${email}.`,
+    activeUntil: (email, date) => `На ${email} подписка до ${date} — новый срок добавится к нему.`,
+    wrongAccount: 'Не тот аккаунт?',
+    signOut: 'Выйти',
+    acceptBefore: 'Оплачивая, вы принимаете',
     offer: 'публичный договор',
     and: 'и',
     refundTerms: 'условия возврата',
+    device: 'Для iPhone и iPad, iOS 18+.',
   },
   account: {
-    title: 'Аккаунт',
     signInApple: 'Войти через Apple',
     signInGoogle: 'Войти через Google',
-    signedInAs: 'Вы вошли как',
-    via: (provider) => `через ${provider}`,
-    activeUntil: (date) => `Подписка до ${date}`,
-    noSubscription: 'Подписка не активна',
-    accountCode: 'Код аккаунта',
-    copy: 'Скопировать',
-    copied: 'Скопировано',
-    signOut: 'Выйти',
-    checking: 'Проверяем аккаунт…',
-    notConfigured: 'Вход на сайте подключается. Пока заказ оформляется письмом.',
-    popupBlocked: 'Браузер закрыл окно входа. Разрешите всплывающие окна для этого сайта и попробуйте снова.',
-    signInError: 'Не удалось войти. Попробуйте ещё раз.',
-    why: 'Войдите с тем же аккаунтом, что и в приложении: так подписка включится именно там.',
+    popupBlocked: 'Браузер закрыл окно входа. Разрешите всплывающие окна и нажмите ещё раз.',
+    signInError: 'Войти не удалось. Попробуйте ещё раз.',
   },
   checkout: {
+    signingIn: 'Открываем вход через Apple…',
     creating: 'Создаём оплату…',
-    redirecting: 'Переходим на страницу WebPay…',
-    unavailable: 'Оплата картой на сайте пока не открыта — закажите письмом.',
-    testOnly: 'Оплата на сайте сейчас открыта только тестировщикам — закажите письмом.',
-    error: 'Не удалось создать оплату. Попробуйте ещё раз или напишите нам.',
-    blocked: 'Оплата для этого аккаунта недоступна. Напишите нам.',
-    rateLimited: 'Слишком много попыток. Подождите минуту и попробуйте снова.',
-    manualHint: 'Если оплатить на сайте не получается, закажите письмом — укажите срок и код аккаунта.',
-  },
-  features: {
-    eyebrow: 'Что входит',
-    title: 'Четыре вещи, которых нет в бесплатной версии.',
-    body: 'Дневник сна, кормлений и ухода бесплатен всегда. Подписка превращает записи в план на сегодня и ответы на ваши вопросы.',
-    device: 'Для iPhone и iPad с iOS 18 и новее. Подписка привязана к аккаунту Yorix и работает на всех устройствах, где выполнен вход.',
-    items: [
-      { title: 'Персональный прогноз сна', body: 'Следующий дневной сон и отбой рассчитываются по реальным снам, окнам бодрствования и возрасту малыша и пересчитываются, когда день идёт не по плану.' },
-      { title: 'ИИ-коуч по сну 24/7', body: 'Ответы на вопросы о коротких снах, ночных пробуждениях, переходах между снами и режиме — с учётом дневника вашего малыша.' },
-      { title: 'Аналитика и тренды', body: 'Недельная картина сна, кормлений и ухода: как меняется ночной сон, сколько длятся окна бодрствования, что влияет на отбой.' },
-      { title: 'Рекомендации на каждый день', body: 'Короткие подсказки на сегодня: когда начинать укладывание, как восстановиться после короткого сна, что поменять в ритуале.' },
-    ],
-  },
-  steps: {
-    eyebrow: 'Как это работает',
-    title: 'Три шага — и подписка уже в приложении.',
-    items: [
-      { title: 'Войдите через Apple', body: 'С тем же Apple ID, которым вы входите в Yorix на iPhone, — так подписка включится именно на вашем аккаунте.' },
-      { title: 'Оплатите картой', body: 'На защищённой странице WebPay. Данные карты видит только банк; мы их не получаем и не храним.' },
-      { title: 'Откройте Yorix', body: 'Подписка уже включена. Письмо с датой окончания срока и чек придут на e-mail.' },
-    ],
-    manualTitle: 'Пока без входа через Apple? Оставьте заявку.',
-    manualBody: 'Укажите почту и код аккаунта из приложения (Настройки → Аккаунт). В течение дня пришлём ссылку на оплату — до этого платить ничего не нужно. После оплаты включим подписку в течение 24 часов.',
-    manualCode: 'Код аккаунта',
-    copyAddress: 'Скопировать адрес',
-    copyTemplate: 'Скопировать шаблон',
-    writeToUs: 'Оставить заявку',
+    redirecting: 'Переходим в WebPay…',
+    unavailable: 'Оплата на сайте пока закрыта — оставьте заявку, пришлём ссылку.',
+    testOnly: 'Оплата пока открыта только тестировщикам — оставьте заявку.',
+    error: 'Не получилось создать оплату. Попробуйте ещё раз или оставьте заявку.',
+    blocked: (email) => `Для этого аккаунта оплата недоступна. Напишите нам: ${email}.`,
+    rateLimited: 'Слишком много попыток. Подождите минуту.',
+    request: 'Оставить заявку',
   },
   faq: {
-    eyebrow: 'Вопросы',
-    title: 'Частые вопросы об оплате.',
+    title: 'Вопросы',
     items: [
-      { q: 'У нас нет режима, сны хаотичные. Прогноз вообще сработает?', a: 'Да. Прогноз считается по вашим реальным снам и возрасту малыша, а не по таблице, — чем хаотичнее день, тем полезнее план, который пересчитывается после каждого записанного сна. Первые два-три дня просто ведите дневник: точность растёт с каждой записью.' },
-      { q: 'Что будет, когда срок закончится?', a: 'Подписка отключится, а все записи о малыше останутся в приложении. Карта не привязывается, автоматических списаний нет. Продлить можно новым заказом — дни добавятся к текущему сроку.' },
-      { q: 'Зачем входить через Apple?', a: 'Подписка привязывается к аккаунту Yorix, а не к телефону или карте. Вход с тем же Apple ID, что и в приложении, гарантирует, что оплата попадёт на ваш аккаунт и будет работать на всех ваших устройствах. Если вы вошли в приложение через Google — войдите через Google и здесь.' },
-      { q: 'С какого момента считается срок?', a: 'С момента включения подписки на аккаунте: при оплате на сайте — сразу после оплаты, при заказе письмом — когда мы его включим. Дату окончания видно в блоке «Аккаунт» и в письме-подтверждении.' },
-      { q: 'Как убедиться, что страница оплаты настоящая?', a: 'Страница оплаты открывается в домене webpay.by, а письма мы отправляем только с адреса, указанного в подвале сайта. Мы никогда не просим прислать данные карты в письме или мессенджере.' },
-      { q: 'Какие карты принимаются?', a: 'Visa, Mastercard и Белкарт — через процессинговую систему WebPay. Цена указана в белорусских рублях; если счёт карты в другой валюте, сумму пересчитает ваш банк по своему курсу.' },
-      { q: 'У меня уже есть подписка в App Store. Что делать?', a: 'Подписка, купленная на сайте, не отменяет подписку через App Store. Чтобы не платить дважды, отключите автопродление: «Настройки → ваше имя → Подписки». Подписка Apple будет работать до конца оплаченного периода, а срок с сайта добавится к нему.' },
-      { q: 'Оплатил, а подписка не появилась. Что делать?', a: 'В приложении подписка отображается как Premium. Перезапустите приложение: оно проверяет аккаунт при каждом открытии. Если Premium не появился в течение часа, напишите нам — укажите дату и сумму оплаты. Проверьте также папку «Спам», если ждёте письмо от нас.' },
-      { q: 'Как отменить подписку и можно ли вернуть деньги?', a: 'Отменять нечего: автопродления нет, и списаний после оплаты не будет. Оплаченный срок действует до конца и не возвращается — так же, как подписка в App Store. Если подписка не включилась, не работала по нашей вине или списание прошло ошибочно, напишите нам — вернём деньги на ту же карту.' },
-      { q: 'Входят ли в подписку программы из раздела «Программы»?', a: 'Нет. Программы покупаются отдельно в приложении и в подписку не входят.' },
+      { q: 'Что будет, когда срок закончится?', a: 'Подписка выключится, записи останутся. Ничего не спишется — карту мы не храним. Чтобы продлить, оформите новый срок: дни добавятся к текущему.' },
+      { q: 'Зачем входить через Apple ID?', a: 'Подписка привязана к аккаунту, не к телефону. Войдите тем же Apple ID, что и в приложении, — включится именно там. Вошли через Google? Здесь тоже.' },
+      { q: 'Можно ли вернуть деньги?', a: 'Как в App Store: оплаченный срок не возвращается. Исключения — подписка не включилась, не работала по нашей вине или списание ошибочное: вернём на ту же карту.' },
+      { q: 'У меня уже есть подписка в App Store.', a: 'Отключите автопродление: Настройки → ваше имя → Подписки. Подписка Apple доработает до конца периода, срок с сайта добавится после него.' },
     ],
+    more: 'Другой вопрос? Напишите нам',
   },
   ret: {
-    title: 'Спасибо за оплату!',
     checking: 'Проверяем оплату…',
-    paid: (date) => `Подписка активна до ${date}`,
-    openApp: 'Откройте Yorix на iPhone — подписка уже включена. Письмо с подтверждением и чек придут на e-mail.',
-    pending: 'Платёж ещё обрабатывается. Обычно это занимает меньше минуты — страница обновится сама.',
-    failed: 'Мы не нашли оплаченный заказ. Если деньги списаны, напишите нам — укажите дату и сумму оплаты.',
-    signIn: 'Войдите, чтобы увидеть статус заказа.',
+    paid: (date) => `Подписка включена до ${date}`,
+    openApp: 'Откройте Yorix на iPhone — всё уже работает. Чек придёт на e-mail.',
+    pending: 'Банк подтверждает оплату — обычно меньше минуты. Страница обновится сама.',
+    failed: 'Оплаченный заказ не найден. Если деньги списаны, напишите нам — дату и сумму.',
+    signIn: 'Войдите через Apple, чтобы увидеть статус заказа.',
     back: 'К тарифам',
   },
-  cancel: {
-    title: 'Оплата отменена',
-    body: 'Деньги не списаны. Вы можете вернуться к тарифам и попробовать снова в любой момент.',
-    back: 'К тарифам',
-  },
+  cancel: { title: 'Оплата отменена', body: 'Деньги не списаны. Вернуться можно в любой момент.', back: 'К тарифам' },
   footer: {
     seller: 'Продавец и контакты',
     tagline: 'Дневник, прогноз сна и коуч для родителей малышей.',
@@ -260,12 +167,10 @@ const ru: SubscriptionCopy = {
   legal: { eyebrow: 'Документы', updated: (date) => `Редакция от ${date}`, binding: '' },
   home: {
     nav: 'Подписка',
-    eyebrow: 'Подписка, если App Store недоступен',
-    title: 'Знайте, когда малышу пора спать, — раньше, чем начнутся капризы.',
-    body: 'Прогноз следующего сна по дневнику вашего малыша, коуч, который знает ваш день, и план, который пересчитывается сам. Доступ на неделю, месяц или год: разовая оплата картой, без автопродления.',
-    note: 'Платите один раз за выбранный срок: карта не сохраняется, ничего не продлевается и не списывается само.',
-    details: 'Условия, возврат и реквизиты продавца',
-    more: 'Всё о подписке',
+    eyebrow: 'Подписка картой — если App Store недоступен',
+    title: 'Полная подписка Yorix — картой, без App Store.',
+    body: 'Прогноз следующего сна, коуч 24/7, аналитика и советы на день — на неделю, месяц или год.',
+    more: 'Всё о подписке: условия, возврат, вопросы',
   },
   currency: {
     label: 'Валюта',
@@ -273,162 +178,104 @@ const ru: SubscriptionCopy = {
     names: { BYN: 'Белорусский рубль', RUB: 'Российский рубль', EUR: 'Евро', USD: 'Доллар США' },
   },
   request: {
-    title: 'Оформить подписку',
-    body: 'Оставьте e-mail — пришлём ссылку на защищённую оплату WebPay. После оплаты включим подписку на вашем аккаунте.',
+    title: 'Заявка на подписку',
+    body: 'Оставьте e-mail — в течение дня пришлём ссылку на оплату. Платить пока не нужно.',
     plan: 'Срок',
     email: 'E-mail',
     code: 'Код аккаунта',
-    optional: '(если уже установили приложение)',
-    codeHint: 'В приложении: Настройки → Аккаунт → «Код аккаунта». Без него включим подписку по e-mail входа.',
-    submit: 'Получить ссылку на оплату',
+    optional: '(если есть)',
+    codeHint: 'В приложении: Настройки → Аккаунт',
+    submit: 'Получить ссылку',
     cancel: 'Отмена',
-    consent: 'Нажимая кнопку, вы соглашаетесь с обработкой e-mail для оформления заказа.',
+    consent: 'Нажимая кнопку, вы соглашаетесь на обработку e-mail для этого заказа.',
     sentTitle: 'Заявка принята',
-    sentBody: 'Ссылка на оплату придёт на ваш e-mail в течение рабочего дня, обычно быстрее. Проверьте папку «Спам», если письма долго нет.',
+    sentBody: 'Ссылка придёт на e-mail в течение дня — загляните и в «Спам».',
     close: 'Понятно',
-    error: 'Не удалось отправить заявку.',
+    error: 'Не отправилось.',
     errorMail: 'Написать письмом',
   },
 };
 
 const en: SubscriptionCopy = {
   meta: {
-    title: 'Yorix subscription — plans and card payment',
-    description:
-      'A Yorix subscription for a week, a month or a year: a personal sleep forecast, the AI coach and analytics. Prices in Belarusian rubles, card payment via WebPay.',
+    title: 'Yorix subscription — pay by card, no App Store needed',
+    description: 'Sleep forecast, 24/7 coach and analytics for a week, a month or a year. One card payment via WebPay, no auto-renewal.',
     ogLocale: 'en_US',
   },
-  nav: { plans: 'Plans', howToBuy: 'How to buy', payment: 'Payment & refunds', contacts: 'Contacts', choosePlan: 'Choose a plan', language: 'Language' },
+  nav: { plans: 'Plans', reviews: 'Reviews', faq: 'FAQ', documents: 'Documents', choosePlan: 'Choose a plan', language: 'Language' },
   hero: {
-    badge: 'Yorix subscription · a week, a month or a year',
-    title: "Know when your baby's next sleep is due — before the fussing starts.",
-    body: "Yorix computes the next nap window and bedtime from your baby's diary and re-plans when the day drifts. Alongside: a sleep coach that knows your diary, any hour of the night.",
-    primary: (price) => `Subscribe from ${price}`,
-    oneOff: 'One payment, no auto-renewal',
-    nextLive: "Sign in with Apple → card on WebPay's secure page → the subscription switches on in the app right away. No charges later.",
-    nextRequest: "Leave your e-mail — within a day we send a payment link. Nothing to pay until then.",
+    eyebrow: 'Yorix subscription · card payment outside the App Store',
+    title: "Tonight you'll already know when to start bedtime.",
+    subline: "A next-nap forecast from your baby's diary, a plan that re-plans itself, and a coach that knows your day.",
+    primary: (price) => `Subscribe · from ${price}`,
   },
   outcomes: {
-    eyebrow: 'What changes tonight',
-    title: 'Three things the subscription does for you.',
+    title: 'What changes tonight',
     items: [
-      { title: 'You see when to start winding down', body: "Before overtiredness, not after. The sleep window comes from your baby's real naps and age, not a chart off the internet." },
-      { title: 'A nap slipped by an hour? The plan re-planned itself', body: 'One short nap and the whole day shifts, bedtime included. Nothing to recalculate in your head.' },
-      { title: "At 3 a.m. there's someone to ask", body: "The coach answers from your diary, not in generic phrases: what is happening with night sleep, what to change in the ritual, when to expect the one-nap switch." },
+      { lead: 'See', rest: 'when to start winding down — before overtiredness.' },
+      { lead: 'A short nap?', rest: 'The plan re-plans itself.' },
+      { lead: 'A 3 a.m. coach', rest: 'that knows your diary.' },
     ],
   },
-  guarantee: 'Pay once for the period you choose: no card on file, nothing renews or gets charged by itself. When the period ends, simply order a new one.',
-  proof: {
-    eyebrow: 'Reviews',
-    title: 'What parents write — unedited.',
-    translated: 'translated',
-    source: 'App Store review',
-    parents: 'parent feedback',
-  },
+  proof: { eyebrow: 'Reviews · unedited', title: 'What parents write', translated: 'translated', source: 'App Store review', parents: 'parent feedback' },
   plans: {
-    eyebrow: 'Access',
-    title: 'Pick the length. Everything else is the same.',
-    body: 'Every plan is the full subscription: sleep forecast, coach, analytics and daily advice.',
+    title: 'Pick the length. The rest is the same.',
+    included: 'Every plan: sleep forecast · 24/7 coach · analytics · daily advice',
     bestValue: 'Best value',
-    perWeek: (price) => `${price} a week`,
-    cheaper: (pct) => `${pct}% less than weekly`,
-    pay: 'Subscribe',
-    order: 'Order by e-mail',
-    perDay: (price) => `${price} a day`,
-    perMonth: (price) => `${price} a month`,
-    yearSaving: (pct) => `${pct}% less than 12 separate months`,
-    footnote: 'The period starts when the subscription is switched on for the account.',
+    perWeek: (perWeek, base) => `${perWeek} a week instead of ${base}`,
+    subscribe: (period) => `Subscribe ${period}`,
+    extend: (period) => `Extend ${period}`,
+    trust: 'One payment for the period. No auto-renewal, no card on file.',
+    steps: 'Apple ID as in the app → card via WebPay → on in the app',
+    googleQuestion: 'Signed in to the app with Google?',
+    googleLink: 'Sign in with Google',
+    goesTo: (email) => `The subscription goes to ${email}.`,
+    activeUntil: (email, date) => `${email} is subscribed until ${date} — a new period is added on.`,
+    wrongAccount: 'Wrong account?',
+    signOut: 'Sign out',
     acceptBefore: 'By paying you accept the',
     offer: 'public offer',
     and: 'and the',
     refundTerms: 'refund terms',
+    device: 'iPhone and iPad, iOS 18+.',
   },
   account: {
-    title: 'Account',
     signInApple: 'Sign in with Apple',
     signInGoogle: 'Sign in with Google',
-    signedInAs: 'Signed in as',
-    via: (provider) => `via ${provider}`,
-    activeUntil: (date) => `Subscription until ${date}`,
-    noSubscription: 'No active subscription',
-    accountCode: 'Account code',
-    copy: 'Copy',
-    copied: 'Copied',
-    signOut: 'Sign out',
-    checking: 'Checking your account…',
-    notConfigured: 'Sign-in on the site is being connected. For now, order by e-mail.',
-    popupBlocked: 'The browser closed the sign-in window. Allow pop-ups for this site and try again.',
+    popupBlocked: 'The browser closed the sign-in window. Allow pop-ups and press again.',
     signInError: 'Sign-in failed. Please try again.',
-    why: 'Sign in with the account you use in the app, so the subscription switches on right there.',
   },
   checkout: {
+    signingIn: 'Opening Apple sign-in…',
     creating: 'Creating your payment…',
-    redirecting: 'Taking you to the WebPay page…',
-    unavailable: 'Card payment on the site is not open yet — order by e-mail.',
-    testOnly: 'Card payment on the site is currently open to testers only — order by e-mail.',
-    error: 'Could not create the payment. Try again or write to us.',
-    blocked: 'Payment is unavailable for this account. Please write to us.',
-    rateLimited: 'Too many attempts. Wait a minute and try again.',
-    manualHint: 'If paying on the site does not work, order by e-mail — state the period and your account code.',
-  },
-  features: {
-    eyebrow: "What's included",
-    title: 'Four things the free app does not have.',
-    body: 'The sleep, feeding and care diary is free forever. The subscription turns the entries into a plan for today and answers to your questions.',
-    device: 'For iPhone and iPad on iOS 18 or later. The subscription is tied to your Yorix account and works on every device where you are signed in.',
-    items: [
-      { title: 'Personal sleep forecast', body: 'The next nap and bedtime are computed from real naps, wake windows and your baby’s age, and recomputed when the day goes off plan.' },
-      { title: '24/7 AI sleep coach', body: 'Answers about short naps, night wakings, nap transitions and routine — informed by your baby’s diary.' },
-      { title: 'Analytics and trends', body: 'A weekly picture of sleep, feeding and care: how night sleep changes, how long wake windows last, what affects bedtime.' },
-      { title: 'Daily recommendations', body: 'Short tips for today: when to start winding down, how to recover after a short nap, what to change in the ritual.' },
-    ],
-  },
-  steps: {
-    eyebrow: 'How it works',
-    title: 'Three steps and the subscription is in the app.',
-    items: [
-      { title: 'Sign in with Apple', body: 'With the same Apple ID you use in Yorix on your iPhone — so the subscription lands on your own account.' },
-      { title: 'Pay by card', body: "On WebPay's secure page. Only the bank sees the card; we never receive or store it." },
-      { title: 'Open Yorix', body: 'The subscription is already on. A confirmation with the end date and a receipt arrive by e-mail.' },
-    ],
-    manualTitle: 'No Apple sign-in yet? Leave a request.',
-    manualBody: 'Give your e-mail and the account code from the app (Settings → Account). Within a day we send a payment link — nothing to pay until then. After payment we switch the subscription on within 24 hours.',
-    manualCode: 'Account code',
-    copyAddress: 'Copy address',
-    copyTemplate: 'Copy template',
-    writeToUs: 'Leave a request',
+    redirecting: 'Taking you to WebPay…',
+    unavailable: "Card payment on the site isn't open yet — leave a request and we'll send a link.",
+    testOnly: 'Payment is open to testers only for now — leave a request.',
+    error: "Couldn't create the payment. Try again or leave a request.",
+    blocked: (email) => `Payment isn't available for this account. Write to us: ${email}.`,
+    rateLimited: 'Too many attempts. Wait a minute.',
+    request: 'Leave a request',
   },
   faq: {
-    eyebrow: 'FAQ',
-    title: 'Common questions about payment.',
+    title: 'FAQ',
     items: [
-      { q: 'We have no routine and naps are chaotic. Will the forecast even work?', a: "Yes. The forecast comes from your baby's real naps and age, not a chart — the more chaotic the day, the more useful a plan that re-plans after every logged nap. Just keep the diary for the first two or three days: accuracy grows with every entry." },
-      { q: 'What happens when the period ends?', a: 'The subscription switches off and every record about your baby stays in the app. No card is stored and nothing is charged automatically. To extend, place a new order — the days are added to the current period.' },
-      { q: 'Why sign in with Apple?', a: 'The subscription is tied to your Yorix account, not to a phone or a card. Signing in with the same Apple ID as in the app guarantees the payment lands on your account and works on all your devices. If you signed in to the app with Google, sign in with Google here as well.' },
-      { q: 'When does the period start?', a: 'When the subscription is switched on for the account: immediately after paying on the site, or when we switch it on for an e-mail order. The end date is shown in the “Account” block and in the confirmation e-mail.' },
-      { q: 'How do I know the payment page is genuine?', a: 'The payment page opens on the webpay.by domain, and our e-mails come only from the address in the site footer. We never ask for card details by e-mail or messenger.' },
-      { q: 'Which cards are accepted?', a: 'Visa, Mastercard and Belkart, through the WebPay processing system. The price is in Belarusian rubles; if your card is in another currency, your bank converts the amount at its own rate.' },
-      { q: 'I already have an App Store subscription. What now?', a: 'A subscription bought on the site does not cancel the App Store one. To avoid paying twice, turn off auto-renewal: Settings → your name → Subscriptions. The Apple subscription runs until the end of the paid period, and the site period is added after it.' },
-      { q: 'I paid but the subscription did not appear. What should I do?', a: 'In the app the subscription is shown as Premium. Restart the app: it checks the account every time it opens. If Premium is still missing after an hour, write to us with the date and amount of the payment. Check the spam folder too if you are waiting for our e-mail.' },
-      { q: 'How do I cancel, and can I get a refund?', a: 'There is nothing to cancel: no auto-renewal, no charges after the payment. The paid period runs to its end and is not refunded — the same as an App Store subscription. If the subscription did not switch on, did not work through our fault, or you were charged by mistake, write to us and we refund to the same card.' },
-      { q: 'Are the programs from the “Programs” section included?', a: 'No. Programs are bought separately in the app and are not part of the subscription.' },
+      { q: 'What happens when the period ends?', a: 'It switches off; your records stay. Nothing is charged — we keep no card. To extend, buy a new period: the days are added on.' },
+      { q: 'Why sign in with my Apple ID?', a: 'Tied to your account, not your phone. Same Apple ID as in the app — and it switches on there. Google in the app? Google here.' },
+      { q: 'Can I get a refund?', a: "As in the App Store, a paid period isn't refunded — unless it never switched on, failed through our fault or was charged by mistake." },
+      { q: 'I already have an App Store subscription.', a: 'Turn off auto-renewal: Settings → your name → Subscriptions. The Apple period runs to its end; the site period is added after it.' },
     ],
+    more: 'Another question? Write to us',
   },
   ret: {
-    title: 'Thank you for your payment!',
     checking: 'Checking the payment…',
-    paid: (date) => `Subscription active until ${date}`,
-    openApp: 'Open Yorix on your iPhone — the subscription is already on. A confirmation and receipt will arrive by e-mail.',
-    pending: 'The payment is still being processed. It usually takes under a minute — this page refreshes by itself.',
-    failed: 'We could not find a paid order. If money was charged, write to us with the date and amount.',
-    signIn: 'Sign in to see the order status.',
+    paid: (date) => `Subscription on until ${date}`,
+    openApp: "Open Yorix on your iPhone — it's already working. The receipt arrives by e-mail.",
+    pending: 'The bank is confirming the payment — usually under a minute. This page refreshes itself.',
+    failed: 'No paid order found. If money was charged, write to us with the date and amount.',
+    signIn: 'Sign in with Apple to see the order status.',
     back: 'Back to plans',
   },
-  cancel: {
-    title: 'Payment cancelled',
-    body: 'Nothing was charged. You can go back to the plans and try again any time.',
-    back: 'Back to plans',
-  },
+  cancel: { title: 'Payment cancelled', body: 'Nothing was charged. Come back any time.', back: 'Back to plans' },
   footer: {
     seller: 'Seller and contacts',
     tagline: 'Diary, sleep forecast and a coach for parents of little ones.',
@@ -446,12 +293,10 @@ const en: SubscriptionCopy = {
   },
   home: {
     nav: 'Subscription',
-    eyebrow: 'A subscription when the App Store is not an option',
-    title: "Know when your baby's next sleep is due — before the fussing starts.",
-    body: "A next-nap forecast from your baby's diary, a coach that knows your day, and a plan that re-plans itself. A week, a month or a year: one card payment, no auto-renewal.",
-    note: 'Pay once for the period you choose: no card on file, nothing renews or gets charged by itself.',
-    details: 'Terms, refunds and seller details',
-    more: 'All about the subscription',
+    eyebrow: 'When the App Store is not an option',
+    title: 'The full Yorix subscription — by card, no App Store.',
+    body: 'Next-nap forecast, 24/7 coach, analytics and daily advice — for a week, a month or a year.',
+    more: 'All about the subscription: terms, refunds, FAQ',
   },
   currency: {
     label: 'Currency',
@@ -459,21 +304,21 @@ const en: SubscriptionCopy = {
     names: { BYN: 'Belarusian ruble', RUB: 'Russian ruble', EUR: 'Euro', USD: 'US dollar' },
   },
   request: {
-    title: 'Subscribe',
-    body: 'Leave your e-mail — we send a secure WebPay payment link. After payment we switch the subscription on for your account.',
+    title: 'Subscription request',
+    body: "Leave your e-mail — we'll send a payment link within a day. Nothing to pay yet.",
     plan: 'Period',
     email: 'E-mail',
     code: 'Account code',
-    optional: '(if you already have the app)',
-    codeHint: 'In the app: Settings → Account → “Account code”. Without it we match the subscription to the sign-in e-mail.',
-    submit: 'Send me the payment link',
+    optional: '(if you have one)',
+    codeHint: 'In the app: Settings → Account',
+    submit: 'Send me the link',
     cancel: 'Cancel',
-    consent: 'By pressing the button you agree to the processing of your e-mail for this order.',
+    consent: 'By pressing the button you agree to e-mail processing for this order.',
     sentTitle: 'Request received',
-    sentBody: 'The payment link arrives by e-mail within one working day, usually sooner. Check the spam folder if it takes long.',
+    sentBody: 'The link arrives by e-mail within a day — check spam too.',
     close: 'Got it',
-    error: 'The request could not be sent.',
-    errorMail: 'Write by e-mail instead',
+    error: "Didn't send.",
+    errorMail: 'Write by e-mail',
   },
 };
 

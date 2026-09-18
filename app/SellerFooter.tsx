@@ -19,8 +19,8 @@ export function SellerFooter({ note, lang = 'en' }: { note: string; lang?: Lang 
   const home = subscriptionPath(lang);
   const subscriptionLinks = [
     { href: `${home}#plans`, label: copy.nav.plans },
-    { href: `${home}#how-to-buy`, label: copy.nav.howToBuy },
-    { href: `${home}#faq`, label: copy.faq.eyebrow },
+    { href: `${home}#reviews`, label: copy.nav.reviews },
+    { href: `${home}#faq`, label: copy.nav.faq },
   ];
 
   return (

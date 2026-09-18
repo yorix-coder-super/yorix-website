@@ -1,28 +1,33 @@
-import { ArrowRight, BarChart3, CalendarClock, LockKeyhole, MessageCircle, RotateCcw, ShieldCheck, Smartphone, Sparkles, Sun, UserRound } from 'lucide-react';
+import { ArrowRight, CalendarClock, MessageCircle, RotateCcw } from 'lucide-react';
 import { headers } from 'next/headers';
-import { AccountPanel, AccountProvider, FlowNote, ManualOrder, PlanCard, RequestForm } from './account';
+import { AccountLine, AccountProvider, PlanCard, RequestForm } from './account';
 import { subscriptionCopy } from './copy';
 import { subscriptionPath, type Lang } from './i18n';
-import { formatByn, plans } from './merchant';
 import { Magnetic } from './Magnetic';
+import { formatByn, merchant, plans } from './merchant';
 import { Money } from './Money';
-import { SubscriptionShell } from './SubscriptionShell';
 import { Parallax } from './Parallax';
 import { Reveal } from './Reveal';
 import { SocialProof } from './SocialProof';
-import { WordReveal } from './WordReveal';
+import { SubscriptionShell } from './SubscriptionShell';
+import { testimonials } from './testimonials';
 import { Button, Eyebrow, SectionTitle } from './ui';
+import { WordReveal } from './WordReveal';
 
-const featureIcons = [Sparkles, MessageCircle, BarChart3, Sun];
 const outcomeIcons = [CalendarClock, RotateCcw, MessageCircle];
-const stepIcons = [UserRound, LockKeyhole, Smartphone];
 
+// The storefront is a funnel: hero thesis → three outcomes → the plan grid
+// (the only decision) → proof → four objections. Sign-in happens inside the
+// plan button; the bank-facing texts live on /payment and in the footer.
 export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
   const copy = subscriptionCopy[lang];
   const week = plans[0];
   const requestHeaders = await headers();
   const country = requestHeaders.get('cf-ipcountry');
   const acceptLanguage = requestHeaders.get('accept-language');
+  // One verbatim sentence from a real parent is the hero's only trust signal.
+  const voice = testimonials[1];
+  const quote = (voice.locale === lang ? voice.quote : voice.translations[lang]).split(/(?<=\.)\s/)[0];
 
   return (
     <SubscriptionShell lang={lang}>
@@ -32,90 +37,81 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
           <div className="relative mx-auto grid w-full max-w-6xl items-center gap-10 px-5 pb-14 pt-6 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:pb-20">
             <div className="relative z-10 min-w-0">
               <Reveal load animation="fadeIn">
-                <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-[#C7D2FE] backdrop-blur-xl">
-                  <Sparkles className="h-4 w-4" aria-hidden="true" />
-                  {copy.hero.badge}
-                </p>
+                <p className="mb-6 text-sm font-semibold uppercase tracking-wide text-[#A78BFA]">{copy.hero.eyebrow}</p>
               </Reveal>
               <h1 className="max-w-2xl text-[2.35rem] font-semibold leading-[1.06] text-white sm:text-6xl">
                 <WordReveal delay={120} text={copy.hero.title} />
               </h1>
               <Reveal load delay={260}>
-                <p className="mt-6 max-w-xl text-lg leading-8 text-white/70">{copy.hero.body}</p>
+                <p className="mt-6 max-w-xl text-lg leading-8 text-white/70">{copy.hero.subline}</p>
               </Reveal>
               <Reveal load delay={400}>
-                <div className="mt-8 flex flex-wrap items-center gap-3">
-                  <Magnetic className="flex">
+                <div className="mt-8">
+                  <Magnetic className="flex sm:inline-flex">
                     <Button className="flex-1" href="#plans">
                       <Money text={copy.hero.primary(formatByn(week.priceByn, lang))} />
                       <ArrowRight className="h-5 w-5" aria-hidden="true" />
                     </Button>
                   </Magnetic>
-                  <span className="inline-flex items-center gap-2 text-sm text-white/65">
-                    <RotateCcw className="h-4 w-4" aria-hidden="true" />
-                    {copy.hero.oneOff}
-                  </span>
                 </div>
-                <FlowNote className="mt-4 max-w-xl text-sm leading-6 text-white/55" />
-                <AccountPanel />
+                <p className="mt-5 max-w-xl text-sm leading-6 text-white/60">
+                  <span className="text-white/85">«{quote}»</span> — {voice.author}, {copy.proof.parents}
+                </p>
               </Reveal>
             </div>
             <Reveal load animation="zoomIn" delay={200} className="relative z-0 mx-auto hidden w-full max-w-[460px] sm:block">
               <Parallax className="relative h-[560px]" offset={['start start', 'end start']} scale={[1, 0.97]} y={[0, -70]}>
-              <div className="absolute inset-x-6 bottom-10 top-16 rounded-full bg-[#6366F1]/25 blur-3xl" />
-              <img
-                src="/screen-coach.png"
-                alt=""
-                className="absolute left-0 top-16 z-10 w-[46%] rotate-[-6deg] rounded-[2rem] shadow-[0_34px_90px_rgb(0_0_0/42%)] ring-1 ring-white/15"
-                width="1206"
-                height="2622"
-              />
-              <img
-                src="/screen-plan.png"
-                alt=""
-                className="absolute right-0 top-0 z-20 w-[54%] rounded-[2rem] shadow-[0_34px_90px_rgb(0_0_0/42%)] ring-1 ring-white/15"
-                width="1206"
-                height="2622"
-                fetchPriority="high"
-              />
+                <div className="absolute inset-x-6 bottom-10 top-16 rounded-full bg-[#6366F1]/25 blur-3xl" />
+                <img
+                  src="/screen-coach.png"
+                  alt=""
+                  className="absolute left-0 top-16 z-10 w-[46%] rotate-[-6deg] rounded-[2rem] shadow-[0_34px_90px_rgb(0_0_0/42%)] ring-1 ring-white/15"
+                  width="1206"
+                  height="2622"
+                />
+                <img
+                  src="/screen-plan.png"
+                  alt=""
+                  className="absolute right-0 top-0 z-20 w-[54%] rounded-[2rem] shadow-[0_34px_90px_rgb(0_0_0/42%)] ring-1 ring-white/15"
+                  width="1206"
+                  height="2622"
+                  fetchPriority="high"
+                />
               </Parallax>
             </Reveal>
           </div>
         </section>
 
-        <section className="relative mx-auto max-w-6xl px-5 pt-4 pb-10 sm:px-8">
+        <section className="relative mx-auto max-w-6xl px-5 pb-10 pt-2 sm:px-8">
           <Reveal>
-            <Eyebrow>{copy.outcomes.eyebrow}</Eyebrow>
             <SectionTitle className="max-w-2xl">{copy.outcomes.title}</SectionTitle>
           </Reveal>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <ul className="mt-8 grid gap-4 md:grid-cols-3">
             {copy.outcomes.items.map((item, index) => {
               const Icon = outcomeIcons[index];
               return (
-                <Reveal className="flex" delay={index * 120} key={item.title}>
-                  <article className="group spotlight w-full rounded-[1.5rem] border border-white/15 bg-white/[0.1] p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/30">
-                    <span className="relative inline-grid">
+                <Reveal className="flex" delay={index * 120} key={item.lead}>
+                  <li className="group spotlight flex w-full items-start gap-4 rounded-[1.5rem] border border-white/15 bg-white/[0.1] p-5 backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/30">
+                    <span className="relative inline-grid shrink-0">
                       <span aria-hidden="true" className="absolute inset-0 rounded-full bg-[#FDE68A] opacity-30 blur-xl transition duration-500 group-hover:opacity-80" />
                       <span className="relative grid h-11 w-11 place-items-center rounded-full bg-[#FDE68A] text-[#1E1B4B]">
                         <Icon className="h-5 w-5" aria-hidden="true" />
                       </span>
                     </span>
-                    <h3 className="mt-5 text-lg font-semibold text-white">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-white/65">{item.body}</p>
-                  </article>
+                    <p className="text-base leading-7 text-white/75">
+                      <strong className="font-semibold text-white">{item.lead}</strong> {item.rest}
+                    </p>
+                  </li>
                 </Reveal>
               );
             })}
-          </div>
+          </ul>
         </section>
 
         <section id="plans" className="relative mx-auto max-w-6xl scroll-mt-6 px-5 py-14 sm:px-8">
           <Reveal>
-            <div className="max-w-2xl">
-              <Eyebrow>{copy.plans.eyebrow}</Eyebrow>
-              <SectionTitle>{copy.plans.title}</SectionTitle>
-              <p className="mt-4 text-lg leading-8 text-white/65">{copy.plans.body}</p>
-            </div>
+            <SectionTitle className="max-w-2xl">{copy.plans.title}</SectionTitle>
+            <p className="mt-4 text-base leading-7 text-white/65">{copy.plans.included}</p>
           </Reveal>
           <div className="mt-10 grid gap-5 md:grid-cols-3 md:items-stretch">
             {plans.map((plan, index) => (
@@ -124,88 +120,27 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
               </Reveal>
             ))}
           </div>
-          <p className="mt-6 flex items-start gap-3 rounded-[1.25rem] border border-[#FDE68A]/30 bg-[#FDE68A]/10 px-5 py-4 text-base leading-7 text-white">
-            <ShieldCheck className="mt-1 h-5 w-5 shrink-0 text-[#FDE68A]" aria-hidden="true" />
-            {copy.guarantee}
-          </p>
-          <p className="mt-4 text-sm leading-6 text-white/60">
-            {copy.plans.footnote} {copy.plans.acceptBefore}{' '}
-            <a className="text-white underline decoration-white/30 hover:decoration-white" href={subscriptionPath(lang, '/offer')}>
+          <p className="mt-6 text-base font-semibold leading-7 text-white">{copy.plans.trust}</p>
+          <p className="mt-2 text-sm leading-6 text-white/60">{copy.plans.steps}</p>
+          <AccountLine className="mt-3 text-sm leading-6 text-white/60" />
+          <p className="mt-4 text-sm leading-6 text-white/50">
+            {copy.plans.acceptBefore}{' '}
+            <a className="text-white/80 underline decoration-white/30 hover:text-white hover:decoration-white" href={subscriptionPath(lang, '/offer')}>
               {copy.plans.offer}
             </a>{' '}
             {copy.plans.and}{' '}
-            <a className="text-white underline decoration-white/30 hover:decoration-white" href={subscriptionPath(lang, '/payment')}>
+            <a className="text-white/80 underline decoration-white/30 hover:text-white hover:decoration-white" href={subscriptionPath(lang, '/payment')}>
               {copy.plans.refundTerms}
             </a>
-            .
+            . {copy.plans.device}
           </p>
         </section>
 
         <SocialProof lang={lang} />
 
-        <section className="relative mx-auto max-w-6xl px-5 py-14 sm:px-8">
-          <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-            <Reveal>
-              <Eyebrow>{copy.features.eyebrow}</Eyebrow>
-              <SectionTitle>{copy.features.title}</SectionTitle>
-              <p className="mt-5 text-lg leading-8 text-white/65">{copy.features.body}</p>
-              <p className="mt-5 flex items-start gap-3 text-sm leading-6 text-white/55">
-                <Smartphone className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
-                {copy.features.device}
-              </p>
-            </Reveal>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {copy.features.items.map((feature, index) => {
-                const Icon = featureIcons[index];
-                return (
-                  <Reveal className="flex" delay={index * 90} key={feature.title}>
-                    <article className="group spotlight w-full rounded-[1.5rem] border border-white/15 bg-white/[0.1] p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/30">
-                      <span className="relative inline-grid">
-                        <span aria-hidden="true" className="absolute inset-0 rounded-full bg-[#6366F1] opacity-30 blur-xl transition duration-500 group-hover:opacity-80" />
-                        <span className="relative grid h-11 w-11 place-items-center rounded-full bg-[#EEF2FF] text-[#6366F1]">
-                          <Icon className="h-5 w-5" aria-hidden="true" />
-                        </span>
-                      </span>
-                      <h3 className="mt-5 text-lg font-semibold text-white">{feature.title}</h3>
-                      <p className="mt-2 text-sm leading-6 text-white/60">{feature.body}</p>
-                    </article>
-                  </Reveal>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        <section id="how-to-buy" className="relative scroll-mt-6 border-y border-white/10 bg-[#161628]/70">
-          <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
-            <Reveal>
-              <Eyebrow>{copy.steps.eyebrow}</Eyebrow>
-              <SectionTitle className="max-w-2xl">{copy.steps.title}</SectionTitle>
-            </Reveal>
-            <ol className="mt-10 grid gap-4 md:grid-cols-3">
-              {copy.steps.items.map((step, index) => {
-                const Icon = stepIcons[index];
-                return (
-                  <Reveal className="flex" delay={index * 100} key={step.title}>
-                    <li className="spotlight w-full list-none rounded-[1.5rem] border border-white/15 bg-white/[0.1] p-6">
-                      <div className="flex items-center justify-between">
-                        <span className="grid h-10 w-10 place-items-center rounded-full bg-[#6366F1] text-sm font-bold text-white">{index + 1}</span>
-                        <Icon className="h-5 w-5 text-[#C7D2FE]" aria-hidden="true" />
-                      </div>
-                      <h3 className="mt-5 text-lg font-semibold text-white">{step.title}</h3>
-                      <p className="mt-2 text-sm leading-6 text-white/60">{step.body}</p>
-                    </li>
-                  </Reveal>
-                );
-              })}
-            </ol>
-            <ManualOrder />
-          </div>
-        </section>
-
-        <section id="faq" className="relative mx-auto max-w-4xl px-5 pb-20 pt-14 sm:px-8">
+        <section id="faq" className="relative mx-auto max-w-4xl scroll-mt-6 px-5 pb-20 pt-10 sm:px-8">
           <Reveal>
-            <Eyebrow center>{copy.faq.eyebrow}</Eyebrow>
+            <Eyebrow center>{copy.nav.faq}</Eyebrow>
             <SectionTitle center>{copy.faq.title}</SectionTitle>
           </Reveal>
           <div className="mt-8 grid gap-3">
@@ -220,6 +155,12 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
               </Reveal>
             ))}
           </div>
+          <p className="mt-6 text-center text-sm text-white/60">
+            <a className="inline-flex items-center gap-1 font-semibold text-white underline decoration-white/30 hover:decoration-white" href={`mailto:${merchant.email}`}>
+              {copy.faq.more}
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+          </p>
         </section>
       </AccountProvider>
     </SubscriptionShell>

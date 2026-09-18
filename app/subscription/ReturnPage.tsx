@@ -68,7 +68,9 @@ function ReturnStatus() {
 
   return (
     <section className="relative mx-auto max-w-2xl px-5 pb-24 pt-10 text-center sm:px-8">
-      <h1 className="text-4xl font-semibold leading-tight text-white sm:text-5xl">{status === 'paid' ? copy.ret.title : copy.ret.checking}</h1>
+      <h1 className="text-4xl font-semibold leading-tight text-white sm:text-5xl">
+        {status === 'paid' && until ? copy.ret.paid(formatDate(until, lang)) : copy.ret.checking}
+      </h1>
       <div className="mt-8 rounded-[1.75rem] border border-white/15 bg-white/[0.1] p-8 backdrop-blur-xl">
         {!needsSignIn && (status === 'checking' || status === 'pending') ? (
           <p className="inline-flex items-center gap-3 text-lg text-white/80">
@@ -76,12 +78,7 @@ function ReturnStatus() {
             {status === 'pending' ? copy.ret.pending : copy.ret.checking}
           </p>
         ) : null}
-        {status === 'paid' && until ? (
-          <>
-            <p className="text-2xl font-semibold text-[#FDE68A]">{copy.ret.paid(formatDate(until, lang))}</p>
-            <p className="mt-3 text-base leading-7 text-white/75">{copy.ret.openApp}</p>
-          </>
-        ) : null}
+        {status === 'paid' && until ? <p className="text-lg leading-8 text-white/85">{copy.ret.openApp}</p> : null}
         {!needsSignIn && status === 'failed' ? <p className="text-base leading-7 text-white/80">{copy.ret.failed}</p> : null}
         {needsSignIn ? (
           <>

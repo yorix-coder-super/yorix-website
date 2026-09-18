@@ -1,7 +1,5 @@
 'use client';
 
-import { Check, Copy, LogOut } from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import type { Auth, User as FirebaseUser } from 'firebase/auth';
 import { API_BASE, firebaseConfig, isFirebaseConfigured } from './config';
@@ -9,7 +7,7 @@ import { subscriptionCopy, type SubscriptionCopy } from './copy';
 import { currencyForVisitor, formatMoney, type Currency } from './currency';
 import { useCurrency } from './currencyStore';
 import { formatDate, subscriptionPath, type Lang } from './i18n';
-import { formatByn, mailtoOrder, orderTemplate, planCopy, plans, prices, type Plan } from './merchant';
+import { formatByn, mailtoOrder, merchant, planCopy, plans, prices, type Plan } from './merchant';
 import { Money } from './Money';
 import { MoonPhase } from './MoonPhase';
 import { Button, Spinner } from './ui';
@@ -27,7 +25,7 @@ type State = {
   config: WebConfig | null;
   user: Account | null;
   me: Me | null;
-  busy: 'signin' | 'order' | null;
+  busy: 'signin' | 'order' | 'redirect' | null;
   error: ErrorKey | null;
   errorOrigin: string | null;
   requestPlan: Plan | null;
@@ -39,7 +37,7 @@ type Api = State & {
   currency: Currency;
   signIn: (provider: Provider, origin?: string) => Promise<Account | null>;
   signOut: () => Promise<void>;
-  createOrder: (planId: string) => Promise<void>;
+  createOrder: (planId: string) => Promise<boolean>;
   getToken: () => Promise<string | null>;
   clearError: () => void;
   openRequest: (plan: Plan | null) => void;
@@ -187,7 +185,7 @@ export function AccountProvider({ lang, country, acceptLanguage, children }: { l
   const createOrder = useCallback(
     async (planId: string) => {
       const token = await getToken();
-      if (!token) return;
+      if (!token) return false;
       setState((s) => ({ ...s, busy: 'order', error: null, errorOrigin: null }));
       try {
         const res = await fetch(`${API_BASE}/v1/web/orders`, {
@@ -197,13 +195,15 @@ export function AccountProvider({ lang, country, acceptLanguage, children }: { l
         });
         const body = (await res.json().catch(() => ({}))) as { redirectUrl?: string; error?: string };
         if (res.ok && body.redirectUrl && /^https:\/\/(securesandbox|payment)\.webpay\.by\//.test(body.redirectUrl)) {
+          setState((s) => ({ ...s, busy: 'redirect' }));
           window.location.assign(body.redirectUrl);
-          return;
+          return true;
         }
         setState(settled(orderErrorFor(res.status, body.error, checkoutMode), planId));
       } catch {
         setState(settled('error', planId));
       }
+      return false;
     },
     [getToken, lang, checkoutMode],
   );
@@ -225,149 +225,87 @@ export function useAccount() {
   return api;
 }
 
-function providerName(id: string) {
-  return id === 'google.com' ? 'Google' : id === 'apple.com' ? 'Apple' : id;
-}
-
-function IconSwap({ copied, size }: { copied: boolean; size: string }) {
-  const Icon = copied ? Check : Copy;
-  return (
-    <AnimatePresence initial={false} mode="wait">
-      <motion.span
-        animate={{ opacity: 1, scale: 1 }}
-        className="inline-flex"
-        exit={{ opacity: 0, scale: 0.6 }}
-        initial={{ opacity: 0, scale: 0.6 }}
-        key={copied ? 'check' : 'copy'}
-        transition={{ duration: 0.15 }}
-      >
-        <Icon className={size} aria-hidden="true" />
-      </motion.span>
-    </AnimatePresence>
-  );
-}
-
-function CopyInline({ value, label, done }: { value: string; label: string; done: string }) {
-  const [copied, setCopied] = useState(false);
-  return (
-    <button
-      className="inline-flex min-h-8 items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 text-xs font-semibold text-white transition hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
-      onClick={async () => {
-        try {
-          await navigator.clipboard.writeText(value);
-          setCopied(true);
-          window.setTimeout(() => setCopied(false), 2000);
-        } catch {
-          setCopied(false);
-        }
-      }}
-      type="button"
-    >
-      <IconSwap copied={copied} size="h-3.5 w-3.5" />
-      <span aria-live="polite">{copied ? done : label}</span>
-    </button>
-  );
-}
-
-export function AccountPanel() {
-  const { ready, configured, user, me, busy, error, errorOrigin, copy, lang, signIn, signOut } = useAccount();
-
-  // Until sign-in is configured the request form is the whole funnel; the
-  // page already says what happens next, so the panel stays out of the way.
-  if (!configured) return null;
-  if (!ready) {
+// Under the plan grid: which account the subscription goes to once signed
+// in (with a way out of the wrong one), and the Google door for parents who
+// use Google in the app. Nothing until the live checkout is configured.
+export function AccountLine({ className = '' }: { className?: string }) {
+  const { ready, configured, config, user, me, busy, error, errorOrigin, copy, lang, signIn, signOut } = useAccount();
+  const live = configured && (config?.checkoutMode ?? 'off') !== 'off';
+  if (!live || !ready) return null;
+  const link = 'font-semibold text-white underline decoration-white/30 hover:decoration-white disabled:opacity-60';
+  if (!user) {
+    const lineError = errorOrigin === 'line' && (error === 'popupBlocked' || error === 'signInError') ? copy.account[error] : null;
     return (
-      <p className="mt-7 inline-flex items-center gap-2 text-sm text-white/60">
-        <Spinner /> {copy.account.checking}
+      <p className={className}>
+        {copy.plans.googleQuestion}{' '}
+        <button className={link} disabled={busy !== null} onClick={() => void signIn('google.com', 'line')} type="button">
+          {copy.plans.googleLink}
+        </button>
+        {lineError ? (
+          <span className="block text-[#FCA5A5]" role="alert">
+            {lineError}
+          </span>
+        ) : null}
       </p>
     );
   }
-  if (!user) {
-    return (
-      <div className="mt-7 max-w-xl">
-        <div className="flex flex-wrap gap-2">
-          <Button disabled={busy === 'signin'} onClick={() => void signIn('apple.com')} variant="light">
-            {busy === 'signin' ? <Spinner /> : <AppleMark />}
-            {copy.account.signInApple}
-          </Button>
-          <Button disabled={busy === 'signin'} onClick={() => void signIn('google.com')} variant="ghost">
-            {copy.account.signInGoogle}
-          </Button>
-        </div>
-        <p className="mt-3 text-sm leading-6 text-white/55">{copy.account.why}</p>
-        {errorOrigin === 'panel' && (error === 'popupBlocked' || error === 'signInError') ? (
-          <p className="mt-2 text-sm text-[#FCA5A5]" role="alert">
-            {copy.account[error]}
-          </p>
-        ) : null}
-      </div>
-    );
-  }
-
-  const active = me?.premiumUntil && new Date(me.premiumUntil) > new Date();
+  const active = Boolean(me?.premiumUntil && new Date(me.premiumUntil) > new Date());
+  const email = user.email ?? user.uid;
   return (
-    <div className="glass mt-7 grid max-w-xl gap-3 rounded-[1.5rem] border border-white/15 bg-white/[0.08] p-4 backdrop-blur-xl sm:grid-cols-[auto_1fr_auto] sm:items-center">
-      <span className="grid h-11 w-11 place-items-center rounded-full bg-[#EEF2FF] text-base font-bold text-[#1E1B4B]" aria-hidden="true">
-        {(user.email ?? user.uid).slice(0, 1).toUpperCase()}
-      </span>
-      <div className="min-w-0">
-        <p className="truncate text-sm text-white/60">
-          {copy.account.signedInAs} <span className="text-white">{user.email ?? '—'}</span> · {copy.account.via(providerName(user.provider))}
-        </p>
-        <p className={`mt-0.5 text-sm font-semibold ${active ? 'text-[#FDE68A]' : 'text-white/70'}`}>
-          {active && me?.premiumUntil ? copy.account.activeUntil(formatDate(me.premiumUntil, lang)) : copy.account.noSubscription}
-        </p>
-        <p className="mt-2 flex flex-wrap items-center gap-2 text-xs text-white/50">
-          {copy.account.accountCode}: <code className="rounded bg-black/20 px-1.5 py-0.5 text-white/80">{user.uid}</code>
-          <CopyInline done={copy.account.copied} label={copy.account.copy} value={user.uid} />
-        </p>
-      </div>
-      <button
-        className="inline-flex min-h-10 items-center gap-2 self-start rounded-full px-3 text-sm font-semibold text-white/70 transition hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 sm:self-center"
-        onClick={() => void signOut()}
-        type="button"
-      >
-        <LogOut className="h-4 w-4" aria-hidden="true" />
-        {copy.account.signOut}
+    <p className={className}>
+      {active && me?.premiumUntil ? copy.plans.activeUntil(email, formatDate(me.premiumUntil, lang)) : copy.plans.goesTo(email)}{' '}
+      {active ? null : `${copy.plans.wrongAccount} `}
+      <button className={link} onClick={() => void signOut()} type="button">
+        {copy.plans.signOut}
       </button>
-    </div>
-  );
-}
-
-function AppleMark() {
-  return (
-    <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M16.37 12.64c0-2.4 1.96-3.55 2.05-3.6-1.12-1.64-2.86-1.86-3.47-1.89-1.48-.15-2.88.87-3.63.87-.75 0-1.9-.85-3.13-.83-1.61.02-3.09.94-3.92 2.38-1.67 2.9-.43 7.2 1.2 9.55.8 1.15 1.74 2.45 2.98 2.4 1.2-.05 1.65-.78 3.1-.78 1.44 0 1.85.78 3.12.75 1.29-.02 2.1-1.17 2.89-2.33.91-1.34 1.29-2.63 1.31-2.7-.03-.01-2.51-.96-2.5-3.82ZM14 5.6c.66-.8 1.1-1.9.98-3-.95.04-2.1.63-2.78 1.43-.61.7-1.14 1.83-1 2.9 1.06.08 2.14-.54 2.8-1.33Z" />
-    </svg>
+    </p>
   );
 }
 
 export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) {
-  const { ready, configured, config, user, busy, error, errorOrigin, copy, lang, currency, signIn, createOrder, openRequest } = useAccount();
+  const { ready, configured, config, user, me, busy, error, errorOrigin, copy, lang, currency, signIn, createOrder, openRequest } = useAccount();
   const text = planCopy[lang][plan.id];
   const amount = prices[plan.id][currency];
   const price = formatMoney(amount, currency, lang);
-  const perWeekAmount = (amount / plan.days) * 7;
-  const perWeek = formatMoney(perWeekAmount, currency, lang);
-  const cheaper = Math.round((1 - perWeekAmount / prices.week[currency]) * 100);
+  const perWeek = formatMoney((amount / plan.days) * 7, currency, lang);
+  const base = formatMoney(prices.week[currency], currency, lang);
   const live = configured && (config?.checkoutMode ?? 'off') !== 'off';
-  const [pending, setPending] = useState(false);
+  const active = Boolean(me?.premiumUntil && new Date(me.premiumUntil) > new Date());
+  // The button narrates its own funnel: sign-in → order → WebPay.
+  const [stage, setStage] = useState<'idle' | 'signin' | 'order' | 'redirect'>('idle');
 
   const pay = async () => {
-    setPending(true);
+    setStage(user ? 'order' : 'signin');
     try {
       const account = user ?? (await signIn('apple.com', plan.id));
-      if (account) await createOrder(plan.id);
-    } finally {
-      setPending(false);
+      if (!account) {
+        setStage('idle');
+        return;
+      }
+      setStage('order');
+      const redirecting = await createOrder(plan.id);
+      setStage(redirecting ? 'redirect' : 'idle');
+    } catch {
+      setStage('idle');
     }
   };
 
   const variant = featured ? 'dark' : 'light';
   const muted = featured ? 'text-[#1E1B4B]/65' : 'text-white/65';
   const strong = featured ? 'text-[#1E1B4B]' : 'text-white';
-  const showError = pending || busy === 'order' || errorOrigin !== plan.id ? null : error;
-  const fallbackNeeded = showError === 'unavailable' || showError === 'testOnly' || showError === 'blocked' || showError === 'error';
+  const label =
+    stage === 'signin' ? copy.checkout.signingIn
+    : stage === 'order' ? copy.checkout.creating
+    : stage === 'redirect' ? copy.checkout.redirecting
+    : active ? copy.plans.extend(text.forPeriod)
+    : copy.plans.subscribe(text.forPeriod);
+  const showError = stage !== 'idle' || errorOrigin !== plan.id ? null : error;
+  const message =
+    showError === 'popupBlocked' || showError === 'signInError' ? copy.account[showError]
+    : showError === 'blocked' ? copy.checkout.blocked(merchant.email)
+    : showError ? copy.checkout[showError]
+    : null;
+  const offerRequest = showError === 'unavailable' || showError === 'testOnly' || showError === 'error';
 
   return (
     <article
@@ -392,91 +330,33 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
         <Money text={price} />
       </p>
       <p className={`mt-2 min-h-6 text-sm leading-6 ${muted}`}>
-        <Money text={plan.id === 'week' ? '\u00A0' : `${copy.plans.perWeek(perWeek)} · ${copy.plans.cheaper(cheaper)}`} />
+        <Money text={plan.id === 'week' ? '\u00A0' : copy.plans.perWeek(perWeek, base)} />
       </p>
       <div className="mt-auto pt-6">
         <Button
           className="w-full"
-          disabled={live && (!ready || pending || busy !== null)}
+          disabled={live && (!ready || stage !== 'idle' || busy !== null)}
           onClick={() => (live ? void pay() : openRequest(plan))}
           variant={variant}
         >
-          {pending || busy === 'order' ? <Spinner /> : null}
-          {pending || busy === 'order' ? copy.checkout.creating : copy.plans.pay}
+          {stage !== 'idle' ? <Spinner /> : null}
+          {label}
         </Button>
-        {showError ? (
+        {message ? (
           <p className={`mt-3 text-sm leading-5 ${featured ? 'text-[#B45309]' : 'text-[#FCA5A5]'}`} role="alert">
-            {showError === 'popupBlocked' || showError === 'signInError'
-              ? copy.account[showError]
-              : copy.checkout[showError as keyof SubscriptionCopy['checkout']] ?? copy.checkout.error}
-            {fallbackNeeded ? (
+            {message}
+            {offerRequest ? (
               <>
                 {' '}
-                <a className="underline" href={mailtoOrder(lang, plan, user?.uid)}>
-                  {copy.plans.order}
-                </a>
+                <button className="font-semibold underline" onClick={() => openRequest(plan)} type="button">
+                  {copy.checkout.request}
+                </button>
               </>
             ) : null}
           </p>
         ) : null}
       </div>
     </article>
-  );
-}
-
-// What happens after the button: the live sequence once sign-in and checkout
-// are configured, the request-form sequence until then.
-export function FlowNote({ className }: { className?: string }) {
-  const { configured, config, copy } = useAccount();
-  const live = configured && (config ? config.checkoutMode !== 'off' : true);
-  return <p className={className}>{live ? copy.hero.nextLive : copy.hero.nextRequest}</p>;
-}
-
-export function ManualOrder() {
-  const { user, copy, lang, openRequest } = useAccount();
-  const template = orderTemplate(lang, undefined, user?.uid);
-  return (
-    <div className="mt-8 grid gap-6 rounded-[1.5rem] border border-white/10 bg-white/[0.05] p-6 lg:grid-cols-[1fr_auto] lg:items-center">
-      <div className="grid gap-2 text-sm leading-6 text-white/65">
-        <p className="text-base font-semibold text-white">{copy.steps.manualTitle}</p>
-        <p>{copy.steps.manualBody}</p>
-        {user ? (
-          <p className="flex flex-wrap items-center gap-2 text-xs text-white/50">
-            {copy.steps.manualCode}: <code className="rounded bg-black/20 px-1.5 py-0.5 text-white/80">{user.uid}</code>
-            <CopyInline done={copy.account.copied} label={copy.account.copy} value={user.uid} />
-          </p>
-        ) : null}
-      </div>
-      <div className="flex flex-wrap gap-2 lg:flex-col">
-        <Button onClick={() => openRequest(null)} size="sm" variant="light">
-          {copy.steps.writeToUs}
-        </Button>
-        <CopyButton label={copy.steps.copyAddress} done={copy.account.copied} value={mailtoOrder(lang).replace(/^mailto:([^?]+).*$/, '$1')} />
-        <CopyButton label={copy.steps.copyTemplate} done={copy.account.copied} value={template} />
-      </div>
-    </div>
-  );
-}
-
-function CopyButton({ value, label, done }: { value: string; label: string; done: string }) {
-  const [copied, setCopied] = useState(false);
-  return (
-    <Button
-      onClick={async () => {
-        try {
-          await navigator.clipboard.writeText(value);
-          setCopied(true);
-          window.setTimeout(() => setCopied(false), 2000);
-        } catch {
-          setCopied(false);
-        }
-      }}
-      size="sm"
-      variant="ghost"
-    >
-      <IconSwap copied={copied} size="h-4 w-4" />
-      <span aria-live="polite">{copied ? done : label}</span>
-    </Button>
   );
 }
 

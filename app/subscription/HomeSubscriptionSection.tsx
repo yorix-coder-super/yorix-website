@@ -1,15 +1,15 @@
-import { ArrowRight, ShieldCheck } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { headers } from 'next/headers';
-import { AccountPanel, AccountProvider, FlowNote, PlanCard, RequestForm } from './account';
+import { AccountLine, AccountProvider, PlanCard, RequestForm } from './account';
 import { subscriptionCopy } from './copy';
 import { subscriptionPath, type Lang } from './i18n';
 import { plans } from './merchant';
 import { Reveal } from './Reveal';
 import { Eyebrow, SectionTitle } from './ui';
 
-// The purchase, on the landing page itself: the same account panel and plan
-// cards as /subscription, so a visitor buys without leaving the page they came
-// to. The full page keeps the bank-facing texts and the legal documents.
+// The short form of the storefront on the landing page: three prices, the
+// same plan buttons (sign in with Apple → WebPay), one trust line and a link
+// to the full page with the terms, refunds and FAQ.
 export async function HomeSubscriptionSection({ lang }: { lang: Lang }) {
   const copy = subscriptionCopy[lang];
   const requestHeaders = await headers();
@@ -20,21 +20,11 @@ export async function HomeSubscriptionSection({ lang }: { lang: Lang }) {
     <section id="subscription" className="mx-auto max-w-7xl scroll-mt-6 px-5 py-16 sm:px-8 lg:px-10" lang={lang}>
       <AccountProvider acceptLanguage={acceptLanguage} country={country} lang={lang}>
         <RequestForm />
-        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-          <Reveal>
-            <Eyebrow>{copy.home.eyebrow}</Eyebrow>
-            <SectionTitle className="max-w-2xl">{copy.home.title}</SectionTitle>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-white/65">{copy.home.body}</p>
-            <FlowNote className="mt-4 max-w-2xl text-sm leading-6 text-white/55" />
-            <a className="mt-5 inline-flex items-center gap-1 font-semibold text-white underline decoration-white/30 hover:decoration-white" href={subscriptionPath(lang)}>
-              {copy.home.more}
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </a>
-          </Reveal>
-          <Reveal delay={140}>
-            <AccountPanel />
-          </Reveal>
-        </div>
+        <Reveal>
+          <Eyebrow>{copy.home.eyebrow}</Eyebrow>
+          <SectionTitle className="max-w-2xl">{copy.home.title}</SectionTitle>
+          <p className="mt-5 max-w-2xl text-lg leading-8 text-white/65">{copy.home.body}</p>
+        </Reveal>
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {plans.map((plan, index) => (
             <Reveal className={`flex min-w-0 ${plan.id === 'year' ? 'order-first md:order-none' : ''}`} delay={index * 120} key={plan.id}>
@@ -42,14 +32,12 @@ export async function HomeSubscriptionSection({ lang }: { lang: Lang }) {
             </Reveal>
           ))}
         </div>
-        <p className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm leading-6 text-white/70">
-          <ShieldCheck className="h-5 w-5 text-[#FDE68A]" aria-hidden="true" />
-          <span>{copy.home.note}</span>
-          <a className="inline-flex items-center gap-1 font-semibold text-white underline decoration-white/30 hover:decoration-white" href={subscriptionPath(lang, '/payment')}>
-            {copy.home.details}
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </a>
-        </p>
+        <p className="mt-6 text-base font-semibold leading-7 text-white">{copy.plans.trust}</p>
+        <AccountLine className="mt-2 text-sm leading-6 text-white/60" />
+        <a className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-white underline decoration-white/30 hover:decoration-white" href={subscriptionPath(lang)}>
+          {copy.home.more}
+          <ArrowRight className="h-4 w-4" aria-hidden="true" />
+        </a>
       </AccountProvider>
     </section>
   );

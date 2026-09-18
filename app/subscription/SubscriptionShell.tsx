@@ -28,9 +28,9 @@ export async function SubscriptionShell({ lang, page = '', children }: { lang: L
   const acceptLanguage = requestHeaders.get('accept-language');
   const navItems = [
     { href: `${home}#plans`, label: copy.nav.plans },
-    { href: `${home}#how-to-buy`, label: copy.nav.howToBuy },
-    { href: subscriptionPath(lang, '/payment'), label: copy.nav.payment },
-    { href: '#contacts', label: copy.nav.contacts },
+    { href: `${home}#reviews`, label: copy.nav.reviews },
+    { href: `${home}#faq`, label: copy.nav.faq },
+    { href: subscriptionPath(lang, '/payment'), label: copy.nav.documents },
   ];
 
   return (

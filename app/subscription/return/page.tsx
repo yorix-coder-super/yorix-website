@@ -4,7 +4,7 @@ import { subscriptionCopy } from '../copy';
 import { ReturnPage } from '../ReturnPage';
 
 export const metadata: Metadata = {
-  title: subscriptionCopy['en'].ret.title,
+  title: subscriptionCopy['en'].ret.checking,
   description: 'Yorix subscription payment status.',
   alternates: { canonical: subscriptionPath('en', '/return'), languages: subscriptionAlternates('/return') },
   robots: { index: false, follow: false },

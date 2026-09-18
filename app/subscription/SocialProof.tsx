@@ -16,7 +16,7 @@ export function SocialProof({ lang, compact = false }: { lang: Lang; compact?: b
   }));
 
   return (
-    <section className={`relative mx-auto max-w-6xl px-5 ${compact ? 'py-10' : 'py-16'} sm:px-8`} id="otzyvy">
+    <section className={`relative mx-auto max-w-6xl px-5 ${compact ? 'py-10' : 'py-16'} sm:px-8`} id="reviews">
       <Reveal>
         <Eyebrow>{copy.proof.eyebrow}</Eyebrow>
         <SectionTitle className="max-w-2xl">{copy.proof.title}</SectionTitle>
