@@ -55,6 +55,26 @@ export type SubscriptionCopy = {
   legal: { eyebrow: string; updated: (date: string) => string; binding: string };
   home: { nav: string; eyebrow: string; title: string; body: string; more: string };
   currency: { note: (amounts: string) => string };
+  terms: {
+    title: (period: string) => string;
+    period: string;
+    days: (days: string) => string;
+    price: string;
+    charge: (amount: string) => string;
+    oneOff: string;
+    goesTo: (email: string) => string;
+    signInNote: string;
+    accept: [string, string, string, string, string];
+    immediate: string;
+    privacy: [string, string, string];
+    required: string;
+    requiredImmediate: string;
+    withApple: string;
+    pay: (price: string) => string;
+    next: string;
+    google: string;
+    cancel: string;
+  };
   request: {
     title: string;
     body: string;
@@ -139,7 +159,7 @@ const ru: SubscriptionCopy = {
     items: [
       { q: 'Что будет, когда срок закончится?', a: 'Подписка выключится, записи останутся. Ничего не спишется — карту мы не храним. Чтобы продлить, оформите новый срок: дни добавятся к текущему.' },
       { q: 'Зачем входить через Apple ID?', a: 'Подписка привязана к аккаунту, не к телефону. Войдите тем же Apple ID, что и в приложении, — включится именно там. Вошли через Google? Здесь тоже.' },
-      { q: 'Можно ли вернуть деньги?', a: 'Как в App Store: оплаченный срок не возвращается. Исключения — подписка не включилась, не работала по нашей вине или списание ошибочное: вернём на ту же карту.' },
+      { q: 'Можно ли вернуть деньги?', a: 'Да, по разделу 7 оферты. Если подписка не включилась, не работала по нашей вине или списание ошибочное, вернём всю сумму. Если откажетесь сами — стоимость неиспользованных дней за вычетом наших подтверждённых расходов.' },
       { q: 'У меня уже есть подписка в App Store.', a: 'Отключите автопродление: Настройки → ваше имя → Подписки. Подписка Apple доработает до конца периода, срок с сайта добавится после него.' },
     ],
     more: 'Другой вопрос? Напишите нам',
@@ -173,6 +193,27 @@ const ru: SubscriptionCopy = {
     more: 'Всё о подписке: условия, возврат, вопросы',
   },
   currency: { note: (amounts) => `Оплата проходит в белорусских рублях: ${amounts}. Банк карты пересчитает по своему курсу.` },
+  terms: {
+    title: (period) => `Подписка ${period}`,
+    period: 'Срок',
+    days: (days) => `${days} с момента оплаты`,
+    price: 'Цена',
+    charge: (amount) => `к списанию ${amount}`,
+    oneOff: 'Платёж разовый, без автопродления. Карту мы не сохраняем.',
+    goesTo: (email) => `Подписка откроется на ${email} сразу после оплаты.`,
+    signInNote: 'Войдите тем же Apple ID, что и в приложении: подписка откроется на нём сразу после оплаты.',
+    accept: ['Я принимаю условия ', 'публичного договора', ' и ', 'оплаты и возврата', '. Мне есть 18 лет.'],
+    immediate:
+      'Прошу открыть доступ сразу после оплаты. Понимаю, что при отказе в течение 14 дней оплачу уже предоставленные дни, а после окончания оплаченного срока право на отказ утрачивается.',
+    privacy: ['Данные аккаунта и заказа обрабатываем для исполнения договора — ', 'Политика обработки персональных данных', '. Данные карты вводятся только на странице WEBPAY.'],
+    required: 'Отметьте, что принимаете условия: без этого оплата недоступна.',
+    requiredImmediate: 'Для покупателей из Европы нужна и эта отметка: без неё мы не можем открыть доступ сразу после оплаты.',
+    withApple: 'Продолжить с Apple',
+    pay: (price) => `Перейти к оплате · ${price}`,
+    next: 'Продолжить',
+    google: 'В приложении вход через Google? Войти через Google',
+    cancel: 'Отмена',
+  },
   request: {
     title: 'Заявка на подписку',
     body: 'Оставьте e-mail — в течение дня пришлём ссылку на оплату. Платить пока не нужно.',
@@ -183,7 +224,7 @@ const ru: SubscriptionCopy = {
     codeHint: 'В приложении: Настройки → Аккаунт',
     submit: 'Получить ссылку',
     cancel: 'Отмена',
-    consent: 'Нажимая кнопку, вы соглашаетесь на обработку e-mail для этого заказа.',
+    consent: 'E-mail нужен только для этого заказа. Как мы обрабатываем данные:',
     sentTitle: 'Заявка принята',
     sentBody: 'Ссылка придёт на e-mail в течение дня — загляните и в «Спам».',
     close: 'Понятно',
@@ -257,7 +298,7 @@ const en: SubscriptionCopy = {
     items: [
       { q: 'What happens when the period ends?', a: 'It switches off; your records stay. Nothing is charged — we keep no card. To extend, buy a new period: the days are added on.' },
       { q: 'Why sign in with my Apple ID?', a: 'Tied to your account, not your phone. Same Apple ID as in the app — and it switches on there. Google in the app? Google here.' },
-      { q: 'Can I get a refund?', a: "As in the App Store, a paid period isn't refunded — unless it never switched on, failed through our fault or was charged by mistake." },
+      { q: 'Can I get a refund?', a: 'Yes, under section 7 of the offer. If it never switched on, failed through our fault or was charged by mistake, we refund everything. If you cancel yourself — the unused days less our documented costs.' },
       { q: 'I already have an App Store subscription.', a: 'Turn off auto-renewal: Settings → your name → Subscriptions. The Apple period runs to its end; the site period is added after it.' },
     ],
     more: 'Another question? Write to us',
@@ -295,6 +336,27 @@ const en: SubscriptionCopy = {
     more: 'All about the subscription: terms, refunds, FAQ',
   },
   currency: { note: (amounts) => `The card is charged in Belarusian rubles: ${amounts}. Your bank converts at its own rate.` },
+  terms: {
+    title: (period) => `Subscription ${period}`,
+    period: 'Period',
+    days: (days) => `${days} from payment`,
+    price: 'Price',
+    charge: (amount) => `charged as ${amount}`,
+    oneOff: 'One-off payment, no auto-renewal. We keep no card on file.',
+    goesTo: (email) => `The subscription opens on ${email} right after payment.`,
+    signInNote: 'Sign in with the same Apple ID as in the app: the subscription opens there right after payment.',
+    accept: ['I accept the ', 'public offer', ' and the ', 'payment and refund terms', '. I am 18 or older.'],
+    immediate:
+      'Please start my subscription right after payment. I understand that if I withdraw within 14 days I pay for the days already provided, and that I lose the right of withdrawal once the paid period has been fully provided.',
+    privacy: ['We process account and order data to perform the contract — see the ', 'personal data policy', '. Card details are entered only on the WEBPAY page.'],
+    required: 'Tick the box to accept the terms — payment is not available without it.',
+    requiredImmediate: 'Buyers in Europe need this box too: without it we cannot open access right after payment.',
+    withApple: 'Continue with Apple',
+    pay: (price) => `Continue to payment · ${price}`,
+    next: 'Continue',
+    google: 'Google account in the app? Sign in with Google',
+    cancel: 'Cancel',
+  },
   request: {
     title: 'Subscription request',
     body: "Leave your e-mail — we'll send a payment link within a day. Nothing to pay yet.",
@@ -305,7 +367,7 @@ const en: SubscriptionCopy = {
     codeHint: 'In the app: Settings → Account',
     submit: 'Send me the link',
     cancel: 'Cancel',
-    consent: 'By pressing the button you agree to e-mail processing for this order.',
+    consent: 'We use your e-mail only for this order. How we handle data:',
     sentTitle: 'Request received',
     sentBody: 'The link arrives by e-mail within a day — check spam too.',
     close: 'Got it',

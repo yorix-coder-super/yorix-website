@@ -4,11 +4,11 @@ import { Privacy, privacyTitle } from '../legal/Privacy';
 
 export const metadata: Metadata = {
   title: privacyTitle['en'],
-  description: 'What data we receive when you order and pay for a Yorix subscription, why and how long we keep it, and how to exercise your rights.',
+  description: 'What personal data the Yorix site, app and support process, why and on what basis, who receives it, how long it is kept and how to exercise your rights.',
   alternates: { canonical: subscriptionPath('en', '/privacy'), languages: subscriptionAlternates('/privacy') },
   openGraph: {
     title: privacyTitle['en'],
-    description: 'What data we receive when you order and pay for a Yorix subscription, why and how long we keep it, and how to exercise your rights.',
+    description: 'What personal data the Yorix site, app and support process, why and on what basis, who receives it, how long it is kept and how to exercise your rights.',
     url: subscriptionPath('en', '/privacy'),
     type: 'website',
     locale: 'en_US',

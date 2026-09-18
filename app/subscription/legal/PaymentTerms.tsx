@@ -1,11 +1,12 @@
 import { DocumentPage } from '../DocumentPage';
 import { subscriptionPath, type Lang } from '../i18n';
-import { formatByn, listJoin, merchant, planCopy, plans } from '../merchant';
+import { formatMoney, type Currency } from '../currency';
+import { charges, formatByn, listJoin, merchant, planCopy, plans, prices } from '../merchant';
 import { PaymentLogos } from '../PaymentLogos';
 import { SampleReceipt } from '../SampleReceipt';
+import { editionLabel } from './versions';
 
 export const paymentTermsTitle = { ru: 'Оплата, доставка и возврат', en: 'Payment, delivery and refunds' } as const;
-export const paymentTermsUpdated = { ru: '17 сентября 2026 г.', en: '17 September 2026' } as const;
 
 export function PaymentTerms({ lang }: { lang: Lang }) {
   const email = <a href={`mailto:${merchant.email}`}>{merchant.email}</a>;
@@ -20,6 +21,39 @@ export function PaymentTerms({ lang }: { lang: Lang }) {
       ))}
     </ul>
   );
+  const regions: { currency: Currency; label: Record<Lang, string> }[] = [
+    { currency: 'EUR', label: { ru: 'Европа — базовая цена', en: 'Europe — base price' } },
+    { currency: 'BYN', label: { ru: 'Беларусь', en: 'Belarus' } },
+    { currency: 'RUB', label: { ru: 'Россия', en: 'Russia' } },
+    { currency: 'USD', label: { ru: 'Другие страны', en: 'Other countries' } },
+  ];
+  const priceTable = (
+    <div className="legal-table">
+      <table>
+        <thead>
+          <tr>
+            <th>{lang === 'ru' ? 'Регион покупателя' : 'Buyer’s region'}</th>
+            {plans.map((plan) => (
+              <th key={plan.id}>{planCopy[lang][plan.id].days}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {regions.map((region) => (
+            <tr key={region.currency}>
+              <td>{region.label[lang]}</td>
+              {plans.map((plan) => (
+                <td data-label={planCopy[lang][plan.id].days} key={plan.id}>
+                  <strong>{formatByn(charges[plan.id][region.currency], lang, 'code')}</strong>
+                  {region.currency === 'BYN' ? null : <> ({formatMoney(prices[plan.id][region.currency], region.currency, lang)})</>}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
   const logos = (
     <div className="mt-4 rounded-2xl bg-[#1E1B4B] p-4">
       <PaymentLogos />
@@ -28,7 +62,7 @@ export function PaymentTerms({ lang }: { lang: Lang }) {
 
   if (lang === 'en') {
     return (
-      <DocumentPage lang={lang} page="/payment" title={paymentTermsTitle.en} updated={paymentTermsUpdated.en}>
+      <DocumentPage lang={lang} page="/payment" title={paymentTermsTitle.en} updated={editionLabel('payment', lang)}>
         <h2>What you buy</h2>
         <p>
           A Yorix subscription is access to the paid features of the Yorix app for iPhone and iPad for a chosen period: the personal sleep forecast,
@@ -37,6 +71,18 @@ export function PaymentTerms({ lang }: { lang: Lang }) {
         </p>
         {planList}
         <p>Prices are in Belarusian rubles. The payment is one-off; there is no automatic renewal.</p>
+
+        <h2>Prices for different regions</h2>
+        <p>
+          The price depends on the buyer’s region, which the site detects from the connection country and the browser language. The contract price is the
+          amount in Belarusian rubles charged to the card; the price in the local currency in brackets is for reference, and the amount in the card’s currency is
+          set by the card-issuing bank.
+        </p>
+        {priceTable}
+        <p>
+          The prices for Belarus, Russia and other countries are discounts for categories of consumers by location, set by the seller’s decision of
+          18 September 2026 (Article 396(2) of the Civil Code of the Republic of Belarus). A price is fixed at the moment of payment.
+        </p>
 
         <h2>Order procedure</h2>
         <ol>
@@ -102,26 +148,26 @@ export function PaymentTerms({ lang }: { lang: Lang }) {
         <blockquote>
           <p>When paying by bank card through the WEBPAY system, refunds are made to the same card that was used for the payment.</p>
         </blockquote>
-        <p>There is no auto-renewal: nothing is charged after the payment and there is nothing to cancel. The paid period runs to its end.</p>
+        <p>There is no auto-renewal: the card is not saved, nothing is charged after the payment and there is nothing to cancel.</p>
         <ul>
-          <li>before the subscription is switched on, an order can be cancelled at any time — write to us and we refund the full amount;</li>
+          <li>before the subscription is switched on, an order can be cancelled at any time — we refund the full amount;</li>
           <li>
-            after the subscription is switched on, the paid period is not refunded, except in the cases provided for by law — the same rule as for an
-            App Store subscription;
+            after it is switched on you may withdraw at any time: we refund the price of the unused full days of the period, less our documented actual
+            costs (clause 7.2 of the <a href={subscriptionPath(lang, '/offer')}>offer</a>);
           </li>
           <li>
-            if the subscription did not work through our fault, we refund the period during which the features were unavailable, or extend the
-            subscription — your choice;
+            we refund in full if the subscription was not switched on, if a charge was mistaken or duplicated, or if the service did not work through our
+            fault (clause 7.3 of the offer);
           </li>
-          <li>a mistaken or duplicate charge is refunded in full.</li>
+          <li>consumers in the EU, EEA and UK also have a 14-day right of withdrawal (Annex 1 to the offer).</li>
         </ul>
         <p>
-          To request a refund, write to {email} from the address used for the order and state the date and amount of the payment. For operations made in
-          error, attach the receipt or confirmation showing the wrong charge. Cash refunds are not made for card payments.
+          To request a refund, write to {email} from the account’s e-mail address and state the order number, date and amount of the payment. For operations
+          made in error, attach the receipt or confirmation showing the wrong charge. Cash refunds are not made for card payments.
         </p>
         <p>
-          We process a refund within 7 calendar days of the request. The time until the money reaches the card depends on the issuing bank and is
-          usually up to 7 calendar days.
+          We make the refund within 7 days of receiving the request (for consumers in Russia — within 10 days at the latest). The time until the money
+          reaches the card depends on the issuing bank.
         </p>
 
         <h2>Payment confirmation document</h2>
@@ -135,7 +181,7 @@ export function PaymentTerms({ lang }: { lang: Lang }) {
   }
 
   return (
-    <DocumentPage lang={lang} page="/payment" title={paymentTermsTitle.ru} updated={paymentTermsUpdated.ru}>
+    <DocumentPage lang={lang} page="/payment" title={paymentTermsTitle.ru} updated={editionLabel('payment', lang)}>
       <h2>Что вы покупаете</h2>
       <p>
         Подписка Yorix — доступ к платным функциям приложения Yorix для iPhone и iPad на выбранный срок: персональный прогноз сна, ИИ-коуч по сну,
@@ -143,6 +189,17 @@ export function PaymentTerms({ lang }: { lang: Lang }) {
       </p>
       {planList}
       <p>Цены указаны в белорусских рублях. Платёж разовый, автоматического продления нет.</p>
+
+      <h2>Цены для разных регионов</h2>
+      <p>
+        Цена зависит от региона покупателя, который сайт определяет по стране подключения и языку браузера. Цена договора — сумма в белорусских рублях,
+        которая списывается с карты; цена в местной валюте в скобках справочная, а сумму в валюте карты определяет банк, выпустивший карту.
+      </p>
+      {priceTable}
+      <p>
+        Цены для Беларуси, России и других стран — льготы для категорий потребителей по месту нахождения, установленные решением продавца от
+        18 сентября 2026 г. (п. 2 ст. 396 Гражданского кодекса Республики Беларусь). Цена фиксируется в момент оплаты.
+      </p>
 
       <h2>Процедура оформления заказа</h2>
       <ol>
@@ -209,23 +266,23 @@ export function PaymentTerms({ lang }: { lang: Lang }) {
           произведена оплата.
         </p>
       </blockquote>
-      <p>Автопродления нет: после оплаты списаний не будет, и отменять ничего не нужно. Оплаченный срок действует до конца.</p>
+      <p>Автопродления нет: карта не сохраняется, после оплаты списаний не будет, и отменять ничего не нужно.</p>
       <ul>
-        <li>до включения подписки заказ можно отменить в любой момент: напишите нам, и мы вернём всю сумму;</li>
+        <li>до включения подписки заказ можно отменить в любой момент — вернём всю сумму;</li>
         <li>
-          после включения подписки оплаченный срок не возвращается, за исключением случаев, предусмотренных законодательством, — так же, как при
-          подписке в App Store;
+          после включения от подписки можно отказаться в любой момент: вернём стоимость неиспользованных полных суток срока за вычетом подтверждённых
+          фактических расходов (п. 7.2 <a href={subscriptionPath(lang, '/offer')}>оферты</a>);
         </li>
-        <li>если подписка не работала по нашей вине, вернём стоимость периода, когда функции были недоступны, или продлим срок — на ваш выбор;</li>
-        <li>ошибочное или повторное списание возвращаем полностью.</li>
+        <li>полностью возвращаем, если подписка не была включена, списание было ошибочным или повторным либо услуга не работала по нашей вине (п. 7.3 оферты);</li>
+        <li>у потребителей из ЕС, ЕЭЗ и Великобритании есть также 14-дневное право отказа (Приложение 1 к оферте).</li>
       </ul>
       <p>
-        Для возврата напишите на {email} с того адреса, с которого оформляли заказ, и укажите дату и сумму оплаты. По операциям, проведённым с
+        Для возврата напишите на {email} с адреса электронной почты аккаунта и укажите номер заказа, дату и сумму оплаты. По операциям, проведённым с
         ошибками, приложите чек или подтверждение, показывающее ошибочное списание. Возврат наличными при оплате картой не производится.
       </p>
       <p>
-        Мы оформляем возврат в течение 7 календарных дней после обращения. Срок поступления денег на карту зависит от банка, выпустившего карту, и
-        обычно составляет до 7 календарных дней.
+        Мы возвращаем деньги в течение 7 дней после получения заявления (потребителям из России — не позднее 10 дней). Срок поступления денег на карту
+        зависит от банка, выпустившего карту.
       </p>
 
       <h2>Документ, подтверждающий оплату</h2>

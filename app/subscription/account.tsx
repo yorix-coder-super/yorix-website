@@ -2,11 +2,13 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import type { Auth, User as FirebaseUser } from 'firebase/auth';
+import { AppleGlyph } from '../home/art';
 import { API_BASE, firebaseConfig, isFirebaseConfigured } from './config';
 import { subscriptionCopy, type SubscriptionCopy } from './copy';
 import { currencyForVisitor, formatMoney, type Currency } from './currency';
 import { formatDate, subscriptionPath, type Lang } from './i18n';
 import { charges, formatByn, mailtoOrder, merchant, planCopy, plans, prices, type Plan } from './merchant';
+import { legalVersion } from './legal/versions';
 import { Money } from './Money';
 import { Button, Spinner } from './ui';
 
@@ -15,6 +17,9 @@ type CheckoutMode = 'off' | 'test' | 'prod';
 type WebConfig = { checkoutMode: CheckoutMode; plans: { id: string; days: number; priceByn: number }[] };
 type Me = { premiumUntil: string | null; blocked: boolean };
 type Account = { uid: string; email: string | null; provider: string };
+// What the buyer ticked before paying, with the document editions they saw —
+// sent with the order so the acceptance can be proven later.
+type Terms = { offer: string; payment: string; privacy: string; immediateStart?: true };
 type ErrorKey = keyof SubscriptionCopy['checkout'] | 'popupBlocked' | 'signInError';
 
 type State = {
@@ -26,7 +31,9 @@ type State = {
   busy: 'signin' | 'order' | 'redirect' | null;
   error: ErrorKey | null;
   errorOrigin: string | null;
+  termsPlan: Plan | null;
   requestPlan: Plan | null;
+  requestTerms: Terms | null;
 };
 
 type Api = State & {
@@ -35,10 +42,11 @@ type Api = State & {
   currency: Currency;
   signIn: (provider: Provider, origin?: string) => Promise<Account | null>;
   signOut: () => Promise<void>;
-  createOrder: (planId: string) => Promise<boolean>;
+  createOrder: (planId: string, terms: Terms) => Promise<boolean>;
   getToken: () => Promise<string | null>;
   clearError: () => void;
-  openRequest: (plan: Plan | null) => void;
+  openTerms: (plan: Plan | null) => void;
+  openRequest: (plan: Plan | null, terms?: Terms) => void;
 };
 
 const Ctx = createContext<Api | null>(null);
@@ -94,7 +102,9 @@ export function AccountProvider({ lang, country, acceptLanguage, children }: { l
     busy: null,
     error: null,
     errorOrigin: null,
+    termsPlan: null,
     requestPlan: null,
+    requestTerms: null,
   });
   const currency = currencyForVisitor(country, acceptLanguage);
 
@@ -181,7 +191,7 @@ export function AccountProvider({ lang, country, acceptLanguage, children }: { l
 
   const checkoutMode = state.config?.checkoutMode;
   const createOrder = useCallback(
-    async (planId: string) => {
+    async (planId: string, terms: Terms) => {
       const token = await getToken();
       if (!token) return false;
       setState((s) => ({ ...s, busy: 'order', error: null, errorOrigin: null }));
@@ -189,7 +199,7 @@ export function AccountProvider({ lang, country, acceptLanguage, children }: { l
         const res = await fetch(`${API_BASE}/v1/web/orders`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'X-Firebase-Token': token },
-          body: JSON.stringify({ planId, lang }),
+          body: JSON.stringify({ planId, lang, terms }),
         });
         const body = (await res.json().catch(() => ({}))) as { redirectUrl?: string; error?: string };
         if (res.ok && body.redirectUrl && /^https:\/\/(securesandbox|payment)\.webpay\.by\//.test(body.redirectUrl)) {
@@ -207,11 +217,16 @@ export function AccountProvider({ lang, country, acceptLanguage, children }: { l
   );
 
   const clearError = useCallback(() => setState((s) => ({ ...s, error: null, errorOrigin: null })), []);
-  const openRequest = useCallback((plan: Plan | null) => setState((s) => ({ ...s, requestPlan: plan, error: null, errorOrigin: null })), []);
+  const openTerms = useCallback((plan: Plan | null) => setState((s) => ({ ...s, termsPlan: plan, error: null, errorOrigin: null })), []);
+  const openRequest = useCallback(
+    (plan: Plan | null, terms?: Terms) =>
+      setState((s) => ({ ...s, termsPlan: null, requestPlan: plan, requestTerms: plan ? (terms ?? s.requestTerms) : null, error: null, errorOrigin: null })),
+    [],
+  );
 
   const api = useMemo<Api>(
-    () => ({ ...state, lang, copy, currency, signIn, signOut, createOrder, getToken, clearError, openRequest }),
-    [state, lang, copy, currency, signIn, signOut, createOrder, getToken, clearError, openRequest],
+    () => ({ ...state, lang, copy, currency, signIn, signOut, createOrder, getToken, clearError, openTerms, openRequest }),
+    [state, lang, copy, currency, signIn, signOut, createOrder, getToken, clearError, openTerms, openRequest],
   );
 
   return <Ctx.Provider value={api}>{children}</Ctx.Provider>;
@@ -262,73 +277,30 @@ export function AccountLine({ className = '' }: { className?: string }) {
 
 const planIcon = { week: 'icon-moon-crescent', month: 'icon-moon-full', year: 'icon-sun' } as const;
 
+// Centres a dialog but never wider than the screen (a minmax(0) track, so a
+// long button label cannot stretch it) and, when taller than the screen,
+// scrolls from its top instead of cutting it off.
+const dialogFrame = 'pointer-events-none relative grid min-h-full grid-cols-[minmax(0,1fr)] place-items-center p-4';
+
 export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) {
-  const { ready, configured, config, user, me, busy, error, errorOrigin, copy, lang, currency, signIn, createOrder, openRequest } = useAccount();
+  const { me, copy, lang, currency, openTerms } = useAccount();
   const text = planCopy[lang][plan.id];
   const amount = prices[plan.id][currency];
   const price = formatMoney(amount, currency, lang);
   const perWeek = formatMoney((amount / plan.days) * 7, currency, lang);
   const base = formatMoney(prices.week[currency], currency, lang);
-  const live = configured && (config?.checkoutMode ?? 'off') !== 'off';
   const active = Boolean(me?.premiumUntil && new Date(me.premiumUntil) > new Date());
-  // The button narrates its own funnel: sign-in → order → WebPay.
-  const [stage, setStage] = useState<'idle' | 'signin' | 'order' | 'redirect'>('idle');
-
-  // Every plan starts with Sign in with Apple: the subscription is credited to
-  // that account. With the live checkout the order goes on to WebPay; without
-  // it the request form opens already carrying the account's e-mail and code.
-  const choose = async () => {
-    if (stage !== 'idle' || busy !== null) return;
-    if (!configured) {
-      openRequest(plan);
-      return;
-    }
-    if (user && !live) {
-      openRequest(plan);
-      return;
-    }
-    setStage(user ? 'order' : 'signin');
-    try {
-      const account = user ?? (await signIn('apple.com', plan.id));
-      if (!account) {
-        setStage('idle');
-        return;
-      }
-      if (!live) {
-        setStage('idle');
-        openRequest(plan);
-        return;
-      }
-      setStage('order');
-      const redirecting = await createOrder(plan.id);
-      setStage(redirecting ? 'redirect' : 'idle');
-    } catch {
-      setStage('idle');
-    }
-  };
 
   const variant = featured ? 'dark' : 'light';
   const muted = featured ? 'text-[#1E1B4B]/65' : 'text-white/65';
   const strong = featured ? 'text-[#1E1B4B]' : 'text-white';
-  const label =
-    stage === 'signin' ? copy.checkout.signingIn
-    : stage === 'order' ? copy.checkout.creating
-    : stage === 'redirect' ? copy.checkout.redirecting
-    : active ? copy.plans.extend(text.forPeriod)
-    : copy.plans.subscribe(text.forPeriod);
-  const showError = stage !== 'idle' || errorOrigin !== plan.id ? null : error;
-  const message =
-    showError === 'popupBlocked' || showError === 'signInError' ? copy.account[showError]
-    : showError === 'blocked' ? copy.checkout.blocked(merchant.email)
-    : showError ? copy.checkout[showError]
-    : null;
-  const offerRequest = showError === 'unavailable' || showError === 'testOnly' || showError === 'error';
+  const label = active ? copy.plans.extend(text.forPeriod) : copy.plans.subscribe(text.forPeriod);
 
   return (
     <article
       className={`spotlight relative flex w-full min-w-0 flex-col rounded-[1.75rem] border p-6 transition hover:-translate-y-1 ${
         featured
-          ? 'spotlight-dark order-first border-[#FDE68A]/60 bg-[#EEF2FF] text-[#1E1B4B] shadow-[0_28px_80px_rgb(99_102_241/30%)] md:order-none'
+          ? 'spotlight-dark order-first border-[#FDE68A]/60 bg-[#EEF2FF] text-[#1E1B4B] shadow-[0_28px_80px_rgb(99_102_241/30%)] lg:order-none'
           : 'border-white/20 bg-white/[0.12] backdrop-blur-xl hover:border-white/35'
       }`}
     >
@@ -350,29 +322,9 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
         <Money text={plan.id === 'week' ? '\u00A0' : copy.plans.perWeek(perWeek, base)} />
       </p>
       <div className="mt-auto pt-6">
-        <Button
-          aria-busy={stage !== 'idle'}
-          className={`w-full ${stage !== 'idle' ? 'cursor-wait' : ''}`}
-          disabled={configured && !ready}
-          onClick={() => void choose()}
-          variant={variant}
-        >
-          {stage !== 'idle' ? <Spinner /> : null}
+        <Button className="w-full text-center leading-5 whitespace-normal!" onClick={() => openTerms(plan)} variant={variant}>
           {label}
         </Button>
-        {message ? (
-          <p className={`mt-3 text-sm leading-5 ${featured ? 'text-[#B45309]' : 'text-[#FCA5A5]'}`} role="alert">
-            {message}
-            {offerRequest ? (
-              <>
-                {' '}
-                <button className="font-semibold underline" onClick={() => openRequest(plan)} type="button">
-                  {copy.checkout.request}
-                </button>
-              </>
-            ) : null}
-          </p>
-        ) : null}
       </div>
     </article>
   );
@@ -399,11 +351,265 @@ export function ChargeNote({ className = '' }: { className?: string }) {
   );
 }
 
+// The step between a plan and the bank: what is being bought, for how much and
+// on which account, then the acceptance box (never pre-ticked). Buyers in
+// Europe also ask for the service to start at once — without that request
+// an EU consumer could withdraw within 14 days and owe nothing. Sign-in and
+// the order both start from this dialog's button, inside the click, so
+// Safari keeps the Apple window.
+function TermsDialog() {
+  const { termsPlan, openTerms, openRequest, user, me, ready, configured, config, currency, lang, copy, busy, error, errorOrigin, signIn, createOrder, clearError } = useAccount();
+  const [accepted, setAccepted] = useState(false);
+  const [immediate, setImmediate] = useState(false);
+  const [missing, setMissing] = useState<'accept' | 'immediate' | null>(null);
+  const [stage, setStage] = useState<'idle' | 'signin' | 'order' | 'redirect'>('idle');
+  const acceptRef = useRef<HTMLInputElement>(null);
+  const immediateRef = useRef<HTMLInputElement>(null);
+  const open = termsPlan !== null;
+  const openedFor = termsPlan?.id ?? null;
+
+  useEffect(() => {
+    if (!open) return;
+    const frame = requestAnimationFrame(() => {
+      setAccepted(false);
+      setImmediate(false);
+      setMissing(null);
+      setStage('idle');
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [open, openedFor]);
+
+  const closable = stage === 'idle';
+  useEffect(() => {
+    if (!open || !closable) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') openTerms(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open, closable, openTerms]);
+
+  if (!termsPlan) return null;
+  const plan = termsPlan;
+  const text = planCopy[lang][plan.id];
+  const europe = currency === 'EUR';
+  const live = configured && (config?.checkoutMode ?? 'off') !== 'off';
+  const price = formatMoney(prices[plan.id][currency], currency, lang);
+  const charge = currency === 'BYN' ? null : formatMoney(charges[plan.id][currency], 'BYN', lang);
+  const active = Boolean(me?.premiumUntil && new Date(me.premiumUntil) > new Date());
+  const terms: Terms = { offer: legalVersion.offer, payment: legalVersion.payment, privacy: legalVersion.privacy, ...(europe ? { immediateStart: true as const } : {}) };
+
+  const close = () => {
+    if (!closable) return;
+    clearError();
+    openTerms(null);
+  };
+
+  const proceed = async () => {
+    if (stage !== 'idle' || busy !== null) return;
+    if (!accepted) {
+      setMissing('accept');
+      acceptRef.current?.focus();
+      return;
+    }
+    if (europe && !immediate) {
+      setMissing('immediate');
+      immediateRef.current?.focus();
+      return;
+    }
+    setMissing(null);
+    if (!configured) {
+      openRequest(plan, terms);
+      return;
+    }
+    let account = user;
+    if (!account) {
+      setStage('signin');
+      account = await signIn('apple.com', 'terms');
+      if (!account) {
+        setStage('idle');
+        return;
+      }
+    }
+    if (!live) {
+      setStage('idle');
+      openRequest(plan, terms);
+      return;
+    }
+    setStage('order');
+    const redirecting = await createOrder(plan.id, terms);
+    setStage(redirecting ? 'redirect' : 'idle');
+  };
+
+  const shownError = stage !== 'idle' || (errorOrigin !== 'terms' && errorOrigin !== plan.id) ? null : error;
+  const message =
+    shownError === 'popupBlocked' || shownError === 'signInError' ? copy.account[shownError]
+    : shownError === 'blocked' ? copy.checkout.blocked(merchant.email)
+    : shownError ? copy.checkout[shownError]
+    : null;
+  const offerRequest = shownError === 'unavailable' || shownError === 'testOnly' || shownError === 'error';
+  const label =
+    stage === 'signin' ? copy.checkout.signingIn
+    : stage === 'order' ? copy.checkout.creating
+    : stage === 'redirect' ? copy.checkout.redirecting
+    : !configured ? copy.terms.next
+    : !user ? copy.terms.withApple
+    : live ? copy.terms.pay(price)
+    : copy.terms.next;
+  const box = 'mt-0.5 h-5 w-5 shrink-0 cursor-pointer rounded accent-[#A78BFA]';
+  const link = 'font-semibold text-white underline decoration-white/40 underline-offset-2 hover:decoration-white';
+
+  return (
+    <div className="fixed inset-0 z-[100] overflow-y-auto">
+      <button aria-label={copy.terms.cancel} className="fixed inset-0 bg-[#0B0B1E]/70 backdrop-blur-sm" onClick={close} type="button" />
+      <div className={dialogFrame}>
+      <dialog
+        aria-labelledby="terms-title"
+        className="pointer-events-auto relative z-10 m-0 w-full max-w-lg rounded-[1.75rem] border border-white/15 bg-[#1E1B4B] p-6 text-white shadow-[0_40px_120px_rgb(0_0_0/50%)] sm:p-7"
+        open
+      >
+        <p className="text-2xl font-semibold" id="terms-title">
+          {copy.terms.title(text.forPeriod)}
+        </p>
+        <dl className="mt-5 grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-2 rounded-2xl border border-white/10 bg-white/[0.05] p-4 text-sm">
+          <dt className="text-white/60">{copy.terms.period}</dt>
+          <dd className="font-medium">{copy.terms.days(text.days)}</dd>
+          <dt className="text-white/60">{copy.terms.price}</dt>
+          <dd className="font-medium">
+            <Money text={price} />
+            {charge ? (
+              <span className="font-normal text-white/60">
+                {' '}
+                (<Money text={copy.terms.charge(charge)} />)
+              </span>
+            ) : null}
+          </dd>
+        </dl>
+        <ul className="mt-4 grid gap-1.5 text-sm leading-6 text-white/75">
+          <li>{copy.terms.oneOff}</li>
+          <li>
+            {user
+              ? active && me?.premiumUntil
+                ? copy.plans.activeUntil(user.email ?? user.uid, formatDate(me.premiumUntil, lang))
+                : copy.terms.goesTo(user.email ?? user.uid)
+              : copy.terms.signInNote}
+          </li>
+        </ul>
+
+        <label className="mt-5 flex cursor-pointer items-start gap-3 text-sm leading-6">
+          <input
+            aria-describedby={missing === 'accept' ? 'terms-missing' : undefined}
+            aria-invalid={missing === 'accept'}
+            checked={accepted}
+            className={box}
+            onChange={(e) => {
+              setAccepted(e.target.checked);
+              if (e.target.checked && missing === 'accept') setMissing(null);
+            }}
+            ref={acceptRef}
+            type="checkbox"
+          />
+          <span>
+            {copy.terms.accept[0]}
+            <a className={link} href={subscriptionPath(lang, '/offer')} rel="noopener" target="_blank">
+              {copy.terms.accept[1]}
+            </a>
+            {copy.terms.accept[2]}
+            <a className={link} href={subscriptionPath(lang, '/payment')} rel="noopener" target="_blank">
+              {copy.terms.accept[3]}
+            </a>
+            {copy.terms.accept[4]}
+          </span>
+        </label>
+        {europe ? (
+          <label className="mt-3 flex cursor-pointer items-start gap-3 text-sm leading-6">
+            <input
+              aria-describedby={missing === 'immediate' ? 'terms-missing' : undefined}
+              aria-invalid={missing === 'immediate'}
+              checked={immediate}
+              className={box}
+              onChange={(e) => {
+                setImmediate(e.target.checked);
+                if (e.target.checked && missing === 'immediate') setMissing(null);
+              }}
+              ref={immediateRef}
+              type="checkbox"
+            />
+            <span>{copy.terms.immediate}</span>
+          </label>
+        ) : null}
+        {missing ? (
+          <p className="mt-3 text-sm leading-5 text-[#FCA5A5]" id="terms-missing" role="alert">
+            {missing === 'accept' ? copy.terms.required : copy.terms.requiredImmediate}
+          </p>
+        ) : null}
+        <p className="mt-4 text-xs leading-5 text-white/55">
+          {copy.terms.privacy[0]}
+          <a className="underline hover:text-white" href={subscriptionPath(lang, '/privacy')} rel="noopener" target="_blank">
+            {copy.terms.privacy[1]}
+          </a>
+          {copy.terms.privacy[2]}
+        </p>
+
+        {message ? (
+          <p className="mt-4 text-sm leading-5 text-[#FCA5A5]" role="alert">
+            {message}
+            {offerRequest ? (
+              <>
+                {' '}
+                <button className="font-semibold underline" onClick={() => openRequest(plan, terms)} type="button">
+                  {copy.checkout.request}
+                </button>
+              </>
+            ) : null}
+          </p>
+        ) : null}
+
+        <div className="mt-6 flex flex-col gap-2 sm:flex-row">
+          <Button
+            aria-busy={stage !== 'idle'}
+            className={`flex-1 text-center leading-5 whitespace-normal! ${stage !== 'idle' ? 'cursor-wait' : ''}`}
+            disabled={configured && !ready}
+            onClick={() => void proceed()}
+            variant="light"
+          >
+            {stage !== 'idle' ? <Spinner /> : !user && configured ? <AppleGlyph className="h-4 w-4 shrink-0" /> : null}
+            {label}
+          </Button>
+          <Button disabled={!closable} onClick={close} variant="ghost">
+            {copy.terms.cancel}
+          </Button>
+        </div>
+        {configured && !user && stage === 'idle' ? (
+          <button
+            className="mt-3 w-full text-center text-sm text-white/65 underline decoration-white/30 underline-offset-2 hover:text-white disabled:opacity-60"
+            disabled={!ready || busy !== null}
+            onClick={() => void signIn('google.com', 'terms')}
+            type="button"
+          >
+            {copy.terms.google}
+          </button>
+        ) : null}
+      </dialog>
+      </div>
+    </div>
+  );
+}
+
 // The fallback funnel step: a request instead of a mailto. The plan comes
 // pre-selected, the account code is optional, and the owner answers with a
 // payment link. If the worker is unreachable the form falls back to e-mail.
 export function RequestForm() {
-  const { requestPlan, openRequest, user, copy, lang, currency } = useAccount();
+  return (
+    <>
+      <TermsDialog />
+      <RequestDialog />
+    </>
+  );
+}
+
+function RequestDialog() {
+  const { requestPlan, requestTerms, openRequest, user, copy, lang, currency } = useAccount();
   const [planId, setPlanId] = useState<Plan['id']>('year');
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
@@ -443,7 +649,14 @@ export function RequestForm() {
       const res = await fetch(`${API_BASE}/v1/web/requests`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ planId, email: email.trim(), accountCode: code.trim() || undefined, lang, website: typeof honeypot === 'string' ? honeypot : '' }),
+        body: JSON.stringify({
+          planId,
+          email: email.trim(),
+          accountCode: code.trim() || undefined,
+          lang,
+          terms: requestTerms ?? undefined,
+          website: typeof honeypot === 'string' ? honeypot : '',
+        }),
       });
       setStatus(res.status === 429 ? 'rate_limited' : res.ok ? 'sent' : 'error');
     } catch {
@@ -454,9 +667,10 @@ export function RequestForm() {
   const field = 'mt-1.5 w-full rounded-xl border border-white/15 bg-white/10 px-3 py-2.5 text-base text-white outline-none placeholder:text-white/35 focus:ring-4 focus:ring-white/20';
 
   return (
-    <div className="fixed inset-0 z-[100] grid place-items-center p-4">
-      <button aria-label={copy.request.cancel} className="absolute inset-0 bg-[#0B0B1E]/70 backdrop-blur-sm" onClick={() => openRequest(null)} type="button" />
-      <dialog aria-labelledby="request-title" className="relative z-10 m-0 w-full max-w-md rounded-[1.75rem] border border-white/15 bg-[#1E1B4B] p-6 text-white shadow-[0_40px_120px_rgb(0_0_0/50%)]" open>
+    <div className="fixed inset-0 z-[100] overflow-y-auto">
+      <button aria-label={copy.request.cancel} className="fixed inset-0 bg-[#0B0B1E]/70 backdrop-blur-sm" onClick={() => openRequest(null)} type="button" />
+      <div className={dialogFrame}>
+      <dialog aria-labelledby="request-title" className="pointer-events-auto relative z-10 m-0 w-full max-w-md rounded-[1.75rem] border border-white/15 bg-[#1E1B4B] p-6 text-white shadow-[0_40px_120px_rgb(0_0_0/50%)]" open>
         {status === 'sent' ? (
           <>
             <p className="text-2xl font-semibold" id="request-title">{copy.request.sentTitle}</p>
@@ -523,6 +737,7 @@ export function RequestForm() {
           </form>
         )}
       </dialog>
+      </div>
     </div>
   );
 }
