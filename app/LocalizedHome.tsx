@@ -15,15 +15,15 @@ import {
 import { getLocalizedTopicPage, isTranslatedArticleSlug } from './article-localizations';
 import { BrandLogo } from './BrandLogo';
 import { headers } from 'next/headers';
-import { HeaderMenus } from './premium/HeaderMenus';
-import { premiumPath } from './premium/i18n';
-import { Magnetic } from './premium/Magnetic';
-import { WordReveal } from './premium/WordReveal';
-import { HomePremiumSection } from './premium/HomePremiumSection';
-import { premiumCopy } from './premium/copy';
-import { Parallax } from './premium/Parallax';
-import { Reveal } from './premium/Reveal';
-import { StarField } from './premium/StarField';
+import { HeaderMenus } from './subscription/HeaderMenus';
+import { subscriptionPath } from './subscription/i18n';
+import { Magnetic } from './subscription/Magnetic';
+import { WordReveal } from './subscription/WordReveal';
+import { HomeSubscriptionSection } from './subscription/HomeSubscriptionSection';
+import { subscriptionCopy } from './subscription/copy';
+import { Parallax } from './subscription/Parallax';
+import { Reveal } from './subscription/Reveal';
+import { StarField } from './subscription/StarField';
 import { SellerFooter } from './SellerFooter';
 import { appDownloadUrl, topicPages } from './content';
 import { localeCopy, locales, type Locale } from './locales';
@@ -39,7 +39,7 @@ const proofIcons = [Moon, MessageCircle, ShieldCheck];
 
 export async function LocalizedHome({ locale }: { locale: Locale }) {
   const copy = localeCopy[locale];
-  const premiumLang = locale === 'ru' ? 'ru' : 'en';
+  const subscriptionLang = locale === 'ru' ? 'ru' : 'en';
   const country = (await headers()).get('cf-ipcountry');
   const languages = [{ code: 'en', label: 'English', href: '/' }, ...locales.map((item) => ({ code: item, label: localeCopy[item].nativeName, href: `/${item}` }))];
   const guidePages = topicPages.slice(0, 6);
@@ -60,11 +60,11 @@ export async function LocalizedHome({ locale }: { locale: Locale }) {
           <a className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white" href="#plan">{copy.nav.plan}</a>
           <a className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white" href="#features">{copy.nav.features}</a>
           <a className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white" href={`/${locale}/guides`}>{copy.nav.guides}</a>
-          <a className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white" href={premiumPath(premiumLang)}>{premiumCopy[premiumLang].home.nav}</a>
+          <a className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white" href={subscriptionPath(subscriptionLang)}>{subscriptionCopy[subscriptionLang].home.nav}</a>
           <a className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white" href="#faq">{copy.nav.faq}</a>
         </nav>
         <div className="flex items-center gap-2">
-          <HeaderMenus country={country} current={locale.toUpperCase()} lang={premiumLang} languages={languages} />
+          <HeaderMenus country={country} current={locale.toUpperCase()} lang={subscriptionLang} languages={languages} />
           <a className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-[#1E1B4B] shadow-[0_18px_45px_rgb(255_255_255/18%)] transition hover:bg-[#EEF2FF] sm:px-5" href={appDownloadUrl} rel="noopener noreferrer" target="_blank">
             <span className="hidden lg:inline">{copy.nav.download}</span><ArrowRight className="h-4 w-4" aria-hidden="true" />
           </a>
@@ -109,12 +109,12 @@ export async function LocalizedHome({ locale }: { locale: Locale }) {
 
       <section id="guides" className="border-y border-white/10 bg-[#0F1022]"><div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10"><Reveal><div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end"><div><p className="mb-3 text-sm font-semibold uppercase text-[#A78BFA]">{copy.guides.eyebrow}</p><h2 className="max-w-2xl text-4xl font-semibold leading-tight text-white sm:text-5xl">{copy.guides.title}</h2><p className="mt-4 max-w-2xl text-base leading-7 text-white/60">{copy.guides.body}</p></div><a className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-white px-6 text-base font-semibold text-[#1E1B4B] transition hover:bg-[#EEF2FF]" href={`/${locale}/guides`}>{copy.guides.action}<ArrowRight className="h-5 w-5" aria-hidden="true" /></a></div></Reveal><div className="mt-9 grid gap-4 md:grid-cols-2 lg:grid-cols-3">{guidePages.map((page, index) => { const translated = isTranslatedArticleSlug(page.slug) ? getLocalizedTopicPage(locale, page.slug) : undefined; return <Reveal className="flex" delay={index * 80} key={page.slug}><a className="w-full spotlight rounded-lg border border-white/10 bg-white/10 p-5 transition hover:-translate-y-1 hover:border-white/25 hover:bg-white/15" href={guideHref(page.slug)}><p className="text-sm font-semibold text-[#C7D2FE]">{translated?.category ?? page.category} · {translated?.readTime ?? page.readTime}</p><h3 className="mt-4 text-xl font-semibold leading-tight text-white">{translated?.title ?? copy.guides.articles[index].title}</h3><p className="mt-3 text-sm leading-6 text-white/60">{translated?.description ?? copy.guides.articles[index].body}</p></a></Reveal>; })}</div></div></section>
 
-      <HomePremiumSection lang={premiumLang} />
+      <HomeSubscriptionSection lang={subscriptionLang} />
 
       <section id="faq" className="mx-auto max-w-5xl px-5 py-16 sm:px-8"><Reveal><p className="mb-3 text-center text-sm font-semibold uppercase text-[#A78BFA]">{copy.faq.eyebrow}</p><h2 className="text-center text-4xl font-semibold text-white sm:text-5xl">{copy.faq.title}</h2></Reveal><div className="mt-8 grid gap-4">{copy.faq.items.map((item, index) => <Reveal animation="fadeIn" delay={index * 90} key={item.question}><article className="spotlight rounded-lg border border-white/10 bg-white/10 p-6 backdrop-blur-xl"><h3 className="text-xl font-semibold text-white">{item.question}</h3><p className="mt-3 text-base leading-7 text-white/65">{item.answer}</p></article></Reveal>)}</div></section>
 
       <section className="mx-auto max-w-7xl px-5 pb-16 sm:px-8 lg:px-10"><Reveal animation="zoomIn"><div className="grid gap-8 overflow-hidden rounded-[2rem] border border-white/10 bg-[#EEF2FF] p-6 text-[#1E1B4B] shadow-[0_28px_90px_rgb(0_0_0/22%)] md:grid-cols-[1fr_260px] md:items-center md:p-9"><div><p className="mb-3 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#6366F1]"><Users className="h-4 w-4" aria-hidden="true" />{copy.cta.badge}</p><h2 className="max-w-3xl text-4xl font-semibold leading-tight sm:text-5xl">{copy.cta.title}</h2><p className="mt-4 max-w-2xl text-lg leading-8 text-[#64748B]">{copy.cta.body}</p></div><a className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-full bg-[#6366F1] px-7 text-base font-semibold text-white shadow-[0_18px_42px_rgb(99_102_241/30%)] transition hover:bg-[#4F46E5]" href={appDownloadUrl} rel="noopener noreferrer" target="_blank">{copy.cta.action}<ArrowRight className="h-5 w-5" aria-hidden="true" /></a></div></Reveal></section>
-      <SellerFooter lang={premiumLang} note={copy.footer} />
+      <SellerFooter lang={subscriptionLang} note={copy.footer} />
       </div>
     </main>
   );

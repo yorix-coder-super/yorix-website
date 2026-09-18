@@ -14,14 +14,14 @@ import {
 } from 'lucide-react';
 import { headers } from 'next/headers';
 import { BrandLogo } from './BrandLogo';
-import { HeaderMenus } from './premium/HeaderMenus';
-import { Magnetic } from './premium/Magnetic';
-import { WordReveal } from './premium/WordReveal';
-import { HomePremiumSection } from './premium/HomePremiumSection';
-import { testimonials } from './premium/testimonials';
-import { Parallax } from './premium/Parallax';
-import { Reveal } from './premium/Reveal';
-import { StarField } from './premium/StarField';
+import { HeaderMenus } from './subscription/HeaderMenus';
+import { Magnetic } from './subscription/Magnetic';
+import { WordReveal } from './subscription/WordReveal';
+import { HomeSubscriptionSection } from './subscription/HomeSubscriptionSection';
+import { testimonials } from './subscription/testimonials';
+import { Parallax } from './subscription/Parallax';
+import { Reveal } from './subscription/Reveal';
+import { StarField } from './subscription/StarField';
 import { SellerFooter } from './SellerFooter';
 import { appDownloadUrl, topicPages } from './content';
 import { localeCopy, locales } from './locales';
@@ -204,7 +204,7 @@ export default async function Home() {
           </a>
           <a
             className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white"
-            href="/en/premium"
+            href="/en/subscription"
           >
             Subscription
           </a>
@@ -530,7 +530,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <HomePremiumSection lang="en" />
+      <HomeSubscriptionSection lang="en" />
 
       <section id="faq" className="mx-auto max-w-5xl px-5 py-16 sm:px-8">
         <Reveal>

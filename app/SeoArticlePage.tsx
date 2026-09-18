@@ -1,4 +1,4 @@
-import { ScrollProgress } from './premium/ScrollProgress';
+import { ScrollProgress } from './subscription/ScrollProgress';
 import {
   ArrowLeft,
   ArrowRight,

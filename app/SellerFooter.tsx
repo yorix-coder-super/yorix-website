@@ -1,10 +1,10 @@
 import { ArrowRight } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
-import { PaymentLogos } from './premium/PaymentLogos';
-import { premiumCopy } from './premium/copy';
-import { premiumPath, type Lang } from './premium/i18n';
-import { documentLinks } from './premium/PremiumShell';
-import { merchant } from './premium/merchant';
+import { PaymentLogos } from './subscription/PaymentLogos';
+import { subscriptionCopy } from './subscription/copy';
+import { subscriptionPath, type Lang } from './subscription/i18n';
+import { documentLinks } from './subscription/SubscriptionShell';
+import { merchant } from './subscription/merchant';
 
 const heading = 'text-xs font-semibold uppercase tracking-wide text-white/45';
 const link = 'text-white/70 transition hover:text-white';
@@ -15,8 +15,8 @@ const link = 'text-white/70 transition hover:text-white';
 // The seller's name and status stay in Russian (that is what the bank
 // reads); everything else follows the page language.
 export function SellerFooter({ note, lang = 'en' }: { note: string; lang?: Lang }) {
-  const copy = premiumCopy[lang];
-  const home = premiumPath(lang);
+  const copy = subscriptionCopy[lang];
+  const home = subscriptionPath(lang);
   const subscriptionLinks = [
     { href: `${home}#tarify`, label: copy.nav.plans },
     { href: `${home}#kak-kupit`, label: copy.nav.howToBuy },

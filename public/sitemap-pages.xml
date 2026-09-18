@@ -2209,49 +2209,49 @@
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://yorix.website/premium</loc>
+    <loc>https://yorix.website/podpiska</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yorix.website/premium/oplata</loc>
+    <loc>https://yorix.website/podpiska/oplata</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://yorix.website/premium/oferta</loc>
+    <loc>https://yorix.website/podpiska/oferta</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://yorix.website/premium/konfidencialnost</loc>
+    <loc>https://yorix.website/podpiska/konfidencialnost</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://yorix.website/en/premium</loc>
+    <loc>https://yorix.website/en/subscription</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yorix.website/en/premium/oplata</loc>
+    <loc>https://yorix.website/en/subscription/oplata</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://yorix.website/en/premium/oferta</loc>
+    <loc>https://yorix.website/en/subscription/oferta</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://yorix.website/en/premium/konfidencialnost</loc>
+    <loc>https://yorix.website/en/subscription/konfidencialnost</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>

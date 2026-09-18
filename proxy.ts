@@ -48,6 +48,16 @@ export function proxy(request: NextRequest) {
     return withSecurityHeaders(NextResponse.redirect(url, 308));
   }
 
+  // The subscription section was called «Premium» until 2026-09-18; the old
+  // links live in mails and the app store review notes.
+  const renamed = pathname.match(/^\/(en\/)?premium(\/.*)?$/);
+  if (renamed) {
+    const url = request.nextUrl.clone();
+    url.pathname = `${renamed[1] ? '/en/subscription' : '/podpiska'}${renamed[2] ?? ''}`;
+
+    return withSecurityHeaders(NextResponse.redirect(url, 308));
+  }
+
   return withSecurityHeaders(NextResponse.next());
 }
 

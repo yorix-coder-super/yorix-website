@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { siteUrl } from './content';
 import { localeAlternates } from './locales';
-import { Spotlight } from './premium/Spotlight';
+import { Spotlight } from './subscription/Spotlight';
 import { SmoothScroll } from './SmoothScroll';
 import './globals.css';
 
