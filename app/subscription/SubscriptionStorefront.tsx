@@ -20,11 +20,13 @@ const stepIcons = [UserRound, LockKeyhole, Smartphone];
 export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
   const copy = subscriptionCopy[lang];
   const week = plans[0];
-  const country = (await headers()).get('cf-ipcountry');
+  const requestHeaders = await headers();
+  const country = requestHeaders.get('cf-ipcountry');
+  const acceptLanguage = requestHeaders.get('accept-language');
 
   return (
     <SubscriptionShell lang={lang}>
-      <AccountProvider country={country} lang={lang}>
+      <AccountProvider acceptLanguage={acceptLanguage} country={country} lang={lang}>
         <RequestForm />
         <section className="relative">
           <div className="relative mx-auto grid w-full max-w-6xl items-center gap-10 px-5 pb-14 pt-6 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:pb-20">

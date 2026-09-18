@@ -12,11 +12,13 @@ import { Eyebrow, SectionTitle } from './ui';
 // to. The full page keeps the bank-facing texts and the legal documents.
 export async function HomeSubscriptionSection({ lang }: { lang: Lang }) {
   const copy = subscriptionCopy[lang];
-  const country = (await headers()).get('cf-ipcountry');
+  const requestHeaders = await headers();
+  const country = requestHeaders.get('cf-ipcountry');
+  const acceptLanguage = requestHeaders.get('accept-language');
 
   return (
     <section id="subscription" className="mx-auto max-w-7xl scroll-mt-6 px-5 py-16 sm:px-8 lg:px-10" lang={lang}>
-      <AccountProvider country={country} lang={lang}>
+      <AccountProvider acceptLanguage={acceptLanguage} country={country} lang={lang}>
         <RequestForm />
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
           <Reveal>

@@ -23,7 +23,9 @@ export async function SubscriptionShell({ lang, page = '', children }: { lang: L
   const copy = subscriptionCopy[lang];
   const home = subscriptionPath(lang);
   const siteHome = lang === 'ru' ? '/ru' : '/';
-  const country = (await headers()).get('cf-ipcountry');
+  const requestHeaders = await headers();
+  const country = requestHeaders.get('cf-ipcountry');
+  const acceptLanguage = requestHeaders.get('accept-language');
   const navItems = [
     { href: `${home}#plans`, label: copy.nav.plans },
     { href: `${home}#how-to-buy`, label: copy.nav.howToBuy },
@@ -54,6 +56,7 @@ export async function SubscriptionShell({ lang, page = '', children }: { lang: L
         </nav>
         <div className="flex items-center gap-2">
           <HeaderMenus
+            acceptLanguage={acceptLanguage}
             country={country}
             current={lang.toUpperCase()}
             lang={lang}

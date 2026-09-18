@@ -40,7 +40,9 @@ const proofIcons = [Moon, MessageCircle, ShieldCheck];
 export async function LocalizedHome({ locale }: { locale: Locale }) {
   const copy = localeCopy[locale];
   const subscriptionLang = locale === 'ru' ? 'ru' : 'en';
-  const country = (await headers()).get('cf-ipcountry');
+  const requestHeaders = await headers();
+  const country = requestHeaders.get('cf-ipcountry');
+  const acceptLanguage = requestHeaders.get('accept-language');
   const languages = [{ code: 'en', label: 'English', href: '/' }, ...locales.map((item) => ({ code: item, label: localeCopy[item].nativeName, href: `/${item}` }))];
   const guidePages = topicPages.slice(0, 6);
   const guideHref = (slug: string) =>
@@ -64,7 +66,7 @@ export async function LocalizedHome({ locale }: { locale: Locale }) {
           <a className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white" href="#faq">{copy.nav.faq}</a>
         </nav>
         <div className="flex items-center gap-2">
-          <HeaderMenus country={country} current={locale.toUpperCase()} lang={subscriptionLang} languages={languages} />
+          <HeaderMenus acceptLanguage={acceptLanguage} country={country} current={locale.toUpperCase()} lang={subscriptionLang} languages={languages} />
           <a className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-[#1E1B4B] shadow-[0_18px_45px_rgb(255_255_255/18%)] transition hover:bg-[#EEF2FF] sm:px-5" href={appDownloadUrl} rel="noopener noreferrer" target="_blank">
             <span className="hidden lg:inline">{copy.nav.download}</span><ArrowRight className="h-4 w-4" aria-hidden="true" />
           </a>

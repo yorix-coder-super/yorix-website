@@ -12,10 +12,18 @@ const EURO_COUNTRIES = new Set([
   'IS', 'LI', 'NO', 'CH', 'GB', 'UA', 'MD', 'RS', 'ME', 'MK', 'AL', 'BA', 'XK', 'AD', 'MC', 'SM', 'VA', 'GE', 'AM',
 ]);
 
-export function currencyForCountry(country: string | null | undefined): Currency {
+// Country first; when the connection comes from elsewhere (VPN exits are
+// common among Belarusian and Russian parents) the browser language decides:
+// a Russian-language browser is in the BYN/RUB market, and plain «ru» gets
+// the currency the card is actually charged in.
+export function currencyForVisitor(country: string | null | undefined, acceptLanguage?: string | null): Currency {
   const cc = (country ?? '').toUpperCase();
   if (cc === 'BY') return 'BYN';
   if (cc === 'RU') return 'RUB';
+  const langs = (acceptLanguage ?? '').toLowerCase();
+  if (/(^|,)\s*(ru-by|be)(-|;|,|$)/.test(langs)) return 'BYN';
+  if (/(^|,)\s*ru-ru(;|,|$)/.test(langs)) return 'RUB';
+  if (/(^|,)\s*ru(;|,|$)/.test(langs)) return 'BYN';
   if (EURO_COUNTRIES.has(cc)) return 'EUR';
   return 'USD';
 }

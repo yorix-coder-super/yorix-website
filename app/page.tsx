@@ -168,7 +168,9 @@ function PhoneShot({
 
 export default async function Home() {
   const featuredGuides = topicPages.slice(0, 6);
-  const country = (await headers()).get('cf-ipcountry');
+  const requestHeaders = await headers();
+  const country = requestHeaders.get('cf-ipcountry');
+  const acceptLanguage = requestHeaders.get('accept-language');
   const languages = [{ code: 'en', label: 'English', href: '/' }, ...locales.map((item) => ({ code: item, label: localeCopy[item].nativeName, href: `/${item}` }))];
 
   return (
@@ -216,7 +218,7 @@ export default async function Home() {
           </a>
         </nav>
         <div className="flex items-center gap-2">
-          <HeaderMenus country={country} current="EN" lang="en" languages={languages} />
+          <HeaderMenus acceptLanguage={acceptLanguage} country={country} current="EN" lang="en" languages={languages} />
           <a
             className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-[#1E1B4B] shadow-[0_18px_45px_rgb(255_255_255/18%)] transition hover:bg-[#EEF2FF] focus:outline-none focus:ring-4 focus:ring-white/25 sm:px-5"
             href={appDownloadUrl}

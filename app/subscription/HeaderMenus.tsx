@@ -3,7 +3,7 @@
 import { Check, ChevronDown } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import { subscriptionCopy } from './copy';
-import { currencies, currencyForCountry } from './currency';
+import { currencies, currencyForVisitor } from './currency';
 import { setCurrency, useCurrency } from './currencyStore';
 import type { Lang } from './i18n';
 
@@ -16,9 +16,21 @@ const menuClass = 'absolute right-0 top-12 z-50 grid overflow-hidden rounded-xl 
 // Language and currency side by side in every header. Both are <details>,
 // so they work before hydration; the script only closes them on an outside
 // click and applies the currency choice to the prices on the page.
-export function HeaderMenus({ lang, country, current, languages }: { lang: Lang; country: string | null; current: string; languages: LanguageItem[] }) {
+export function HeaderMenus({
+  lang,
+  country,
+  acceptLanguage,
+  current,
+  languages,
+}: {
+  lang: Lang;
+  country: string | null;
+  acceptLanguage: string | null;
+  current: string;
+  languages: LanguageItem[];
+}) {
   const copy = subscriptionCopy[lang];
-  const currency = useCurrency(currencyForCountry(country));
+  const currency = useCurrency(currencyForVisitor(country, acceptLanguage));
   const root = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

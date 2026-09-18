@@ -6,7 +6,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import type { Auth, User as FirebaseUser } from 'firebase/auth';
 import { API_BASE, firebaseConfig, isFirebaseConfigured } from './config';
 import { subscriptionCopy, type SubscriptionCopy } from './copy';
-import { currencyForCountry, formatMoney, type Currency } from './currency';
+import { currencyForVisitor, formatMoney, type Currency } from './currency';
 import { useCurrency } from './currencyStore';
 import { formatDate, subscriptionPath, type Lang } from './i18n';
 import { formatByn, mailtoOrder, orderTemplate, planCopy, plans, prices, type Plan } from './merchant';
@@ -83,7 +83,7 @@ function toAccount(user: FirebaseUser): Account {
   return { uid: user.uid, email: user.email, provider };
 }
 
-export function AccountProvider({ lang, country, children }: { lang: Lang; country?: string | null; children: ReactNode }) {
+export function AccountProvider({ lang, country, acceptLanguage, children }: { lang: Lang; country?: string | null; acceptLanguage?: string | null; children: ReactNode }) {
   const copy = subscriptionCopy[lang];
   const authRef = useRef<Auth | null>(null);
   // Kept from initialisation so sign-in opens its popup synchronously inside
@@ -100,7 +100,7 @@ export function AccountProvider({ lang, country, children }: { lang: Lang; count
     errorOrigin: null,
     requestPlan: null,
   });
-  const currency = useCurrency(currencyForCountry(country));
+  const currency = useCurrency(currencyForVisitor(country, acceptLanguage));
 
   const getToken = useCallback(async () => {
     const user = authRef.current?.currentUser;
