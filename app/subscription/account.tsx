@@ -278,6 +278,7 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
   // that account. With the live checkout the order goes on to WebPay; without
   // it the request form opens already carrying the account's e-mail and code.
   const choose = async () => {
+    if (stage !== 'idle' || busy !== null) return;
     if (!configured) {
       openRequest(plan);
       return;
@@ -350,8 +351,9 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
       </p>
       <div className="mt-auto pt-6">
         <Button
-          className="w-full"
-          disabled={configured && (!ready || stage !== 'idle' || busy !== null)}
+          aria-busy={stage !== 'idle'}
+          className={`w-full ${stage !== 'idle' ? 'cursor-wait' : ''}`}
+          disabled={configured && !ready}
           onClick={() => void choose()}
           variant={variant}
         >

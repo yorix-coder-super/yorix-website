@@ -58,11 +58,13 @@ export function SectionTitle({ children, center = false, className = '' }: { chi
   );
 }
 
+// A ring with a moving arc. shrink-0: inside a nowrap flex button a plain
+// bordered span was squeezed to a sliver and read as a slash.
 export function Spinner({ className = 'h-4 w-4' }: { className?: string }) {
   return (
-    <span
-      aria-hidden="true"
-      className={`${className} inline-block animate-spin rounded-full border-2 border-current border-r-transparent`}
-    />
+    <svg aria-hidden="true" className={`${className} shrink-0 animate-spin`} fill="none" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeOpacity="0.25" strokeWidth="3" />
+      <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" strokeLinecap="round" strokeWidth="3" />
+    </svg>
   );
 }
