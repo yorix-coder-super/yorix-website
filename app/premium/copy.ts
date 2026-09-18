@@ -89,7 +89,7 @@ export type PremiumCopy = {
   };
   docs: { offer: string; payment: string; privacy: string };
   legal: { eyebrow: string; updated: (date: string) => string; binding: string };
-  home: { nav: string; eyebrow: string; title: string; body: string; note: string; details: string };
+  home: { nav: string; eyebrow: string; title: string; body: string; note: string; details: string; more: string };
   currency: { label: string; note: string; names: Record<'BYN' | 'RUB' | 'EUR' | 'USD', string> };
   request: {
     title: string;
@@ -267,6 +267,7 @@ const ru: PremiumCopy = {
     body: 'Прогноз следующего сна по дневнику вашего малыша, коуч, который знает ваш день, и план, который пересчитывается сам. Доступ на неделю, месяц или год: разовая оплата картой, без автопродления.',
     note: 'Платите один раз за выбранный срок: карта не сохраняется, ничего не продлевается и не списывается само.',
     details: 'Условия, возврат и реквизиты продавца',
+    more: 'Всё о подписке',
   },
   currency: {
     label: 'Валюта',
@@ -453,6 +454,7 @@ const en: PremiumCopy = {
     body: "A next-nap forecast from your baby's diary, a coach that knows your day, and a plan that re-plans itself. A week, a month or a year: one card payment, no auto-renewal.",
     note: 'Pay once for the period you choose: no card on file, nothing renews or gets charged by itself.',
     details: 'Terms, refunds and seller details',
+    more: 'All about the subscription',
   },
   currency: {
     label: 'Currency',

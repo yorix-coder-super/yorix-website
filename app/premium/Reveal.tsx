@@ -37,21 +37,29 @@ export function Reveal({
   const ref = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const inView = useInView(ref, { once: true, amount: 0.2, margin: '0px 0px -5% 0px' });
-  const [mode, setMode] = useState<'static' | 'pending' | 'load'>('static');
+  const [mode, setMode] = useState<'static' | 'pending' | 'armed' | 'load'>('static');
 
   useEffect(() => {
     const node = ref.current;
     if (!node || reduced) return;
     // Decide on the next frame: the block is measured after layout, and the
     // state change is not synchronous with the effect body.
+    let play = 0;
     const frame = requestAnimationFrame(() => {
       if (load) {
-        if (performance.now() < 2500) setMode('load');
+        // Park the block for one frame so the entrance has a pose to start from.
+        if (performance.now() < 2500) {
+          setMode('armed');
+          play = requestAnimationFrame(() => setMode('load'));
+        }
         return;
       }
       if (node.getBoundingClientRect().top >= window.innerHeight * 0.9) setMode('pending');
     });
-    return () => cancelAnimationFrame(frame);
+    return () => {
+      cancelAnimationFrame(frame);
+      cancelAnimationFrame(play);
+    };
   }, [load, reduced]);
 
   const variants: Variants = {

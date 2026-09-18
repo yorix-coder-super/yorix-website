@@ -1,6 +1,7 @@
 'use client';
 
 import { Check, Copy, LogOut } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import type { Auth, User as FirebaseUser } from 'firebase/auth';
 import { API_BASE, firebaseConfig, isFirebaseConfigured } from './config';
@@ -86,6 +87,9 @@ function toAccount(user: FirebaseUser): Account {
 export function AccountProvider({ lang, country, children }: { lang: Lang; country?: string | null; children: ReactNode }) {
   const copy = premiumCopy[lang];
   const authRef = useRef<Auth | null>(null);
+  // Kept from initialisation so sign-in opens its popup synchronously inside
+  // the click — Safari blocks a window opened after an awaited import.
+  const authModRef = useRef<typeof import('firebase/auth') | null>(null);
   const [state, setState] = useState<State>({
     ready: !isFirebaseConfigured,
     configured: isFirebaseConfigured,
@@ -133,8 +137,9 @@ export function AccountProvider({ lang, country, children }: { lang: Lang; count
       const auth = await getAuthInstance();
       if (cancelled) return;
       authRef.current = auth;
-      const { onAuthStateChanged } = await import('firebase/auth');
-      unsubscribe = onAuthStateChanged(auth, (user) => {
+      const mod = await import('firebase/auth');
+      authModRef.current = mod;
+      unsubscribe = mod.onAuthStateChanged(auth, (user) => {
         setState((s) => ({ ...s, ready: true, user: user ? toAccount(user) : null, me: user ? s.me : null }));
         if (user) void loadMe();
       });
@@ -151,7 +156,7 @@ export function AccountProvider({ lang, country, children }: { lang: Lang; count
       if (!auth) return null;
       setState((s) => ({ ...s, busy: 'signin', error: null, errorOrigin: null }));
       try {
-        const { GoogleAuthProvider, OAuthProvider, signInWithPopup } = await import('firebase/auth');
+        const { GoogleAuthProvider, OAuthProvider, signInWithPopup } = authModRef.current ?? (await import('firebase/auth'));
         const provider = providerId === 'apple.com' ? new OAuthProvider('apple.com') : new GoogleAuthProvider();
         if (provider instanceof OAuthProvider) {
           provider.addScope('email');
@@ -226,6 +231,24 @@ function providerName(id: string) {
   return id === 'google.com' ? 'Google' : id === 'apple.com' ? 'Apple' : id;
 }
 
+function IconSwap({ copied, size }: { copied: boolean; size: string }) {
+  const Icon = copied ? Check : Copy;
+  return (
+    <AnimatePresence initial={false} mode="wait">
+      <motion.span
+        animate={{ opacity: 1, scale: 1 }}
+        className="inline-flex"
+        exit={{ opacity: 0, scale: 0.6 }}
+        initial={{ opacity: 0, scale: 0.6 }}
+        key={copied ? 'check' : 'copy'}
+        transition={{ duration: 0.15 }}
+      >
+        <Icon className={size} aria-hidden="true" />
+      </motion.span>
+    </AnimatePresence>
+  );
+}
+
 function CopyInline({ value, label, done }: { value: string; label: string; done: string }) {
   const [copied, setCopied] = useState(false);
   return (
@@ -242,7 +265,7 @@ function CopyInline({ value, label, done }: { value: string; label: string; done
       }}
       type="button"
     >
-      {copied ? <Check className="h-3.5 w-3.5" aria-hidden="true" /> : <Copy className="h-3.5 w-3.5" aria-hidden="true" />}
+      <IconSwap copied={copied} size="h-3.5 w-3.5" />
       <span aria-live="polite">{copied ? done : label}</span>
     </button>
   );
@@ -285,7 +308,7 @@ export function AccountPanel() {
 
   const active = me?.premiumUntil && new Date(me.premiumUntil) > new Date();
   return (
-    <div className="mt-7 grid max-w-xl gap-3 rounded-[1.5rem] border border-white/15 bg-white/[0.08] p-4 backdrop-blur-xl sm:grid-cols-[auto_1fr_auto] sm:items-center">
+    <div className="glass mt-7 grid max-w-xl gap-3 rounded-[1.5rem] border border-white/15 bg-white/[0.08] p-4 backdrop-blur-xl sm:grid-cols-[auto_1fr_auto] sm:items-center">
       <span className="grid h-11 w-11 place-items-center rounded-full bg-[#EEF2FF] text-base font-bold text-[#1E1B4B]" aria-hidden="true">
         {(user.email ?? user.uid).slice(0, 1).toUpperCase()}
       </span>
@@ -351,9 +374,9 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
 
   return (
     <article
-      className={`relative flex w-full min-w-0 flex-col rounded-[1.75rem] border p-6 transition hover:-translate-y-1 ${
+      className={`spotlight relative flex w-full min-w-0 flex-col rounded-[1.75rem] border p-6 transition hover:-translate-y-1 ${
         featured
-          ? 'order-first border-[#FDE68A]/60 bg-[#EEF2FF] text-[#1E1B4B] shadow-[0_28px_80px_rgb(99_102_241/30%)] md:order-none'
+          ? 'spotlight-dark order-first border-[#FDE68A]/60 bg-[#EEF2FF] text-[#1E1B4B] shadow-[0_28px_80px_rgb(99_102_241/30%)] md:order-none'
           : 'border-white/20 bg-white/[0.12] backdrop-blur-xl hover:border-white/35'
       }`}
     >
@@ -454,7 +477,7 @@ function CopyButton({ value, label, done }: { value: string; label: string; done
       size="sm"
       variant="ghost"
     >
-      {copied ? <Check className="h-4 w-4" aria-hidden="true" /> : <Copy className="h-4 w-4" aria-hidden="true" />}
+      <IconSwap copied={copied} size="h-4 w-4" />
       <span aria-live="polite">{copied ? done : label}</span>
     </Button>
   );

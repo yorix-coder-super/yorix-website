@@ -22,6 +22,7 @@ export function documentLinks(lang: Lang) {
 export async function PremiumShell({ lang, page = '', children }: { lang: Lang; page?: PremiumPage; children: ReactNode }) {
   const copy = premiumCopy[lang];
   const home = premiumPath(lang);
+  const siteHome = lang === 'ru' ? '/ru' : '/';
   const country = (await headers()).get('cf-ipcountry');
   const navItems = [
     { href: `${home}#tarify`, label: copy.nav.plans },
@@ -34,12 +35,12 @@ export async function PremiumShell({ lang, page = '', children }: { lang: Lang; 
     <main className="home-page relative min-h-screen overflow-hidden text-white" lang={lang}>
       <StarField />
       <header className="relative z-50 mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-5 py-5 sm:px-8">
-        <a href={home} aria-label={`Yorix — ${copy.home.nav}`}>
+        <a href={siteHome} aria-label="Yorix">
           <BrandLogo size="sm" tone="dark" />
         </a>
         <nav
           aria-label={copy.nav.plans}
-          className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/10 p-1.5 text-sm font-semibold text-white/70 backdrop-blur-xl md:flex"
+          className="glass hidden items-center gap-1 rounded-full border border-white/10 bg-white/10 p-1.5 text-sm font-semibold text-white/70 backdrop-blur-xl md:flex"
         >
           {navItems.map((item) => (
             <a

@@ -4,11 +4,13 @@ import { AccountPanel, AccountProvider, FlowNote, ManualOrder, PlanCard, Request
 import { premiumCopy } from './copy';
 import { premiumPath, type Lang } from './i18n';
 import { formatByn, plans } from './merchant';
+import { Magnetic } from './Magnetic';
 import { Money } from './Money';
 import { PremiumShell } from './PremiumShell';
 import { Parallax } from './Parallax';
 import { Reveal } from './Reveal';
 import { SocialProof } from './SocialProof';
+import { WordReveal } from './WordReveal';
 import { Button, Eyebrow, SectionTitle } from './ui';
 
 const featureIcons = [Sparkles, MessageCircle, BarChart3, Sun];
@@ -33,18 +35,20 @@ export async function PremiumStorefront({ lang }: { lang: Lang }) {
                   {copy.hero.badge}
                 </p>
               </Reveal>
-              <Reveal load delay={120}>
-                <h1 className="max-w-2xl text-[2.35rem] font-semibold leading-[1.06] text-white sm:text-6xl">{copy.hero.title}</h1>
-              </Reveal>
+              <h1 className="max-w-2xl text-[2.35rem] font-semibold leading-[1.06] text-white sm:text-6xl">
+                <WordReveal delay={120} text={copy.hero.title} />
+              </h1>
               <Reveal load delay={260}>
                 <p className="mt-6 max-w-xl text-lg leading-8 text-white/70">{copy.hero.body}</p>
               </Reveal>
               <Reveal load delay={400}>
                 <div className="mt-8 flex flex-wrap items-center gap-3">
-                  <Button href="#tarify">
-                    <Money text={copy.hero.primary(formatByn(week.priceByn, lang))} />
-                    <ArrowRight className="h-5 w-5" aria-hidden="true" />
-                  </Button>
+                  <Magnetic className="flex">
+                    <Button className="flex-1" href="#tarify">
+                      <Money text={copy.hero.primary(formatByn(week.priceByn, lang))} />
+                      <ArrowRight className="h-5 w-5" aria-hidden="true" />
+                    </Button>
+                  </Magnetic>
                   <span className="inline-flex items-center gap-2 text-sm text-white/65">
                     <RotateCcw className="h-4 w-4" aria-hidden="true" />
                     {copy.hero.oneOff}
@@ -87,9 +91,12 @@ export async function PremiumStorefront({ lang }: { lang: Lang }) {
               const Icon = outcomeIcons[index];
               return (
                 <Reveal className="flex" delay={index * 120} key={item.title}>
-                  <article className="w-full rounded-[1.5rem] border border-white/15 bg-white/[0.1] p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/30">
-                    <span className="grid h-11 w-11 place-items-center rounded-full bg-[#FDE68A] text-[#1E1B4B]">
-                      <Icon className="h-5 w-5" aria-hidden="true" />
+                  <article className="group spotlight w-full rounded-[1.5rem] border border-white/15 bg-white/[0.1] p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/30">
+                    <span className="relative inline-grid">
+                      <span aria-hidden="true" className="absolute inset-0 rounded-full bg-[#FDE68A] opacity-30 blur-xl transition duration-500 group-hover:opacity-80" />
+                      <span className="relative grid h-11 w-11 place-items-center rounded-full bg-[#FDE68A] text-[#1E1B4B]">
+                        <Icon className="h-5 w-5" aria-hidden="true" />
+                      </span>
                     </span>
                     <h3 className="mt-5 text-lg font-semibold text-white">{item.title}</h3>
                     <p className="mt-2 text-sm leading-6 text-white/65">{item.body}</p>
@@ -150,9 +157,12 @@ export async function PremiumStorefront({ lang }: { lang: Lang }) {
                 const Icon = featureIcons[index];
                 return (
                   <Reveal className="flex" delay={index * 90} key={feature.title}>
-                    <article className="w-full rounded-[1.5rem] border border-white/15 bg-white/[0.1] p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/30">
-                      <span className="grid h-11 w-11 place-items-center rounded-full bg-[#EEF2FF] text-[#6366F1]">
-                        <Icon className="h-5 w-5" aria-hidden="true" />
+                    <article className="group spotlight w-full rounded-[1.5rem] border border-white/15 bg-white/[0.1] p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/30">
+                      <span className="relative inline-grid">
+                        <span aria-hidden="true" className="absolute inset-0 rounded-full bg-[#6366F1] opacity-30 blur-xl transition duration-500 group-hover:opacity-80" />
+                        <span className="relative grid h-11 w-11 place-items-center rounded-full bg-[#EEF2FF] text-[#6366F1]">
+                          <Icon className="h-5 w-5" aria-hidden="true" />
+                        </span>
                       </span>
                       <h3 className="mt-5 text-lg font-semibold text-white">{feature.title}</h3>
                       <p className="mt-2 text-sm leading-6 text-white/60">{feature.body}</p>
@@ -175,7 +185,7 @@ export async function PremiumStorefront({ lang }: { lang: Lang }) {
                 const Icon = stepIcons[index];
                 return (
                   <Reveal className="flex" delay={index * 100} key={step.title}>
-                    <li className="w-full list-none rounded-[1.5rem] border border-white/15 bg-white/[0.1] p-6">
+                    <li className="spotlight w-full list-none rounded-[1.5rem] border border-white/15 bg-white/[0.1] p-6">
                       <div className="flex items-center justify-between">
                         <span className="grid h-10 w-10 place-items-center rounded-full bg-[#6366F1] text-sm font-bold text-white">{index + 1}</span>
                         <Icon className="h-5 w-5 text-[#C7D2FE]" aria-hidden="true" />

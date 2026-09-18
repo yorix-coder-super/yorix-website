@@ -24,6 +24,10 @@ export async function HomePremiumSection({ lang }: { lang: Lang }) {
             <SectionTitle className="max-w-2xl">{copy.home.title}</SectionTitle>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-white/65">{copy.home.body}</p>
             <FlowNote className="mt-4 max-w-2xl text-sm leading-6 text-white/55" />
+            <a className="mt-5 inline-flex items-center gap-1 font-semibold text-white underline decoration-white/30 hover:decoration-white" href={premiumPath(lang)}>
+              {copy.home.more}
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </a>
           </Reveal>
           <Reveal delay={140}>
             <AccountPanel />

@@ -15,6 +15,8 @@ import {
 import { headers } from 'next/headers';
 import { BrandLogo } from './BrandLogo';
 import { HeaderMenus } from './premium/HeaderMenus';
+import { Magnetic } from './premium/Magnetic';
+import { WordReveal } from './premium/WordReveal';
 import { HomePremiumSection } from './premium/HomePremiumSection';
 import { testimonials } from './premium/testimonials';
 import { Parallax } from './premium/Parallax';
@@ -202,7 +204,7 @@ export default async function Home() {
           </a>
           <a
             className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white"
-            href="#premium"
+            href="/en/premium"
           >
             Subscription
           </a>
@@ -238,11 +240,9 @@ export default async function Home() {
               Baby sleep tracker with a plan that re-plans itself
             </p>
           </Reveal>
-          <Reveal load delay={120}>
-            <h1 className="max-w-3xl text-5xl font-semibold leading-[1.02] tracking-normal text-white sm:text-6xl lg:text-7xl">
-              Know when your baby’s next sleep is due — before the fussing starts.
-            </h1>
-          </Reveal>
+          <h1 className="max-w-3xl text-5xl font-semibold leading-[1.02] tracking-normal text-white sm:text-6xl lg:text-7xl">
+            <WordReveal delay={120} text="Know when your baby’s next sleep is due — before the fussing starts." />
+          </h1>
           <Reveal load delay={260}>
             <p className="mt-6 max-w-xl text-lg leading-8 text-white/70">
               Yorix computes the next nap window and bedtime from your baby’s
@@ -253,15 +253,17 @@ export default async function Home() {
           </Reveal>
           <Reveal load delay={400}>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a
-              className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-full bg-[#6366F1] px-7 text-base font-semibold text-white shadow-[0_22px_55px_rgb(99_102_241/34%)] transition hover:bg-[#4F46E5] focus:outline-none focus:ring-4 focus:ring-[#818CF8]/30"
-              href={appDownloadUrl}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Get my baby’s plan
-              <ArrowRight className="h-5 w-5" aria-hidden="true" />
-            </a>
+            <Magnetic className="flex">
+              <a
+                className="inline-flex min-h-[3.25rem] flex-1 items-center justify-center gap-2 rounded-full bg-[#6366F1] px-7 text-base font-semibold text-white shadow-[0_22px_55px_rgb(99_102_241/34%)] transition hover:bg-[#4F46E5] focus:outline-none focus:ring-4 focus:ring-[#818CF8]/30"
+                href={appDownloadUrl}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Get my baby’s plan
+                <ArrowRight className="h-5 w-5" aria-hidden="true" />
+              </a>
+            </Magnetic>
             <a
               className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-full border border-white/15 bg-white/10 px-7 text-base font-semibold text-white transition hover:bg-white/15 focus:outline-none focus:ring-4 focus:ring-white/20"
               href="/guides"
@@ -273,15 +275,15 @@ export default async function Home() {
           </Reveal>
           <Reveal load delay={540}>
           <div className="mt-9 hidden max-w-xl gap-3 text-sm text-white/70 sm:grid sm:grid-cols-3">
-            <div className="rounded-lg border border-white/10 bg-white/10 p-4 backdrop-blur-xl">
+            <div className="spotlight rounded-lg border border-white/10 bg-white/10 p-4 backdrop-blur-xl">
               <strong className="block text-2xl text-white">20</strong>
               languages
             </div>
-            <div className="rounded-lg border border-white/10 bg-white/10 p-4 backdrop-blur-xl">
+            <div className="spotlight rounded-lg border border-white/10 bg-white/10 p-4 backdrop-blur-xl">
               <strong className="block text-2xl text-white">0</strong>
               ads in your routine
             </div>
-            <div className="rounded-lg border border-white/10 bg-white/10 p-4 backdrop-blur-xl">
+            <div className="spotlight rounded-lg border border-white/10 bg-white/10 p-4 backdrop-blur-xl">
               <strong className="block text-2xl text-white">24/7</strong>
               AI coach
             </div>
@@ -328,10 +330,13 @@ export default async function Home() {
             return (
               <Reveal className="flex" delay={index * 120} key={item.label}>
               <article
-                className="flex w-full gap-4 rounded-lg border border-white/10 bg-white/10 p-5 backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/25"
+                className="group spotlight flex w-full gap-4 rounded-lg border border-white/10 bg-white/10 p-5 backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/25"
               >
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#EEF2FF] text-[#6366F1]">
-                  <Icon className="h-5 w-5" aria-hidden="true" />
+                <span className="relative inline-grid shrink-0 self-start">
+                  <span aria-hidden="true" className="absolute inset-0 rounded-full bg-[#6366F1] opacity-30 blur-xl transition duration-500 group-hover:opacity-80" />
+                  <span className="relative grid h-11 w-11 place-items-center rounded-full bg-[#EEF2FF] text-[#6366F1]">
+                    <Icon className="h-5 w-5" aria-hidden="true" />
+                  </span>
                 </span>
                 <div>
                   <h2 className="font-semibold text-white">{item.label}</h2>
@@ -375,7 +380,7 @@ export default async function Home() {
             'Learn from real sleep, feeding, and care patterns',
           ].map((item, index) => (
             <Reveal className="flex" delay={index * 130} key={item}>
-            <article className="w-full rounded-lg border border-white/10 bg-white/10 p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/25">
+            <article className="w-full spotlight rounded-lg border border-white/10 bg-white/10 p-6 backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/25">
               <span className="grid h-10 w-10 place-items-center rounded-full bg-[#6366F1] text-sm font-bold text-white">
                 {index + 1}
               </span>
@@ -454,7 +459,7 @@ export default async function Home() {
           <div className="grid gap-4 md:grid-cols-3">
             {parentQuotes.map((item, index) => (
               <Reveal className="flex" delay={index * 120} key={item.title}>
-              <article className="w-full rounded-lg border border-white/10 bg-white/10 p-5 backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/25">
+              <article className="w-full spotlight rounded-lg border border-white/10 bg-white/10 p-5 backdrop-blur-xl transition hover:-translate-y-1 hover:border-white/25">
                 <div className="mb-5 flex gap-1 text-[#F59E0B]">
                   {Array.from({ length: 5 }).map((_, index) => (
                     <Star
@@ -506,7 +511,7 @@ export default async function Home() {
             {featuredGuides.map((page, index) => (
               <Reveal className="flex" delay={index * 80} key={page.slug}>
               <a
-                className="w-full rounded-lg border border-white/10 bg-white/10 p-5 transition hover:-translate-y-1 hover:border-white/25 hover:bg-white/15"
+                className="w-full spotlight rounded-lg border border-white/10 bg-white/10 p-5 transition hover:-translate-y-1 hover:border-white/25 hover:bg-white/15"
                 href={`/${page.slug}`}
               >
                 <p className="text-sm font-semibold text-[#C7D2FE]">
@@ -539,7 +544,7 @@ export default async function Home() {
         <div className="mt-8 grid gap-4">
           {faqs.map((faq, index) => (
             <Reveal animation="fadeIn" delay={index * 90} key={faq.question}>
-            <article className="rounded-lg border border-white/10 bg-white/10 p-6 backdrop-blur-xl">
+            <article className="spotlight rounded-lg border border-white/10 bg-white/10 p-6 backdrop-blur-xl">
               <h3 className="text-xl font-semibold text-white">
                 {faq.question}
               </h3>

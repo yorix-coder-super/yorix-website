@@ -1,3 +1,4 @@
+import { ScrollProgress } from './premium/ScrollProgress';
 import {
   ArrowLeft,
   ArrowRight,
@@ -75,6 +76,7 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
 
   return (
     <main className="brand-page article-page min-h-screen text-[#1E1B4B]">
+      <ScrollProgress />
       <header className="mx-auto flex w-full max-w-5xl items-center justify-between px-5 py-5 sm:px-8 lg:px-10">
         <a
           className="flex items-center gap-3 text-sm font-semibold text-[#1E1B4B]"

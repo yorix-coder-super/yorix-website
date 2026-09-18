@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { siteUrl } from './content';
 import { localeAlternates } from './locales';
+import { Spotlight } from './premium/Spotlight';
 import { SmoothScroll } from './SmoothScroll';
 import './globals.css';
 
@@ -63,6 +64,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <SmoothScroll />
+        <Spotlight />
         {children}
       </body>
     </html>
