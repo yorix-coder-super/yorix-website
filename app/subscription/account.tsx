@@ -225,11 +225,11 @@ export function useAccount() {
 
 // Under the plan grid: which account the subscription goes to once signed
 // in (with a way out of the wrong one), and the Google door for parents who
-// use Google in the app. Nothing until the live checkout is configured.
+// use Google in the app. Shown whenever sign-in is available — the request
+// form credits the same account as the live checkout.
 export function AccountLine({ className = '' }: { className?: string }) {
-  const { ready, configured, config, user, me, busy, error, errorOrigin, copy, lang, signIn, signOut } = useAccount();
-  const live = configured && (config?.checkoutMode ?? 'off') !== 'off';
-  if (!live || !ready) return null;
+  const { ready, configured, user, me, busy, error, errorOrigin, copy, lang, signIn, signOut } = useAccount();
+  if (!configured || !ready) return null;
   const link = 'font-semibold text-white underline decoration-white/30 hover:decoration-white disabled:opacity-60';
   if (!user) {
     const lineError = errorOrigin === 'line' && (error === 'popupBlocked' || error === 'signInError') ? copy.account[error] : null;
@@ -274,12 +274,28 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
   // The button narrates its own funnel: sign-in → order → WebPay.
   const [stage, setStage] = useState<'idle' | 'signin' | 'order' | 'redirect'>('idle');
 
-  const pay = async () => {
+  // Every plan starts with Sign in with Apple: the subscription is credited to
+  // that account. With the live checkout the order goes on to WebPay; without
+  // it the request form opens already carrying the account's e-mail and code.
+  const choose = async () => {
+    if (!configured) {
+      openRequest(plan);
+      return;
+    }
+    if (user && !live) {
+      openRequest(plan);
+      return;
+    }
     setStage(user ? 'order' : 'signin');
     try {
       const account = user ?? (await signIn('apple.com', plan.id));
       if (!account) {
         setStage('idle');
+        return;
+      }
+      if (!live) {
+        setStage('idle');
+        openRequest(plan);
         return;
       }
       setStage('order');
@@ -335,8 +351,8 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
       <div className="mt-auto pt-6">
         <Button
           className="w-full"
-          disabled={live && (!ready || stage !== 'idle' || busy !== null)}
-          onClick={() => (live ? void pay() : openRequest(plan))}
+          disabled={configured && (!ready || stage !== 'idle' || busy !== null)}
+          onClick={() => void choose()}
           variant={variant}
         >
           {stage !== 'idle' ? <Spinner /> : null}
