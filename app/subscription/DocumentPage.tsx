@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { Art } from '../home/art';
 import { subscriptionCopy } from './copy';
+import { Reveal } from './Reveal';
 import { subscriptionPath, type Lang, type SubscriptionPage } from './i18n';
 import { documentLinks, SubscriptionShell } from './SubscriptionShell';
 
@@ -27,6 +28,7 @@ export function DocumentPage({
   return (
     <SubscriptionShell lang={lang} page={page}>
       <article className="relative mx-auto max-w-4xl px-5 pb-20 pt-4 sm:px-8">
+        <Reveal animation="fadeIn" load>
         <nav aria-label={copy.footer.documents} className="flex flex-wrap gap-2">
           {links.map((link, index) => {
             const active = link.href === current;
@@ -45,6 +47,8 @@ export function DocumentPage({
             );
           })}
         </nav>
+        </Reveal>
+        <Reveal delay={120} load>
         <header className="mt-8 flex items-center gap-5">
           <span className="grid h-20 w-20 shrink-0 place-items-center rounded-3xl bg-[radial-gradient(circle_at_32%_28%,#5B55E8,#2E2A7A_70%)] shadow-[0_0_50px_rgb(99_102_241/40%)] ring-1 ring-white/15">
             <Art className="h-12 w-12 object-contain" height={192} name={icon} priority width={192} />
@@ -54,11 +58,14 @@ export function DocumentPage({
             <h1 className="text-3xl font-semibold leading-tight text-white sm:text-[2.6rem]">{title}</h1>
           </div>
         </header>
+        </Reveal>
         <p className="mt-5 text-sm text-white/50">{copy.legal.updated(updated)}</p>
         {copy.legal.binding ? (
           <p className="mt-3 rounded-2xl border border-[#FDE68A]/30 bg-[#FDE68A]/10 px-4 py-3 text-sm text-[#FDE68A]">{copy.legal.binding}</p>
         ) : null}
-        <div className="legal-document mt-8 rounded-[2rem] bg-[#F8FAFC] p-6 text-[#1E1B4B] shadow-[0_28px_90px_rgb(0_0_0/28%)] sm:p-10">{children}</div>
+        <Reveal delay={240} load>
+          <div className="legal-document mt-8 rounded-[2rem] bg-[#F8FAFC] p-6 text-[#1E1B4B] shadow-[0_28px_90px_rgb(0_0_0/28%)] sm:p-10">{children}</div>
+        </Reveal>
       </article>
     </SubscriptionShell>
   );

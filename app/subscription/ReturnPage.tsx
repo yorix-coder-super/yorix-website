@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Art, Sparkle } from '../home/art';
 import { AccountProvider, useAccount } from './account';
+import { Reveal } from './Reveal';
 import { API_BASE } from './config';
 import { formatDate, subscriptionPath, type Lang } from './i18n';
 import { SubscriptionShell } from './SubscriptionShell';
@@ -69,6 +70,7 @@ function ReturnStatus() {
 
   return (
     <section className="relative mx-auto max-w-2xl px-5 pb-24 pt-6 text-center sm:px-8">
+      <Reveal animation="zoomIn" load>
       <div className="relative mx-auto w-40 sm:w-48">
         {status === 'paid' ? (
           <div className="float-slow">
@@ -82,6 +84,7 @@ function ReturnStatus() {
         <Sparkle className="-left-6 top-4 w-3" delay={300} tone="lavender" />
         <Sparkle className="-right-4 top-10 w-4" delay={1100} />
       </div>
+      </Reveal>
       <h1 className="mt-6 text-4xl font-semibold leading-tight text-white sm:text-5xl">
         {status === 'paid' && until ? copy.ret.paid(formatDate(until, lang)) : copy.ret.checking}
       </h1>

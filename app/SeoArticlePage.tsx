@@ -10,6 +10,7 @@ import { CtaBand } from './home/CtaBand';
 import { type Locale } from './locales';
 import { SellerFooter } from './SellerFooter';
 import { SiteHeader } from './SiteHeader';
+import { Parallax } from './subscription/Parallax';
 import { Reveal } from './subscription/Reveal';
 import { ScrollProgress } from './subscription/ScrollProgress';
 import { StarField } from './subscription/StarField';
@@ -188,7 +189,7 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
               const scene = scenes[index];
               return (
                 <section className="grid scroll-mt-24 gap-6 md:grid-cols-[minmax(0,1fr)_210px] md:items-start" id={section.id} key={section.id}>
-                  <div className="min-w-0">
+                  <Reveal className="min-w-0">
                     <h2 className={`flex items-start gap-4 ${h2}`}>
                       <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[radial-gradient(circle_at_30%_30%,#818CF8,#4F46E5)] text-lg font-semibold shadow-[0_0_30px_rgb(99_102_241/45%)]">
                         {index + 1}
@@ -210,9 +211,11 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
                       ) : null}
                       {index === 1 ? <div className="mt-6">{important}</div> : null}
                     </div>
-                  </div>
+                  </Reveal>
                   {scene ? (
-                    <figure aria-hidden="true" className="relative mx-auto w-40 md:mt-2 md:w-full">
+                    <Reveal animation="zoomIn" className="mx-auto w-40 md:mt-2 md:w-full" delay={160}>
+                    <Parallax y={[36, -36]}>
+                    <figure aria-hidden="true" className="relative">
                       {scene.note ? (
                         <Hand className="mb-1 rotate-[-8deg] text-right text-[1.35rem] text-[#C7D2FE]">
                           {scene.note} <DoodleHeart className="h-4 w-4 text-[#FDE68A]" />
@@ -223,6 +226,8 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
                       </div>
                       <Sparkle className="-left-2 top-1/2 w-3" delay={index * 500} />
                     </figure>
+                    </Parallax>
+                    </Reveal>
                   ) : null}
                 </section>
               );
@@ -231,7 +236,10 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
             {sections.length < 2 ? important : null}
 
             <section className="scroll-mt-24" id="reference">
-              <h2 className={h2}>{ui.quickReference}</h2>
+              <Reveal>
+                <h2 className={h2}>{ui.quickReference}</h2>
+              </Reveal>
+              <Reveal delay={120}>
               <ol className="mt-5 grid gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(150px,1fr))]">
                 {page.sampleRows.map((row) => (
                   <li className="flex flex-col items-center bg-[#1B1947] p-5 text-center" key={`${row.label}-${row.value}`}>
@@ -242,14 +250,18 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
                   </li>
                 ))}
               </ol>
+              </Reveal>
             </section>
 
             {scenarioRows.length ? (
               <section className="scroll-mt-24" id="example-day">
-                <h2 className={h2}>{extra.exampleDay}</h2>
+                <Reveal>
+                  <h2 className={h2}>{extra.exampleDay}</h2>
+                </Reveal>
                 <ol className={`${glass} mt-5 px-2`}>
-                  {scenarioRows.map((row) => (
-                    <li className="grid grid-cols-[44px_1fr] gap-x-4 gap-y-1 border-b border-white/10 px-3 py-4 last:border-b-0 sm:grid-cols-[48px_104px_1fr]" key={`${row.time}-${row.event}`}>
+                  {scenarioRows.map((row, rowIndex) => (
+                    <li className="border-b border-white/10 px-3 py-4 last:border-b-0" key={`${row.time}-${row.event}`}>
+                      <Reveal animation="driftInLeft" className="grid grid-cols-[44px_1fr] gap-x-4 gap-y-1 sm:grid-cols-[48px_104px_1fr]" delay={rowIndex * 90}>
                       <span className="row-span-2 grid h-11 w-11 place-items-center rounded-2xl bg-white/[0.07] sm:row-span-1">
                         <Art className="h-7 w-7 object-contain" height={192} name={timelineIcon(row.time, row.event)} width={192} />
                       </span>
@@ -262,6 +274,7 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
                           {row.yorix}
                         </p>
                       </div>
+                      </Reveal>
                     </li>
                   ))}
                 </ol>
@@ -270,10 +283,13 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
 
             {challenges.length ? (
               <section className="scroll-mt-24" id="challenges">
-                <h2 className={h2}>{extra.commonChallenges}</h2>
+                <Reveal>
+                  <h2 className={h2}>{extra.commonChallenges}</h2>
+                </Reveal>
                 <div className="mt-5 grid gap-4">
-                  {challenges.map((row) => (
-                    <article className={`${glass} p-5 sm:p-6`} key={row.observation}>
+                  {challenges.map((row, rowIndex) => (
+                    <Reveal delay={rowIndex * 110} key={row.observation}>
+                    <article className={`${glass} p-5 sm:p-6`}>
                       <h3 className="flex items-start gap-3 text-[17px] font-semibold leading-6 text-white">
                         <Art className="h-7 w-7 shrink-0 object-contain" height={192} name="icon-question" width={191} />
                         {row.observation}
@@ -293,29 +309,37 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
                         </div>
                       </dl>
                     </article>
+                    </Reveal>
                   ))}
                 </div>
               </section>
             ) : null}
 
             <section className="scroll-mt-24" id="plan">
-              <h2 className={h2}>{extra.planToday}</h2>
+              <Reveal>
+                <h2 className={h2}>{extra.planToday}</h2>
+              </Reveal>
               <div className="mt-5 grid gap-6 md:grid-cols-[minmax(0,1fr)_280px] md:items-start">
                 <ol className="relative grid gap-5 before:absolute before:bottom-5 before:left-[19px] before:top-5 before:w-0.5 before:bg-white/15">
                   {actionPlan.map((item, index) => (
-                    <li className="relative grid grid-cols-[40px_1fr] items-start gap-4" key={item}>
+                    <li className="relative" key={item}>
+                      <Reveal className="grid grid-cols-[40px_1fr] items-start gap-4" delay={index * 90}>
                       <span className="relative grid h-10 w-10 place-items-center rounded-full bg-[#6366F1] text-sm font-semibold text-white shadow-[0_0_20px_rgb(99_102_241/45%)]">
                         {index + 1}
                       </span>
                       <p className="pt-2 text-base leading-7 text-white/80">{item}</p>
+                      </Reveal>
                     </li>
                   ))}
                 </ol>
+                <Reveal animation="driftInRight" delay={200}>
                 <Checklist items={page.checklist} storageKey={`yorix-checklist:${locale ?? 'en'}:${page.slug}`} title={own ? extra.checklist : ui.checklist} />
+                </Reveal>
               </div>
             </section>
 
             {page.appTieIn ? (
+              <Reveal>
               <section className="relative overflow-hidden rounded-3xl border border-white/12 bg-[linear-gradient(135deg,rgb(99_102_241/0.28),rgb(167_139_250/0.10))] p-6 sm:p-8 sm:pr-64">
                 <h2 className={h2}>{page.appTieIn.heading}</h2>
                 {page.appTieIn.body.map((paragraph) => (
@@ -327,13 +351,17 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
                   <PhoneFrame alt="" src={`/shots/${shotLang}-progress.webp`} />
                 </div>
               </section>
+              </Reveal>
             ) : null}
 
             <section className="scroll-mt-24" id="faq">
-              <h2 className={h2}>{ui.commonQuestions}</h2>
+              <Reveal>
+                <h2 className={h2}>{ui.commonQuestions}</h2>
+              </Reveal>
               <div className="mt-5 grid gap-3">
-                {page.faqs.map((faq) => (
-                  <details className="group rounded-2xl border border-white/12 bg-white/[0.05] transition open:bg-white/[0.08] hover:border-white/25" key={faq.question}>
+                {page.faqs.map((faq, faqIndex) => (
+                  <Reveal animation="fadeIn" delay={faqIndex * 80} key={faq.question}>
+                  <details className="group rounded-2xl border border-white/12 bg-white/[0.05] transition open:bg-white/[0.08] hover:border-white/25">
                     <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-semibold leading-6 text-white focus:outline-none focus-visible:underline [&::-webkit-details-marker]:hidden">
                       {faq.question}
                       <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/10 text-white transition duration-300 group-open:rotate-45">
@@ -342,13 +370,16 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
                     </summary>
                     <p className="px-5 pb-5 text-[15px] leading-7 text-white/70">{faq.answer}</p>
                   </details>
+                  </Reveal>
                 ))}
               </div>
             </section>
 
             {page.sources?.length ? (
               <section className="scroll-mt-24" id="sources">
-                <h2 className={h2}>{ui.sources}</h2>
+                <Reveal>
+                  <h2 className={h2}>{ui.sources}</h2>
+                </Reveal>
                 <ul className="mt-4 grid gap-2">
                   {page.sources.map((source) => (
                     <li key={source.href}>
@@ -371,14 +402,18 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
 
           {relatedPages.length ? (
             <section className="mt-16">
-              <h2 className={h2}>{ui.relatedGuides}</h2>
+              <Reveal>
+                <h2 className={h2}>{ui.relatedGuides}</h2>
+              </Reveal>
               <div className="mt-5 grid gap-4 md:grid-cols-3">
-                {relatedPages.map((related) => (
-                  <a className={`${glass} group flex flex-col p-5 transition hover:-translate-y-1 hover:border-white/25`} href={locale ? `/${locale}/${related.slug}` : `/${related.slug}`} key={related.slug}>
+                {relatedPages.map((related, relatedIndex) => (
+                  <Reveal className="flex" delay={relatedIndex * 110} key={related.slug}>
+                  <a className={`${glass} group flex w-full flex-col p-5 transition hover:-translate-y-1 hover:border-white/25`} href={locale ? `/${locale}/${related.slug}` : `/${related.slug}`}>
                     <Art className="h-12 w-12 object-contain transition duration-300 group-hover:scale-110" height={192} name={guideIcon(related.slug)} width={192} />
                     <h3 className="mt-4 font-semibold leading-6 text-white">{related.shortTitle}</h3>
                     <p className="mt-2 text-sm leading-6 text-white/65">{related.description}</p>
                   </a>
+                  </Reveal>
                 ))}
               </div>
             </section>

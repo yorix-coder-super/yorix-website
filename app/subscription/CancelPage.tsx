@@ -4,6 +4,7 @@ import { whitePill } from '../home/CtaBand';
 import { subscriptionCopy } from './copy';
 import { subscriptionPath, type Lang } from './i18n';
 import { merchant } from './merchant';
+import { Reveal } from './Reveal';
 import { SubscriptionShell } from './SubscriptionShell';
 
 export function CancelPage({ lang }: { lang: Lang }) {
@@ -11,6 +12,7 @@ export function CancelPage({ lang }: { lang: Lang }) {
   return (
     <SubscriptionShell lang={lang} page="/cancel">
       <section className="relative mx-auto max-w-2xl px-5 pb-24 pt-6 text-center sm:px-8">
+        <Reveal animation="zoomIn" load>
         <div className="relative mx-auto w-40 sm:w-48">
           <div className="bob">
             <Art className="h-auto w-full drop-shadow-[0_24px_40px_rgb(15_16_34/40%)]" height={420} name="star-mascot" priority width={410} />
@@ -18,6 +20,8 @@ export function CancelPage({ lang }: { lang: Lang }) {
           <Sparkle className="-left-6 top-4 w-3" delay={300} tone="lavender" />
           <Sparkle className="-right-4 top-10 w-4" delay={1100} />
         </div>
+        </Reveal>
+        <Reveal delay={160} load>
         <h1 className="mt-6 text-4xl font-semibold leading-tight text-white sm:text-5xl">{copy.cancel.title}</h1>
         <p className="mx-auto mt-5 max-w-xl text-lg leading-8 text-white/75">{copy.cancel.body}</p>
         <div className="mt-8 flex flex-col items-center gap-4">
@@ -29,6 +33,7 @@ export function CancelPage({ lang }: { lang: Lang }) {
             {merchant.email}
           </a>
         </div>
+        </Reveal>
       </section>
     </SubscriptionShell>
   );
