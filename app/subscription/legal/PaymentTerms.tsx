@@ -63,6 +63,11 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
           <li>The secure WEBPAY payment page opens: enter your card details and confirm the payment.</li>
           <li>Right after payment the subscription turns on automatically in the Yorix app on your account — no codes, no manual activation.</li>
         </ol>
+        <p>
+          A month or a year can be given as a gift: on the <a href={subscriptionPath(lang, '/gift')}>gift page</a> sign the card and pay the same way.
+          After payment you see a link and a code — pass them to the recipient, who redeems them by signing in with Apple. The code is valid for 12
+          months (clauses 5.7–5.10 of the offer).
+        </p>
 
         <h2>Payment methods</h2>
         <p>
@@ -162,6 +167,11 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         <li>Откроется защищённая платёжная страница WEBPAY: введите данные карты и подтвердите оплату.</li>
         <li>Сразу после оплаты подписка автоматически включится в приложении Yorix на вашем аккаунте — без кодов и ручной активации.</li>
       </ol>
+      <p>
+        Подписку на месяц или год можно подарить: на странице <a href={subscriptionPath(lang, '/gift')}>подарка</a> подпишите открытку и оплатите так
+        же. После оплаты вы увидите ссылку и код — передайте их получателю, он активирует подарок, войдя через Apple. Код действует 12 месяцев
+        (п. 5.7–5.10 оферты).
+      </p>
 
       <h2>Способы оплаты</h2>
       <p>

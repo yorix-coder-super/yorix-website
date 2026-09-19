@@ -290,7 +290,7 @@ export const translation: SiteTranslation = {
       cancel: 'Batal',
     },
     currency: { note: (amounts) => `Kartu Mir diterima. Kartu Anda ditagih dalam rubel Belarus: ${amounts}. Bank Anda akan mengonversinya dengan kursnya sendiri.` },
-    docs: { offer: 'Perjanjian penawaran publik', payment: 'Pembayaran, pengiriman, dan pengembalian dana', privacy: 'Kebijakan data pribadi' },
+    docs: { offer: 'Perjanjian penawaran publik', payment: 'Pembayaran, pengiriman, dan pengembalian dana', terms: 'Ketentuan penggunaan', privacy: 'Kebijakan data pribadi' },
     home: {
       nav: 'Langganan',
       eyebrow: 'Saat App Store bukan pilihan',
@@ -328,6 +328,140 @@ export const translation: SiteTranslation = {
     'Prediksi tidur siangnya akurat sekali, sampai menakutkan. Saya berhenti menebak-nebak dan malam-malam kami akhirnya jadi tenang — waktu tidur malam yang dulu satu jam penuh perlawanan kini hanya lima belas menit.',
     'Yang membuat saya yakin adalah rencananya menyesuaikan sendiri setiap kali saya mencatat tidur siang. Satu tidur siang yang singkat, dan seluruh hari ikut bergeser — tidak perlu lagi berhitung pukul 2 siang dengan bayi yang menangis.',
   ],
+  support: {
+    nav: 'Dukungan',
+    eyebrow: 'Dukungan',
+    title: 'Ada yang bisa kami bantu?',
+    body: 'Jawaban atas pertanyaan yang paling sering diajukan orang tua tentang Yorix. Tidak menemukan pertanyaan Anda? Tulis ke kami — setiap pesan dibaca oleh orang sungguhan.',
+    contact: {
+      title: 'Masih butuh bantuan?',
+      body: 'Tulis ke kami di aplikasi — Pengaturan → “Tulis ke kami” membuka obrolan dengan kami — atau kirim e-mail.',
+      reply: 'Kami membalas dalam 3 hari kerja.',
+      include: 'Agar kami bisa membantu lebih cepat, sebutkan model iPhone, versi iOS dan Yorix, serta apa yang terjadi.',
+      email: 'Kirim e-mail',
+    },
+    topics: [
+      {
+        title: 'Memulai',
+        items: [
+          {
+            question: 'Dari mana saya mulai?',
+            answer: 'Tambahkan si kecil saat pertama kali membuka aplikasi, lalu catat kapan ia bangun atau tertidur. Begitu ada entri pertama, Yorix menampilkan jendela tidur berikutnya dan terus mempertajamnya di setiap entri baru.',
+          },
+          {
+            question: 'Bagaimana Yorix membuat prakiraannya?',
+            answer: 'Yorix berangkat dari norma tidur dan jendela bangun sesuai usia si kecil, lalu menyesuaikannya dengan bayi Anda: bagaimana ia tidur hari ini dan beberapa hari terakhir. Makin banyak yang Anda catat, makin akurat prakiraannya.',
+          },
+        ],
+      },
+      {
+        title: 'Langganan dan pembelian',
+        items: [
+          {
+            question: 'Apa saja yang termasuk dalam langganan?',
+            answer: 'Prakiraan tidur berikutnya khusus untuk si kecil, pelatih AI, analitik catatan harian, dan saran harian. Mengisi catatan harian bisa Anda mulai secara gratis.',
+          },
+          {
+            question: 'Bagaimana cara memulihkan pembelian di iPhone baru?',
+            answer: 'Masuk dengan Apple ID yang sama, buka layar langganan di aplikasi, lalu ketuk “Pulihkan Pembelian”.',
+          },
+          {
+            question: 'Bagaimana cara membatalkan langganan App Store?',
+            answer: 'Di Pengaturan iPhone: ketuk nama Anda → Langganan → Yorix. Akses tetap berlaku sampai akhir periode yang sudah dibayar.',
+          },
+        ],
+      },
+      {
+        title: 'Keluarga dan data',
+        items: [
+          {
+            question: 'Bagaimana cara mengisi catatan harian berdua?',
+            answer: 'Di pengaturan Yorix, ketuk “Undang Pasangan” lalu kirim undangannya. Orang dewasa lainnya akan melihat catatan harian yang sama dan bisa menambahkan entri dari iPhone-nya sendiri.',
+          },
+          {
+            question: 'Bagaimana cara memindahkan catatan harian ke iPhone baru?',
+            answer: 'Catatan harian tersimpan di iCloud Anda. Masuk ke Apple ID yang sama di iPhone baru dan pastikan iCloud menyala untuk Yorix — entri Anda akan kembali dengan sendirinya.',
+          },
+          {
+            question: 'Bagaimana cara mengekspor data saya?',
+            answer: 'Di pengaturan Yorix, pilih “Ekspor Data” — aplikasi akan menyimpan file berisi entri Anda.',
+          },
+          {
+            question: 'Bagaimana cara menghapus akun dan data saya?',
+            answer: 'Di pengaturan Yorix: “Akun” → “Hapus Akun”. Entri di iCloud Anda bisa dihapus di aplikasi atau di pengaturan iCloud.',
+          },
+        ],
+      },
+      {
+        title: 'Pengingat dan widget',
+        items: [
+          {
+            question: 'Mengapa pengingat tidak masuk?',
+            answer: 'Pastikan pemberitahuan untuk Yorix menyala di iPhone: Pengaturan → Pemberitahuan → Yorix. Fokus dan Jangan Ganggu juga bisa menyembunyikannya.',
+          },
+          {
+            question: 'Bagaimana cara menambahkan widget?',
+            answer: 'Sentuh dan tahan area kosong di Layar Utama, ketuk “Edit” → “Tambah Widget”, cari Yorix, lalu pilih widget.',
+          },
+        ],
+      },
+      {
+        title: 'Jika ada kendala',
+        items: [
+          {
+            question: 'Entri tidak muncul di perangkat lain',
+            answer: 'Pastikan kedua perangkat memakai Apple ID yang sama, iCloud menyala untuk Yorix, dan ada koneksi internet. Buka aplikasi di kedua perangkat — sinkronisasinya butuh satu-dua menit.',
+          },
+          {
+            question: 'Aplikasi tidak berjalan semestinya',
+            answer: 'Perbarui Yorix ke versi terbaru di App Store, lalu mulai ulang aplikasinya. Jika belum berhasil, tulis ke kami — kontaknya ada di bawah.',
+          },
+        ],
+      },
+    ],
+    web: 'Membayar langganan dengan kartu di situs web? Jawabannya ada di halaman langganan.',
+  },
+  about: {
+    nav: 'Tentang Yorix',
+    eyebrow: 'Tentang kami',
+    title: 'Malam yang lebih tenang untuk seluruh keluarga',
+    body: 'Yorix membantu orang tua mengetahui kapan si kecil perlu tidur — dan membangun rutinitas yang pas untuk keluarga mereka sendiri.',
+    sections: [
+      {
+        title: 'Mengapa kami membuat Yorix',
+        body: 'Setiap orang tua mengenal pertanyaan ini: sudah waktunya menidurkan si kecil, atau masih terlalu awal? Tabel tidur memberi angka rata-rata, padahal setiap bayi punya ritmenya sendiri. Kami membuat Yorix agar jawabannya berpijak pada hari si kecil yang sebenarnya, bukan pada jadwal rata-rata.',
+      },
+      {
+        title: 'Cara kerjanya',
+        body: 'Dasarnya adalah panduan sesuai usia dari WHO dan American Academy of Sleep Medicine, serta jendela bangun untuk setiap usia. Setiap entri di catatan harian mempertajam prakiraan: Yorix memperhitungkan bagaimana si kecil tidur hari ini dan beberapa hari terakhir, lalu menghitung ulang rencana untuk sisa hari itu.',
+      },
+      {
+        title: 'Misi kami',
+        body: 'Tidur yang lebih tenang bagi si kecil — serta lebih banyak rasa percaya diri dan istirahat bagi orang tuanya.',
+      },
+    ],
+    values: {
+      title: 'Yang penting bagi kami',
+      items: [
+        {
+          title: 'Tanpa iklan',
+          body: 'Yorix bebas iklan — tak ada yang mengganggu saat Anda menidurkan si kecil.',
+        },
+        {
+          title: 'Data Anda milik Anda',
+          body: 'Catatan harian tersimpan di iPhone dan iCloud Anda. Kami tidak menjual data.',
+        },
+        {
+          title: 'Jujur soal batasan',
+          body: 'Yorix membantu soal rutinitas, tetapi tidak menggantikan dokter. Untuk pertanyaan kesehatan, bicarakan dengan dokter anak Anda.',
+        },
+        {
+          title: 'Untuk seluruh keluarga',
+          body: 'Dua orang tua bisa mengisi satu catatan harian bersama, dan pelatih siap menjawab kapan saja.',
+        },
+      ],
+    },
+  },
   footerLabels: { product: 'Produk', features: 'Fitur', guides: 'Panduan', support: 'Dukungan', write: 'Kirim email ke kami', badgeTop: 'Download di' },
   docsNote: 'Dokumen tersedia dalam bahasa Inggris dan Rusia.',
   topics: {

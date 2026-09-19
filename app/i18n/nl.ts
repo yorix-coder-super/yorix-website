@@ -290,7 +290,7 @@ export const translation: SiteTranslation = {
       cancel: 'Annuleren',
     },
     currency: { note: (amounts) => `Mir-kaarten worden geaccepteerd. Het bedrag wordt afgeschreven in Belarussische roebels: ${amounts}. Je bank rekent om tegen de eigen koers.` },
-    docs: { offer: 'Openbaar aanbod (overeenkomst)', payment: 'Betaling, levering en terugbetaling', privacy: 'Beleid voor persoonsgegevens' },
+    docs: { offer: 'Openbaar aanbod (overeenkomst)', payment: 'Betaling, levering en terugbetaling', terms: 'Gebruiksvoorwaarden', privacy: 'Beleid voor persoonsgegevens' },
     home: {
       nav: 'Abonnement',
       eyebrow: 'Als de App Store geen optie is',
@@ -319,6 +319,140 @@ export const translation: SiteTranslation = {
     'De voorspellingen voor de dutjes zijn griezelig nauwkeurig. Ik ben gestopt met gissen en onze avonden zijn eindelijk rustig geworden – bedtijd ging van een uur strijd naar vijftien minuten.',
     'Wat me over de streep trok, is dat het plan zichzelf bijstelt na elk dutje dat ik vastleg. Eén kort dutje en de hele dag schuift op – geen gereken meer om twee uur ’s middags met een huilende baby.',
   ],
+  support: {
+    nav: 'Support',
+    eyebrow: 'Support',
+    title: 'Hoe kunnen we helpen?',
+    body: 'Antwoorden op de vragen die ouders ons het vaakst stellen over Yorix. Staat jouw vraag er niet bij? Schrijf ons – bij ons leest een echt mens elk bericht.',
+    contact: {
+      title: 'Nog hulp nodig?',
+      body: 'Neem contact op via de app – ‘Instellingen’ → ‘Schrijf ons’ opent een chat met ons – of stuur ons een e-mail.',
+      reply: 'We reageren binnen 3 werkdagen.',
+      include: 'Zo kunnen we je sneller helpen: vermeld je iPhone-model, de versies van iOS en Yorix en wat er is gebeurd.',
+      email: 'Stuur een e-mail',
+    },
+    topics: [
+      {
+        title: 'Aan de slag',
+        items: [
+          {
+            question: 'Waar begin ik?',
+            answer: 'Voeg je baby toe als je de app voor het eerst opent, en leg vast wanneer je kleintje wakker werd of in slaap viel. Zodra je iets hebt vastgelegd, laat Yorix het volgende slaapvenster zien – en met alles wat je daarna vastlegt, wordt het preciezer.',
+          },
+          {
+            question: 'Hoe maakt Yorix de voorspelling?',
+            answer: 'Yorix begint bij de slaapnormen en wakevensters voor de leeftijd van je baby en stemt die af op je kind: op hoe het vandaag en de afgelopen dagen heeft geslapen. Hoe meer je vastlegt, hoe nauwkeuriger de voorspelling.',
+          },
+        ],
+      },
+      {
+        title: 'Abonnement en aankopen',
+        items: [
+          {
+            question: 'Wat zit er in het abonnement?',
+            answer: 'De persoonlijke voorspelling van het volgende slaapmoment, de AI-coach, analyses van je dagboek en dagelijks advies. Beginnen met het dagboek kan gratis.',
+          },
+          {
+            question: 'Hoe herstel ik aankopen op een nieuwe iPhone?',
+            answer: 'Log in met dezelfde Apple ID, open het abonnementsscherm in de app en tik op ‘Aankopen herstellen’.',
+          },
+          {
+            question: 'Hoe zeg ik een abonnement via de App Store op?',
+            answer: 'In Instellingen op je iPhone: tik op je naam → Abonnementen → Yorix. Tot het einde van de betaalde periode houd je toegang.',
+          },
+        ],
+      },
+      {
+        title: 'Gezin en gegevens',
+        items: [
+          {
+            question: 'Hoe houden we het dagboek samen bij?',
+            answer: 'Tik in de instellingen van Yorix op ‘Partner uitnodigen’ en verstuur de uitnodiging. De ander ziet dan hetzelfde dagboek en kan vanaf de eigen iPhone ook dingen vastleggen.',
+          },
+          {
+            question: 'Hoe zet ik het dagboek over naar een nieuwe iPhone?',
+            answer: 'Het dagboek staat in je iCloud. Log op de nieuwe iPhone in met dezelfde Apple ID en controleer of iCloud voor Yorix aanstaat – alles wat je hebt vastgelegd, komt vanzelf terug.',
+          },
+          {
+            question: 'Hoe exporteer ik mijn gegevens?',
+            answer: 'Kies in de instellingen van Yorix ‘Gegevens exporteren’ – de app bewaart een bestand met alles wat je hebt vastgelegd.',
+          },
+          {
+            question: 'Hoe verwijder ik mijn account en gegevens?',
+            answer: 'In de instellingen van Yorix: ‘Account’ → ‘Account verwijderen’. Wat in je iCloud staat, kun je verwijderen in de app of in de iCloud-instellingen.',
+          },
+        ],
+      },
+      {
+        title: 'Herinneringen en widgets',
+        items: [
+          {
+            question: 'Waarom komen herinneringen niet binnen?',
+            answer: 'Controleer in Instellingen → Berichtgeving → Yorix op je iPhone of meldingen aanstaan. Ook ‘Focus’ en ‘Niet storen’ kunnen ze verbergen.',
+          },
+          {
+            question: 'Hoe voeg ik een widget toe?',
+            answer: 'Houd je vinger op een lege plek op het beginscherm, tik op ‘Wijzig’ → ‘Voeg widget toe’, zoek Yorix en kies een widget.',
+          },
+        ],
+      },
+      {
+        title: 'Als er iets misgaat',
+        items: [
+          {
+            question: 'Wat ik vastleg, verschijnt niet op mijn andere apparaat',
+            answer: 'Zorg dat beide apparaten dezelfde Apple ID gebruiken, dat iCloud voor Yorix aanstaat en dat er internetverbinding is. Open de app op beide apparaten – synchroniseren duurt een paar minuten.',
+          },
+          {
+            question: 'De app werkt niet zoals verwacht',
+            answer: 'Werk Yorix bij naar de nieuwste versie in de App Store en start de app opnieuw. Helpt dat niet, schrijf ons dan – hieronder lees je hoe.',
+          },
+        ],
+      },
+    ],
+    web: 'Heb je je abonnement op de website met je kaart betaald? De antwoorden staan op de abonnementspagina.',
+  },
+  about: {
+    nav: 'Over Yorix',
+    eyebrow: 'Over ons',
+    title: 'Rustigere avonden voor het hele gezin',
+    body: 'Yorix helpt ouders te zien wanneer hun baby moet slapen – en een routine op te bouwen die bij hun eigen gezin past.',
+    sections: [
+      {
+        title: 'Waarom we Yorix hebben gemaakt',
+        body: 'Elke ouder kent de vraag: is het al tijd om je baby naar bed te brengen, of is het nog te vroeg? Slaaptabellen geven gemiddelden, maar elke baby heeft een eigen ritme. We hebben Yorix gemaakt zodat het antwoord uitgaat van de echte dag van jouw baby, niet van een gemiddeld schema.',
+      },
+      {
+        title: 'Hoe het werkt',
+        body: 'De basis vormen de leeftijdsrichtlijnen van de WHO en de American Academy of Sleep Medicine, en de wakevensters voor elke leeftijd. Alles wat je in het dagboek vastlegt, maakt de voorspelling scherper: Yorix houdt rekening met hoe je baby vandaag en de afgelopen dagen heeft geslapen, en berekent het plan voor de rest van de dag opnieuw.',
+      },
+      {
+        title: 'Onze missie',
+        body: 'Meer rustige slaap voor baby’s – en meer vertrouwen en ontspanning voor hun ouders.',
+      },
+    ],
+    values: {
+      title: 'Wat voor ons belangrijk is',
+      items: [
+        {
+          title: 'Geen advertenties',
+          body: 'Yorix heeft geen advertenties – niets leidt je af terwijl je je baby naar bed brengt.',
+        },
+        {
+          title: 'Jouw gegevens zijn van jou',
+          body: 'Het dagboek staat op je iPhone en in je iCloud. We verkopen geen gegevens.',
+        },
+        {
+          title: 'Eerlijk over onze grenzen',
+          body: 'Yorix helpt met de routine, maar vervangt geen arts. Met vragen over gezondheid kun je het best terecht bij je kinderarts.',
+        },
+        {
+          title: 'Voor het hele gezin',
+          body: 'Jullie kunnen samen één dagboek bijhouden, en de coach antwoordt dag en nacht.',
+        },
+      ],
+    },
+  },
   footerLabels: { product: 'Product', features: 'Functies', guides: 'Gidsen', support: 'Support', write: 'Neem contact op', badgeTop: 'Download in de' },
   docsNote: 'De documenten zijn beschikbaar in het Engels en het Russisch.',
   topics: {

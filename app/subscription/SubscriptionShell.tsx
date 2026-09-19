@@ -5,12 +5,16 @@ import { subscriptionCopy } from './copy';
 import { subscriptionPath, type Lang, type SubscriptionPage } from './i18n';
 import { StarField } from './StarField';
 
-export function documentLinks(lang: Lang) {
+export function documentLinks(lang: Lang, web = true) {
   const copy = subscriptionCopy[lang];
+  const sales = [
+    { page: '/offer' as const, href: subscriptionPath(lang, '/offer'), label: copy.docs.offer },
+    { page: '/payment' as const, href: subscriptionPath(lang, '/payment'), label: copy.docs.payment },
+  ];
   return [
-    { href: subscriptionPath(lang, '/offer'), label: copy.docs.offer },
-    { href: subscriptionPath(lang, '/payment'), label: copy.docs.payment },
-    { href: subscriptionPath(lang, '/privacy'), label: copy.docs.privacy },
+    ...(web ? sales : []),
+    { page: '/terms' as const, href: subscriptionPath(lang, '/terms'), label: copy.docs.terms },
+    { page: '/privacy' as const, href: subscriptionPath(lang, '/privacy'), label: copy.docs.privacy },
   ];
 }
 

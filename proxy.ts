@@ -81,7 +81,7 @@ function languageRedirect(request: NextRequest): NextResponse | null {
 // the app's showcase. The storefront, the offer and the payment terms send
 // those visitors home. The privacy policy (the app's too) and the acquirer's
 // return pages stay reachable.
-const SALES_PAGE = /^\/(ru\/)?subscription(?:\/(?:offer|payment))?\/?$/;
+const SALES_PAGE = /^\/(ru\/)?subscription(?:\/(?:offer|payment|gift))?\/?$/;
 
 function salesRedirect(request: NextRequest): NextResponse | null {
   if (request.method !== 'GET' && request.method !== 'HEAD') return null;

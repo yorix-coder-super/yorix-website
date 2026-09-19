@@ -5,7 +5,7 @@ export const subscriptionLangs: { code: Lang; label: string; short: string }[] =
   { code: 'en', label: 'English', short: 'EN' },
 ];
 
-export type SubscriptionPage = '' | '/payment' | '/offer' | '/privacy' | '/return' | '/cancel';
+export type SubscriptionPage = '' | '/payment' | '/offer' | '/terms' | '/privacy' | '/gift' | '/return' | '/cancel';
 
 export function subscriptionPath(lang: Lang, page: SubscriptionPage = '') {
   return lang === 'ru' ? `/ru/subscription${page}` : `/subscription${page}`;

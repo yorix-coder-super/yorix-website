@@ -290,7 +290,7 @@ export const translation: SiteTranslation = {
       cancel: 'Hủy',
     },
     currency: { note: (amounts) => `Chấp nhận thẻ Mir. Thẻ được trừ tiền bằng rúp Belarus: ${amounts}. Ngân hàng của bạn sẽ quy đổi theo tỷ giá riêng.` },
-    docs: { offer: 'Đề nghị hợp đồng công khai', payment: 'Thanh toán, giao hàng và hoàn tiền', privacy: 'Chính sách dữ liệu cá nhân' },
+    docs: { offer: 'Đề nghị hợp đồng công khai', payment: 'Thanh toán, giao hàng và hoàn tiền', terms: 'Điều khoản sử dụng', privacy: 'Chính sách dữ liệu cá nhân' },
     home: {
       nav: 'Gói đăng ký',
       eyebrow: 'Khi App Store không phải là lựa chọn',
@@ -328,6 +328,140 @@ export const translation: SiteTranslation = {
     'Dự đoán giấc ngủ ngày chính xác đến đáng sợ. Mình thôi đoán mò và các buổi tối cuối cùng cũng êm ả — giờ đi ngủ từ một tiếng vật lộn chỉ còn mười lăm phút.',
     'Điều thuyết phục mình là kế hoạch tự điều chỉnh sau mỗi giấc ngủ ngày mình ghi lại. Chỉ một giấc ngắn là cả ngày dịch chuyển theo — không còn phải tính toán lúc 2 giờ chiều với một em bé đang khóc.',
   ],
+  support: {
+    nav: 'Hỗ trợ',
+    eyebrow: 'Hỗ trợ',
+    title: 'Chúng tôi có thể giúp gì cho bạn?',
+    body: 'Giải đáp những câu hỏi cha mẹ thường hỏi nhất về Yorix. Chưa thấy câu hỏi của bạn? Hãy viết cho chúng tôi — mọi tin nhắn đều có người thật đọc.',
+    contact: {
+      title: 'Vẫn cần hỗ trợ?',
+      body: 'Viết cho chúng tôi ngay trong ứng dụng — Cài đặt → “Viết cho chúng tôi” sẽ mở cuộc trò chuyện với chúng tôi — hoặc gửi e-mail.',
+      reply: 'Chúng tôi phản hồi trong vòng 3 ngày làm việc.',
+      include: 'Để được hỗ trợ nhanh hơn, hãy cho chúng tôi biết mẫu iPhone, phiên bản iOS và Yorix, cùng điều đã xảy ra.',
+      email: 'Gửi e-mail',
+    },
+    topics: [
+      {
+        title: 'Bắt đầu',
+        items: [
+          {
+            question: 'Tôi nên bắt đầu từ đâu?',
+            answer: 'Thêm bé khi mở ứng dụng lần đầu và ghi lại lúc bé thức dậy hoặc chìm vào giấc ngủ. Ngay sau ghi chép đầu tiên, Yorix sẽ hiển thị khung giờ ngủ tiếp theo và ngày càng chính xác hơn với mỗi ghi chép mới.',
+          },
+          {
+            question: 'Yorix dự báo bằng cách nào?',
+            answer: 'Yorix bắt đầu từ chuẩn giấc ngủ và khoảng thức theo độ tuổi của bé, rồi điều chỉnh cho phù hợp với chính bé: hôm nay và vài ngày gần đây bé ngủ thế nào. Bạn ghi càng nhiều, dự báo càng chính xác.',
+          },
+        ],
+      },
+      {
+        title: 'Gói đăng ký và giao dịch mua',
+        items: [
+          {
+            question: 'Gói đăng ký gồm những gì?',
+            answer: 'Dự báo giấc ngủ tiếp theo dành riêng cho bé, cố vấn AI, phân tích nhật ký và lời khuyên mỗi ngày. Bạn có thể bắt đầu ghi nhật ký miễn phí.',
+          },
+          {
+            question: 'Làm cách nào để khôi phục giao dịch mua trên iPhone mới?',
+            answer: 'Đăng nhập bằng cùng Apple ID, mở màn hình gói đăng ký trong ứng dụng và chạm vào “Khôi phục giao dịch”.',
+          },
+          {
+            question: 'Làm cách nào để hủy gói đăng ký App Store?',
+            answer: 'Trong Cài đặt trên iPhone: chạm vào tên của bạn → Đăng ký → Yorix. Bạn vẫn dùng được đến hết thời hạn đã thanh toán.',
+          },
+        ],
+      },
+      {
+        title: 'Gia đình và dữ liệu',
+        items: [
+          {
+            question: 'Làm sao để cùng ghi nhật ký?',
+            answer: 'Trong phần cài đặt của Yorix, chạm vào “Mời bạn đời” và gửi lời mời. Người còn lại sẽ thấy cùng cuốn nhật ký và có thể thêm ghi chép từ iPhone của mình.',
+          },
+          {
+            question: 'Làm sao để chuyển nhật ký sang iPhone mới?',
+            answer: 'Nhật ký được lưu trong iCloud của bạn. Hãy đăng nhập cùng Apple ID trên iPhone mới và đảm bảo iCloud đã bật cho Yorix — các ghi chép sẽ tự trở lại.',
+          },
+          {
+            question: 'Làm sao để xuất dữ liệu?',
+            answer: 'Trong phần cài đặt của Yorix, chọn “Xuất dữ liệu” — ứng dụng sẽ lưu một tệp chứa các ghi chép của bạn.',
+          },
+          {
+            question: 'Làm sao để xóa tài khoản và dữ liệu?',
+            answer: 'Trong phần cài đặt của Yorix: “Tài khoản” → “Xóa tài khoản”. Các ghi chép trong iCloud của bạn có thể xóa trong ứng dụng hoặc trong cài đặt iCloud.',
+          },
+        ],
+      },
+      {
+        title: 'Lời nhắc và tiện ích',
+        items: [
+          {
+            question: 'Vì sao tôi không nhận được lời nhắc?',
+            answer: 'Hãy kiểm tra xem thông báo của Yorix đã được bật chưa: trên iPhone, vào Cài đặt → Thông báo → Yorix. Các chế độ Tập trung và Không làm phiền cũng có thể ẩn thông báo.',
+          },
+          {
+            question: 'Làm sao để thêm tiện ích?',
+            answer: 'Chạm và giữ vào một chỗ trống trên Màn hình chính, chạm vào “Sửa” → “Thêm tiện ích”, tìm Yorix rồi chọn một tiện ích.',
+          },
+        ],
+      },
+      {
+        title: 'Khi có sự cố',
+        items: [
+          {
+            question: 'Ghi chép không hiển thị trên thiết bị khác',
+            answer: 'Hãy đảm bảo hai thiết bị dùng cùng một Apple ID, iCloud đã bật cho Yorix và có kết nối internet. Mở ứng dụng trên cả hai thiết bị — việc đồng bộ mất vài phút.',
+          },
+          {
+            question: 'Ứng dụng không hoạt động như mong đợi',
+            answer: 'Cập nhật Yorix lên phiên bản mới nhất trên App Store và khởi động lại ứng dụng. Nếu vẫn chưa được, hãy viết cho chúng tôi — thông tin liên hệ ở bên dưới.',
+          },
+        ],
+      },
+    ],
+    web: 'Đã thanh toán gói đăng ký bằng thẻ trên trang web? Câu trả lời có ở trang gói đăng ký.',
+  },
+  about: {
+    nav: 'Về Yorix',
+    eyebrow: 'Về chúng tôi',
+    title: 'Những buổi tối bình yên hơn cho cả gia đình',
+    body: 'Yorix giúp cha mẹ biết khi nào bé cần ngủ — và xây dựng nếp sinh hoạt phù hợp với chính gia đình mình.',
+    sections: [
+      {
+        title: 'Vì sao chúng tôi tạo ra Yorix',
+        body: 'Cha mẹ nào cũng quen với câu hỏi: đã đến lúc cho bé ngủ chưa, hay vẫn còn sớm? Bảng giờ ngủ chỉ đưa ra con số trung bình, còn mỗi bé lại có nhịp riêng. Chúng tôi tạo ra Yorix để câu trả lời dựa trên một ngày thực tế của bé, chứ không phải một lịch trình trung bình.',
+      },
+      {
+        title: 'Cách Yorix hoạt động',
+        body: 'Nền tảng là các hướng dẫn theo độ tuổi của Tổ chức Y tế Thế giới (WHO) và Viện Hàn lâm Y học Giấc ngủ Hoa Kỳ, cùng khoảng thức cho từng độ tuổi. Mỗi ghi chép trong nhật ký giúp dự báo chính xác hơn: Yorix tính đến việc hôm nay và những ngày gần đây bé ngủ thế nào, rồi tính lại kế hoạch cho phần còn lại của ngày.',
+      },
+      {
+        title: 'Sứ mệnh của chúng tôi',
+        body: 'Thêm nhiều giấc ngủ bình yên cho bé — và thêm tự tin, thêm nghỉ ngơi cho cha mẹ.',
+      },
+    ],
+    values: {
+      title: 'Điều chúng tôi coi trọng',
+      items: [
+        {
+          title: 'Không quảng cáo',
+          body: 'Yorix không có quảng cáo — không gì làm bạn xao nhãng khi đang dỗ bé ngủ.',
+        },
+        {
+          title: 'Dữ liệu là của bạn',
+          body: 'Nhật ký nằm trên iPhone và trong iCloud của bạn. Chúng tôi không bán dữ liệu.',
+        },
+        {
+          title: 'Thẳng thắn về giới hạn',
+          body: 'Yorix hỗ trợ nếp sinh hoạt nhưng không thay thế bác sĩ. Với các câu hỏi về sức khỏe, hãy trao đổi với bác sĩ nhi khoa.',
+        },
+        {
+          title: 'Cho cả gia đình',
+          body: 'Cha mẹ có thể cùng ghi một cuốn nhật ký, và cố vấn luôn sẵn sàng trả lời bất kể giờ nào.',
+        },
+      ],
+    },
+  },
   footerLabels: { product: 'Sản phẩm', features: 'Tính năng', guides: 'Hướng dẫn', support: 'Hỗ trợ', write: 'Gửi email cho chúng tôi', badgeTop: 'Tải về trên' },
   docsNote: 'Các tài liệu hiện có bằng tiếng Anh và tiếng Nga.',
   topics: {

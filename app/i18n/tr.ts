@@ -290,7 +290,7 @@ export const translation: SiteTranslation = {
       cancel: 'İptal',
     },
     currency: { note: (amounts) => `Mir kartları kabul edilir. Kartınızdan Belarus rublesiyle tahsilat yapılır: ${amounts}. Bankanız kendi kuruyla çevirir.` },
-    docs: { offer: 'Kamuya açık teklif sözleşmesi', payment: 'Ödeme, teslimat ve iade', privacy: 'Kişisel veri politikası' },
+    docs: { offer: 'Kamuya açık teklif sözleşmesi', payment: 'Ödeme, teslimat ve iade', terms: 'Kullanım koşulları', privacy: 'Kişisel veri politikası' },
     home: {
       nav: 'Abonelik',
       eyebrow: 'App Store bir seçenek olmadığında',
@@ -319,6 +319,140 @@ export const translation: SiteTranslation = {
     'Gündüz uykusu öngörüleri ürkütücü derecede isabetli. Tahmin yürütmeyi bıraktım ve akşamlarımız sonunda sakinleşti — uyku vakti bir saatlik mücadeleden on beş dakikaya indi.',
     'Beni ikna eden, kaydettiğim her gündüz uykusundan sonra planın kendini ayarlaması oldu. Tek bir kısa uyku ve bütün gün kayıyor — artık öğleden sonra saat ikide ağlayan bir bebekle hesap yapmak yok.',
   ],
+  support: {
+    nav: 'Destek',
+    eyebrow: 'Destek',
+    title: 'Size nasıl yardımcı olabiliriz?',
+    body: 'Ebeveynlerin Yorix hakkında en sık sorduğu soruların yanıtları. Sorunuzu bulamadınız mı? Bize yazın — her mesajı gerçek bir insan okuyor.',
+    contact: {
+      title: 'Hâlâ yardıma mı ihtiyacınız var?',
+      body: 'Bize uygulamadan yazın — Ayarlar → “Bize yaz” seçeneği bizimle bir sohbet açar — ya da e-mail gönderin.',
+      reply: '3 iş günü içinde yanıt veriyoruz.',
+      include: 'Size daha hızlı yardımcı olabilmemiz için iPhone modelinizi, iOS ve Yorix sürümlerinizi ve ne olduğunu yazın.',
+      email: 'E-mail gönder',
+    },
+    topics: [
+      {
+        title: 'İlk adımlar',
+        items: [
+          {
+            question: 'Nereden başlamalıyım?',
+            answer: 'Uygulamayı ilk açtığınızda bebeğinizi ekleyin ve ne zaman uyandığını ya da uykuya daldığını kaydedin. Yorix daha ilk kayıttan sonra bir sonraki uyku penceresini gösterir ve her yeni kayıtla onu daha da netleştirir.',
+          },
+          {
+            question: 'Yorix tahminini nasıl yapıyor?',
+            answer: 'Bebeğinizin yaşına uygun uyku normlarından ve uyanıklık pencerelerinden yola çıkar, sonra bunları bebeğinize göre uyarlar: bugün ve son birkaç günde nasıl uyuduğuna bakar. Ne kadar çok kayıt girerseniz tahmin o kadar isabetli olur.',
+          },
+        ],
+      },
+      {
+        title: 'Abonelik ve satın alımlar',
+        items: [
+          {
+            question: 'Aboneliğe neler dâhil?',
+            answer: 'Bebeğinize özel sonraki uyku tahmini, yapay zekâ koçu, kayıtlarınızın analizi ve günlük öneriler. Günlük tutmaya ücretsiz başlayabilirsiniz.',
+          },
+          {
+            question: 'Yeni bir iPhone’da satın alımlarımı nasıl geri yüklerim?',
+            answer: 'Aynı Apple ID ile giriş yapın, uygulamada abonelik ekranını açın ve “Satın alımları geri yükle” seçeneğine dokunun.',
+          },
+          {
+            question: 'App Store aboneliğini nasıl iptal ederim?',
+            answer: 'iPhone’unuzda Ayarlar → adınız → Abonelikler → Yorix yolunu izleyin. Ödediğiniz dönemin sonuna kadar erişiminiz devam eder.',
+          },
+        ],
+      },
+      {
+        title: 'Aile ve veriler',
+        items: [
+          {
+            question: 'Günlüğü birlikte nasıl tutabiliriz?',
+            answer: 'Yorix ayarlarında “Eşi davet et” seçeneğine dokunun ve daveti gönderin. Davet ettiğiniz kişi aynı günlüğü görür ve kendi iPhone’undan kayıt ekleyebilir.',
+          },
+          {
+            question: 'Günlüğü yeni bir iPhone’a nasıl taşırım?',
+            answer: 'Günlük, iCloud hesabınızda saklanır. Yeni iPhone’da aynı Apple ID ile giriş yapın ve Yorix için iCloud’un açık olduğundan emin olun — kayıtlarınız kendiliğinden geri gelir.',
+          },
+          {
+            question: 'Verilerimi nasıl dışa aktarırım?',
+            answer: 'Yorix ayarlarında “Verileri dışa aktar” seçeneğine dokunun — uygulama, kayıtlarınızı içeren bir dosya kaydeder.',
+          },
+          {
+            question: 'Hesabımı ve verilerimi nasıl silerim?',
+            answer: 'Yorix ayarlarında: “Hesap” → “Hesabı sil”. iCloud’daki kayıtlarınızı uygulamadan ya da iCloud ayarlarından silebilirsiniz.',
+          },
+        ],
+      },
+      {
+        title: 'Hatırlatıcılar ve widget’lar',
+        items: [
+          {
+            question: 'Hatırlatıcılar neden gelmiyor?',
+            answer: 'Yorix bildirimlerinin açık olduğunu kontrol edin: iPhone’da Ayarlar → Bildirimler → Yorix. Odak ya da Rahatsız Etme açıksa bildirimler gizlenebilir.',
+          },
+          {
+            question: 'Widget nasıl eklenir?',
+            answer: 'Ana ekranda boş bir alana dokunup basılı tutun, önce “Düzenle”, sonra “Araç Takımı Ekle” seçeneğine dokunun, Yorix’i bulun ve istediğiniz widget’ı seçin.',
+          },
+        ],
+      },
+      {
+        title: 'Bir sorun çıkarsa',
+        items: [
+          {
+            question: 'Kayıtlar diğer cihazımda görünmüyor',
+            answer: 'İki cihazda da aynı Apple ID’nin kullanıldığından, Yorix için iCloud’un açık olduğundan ve internet bağlantısı bulunduğundan emin olun. Uygulamayı iki cihazda da açın — senkronizasyon birkaç dakika sürer.',
+          },
+          {
+            question: 'Uygulama beklendiği gibi çalışmıyor',
+            answer: 'Yorix’i App Store’dan en son sürüme güncelleyin ve uygulamayı yeniden başlatın. Bu işe yaramazsa bize yazın — iletişim bilgileri aşağıda.',
+          },
+        ],
+      },
+    ],
+    web: 'Sitede kartla abonelik mi satın aldınız? Yanıtlar abonelik sayfasında.',
+  },
+  about: {
+    nav: 'Yorix hakkında',
+    eyebrow: 'Hakkımızda',
+    title: 'Tüm aile için daha huzurlu akşamlar',
+    body: 'Yorix, bebeğinizin ne zaman uyuması gerektiğini anlamanıza ve tam da ailenize uyan bir rutin kurmanıza yardımcı olur.',
+    sections: [
+      {
+        title: 'Yorix’i neden yaptık',
+        body: 'Her ebeveyn bu soruyu bilir: Yatırma vakti geldi mi, yoksa daha erken mi? Uyku çizelgeleri ortalamaları gösterir ama her bebeğin kendi ritmi vardır. Yorix’i, yanıt ortalama bir programa değil, bebeğinizin gerçek gününe dayansın diye yaptık.',
+      },
+      {
+        title: 'Nasıl çalışır',
+        body: 'Yorix, DSÖ ve Amerikan Uyku Tıbbı Akademisinin yaşa göre önerilerinden ve her yaş için belirlenen uyanıklık pencerelerinden yola çıkar. Günlüğe eklediğiniz her kayıt tahmini daha da netleştirir: Yorix, bebeğinizin bugün ve son günlerde nasıl uyuduğunu dikkate alır ve günün geri kalanının planını yeniden hesaplar.',
+      },
+      {
+        title: 'Misyonumuz',
+        body: 'Bebekler için daha çok huzurlu uyku — ebeveynleri için de daha fazla özgüven ve dinlenme.',
+      },
+    ],
+    values: {
+      title: 'Bizim için önemli olanlar',
+      items: [
+        {
+          title: 'Reklam yok',
+          body: 'Yorix’te reklam yok — bebeğinizi uyuturken hiçbir şey dikkatinizi dağıtmaz.',
+        },
+        {
+          title: 'Verileriniz sizindir',
+          body: 'Günlük, iPhone’unuzda ve iCloud hesabınızda saklanır. Veri satmıyoruz.',
+        },
+        {
+          title: 'Sınırlarımızı biliyoruz',
+          body: 'Yorix rutine yardımcı olur ama doktorun yerini tutmaz. Sağlıkla ilgili sorularınızı çocuk doktorunuza danışın.',
+        },
+        {
+          title: 'Tüm aile için',
+          body: 'İki ebeveyn tek bir günlük tutabilir, koç da günün her saatinde yanıt verir.',
+        },
+      ],
+    },
+  },
   footerLabels: { product: 'Ürün', features: 'Özellikler', guides: 'Rehberler', support: 'Destek', write: 'Bize yazın', badgeTop: 'Şuradan indirin' },
   docsNote: 'Belgeler İngilizce ve Rusça olarak mevcuttur.',
   topics: {

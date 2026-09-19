@@ -45,7 +45,8 @@ export function preferredLanguage(acceptLanguage: string | null | undefined, cou
 export function localizedPath(pathname: string, lang: Locale): string | null {
   if (pathname === '/') return `/${lang}`;
   if (pathname === '/guides') return `/${lang}/guides`;
-  if (pathname === '/subscription' || /^\/subscription\/(offer|payment|privacy)$/.test(pathname)) {
+  if (pathname === '/support' || pathname === '/about') return `/${lang}${pathname}`;
+  if (pathname === '/subscription' || /^\/subscription\/(offer|payment|terms|privacy|gift)$/.test(pathname)) {
     return lang === 'ru' ? `/ru${pathname}` : null;
   }
   const slug = pathname.slice(1);

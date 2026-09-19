@@ -290,7 +290,7 @@ export const translation: SiteTranslation = {
       cancel: 'Annuller',
     },
     currency: { note: (amounts) => `Mir-kort accepteres. Kortet trækkes i hviderussiske rubler: ${amounts}. Din bank omregner til sin egen kurs.` },
-    docs: { offer: 'Offentligt aftaletilbud', payment: 'Betaling, levering og refusion', privacy: 'Persondatapolitik' },
+    docs: { offer: 'Offentligt aftaletilbud', payment: 'Betaling, levering og refusion', terms: 'Brugsvilkår', privacy: 'Persondatapolitik' },
     home: {
       nav: 'Abonnement',
       eyebrow: 'Når App Store ikke er en mulighed',
@@ -319,6 +319,140 @@ export const translation: SiteTranslation = {
     'Forudsigelserne for lurene er skræmmende præcise. Jeg holdt op med at gætte, og vores aftener er endelig blevet rolige – puttetiden gik fra en times kamp til femten minutter.',
     'Det, der overbeviste mig, er, at planen justerer sig selv efter hver lur, jeg registrerer. Én kort lur, og hele dagen rykker sig – ikke mere hovedregning klokken to om eftermiddagen med en grædende baby.',
   ],
+  support: {
+    nav: 'Support',
+    eyebrow: 'Support',
+    title: 'Hvordan kan vi hjælpe?',
+    body: 'Svar på de spørgsmål, forældre oftest stiller om Yorix. Kan du ikke finde dit? Skriv til os – et rigtigt menneske læser hver eneste besked.',
+    contact: {
+      title: 'Brug for mere hjælp?',
+      body: 'Skriv til os i appen – Settings → »Write to us« åbner en chat med os – eller send en e-mail.',
+      reply: 'Vi svarer inden for 3 arbejdsdage.',
+      include: 'Vi kan hjælpe hurtigere, hvis du skriver, hvilken iPhone-model du har, hvilke versioner af iOS og Yorix du bruger, og hvad der skete.',
+      email: 'Send en e-mail',
+    },
+    topics: [
+      {
+        title: 'Kom godt i gang',
+        items: [
+          {
+            question: 'Hvor skal jeg starte?',
+            answer: 'Tilføj din baby, første gang du åbner appen, og registrer, hvornår babyen vågnede eller faldt i søvn. Allerede efter den første registrering viser Yorix det næste søvnvindue og gør det mere præcist med hver ny registrering.',
+          },
+          {
+            question: 'Hvordan laver Yorix sin prognose?',
+            answer: 'Yorix tager udgangspunkt i søvnnormer og vågenvinduer for din babys alder og tilpasser dem ud fra, hvordan babyen har sovet i dag og de seneste dage. Jo mere du registrerer, jo mere præcis bliver prognosen.',
+          },
+        ],
+      },
+      {
+        title: 'Abonnement og køb',
+        items: [
+          {
+            question: 'Hvad indeholder abonnementet?',
+            answer: 'Den personlige prognose for næste lur, AI-coachen, analyser af dagbogen og daglige råd. Du kan komme i gang med dagbogen gratis.',
+          },
+          {
+            question: 'Hvordan gendanner jeg køb på en ny iPhone?',
+            answer: 'Log ind med det samme Apple ID, åbn abonnementsskærmen i appen, og tryk på »Restore Purchases«.',
+          },
+          {
+            question: 'Hvordan opsiger jeg et abonnement i App Store?',
+            answer: 'I Indstillinger på din iPhone: Tryk på dit navn → Abonnementer → Yorix. Du beholder adgangen, indtil den betalte periode udløber.',
+          },
+        ],
+      },
+      {
+        title: 'Familie og data',
+        items: [
+          {
+            question: 'Hvordan fører vi dagbogen sammen?',
+            answer: 'Tryk på »Invite Partner« i indstillingerne i Yorix, og send invitationen. Den anden voksne ser den samme dagbog og kan tilføje registreringer fra sin egen iPhone.',
+          },
+          {
+            question: 'Hvordan flytter jeg dagbogen til en ny iPhone?',
+            answer: 'Dagbogen gemmes i din iCloud. Log ind med det samme Apple ID på den nye iPhone, og tjek, at iCloud er slået til for Yorix – så kommer dine registreringer tilbage af sig selv.',
+          },
+          {
+            question: 'Hvordan eksporterer jeg mine data?',
+            answer: 'Vælg »Export Data« i indstillingerne i Yorix – appen gemmer en fil med dine registreringer.',
+          },
+          {
+            question: 'Hvordan sletter jeg min konto og mine data?',
+            answer: 'I indstillingerne i Yorix: »Account« → »Delete Account«. Registreringer i din iCloud kan du slette i appen eller i iCloud-indstillingerne.',
+          },
+        ],
+      },
+      {
+        title: 'Påmindelser og widgets',
+        items: [
+          {
+            question: 'Hvorfor kommer påmindelserne ikke?',
+            answer: 'Tjek, at notifikationer er slået til for Yorix: Indstillinger på din iPhone → Notifikationer → Yorix. Fokus og Forstyr ikke kan også skjule dem.',
+          },
+          {
+            question: 'Hvordan tilføjer jeg en widget?',
+            answer: 'Hold en finger på et tomt sted på hjemmeskærmen, tryk på »Rediger« → »Tilføj widget«, find Yorix, og vælg en widget.',
+          },
+        ],
+      },
+      {
+        title: 'Hvis noget går galt',
+        items: [
+          {
+            question: 'Registreringer vises ikke på min anden enhed',
+            answer: 'Tjek, at begge enheder bruger det samme Apple ID, at iCloud er slået til for Yorix, og at der er forbindelse til internettet. Åbn appen på begge enheder – synkroniseringen tager et par minutter.',
+          },
+          {
+            question: 'Appen virker ikke, som den skal',
+            answer: 'Opdater Yorix til den nyeste version i App Store, og genstart appen. Hjælper det ikke, så skriv til os – se nedenfor.',
+          },
+        ],
+      },
+    ],
+    web: 'Har du betalt for abonnementet med kort her på siden? Svarene finder du på abonnementssiden.',
+  },
+  about: {
+    nav: 'Om Yorix',
+    eyebrow: 'Om os',
+    title: 'Roligere aftener for hele familien',
+    body: 'Yorix hjælper forældre med at vide, hvornår deres baby skal sove – og med at skabe en rutine, der passer til netop deres familie.',
+    sections: [
+      {
+        title: 'Derfor har vi lavet Yorix',
+        body: 'Alle forældre kender spørgsmålet: Er det tid til at lægge babyen, eller er det for tidligt? Søvntabeller giver gennemsnit, men hver baby har sin egen rytme. Vi har lavet Yorix, så svaret bygger på din babys virkelige dag og ikke på et gennemsnitligt skema.',
+      },
+      {
+        title: 'Sådan virker det',
+        body: 'Udgangspunktet er de aldersbaserede anbefalinger fra WHO og American Academy of Sleep Medicine og vågenvinduerne for hver alder. Hver registrering i dagbogen gør prognosen mere præcis: Yorix tager højde for, hvordan din baby har sovet i dag og de seneste dage, og genberegner planen for resten af dagen.',
+      },
+      {
+        title: 'Vores mission',
+        body: 'Mere rolig søvn til babyer – og mere tryghed og hvile til deres forældre.',
+      },
+    ],
+    values: {
+      title: 'Det går vi op i',
+      items: [
+        {
+          title: 'Ingen annoncer',
+          body: 'Der er ingen annoncer i Yorix – intet forstyrrer dig, mens du putter din baby.',
+        },
+        {
+          title: 'Dine data er dine',
+          body: 'Dagbogen ligger på din iPhone og i din iCloud. Vi sælger ikke data.',
+        },
+        {
+          title: 'Ærlige om grænserne',
+          body: 'Yorix hjælper med rutinen, men erstatter ikke en læge. Tal med lægen, hvis du har spørgsmål om din babys helbred.',
+        },
+        {
+          title: 'Til hele familien',
+          body: 'To forældre kan føre én dagbog sammen, og coachen svarer døgnet rundt.',
+        },
+      ],
+    },
+  },
   footerLabels: { product: 'Produkt', features: 'Funktioner', guides: 'Guider', support: 'Support', write: 'Skriv til os', badgeTop: 'Hent i' },
   docsNote: 'Dokumenterne findes på engelsk og russisk.',
   topics: {

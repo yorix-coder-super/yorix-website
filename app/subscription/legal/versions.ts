@@ -6,6 +6,7 @@ import type { Lang } from '../i18n';
 export const legalVersion = {
   offer: '2026-09-19',
   payment: '2026-09-19',
+  terms: '2026-09-19',
   privacy: '2026-09-19',
 } as const;
 

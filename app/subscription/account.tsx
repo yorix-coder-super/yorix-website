@@ -20,7 +20,9 @@ type WebConfig = { checkoutMode: CheckoutMode };
 type Me = { premiumUntil: string | null; blocked: boolean };
 // The document editions the buyer accepted — sent with the order so the
 // acceptance can be proven later.
-type Terms = { offer: string; payment: string; privacy: string };
+export type Terms = { offer: string; payment: string; privacy: string };
+// The card on a gift order: who it is for and a short wish.
+export type GiftCard = { to: string; message: string };
 type ErrorKey = keyof SubscriptionCopy['checkout'] | 'popupBlocked' | 'signInError';
 
 type State = {
@@ -48,7 +50,7 @@ type Api = State & {
   docsNote: string;
   currency: WebCurrency;
   signIn: () => Promise<boolean>;
-  createOrder: (planId: string, terms: Terms) => Promise<boolean>;
+  createOrder: (planId: string, terms: Terms, gift?: GiftCard) => Promise<boolean>;
   getToken: () => Promise<string | null>;
   clearError: () => void;
   openTerms: (plan: Plan | null) => void;
@@ -195,7 +197,7 @@ export function AccountProvider({
 
   const checkoutMode = state.config?.checkoutMode;
   const createOrder = useCallback(
-    async (planId: string, terms: Terms) => {
+    async (planId: string, terms: Terms, gift?: GiftCard) => {
       const token = await getToken();
       if (!token) return false;
       setState((s) => ({ ...s, busy: 'order', error: null }));
@@ -204,7 +206,7 @@ export function AccountProvider({
         const res = await fetch(`${API_BASE}/v1/web/orders`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'X-Firebase-Token': token },
-          body: JSON.stringify({ planId, lang, terms }),
+          body: JSON.stringify({ planId, lang, terms, ...(gift ? { gift } : {}) }),
         });
         const body = (await res.json().catch(() => ({}))) as { redirectUrl?: string; error?: string };
         if (res.ok && body.redirectUrl && PAYMENT_PAGE.test(body.redirectUrl)) {

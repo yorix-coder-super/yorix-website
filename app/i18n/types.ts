@@ -60,6 +60,28 @@ export type SceneName =
   | 'scene-crib'
   | 'scene-bunny';
 
+// /support: help topics answered against the app's own labels, then contact.
+export type SupportCopy = {
+  nav: string;
+  eyebrow: string;
+  title: string;
+  body: string;
+  contact: { title: string; body: string; reply: string; include: string; email: string };
+  topics: { title: string; items: { question: string; answer: string }[] }[];
+  // Only for visitors who can pay by card on the site.
+  web: string;
+};
+
+// /about: why Yorix exists, how it works and what it stands for.
+export type AboutCopy = {
+  nav: string;
+  eyebrow: string;
+  title: string;
+  body: string;
+  sections: [Pair, Pair, Pair];
+  values: { title: string; items: [Pair, Pair, Pair, Pair] };
+};
+
 export type SiteTranslation = {
   home: HomeCopy;
   guides: { eyebrow: string; title: string; body: string };
@@ -72,6 +94,8 @@ export type SiteTranslation = {
   plans: Record<PlanId, { title: string; forPeriod: string; days: string; purpose: string }>;
   // The three parent quotes (subscription/testimonials.ts), in that order.
   testimonials: [string, string, string];
+  support: SupportCopy;
+  about: AboutCopy;
   footerLabels: { product: string; features: string; guides: string; support: string; write: string; badgeTop: string };
   // Under the acceptance box when the documents are not in this language.
   docsNote: string;

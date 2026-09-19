@@ -290,7 +290,7 @@ export const translation: SiteTranslation = {
       cancel: 'Batal',
     },
     currency: { note: (amounts) => `Kad Mir diterima. Kad anda dicaj dalam rubel Belarus: ${amounts}. Bank anda akan menukarnya mengikut kadar bank sendiri.` },
-    docs: { offer: 'Perjanjian tawaran awam', payment: 'Pembayaran, penghantaran dan bayaran balik', privacy: 'Dasar data peribadi' },
+    docs: { offer: 'Perjanjian tawaran awam', payment: 'Pembayaran, penghantaran dan bayaran balik', terms: 'Terma penggunaan', privacy: 'Dasar data peribadi' },
     home: {
       nav: 'Langganan',
       eyebrow: 'Apabila App Store bukan pilihan',
@@ -328,6 +328,140 @@ export const translation: SiteTranslation = {
     'Ramalan tidur siangnya tepat sampai menakutkan. Saya berhenti meneka dan waktu malam kami akhirnya tenang — menidurkan anak yang dulunya sejam bergelut kini hanya lima belas minit.',
     'Yang meyakinkan saya ialah pelan menyesuaikan dirinya selepas setiap tidur siang yang saya catat. Satu tidur siang yang singkat dan seluruh hari turut beralih — tiada lagi mengira-ngira pada pukul 2 petang dengan bayi yang menangis.',
   ],
+  support: {
+    nav: 'Sokongan',
+    eyebrow: 'Sokongan',
+    title: 'Apa yang boleh kami bantu?',
+    body: 'Jawapan kepada soalan yang paling kerap ditanya oleh ibu bapa tentang Yorix. Tidak jumpa soalan anda? Tulis kepada kami — setiap mesej dibaca oleh manusia sebenar.',
+    contact: {
+      title: 'Masih perlukan bantuan?',
+      body: 'Tulis kepada kami dalam aplikasi — Settings → “Write to us” membuka sembang dengan kami — atau hantar e-mail.',
+      reply: 'Kami membalas dalam tempoh 3 hari bekerja.',
+      include: 'Untuk bantuan yang lebih pantas, beritahu kami model iPhone, versi iOS dan Yorix anda serta apa yang berlaku.',
+      email: 'Hantar e-mail',
+    },
+    topics: [
+      {
+        title: 'Bermula',
+        items: [
+          {
+            question: 'Dari mana saya perlu bermula?',
+            answer: 'Tambah bayi anda semasa membuka aplikasi buat kali pertama, dan catat bila dia bangun atau tertidur. Sejurus selepas catatan pertama, Yorix menunjukkan waktu tidur seterusnya dan memperhalusinya dengan setiap catatan baharu.',
+          },
+          {
+            question: 'Bagaimanakah Yorix membuat ramalan?',
+            answer: 'Yorix bermula dengan norma tidur dan waktu berjaga mengikut umur bayi anda, kemudian menyesuaikannya dengan bayi anda sendiri: cara dia tidur hari ini dan dalam beberapa hari lepas. Semakin banyak anda catat, semakin tepat ramalannya.',
+          },
+        ],
+      },
+      {
+        title: 'Langganan dan pembelian',
+        items: [
+          {
+            question: 'Apakah yang termasuk dalam langganan?',
+            answer: 'Ramalan tidur seterusnya yang khusus untuk bayi anda, jurulatih AI, analitik diari dan nasihat harian. Anda boleh mula mengisi diari secara percuma.',
+          },
+          {
+            question: 'Bagaimana cara memulihkan pembelian pada iPhone baharu?',
+            answer: 'Daftar masuk dengan Apple ID yang sama, buka skrin langganan dalam aplikasi dan ketik “Restore Purchases”.',
+          },
+          {
+            question: 'Bagaimana cara membatalkan langganan App Store?',
+            answer: 'Dalam Seting iPhone anda: ketik nama anda → Langganan → Yorix. Anda masih boleh menggunakannya sehingga tamat tempoh yang telah dibayar.',
+          },
+        ],
+      },
+      {
+        title: 'Keluarga dan data',
+        items: [
+          {
+            question: 'Bagaimana cara mengisi diari bersama-sama?',
+            answer: 'Dalam tetapan Yorix, ketik “Invite Partner” dan hantar jemputan. Orang dewasa yang seorang lagi akan melihat diari yang sama dan boleh menambah catatan daripada iPhone sendiri.',
+          },
+          {
+            question: 'Bagaimana cara memindahkan diari ke iPhone baharu?',
+            answer: 'Diari disimpan dalam iCloud anda. Daftar masuk ke Apple ID yang sama pada iPhone baharu dan pastikan iCloud diaktifkan untuk Yorix — catatan anda akan kembali dengan sendirinya.',
+          },
+          {
+            question: 'Bagaimana cara mengeksport data saya?',
+            answer: 'Dalam tetapan Yorix, pilih “Export Data” — aplikasi akan menyimpan fail yang mengandungi catatan anda.',
+          },
+          {
+            question: 'Bagaimana cara memadam akaun dan data saya?',
+            answer: 'Dalam tetapan Yorix: “Account” → “Delete Account”. Catatan dalam iCloud anda boleh dipadam dalam aplikasi atau dalam seting iCloud.',
+          },
+        ],
+      },
+      {
+        title: 'Peringatan dan widget',
+        items: [
+          {
+            question: 'Mengapa peringatan tidak sampai?',
+            answer: 'Pastikan pemberitahuan untuk Yorix diaktifkan pada iPhone: Seting → Pemberitahuan → Yorix. Fokus dan Jangan Ganggu juga boleh menyembunyikannya.',
+          },
+          {
+            question: 'Bagaimana cara menambah widget?',
+            answer: 'Sentuh dan tahan ruang kosong pada Skrin Utama, ketik “Edit” → “Tambah Widget”, cari Yorix dan pilih widget.',
+          },
+        ],
+      },
+      {
+        title: 'Jika ada masalah',
+        items: [
+          {
+            question: 'Catatan tidak muncul pada peranti saya yang lain',
+            answer: 'Pastikan kedua-dua peranti menggunakan Apple ID yang sama, iCloud diaktifkan untuk Yorix dan ada sambungan internet. Buka aplikasi pada kedua-dua peranti — penyegerakan mengambil masa beberapa minit.',
+          },
+          {
+            question: 'Aplikasi tidak berfungsi seperti yang dijangka',
+            answer: 'Kemas kini Yorix kepada versi terkini di App Store dan mulakan semula aplikasi. Jika masih tidak berjaya, tulis kepada kami — maklumat hubungan ada di bawah.',
+          },
+        ],
+      },
+    ],
+    web: 'Membayar langganan dengan kad di laman web? Jawapannya ada di halaman langganan.',
+  },
+  about: {
+    nav: 'Tentang Yorix',
+    eyebrow: 'Tentang kami',
+    title: 'Malam yang lebih tenang untuk seisi keluarga',
+    body: 'Yorix membantu ibu bapa mengetahui bila bayi mereka perlu tidur — dan membina rutin yang sesuai dengan keluarga mereka sendiri.',
+    sections: [
+      {
+        title: 'Mengapa kami mencipta Yorix',
+        body: 'Setiap ibu bapa kenal soalan ini: sudah tiba masa menidurkan bayi, atau masih terlalu awal? Carta tidur memberi angka purata, tetapi setiap bayi ada rentaknya sendiri. Kami mencipta Yorix supaya jawapannya berpandukan hari sebenar bayi anda, bukan jadual purata.',
+      },
+      {
+        title: 'Cara ia berfungsi',
+        body: 'Asasnya ialah garis panduan mengikut umur daripada WHO dan American Academy of Sleep Medicine, serta waktu berjaga bagi setiap peringkat umur. Setiap catatan dalam diari menajamkan ramalan: Yorix mengambil kira cara bayi anda tidur hari ini dan dalam beberapa hari lepas, lalu mengira semula pelan untuk baki hari itu.',
+      },
+      {
+        title: 'Misi kami',
+        body: 'Lebih banyak tidur yang tenang untuk bayi — serta lebih keyakinan dan rehat untuk ibu bapa mereka.',
+      },
+    ],
+    values: {
+      title: 'Apa yang penting bagi kami',
+      items: [
+        {
+          title: 'Tanpa iklan',
+          body: 'Yorix tidak memaparkan iklan — tiada apa yang mengganggu semasa anda menidurkan bayi.',
+        },
+        {
+          title: 'Data anda milik anda',
+          body: 'Diari disimpan dalam iPhone dan iCloud anda. Kami tidak menjual data.',
+        },
+        {
+          title: 'Jujur tentang batasan',
+          body: 'Yorix membantu dengan rutin tetapi tidak menggantikan doktor. Untuk soalan kesihatan, berbincanglah dengan doktor pakar kanak-kanak.',
+        },
+        {
+          title: 'Untuk seisi keluarga',
+          body: 'Ibu bapa boleh mengisi satu diari bersama-sama, dan jurulatih sedia menjawab pada bila-bila masa.',
+        },
+      ],
+    },
+  },
   footerLabels: { product: 'Produk', features: 'Ciri', guides: 'Panduan', support: 'Sokongan', write: 'E-mel kami', badgeTop: 'Muat turun pada' },
   docsNote: 'Dokumen tersedia dalam bahasa Inggeris dan Rusia.',
   topics: {

@@ -44,10 +44,43 @@ export type SubscriptionCopy = {
     medical: string;
     rows: { seller: string; status: string; unp: string; address: string; register: string; email: string; phone: string; hours: string };
   };
-  docs: { offer: string; payment: string; privacy: string };
+  docs: { offer: string; payment: string; terms: string; privacy: string };
   legal: { eyebrow: string; updated: (date: string) => string; binding: string };
   home: { nav: string; eyebrow: string; title: string; body: string; more: string };
   currency: { note: (amounts: string) => string };
+  gift: {
+    nav: string;
+    eyebrow: string;
+    title: string;
+    body: string;
+    steps: [string, string, string];
+    plan: string;
+    to: string;
+    toPlaceholder: string;
+    message: string;
+    messagePlaceholder: string;
+    cardFor: (name: string) => string;
+    cardPlan: (period: string) => string;
+    note: string;
+    pay: (price: string) => string;
+    paidTitle: string;
+    paidBody: string;
+    link: string;
+    code: string;
+    copyLink: string;
+    copied: string;
+    share: string;
+    validUntil: (date: string) => string;
+    redeemTitle: string;
+    redeemBody: string;
+    redeem: string;
+    redeemAccept: [string, string, string];
+    redeemed: (date: string) => string;
+    openApp: string;
+    download: string;
+    loading: string;
+    errors: { notFound: string; redeemed: string; expired: string; cancelled: string; error: string };
+  };
   terms: {
     title: (period: string) => string;
     period: string;
@@ -148,7 +181,7 @@ const ru: SubscriptionCopy = {
     medical: 'Yorix помогает с режимом дня и не оказывает медицинских услуг.',
     rows: { seller: 'Продавец', status: 'Статус', unp: 'УНП', address: 'Адрес', register: 'Регистрация в Торговом реестре', email: 'E-mail', phone: 'Телефон', hours: 'Режим работы' },
   },
-  docs: { offer: 'Публичный договор (оферта)', payment: 'Оплата, доставка и возврат', privacy: 'Политика обработки персональных данных' },
+  docs: { offer: 'Публичный договор (оферта)', payment: 'Оплата, доставка и возврат', terms: 'Условия использования', privacy: 'Политика обработки персональных данных' },
   legal: { eyebrow: 'Документы', updated: (date) => `Редакция от ${date}`, binding: '' },
   home: {
     nav: 'Подписка',
@@ -158,6 +191,46 @@ const ru: SubscriptionCopy = {
     more: 'Всё о подписке: условия, возврат, вопросы',
   },
   currency: { note: (amounts) => `Принимаем карты «Мир». Оплата проходит в белорусских рублях: ${amounts}. Банк карты пересчитает по своему курсу.` },
+  gift: {
+    nav: 'Подарок',
+    eyebrow: 'Подписка в подарок',
+    title: 'Подарите спокойные ночи',
+    body: 'Подписка Yorix на месяц или год — подарок молодым родителям: прогноз сна, ИИ-коуч и аналитика дневника с первого дня.',
+    steps: ['Выберите срок и подпишите открытку', 'Оплатите картой — сразу получите ссылку и код', 'Получатель откроет ссылку, войдёт через Apple, и подписка включится'],
+    plan: 'Срок',
+    to: 'Кому',
+    toPlaceholder: 'Например, Маше и Саше',
+    message: 'Пожелание',
+    messagePlaceholder: 'Спокойных ночей и сладких снов!',
+    // A Russian card dedication is in the dative, without «для»: «Маше и Саше».
+    cardFor: (name) => name,
+    cardPlan: (period) => `Подписка Yorix ${period}`,
+    note: 'Вход через Apple нужен, чтобы после оплаты показать вам ссылку и код подарка. Код действует 12 месяцев.',
+    pay: (price) => `Оплатить подарок · ${price}`,
+    paidTitle: 'Подарок оплачен!',
+    paidBody: 'Отправьте получателю ссылку: он откроет её, войдёт через Apple — и подписка включится на его аккаунте.',
+    link: 'Ссылка на подарок',
+    code: 'Код подарка',
+    copyLink: 'Скопировать ссылку',
+    copied: 'Скопировано',
+    share: 'Поделиться',
+    validUntil: (date) => `Код действует до ${date}.`,
+    redeemTitle: 'Вам подарили подписку Yorix',
+    redeemBody: 'Войдите через Apple тем же аккаунтом, что и в приложении Yorix, — подписка включится сразу.',
+    redeem: 'Активировать с Apple',
+    redeemAccept: ['Активируя подарок, вы принимаете ', 'условия использования', '.'],
+    redeemed: (date) => `Готово! Подписка действует до ${date}`,
+    openApp: 'Откройте Yorix на iPhone тем же аккаунтом Apple — функции подписки уже доступны.',
+    download: 'Скачать Yorix',
+    loading: 'Открываем подарок…',
+    errors: {
+      notFound: 'Такого подарка нет. Проверьте ссылку или код.',
+      redeemed: 'Этот подарок уже активирован.',
+      expired: 'Срок действия подарка истёк.',
+      cancelled: 'Подарок отменён.',
+      error: 'Не получилось активировать подарок. Попробуйте ещё раз через минуту.',
+    },
+  },
   terms: {
     title: (period) => `Подписка ${period}`,
     period: 'Срок',
@@ -258,7 +331,7 @@ const en: SubscriptionCopy = {
     medical: 'Yorix helps with the daily routine and does not provide medical services.',
     rows: { seller: 'Seller', status: 'Status', unp: 'Taxpayer number (УНП)', address: 'Address', register: 'Trade register', email: 'E-mail', phone: 'Phone', hours: 'Working hours' },
   },
-  docs: { offer: 'Public offer agreement', payment: 'Payment, delivery and refunds', privacy: 'Personal data policy' },
+  docs: { offer: 'Public offer agreement', payment: 'Payment, delivery and refunds', terms: 'Terms of use', privacy: 'Personal data policy' },
   legal: {
     eyebrow: 'Documents',
     updated: (date) => `Version of ${date}`,
@@ -272,6 +345,45 @@ const en: SubscriptionCopy = {
     more: 'All about the subscription: terms, refunds, FAQ',
   },
   currency: { note: (amounts) => `Mir cards are accepted. The card is charged in Belarusian rubles: ${amounts}. Your bank converts at its own rate.` },
+  gift: {
+    nav: 'Gift',
+    eyebrow: 'Gift a subscription',
+    title: 'Give the gift of calm nights',
+    body: 'A month or a year of Yorix for new parents: the sleep forecast, the AI coach and diary analytics from day one.',
+    steps: ['Pick a period and sign the card', 'Pay by card — get the link and code right away', 'The recipient opens the link, signs in with Apple and the subscription turns on'],
+    plan: 'Period',
+    to: 'To',
+    toPlaceholder: 'For example, Masha and Sasha',
+    message: 'Message',
+    messagePlaceholder: 'Calm nights and sweet dreams!',
+    cardFor: (name) => `For ${name}`,
+    cardPlan: (period) => `Yorix subscription ${period}`,
+    note: 'Signing in with Apple lets us show you the gift link and code after payment. The code is valid for 12 months.',
+    pay: (price) => `Pay for the gift · ${price}`,
+    paidTitle: 'Your gift is paid!',
+    paidBody: 'Send the recipient the link: they open it, sign in with Apple — and the subscription turns on for their account.',
+    link: 'Gift link',
+    code: 'Gift code',
+    copyLink: 'Copy link',
+    copied: 'Copied',
+    share: 'Share',
+    validUntil: (date) => `The code is valid until ${date}.`,
+    redeemTitle: 'Someone gave you a Yorix subscription',
+    redeemBody: 'Sign in with Apple using the same account as in the Yorix app — the subscription turns on right away.',
+    redeem: 'Redeem with Apple',
+    redeemAccept: ['By redeeming the gift you accept the ', 'terms of use', '.'],
+    redeemed: (date) => `Done! Your subscription runs until ${date}`,
+    openApp: 'Open Yorix on your iPhone with the same Apple account — the subscription features are already there.',
+    download: 'Get Yorix',
+    loading: 'Opening your gift…',
+    errors: {
+      notFound: 'There is no such gift. Check the link or the code.',
+      redeemed: 'This gift has already been redeemed.',
+      expired: 'This gift has expired.',
+      cancelled: 'This gift was cancelled.',
+      error: 'The gift could not be redeemed. Please try again in a minute.',
+    },
+  },
   terms: {
     title: (period) => `Subscription ${period}`,
     period: 'Period',

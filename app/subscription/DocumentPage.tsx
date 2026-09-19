@@ -6,7 +6,7 @@ import { subscriptionPath, type Lang, type SubscriptionPage } from './i18n';
 import { sellsHere } from './region';
 import { documentLinks, SubscriptionShell } from './SubscriptionShell';
 
-const docIcons = ['icon-document', 'icon-card', 'icon-lock'];
+const docIcons: Partial<Record<SubscriptionPage, string>> = { '/offer': 'icon-document', '/payment': 'icon-card', '/terms': 'icon-check', '/privacy': 'icon-lock' };
 
 export async function DocumentPage({
   lang,
@@ -22,11 +22,10 @@ export async function DocumentPage({
   children: ReactNode;
 }) {
   const copy = subscriptionCopy[lang];
-  const all = documentLinks(lang);
-  // Outside Belarus and Russia only the privacy policy is reachable, so there is nothing to switch between.
-  const links = (await sellsHere()) ? all : [];
+  // Outside Belarus and Russia only the terms and the privacy policy are reachable.
+  const links = documentLinks(lang, await sellsHere());
   const current = subscriptionPath(lang, page);
-  const icon = docIcons[Math.max(0, all.findIndex((link) => link.href === current))];
+  const icon = docIcons[page] ?? 'icon-document';
 
   return (
     <SubscriptionShell lang={lang} page={page}>
@@ -34,7 +33,7 @@ export async function DocumentPage({
         {links.length ? (
         <Reveal animation="fadeIn" load>
         <nav aria-label={copy.footer.documents} className="flex flex-wrap gap-2">
-          {links.map((link, index) => {
+          {links.map((link) => {
             const active = link.href === current;
             return (
               <a
@@ -45,7 +44,7 @@ export async function DocumentPage({
                 href={link.href}
                 key={link.href}
               >
-                <Art className="h-6 w-6 object-contain" height={192} name={docIcons[index]} width={192} />
+                <Art className="h-6 w-6 object-contain" height={192} name={docIcons[link.page] ?? 'icon-document'} width={192} />
                 {link.label}
               </a>
             );

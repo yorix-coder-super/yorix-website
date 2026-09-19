@@ -290,7 +290,7 @@ export const translation: SiteTranslation = {
       cancel: 'Zrušit',
     },
     currency: { note: (amounts) => `Přijímáme karty Mir. Platba se z karty strhne v běloruských rublech: ${amounts}. Tvoje banka ji přepočítá podle svého kurzu.` },
-    docs: { offer: 'Smlouva (veřejná nabídka)', payment: 'Platba, dodání a vrácení peněz', privacy: 'Zásady zpracování osobních údajů' },
+    docs: { offer: 'Smlouva (veřejná nabídka)', payment: 'Platba, dodání a vrácení peněz', terms: 'Podmínky používání', privacy: 'Zásady zpracování osobních údajů' },
     home: {
       nav: 'Předplatné',
       eyebrow: 'Když App Store nepřipadá v úvahu',
@@ -319,6 +319,140 @@ export const translation: SiteTranslation = {
     'Předpovědi denních spánků jsou až děsivě přesné. Přestala jsem hádat a naše večery se konečně zklidnily — uspávání se zkrátilo z hodiny boje na patnáct minut.',
     'Přesvědčilo mě, že se plán sám upraví po každém spánku, který zapíšu. Jeden krátký spánek a celý den se posune — žádné počítání ve dvě odpoledne s plačícím miminkem.',
   ],
+  support: {
+    nav: 'Podpora',
+    eyebrow: 'Podpora',
+    title: 'Jak ti můžeme pomoct?',
+    body: 'Odpovědi na otázky, které rodiče o aplikaci Yorix kladou nejčastěji. Chybí tu ta tvoje? Napiš nám — každou zprávu čte skutečný člověk.',
+    contact: {
+      title: 'Potřebuješ ještě pomoct?',
+      body: 'Napiš nám přímo v aplikaci — Settings → „Write to us“ otevře chat s námi — nebo pošli e-mail.',
+      reply: 'Odpovídáme do 3 pracovních dnů.',
+      include: 'Abychom ti pomohli rychleji, uveď model iPhonu, verze iOS a Yorix a popiš, co se stalo.',
+      email: 'Poslat e-mail',
+    },
+    topics: [
+      {
+        title: 'Začínáme',
+        items: [
+          {
+            question: 'Kde začít?',
+            answer: 'Při prvním spuštění přidej miminko a zapiš, kdy se probudilo nebo usnulo. Už po prvním záznamu ti Yorix ukáže okno dalšího spánku a s každým dalším ho bude zpřesňovat.',
+          },
+          {
+            question: 'Jak Yorix sestavuje předpověď?',
+            answer: 'Vychází z norem spánku a oken bdění pro věk tvého miminka a přizpůsobuje je přímo jemu — podle toho, jak spalo dnes a v posledních dnech. Čím víc záznamů, tím přesnější předpověď.',
+          },
+        ],
+      },
+      {
+        title: 'Předplatné a nákupy',
+        items: [
+          {
+            question: 'Co zahrnuje předplatné?',
+            answer: 'Osobní předpověď dalšího spánku, AI kouče, analýzy deníku a denní rady. Začít vést deník můžeš zdarma.',
+          },
+          {
+            question: 'Jak obnovím nákupy na novém iPhonu?',
+            answer: 'Přihlas se ke stejnému Apple ID, otevři v aplikaci obrazovku předplatného a klepni na „Restore Purchases“.',
+          },
+          {
+            question: 'Jak zruším předplatné v App Store?',
+            answer: 'V Nastavení na iPhonu klepni na své jméno → Předplatná → Yorix. Přístup ti zůstane až do konce zaplaceného období.',
+          },
+        ],
+      },
+      {
+        title: 'Rodina a data',
+        items: [
+          {
+            question: 'Jak vést deník ve dvou?',
+            answer: 'V nastavení aplikace Yorix klepni na „Invite Partner“ a pošli pozvánku. Druhý dospělý pak uvidí stejný deník a bude moct přidávat záznamy ze svého iPhonu.',
+          },
+          {
+            question: 'Jak přenést deník na nový iPhone?',
+            answer: 'Deník se ukládá na tvůj iCloud. Na novém iPhonu se přihlas ke stejnému Apple ID a zkontroluj, že má Yorix zapnutý iCloud — záznamy se vrátí samy.',
+          },
+          {
+            question: 'Jak exportovat data?',
+            answer: 'V nastavení aplikace Yorix zvol „Export Data“ — aplikace uloží soubor s tvými záznamy.',
+          },
+          {
+            question: 'Jak smazat účet a data?',
+            answer: 'V nastavení aplikace Yorix: „Account“ → „Delete Account“. Záznamy na tvém iCloudu můžeš smazat v aplikaci nebo v nastavení iCloudu.',
+          },
+        ],
+      },
+      {
+        title: 'Připomínky a widgety',
+        items: [
+          {
+            question: 'Proč mi nechodí připomínky?',
+            answer: 'Zkontroluj, že má Yorix zapnutá oznámení: Nastavení na iPhonu → Oznámení → Yorix. Skrýt je může i režim soustředění nebo funkce Nerušit.',
+          },
+          {
+            question: 'Jak přidat widget?',
+            answer: 'Podrž prst na prázdném místě plochy, klepni na „Upravit“ → „Přidat widget“, najdi Yorix a vyber widget.',
+          },
+        ],
+      },
+      {
+        title: 'Když něco nefunguje',
+        items: [
+          {
+            question: 'Záznamy se nezobrazují na druhém zařízení',
+            answer: 'Zkontroluj, že obě zařízení používají stejné Apple ID, Yorix má zapnutý iCloud a je k dispozici internet. Otevři aplikaci na obou zařízeních — synchronizace zabere pár minut.',
+          },
+          {
+            question: 'Aplikace nefunguje, jak by měla',
+            answer: 'Aktualizuj Yorix v App Store na nejnovější verzi a restartuj aplikaci. Pokud to nepomůže, napiš nám — kontakt najdeš níže.',
+          },
+        ],
+      },
+    ],
+    web: 'Máš předplatné zaplacené kartou na webu? Odpovědi najdeš na stránce předplatného.',
+  },
+  about: {
+    nav: 'O aplikaci Yorix',
+    eyebrow: 'O nás',
+    title: 'Klidnější večery pro celou rodinu',
+    body: 'Yorix pomáhá rodičům poznat, kdy už má miminko spát — a vytvořit režim, který vyhovuje právě jejich rodině.',
+    sections: [
+      {
+        title: 'Proč jsme vytvořili Yorix',
+        body: 'Tuhle otázku zná každý rodič: je už čas miminko uložit, nebo je ještě brzo? Tabulky spánku nabízejí průměry, jenže každé miminko má svůj vlastní rytmus. Yorix jsme vytvořili proto, aby se odpověď opírala o skutečný den tvého miminka, a ne o průměrný rozvrh.',
+      },
+      {
+        title: 'Jak to funguje',
+        body: 'Základem jsou věková doporučení WHO a Americké akademie spánkové medicíny a okna bdění pro každý věk. Každý záznam v deníku předpověď zpřesní: Yorix zohlední, jak miminko spalo dnes a v posledních dnech, a přepočítá plán na zbytek dne.',
+      },
+      {
+        title: 'Naše mise',
+        body: 'Víc klidného spánku pro miminka — a víc jistoty a odpočinku pro jejich rodiče.',
+      },
+    ],
+    values: {
+      title: 'Na čem nám záleží',
+      items: [
+        {
+          title: 'Bez reklam',
+          body: 'V aplikaci Yorix nejsou žádné reklamy — nic tě neruší, když ukládáš miminko ke spánku.',
+        },
+        {
+          title: 'Tvoje data patří tobě',
+          body: 'Deník je uložený na tvém iPhonu a na tvém iCloudu. Data neprodáváme.',
+        },
+        {
+          title: 'Známe své meze',
+          body: 'Yorix pomáhá s režimem, ale lékaře nenahradí. Se zdravotními otázkami se obrať na dětského lékaře.',
+        },
+        {
+          title: 'Pro celou rodinu',
+          body: 'Deník můžou vést oba rodiče společně a kouč odpovídá kdykoli ve dne i v noci.',
+        },
+      ],
+    },
+  },
   footerLabels: { product: 'Produkt', features: 'Funkce', guides: 'Články', support: 'Podpora', write: 'Napiš nám', badgeTop: 'Stáhnout v' },
   docsNote: 'Dokumenty jsou k dispozici v angličtině a ruštině.',
   topics: {

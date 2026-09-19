@@ -290,7 +290,7 @@ export const translation: SiteTranslation = {
       cancel: 'Cancelar',
     },
     currency: { note: (amounts) => `Aceptamos tarjetas Mir. El cargo en la tarjeta se hace en rublos bielorrusos: ${amounts}. Tu banco aplica su propio tipo de cambio.` },
-    docs: { offer: 'Contrato de oferta pública', payment: 'Pago, entrega y reembolsos', privacy: 'Política de tratamiento de datos personales' },
+    docs: { offer: 'Contrato de oferta pública', payment: 'Pago, entrega y reembolsos', terms: 'Condiciones de uso', privacy: 'Política de tratamiento de datos personales' },
     home: {
       nav: 'Suscripción',
       eyebrow: 'Cuando el App Store no es una opción',
@@ -328,6 +328,140 @@ export const translation: SiteTranslation = {
     'Las predicciones de las siestas son de una precisión que asusta. Dejé de adivinar y por fin nuestras noches se calmaron: acostarlo pasó de una hora de pelea a quince minutos.',
     'Lo que me convenció es que el plan se ajusta solo después de cada siesta que registro. Una siesta corta y todo el día se mueve: se acabó hacer cuentas a las dos de la tarde con un bebé llorando.',
   ],
+  support: {
+    nav: 'Soporte',
+    eyebrow: 'Soporte',
+    title: '¿Cómo podemos ayudarte?',
+    body: 'Respuestas a las preguntas que más nos hacen los padres sobre Yorix. ¿No encuentras la tuya? Escríbenos: cada mensaje lo lee una persona de verdad.',
+    contact: {
+      title: '¿Todavía necesitas ayuda?',
+      body: 'Puedes escribirnos desde la app (en «Ajustes» → «Escríbenos» se abre un chat con nosotros) o enviarnos un e-mail.',
+      reply: 'Respondemos en un plazo de 3 días laborables.',
+      include: 'Para ayudarte más rápido, indícanos el modelo de tu iPhone, las versiones de iOS y de Yorix, y cuéntanos qué pasó.',
+      email: 'Enviar un e-mail',
+    },
+    topics: [
+      {
+        title: 'Primeros pasos',
+        items: [
+          {
+            question: '¿Por dónde empiezo?',
+            answer: 'Añade a tu bebé la primera vez que abras la app y registra cuándo se despertó o se durmió. Desde el primer registro, Yorix te muestra la próxima ventana de sueño y la afina con cada registro nuevo.',
+          },
+          {
+            question: '¿Cómo calcula Yorix su pronóstico?',
+            answer: 'Parte de las pautas de sueño y las ventanas de vigilia para la edad de tu bebé y las adapta a él: a cómo durmió hoy y en los últimos días. Cuanto más registres, más preciso será el pronóstico.',
+          },
+        ],
+      },
+      {
+        title: 'Suscripción y compras',
+        items: [
+          {
+            question: '¿Qué incluye la suscripción?',
+            answer: 'El pronóstico personalizado del próximo sueño, el coach con IA, los análisis de tu diario y consejos para cada día. Puedes empezar el diario gratis.',
+          },
+          {
+            question: '¿Cómo restauro mis compras en un iPhone nuevo?',
+            answer: 'Inicia sesión con el mismo Apple ID, abre la pantalla de suscripción en la app y toca «Restaurar compras».',
+          },
+          {
+            question: '¿Cómo cancelo una suscripción del App Store?',
+            answer: 'En los Ajustes del iPhone: toca tu nombre → Suscripciones → Yorix. Mantienes el acceso hasta que termine el periodo pagado.',
+          },
+        ],
+      },
+      {
+        title: 'Familia y datos',
+        items: [
+          {
+            question: '¿Cómo llevamos el diario entre dos?',
+            answer: 'En los ajustes de Yorix, toca «Invitar pareja» y envía la invitación. La otra persona verá el mismo diario y podrá añadir registros desde su propio iPhone.',
+          },
+          {
+            question: '¿Cómo paso el diario a un iPhone nuevo?',
+            answer: 'El diario se guarda en tu iCloud. En el iPhone nuevo, inicia sesión con el mismo Apple ID y comprueba que iCloud esté activado para Yorix: tus registros volverán solos.',
+          },
+          {
+            question: '¿Cómo exporto mis datos?',
+            answer: 'En los ajustes de Yorix, elige «Exportar datos»: la app guardará un archivo con tus registros.',
+          },
+          {
+            question: '¿Cómo elimino mi cuenta y mis datos?',
+            answer: 'En los ajustes de Yorix: «Cuenta» → «Eliminar cuenta». Los registros de tu iCloud se pueden borrar en la app o en los ajustes de iCloud.',
+          },
+        ],
+      },
+      {
+        title: 'Recordatorios y widgets',
+        items: [
+          {
+            question: '¿Por qué no me llegan los recordatorios?',
+            answer: 'Comprueba que las notificaciones de Yorix estén activadas: Ajustes del iPhone → Notificaciones → Yorix. «Concentración» y «No molestar» también pueden ocultarlas.',
+          },
+          {
+            question: '¿Cómo añado un widget?',
+            answer: 'Mantén pulsado un espacio vacío de la pantalla de inicio, toca «Editar» → «Añadir widget», busca Yorix y elige un widget.',
+          },
+        ],
+      },
+      {
+        title: 'Si algo no funciona',
+        items: [
+          {
+            question: 'Los registros no aparecen en mi otro dispositivo',
+            answer: 'Comprueba que los dos dispositivos usen el mismo Apple ID, que iCloud esté activado para Yorix y que haya conexión a internet. Abre la app en ambos: la sincronización tarda un par de minutos.',
+          },
+          {
+            question: 'La app no funciona como debería',
+            answer: 'Actualiza Yorix a la última versión desde el App Store y reinicia la app. Si no se soluciona, escríbenos: más abajo te contamos cómo.',
+          },
+        ],
+      },
+    ],
+    web: '¿Pagaste la suscripción con tarjeta en la web? Encontrarás las respuestas en la página de la suscripción.',
+  },
+  about: {
+    nav: 'Sobre Yorix',
+    eyebrow: 'Quiénes somos',
+    title: 'Noches más tranquilas para toda la familia',
+    body: 'Yorix ayuda a madres y padres a saber cuándo necesita dormir su bebé y a crear una rutina a la medida de su familia.',
+    sections: [
+      {
+        title: 'Por qué creamos Yorix',
+        body: 'Todos los padres conocen esta pregunta: ¿ya toca acostarlo o todavía es pronto? Las tablas de sueño dan promedios, pero cada bebé tiene su propio ritmo. Creamos Yorix para que la respuesta se base en el día real de tu bebé, no en un horario promedio.',
+      },
+      {
+        title: 'Cómo funciona',
+        body: 'Yorix parte de las pautas por edad de la OMS y de la Academia Americana de Medicina del Sueño, y de las ventanas de vigilia de cada edad. Cada registro en el diario afina el pronóstico: la app tiene en cuenta cómo durmió tu bebé hoy y en los últimos días, y recalcula el plan para el resto del día.',
+      },
+      {
+        title: 'Nuestra misión',
+        body: 'Más sueño tranquilo para los bebés, y más confianza y descanso para sus padres.',
+      },
+    ],
+    values: {
+      title: 'Lo que nos importa',
+      items: [
+        {
+          title: 'Sin anuncios',
+          body: 'Yorix no tiene anuncios: nada te distrae mientras acuestas a tu bebé.',
+        },
+        {
+          title: 'Tus datos son tuyos',
+          body: 'El diario se guarda en tu iPhone y en tu iCloud. No vendemos datos.',
+        },
+        {
+          title: 'Honestos con nuestros límites',
+          body: 'Yorix te ayuda con la rutina, pero no sustituye al médico. Si tienes dudas de salud, consulta a tu pediatra.',
+        },
+        {
+          title: 'Para toda la familia',
+          body: 'El diario se puede llevar entre dos, y el coach responde a cualquier hora.',
+        },
+      ],
+    },
+  },
   footerLabels: { product: 'Producto', features: 'Funciones', guides: 'Guías', support: 'Soporte', write: 'Escríbenos', badgeTop: 'Descárgalo en el' },
   docsNote: 'Los documentos están disponibles en inglés y ruso.',
   topics: {

@@ -4,6 +4,7 @@ import { AppleGlyph } from './home/art';
 import { docsLang, siteCopy, type SiteLocale } from './i18n';
 import { PaymentLogos } from './subscription/PaymentLogos';
 import { subscriptionPath } from './subscription/i18n';
+import { subscriptionCopy } from './subscription/copy';
 import { merchant } from './subscription/merchant';
 import { sellsHere } from './subscription/region';
 
@@ -24,16 +25,18 @@ export async function SellerFooter({ note, locale = 'en', home }: { note: string
   const year = new Date().getFullYear();
   const years = year > 2026 ? `2026–${year}` : '2026';
   const web = await sellsHere();
-  const faq = web ? `${subscription}#faq` : homePath === '/' ? '/#faq' : `${homePath}#faq`;
+  const supportPage = locale === 'en' ? '/support' : `/${locale}/support`;
   const columns = [
     {
       title: text.product,
       links: [
         { href: homePath === '/' ? '/#features' : `${homePath}#features`, label: text.features },
         { href: locale === 'en' ? '/guides' : `/${locale}/guides`, label: text.guides },
+        { href: locale === 'en' ? '/about' : `/${locale}/about`, label: site.about.nav },
         ...(web
           ? [
               { href: `${subscription}#plans`, label: copy.nav.plans },
+              { href: subscriptionPath(docs, '/gift'), label: subscriptionCopy[docs].gift.eyebrow },
               { href: `${subscription}#reviews`, label: copy.nav.reviews },
             ]
           : []),
@@ -42,7 +45,7 @@ export async function SellerFooter({ note, locale = 'en', home }: { note: string
     {
       title: text.support,
       links: [
-        { href: faq, label: copy.nav.faq },
+        { href: supportPage, label: copy.nav.faq },
         { href: `mailto:${merchant.email}`, label: text.write },
         ...(web ? [{ href: subscriptionPath(docs, '/offer'), label: copy.footer.requisites }] : []),
       ],
@@ -56,6 +59,7 @@ export async function SellerFooter({ note, locale = 'en', home }: { note: string
               { href: subscriptionPath(docs, '/payment'), label: copy.docs.payment },
             ]
           : []),
+        { href: subscriptionPath(docs, '/terms'), label: copy.docs.terms },
         { href: subscriptionPath(docs, '/privacy'), label: copy.docs.privacy },
       ],
     },

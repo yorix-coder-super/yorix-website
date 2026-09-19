@@ -6,6 +6,7 @@ import { docsLang, siteCopy, type SiteLocale } from './i18n';
 import { localeCopy, locales } from './locales';
 import { HeaderMenus, type LanguageItem } from './subscription/HeaderMenus';
 import { subscriptionPath, type SubscriptionPage } from './subscription/i18n';
+import { subscriptionCopy } from './subscription/copy';
 import { sellsHere } from './subscription/region';
 
 const item = 'rounded-full px-3.5 py-2 transition hover:text-white';
@@ -13,31 +14,33 @@ const item = 'rounded-full px-3.5 py-2 transition hover:text-white';
 // One header for every page: the same five items, the same menus and the
 // same app button whether the visitor is on a home page, a guide or the
 // subscription page — so the site never feels like two sites.
-export async function SiteHeader({ locale, current, page = '' }: { locale: SiteLocale; current?: 'subscription'; page?: SubscriptionPage }) {
+export async function SiteHeader({ locale, current, page = '' }: { locale: SiteLocale; current?: 'subscription' | 'support' | 'about'; page?: SubscriptionPage }) {
   const isRoot = locale === 'en';
   const site = siteCopy(locale);
   const nav = site.home.nav;
   const home = isRoot ? '/' : `/${locale}`;
   const subscription = subscriptionPath(docsLang(locale));
   const web = await sellsHere();
+  const gift = subscriptionPath(docsLang(locale), '/gift');
   // On a subscription page the language links keep the visitor on the same
   // document; everywhere else they go to that language's home. `?lang=` makes
   // the choice stick over the automatic one (see proxy.ts).
   const languages: LanguageItem[] = [
-    { code: 'en', label: 'English', href: `${current === 'subscription' ? subscriptionPath('en', page) : '/'}?lang=en` },
+    { code: 'en', label: 'English', href: `${current === 'subscription' ? subscriptionPath('en', page) : current ? `/${current}` : '/'}?lang=en` },
     ...locales.map((code) => ({
       code,
       label: localeCopy[code].nativeName,
-      href: `${current === 'subscription' && code === 'ru' ? subscriptionPath('ru', page) : `/${code}`}?lang=${code}`,
+      href: `${current === 'subscription' && code === 'ru' ? subscriptionPath('ru', page) : current && current !== 'subscription' ? `/${code}/${current}` : `/${code}`}?lang=${code}`,
     })),
   ];
   const links = [
-    { href: `${home}#plan`, label: nav.plan },
     { href: `${home}#features`, label: nav.features },
     { href: isRoot ? '/guides' : `/${locale}/guides`, label: nav.guides },
-    { href: subscription, label: site.subscription.home.nav, current: current === 'subscription' },
-    { href: `${home}#faq`, label: nav.faq },
-  ].filter((link) => link.href !== subscription || web);
+    { href: subscription, label: site.subscription.home.nav, current: current === 'subscription' && page !== '/gift' },
+    { href: gift, label: subscriptionCopy[docsLang(locale)].gift.nav, current: current === 'subscription' && page === '/gift', wide: true },
+    { href: isRoot ? '/about' : `/${locale}/about`, label: site.about.nav, current: current === 'about', wide: true },
+    { href: isRoot ? '/support' : `/${locale}/support`, label: site.support.nav, current: current === 'support' },
+  ].filter((link) => (link.href !== subscription && link.href !== gift) || web);
 
   return (
     <header className="relative z-50 mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-5 py-5 sm:px-8 lg:px-10">
@@ -46,7 +49,12 @@ export async function SiteHeader({ locale, current, page = '' }: { locale: SiteL
       </a>
       <nav className="hidden items-center gap-1 text-sm font-medium text-white/75 md:flex">
         {links.map((link) => (
-          <a aria-current={link.current ? 'page' : undefined} className={`${item} ${link.current ? 'text-white underline decoration-[#A78BFA] decoration-2 underline-offset-8' : ''}`} href={link.href} key={link.href}>
+          <a
+            aria-current={link.current ? 'page' : undefined}
+            className={`${item} ${'wide' in link && link.wide ? 'hidden xl:inline-flex' : ''} ${link.current ? 'text-white underline decoration-[#A78BFA] decoration-2 underline-offset-8' : ''}`}
+            href={link.href}
+            key={link.href}
+          >
             {link.label}
           </a>
         ))}

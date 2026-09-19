@@ -290,7 +290,7 @@ export const translation: SiteTranslation = {
       cancel: 'Annuler',
     },
     currency: { note: (amounts) => `Nous acceptons les cartes Mir. Le débit sur la carte se fait en roubles biélorusses : ${amounts}. Votre banque applique son propre taux de change.` },
-    docs: { offer: 'Contrat d’offre publique', payment: 'Paiement, livraison et remboursement', privacy: 'Politique de traitement des données personnelles' },
+    docs: { offer: 'Contrat d’offre publique', payment: 'Paiement, livraison et remboursement', terms: 'Conditions d’utilisation', privacy: 'Politique de traitement des données personnelles' },
     home: {
       nav: 'Abonnement',
       eyebrow: 'Quand l’App Store n’est pas une option',
@@ -328,6 +328,140 @@ export const translation: SiteTranslation = {
     'Les prévisions de siestes sont d’une précision effrayante. J’ai arrêté de deviner et nos soirées se sont enfin apaisées — le coucher est passé d’une heure de lutte à quinze minutes.',
     'Ce qui m’a convaincu, c’est que le plan s’ajuste tout seul après chaque sieste que j’enregistre. Une sieste courte, et toute la journée se décale — fini les calculs à 14 h avec un bébé qui pleure.',
   ],
+  support: {
+    nav: 'Assistance',
+    eyebrow: 'Assistance',
+    title: 'Comment pouvons-nous vous aider ?',
+    body: 'Les réponses aux questions que les parents nous posent le plus souvent sur Yorix. Vous ne trouvez pas la vôtre ? Écrivez-nous — chaque message est lu par une vraie personne.',
+    contact: {
+      title: 'Toujours besoin d’aide ?',
+      body: 'Contactez-nous depuis l’app — « Réglages » → « Écrivez-nous » ouvre une discussion avec nous — ou envoyez-nous un e-mail.',
+      reply: 'Nous répondons sous 3 jours ouvrés.',
+      include: 'Pour vous aider plus vite, indiquez-nous le modèle de votre iPhone, les versions d’iOS et de Yorix, et ce qui s’est passé.',
+      email: 'Envoyer un e-mail',
+    },
+    topics: [
+      {
+        title: 'Premiers pas',
+        items: [
+          {
+            question: 'Par où commencer ?',
+            answer: 'Ajoutez votre bébé à la première ouverture de l’app, puis notez quand il s’est réveillé ou endormi. Dès la première note, Yorix affiche la prochaine fenêtre de sommeil et l’affine au fil des suivantes.',
+          },
+          {
+            question: 'Comment Yorix établit-il sa prévision ?',
+            answer: 'Yorix part des repères de sommeil et des fenêtres d’éveil propres à l’âge de votre bébé, puis les ajuste à son cas : la façon dont il a dormi aujourd’hui et ces derniers jours. Plus vous notez, plus la prévision est précise.',
+          },
+        ],
+      },
+      {
+        title: 'Abonnement et achats',
+        items: [
+          {
+            question: 'Que comprend l’abonnement ?',
+            answer: 'La prévision personnalisée du prochain sommeil, le coach IA, les analyses du journal et les conseils du jour. Vous pouvez commencer à tenir le journal gratuitement.',
+          },
+          {
+            question: 'Comment restaurer mes achats sur un nouvel iPhone ?',
+            answer: 'Connectez-vous avec le même Apple ID, ouvrez l’écran de l’abonnement dans l’app et touchez « Restaurer les achats ».',
+          },
+          {
+            question: 'Comment annuler un abonnement App Store ?',
+            answer: 'Dans les Réglages de votre iPhone : touchez votre nom → Abonnements → Yorix. Vous gardez l’accès jusqu’à la fin de la période payée.',
+          },
+        ],
+      },
+      {
+        title: 'Famille et données',
+        items: [
+          {
+            question: 'Comment tenir le journal à deux ?',
+            answer: 'Dans les réglages de Yorix, touchez « Inviter un partenaire » et envoyez l’invitation. L’autre adulte voit le même journal et peut ajouter des notes depuis son propre iPhone.',
+          },
+          {
+            question: 'Comment transférer le journal sur un nouvel iPhone ?',
+            answer: 'Le journal est stocké dans votre iCloud. Sur le nouvel iPhone, connectez-vous avec le même Apple ID et vérifiez qu’iCloud est activé pour Yorix — vos notes reviendront d’elles-mêmes.',
+          },
+          {
+            question: 'Comment exporter mes données ?',
+            answer: 'Dans les réglages de Yorix, choisissez « Exporter les données » — l’app enregistre un fichier avec vos notes.',
+          },
+          {
+            question: 'Comment supprimer mon compte et mes données ?',
+            answer: 'Dans les réglages de Yorix : « Compte » → « Supprimer le compte ». Les notes stockées dans votre iCloud peuvent être supprimées dans l’app ou dans les réglages iCloud.',
+          },
+        ],
+      },
+      {
+        title: 'Rappels et widgets',
+        items: [
+          {
+            question: 'Pourquoi les rappels n’arrivent-ils pas ?',
+            answer: 'Vérifiez que les notifications sont activées pour Yorix : Réglages de l’iPhone → Notifications → Yorix. La fonction « Concentration » et le mode « Ne pas déranger » peuvent aussi les masquer.',
+          },
+          {
+            question: 'Comment ajouter un widget ?',
+            answer: 'Maintenez le doigt sur un espace vide de l’écran d’accueil, touchez « Modifier » → « Ajouter un widget », cherchez Yorix et choisissez un widget.',
+          },
+        ],
+      },
+      {
+        title: 'En cas de problème',
+        items: [
+          {
+            question: 'Mes notes n’apparaissent pas sur mon autre appareil',
+            answer: 'Assurez-vous que les deux appareils utilisent le même Apple ID, qu’iCloud est activé pour Yorix et que la connexion Internet fonctionne. Ouvrez l’app sur les deux appareils : la synchronisation prend quelques minutes.',
+          },
+          {
+            question: 'L’app ne fonctionne pas comme prévu',
+            answer: 'Mettez Yorix à jour vers la dernière version sur l’App Store, puis relancez l’app. Si cela ne suffit pas, écrivez-nous — nos coordonnées sont juste en dessous.',
+          },
+        ],
+      },
+    ],
+    web: 'Vous avez payé votre abonnement par carte sur le site ? Les réponses se trouvent sur la page Abonnement.',
+  },
+  about: {
+    nav: 'À propos de Yorix',
+    eyebrow: 'Qui sommes-nous',
+    title: 'Des soirées plus sereines pour toute la famille',
+    body: 'Yorix aide les parents à savoir quand leur bébé a besoin de dormir — et à construire une routine qui convient vraiment à leur famille.',
+    sections: [
+      {
+        title: 'Pourquoi nous avons créé Yorix',
+        body: 'Tous les parents connaissent cette question : faut-il déjà coucher bébé, ou est-ce encore trop tôt ? Les tableaux de sommeil donnent des moyennes, mais chaque bébé a son propre rythme. Nous avons créé Yorix pour que la réponse s’appuie sur la vraie journée de votre bébé, et non sur un planning moyen.',
+      },
+      {
+        title: 'Comment ça marche',
+        body: 'Yorix s’appuie sur les repères par âge de l’OMS et de l’Académie américaine de médecine du sommeil, ainsi que sur les fenêtres d’éveil propres à chaque âge. Chaque note du journal affine la prévision : l’app tient compte de la façon dont votre bébé a dormi aujourd’hui et ces derniers jours, puis recalcule le plan du reste de la journée.',
+      },
+      {
+        title: 'Notre mission',
+        body: 'Plus de sommeil paisible pour les bébés — et plus de confiance et de repos pour leurs parents.',
+      },
+    ],
+    values: {
+      title: 'Ce qui compte pour nous',
+      items: [
+        {
+          title: 'Zéro publicité',
+          body: 'Yorix n’affiche aucune publicité — rien ne vient vous distraire pendant que vous couchez votre bébé.',
+        },
+        {
+          title: 'Vos données vous appartiennent',
+          body: 'Le journal reste sur votre iPhone et dans votre iCloud. Nous ne vendons aucune donnée.',
+        },
+        {
+          title: 'Honnêtes sur nos limites',
+          body: 'Yorix aide à organiser la routine, mais ne remplace pas un médecin. Pour toute question de santé, parlez-en à votre pédiatre.',
+        },
+        {
+          title: 'Pour toute la famille',
+          body: 'Deux parents peuvent tenir un seul et même journal, et le coach répond à toute heure.',
+        },
+      ],
+    },
+  },
   footerLabels: { product: 'Produit', features: 'Fonctionnalités', guides: 'Guides', support: 'Assistance', write: 'Écrivez-nous', badgeTop: 'Télécharger sur' },
   docsNote: 'Les documents sont disponibles en anglais et en russe.',
   topics: {

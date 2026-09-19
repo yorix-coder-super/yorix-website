@@ -290,7 +290,7 @@ export const translation: SiteTranslation = {
       cancel: 'Abbrechen',
     },
     currency: { note: (amounts) => `Mir-Karten werden akzeptiert. Die Karte wird in belarussischen Rubeln belastet: ${amounts}. Deine Bank rechnet zu ihrem eigenen Kurs um.` },
-    docs: { offer: 'Öffentliches Vertragsangebot', payment: 'Zahlung, Lieferung und Rückerstattung', privacy: 'Datenschutzrichtlinie' },
+    docs: { offer: 'Öffentliches Vertragsangebot', payment: 'Zahlung, Lieferung und Rückerstattung', terms: 'Nutzungsbedingungen', privacy: 'Datenschutzrichtlinie' },
     home: {
       nav: 'Abo',
       eyebrow: 'Wenn der App Store keine Option ist',
@@ -319,6 +319,140 @@ export const translation: SiteTranslation = {
     'Die Vorhersagen für die Nickerchen sind erschreckend genau. Ich habe aufgehört zu raten, und unsere Abende sind endlich ruhig geworden – aus einer Stunde Kampf beim Zubettbringen wurden fünfzehn Minuten.',
     'Überzeugt hat mich, dass sich der Plan nach jedem Nickerchen, das ich eintrage, selbst anpasst. Ein kurzes Nickerchen, und der ganze Tag verschiebt sich – kein Kopfrechnen mehr um 14 Uhr mit einem weinenden Baby.',
   ],
+  support: {
+    nav: 'Support',
+    eyebrow: 'Support',
+    title: 'Wie können wir helfen?',
+    body: 'Antworten auf die Fragen, die Eltern uns am häufigsten zu Yorix stellen. Deine Frage ist nicht dabei? Schreib uns – bei uns liest ein echter Mensch jede Nachricht.',
+    contact: {
+      title: 'Noch Fragen offen?',
+      body: 'Melde dich direkt in der App – „Einstellungen“ → „Schreib uns“ öffnet einen Chat mit uns – oder schreib uns eine E-Mail.',
+      reply: 'Wir antworten innerhalb von 3 Werktagen.',
+      include: 'Damit wir schneller helfen können, nenn uns dein iPhone-Modell, die Versionen von iOS und Yorix und beschreib kurz, was passiert ist.',
+      email: 'E-Mail schreiben',
+    },
+    topics: [
+      {
+        title: 'Erste Schritte',
+        items: [
+          {
+            question: 'Wo fange ich an?',
+            answer: 'Füge beim ersten Öffnen der App dein Baby hinzu und trag ein, wann es aufgewacht oder eingeschlafen ist. Schon nach dem ersten Eintrag zeigt Yorix das nächste Schlaffenster und verfeinert es mit jedem weiteren.',
+          },
+          {
+            question: 'Wie erstellt Yorix die Prognose?',
+            answer: 'Yorix startet mit den Richtwerten für Schlaf und Wachfenster, die für das Alter deines Babys gelten, und stimmt sie auf dein Kind ab: darauf, wie es heute und in den letzten Tagen geschlafen hat. Je mehr du einträgst, desto genauer wird die Prognose.',
+          },
+        ],
+      },
+      {
+        title: 'Abo und Käufe',
+        items: [
+          {
+            question: 'Was ist im Abo enthalten?',
+            answer: 'Die persönliche Prognose für den nächsten Schlaf, der KI-Coach, Auswertungen deines Tagebuchs und Tagestipps. Mit dem Tagebuch kannst du kostenlos loslegen.',
+          },
+          {
+            question: 'Wie stelle ich Käufe auf einem neuen iPhone wieder her?',
+            answer: 'Melde dich mit derselben Apple ID an, öffne in der App den Abo-Bildschirm und tippe auf „Käufe wiederherstellen“.',
+          },
+          {
+            question: 'Wie kündige ich ein Abo über den App Store?',
+            answer: 'In den Einstellungen auf deinem iPhone: Tippe auf deinen Namen → Abonnements → Yorix. Den Zugang behältst du bis zum Ende des bezahlten Zeitraums.',
+          },
+        ],
+      },
+      {
+        title: 'Familie und Daten',
+        items: [
+          {
+            question: 'Wie führen wir das Tagebuch zu zweit?',
+            answer: 'Tippe in den Yorix-Einstellungen auf „Partner einladen“ und schick die Einladung ab. Die eingeladene Person sieht dasselbe Tagebuch und kann von ihrem eigenen iPhone aus Einträge hinzufügen.',
+          },
+          {
+            question: 'Wie ziehe ich das Tagebuch auf ein neues iPhone um?',
+            answer: 'Das Tagebuch wird in deiner iCloud gespeichert. Melde dich auf dem neuen iPhone mit derselben Apple ID an und achte darauf, dass iCloud für Yorix eingeschaltet ist – deine Einträge kommen dann von selbst zurück.',
+          },
+          {
+            question: 'Wie exportiere ich meine Daten?',
+            answer: 'Wähle in den Yorix-Einstellungen „Daten exportieren“ – die App speichert eine Datei mit deinen Einträgen.',
+          },
+          {
+            question: 'Wie lösche ich mein Konto und meine Daten?',
+            answer: 'In den Yorix-Einstellungen: „Konto“ → „Konto löschen“. Einträge in deiner iCloud kannst du in der App oder in den iCloud-Einstellungen löschen.',
+          },
+        ],
+      },
+      {
+        title: 'Erinnerungen und Widgets',
+        items: [
+          {
+            question: 'Warum kommen keine Erinnerungen an?',
+            answer: 'Prüfe auf deinem iPhone unter Einstellungen → Mitteilungen → Yorix, ob Mitteilungen erlaubt sind. Auch „Fokus“ und „Nicht stören“ können sie ausblenden.',
+          },
+          {
+            question: 'Wie füge ich ein Widget hinzu?',
+            answer: 'Halte eine freie Stelle auf dem Home-Bildschirm gedrückt, tippe auf „Bearbeiten“ → „Widget hinzufügen“, such nach Yorix und wähle ein Widget aus.',
+          },
+        ],
+      },
+      {
+        title: 'Wenn etwas nicht klappt',
+        items: [
+          {
+            question: 'Einträge erscheinen nicht auf meinem anderen Gerät',
+            answer: 'Stell sicher, dass beide Geräte dieselbe Apple ID nutzen, iCloud für Yorix eingeschaltet ist und eine Internetverbindung besteht. Öffne die App auf beiden Geräten – die Synchronisierung dauert ein paar Minuten.',
+          },
+          {
+            question: 'Die App funktioniert nicht wie erwartet',
+            answer: 'Aktualisiere Yorix im App Store auf die neueste Version und starte die App neu. Hilft das nicht, schreib uns – die Kontaktmöglichkeiten findest du unten.',
+          },
+        ],
+      },
+    ],
+    web: 'Du hast dein Abo per Karte auf der Website bezahlt? Die Antworten findest du auf der Abo-Seite.',
+  },
+  about: {
+    nav: 'Über Yorix',
+    eyebrow: 'Über uns',
+    title: 'Ruhigere Abende für die ganze Familie',
+    body: 'Yorix hilft Eltern zu erkennen, wann ihr Baby Schlaf braucht – und eine Routine aufzubauen, die wirklich zur eigenen Familie passt.',
+    sections: [
+      {
+        title: 'Warum wir Yorix entwickelt haben',
+        body: 'Alle Eltern kennen diese Frage: Ist es schon Zeit, das Baby hinzulegen, oder noch zu früh? Schlaftabellen zeigen Durchschnittswerte, doch jedes Baby hat seinen eigenen Rhythmus. Wir haben Yorix entwickelt, damit sich die Antwort auf den echten Tag deines Babys stützt – nicht auf einen Durchschnittsplan.',
+      },
+      {
+        title: 'So funktioniert es',
+        body: 'Grundlage sind die Altersempfehlungen der WHO und der American Academy of Sleep Medicine sowie die Wachfenster für jedes Alter. Jeder Eintrag im Tagebuch schärft die Prognose: Yorix berücksichtigt, wie dein Baby heute und in den letzten Tagen geschlafen hat, und berechnet den Plan für den Rest des Tages neu.',
+      },
+      {
+        title: 'Unsere Mission',
+        body: 'Mehr ruhiger Schlaf für Babys – und mehr Zuversicht und Erholung für ihre Eltern.',
+      },
+    ],
+    values: {
+      title: 'Was uns wichtig ist',
+      items: [
+        {
+          title: 'Keine Werbung',
+          body: 'In Yorix gibt es keine Werbung – nichts lenkt dich ab, während du dein Baby ins Bett bringst.',
+        },
+        {
+          title: 'Deine Daten gehören dir',
+          body: 'Das Tagebuch liegt auf deinem iPhone und in deiner iCloud. Wir verkaufen keine Daten.',
+        },
+        {
+          title: 'Ehrlich über unsere Grenzen',
+          body: 'Yorix hilft bei der Routine, ersetzt aber keinen Arztbesuch. Bei Fragen zur Gesundheit wende dich an deine Kinderarztpraxis.',
+        },
+        {
+          title: 'Für die ganze Familie',
+          body: 'Ihr könnt das Tagebuch zu zweit führen, und der Coach antwortet rund um die Uhr.',
+        },
+      ],
+    },
+  },
   footerLabels: { product: 'Produkt', features: 'Funktionen', guides: 'Ratgeber', support: 'Support', write: 'Schreib uns', badgeTop: 'Laden im' },
   docsNote: 'Die Dokumente gibt es auf Englisch und Russisch.',
   topics: {

@@ -10,12 +10,14 @@ import { formatDate, subscriptionPath, type Lang } from './i18n';
 import { Button, Spinner } from './ui';
 
 type Status = 'checking' | 'paid' | 'pending' | 'failed';
+type PaidGift = { code: string; to: string | null; expiresAt: string };
 
 function ReturnStatus() {
   const { ready, configured, signedIn, lang, getToken, signIn } = useAccount();
   const copy = subscriptionCopy[lang];
   const [status, setStatus] = useState<Status>('checking');
   const [until, setUntil] = useState<string | null>(null);
+  const [gift, setGift] = useState<PaidGift | null>(null);
   const needsSignIn = ready && (!configured || !signedIn);
 
   useEffect(() => {
@@ -36,7 +38,13 @@ function ReturnStatus() {
         const res = await fetch(`${API_BASE}/v1/web/orders/${orderId}`, { headers: { 'X-Firebase-Token': token } });
         if (cancelled) return;
         if (res.ok) {
-          const body = (await res.json()) as { status: string; premiumUntil?: string | null };
+          const body = (await res.json()) as { status: string; premiumUntil?: string | null; gift?: PaidGift | null };
+          // A gift order is done once its code exists; the buyer gets no pass of their own.
+          if (body.status === 'paid' && body.gift) {
+            setGift(body.gift);
+            setStatus('paid');
+            return;
+          }
           if (body.status === 'paid' && body.premiumUntil) {
             setUntil(body.premiumUntil);
             setStatus('paid');
@@ -87,7 +95,7 @@ function ReturnStatus() {
       </div>
       </Reveal>
       <h1 className="mt-6 text-4xl font-semibold leading-tight text-white sm:text-5xl">
-        {status === 'paid' && until ? copy.ret.paid(formatDate(until, lang)) : copy.ret.checking}
+        {gift ? copy.gift.paidTitle : status === 'paid' && until ? copy.ret.paid(formatDate(until, lang)) : copy.ret.checking}
       </h1>
       <div className="mt-8 rounded-[2rem] border border-white/12 bg-white/[0.06] p-8 backdrop-blur-xl">
         {!needsSignIn && (status === 'checking' || status === 'pending') ? (
@@ -97,6 +105,7 @@ function ReturnStatus() {
           </p>
         ) : null}
         {status === 'paid' && until ? <p className="text-lg leading-8 text-white/85">{copy.ret.openApp}</p> : null}
+        {gift ? <GiftLink gift={gift} lang={lang} /> : null}
         {!needsSignIn && status === 'failed' ? <p className="text-base leading-7 text-white/80">{copy.ret.failed}</p> : null}
         {needsSignIn ? (
           <>
@@ -124,5 +133,40 @@ export function ReturnStatusPanel({ lang }: { lang: Lang }) {
     <AccountProvider lang={lang}>
       <ReturnStatus />
     </AccountProvider>
+  );
+}
+
+// What the buyer passes on: the link (with copy and share) and the code.
+function GiftLink({ gift, lang }: { gift: PaidGift; lang: Lang }) {
+  const text = subscriptionCopy[lang].gift;
+  const [copied, setCopied] = useState(false);
+  const url = typeof window === 'undefined' ? '' : `${window.location.origin}${lang === 'ru' ? '/ru' : ''}/gift/${gift.code}`;
+  const canShare = typeof navigator !== 'undefined' && typeof navigator.share === 'function';
+
+  return (
+    <div className="text-start">
+      <p className="text-base leading-7 text-white/85">{text.paidBody}</p>
+      <p className="mt-5 text-sm font-semibold text-white/70">{text.link}</p>
+      <p className="mt-1 break-all rounded-2xl border border-white/15 bg-white/[0.06] px-4 py-3 font-mono text-sm text-white">{url}</p>
+      <div className="mt-3 flex flex-wrap gap-3">
+        <Button
+          onClick={() => {
+            void navigator.clipboard?.writeText(url).then(() => setCopied(true));
+          }}
+          variant="light"
+        >
+          {copied ? text.copied : text.copyLink}
+        </Button>
+        {canShare ? (
+          <Button onClick={() => void navigator.share({ title: text.eyebrow, url }).catch(() => {})} variant="ghost">
+            {text.share}
+          </Button>
+        ) : null}
+      </div>
+      <p className="mt-5 text-sm text-white/70">
+        {text.code}: <span className="font-mono text-base font-semibold tracking-wider text-white">{gift.code}</span>
+      </p>
+      <p className="mt-1 text-sm text-white/55">{text.validUntil(formatDate(gift.expiresAt, lang))}</p>
+    </div>
   );
 }

@@ -262,6 +262,140 @@ export const translation: SiteTranslation = {
   },
   plans: planCopy.en,
   testimonials: testimonials.map((t) => t.translations.en) as SiteTranslation['testimonials'],
+  support: {
+    nav: 'Support',
+    eyebrow: 'Support',
+    title: 'How can we help?',
+    body: 'Answers to the questions parents ask most about Yorix. Can’t find yours? Write to us — a real person reads every message.',
+    contact: {
+      title: 'Still need help?',
+      body: 'Write to us in the app — Settings → “Write to us” opens a chat with us — or send an e-mail.',
+      reply: 'We reply within 3 working days.',
+      include: 'To help faster, tell us your iPhone model, iOS and Yorix versions and what happened.',
+      email: 'Send an e-mail',
+    },
+    topics: [
+      {
+        title: 'Getting started',
+        items: [
+          {
+            question: 'Where do I start?',
+            answer: 'Add your baby when you first open the app and log when they woke up or fell asleep. After the very first entry Yorix shows the next sleep window and refines it with every new one.',
+          },
+          {
+            question: 'How does Yorix make its forecast?',
+            answer: 'It starts from the sleep norms and wake windows for your baby’s age and adjusts them to your baby: how they slept today and over the last few days. The more you log, the more accurate the forecast.',
+          },
+        ],
+      },
+      {
+        title: 'Subscription and purchases',
+        items: [
+          {
+            question: 'What does the subscription include?',
+            answer: 'The personal next-sleep forecast, the AI coach, diary analytics and daily recommendations. You can start the diary for free.',
+          },
+          {
+            question: 'How do I restore purchases on a new iPhone?',
+            answer: 'Sign in with the same Apple ID, open the subscription screen in the app and tap “Restore Purchases”.',
+          },
+          {
+            question: 'How do I cancel an App Store subscription?',
+            answer: 'In your iPhone Settings: tap your name → Subscriptions → Yorix. You keep access until the end of the paid period.',
+          },
+        ],
+      },
+      {
+        title: 'Family and data',
+        items: [
+          {
+            question: 'How do we keep the diary together?',
+            answer: 'In Yorix settings, tap “Invite Partner” and send the invitation. The other adult sees the same diary and can add entries from their own iPhone.',
+          },
+          {
+            question: 'How do I move the diary to a new iPhone?',
+            answer: 'The diary is stored in your iCloud. Sign in to the same Apple ID on the new iPhone and make sure iCloud is on for Yorix — your entries come back on their own.',
+          },
+          {
+            question: 'How do I export my data?',
+            answer: 'In Yorix settings, choose “Export Data” — the app saves a file with your entries.',
+          },
+          {
+            question: 'How do I delete my account and data?',
+            answer: 'In Yorix settings: “Account” → “Delete Account”. Entries in your iCloud can be deleted in the app or in iCloud settings.',
+          },
+        ],
+      },
+      {
+        title: 'Reminders and widgets',
+        items: [
+          {
+            question: 'Why don’t reminders arrive?',
+            answer: 'Check that notifications are on for Yorix: iPhone Settings → Notifications → Yorix. Focus and Do Not Disturb can hide them too.',
+          },
+          {
+            question: 'How do I add a widget?',
+            answer: 'Touch and hold an empty spot on the Home Screen, tap “Edit” → “Add Widget”, find Yorix and pick a widget.',
+          },
+        ],
+      },
+      {
+        title: 'If something goes wrong',
+        items: [
+          {
+            question: 'Entries don’t show up on my other device',
+            answer: 'Make sure both devices use the same Apple ID, iCloud is on for Yorix and there is an internet connection. Open the app on both devices — syncing takes a couple of minutes.',
+          },
+          {
+            question: 'The app doesn’t work as expected',
+            answer: 'Update Yorix to the latest version in the App Store and restart the app. If that doesn’t help, write to us — see below.',
+          },
+        ],
+      },
+    ],
+    web: 'Paid for a subscription by card on the website? The answers are on the subscription page.',
+  },
+  about: {
+    nav: 'About Yorix',
+    eyebrow: 'About us',
+    title: 'Calmer evenings for the whole family',
+    body: 'Yorix helps parents know when their baby needs to sleep — and build a routine that fits their own family.',
+    sections: [
+      {
+        title: 'Why we made Yorix',
+        body: 'Every parent knows the question: is it time to put the baby down, or is it too early? Sleep charts give averages, but every baby has their own rhythm. We made Yorix so the answer rests on your baby’s real day, not on an average schedule.',
+      },
+      {
+        title: 'How it works',
+        body: 'It starts from the age-based guidance of the WHO and the American Academy of Sleep Medicine and the wake windows for each age. Every diary entry sharpens the forecast: Yorix takes into account how your baby slept today and in recent days and recalculates the rest of the day’s plan.',
+      },
+      {
+        title: 'Our mission',
+        body: 'More calm sleep for babies — and more confidence and rest for their parents.',
+      },
+    ],
+    values: {
+      title: 'What matters to us',
+      items: [
+        {
+          title: 'No ads',
+          body: 'Yorix has no ads — nothing distracts you while you’re putting your baby to bed.',
+        },
+        {
+          title: 'Your data is yours',
+          body: 'The diary lives on your iPhone and in your iCloud. We don’t sell data.',
+        },
+        {
+          title: 'Honest about limits',
+          body: 'Yorix helps with routines but doesn’t replace a doctor. For health questions, talk to your pediatrician.',
+        },
+        {
+          title: 'For the whole family',
+          body: 'Two parents can keep one diary, and the coach answers at any hour.',
+        },
+      ],
+    },
+  },
   footerLabels: { product: 'Product', features: 'Features', guides: 'Guides', support: 'Support', write: 'Write to us', badgeTop: 'Download on the' },
   docsNote: '',
 };

@@ -70,12 +70,16 @@ function ru({ email, payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '5. Предоставление доступа',
       blocks: [
-        '5.1. Подписка активируется автоматически после получения Исполнителем от Платёжного сервиса подтверждения успешной оплаты и привязывается к Аккаунту, от имени которого совершена оплата. Период доступа исчисляется с момента активации.',
+        '5.1. Подписка активируется автоматически после получения Исполнителем от Платёжного сервиса подтверждения успешной оплаты и привязывается к Аккаунту, от имени которого совершена оплата. Период доступа исчисляется с момента активации. Для подарка действуют п. 5.7–5.10.',
         `5.2. Если Подписка не активировалась в течение 3 дней после оплаты, Пользователь сообщает об этом на ${email}. Исполнитель в течение 3 рабочих дней активирует Подписку либо, по выбору Пользователя, возвращает оплату в полном объёме.`,
         '5.3. Если на момент оплаты у Пользователя есть действующая Подписка, новый Период доступа начинается после окончания текущего.',
         '5.4. Услуга считается оказанной надлежащим образом, если в течение Периода доступа платные функции доступны на Аккаунте Пользователя. Факт предоставления доступа подтверждается журналами Сервиса и Платёжного сервиса; это не лишает Пользователя права представлять иные доказательства.',
         '5.5. По окончании Периода доступа платные функции отключаются. Бесплатные функции и данные, внесённые Пользователем, сохраняются.',
         '5.6. Покупки в App Store совершаются по правилам Apple: списания, отмена автопродления и возвраты по ним осуществляются через Apple. Покупка на Сайте не отменяет автопродление подписки App Store.',
+        '5.7. **Подписка в подарок.** Пользователь может оплатить Подписку на 30 или 365 суток для другого лица. После оплаты ссылка и код подарка показываются Пользователю на странице результата оплаты; передать их получателю — забота Пользователя. По электронной почте Исполнитель их не направляет.',
+        '5.8. Код действует 12 месяцев с даты оплаты и активируется один раз: получатель переходит по ссылке и входит через Apple, после чего Период доступа начинается на его Аккаунте. Код, не активированный в этот срок, прекращает действие; Пользователь вправе отказаться от Договора с возвратом в порядке раздела 7.',
+        '5.9. До активации кода Пользователь вправе отказаться от Договора с возвратом полной стоимости подарка, код при этом аннулируется. После активации отказ и возврат производятся в порядке раздела 7, доступ получателя при этом прекращается.',
+        '5.10. Стороной Договора остаётся Пользователь, оплативший подарок. Получатель пользуется Подпиской на условиях этой оферты и условий использования Сервиса.',
       ],
     },
     {
@@ -258,12 +262,16 @@ function en({ email, payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '5. Provision of access',
       blocks: [
-        '5.1. The Subscription is activated automatically once the Payment Service confirms a successful payment, and is tied to the Account used to pay. The Access Period runs from activation.',
+        '5.1. The Subscription is activated automatically once the Payment Service confirms a successful payment, and is tied to the Account used to pay. The Access Period runs from activation. Gifts follow clauses 5.7–5.10.',
         `5.2. If the Subscription is not activated within 3 days of payment, the User writes to ${email}. Within 3 working days the Provider activates it or, at the User’s choice, refunds the payment in full.`,
         '5.3. If the User already has an active Subscription, the new Access Period starts when the current one ends.',
         '5.4. The service is duly provided when the paid features are available on the User’s Account during the Access Period. This is evidenced by the logs of the Service and the Payment Service; the User may present other evidence.',
         '5.5. When the Access Period ends, the paid features switch off. Free features and the User’s data are kept.',
         '5.6. App Store purchases follow Apple’s rules: charges, cancelling auto-renewal and refunds are handled by Apple. A Website purchase does not cancel an App Store auto-renewal.',
+        '5.7. **Gift subscriptions.** The User may pay for a 30- or 365-day Subscription for someone else. After payment the gift link and code are shown to the User on the payment result page; passing them to the recipient is up to the User. The Provider does not send them by e-mail.',
+        '5.8. The code is valid for 12 months from payment and can be redeemed once: the recipient opens the link and signs in with Apple, and the Access Period starts on their Account. A code not redeemed within that time stops working; the User may withdraw with a refund under section 7.',
+        '5.9. Before the code is redeemed the User may withdraw with a full refund of the gift, and the code is cancelled. After redemption, withdrawal and refunds follow section 7, and the recipient’s access ends.',
+        '5.10. The User who paid for the gift remains the party to the Agreement. The recipient uses the Subscription under this offer and the terms of use of the Service.',
       ],
     },
     {
