@@ -29,51 +29,51 @@ export const translation: SiteTranslation = {
       items: [
         {
           question: 'Hur skiljer sig Yorix från en sömntabell för bebisar?',
-          answer: 'En tabell visar genomsnittliga intervall. Yorix använder bebisens verkliga tupplurar, vakentider, nattliga uppvaknanden, matningar och rutinhistorik för att justera nästa sömnfönster.',
+          answer: 'En tabell ger genomsnittliga intervall för åldern – och inte mer. Yorix tittar på just din bebis: när den vaknade i dag, hur mycket och hur bra den sov, hur länge den varit vaken, hur de senaste dagarna sett ut – och räknar utifrån det ut när vakentiden tar slut och när det är dags att börja nattningen. Logga en kort tupplur eller en sen morgon, så räknas planen för resten av dagen om direkt.',
         },
         {
           question: 'Vad är vakentid?',
-          answer: 'Det är den tid bebisen orkar vara vaken mellan sömnperioderna utan att bli övertrött. För en nyfödd är det 30–60 minuter, och vid ett års ålder 3–4 timmar. Är bebisen vaken för länge, blir den uppvarvad och tar längre tid på sig att somna. Yorix räknar ut vakentiden utifrån bebisens ålder och hur den har sovit i dag.',
+          answer: 'Det är den sträcka bebisen orkar vara vaken mellan två sömnpass utan att bli övertrött. Hos en nyfödd är den kort – 30–60 minuter; vid ettårsdagen växer den till 3–4 timmar. Missar man vakentiden blir bebisen uppvarvad: den somnar långsammare, sover oroligare och vaknar oftare på natten. Yorix räknar ut den utifrån bebisens ålder och hur den har sovit i dag, och säger till i god tid före nattningen.',
         },
         {
           question: 'Hur mycket sömn behöver en bebis?',
-          answer: 'WHO:s rekommendationer för total sömn per dygn, tupplurar inräknade: 0–3 månader – 14–17 timmar, 4–11 månader – 12–16, 1–2 år – 11–14. Intervallen är breda eftersom alla bebisar är olika. Yorix summerar hur mycket bebisen har sovit under dygnet, så det är lätt att jämföra.',
+          answer: 'WHO:s rekommendationer för ett helt dygn, tupplurar inräknade: 0–3 månader – 14–17 timmar, 4–11 månader – 12–16, 1–2 år – 11–14. Intervallen är medvetet breda: en bebis klarar sig på 12 timmar, en annan behöver 15, och båda är friska. Det viktiga är alltså inte att pricka en siffra utan att känna till er egen – Yorix summerar dygnets sömn och visar den bredvid rekommendationen, så att du märker om bebisen plötsligt sover betydligt mindre.',
         },
         {
           question: 'Kan jag använda Yorix med en nyfödd?',
-          answer: 'Ja. Under nyföddhetsperioden är Yorix mest användbar som en enkel logg för sömn, matning, blöjor och omsorg. Ju tydligare mönstren blir, desto bättre kan rutinen förutsägas.',
+          answer: 'Ja, och de första veckorna är appen framför allt en bekväm logg: sömn, matningar, blöjor och omsorg på ett ställe, en registrering med ett enda tryck – även på natten, med en hand. Någon fast rutin finns inte i den här åldern, så Yorix tvingar inte på något schema; den vägleder efter vakentider och hjälper dig att inte missa trötthetstecknen. När de första återkommande mönstren dyker upp blir prognosen och planen träffsäkrare.',
         },
         {
           question: 'Vad gör jag om bebisen inte sover enligt prognosen?',
-          answer: 'Logga bara det som faktiskt hände – Yorix räknar direkt om sömnfönstren och planen för resten av dagen. Prognosen lär sig av det du loggar och blir träffsäkrare för varje dag.',
+          answer: 'Inget är fel – logga bara det som faktiskt hände. Yorix räknar genast om sömnfönstren och planen för resten av dagen: efter en kort tupplur flyttas nästa nattning närmare, efter en lång längre fram. Prognosen lär sig just av dina registreringar, så ju längre du för dagboken desto bättre passar den ditt barn. Har det blivit fel kan varje registrering ändras eller raderas, och planen räknas om igen.',
         },
         {
           question: 'Kan två föräldrar föra dagboken tillsammans?',
-          answer: 'Ja. Tryck på ”Invite Partner” i inställningarna i Yorix – den andra vuxna ser samma dagbok och kan logga från sin egen iPhone. Allt synkroniseras via iCloud.',
+          answer: 'Ja. Tryck på ”Invite Partner” i inställningarna: den andra vuxna tackar ja till inbjudan och ser samma dagbok i sin egen iPhone. Registreringarna dyker upp hos er båda nästan direkt – skönt när den ena tar natten och den andra förmiddagspromenaden och ingenting behöver återberättas. Synkroniseringen går via din iCloud, och något separat Yorix-konto behöver du inte skapa.',
         },
         {
           question: 'Vad är gratis och vad ingår i prenumerationen?',
-          answer: 'Det är gratis att hämta Yorix och börja föra dagbok. Den personliga prognosen för nästa tupplur, AI-coachen, analys och dagliga råd ingår i prenumerationen.',
+          answer: 'Det är gratis att hämta Yorix och logga sömn. För övriga typer av registreringar – matningar, blöjor, omsorg, tillväxt – finns en gräns i gratisversionen. Prenumerationen täcker det som kräver beräkningar och AI: den personliga prognosen för nästa sömn, en dagsplan som räknar om sig själv, AI-coachen som svarar utifrån din egen dagbok, analyser och dagliga råd. Programmen om fast föda, utvecklingsskutt och potträning köps separat.',
         },
         {
           question: 'Hur säger jag upp prenumerationen?',
-          answer: 'En prenumeration via App Store säger du upp i Inställningar på din iPhone: tryck på ditt namn → Abonnemang → Yorix. Du behåller tillgången till slutet av den betalda perioden.',
+          answer: 'En prenumeration via App Store säger du upp i Inställningar på din iPhone: tryck på ditt namn → Abonnemang → Yorix → Avbryt abonnemang. Du behåller tillgången till slutet av den period du redan betalat för, och därefter förnyas den helt enkelt inte. En prenumeration som köpts med kort på webbplatsen förnyas aldrig av sig själv: den tar slut sin dag, vi sparar inget kort och drar ingenting.',
         },
         {
           question: 'Var sparas uppgifterna om min bebis?',
-          answer: 'Dagboken finns på din iPhone och i din privata iCloud – vi har ingen åtkomst till den. AI-coachen får bara den sammanfattning den behöver för att svara. Vi säljer inga uppgifter och visar ingen reklam.',
+          answer: 'Dagboken finns på din iPhone och i din egen privata iCloud – vi har ingen åtkomst till den och kan inte läsa den. AI-coachen får bara den korta sammanfattning som behövs för att svara på just din fråga: bebisens ålder och de senaste registreringarna, utan namn och kontaktuppgifter. Vi säljer inga uppgifter och visar ingen reklam. Vad som behandlas och varför står i policyn för personuppgifter.',
         },
         {
           question: 'Vilka enheter fungerar Yorix på?',
-          answer: 'iPhone och iPad med iOS 18 eller senare. Det finns ingen Android-version ännu.',
+          answer: 'iPhone och iPad med iOS 18 eller senare. Gränssnittet finns på 20 språk, och det finns widgetar på hemskärmen och låsskärmen, en liveaktivitet medan bebisen sover och Siri-kommandon för att logga sömn eller matning med rösten. Någon Android-version eller webbversion av dagboken finns ännu inte: prognosen räknas ut på själva enheten.',
         },
         {
           question: 'Fungerar Yorix utan internet?',
-          answer: 'Ja: dagboken och prognoserna fungerar utan uppkoppling – allt räknas ut på telefonen. AI-coachen och synkroniseringen via iCloud behöver internet.',
+          answer: 'Ja. Dagboken, vakentiderna och prognosen för nästa sömn räknas ut direkt i telefonen, så de fungerar både på flyget och i sommarstugan utan täckning. Internet behövs bara av AI-coachen, som svarar på servern, och av synkroniseringen via iCloud: registreringar du gör offline sprids till dina andra enheter så fort uppkopplingen är tillbaka.',
         },
         {
           question: 'Ersätter Yorix medicinsk rådgivning?',
-          answer: 'Nej. Yorix är en rutinhjälp, inte en medicinsk tjänst. Oro kring matning, tillväxt, andning, feber, symtom eller säkerhet bör du ta upp med kvalificerad vårdpersonal.',
+          answer: 'Nej. Yorix hjälper till med dygnsrytmen och rutinerna hos en frisk bebis, men det är ingen medicinsk tjänst: den ställer inga diagnoser och ordinerar ingen behandling. Om du oroar dig för andning, feber, vikt, matning eller barnets allmäntillstånd ska du kontakta barnläkare – och i en akut situation ringa efter hjälp. Coachens svar är allmän information, inte ett läkarråd.',
         },
       ],
     },

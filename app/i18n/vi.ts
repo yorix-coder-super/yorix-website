@@ -29,51 +29,51 @@ export const translation: SiteTranslation = {
       items: [
         {
           question: 'Yorix khác gì so với bảng giờ ngủ của bé?',
-          answer: 'Bảng chỉ đưa ra các khoảng trung bình. Yorix dùng các giấc ngủ ngày, khoảng thức, những lần thức giấc đêm, cữ ăn và lịch sử nếp sinh hoạt thực tế của bé để điều chỉnh khung giờ ngủ tiếp theo.',
+          answer: 'Bảng chỉ đưa ra các khoảng trung bình theo độ tuổi — chỉ vậy thôi. Yorix thì nhìn vào chính bé nhà bạn: hôm nay bé dậy lúc mấy giờ, ngủ bao nhiêu và ngủ thế nào, đã thức được bao lâu, mấy ngày qua ra sao — rồi từ đó tính khi nào khoảng thức khép lại và mấy giờ nên bắt đầu ru bé ngủ. Chỉ cần bạn ghi một giấc ngủ ngắn hay một lần dậy muộn, kế hoạch cho phần còn lại của ngày sẽ tự tính lại, chứ không giữ nguyên như hôm qua.',
         },
         {
           question: 'Khoảng thức là gì?',
-          answer: 'Đó là khoảng thời gian bé có thể thức giữa hai giấc ngủ mà không bị quá mệt. Với trẻ sơ sinh là 30–60 phút, đến khi tròn một tuổi là 3–4 giờ. Nếu lỡ khoảng thức, bé sẽ quá hưng phấn và lâu vào giấc hơn. Yorix tính khoảng thức dựa trên độ tuổi của bé và cách bé đã ngủ hôm nay.',
+          answer: 'Đó là khoảng thời gian bé chịu được giữa hai giấc ngủ mà chưa kịp quá mệt. Với trẻ sơ sinh, khoảng này ngắn — 30–60 phút; đến khi tròn một tuổi thì dài ra 3–4 giờ. Nếu lỡ khoảng thức, bé sẽ bị kích thích quá mức: lâu vào giấc hơn, ngủ không yên và đêm hay tỉnh giấc hơn. Yorix không tính khoảng thức theo lịch, mà theo độ tuổi của bé và theo cách bé đã ngủ hôm nay, rồi báo trước cho bạn khi nào nên bắt đầu ru bé ngủ.',
         },
         {
           question: 'Bé cần ngủ bao lâu mỗi ngày?',
-          answer: 'Theo khuyến nghị của WHO, tổng thời gian ngủ trong 24 giờ, tính cả giấc ngủ ngày, là 14–17 giờ với bé 0–3 tháng, 12–16 giờ với bé 4–11 tháng và 11–14 giờ với bé 1–2 tuổi. Các khoảng này khá rộng vì mỗi bé mỗi khác. Yorix cộng dồn thời gian ngủ của bé trong ngày để bạn dễ so sánh.',
+          answer: 'Khuyến nghị của WHO cho cả ngày lẫn đêm, tính cả giấc ngủ ngày: 0–3 tháng 14–17 giờ, 4–11 tháng 12–16 giờ, 1–2 tuổi 11–14 giờ. Các khoảng này rộng là có chủ ý: bé này ngủ 12 giờ đã đủ, bé kia cần tới 15 giờ, và cả hai đều khỏe mạnh. Vì vậy điều quan trọng không phải là chạm đúng một con số, mà là biết mức bình thường của con mình — Yorix cộng dồn giấc ngủ cả ngày và đặt cạnh khuyến nghị, để bạn nhận ra ngay khi bé bỗng ngủ ít hơn hẳn thường ngày.',
         },
         {
           question: 'Có thể dùng Yorix cho trẻ sơ sinh không?',
-          answer: 'Có. Ở giai đoạn sơ sinh, Yorix hữu ích nhất như một cuốn nhật ký đơn giản về giấc ngủ, cữ ăn, tã và chăm sóc. Khi các quy luật dần hình thành, nếp sinh hoạt sẽ dễ dự đoán hơn.',
+          answer: 'Có, và trong những tuần đầu, Yorix trước hết là một cuốn nhật ký tiện tay: giấc ngủ, cữ ăn, tã và việc chăm sóc gom về một chỗ, ghi chỉ bằng một chạm — kể cả ban đêm, bằng một tay. Ở tuổi này chưa có nếp sinh hoạt cứng nhắc nào, nên Yorix không áp đặt thời gian biểu; ứng dụng gợi ý theo khoảng thức và giúp bạn không bỏ lỡ dấu hiệu buồn ngủ. Khi những quy luật lặp lại đầu tiên xuất hiện, dự báo và kế hoạch sẽ chính xác hơn.',
         },
         {
           question: 'Nếu bé không ngủ đúng như dự báo thì sao?',
-          answer: 'Bạn chỉ cần ghi lại những gì thực sự diễn ra — Yorix sẽ tính lại ngay các khung giờ ngủ và kế hoạch cho phần còn lại của ngày. Dự báo học từ những gì bạn ghi và chính xác hơn mỗi ngày.',
+          answer: 'Không sao cả — bạn chỉ cần ghi lại đúng những gì đã diễn ra. Yorix sẽ tính lại ngay các khoảng thức và kế hoạch cho phần còn lại của ngày: sau một giấc ngắn, lần ru ngủ kế tiếp xích lại gần hơn; sau một giấc dài thì lùi ra xa. Dự báo học từ chính những ghi chép của bạn, nên bạn ghi nhật ký càng lâu, nó càng hợp với con bạn. Lỡ ghi nhầm thì mọi ghi chép đều sửa hoặc xóa được, và kế hoạch lại được tính lại.',
         },
         {
           question: 'Cha mẹ có thể cùng ghi nhật ký không?',
-          answer: 'Có. Trong phần cài đặt của Yorix, chạm vào “Mời bạn đời” — người còn lại sẽ thấy cùng cuốn nhật ký và có thể thêm ghi chép từ iPhone của mình. Mọi thứ được đồng bộ qua iCloud.',
+          answer: 'Có. Trong phần cài đặt, hãy chạm vào “Mời bạn đời”: người lớn thứ hai nhận lời mời và thấy đúng cuốn nhật ký đó trên iPhone của mình. Ghi chép hiện ra với cả hai gần như tức thì — rất tiện khi một người trực đêm còn người kia dắt bé đi dạo buổi sáng, không phải kể lại cho nhau. Việc đồng bộ đi qua iCloud của bạn, không cần lập thêm tài khoản Yorix riêng.',
         },
         {
           question: 'Tính năng nào miễn phí, tính năng nào cần gói đăng ký?',
-          answer: 'Tải Yorix và bắt đầu ghi nhật ký hoàn toàn miễn phí. Dự báo giấc ngủ tiếp theo dành riêng cho bé, cố vấn AI, phân tích và lời khuyên mỗi ngày có trong gói đăng ký.',
+          answer: 'Tải Yorix và ghi giấc ngủ là miễn phí. Với các loại ghi chép khác — cữ ăn, tã, chăm sóc, tăng trưởng — bản miễn phí có giới hạn. Gói đăng ký bao gồm những gì cần đến tính toán và AI: dự báo giấc ngủ tiếp theo dành riêng cho bé, kế hoạch trong ngày tự sắp xếp lại, cố vấn AI trả lời dựa trên nhật ký của bạn, phân tích và lời khuyên mỗi ngày. Các chương trình “Bắt đầu ăn dặm”, “Các bước nhảy phát triển”, “Tập ngồi bô” và những chương trình khác được mua riêng.',
         },
         {
           question: 'Làm cách nào để hủy gói đăng ký?',
-          answer: 'Gói đăng ký qua App Store được hủy trong Cài đặt trên iPhone: chạm vào tên của bạn → Đăng ký → Yorix. Bạn vẫn dùng được đến hết thời hạn đã thanh toán.',
+          answer: 'Gói đăng ký từ App Store được hủy trong phần Cài đặt trên iPhone: tên của bạn → “Đăng ký” → Yorix → “Hủy đăng ký”. Bạn vẫn dùng được đến hết kỳ hạn đã thanh toán, sau đó gói đơn giản là không gia hạn nữa. Gói mua trên website bằng thẻ thì vốn không tự gia hạn: nó kết thúc đúng ngày của nó, chúng tôi không lưu thẻ và không trừ tiền.',
         },
         {
           question: 'Dữ liệu của bé được lưu ở đâu?',
-          answer: 'Nhật ký được lưu trên iPhone và trong iCloud riêng của bạn — chúng tôi không có quyền truy cập. Cố vấn AI chỉ nhận phần tóm tắt cần thiết để trả lời. Chúng tôi không bán dữ liệu và không hiển thị quảng cáo.',
+          answer: 'Nhật ký được lưu trên iPhone và trong iCloud riêng của bạn — chúng tôi không có quyền truy cập và không thể đọc được. Cố vấn AI chỉ nhận một bản tóm tắt ngắn đủ để trả lời câu hỏi cụ thể đó: độ tuổi của bé và các ghi chép gần nhất, không kèm tên hay thông tin liên hệ. Chúng tôi không bán dữ liệu và không hiển thị quảng cáo. Những gì được xử lý và để làm gì đều được nêu rõ trong “Chính sách dữ liệu cá nhân”.',
         },
         {
           question: 'Yorix dùng được trên những thiết bị nào?',
-          answer: 'iPhone và iPad chạy iOS 18 trở lên, với 20 ngôn ngữ. Hiện chưa có phiên bản Android.',
+          answer: 'Trên iPhone và iPad chạy iOS 18 trở lên. Giao diện đã được dịch sang 20 ngôn ngữ, có tiện ích cho Màn hình chính và Màn hình khóa, Hoạt động Trực tiếp trong lúc bé ngủ, cùng các lệnh Siri để ghi giấc ngủ hay cữ ăn bằng giọng nói. Hiện chưa có phiên bản Android và cũng chưa có bản web của nhật ký: dự báo được tính ngay trên thiết bị.',
         },
         {
           question: 'Yorix có dùng được khi không có mạng không?',
-          answer: 'Có. Nhật ký và dự báo vẫn hoạt động khi không có mạng — mọi thứ đều được tính ngay trên điện thoại của bạn. Cố vấn AI và đồng bộ iCloud thì cần internet.',
+          answer: 'Có. Nhật ký, khoảng thức và dự báo giấc ngủ tiếp theo đều được tính ngay trên điện thoại, nên vẫn dùng được trên máy bay hay ở nơi không có sóng. Internet chỉ cần cho cố vấn AI, vốn trả lời từ máy chủ, và cho việc đồng bộ qua iCloud: những ghi chép bạn tạo khi ngoại tuyến sẽ lan sang các thiết bị khác ngay khi có mạng trở lại.',
         },
         {
           question: 'Yorix có thay thế lời khuyên y tế không?',
-          answer: 'Không. Yorix là công cụ hỗ trợ nếp sinh hoạt, không phải dịch vụ y tế. Những lo lắng về ăn uống, tăng trưởng, hô hấp, sốt, triệu chứng hay an toàn cần được trao đổi với nhân viên y tế có chuyên môn.',
+          answer: 'Không. Yorix giúp bạn sắp xếp nếp sinh hoạt của một em bé khỏe mạnh, nhưng đây không phải dịch vụ y tế: ứng dụng không chẩn đoán và không kê đơn điều trị. Nếu bạn lo về hơi thở, thân nhiệt, cân nặng, việc ăn uống hay tình trạng của bé, hãy đến gặp bác sĩ nhi — và trong tình huống khẩn cấp hãy gọi cấp cứu ngay. Câu trả lời của cố vấn AI là thông tin chung, không phải chỉ định của bác sĩ.',
         },
       ],
     },

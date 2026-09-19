@@ -29,51 +29,51 @@ export const translation: SiteTranslation = {
       items: [
         {
           question: 'Yorix’i bir bebek uyku çizelgesinden farklı kılan ne?',
-          answer: 'Bir çizelge ortalama aralıklar verir. Yorix, bir sonraki uyku penceresini ayarlamak için bebeğinizin gerçek gündüz uykularını, uyanıklık pencerelerini, gece uyanmalarını, beslenmelerini ve rutin geçmişini kullanır.',
+          answer: 'Bir çizelge yaşa göre ortalama aralıklar verir — o kadar. Yorix ise doğrudan bebeğinize bakar: bugün saat kaçta uyandı, ne kadar ve nasıl uyudu, ne zamandır uyanık, son günler nasıl geçti — ve buna göre uyanıklık penceresinin ne zaman kapanacağını, uyku hazırlığına ne zaman başlanacağını hesaplar. Kısa bir uyku ya da geç bir uyanış kaydedin; günün kalanına ait plan dünden kalma olmaz, kendiliğinden yeniden hesaplanır.',
         },
         {
           question: 'Uyanıklık penceresi nedir?',
-          answer: 'Bebeğinizin iki uyku arasında aşırı yorulmadan uyanık kalabildiği süredir. Yenidoğanda bu süre 30–60 dakikadır, bir yaşına doğru 3–4 saate çıkar. Pencere kaçırılırsa bebek fazla uyarılır ve uykuya dalması daha uzun sürer. Yorix, pencereyi bebeğinizin yaşına ve bugün nasıl uyuduğuna göre hesaplar.',
+          answer: 'Bebeğin aşırı yorulmadan iki uyku arasında dayanabildiği süredir. Yenidoğanda kısadır — 30–60 dakika; bir yaşına doğru 3–4 saate çıkar. Pencere kaçırılırsa bebek fazla uyarılır: daha geç uykuya dalar, daha huzursuz uyur ve gece daha sık uyanır. Yorix pencereyi takvime göre değil, bebeğinizin yaşına ve bugün nasıl uyuduğuna göre hesaplar; uyku hazırlığına ne zaman başlayacağınızı önceden gösterir.',
         },
         {
           question: 'Bebek ne kadar uyumalı?',
-          answer: 'DSÖ’nün gündüz uykuları dâhil 24 saatlik toplam uyku önerisi: 0–3 ay — 14–17 saat, 4–11 ay — 12–16, 1–2 yaş — 11–14. Aralıklar geniş, çünkü her bebek farklıdır. Yorix, bebeğinizin 24 saatte toplam ne kadar uyuduğunu hesaplar; böylece karşılaştırmak kolaylaşır.',
+          answer: 'DSÖ’nün gündüz uykuları dâhil 24 saatlik önerisi: 0–3 ay — 14–17 saat, 4–11 ay — 12–16, 1–2 yaş — 11–14. Aralıklar bilerek geniş: bir bebeğe 12 saat yeter, bir başkasına 15 gerekir ve ikisi de sağlıklıdır. Bu yüzden önemli olan bir sayıyı tutturmak değil, kendi normunuzu bilmek — Yorix günün uykusunu toplar ve öneriyle yan yana gösterir; bebeğiniz birden her zamankinden çok daha az uyursa fark edersiniz.',
         },
         {
           question: 'Yorix’i yenidoğanla kullanabilir miyim?',
-          answer: 'Evet. Yenidoğan döneminde Yorix en çok basit bir uyku, beslenme, bez ve bakım kaydı olarak işe yarar. Düzenler oluştukça rutin daha iyi öngörülür.',
+          answer: 'Evet — ilk haftalarda Yorix her şeyden önce kullanışlı bir günlüktür: uyku, beslenme, bez ve bakım tek yerde, tek dokunuşla kayıt — gece bile, tek elle. Bu yaşta katı bir düzen yoktur; bu yüzden Yorix bir program dayatmaz, uyanıklık pencerelerine göre yol gösterir ve yorgunluk işaretlerini kaçırmamanıza yardım eder. İlk tekrar eden örüntüler belirdiğinde tahmin de plan da daha isabetli olur.',
         },
         {
           question: 'Bebeğim tahmin edilen saatte uyumazsa ne yapmalıyım?',
-          answer: 'Olanı olduğu gibi kaydetmeniz yeterli — Yorix pencereleri ve günün geri kalanının planını hemen yeniden hesaplar. Tahmin, kayıtlarınızdan öğrenir ve her gün daha isabetli hâle gelir.',
+          answer: 'Sorun değil — olanı olduğu gibi kaydetmeniz yeterli. Yorix pencereleri ve günün kalanına ait planı hemen yeniden hesaplar: kısa bir uykudan sonra bir sonraki uyku hazırlığı öne, uzun bir uykudan sonra geriye kayar. Tahmin tam da sizin kayıtlarınızdan öğrenir; günlüğü ne kadar uzun tutarsanız bebeğinize o kadar yaklaşır. Yanlış kaydettiyseniz her kaydı düzenleyebilir ya da silebilirsiniz, plan yeniden hesaplanır.',
         },
         {
           question: 'Günlüğü iki ebeveyn birlikte tutabilir mi?',
-          answer: 'Evet. Yorix ayarlarında “Eşi davet et” seçeneğine dokunun — davet ettiğiniz kişi aynı günlüğü görür ve kendi iPhone’undan kayıt ekleyebilir. Her şey iCloud üzerinden senkronize edilir.',
+          answer: 'Evet. Ayarlarda “Eşi davet et”e dokunun: daveti kabul eden ikinci yetişkin aynı günlüğü kendi iPhone’unda görür. Kayıtlar neredeyse anında ikinizde birden görünür — geceyi biri devralıp sabah yürüyüşüne diğeri çıktığında hiçbir şeyi baştan anlatmak gerekmez. Senkronizasyon sizin iCloud hesabınız üzerinden yapılır; ayrı bir Yorix hesabı açmanıza gerek yok.',
         },
         {
           question: 'Neler ücretsiz, neler abonelik gerektiriyor?',
-          answer: 'Yorix’i indirmek ve günlük tutmaya başlamak ücretsiz. Bebeğinize özel sonraki uyku tahmini, yapay zekâ koçu, analizler ve günlük öneriler aboneliğe dâhildir.',
+          answer: 'Yorix’i indirmek ve uykuyu kaydetmek ücretsiz. Diğer kayıt türlerinde — beslenme, bez, bakım, büyüme — ücretsiz sürümün bir sınırı var. Abonelik, hesaplama ve yapay zekâ gerektiren her şeyi kapsar: bir sonraki uyku için kişisel tahmin, kendini yeniden hesaplayan gün planı, günlüğünüze bakarak yanıt veren yapay zekâ koçu, analizler ve öneriler. “Ek gıdaya başlangıç”, “Gelişim sıçramaları”, “Tuvalet eğitimi” gibi programlar ayrıca satın alınır.',
         },
         {
           question: 'Aboneliğimi nasıl iptal ederim?',
-          answer: 'App Store aboneliğinizi iPhone’unuzdan iptal edebilirsiniz: Ayarlar → adınız → Abonelikler → Yorix. Ödediğiniz dönemin sonuna kadar erişiminiz devam eder.',
+          answer: 'App Store aboneliği iPhone’un Ayarlar uygulamasından iptal edilir: adınız → Abonelikler → Yorix → Aboneliği İptal Et. Ödemesini yaptığınız dönemin sonuna kadar erişiminiz sürer, sonrasında yalnızca yenilenmez. Sitede kartla alınan abonelik ise kendiliğinden hiç yenilenmez: kendi gününde sona erer, kartınızı saklamayız ve hiçbir tahsilat yapmayız.',
         },
         {
           question: 'Bebeğimin verileri nerede saklanıyor?',
-          answer: 'Günlüğünüz iPhone’unuzda ve size özel iCloud hesabınızda saklanır — biz ona erişemeyiz. Yapay zekâ koçu yalnızca yanıt vermek için ihtiyaç duyduğu özeti alır. Veri satmıyoruz, reklam da göstermiyoruz.',
+          answer: 'Günlük sizin iPhone’unuzda ve size ait iCloud hesabında saklanır — bizim erişimimiz yok, onu okuyamayız. Yapay zekâ koçuna yalnızca o soruyu yanıtlamak için gereken kısa özet gider: bebeğin yaşı ve son kayıtlar, isim ve iletişim bilgisi olmadan. Veri satmıyoruz, reklam göstermiyoruz. Nelerin hangi amaçla işlendiği Kişisel veri politikasında ayrıntılı olarak anlatılır.',
         },
         {
           question: 'Yorix hangi cihazlarda çalışır?',
-          answer: 'iOS 18 veya üzeri yüklü iPhone ve iPad’de, 20 dilde çalışır. Android sürümü henüz yok.',
+          answer: 'iOS 18 veya üzeri yüklü iPhone ve iPad’de. Arayüz 20 dile çevrildi; Ana Ekran ve Kilit Ekranı widget’ları, bebek uyurken Canlı Etkinlik ve uykuyu ya da beslenmeyi sesle kaydetmek için Siri komutları var. Android sürümü ve günlüğün web sürümü henüz yok: tahmin doğrudan cihazın kendisinde hesaplanır.',
         },
         {
           question: 'Yorix internet olmadan çalışır mı?',
-          answer: 'Evet. Günlük ve tahminler bağlantı olmadan da çalışır — her şey telefonunuzda hesaplanır. Yapay zekâ koçu ve iCloud senkronizasyonu için internet gerekir.',
+          answer: 'Evet. Günlük, uyanıklık pencereleri ve bir sonraki uyku tahmini doğrudan telefonda hesaplanır; bu yüzden uçakta da, şebekenin çekmediği bir yazlıkta da çalışır. İnternet yalnızca sunucuda yanıt veren yapay zekâ koçu ve iCloud senkronizasyonu için gerekir: çevrimdışıyken yaptığınız kayıtlar, bağlantı gelir gelmez diğer cihazlara dağılır.',
         },
         {
           question: 'Yorix tıbbi tavsiyenin yerini tutar mı?',
-          answer: 'Hayır. Yorix bir rutin yardımcısıdır, tıbbi bir hizmet değildir. Beslenme, büyüme, solunum, ateş, belirtiler ya da güvenlikle ilgili endişelerinizi uzman bir sağlık profesyoneliyle konuşun.',
+          answer: 'Hayır. Yorix sağlıklı bir bebeğin düzenine ve rutinine yardımcı olur, ama tıbbi bir hizmet değildir: tanı koymaz, tedavi önermez. Bebeğinizin solunumu, ateşi, kilosu, beslenmesi ya da genel hâli sizi endişelendiriyorsa çocuk doktoruna başvurun; acil bir durumda ambulans çağırın. Koçun yanıtları genel bilgidir, doktor tavsiyesi değil.',
         },
       ],
     },

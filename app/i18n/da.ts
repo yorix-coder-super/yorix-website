@@ -29,51 +29,51 @@ export const translation: SiteTranslation = {
       items: [
         {
           question: 'Hvad gør Yorix anderledes end en søvntabel?',
-          answer: 'En tabel giver gennemsnitlige intervaller. Yorix bruger din babys faktiske lure, vågenvinduer, natlige opvågninger, måltider og rutinehistorik til at tilpasse næste søvnvindue.',
+          answer: 'En tabel giver gennemsnitlige intervaller for alderen – og ikke mere. Yorix ser på netop din baby: hvornår den vågnede i dag, hvor meget og hvor godt den sov, hvor længe den har været vågen, hvordan de sidste dage så ud – og regner derudfra ud, hvornår vågenvinduet lukker, og hvornår I skal begynde at putte. Registrer en kort lur eller en sen morgen, og planen for resten af dagen bliver lagt om med det samme.',
         },
         {
           question: 'Hvad er et vågenvindue?',
-          answer: 'Det er den tid, din baby kan være vågen mellem søvnperioderne uden at blive overtræt. For en nyfødt er det 30–60 minutter, og omkring etårsalderen 3–4 timer. Går du glip af vinduet, bliver babyen overgearet og er længere om at falde i søvn. Yorix beregner vinduet ud fra alderen og hvordan babyen har sovet i dag.',
+          answer: 'Det er den strækning, din baby kan holde til mellem to søvnperioder uden at blive overtræt. Hos en nyfødt er den kort – 30–60 minutter; omkring etårsalderen vokser den til 3–4 timer. Går vinduet forbi, bliver babyen overgearet: den er længere om at falde i søvn, sover mere uroligt og vågner oftere om natten. Yorix beregner vinduet ud fra babyens alder og ud fra, hvordan den har sovet i dag, og siger til i god tid før puttetid.',
         },
         {
           question: 'Hvor meget søvn har en baby brug for?',
-          answer: 'WHO’s anbefalinger for den samlede søvn i døgnet, lure medregnet: 0–3 måneder – 14–17 timer, 4–11 måneder – 12–16, 1–2 år – 11–14. Intervallerne er brede, fordi alle babyer er forskellige. Yorix lægger babyens søvn i døgnet sammen, så du nemt kan sammenligne.',
+          answer: 'WHO’s anbefalinger for et helt døgn, lure medregnet: 0–3 måneder – 14–17 timer, 4–11 måneder – 12–16, 1–2 år – 11–14. Intervallerne er bevidst brede: én baby har nok i 12 timer, en anden har brug for 15, og begge er sunde. Det vigtigste er altså ikke at ramme et tal, men at kende jeres eget – Yorix lægger døgnets søvn sammen og viser den ved siden af anbefalingen, så du opdager det, hvis babyen pludselig sover markant mindre.',
         },
         {
           question: 'Kan jeg bruge Yorix til en nyfødt?',
-          answer: 'Ja. I nyfødtperioden er Yorix mest nyttig som en enkel dagbog over søvn, måltider, bleer og pleje. Efterhånden som der opstår mønstre, bliver rutinen bedre til at forudsige.',
+          answer: 'Ja, og i de første uger er den først og fremmest en nem dagbog: søvn, måltider, bleer og pleje ét sted, én registrering med et enkelt tryk – også om natten, med én hånd. Der findes ingen fast rutine i den alder, så Yorix påtvinger ikke et skema; den guider efter vågenvinduer og hjælper dig med at fange træthedstegnene i tide. Når de første gentagne mønstre dukker op, bliver prognosen og planen mere præcise.',
         },
         {
           question: 'Hvad hvis min baby ikke sover efter prognosen?',
-          answer: 'Registrer bare, hvad der faktisk skete – Yorix genberegner straks vinduerne og planen for resten af dagen. Prognosen lærer af dine registreringer og bliver mere præcis dag for dag.',
+          answer: 'Der sker ikke noget – registrer bare, hvad der faktisk skete. Yorix lægger straks vinduerne og planen for resten af dagen om: efter en kort lur rykker næste putning tættere på, efter en lang rykker den længere ud. Prognosen lærer netop af dine registreringer, så jo længere du fører dagbogen, jo bedre passer den til dit barn. Er noget skrevet forkert, kan enhver registrering rettes eller slettes, og planen bliver lagt om igen.',
         },
         {
           question: 'Kan to forældre føre dagbogen sammen?',
-          answer: 'Ja. Tryk på »Invite Partner« i indstillingerne i Yorix – den anden voksne ser den samme dagbog og kan tilføje registreringer fra sin egen iPhone. Alt synkroniseres via iCloud.',
+          answer: 'Ja. Tryk på »Invite Partner« i indstillingerne: den anden voksne tager imod invitationen og ser den samme dagbog på sin egen iPhone. Registreringerne dukker op hos jer begge næsten med det samme – praktisk, når den ene tager natten og den anden går tur om formiddagen, og ingen skal genfortælle noget. Synkroniseringen sker via din iCloud, og der skal ikke oprettes nogen særskilt Yorix-konto.',
         },
         {
           question: 'Hvad er gratis, og hvad kræver et abonnement?',
-          answer: 'Det er gratis at hente Yorix og komme i gang med dagbogen. Den personlige prognose for næste lur, AI-coachen, analyser og daglige råd følger med abonnementet.',
+          answer: 'Det er gratis at hente Yorix og registrere søvn. For de øvrige typer registreringer – måltider, bleer, pleje, vækst – er der en grænse i den gratis version. Abonnementet dækker det, der kræver beregning og AI: den personlige prognose for næste søvn, en dagsplan, der lægger sig selv om, AI-coachen, der svarer ud fra din egen dagbog, analyser og daglige råd. Programmerne om overgangskost, udviklingsspring og pottetræning købes separat.',
         },
         {
           question: 'Hvordan opsiger jeg mit abonnement?',
-          answer: 'Et abonnement via App Store opsiger du i Indstillinger på din iPhone: Tryk på dit navn → Abonnementer → Yorix. Du beholder adgangen, indtil den betalte periode udløber.',
+          answer: 'Et abonnement fra App Store opsiger du i Indstillinger på din iPhone: tryk på dit navn → Abonnementer → Yorix → Annuller abonnement. Du beholder adgangen, indtil den periode, du allerede har betalt for, udløber, og derefter fornyes den ganske enkelt ikke. Et abonnement købt med kort på hjemmesiden fornyes slet ikke af sig selv: det slutter på sin dag, vi gemmer ikke kortet og trækker ingenting.',
         },
         {
           question: 'Hvor bliver min babys data gemt?',
-          answer: 'Dagbogen ligger på din iPhone og i din private iCloud – vi har ikke adgang til den. AI-coachen får kun det resumé, den skal bruge for at svare. Vi sælger ikke data og viser ingen annoncer.',
+          answer: 'Dagbogen ligger på din iPhone og i din egen private iCloud – vi har ikke adgang til den og kan ikke læse den. AI-coachen får kun det korte resumé, der skal til for at svare på netop dit spørgsmål: babyens alder og de seneste registreringer, uden navn og kontaktoplysninger. Vi sælger ikke data og viser ingen annoncer. Hvad vi behandler, og hvorfor, står der i persondatapolitikken.',
         },
         {
           question: 'Hvilke enheder virker Yorix på?',
-          answer: 'iPhone og iPad med iOS 18 eller nyere. Der findes endnu ingen Android-version.',
+          answer: 'iPhone og iPad med iOS 18 eller nyere. Brugerfladen findes på 20 sprog, og der er widgets til hjemmeskærmen og den låste skærm, en live-aktivitet mens babyen sover, og Siri-kommandoer, så du kan registrere søvn eller et måltid med stemmen. Der findes endnu hverken en Android-version eller en webudgave af dagbogen: prognosen beregnes på selve enheden.',
         },
         {
           question: 'Virker Yorix uden internet?',
-          answer: 'Ja: Dagbogen og prognoserne virker uden forbindelse – alt beregnes på din telefon. AI-coachen og synkroniseringen via iCloud kræver internet.',
+          answer: 'Ja. Dagbogen, vågenvinduerne og prognosen for næste søvn beregnes direkte på telefonen, så de virker både i flyveren og i sommerhuset uden dækning. Internet skal kun bruges af AI-coachen, der svarer på serveren, og af synkroniseringen via iCloud: registreringer, du laver offline, fordeler sig til de andre enheder, så snart der er forbindelse igen.',
         },
         {
           question: 'Erstatter Yorix lægelig rådgivning?',
-          answer: 'Nej. Yorix er en hjælp til rutinen, ikke en medicinsk tjeneste. Bekymringer om ernæring, vækst, vejrtrækning, feber, symptomer eller sikkerhed bør du tale med en kvalificeret sundhedsperson om.',
+          answer: 'Nej. Yorix hjælper med døgnrytmen og rutinen hos en rask baby, men det er ikke en medicinsk tjeneste: den stiller ingen diagnoser og ordinerer ingen behandling. Er du bekymret for vejrtrækning, feber, vægt, ernæring eller dit barns almene tilstand, så kontakt en læge – og ring efter hjælp i en akut situation. Coachens svar er generel information, ikke en lægelig anvisning.',
         },
       ],
     },

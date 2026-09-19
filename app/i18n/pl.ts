@@ -29,51 +29,51 @@ export const translation: SiteTranslation = {
       items: [
         {
           question: 'Czym Yorix różni się od tabeli snu?',
-          answer: 'Tabela podaje średnie zakresy. Yorix wykorzystuje prawdziwe drzemki Twojego dziecka, okna czuwania, nocne pobudki, karmienia i historię rutyny, aby dopasować kolejne okno snu.',
+          answer: 'Tabela podaje średnie zakresy dla wieku — i na tym koniec. Yorix patrzy na Twoje dziecko: o której wstało dzisiaj, ile i jak spało, jak długo już czuwa, jak wyglądały ostatnie dni — i z tego wylicza, kiedy zamknie się okno czuwania i o której zacząć układanie. Wystarczy zapisać krótką drzemkę albo późną pobudkę, a plan na resztę dnia przeliczy się sam, zamiast zostać wczorajszym.',
         },
         {
           question: 'Czym jest okno czuwania?',
-          answer: 'To czas, przez który Twoje dziecko może czuwać między kolejnymi snami, zanim się przemęczy. U noworodka to 30–60 minut, a około pierwszych urodzin — 3–4 godziny. Gdy okno minie, dziecko robi się nakręcone i dłużej zasypia. Yorix wylicza okno na podstawie wieku dziecka i tego, jak spało dzisiaj.',
+          answer: 'To czas, który dziecko wytrzyma między snami, zanim się przemęczy. U noworodka jest krótki — 30–60 minut, a około pierwszych urodzin rośnie do 3–4 godzin. Gdy okno minie, dziecko się nakręca: dłużej zasypia, śpi niespokojniej i częściej budzi się w nocy. Yorix liczy okno nie z zegarka, tylko z wieku dziecka i z tego, jak spało dzisiaj, i z wyprzedzeniem pokazuje, kiedy zacząć układanie.',
         },
         {
           question: 'Ile snu potrzebuje dziecko?',
-          answer: 'Według zaleceń WHO łączny sen w ciągu doby, razem z drzemkami, wynosi: 0–3 miesiące — 14–17 godzin, 4–11 miesięcy — 12–16, 1–2 lata — 11–14. Zakresy są szerokie, bo każde dziecko jest inne. Yorix sumuje sen dziecka z całej doby, więc łatwo go porównać.',
+          answer: 'Orientacyjne wartości WHO na dobę, razem z drzemkami: 0–3 miesiące — 14–17 godzin, 4–11 miesięcy — 12–16, 1–2 lata — 11–14. Zakresy są celowo szerokie: jednemu dziecku wystarczy 12 godzin, inne potrzebuje 15 i oba są zdrowe. Ważniejsze od trafienia w liczbę jest więc poznanie własnej normy — Yorix sumuje sen z doby i pokazuje go obok wartości orientacyjnej, żeby od razu było widać, gdy dziecko nagle zaczyna spać wyraźnie mniej niż zwykle.',
         },
         {
           question: 'Czy Yorix sprawdzi się przy noworodku?',
-          answer: 'Tak. W okresie noworodkowym Yorix najlepiej sprawdza się jako prosty dziennik snu, karmień, pieluch i pielęgnacji. Gdy pojawiają się wzorce, rutynę da się coraz lepiej przewidywać.',
+          answer: 'Tak, a w pierwszych tygodniach jest przede wszystkim wygodnym dziennikiem: sen, karmienia, pieluchy i pielęgnacja w jednym miejscu, wpis jednym dotknięciem — także w nocy i jedną ręką. W tym wieku nie ma sztywnego rytmu, więc Yorix nie narzuca rozkładu dnia: podpowiada według okien czuwania i pomaga nie przegapić oznak zmęczenia. Gdy pojawią się pierwsze powtarzalne wzorce, prognoza i plan staną się dokładniejsze.',
         },
         {
           question: 'Co zrobić, gdy dziecko nie śpi zgodnie z prognozą?',
-          answer: 'Po prostu zapisz, jak było naprawdę — Yorix od razu przeliczy okna snu i plan na resztę dnia. Prognoza uczy się na Twoich wpisach i z każdym dniem jest trafniejsza.',
+          answer: 'Nic się nie stało — po prostu zapisz, jak było naprawdę. Yorix od razu przeliczy okna i plan na resztę dnia: po krótkiej drzemce kolejne układanie przesunie się bliżej, po długiej — dalej. Prognoza uczy się właśnie na Twoich wpisach, więc im dłużej prowadzisz dziennik, tym lepiej pasuje do Twojego dziecka. Pomyłka przy zapisie? Każdy wpis można poprawić albo usunąć, a plan przeliczy się ponownie.',
         },
         {
           question: 'Czy możemy prowadzić dziennik we dwoje?',
-          answer: 'Tak. W ustawieniach Yorix wybierz „Zaproś partnera” — zaproszona osoba zobaczy ten sam dziennik i będzie mogła dodawać wpisy ze swojego iPhone’a. Wszystko synchronizuje się przez iCloud.',
+          answer: 'Tak. W ustawieniach wybierz „Zaproś partnera”: druga dorosła osoba przyjmuje zaproszenie i widzi ten sam dziennik na swoim iPhonie. Wpisy pojawiają się u obojga niemal natychmiast — wygodnie, gdy jedno ma nocny dyżur, a drugie poranny spacer, i nie trzeba sobie niczego opowiadać. Synchronizacja idzie przez Twój iCloud, osobnego konta Yorix nie trzeba zakładać.',
         },
         {
           question: 'Co jest darmowe, a co wymaga subskrypcji?',
-          answer: 'Yorix pobierzesz i zaczniesz prowadzić dziennik za darmo. Osobista prognoza kolejnego snu, trener AI, analityka i codzienne porady są dostępne w subskrypcji.',
+          answer: 'Pobranie Yorix i zapisywanie snu jest darmowe. Przy pozostałych rodzajach wpisów — karmienia, pieluchy, pielęgnacja, wzrost — wersja darmowa ma limit. W subskrypcji jest to, co wymaga obliczeń i AI: osobista prognoza kolejnego snu, plan dnia, który przelicza się sam, trener AI odpowiadający na podstawie Twojego dziennika, analityka i codzienne porady. Programy „Rozszerzanie diety”, „Skoki rozwojowe” czy „Odpieluchowanie” kupuje się osobno.',
         },
         {
           question: 'Jak anulować subskrypcję?',
-          answer: 'Subskrypcję z App Store anulujesz w Ustawieniach na iPhonie: stuknij w swoje imię i nazwisko → Subskrypcje → Yorix. Dostęp zachowasz do końca opłaconego okresu.',
+          answer: 'Subskrypcję z App Store anulujesz w Ustawieniach na iPhonie: stuknij w swoje imię i nazwisko → Subskrypcje → Yorix → „Anuluj subskrypcję”. Dostęp zachowasz do końca już opłaconego okresu, a potem po prostu się nie odnowi. Subskrypcja kupiona kartą na stronie i tak nigdy nie odnawia się sama: kończy się w swoim dniu, karty nie przechowujemy i niczego nie pobieramy.',
         },
         {
           question: 'Gdzie są przechowywane dane mojego dziecka?',
-          answer: 'Dziennik zostaje na Twoim iPhonie i w Twoim prywatnym iCloud — nie mamy do niego dostępu. Trener AI dostaje tylko podsumowanie potrzebne do odpowiedzi. Nie sprzedajemy danych i nie wyświetlamy reklam.',
+          answer: 'Dziennik zostaje na Twoim iPhonie i w Twoim prywatnym iCloud — nie mamy do niego dostępu i nie możemy go odczytać. Do trenera AI trafia tylko krótkie podsumowanie potrzebne do odpowiedzi na konkretne pytanie: wiek dziecka i ostatnie wpisy, bez imienia i danych kontaktowych. Nie sprzedajemy danych i nie wyświetlamy reklam. Co i po co przetwarzamy, opisuje polityka przetwarzania danych osobowych.',
         },
         {
           question: 'Na jakich urządzeniach działa Yorix?',
-          answer: 'iPhone i iPad z iOS 18 lub nowszym, w 20 językach. Wersji na Androida na razie nie ma.',
+          answer: 'Na iPhonie i iPadzie z iOS 18 lub nowszym. Interfejs jest przetłumaczony na 20 języków, są widżety na ekran początkowy i ekran blokady, aktywność na żywo podczas snu oraz polecenia Siri, żeby zapisać sen albo karmienie głosem. Wersji na Androida ani dziennika w przeglądarce na razie nie ma: prognoza liczona jest na samym urządzeniu.',
         },
         {
           question: 'Czy Yorix działa bez internetu?',
-          answer: 'Tak: dziennik i prognozy działają bez sieci — wszystkie obliczenia odbywają się na Twoim telefonie. Internetu potrzebują tylko trener AI i synchronizacja przez iCloud.',
+          answer: 'Tak. Dziennik, okna czuwania i prognoza kolejnego snu liczone są bezpośrednio na telefonie, więc działają i w samolocie, i na działce bez zasięgu. Internet potrzebny jest tylko trenerowi AI, który odpowiada na serwerze, oraz synchronizacji przez iCloud: wpisy zrobione offline rozejdą się na pozostałe urządzenia, gdy tylko pojawi się sieć.',
         },
         {
           question: 'Czy Yorix zastępuje poradę lekarską?',
-          answer: 'Nie. Yorix pomaga w codziennej rutynie, ale nie jest usługą medyczną. Kwestie karmienia, wzrostu, oddychania, gorączki, objawów czy bezpieczeństwa omów z wykwalifikowanym lekarzem.',
+          answer: 'Nie. Yorix pomaga przy rytmie dnia i codziennej rutynie zdrowego dziecka, ale nie jest usługą medyczną: nie stawia diagnoz i nie zaleca leczenia. Jeśli niepokoi Cię oddech, gorączka, waga, karmienie albo samopoczucie dziecka, zgłoś się do pediatry, a w nagłej sytuacji wezwij pogotowie. Odpowiedzi trenera to ogólna informacja, a nie zalecenie lekarza.',
         },
       ],
     },

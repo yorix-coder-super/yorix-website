@@ -29,51 +29,51 @@ export const translation: SiteTranslation = {
       items: [
         {
           question: 'Čím se Yorix liší od tabulky spánku?',
-          answer: 'Tabulka ukazuje průměrná rozmezí. Yorix vychází ze skutečných denních spánků tvého miminka, oken bdění, nočních probuzení, krmení a historie režimu a podle nich upraví další okno spánku.',
+          answer: 'Tabulka ukáže průměrná rozmezí pro daný věk — a tím to končí. Yorix se dívá na tvoje miminko: kdy se dnes vzbudilo, kolik a jak spalo, jak dlouho už je vzhůru, jak vypadaly poslední dny — a z toho spočítá, kdy se zavře okno bdění a kdy začít s ukládáním. Stačí zapsat krátký spánek nebo pozdní probuzení a plán na zbytek dne se přepočítá sám, místo aby zůstal včerejší.',
         },
         {
           question: 'Co je okno bdění?',
-          answer: 'Je to doba, po kterou miminko zvládne být mezi spánky vzhůru bez přílišné únavy. U novorozence je to 30–60 minut, kolem prvních narozenin už 3–4 hodiny. Když okno propásneš, miminko se přetáhne a déle usíná. Yorix okno spočítá podle věku miminka a podle toho, jak dnes spalo.',
+          answer: 'Je to úsek, který miminko mezi spánky vydrží, aniž by se přetáhlo. U novorozence je krátký — 30–60 minut, kolem prvních narozenin už 3–4 hodiny. Když okno propásneš, miminko se přebudí: usíná déle, spí neklidněji a v noci se častěji budí. Yorix počítá okno ne podle kalendáře, ale podle věku miminka a podle toho, jak dnes spalo, a s předstihem ukáže, kdy je čas začít ukládat.',
         },
         {
           question: 'Kolik by mělo miminko spát?',
-          answer: 'Doporučení WHO pro celkový spánek za 24 hodin včetně denních spánků: 0–3 měsíce — 14–17 hodin, 4–11 měsíců — 12–16, 1–2 roky — 11–14. Rozmezí jsou široká, protože každé miminko je jiné. Yorix sečte, kolik miminko za celý den naspalo, takže to snadno porovnáš.',
+          answer: 'Doporučení WHO na 24 hodin včetně denních spánků: 0–3 měsíce — 14–17 hodin, 4–11 měsíců — 12–16, 1–2 roky — 11–14. Rozmezí jsou schválně široká: jednomu miminku stačí 12 hodin, jiné potřebuje 15 a obě jsou zdravá. Nejde tedy o to trefit číslo, ale znát to svoje — Yorix sečte spánek za celý den a ukáže ho vedle doporučení, takže si všimneš, když miminko najednou spí výrazně méně než obvykle.',
         },
         {
           question: 'Můžu Yorix používat už s novorozencem?',
-          answer: 'Ano. V novorozeneckém období je Yorix nejužitečnější jako jednoduchý záznam spánku, krmení, plenek a péče. Jak se objevují vzorce, režim jde stále lépe předvídat.',
+          answer: 'Ano, a v prvních týdnech je to hlavně pohodlný deník: spánek, krmení, plenky a péče na jednom místě, záznam jedním klepnutím — i v noci, jednou rukou. V tomhle věku žádný pevný režim není, takže Yorix rozvrh nevnucuje; radí podle oken bdění a pomáhá nepřehlédnout známky únavy. Jakmile se objeví první opakující se vzorce, předpověď i plán začnou být přesnější.',
         },
         {
           question: 'Co když miminko neusne podle předpovědi?',
-          answer: 'Prostě zapiš, jak to bylo doopravdy — Yorix hned přepočítá okna i plán na zbytek dne. Předpověď se učí z tvých záznamů a každým dnem je přesnější.',
+          answer: 'Nic se neděje — prostě zapiš, jak to doopravdy bylo. Yorix hned přepočítá okna i plán na zbytek dne: po krátkém spánku se další ukládání posune blíž, po dlouhém dál. Předpověď se učí právě z tvých záznamů, takže čím déle deník vedeš, tím blíž je tvému dítěti. A když se při zápisu spleteš, každý záznam jde upravit nebo smazat a plán se přepočítá znovu.',
         },
         {
           question: 'Můžou deník vést oba rodiče společně?',
-          answer: 'Ano. V nastavení aplikace Yorix klepni na „Invite Partner“ — druhý dospělý uvidí stejný deník a bude moct přidávat záznamy ze svého iPhonu. Všechno se synchronizuje přes iCloud.',
+          answer: 'Ano. V nastavení klepni na „Invite Partner“: druhý dospělý pozvánku přijme a uvidí stejný deník na svém iPhonu. Záznamy se objeví oběma skoro okamžitě — hodí se to, když v noci drží službu jeden a dopoledne jde ven druhý a nic se nemusí převyprávět. Synchronizace jde přes tvůj iCloud, zvláštní účet Yorix si zakládat nemusíš.',
         },
         {
           question: 'Co je zdarma a co patří do předplatného?',
-          answer: 'Stáhnout Yorix a začít vést deník můžeš zdarma. Osobní předpověď dalšího spánku, AI kouč, analýzy a denní rady jsou součástí předplatného.',
+          answer: 'Stáhnout Yorix a zapisovat spánek je zdarma. U ostatních typů záznamů — krmení, plenky, péče, růst — má bezplatná verze limit. V předplatném je to, kvůli čemu jsou potřeba výpočty a AI: osobní předpověď dalšího spánku, plán dne, který se sám přepočítá, AI kouč odpovídající podle tvého deníku, analýzy a denní doporučení. Programy o příkrmech, vývojových skocích nebo nočníku se kupují zvlášť.',
         },
         {
           question: 'Jak zruším předplatné?',
-          answer: 'Předplatné z App Store zrušíš v Nastavení na iPhonu: klepni na své jméno → Předplatná → Yorix. Přístup ti zůstane až do konce zaplaceného období.',
+          answer: 'Předplatné z App Store zrušíš v Nastavení na iPhonu: klepni na své jméno → Předplatná → Yorix → Zrušit předplatné. Přístup ti zůstane do konce už zaplaceného období a pak se jednoduše neobnoví. Předplatné koupené na webu kartou se neobnovuje vůbec: skončí ve svůj den, kartu neukládáme a nic ti nestrháváme.',
         },
         {
           question: 'Kde jsou uložená data o miminku?',
-          answer: 'Deník se ukládá na tvůj iPhone a na tvůj soukromý iCloud — my k němu přístup nemáme. AI kouč dostane jen shrnutí, které potřebuje k odpovědi. Data neprodáváme a reklamy nezobrazujeme.',
+          answer: 'Deník je uložený na tvém iPhonu a na tvém soukromém iCloudu — my k němu přístup nemáme a přečíst si ho nedokážeme. AI kouči odchází jen krátké shrnutí potřebné k odpovědi na konkrétní dotaz: věk miminka a poslední záznamy, bez jména a kontaktů. Data neprodáváme a reklamy nezobrazujeme. Co a proč zpracováváme, podrobně popisují Zásady zpracování osobních údajů.',
         },
         {
           question: 'Na jakých zařízeních Yorix funguje?',
-          answer: 'Na iPhonu a iPadu s iOS 18 nebo novějším. Verze pro Android zatím není.',
+          answer: 'Na iPhonu a iPadu s iOS 18 nebo novějším. Rozhraní je přeložené do 20 jazyků, jsou tu widgety na plochu i na zamčenou obrazovku, živá aktivita během spánku a příkazy pro Siri, kterými zapíšeš spánek nebo krmení hlasem. Verze pro Android ani webová verze deníku zatím nejsou: předpověď se počítá přímo v zařízení.',
         },
         {
           question: 'Funguje Yorix bez internetu?',
-          answer: 'Ano: deník i předpovědi fungují bez připojení — všechno se počítá přímo v telefonu. Internet potřebuje AI kouč a synchronizace přes iCloud.',
+          answer: 'Ano. Deník, okna bdění i předpověď dalšího spánku se počítají přímo v telefonu, takže fungují i v letadle nebo na chatě bez signálu. Internet potřebuje jen AI kouč, který odpovídá na serveru, a synchronizace přes iCloud: záznamy pořízené offline se rozejdou na ostatní zařízení, jakmile se objeví síť.',
         },
         {
           question: 'Nahrazuje Yorix lékařskou radu?',
-          answer: 'Ne. Yorix pomáhá s denním režimem, není to zdravotnická služba. Krmení, růst, dýchání, horečku, příznaky nebo obavy o bezpečnost je potřeba probrat s kvalifikovaným lékařem.',
+          answer: 'Ne. Yorix pomáhá s režimem a rutinou zdravého miminka, ale není to zdravotnická služba: nestanovuje diagnózy ani nepředepisuje léčbu. Pokud tě trápí dýchání, teplota, váha, krmení nebo celkový stav dítěte, obrať se na dětského lékaře a v naléhavé situaci volej záchranku. Odpovědi kouče jsou obecné informace, ne doporučení lékaře.',
         },
       ],
     },

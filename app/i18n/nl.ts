@@ -29,51 +29,51 @@ export const translation: SiteTranslation = {
       items: [
         {
           question: 'Wat maakt Yorix anders dan een slaaptabel voor baby’s?',
-          answer: 'Een tabel geeft gemiddelden. Yorix gebruikt de echte dutjes, wakevensters, nachtelijke ontwakingen, voedingen en routinegeschiedenis van je baby om het volgende slaapvenster bij te stellen.',
+          answer: 'Een tabel geeft gemiddelden per leeftijd – daar houdt het op. Yorix kijkt naar jouw baby: hoe laat die vandaag wakker werd, hoe lang en hoe goed die sliep, hoe lang die al wakker is en hoe de afgelopen dagen eruitzagen. Daaruit berekent Yorix wanneer het wakevenster sluit en wanneer je aan het naar bed brengen begint. Leg je een kort dutje of een laat ontwaken vast, dan wordt het plan voor de rest van de dag meteen opnieuw berekend.',
         },
         {
           question: 'Wat is een wakevenster?',
-          answer: 'Dat is de tijd dat je baby tussen twee slaapmomenten wakker kan blijven zonder oververmoeid te raken. Bij een pasgeborene is dat 30 tot 60 minuten, rond de eerste verjaardag 3 tot 4 uur. Is het venster voorbij, dan raakt je baby overprikkeld en duurt het inslapen langer. Yorix berekent het venster op basis van de leeftijd van je baby en de slaap van vandaag.',
+          answer: 'Dat is de tijd die je baby tussen twee slaapmomenten wakker blijft zonder oververmoeid te raken. Bij een pasgeborene is dat 30 tot 60 minuten; rond de eerste verjaardag 3 à 4 uur. Mis je het venster, dan raakt je baby overprikkeld: inslapen duurt langer, de slaap is onrustiger en je baby wordt ’s nachts vaker wakker. Yorix berekent het venster uit de leeftijd van je baby en de slaap van vandaag, en laat op tijd weten wanneer je kunt beginnen.',
         },
         {
           question: 'Hoeveel slaap heeft een baby nodig?',
-          answer: 'De WHO adviseert per etmaal in totaal, dutjes meegerekend: 14–17 uur slaap bij 0–3 maanden, 12–16 uur bij 4–11 maanden en 11–14 uur bij 1–2 jaar. De marges zijn ruim, want elke baby is anders. Yorix telt de slaap van je baby per etmaal bij elkaar op, zodat je makkelijk kunt vergelijken.',
+          answer: 'De WHO-richtlijn voor het hele etmaal, dutjes meegerekend: 0–3 maanden 14–17 uur, 4–11 maanden 12–16 uur en 1–2 jaar 11–14 uur. De marges zijn met opzet ruim: de ene baby heeft genoeg aan 12 uur, de andere heeft er 15 nodig, en allebei zijn ze gezond. Het gaat dus minder om het getal dan om je eigen normaal: Yorix telt de slaap van het etmaal op en zet die naast de richtlijn, zodat je het merkt als je baby ineens flink minder slaapt dan anders.',
         },
         {
           question: 'Kan ik Yorix gebruiken bij een pasgeboren baby?',
-          answer: 'Ja. Bij een pasgeborene is Yorix vooral handig als eenvoudig logboek voor slaap, voeding, luiers en verzorging. Naarmate er patronen ontstaan, wordt de routine voorspellender.',
+          answer: 'Ja, en in de eerste weken is het vooral een fijn logboek: slaap, voedingen, luiers en verzorging op één plek, met één tik vastgelegd – ook ’s nachts, met één hand. Op die leeftijd is er nog geen vast ritme, dus Yorix legt geen schema op: het rekent met wakevensters en helpt je de vermoeidheidssignalen op tijd te zien. Zodra de eerste patronen terugkomen, worden de voorspelling en het plan scherper.',
         },
         {
           question: 'Wat als mijn baby anders slaapt dan voorspeld?',
-          answer: 'Leg gewoon vast wat er echt is gebeurd – Yorix berekent de slaapvensters en het plan voor de rest van de dag meteen opnieuw. De voorspelling leert van wat je vastlegt en wordt elke dag nauwkeuriger.',
+          answer: 'Niets aan de hand: leg gewoon vast wat er echt gebeurde. Yorix berekent de vensters en het plan voor de rest van de dag meteen opnieuw – na een kort dutje schuift het volgende slaapmoment naar voren, na een lang dutje naar achteren. De voorspelling leert juist van wat jij vastlegt, dus hoe langer je het dagboek bijhoudt, hoe beter die bij jouw kind past. Verkeerd ingevoerd? Elk item is aan te passen of te verwijderen.',
         },
         {
           question: 'Kunnen we het dagboek met z’n tweeën bijhouden?',
-          answer: 'Ja. Tik in de instellingen van Yorix op ‘Partner uitnodigen’ – de ander ziet dan hetzelfde dagboek en kan vanaf de eigen iPhone ook dingen vastleggen. Alles synchroniseert via iCloud.',
+          answer: 'Ja. Tik in de instellingen op ‘Partner uitnodigen’: de tweede volwassene neemt de uitnodiging aan en ziet hetzelfde dagboek op de eigen iPhone. Nieuwe invoer verschijnt bijna meteen bij allebei – handig als de een de nacht doet en de ander de ochtendwandeling, zonder dat je elkaar iets hoeft na te vertellen. Het synchroniseert via jouw iCloud; een apart Yorix-account is niet nodig.',
         },
         {
           question: 'Wat is gratis en wat zit in het abonnement?',
-          answer: 'Yorix downloaden en beginnen met het dagboek is gratis. De persoonlijke voorspelling van het volgende slaapmoment, de AI-coach, analyses en dagelijks advies krijg je met een abonnement.',
+          answer: 'Yorix downloaden en slaap vastleggen is gratis. Voor andere invoer – voedingen, luiers, verzorging, groei – kent de gratis versie een limiet. In het abonnement zit alles waar gerekend en AI aan te pas komt: de persoonlijke voorspelling van het volgende slaapmoment, het dagplan dat zichzelf bijstelt, de AI-coach die uit je dagboek antwoordt, analyses en dagelijks advies. De programma’s ‘Eerste hapjes’, ‘Ontwikkelingssprongen’ en ‘Zindelijkheidstraining’ koop je los.',
         },
         {
           question: 'Hoe zeg ik mijn abonnement op?',
-          answer: 'Een abonnement via de App Store zeg je op in Instellingen op je iPhone: tik op je naam → Abonnementen → Yorix. Tot het einde van de betaalde periode houd je toegang.',
+          answer: 'Een abonnement via de App Store zeg je op in Instellingen op je iPhone: tik op je naam → Abonnementen → Yorix → ‘Zeg abonnement op’. Tot het einde van de al betaalde periode houd je toegang, daarna wordt er gewoon niet verlengd. Een abonnement dat je met een kaart op de site kocht, verlengt sowieso nooit vanzelf: het loopt op zijn eigen dag af, we bewaren je kaart niet en schrijven niets af.',
         },
         {
           question: 'Waar worden de gegevens van mijn baby bewaard?',
-          answer: 'Het dagboek staat op je iPhone en in je eigen iCloud – wij kunnen er niet bij. De AI-coach krijgt alleen de samenvatting die nodig is om te antwoorden. We verkopen geen gegevens en tonen geen advertenties.',
+          answer: 'Het dagboek staat op je iPhone en in je eigen iCloud – wij kunnen er niet bij en kunnen het niet lezen. De AI-coach krijgt alleen de korte samenvatting die voor die ene vraag nodig is: de leeftijd van je baby en de laatste invoer, zonder naam of contactgegevens. We verkopen geen gegevens en tonen geen advertenties. Wat we verwerken en waarom, staat in het beleid voor persoonsgegevens.',
         },
         {
           question: 'Op welke apparaten werkt Yorix?',
-          answer: 'Op iPhone en iPad met iOS 18 of nieuwer, in 20 talen. Een Android-versie is er nog niet.',
+          answer: 'Op iPhone en iPad met iOS 18 of nieuwer. De interface is vertaald in 20 talen, en er zijn widgets voor het beginscherm en het toegangsscherm, een live activiteit tijdens het slapen en Siri-opdrachten om met je stem een slaapje of een voeding vast te leggen. Een Android-versie en een dagboek op het web zijn er nog niet: de voorspelling wordt op het toestel zelf berekend.',
         },
         {
           question: 'Werkt Yorix zonder internet?',
-          answer: 'Ja: het dagboek en de voorspellingen werken zonder verbinding – alles wordt op je telefoon berekend. Alleen de AI-coach en de synchronisatie via iCloud hebben internet nodig.',
+          answer: 'Ja. Het dagboek, de wakevensters en de voorspelling van het volgende slaapmoment worden op de telefoon zelf berekend, dus ze werken ook in het vliegtuig of in een vakantiehuisje zonder bereik. Internet is alleen nodig voor de AI-coach, die op de server antwoordt, en voor de iCloud-synchronisatie: wat je offline vastlegt, komt bij je andere apparaten zodra er weer verbinding is.',
         },
         {
           question: 'Vervangt Yorix medisch advies?',
-          answer: 'Nee. Yorix is een hulp bij de routine, geen medische dienst. Bespreek zorgen over voeding, groei, ademhaling, koorts, symptomen of veiligheid met een gekwalificeerde zorgverlener.',
+          answer: 'Nee. Yorix helpt met het ritme en de routine van een gezonde baby, maar is geen medische dienst: het stelt geen diagnose en schrijft geen behandeling voor. Maak je je zorgen over de ademhaling, koorts, het gewicht, de voeding of hoe je kind zich voelt, ga dan naar de kinderarts of het consultatiebureau; bel bij spoed het alarmnummer. De antwoorden van de coach zijn algemene informatie, geen doktersadvies.',
         },
       ],
     },

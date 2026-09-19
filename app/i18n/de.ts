@@ -29,51 +29,51 @@ export const translation: SiteTranslation = {
       items: [
         {
           question: 'Was unterscheidet Yorix von einer Babyschlaf-Tabelle?',
-          answer: 'Eine Tabelle zeigt Durchschnittswerte. Yorix nutzt die echten Nickerchen, Wachfenster, nächtlichen Wachphasen, Mahlzeiten und die bisherige Routine deines Babys, um das nächste Schlaffenster anzupassen.',
+          answer: 'Eine Tabelle zeigt Durchschnittswerte fürs Alter – mehr nicht. Yorix schaut auf dein Baby: wann es heute aufgewacht ist, wie lange und wie gut es geschlafen hat, wie lange es schon wach ist, wie die letzten Tage aussahen. Daraus berechnet Yorix, wann das Wachfenster schließt und wann du mit dem Zubettbringen beginnen solltest. Trägst du ein kurzes Nickerchen oder ein spätes Aufwachen ein, rechnet sich der Plan für den Rest des Tages sofort neu.',
         },
         {
           question: 'Was ist ein Wachfenster?',
-          answer: 'Das ist die Zeitspanne, in der dein Baby zwischen zwei Schlafphasen wach bleiben kann, ohne übermüdet zu werden. Bei Neugeborenen sind es 30–60 Minuten, mit einem Jahr 3–4 Stunden. Wird das Fenster verpasst, ist dein Baby schnell überdreht und braucht länger zum Einschlafen. Yorix berechnet das Fenster aus dem Alter deines Babys und seinem Schlaf von heute.',
+          answer: 'Das ist die Zeitspanne, die dein Baby zwischen zwei Schlafphasen wach bleiben kann, ohne übermüdet zu werden. Bei Neugeborenen sind es 30–60 Minuten, zum ersten Geburtstag hin 3–4 Stunden. Wird das Fenster verpasst, dreht das Baby auf: Es schläft langsamer ein, schläft unruhiger und wacht nachts öfter auf. Yorix berechnet das Fenster aus dem Alter deines Babys und seinem Schlaf von heute und sagt dir vorab, wann das Zubettbringen beginnen sollte.',
         },
         {
           question: 'Wie viel Schlaf braucht ein Baby?',
-          answer: 'Die WHO empfiehlt als Gesamtschlaf in 24 Stunden, Nickerchen eingerechnet: mit 0–3 Monaten 14–17 Stunden, mit 4–11 Monaten 12–16, mit 1–2 Jahren 11–14. Die Spannen sind weit gefasst, denn jedes Baby ist anders. Yorix rechnet zusammen, wie viel dein Baby in 24 Stunden geschlafen hat – so lässt sich das leicht vergleichen.',
+          answer: 'Die WHO nennt als Gesamtschlaf pro Tag, Nickerchen eingerechnet: 0–3 Monate 14–17 Stunden, 4–11 Monate 12–16, 1–2 Jahre 11–14. Die Spannen sind bewusst weit: Dem einen Baby reichen 12 Stunden, das andere braucht 15 – und beide sind gesund. Wichtiger als die Zahl ist also die eigene Norm. Yorix zählt den Schlaf des Tages zusammen und stellt ihn neben den Richtwert – so fällt dir auf, wenn dein Baby plötzlich deutlich weniger schläft als sonst.',
         },
         {
           question: 'Kann ich Yorix mit einem Neugeborenen nutzen?',
-          answer: 'Ja. In der Neugeborenenzeit ist Yorix vor allem als einfaches Tagebuch für Schlaf, Mahlzeiten, Windeln und Pflege hilfreich. Je mehr Muster sichtbar werden, desto vorausschauender wird die Routine.',
+          answer: 'Ja – in den ersten Wochen ist es vor allem ein bequemes Tagebuch: Schlaf, Mahlzeiten, Windeln und Pflege an einem Ort, jeder Eintrag mit einem Tippen, auch nachts und einhändig. Einen festen Rhythmus gibt es in diesem Alter nicht, deshalb drängt dir Yorix keinen Zeitplan auf, sondern geht nach Wachfenstern und hilft dir, Müdigkeitszeichen früh zu erkennen. Sobald sich erste Muster wiederholen, werden Prognose und Plan genauer.',
         },
         {
           question: 'Was tun, wenn mein Baby anders schläft als vorhergesagt?',
-          answer: 'Trag einfach ein, wie es wirklich war – Yorix berechnet die Schlaffenster und den Plan für den Rest des Tages sofort neu. Die Prognose lernt aus deinen Einträgen und wird mit jedem Tag genauer.',
+          answer: 'Kein Grund zur Sorge – trag einfach ein, wie es wirklich war. Yorix berechnet die Fenster und den Plan für den Rest des Tages sofort neu: Nach einem kurzen Nickerchen rückt das nächste Zubettbringen näher, nach einem langen weiter nach hinten. Die Prognose lernt aus deinen Einträgen, also passt sie umso besser zu deinem Kind, je länger du das Tagebuch führst. Vertippt? Jeder Eintrag lässt sich ändern oder löschen – der Plan rechnet neu.',
         },
         {
           question: 'Können wir das Tagebuch zu zweit führen?',
-          answer: 'Ja. Tippe in den Yorix-Einstellungen auf „Partner einladen“ – die eingeladene Person sieht dasselbe Tagebuch und kann von ihrem eigenen iPhone aus Einträge hinzufügen. Alles wird über iCloud synchronisiert.',
+          answer: 'Ja. Tippe in den Einstellungen auf „Partner einladen“: Die zweite erwachsene Person nimmt die Einladung an und sieht dasselbe Tagebuch auf ihrem eigenen iPhone. Neue Einträge erscheinen fast sofort bei beiden – praktisch, wenn eine Person die Nacht übernimmt und die andere den Vormittagsspaziergang, und niemand etwas nacherzählen muss. Synchronisiert wird über deine iCloud, ein eigenes Yorix-Konto braucht ihr nicht.',
         },
         {
           question: 'Was ist kostenlos und was gehört zum Abo?',
-          answer: 'Yorix herunterzuladen und mit dem Tagebuch zu beginnen, kostet nichts. Die persönliche Prognose für den nächsten Schlaf, der KI-Coach, Analysen und Tagestipps gehören zum Abo.',
+          answer: 'Yorix herunterzuladen und Schlaf einzutragen, ist kostenlos. Für die übrigen Eintragsarten – Mahlzeiten, Windeln, Pflege, Wachstum – hat die kostenlose Version ein Limit. Ins Abo gehört alles, wofür gerechnet wird: die persönliche Prognose für den nächsten Schlaf, der Tagesplan, der sich selbst anpasst, der KI-Coach mit Antworten aus deinem Tagebuch, Analysen und Tagestipps. Die Programme „Beikoststart“, „Entwicklungssprünge“ oder „Töpfchentraining“ kauft man einzeln.',
         },
         {
           question: 'Wie kündige ich mein Abo?',
-          answer: 'Ein Abo über den App Store kündigst du in den Einstellungen auf deinem iPhone: Tippe auf deinen Namen → Abonnements → Yorix. Den Zugang behältst du bis zum Ende des bezahlten Zeitraums.',
+          answer: 'Ein Abo aus dem App Store kündigst du in den Einstellungen deines iPhones: Tippe auf deinen Namen → „Abonnements“ → Yorix → „Abo kündigen“. Den Zugang behältst du bis zum Ende des bereits bezahlten Zeitraums, danach verlängert er sich einfach nicht. Ein auf der Website mit Karte gekauftes Abo verlängert sich ohnehin nie von selbst: Es endet an seinem Tag, wir speichern keine Kartendaten und buchen nichts ab.',
         },
         {
           question: 'Wo werden die Daten meines Babys gespeichert?',
-          answer: 'Das Tagebuch liegt auf deinem iPhone und in deiner privaten iCloud – wir haben keinen Zugriff darauf. Der KI-Coach bekommt nur die Zusammenfassung, die er für eine Antwort braucht. Wir verkaufen keine Daten und zeigen keine Werbung.',
+          answer: 'Das Tagebuch liegt auf deinem iPhone und in deiner privaten iCloud – wir haben keinen Zugriff darauf und können es nicht lesen. Der KI-Coach bekommt nur die kurze Zusammenfassung, die er für die jeweilige Frage braucht: das Alter des Babys und die letzten Einträge, ohne Namen und Kontaktdaten. Wir verkaufen keine Daten und zeigen keine Werbung. Was wir wozu verarbeiten, steht ausführlich in der Datenschutzrichtlinie.',
         },
         {
           question: 'Auf welchen Geräten läuft Yorix?',
-          answer: 'Auf iPhone und iPad mit iOS 18 oder neuer, in 20 Sprachen. Eine Android-Version gibt es noch nicht.',
+          answer: 'Auf iPhone und iPad mit iOS 18 oder neuer. Die Oberfläche gibt es in 20 Sprachen, dazu Widgets für Home- und Sperrbildschirm, eine Live-Aktivität während des Schlafs und Siri-Kurzbefehle, mit denen du Schlaf oder Mahlzeit per Stimme einträgst. Eine Android-Version und ein Web-Tagebuch gibt es bisher nicht: Die Prognose wird auf dem Gerät selbst berechnet.',
         },
         {
           question: 'Funktioniert Yorix ohne Internet?',
-          answer: 'Ja: Tagebuch und Prognosen funktionieren ohne Verbindung – alles wird direkt auf deinem Handy berechnet. Internet brauchen nur der KI-Coach und die Synchronisierung über iCloud.',
+          answer: 'Ja. Tagebuch, Wachfenster und die Prognose für den nächsten Schlaf werden direkt auf dem Handy berechnet und funktionieren deshalb auch im Flugzeug oder im Ferienhaus ohne Empfang. Internet brauchen nur der KI-Coach, der auf dem Server antwortet, und die Synchronisierung über iCloud: Offline gemachte Einträge landen auf den anderen Geräten, sobald wieder eine Verbindung da ist.',
         },
         {
           question: 'Ersetzt Yorix ärztlichen Rat?',
-          answer: 'Nein. Yorix ist eine Hilfe für die Routine, kein medizinischer Dienst. Sorgen zu Ernährung, Wachstum, Atmung, Fieber, Symptomen oder Sicherheit besprich bitte mit qualifiziertem medizinischem Fachpersonal.',
+          answer: 'Nein. Yorix hilft beim Rhythmus und bei der Routine eines gesunden Babys, ist aber kein medizinischer Dienst: Es stellt keine Diagnosen und verordnet keine Behandlung. Wenn dich Atmung, Fieber, Gewicht, Ernährung oder das Befinden deines Kindes beunruhigen, geh zur Kinderärztin oder zum Kinderarzt – im Notfall ruf den Rettungsdienst. Die Antworten des Coachs sind allgemeine Informationen, keine ärztliche Empfehlung.',
         },
       ],
     },

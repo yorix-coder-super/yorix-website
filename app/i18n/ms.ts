@@ -29,51 +29,51 @@ export const translation: SiteTranslation = {
       items: [
         {
           question: 'Apakah beza Yorix dengan carta tidur bayi?',
-          answer: 'Carta memberi julat purata. Yorix menggunakan tidur siang, waktu berjaga, terjaga malam, penyusuan dan sejarah rutin sebenar bayi anda untuk melaraskan waktu tidur seterusnya.',
+          answer: 'Carta hanya memberi julat purata mengikut umur — setakat itu sahaja. Yorix pula melihat bayi anda sendiri: pukul berapa dia bangun hari ini, berapa lama dan bagaimana dia tidur, sudah berapa lama dia berjaga, dan bagaimana hari-hari kebelakangan ini — lalu mengira bila waktu berjaga akan tamat dan bila anda patut mula menidurkannya. Sebaik anda mencatat tidur siang yang singkat atau bangun yang lewat, pelan untuk baki hari itu dikira semula dengan sendirinya.',
         },
         {
           question: 'Apakah itu waktu berjaga?',
-          answer: 'Waktu berjaga ialah tempoh bayi boleh terus terjaga di antara dua waktu tidur tanpa menjadi terlalu letih. Bagi bayi baru lahir, tempohnya 30–60 minit; apabila mencecah usia setahun, 3–4 jam. Jika waktu ini terlepas, bayi menjadi terlalu teruja dan mengambil masa lebih lama untuk tertidur. Yorix mengira waktu berjaga berdasarkan umur bayi anda dan cara dia tidur hari ini.',
+          answer: 'Waktu berjaga ialah tempoh bayi boleh terjaga di antara dua waktu tidur tanpa menjadi terlalu letih. Bagi bayi baru lahir tempohnya singkat — 30–60 minit; menjelang usia setahun ia memanjang kepada 3–4 jam. Jika tempoh ini terlepas, bayi menjadi terlalu teruja: lebih lama tertidur, tidurnya gelisah dan lebih kerap terjaga malam. Yorix mengiranya mengikut umur bayi anda dan cara dia tidur hari ini, bukan mengikut kalendar, dan memberitahu awal bila masa untuk menidurkan.',
         },
         {
           question: 'Berapa lama bayi perlu tidur?',
-          answer: 'Menurut garis panduan WHO, jumlah tidur dalam 24 jam, termasuk tidur siang, ialah 14–17 jam bagi usia 0–3 bulan, 12–16 jam bagi usia 4–11 bulan dan 11–14 jam bagi usia 1–2 tahun. Julatnya luas kerana setiap bayi berbeza. Yorix menjumlahkan tempoh tidur bayi anda dalam sehari, jadi mudah untuk dibandingkan.',
+          answer: 'Garis panduan WHO untuk sehari semalam, termasuk tidur siang: umur 0–3 bulan 14–17 jam, 4–11 bulan 12–16 jam, 1–2 tahun 11–14 jam. Julatnya sengaja luas: seorang bayi cukup dengan 12 jam, seorang lagi memerlukan 15 jam, dan kedua-duanya sihat. Jadi yang penting bukan angka, tetapi mengenali kebiasaan bayi anda sendiri — Yorix menjumlahkan tidurnya sepanjang hari dan memaparkannya di sebelah garis panduan, supaya anda perasan jika tiba-tiba dia tidur jauh lebih sedikit.',
         },
         {
           question: 'Bolehkah saya menggunakan Yorix untuk bayi baru lahir?',
-          answer: 'Boleh. Pada peringkat bayi baru lahir, Yorix paling berguna sebagai log ringkas untuk tidur, penyusuan, lampin dan penjagaan. Rutin menjadi lebih mudah diramal apabila pola mula kelihatan.',
+          answer: 'Boleh, dan pada minggu-minggu pertama ia terutamanya sebuah log yang mudah: tidur, penyusuan, lampin dan penjagaan di satu tempat, satu ketikan untuk satu catatan — termasuk pada waktu malam, dengan sebelah tangan. Pada usia ini belum ada rutin yang ketat, jadi Yorix tidak memaksakan jadual; ia membimbing mengikut waktu berjaga dan membantu anda tidak terlepas tanda letih. Apabila pola berulang mula kelihatan, ramalan dan pelan menjadi lebih tepat.',
         },
         {
           question: 'Bagaimana jika bayi saya tidak tidur seperti yang diramalkan?',
-          answer: 'Catat sahaja apa yang benar-benar berlaku — Yorix terus mengira semula waktu tidur dan pelan untuk baki hari itu. Ramalan belajar daripada catatan anda dan menjadi lebih tepat setiap hari.',
+          answer: 'Tidak mengapa — catat sahaja apa yang benar-benar berlaku. Yorix terus mengira semula waktu berjaga dan pelan untuk baki hari itu: selepas tidur siang yang singkat, waktu menidurkan seterusnya beralih lebih awal; selepas tidur yang panjang, ia beralih lebih lewat. Ramalan belajar daripada catatan anda sendiri, jadi lebih lama anda mengisi diari, lebih hampir ia dengan anak anda. Tersalah catat? Setiap catatan boleh diubah atau dipadam, dan pelan dikira semula.',
         },
         {
           question: 'Bolehkah ibu bapa mengisi diari bersama-sama?',
-          answer: 'Boleh. Dalam tetapan Yorix, ketik “Invite Partner” — orang dewasa yang seorang lagi akan melihat diari yang sama dan boleh menambah catatan daripada iPhone sendiri. Semuanya disegerakkan melalui iCloud.',
+          answer: 'Boleh. Dalam tetapan, ketik “Invite Partner”: orang dewasa yang seorang lagi menerima jemputan dan melihat diari yang sama pada iPhone sendiri. Catatan muncul pada kedua-duanya hampir serta-merta — memang membantu apabila seorang berjaga malam dan seorang lagi membawa bersiar pada waktu pagi, tanpa perlu menceritakan semula apa-apa. Penyegerakan berjalan melalui iCloud anda; tidak perlu membuka akaun Yorix yang berasingan.',
         },
         {
           question: 'Apakah yang percuma dan apakah yang memerlukan langganan?',
-          answer: 'Memuat turun Yorix dan mula mengisi diari adalah percuma. Ramalan tidur seterusnya khusus untuk bayi anda, jurulatih AI, analitik dan nasihat harian disediakan melalui langganan.',
+          answer: 'Memuat turun Yorix dan mencatat tidur adalah percuma. Bagi jenis catatan yang lain — penyusuan, lampin, penjagaan, tumbesaran — versi percuma ada hadnya. Langganan merangkumi perkara yang memerlukan pengiraan dan AI: ramalan tidur seterusnya untuk bayi anda, pelan harian yang menyusun semula dirinya, jurulatih AI yang menjawab berdasarkan diari anda, analitik dan nasihat harian. Program tentang makanan pejal, lonjakan perkembangan atau latihan tandas dibeli berasingan.',
         },
         {
           question: 'Bagaimana cara membatalkan langganan saya?',
-          answer: 'Batalkan langganan App Store dalam Seting iPhone anda: ketik nama anda → Langganan → Yorix. Anda masih boleh menggunakannya sehingga tamat tempoh yang telah dibayar.',
+          answer: 'Langganan App Store dibatalkan dalam Seting iPhone: nama anda → “Langganan” → Yorix → “Batalkan Langganan”. Akses kekal sehingga tamat tempoh yang telah dibayar, selepas itu ia sekadar tidak diperbaharui. Langganan yang dibeli di laman web dengan kad pula memang tidak memperbaharui dirinya sendiri: ia tamat pada harinya, kami tidak menyimpan maklumat kad dan tidak mengenakan sebarang caj.',
         },
         {
           question: 'Di manakah data bayi saya disimpan?',
-          answer: 'Diari disimpan dalam iPhone anda dan iCloud peribadi anda — kami tidak mempunyai akses kepadanya. Jurulatih AI hanya menerima ringkasan yang diperlukan untuk menjawab. Kami tidak menjual data dan tidak memaparkan iklan.',
+          answer: 'Diari disimpan dalam iPhone anda dan dalam iCloud peribadi anda — kami tidak mempunyai akses kepadanya dan tidak boleh membacanya. Jurulatih AI hanya menerima ringkasan pendek yang diperlukan untuk menjawab soalan tertentu: umur bayi dan catatan terkini, tanpa nama dan maklumat perhubungan. Kami tidak menjual data dan tidak memaparkan iklan. Apa yang diproses dan untuk apa diterangkan dengan terperinci dalam “Dasar data peribadi”.',
         },
         {
           question: 'Yorix boleh digunakan pada peranti apa?',
-          answer: 'iPhone dan iPad dengan iOS 18 atau lebih baharu. Versi Android belum tersedia.',
+          answer: 'Pada iPhone dan iPad dengan iOS 18 atau lebih baharu. Antara mukanya diterjemahkan ke dalam 20 bahasa, ada widget untuk Skrin Utama dan Skrin Kunci, Aktiviti Langsung sewaktu bayi tidur, serta arahan Siri untuk mencatat tidur atau penyusuan menggunakan suara. Versi Android dan versi web diari belum ada lagi: ramalan dikira pada peranti itu sendiri.',
         },
         {
           question: 'Adakah Yorix berfungsi tanpa internet?',
-          answer: 'Ya. Diari dan ramalan berfungsi tanpa sambungan — semuanya dikira pada telefon anda. Jurulatih AI dan penyegerakan iCloud memerlukan internet.',
+          answer: 'Ya. Diari, waktu berjaga dan ramalan tidur seterusnya dikira terus pada telefon, jadi semuanya berfungsi di dalam kapal terbang mahupun di tempat yang tiada liputan. Internet hanya diperlukan oleh jurulatih AI, yang menjawab di pelayan, dan oleh penyegerakan iCloud: catatan yang dibuat di luar talian akan sampai ke peranti anda yang lain sebaik sahaja sambungan kembali.',
         },
         {
           question: 'Adakah Yorix menggantikan nasihat perubatan?',
-          answer: 'Tidak. Yorix ialah pembantu rutin, bukan perkhidmatan perubatan. Kebimbangan tentang penyusuan, tumbesaran, pernafasan, demam, simptom atau keselamatan perlu dibincangkan dengan pengamal perubatan yang bertauliah.',
+          answer: 'Tidak. Yorix membantu menyusun rutin bayi yang sihat, tetapi ia bukan perkhidmatan perubatan: ia tidak membuat diagnosis dan tidak menetapkan rawatan. Jika anda bimbang tentang pernafasan, demam, berat badan, penyusuan atau keadaan bayi, jumpa pakar pediatrik — dan dalam keadaan kecemasan terus hubungi perkhidmatan kecemasan. Jawapan jurulatih AI ialah maklumat umum, bukan nasihat doktor.',
         },
       ],
     },

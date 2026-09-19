@@ -29,51 +29,51 @@ export const translation: SiteTranslation = {
       items: [
         {
           question: '¿En qué se diferencia Yorix de una tabla de sueño?',
-          answer: 'Una tabla da rangos medios. Yorix usa las siestas reales, las ventanas de vigilia, los despertares nocturnos, las tomas y el historial de rutina de tu bebé para ajustar la siguiente ventana de sueño.',
+          answer: 'Una tabla da rangos medios para una edad y ahí se queda. Yorix mira a tu bebé: a qué hora se despertó hoy, cuánto y cómo durmió, cuánto lleva despierto y qué aspecto tuvieron los últimos días; con eso calcula cuándo se cierra la ventana de vigilia y a qué hora empezar a acostarlo. Registra una siesta corta o un despertar tardío y el plan del resto del día se recalcula solo, en vez de quedarse en el de ayer.',
         },
         {
           question: '¿Qué es una ventana de vigilia?',
-          answer: 'Es el tiempo que tu bebé puede pasar despierto entre un sueño y otro sin sobrecansarse. En un recién nacido son de 30 a 60 minutos; hacia el año, de 3 a 4 horas. Si se pasa la ventana, tu bebé se sobreexcita y tarda más en dormirse. Yorix calcula la ventana según la edad de tu bebé y cómo durmió hoy.',
+          answer: 'Es el rato que tu bebé aguanta despierto entre un sueño y otro sin llegar a sobrecansarse. En un recién nacido es corto, de 30 a 60 minutos; hacia el año llega a 3 o 4 horas. Si se pasa la ventana, el bebé se sobreexcita: tarda más en dormirse, duerme más inquieto y se despierta más veces por la noche. Yorix calcula la ventana por la edad de tu bebé y por cómo ha dormido hoy, y te avisa con antelación de cuándo empezar a acostarlo.',
         },
         {
           question: '¿Cuánto debe dormir un bebé?',
-          answer: 'Las pautas de la OMS para el sueño total en 24 horas, siestas incluidas, son: 14-17 horas de 0 a 3 meses, 12-16 de 4 a 11 meses y 11-14 de 1 a 2 años. Los rangos son amplios porque cada bebé es distinto. Yorix suma todo lo que duerme tu bebé en 24 horas, así es fácil comparar.',
+          answer: 'Las referencias de la OMS para las 24 horas, siestas incluidas: 14-17 horas de 0 a 3 meses, 12-16 de 4 a 11 meses y 11-14 de 1 a 2 años. Los rangos son amplios a propósito: a un bebé le bastan 12 horas y otro necesita 15, y los dos están sanos. Por eso importa menos acertar con la cifra que conocer la propia: Yorix suma el sueño del día y lo muestra junto a la referencia, para que notes si tu bebé empieza a dormir bastante menos de lo habitual.',
         },
         {
           question: '¿Puedo usar Yorix con un recién nacido?',
-          answer: 'Sí. En la etapa de recién nacido, Yorix es más útil como un registro sencillo de sueño, tomas, pañales y cuidados. La rutina se vuelve más predecible a medida que aparecen patrones.',
+          answer: 'Sí, y en las primeras semanas es sobre todo un diario cómodo: sueño, tomas, pañales y cuidados en un mismo sitio, con un toque por registro, también de noche y con una mano. A esta edad no hay una rutina rígida, así que Yorix no impone horarios: se guía por las ventanas de vigilia y te ayuda a no pasar por alto las señales de cansancio. Cuando aparecen los primeros patrones, el pronóstico y el plan se afinan.',
         },
         {
           question: '¿Y si mi bebé no duerme según el pronóstico?',
-          answer: 'Solo tienes que registrar lo que pasó de verdad: Yorix recalcula al instante las ventanas de sueño y el plan para el resto del día. El pronóstico aprende de tus registros y cada día es más preciso.',
+          answer: 'No pasa nada: registra lo que ocurrió de verdad. Yorix recalcula al momento las ventanas y el plan del resto del día; después de una siesta corta, el siguiente sueño se adelanta, y después de una larga se retrasa. El pronóstico aprende de tus propios registros, así que cuanto más tiempo lleves el diario, mejor se ajusta a tu hijo. ¿Te equivocaste al anotar? Cualquier registro se puede editar o borrar y el plan vuelve a recalcularse.',
         },
         {
           question: '¿Se puede llevar el diario entre dos?',
-          answer: 'Sí. En los ajustes de Yorix, toca «Invitar pareja»: la persona invitada ve el mismo diario y puede añadir registros desde su propio iPhone. Todo se sincroniza a través de iCloud.',
+          answer: 'Sí. En los ajustes toca «Invitar pareja»: la otra persona acepta la invitación y ve el mismo diario en su propio iPhone. Los registros aparecen casi al instante en los dos teléfonos, algo muy práctico cuando uno hace la noche y el otro el paseo de la mañana, sin tener que contarse nada. La sincronización va por tu iCloud; no hace falta crear ninguna cuenta de Yorix.',
         },
         {
           question: '¿Qué es gratis y qué incluye la suscripción?',
-          answer: 'Descargar Yorix y empezar el diario es gratis. El pronóstico personalizado del próximo sueño, el coach con IA, los análisis y los consejos diarios vienen con la suscripción.',
+          answer: 'Descargar Yorix y registrar el sueño es gratis. Para los demás tipos de registro (tomas, pañales, cuidados, crecimiento) la versión gratuita tiene un límite. La suscripción incluye lo que necesita cálculo e IA: el pronóstico personalizado del próximo sueño, el plan del día que se rehace solo, el coach con IA que responde a partir de tu diario, los análisis y los consejos diarios. Los programas «Primeros alimentos», «Saltos de desarrollo» o «Dejar el pañal» se compran aparte.',
         },
         {
           question: '¿Cómo cancelo mi suscripción?',
-          answer: 'Una suscripción del App Store se cancela en los Ajustes del iPhone: toca tu nombre → Suscripciones → Yorix. Mantienes el acceso hasta que termine el periodo pagado.',
+          answer: 'Una suscripción del App Store se cancela en los Ajustes del iPhone: toca tu nombre → Suscripciones → Yorix → «Cancelar suscripción». Conservas el acceso hasta el final del periodo que ya has pagado y a partir de ahí simplemente no se renueva. La suscripción comprada con tarjeta en la web no se renueva sola: termina el día que le toca, no guardamos la tarjeta y no cobramos nada.',
         },
         {
           question: '¿Dónde se guardan los datos de mi bebé?',
-          answer: 'El diario se guarda en tu iPhone y en tu iCloud privado; no tenemos acceso a él. El coach con IA solo recibe el resumen que necesita para responder. No vendemos datos ni mostramos anuncios.',
+          answer: 'El diario se guarda en tu iPhone y en tu iCloud personal: nosotros no tenemos acceso y no podemos leerlo. Al coach con IA solo le llega un resumen breve, el que hace falta para responder a esa pregunta concreta: la edad del bebé y los últimos registros, sin nombres ni datos de contacto. No vendemos datos ni mostramos anuncios. Qué se trata y para qué se explica en la política de tratamiento de datos personales.',
         },
         {
           question: '¿En qué dispositivos funciona Yorix?',
-          answer: 'En iPhone y iPad con iOS 18 o posterior, en 20 idiomas. Todavía no hay versión para Android.',
+          answer: 'En iPhone y iPad con iOS 18 o posterior. La interfaz está traducida a 20 idiomas y hay widgets para la pantalla de inicio y la pantalla bloqueada, una actividad en vivo mientras el bebé duerme y comandos de Siri para registrar un sueño o una toma con la voz. Todavía no hay versión para Android ni diario web: el pronóstico se calcula en el propio dispositivo.',
         },
         {
           question: '¿Yorix funciona sin internet?',
-          answer: 'Sí: el diario y los pronósticos funcionan sin conexión, porque todo se calcula en tu teléfono. Solo el coach con IA y la sincronización con iCloud necesitan internet.',
+          answer: 'Sí. El diario, las ventanas de vigilia y el pronóstico del próximo sueño se calculan en el propio teléfono, así que funcionan en un avión o en el campo sin cobertura. Internet solo lo necesitan el coach con IA, que responde desde el servidor, y la sincronización por iCloud: los registros hechos sin conexión llegan a tus otros dispositivos en cuanto vuelve la red.',
         },
         {
           question: '¿Yorix sustituye el consejo médico?',
-          answer: 'No. Yorix es una ayuda para la rutina, no un servicio médico. Las dudas sobre alimentación, crecimiento, respiración, fiebre, síntomas o seguridad deben consultarse con un profesional de la salud cualificado.',
+          answer: 'No. Yorix ayuda con el ritmo y la rutina de un bebé sano, pero no es un servicio médico: no diagnostica ni indica tratamientos. Si te preocupan la respiración, la fiebre, el peso, la alimentación o cómo se encuentra tu hijo, acude al pediatra, y en una urgencia llama a emergencias. Las respuestas del coach son información general, no una indicación médica.',
         },
       ],
     },

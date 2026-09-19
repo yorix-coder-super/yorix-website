@@ -29,51 +29,51 @@ export const translation: SiteTranslation = {
       items: [
         {
           question: 'Cosa rende Yorix diverso da una tabella del sonno?',
-          answer: 'Una tabella offre intervalli medi. Yorix usa le vere nanne, le finestre di veglia, i risvegli notturni, le pappe e la storia della routine del tuo bambino per adattare la prossima finestra di sonno.',
+          answer: 'Una tabella offre intervalli medi per età, e finisce lì. Yorix guarda il tuo bambino: a che ora si è svegliato oggi, quanto e come ha dormito, da quanto è sveglio, come sono andati gli ultimi giorni — e da qui calcola quando si chiude la finestra di veglia e a che ora iniziare la nanna. Basta registrare un sonnellino corto o un risveglio tardivo e il piano per il resto della giornata si ricalcola da solo, invece di restare quello di ieri.',
         },
         {
           question: 'Che cos’è una finestra di veglia?',
-          answer: 'È il tempo che il tuo bambino riesce a stare sveglio tra un sonno e l’altro senza stancarsi troppo. Per un neonato sono 30-60 minuti; verso l’anno, 3-4 ore. Se si supera la finestra, il bambino diventa sovraeccitato e fa più fatica ad addormentarsi. Yorix calcola la finestra in base all’età del tuo bambino e a come ha dormito oggi.',
+          answer: 'È il tempo che il tuo bambino riesce a stare sveglio tra un sonno e l’altro senza stancarsi troppo. Nel neonato è breve, 30-60 minuti; verso l’anno arriva a 3-4 ore. Se la finestra viene superata il bambino si sovraeccita: fa più fatica ad addormentarsi, dorme più agitato e di notte si sveglia più spesso. Yorix calcola la finestra in base all’età del bambino e a come ha dormito oggi, e ti avvisa in anticipo di quando iniziare la nanna.',
         },
         {
           question: 'Quanto deve dormire un bambino?',
-          answer: 'Le indicazioni dell’OMS per il sonno totale nelle 24 ore, nanne comprese, sono: 14-17 ore da 0 a 3 mesi, 12-16 da 4 a 11 mesi e 11-14 da 1 a 2 anni. Gli intervalli sono ampi perché ogni bambino è diverso. Yorix somma quanto ha dormito il tuo bambino nelle 24 ore, così il confronto è facile.',
+          answer: 'I riferimenti dell’OMS sulle 24 ore, nanne comprese: 14-17 ore da 0 a 3 mesi, 12-16 da 4 a 11 mesi, 11-14 da 1 a 2 anni. Gli intervalli sono volutamente ampi: a un bambino bastano 12 ore, a un altro ne servono 15, e stanno bene entrambi. Più che centrare il numero conta conoscere il proprio: Yorix somma il sonno della giornata e lo mostra accanto al riferimento, così noti subito se il bambino inizia a dormire molto meno del solito.',
         },
         {
           question: 'Posso usare Yorix con un neonato?',
-          answer: 'Sì. Nella fase neonatale Yorix è utile soprattutto come semplice diario di sonno, pappe, pannolini e cure. La routine diventa più prevedibile man mano che emergono dei ritmi.',
+          answer: 'Sì, e nelle prime settimane è soprattutto un diario comodo: sonno, pappe, pannolini e cure in un unico posto, una registrazione con un tocco — anche di notte, con una mano sola. A quest’età non esiste una routine rigida, perciò Yorix non impone orari: ragiona per finestre di veglia e ti aiuta a non perdere i segnali di stanchezza. Quando compaiono i primi ritmi ricorrenti, previsione e piano diventano più precisi.',
         },
         {
           question: 'E se il mio bambino non dorme come previsto?',
-          answer: 'Registra semplicemente com’è andata davvero — Yorix ricalcola subito le finestre di sonno e il piano per il resto della giornata. La previsione impara dalle tue registrazioni e diventa più precisa ogni giorno.',
+          answer: 'Nessun problema: registra com’è andata davvero. Yorix ricalcola subito le finestre e il piano per il resto della giornata — dopo un sonnellino corto la nanna successiva si avvicina, dopo uno lungo si allontana. La previsione impara proprio dalle tue registrazioni, quindi più a lungo tieni il diario, più si adatta al tuo bambino. Hai sbagliato a registrare? Ogni voce si può modificare o eliminare e il piano si ricalcola di nuovo.',
         },
         {
           question: 'Si può tenere il diario in due?',
-          answer: 'Sì. Nelle impostazioni di Yorix tocca «Invita il partner» — la persona invitata vede lo stesso diario e può aggiungere registrazioni dal proprio iPhone. Tutto si sincronizza tramite iCloud.',
+          answer: 'Sì. Nelle impostazioni tocca «Invita il partner»: l’altro adulto accetta l’invito e vede lo stesso diario sul proprio iPhone. Le registrazioni compaiono quasi subito da entrambe le parti — comodo quando uno fa la notte e l’altro la passeggiata del mattino, senza doversi raccontare nulla. La sincronizzazione passa dal tuo iCloud: non serve creare un account Yorix.',
         },
         {
           question: 'Cosa è gratis e cosa include l’abbonamento?',
-          answer: 'Scaricare Yorix e iniziare il diario è gratis. La previsione personalizzata del prossimo sonno, il coach AI, le analisi e i consigli quotidiani sono inclusi nell’abbonamento.',
+          answer: 'Scaricare Yorix e registrare il sonno è gratis. Per le altre registrazioni — pappe, pannolini, cure, crescita — la versione gratuita ha un limite. Nell’abbonamento c’è ciò che richiede calcoli e AI: la previsione personalizzata del prossimo sonno, il piano del giorno che si rifà da solo, il coach AI che risponde leggendo il tuo diario, le analisi e i consigli quotidiani. I programmi «Svezzamento», «Salti di sviluppo» o «Togliere il pannolino» si comprano a parte.',
         },
         {
           question: 'Come annullo l’abbonamento?',
-          answer: 'Un abbonamento dell’App Store si annulla nelle Impostazioni dell’iPhone: tocca il tuo nome → Abbonamenti → Yorix. L’accesso resta attivo fino alla fine del periodo già pagato.',
+          answer: 'Un abbonamento dell’App Store si annulla nelle Impostazioni dell’iPhone: tocca il tuo nome → Abbonamenti → Yorix → «Annulla abbonamento». L’accesso resta attivo fino alla fine del periodo già pagato e poi semplicemente non si rinnova. L’abbonamento acquistato con carta sul sito non si rinnova mai da solo: finisce nel suo giorno, non conserviamo la carta e non addebitiamo nulla.',
         },
         {
           question: 'Dove vengono salvati i dati del mio bambino?',
-          answer: 'Il diario resta sul tuo iPhone e nel tuo iCloud privato — noi non possiamo accedervi. Il coach AI riceve solo il riepilogo che gli serve per rispondere. Non vendiamo dati e non mostriamo pubblicità.',
+          answer: 'Il diario resta sul tuo iPhone e nel tuo iCloud personale: noi non possiamo accedervi né leggerlo. Al coach AI arriva solo un breve riepilogo, quello che serve per rispondere alla domanda del momento — l’età del bambino e le ultime registrazioni, senza nome né contatti. Non vendiamo dati e non mostriamo pubblicità. Cosa trattiamo e perché è spiegato nell’informativa sul trattamento dei dati personali.',
         },
         {
           question: 'Su quali dispositivi funziona Yorix?',
-          answer: 'Su iPhone e iPad con iOS 18 o versioni successive, in 20 lingue. La versione per Android non c’è ancora.',
+          answer: 'Su iPhone e iPad con iOS 18 o versioni successive. L’interfaccia è tradotta in 20 lingue e ci sono i widget per la schermata Home e per la schermata di blocco, un’attività in tempo reale mentre il bambino dorme e i comandi Siri per registrare un sonno o una pappa con la voce. La versione per Android e il diario sul web non ci sono ancora: la previsione viene calcolata sul dispositivo.',
         },
         {
           question: 'Yorix funziona senza internet?',
-          answer: 'Sì: diario e previsioni funzionano anche senza connessione — tutto viene calcolato sul tuo telefono. Solo il coach AI e la sincronizzazione con iCloud hanno bisogno di internet.',
+          answer: 'Sì. Diario, finestre di veglia e previsione del prossimo sonno vengono calcolati direttamente sul telefono, quindi funzionano in aereo o in campagna senza campo. Internet serve solo al coach AI, che risponde dal server, e alla sincronizzazione iCloud: le registrazioni fatte offline raggiungono gli altri dispositivi appena torna la connessione.',
         },
         {
           question: 'Yorix sostituisce il parere medico?',
-          answer: 'No. Yorix aiuta con la routine, non è un servizio medico. Per dubbi su alimentazione, crescita, respirazione, febbre, sintomi o sicurezza, rivolgiti a un professionista sanitario qualificato.',
+          answer: 'No. Yorix aiuta con i ritmi e la routine di un bambino sano, ma non è un servizio medico: non fa diagnosi e non prescrive terapie. Se ti preoccupano il respiro, la febbre, il peso, l’alimentazione o come sta il tuo bambino, rivolgiti al pediatra e, in caso di urgenza, chiama i soccorsi. Le risposte del coach sono informazioni generali, non l’indicazione di un medico.',
         },
       ],
     },
