@@ -408,6 +408,6 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Product', features: 'Features', guides: 'Guides', support: 'Support', write: 'Write to us', badgeTop: 'Download on the' },
+  footerLabels: { product: 'Product', features: 'Features', guides: 'Guides', support: 'Support', write: 'Write to us', redeem: 'Redeem a gift', badgeTop: 'Download on the' },
   docsNote: '',
 };

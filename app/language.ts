@@ -49,6 +49,8 @@ export function localizedPath(pathname: string, lang: Locale): string | null {
   if (pathname === '/subscription' || /^\/subscription\/(offer|payment|terms|privacy|gift)$/.test(pathname)) {
     return lang === 'ru' ? `/ru${pathname}` : null;
   }
+  // Gift pages exist in Russian and English only.
+  if (/^\/gift(\/[A-Za-z0-9-]{12,20})?$/.test(pathname)) return lang === 'ru' ? `/ru${pathname}` : null;
   const slug = pathname.slice(1);
   if (/^[a-z0-9-]+$/.test(slug) && isTranslatedArticleSlug(slug) && getLocalizedTopicPage(lang, slug)) {
     return `/${lang}/${slug}`;

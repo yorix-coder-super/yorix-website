@@ -15,9 +15,11 @@ export const metadata: Metadata = {
 };
 
 export default function Page({ params }: { params: { code: string } }) {
+  // A code is letters, digits and dashes; anything else is noise (and never reaches a link or a URL decoder).
+  const code = params.code.replace(/[^A-Za-z0-9-]/g, '').slice(0, 20);
   return (
-    <SubscriptionShell lang="ru">
-      <GiftRedeemPanel appUrl={appDownloadUrl} code={decodeURIComponent(params.code)} lang="ru" />
+    <SubscriptionShell giftPaths={{ en: `/gift/${code}`, ru: `/ru/gift/${code}` }} lang="ru">
+      <GiftRedeemPanel appUrl={appDownloadUrl} code={code} lang="ru" />
     </SubscriptionShell>
   );
 }

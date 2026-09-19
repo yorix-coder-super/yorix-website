@@ -465,7 +465,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Produkt', features: 'Funktioner', guides: 'Guider', support: 'Support', write: 'Skriv til os', badgeTop: 'Hent i' },
+  footerLabels: { product: 'Produkt', features: 'Funktioner', guides: 'Guider', support: 'Support', write: 'Skriv til os', redeem: 'Indløs en gave', badgeTop: 'Hent i' },
   docsNote: 'Dokumenterne findes på engelsk og russisk.',
   topics: {
     'baby-nap-schedule-by-age': 'Lurskema efter alder',

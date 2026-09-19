@@ -5,9 +5,10 @@ import type { Lang } from '../i18n';
 import { Reveal } from '../Reveal';
 import { SubscriptionShell } from '../SubscriptionShell';
 import { GiftCheckout } from './GiftCheckout';
+import { GiftList } from './GiftList';
 
 // The gift page of the card-sales countries (the proxy sends everyone else
-// home): headline, then the live card and the checkout.
+// home): headline, the live card and the checkout, then the buyer's gifts.
 export async function GiftPage({ lang }: { lang: Lang }) {
   const text = subscriptionCopy[lang].gift;
   const requestHeaders = await headers();
@@ -28,6 +29,7 @@ export async function GiftPage({ lang }: { lang: Lang }) {
       <section className="mx-auto max-w-7xl px-5 pb-20 pt-4 sm:px-8 lg:px-10">
         <AccountProvider acceptLanguage={requestHeaders.get('accept-language')} country={requestHeaders.get('cf-ipcountry')} lang={lang}>
           <GiftCheckout />
+          <GiftList />
         </AccountProvider>
       </section>
     </SubscriptionShell>

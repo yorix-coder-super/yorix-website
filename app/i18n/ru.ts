@@ -336,7 +336,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Продукт', features: 'Возможности', guides: 'Гайды', support: 'Поддержка', write: 'Написать нам', badgeTop: 'Загрузите в' },
+  footerLabels: { product: 'Продукт', features: 'Возможности', guides: 'Гайды', support: 'Поддержка', write: 'Написать нам', redeem: 'Активировать подарок', badgeTop: 'Загрузите в' },
   docsNote: '',
   topics: {
     'baby-nap-schedule-by-age': 'Режим дневного сна ребенка по возрасту',

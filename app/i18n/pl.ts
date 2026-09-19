@@ -465,7 +465,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Produkt', features: 'Funkcje', guides: 'Poradniki', support: 'Wsparcie', write: 'Napisz do nas', badgeTop: 'Pobierz w' },
+  footerLabels: { product: 'Produkt', features: 'Funkcje', guides: 'Poradniki', support: 'Wsparcie', write: 'Napisz do nas', redeem: 'Zrealizuj prezent', badgeTop: 'Pobierz w' },
   docsNote: 'Dokumenty są dostępne po angielsku i rosyjsku.',
   topics: {
     'baby-nap-schedule-by-age': 'Plan drzemek dziecka według wieku',

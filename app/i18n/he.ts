@@ -465,7 +465,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'מוצר', features: 'יכולות', guides: 'מדריכים', support: 'תמיכה', write: 'כתבו לנו', badgeTop: 'להורדה ב-' },
+  footerLabels: { product: 'מוצר', features: 'יכולות', guides: 'מדריכים', support: 'תמיכה', write: 'כתבו לנו', redeem: 'מימוש מתנה', badgeTop: 'להורדה ב-' },
   docsNote: 'המסמכים זמינים באנגלית וברוסית.',
   topics: {
     'baby-nap-schedule-by-age': 'לוח תנומות לתינוק לפי גיל',

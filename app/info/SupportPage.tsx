@@ -1,4 +1,4 @@
-import { Mail } from 'lucide-react';
+import { Gift, Mail } from 'lucide-react';
 import { Art, Sparkle } from '../home/art';
 import { CtaBand, FaqItem, whitePill } from '../home/CtaBand';
 import { docsLang, isRtl, siteCopy, type SiteLocale } from '../i18n';
@@ -41,10 +41,16 @@ export async function SupportPage({ locale }: { locale: SiteLocale }) {
               <p className="mt-5 max-w-2xl text-base leading-7 text-white/75 sm:text-[17px]">{copy.body}</p>
             </Reveal>
             <Reveal delay={320} load>
-              <a className={`${whitePill} mt-7`} href="#contact">
-                <Mail className="h-5 w-5" aria-hidden="true" />
-                {copy.contact.title}
-              </a>
+              <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-4">
+                <a className={whitePill} href="#contact">
+                  <Mail className="h-5 w-5" aria-hidden="true" />
+                  {copy.contact.title}
+                </a>
+                <a className="inline-flex items-center gap-2 text-base font-semibold text-white/85 underline decoration-white/30 underline-offset-4 hover:decoration-white" href={docs === 'ru' ? '/ru/gift' : '/gift'}>
+                  <Gift className="h-5 w-5" aria-hidden="true" />
+                  {site.footerLabels.redeem}
+                </a>
+              </div>
             </Reveal>
           </div>
           <div aria-hidden="true" className="relative mx-auto hidden h-[320px] w-full max-w-[380px] sm:block">

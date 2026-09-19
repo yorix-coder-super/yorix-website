@@ -465,7 +465,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Produkt', features: 'Funktionen', guides: 'Ratgeber', support: 'Support', write: 'Schreib uns', badgeTop: 'Laden im' },
+  footerLabels: { product: 'Produkt', features: 'Funktionen', guides: 'Ratgeber', support: 'Support', write: 'Schreib uns', redeem: 'Geschenk einlösen', badgeTop: 'Laden im' },
   docsNote: 'Die Dokumente gibt es auf Englisch und Russisch.',
   topics: {
     'baby-nap-schedule-by-age': 'Nickerchen nach Alter',

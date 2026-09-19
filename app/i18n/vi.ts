@@ -474,7 +474,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Sản phẩm', features: 'Tính năng', guides: 'Hướng dẫn', support: 'Hỗ trợ', write: 'Gửi email cho chúng tôi', badgeTop: 'Tải về trên' },
+  footerLabels: { product: 'Sản phẩm', features: 'Tính năng', guides: 'Hướng dẫn', support: 'Hỗ trợ', write: 'Gửi email cho chúng tôi', redeem: 'Đổi quà tặng', badgeTop: 'Tải về trên' },
   docsNote: 'Các tài liệu hiện có bằng tiếng Anh và tiếng Nga.',
   topics: {
     'baby-nap-schedule-by-age': 'Lịch ngủ ngày của bé theo độ tuổi',

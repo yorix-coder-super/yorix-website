@@ -465,7 +465,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'المنتج', features: 'المزايا', guides: 'الأدلة', support: 'الدعم', write: 'راسلنا', badgeTop: 'تنزيل من' },
+  footerLabels: { product: 'المنتج', features: 'المزايا', guides: 'الأدلة', support: 'الدعم', write: 'راسلنا', redeem: 'استرداد هدية', badgeTop: 'تنزيل من' },
   docsNote: 'المستندات متاحة باللغتين الإنجليزية والروسية.',
   topics: {
     'baby-nap-schedule-by-age': 'جدول قيلولات الطفل حسب العمر',

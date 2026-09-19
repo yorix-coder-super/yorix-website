@@ -465,7 +465,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Produkt', features: 'Funksjoner', guides: 'Guider', support: 'Kundestøtte', write: 'Skriv til oss', badgeTop: 'Last ned i' },
+  footerLabels: { product: 'Produkt', features: 'Funksjoner', guides: 'Guider', support: 'Kundestøtte', write: 'Skriv til oss', redeem: 'Løs inn en gave', badgeTop: 'Last ned i' },
   docsNote: 'Dokumentene finnes på engelsk og russisk.',
   topics: {
     'baby-nap-schedule-by-age': 'Lurplan for baby etter alder',

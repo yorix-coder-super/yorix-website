@@ -18,13 +18,23 @@ export function documentLinks(lang: Lang, web = true) {
   ];
 }
 
-export async function SubscriptionShell({ lang, page = '', children }: { lang: Lang; page?: SubscriptionPage; children: ReactNode }) {
+export async function SubscriptionShell({
+  lang,
+  page = '',
+  giftPaths,
+  children,
+}: {
+  lang: Lang;
+  page?: SubscriptionPage;
+  giftPaths?: { en: string; ru: string };
+  children: ReactNode;
+}) {
   const copy = subscriptionCopy[lang];
 
   return (
     <main className="home-page relative min-h-screen overflow-hidden text-white" lang={lang}>
       <StarField />
-      <SiteHeader current="subscription" locale={lang} page={page} />
+      <SiteHeader current="subscription" giftPaths={giftPaths} locale={lang} page={page} />
 
       <div className="relative z-10">{children}</div>
 

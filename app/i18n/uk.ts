@@ -465,7 +465,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Продукт', features: 'Можливості', guides: 'Гайди', support: 'Підтримка', write: 'Написати нам', badgeTop: 'Завантажте в' },
+  footerLabels: { product: 'Продукт', features: 'Можливості', guides: 'Гайди', support: 'Підтримка', write: 'Написати нам', redeem: 'Активувати подарунок', badgeTop: 'Завантажте в' },
   docsNote: 'Документи доступні англійською та російською мовами.',
   topics: {
     'baby-nap-schedule-by-age': 'Режим денного сну малюка за віком',

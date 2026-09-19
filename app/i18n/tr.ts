@@ -465,7 +465,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Ürün', features: 'Özellikler', guides: 'Rehberler', support: 'Destek', write: 'Bize yazın', badgeTop: 'Şuradan indirin' },
+  footerLabels: { product: 'Ürün', features: 'Özellikler', guides: 'Rehberler', support: 'Destek', write: 'Bize yazın', redeem: 'Hediye kodunu kullan', badgeTop: 'Şuradan indirin' },
   docsNote: 'Belgeler İngilizce ve Rusça olarak mevcuttur.',
   topics: {
     'baby-nap-schedule-by-age': 'Yaşa göre gündüz uykusu programı',

@@ -466,7 +466,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'サービス', features: '機能', guides: 'ガイド', support: 'サポート', write: 'お問い合わせ', badgeTop: 'ダウンロード' },
+  footerLabels: { product: 'サービス', features: '機能', guides: 'ガイド', support: 'サポート', write: 'お問い合わせ', redeem: 'ギフトを使う', badgeTop: 'ダウンロード' },
   docsNote: '規約・ポリシーは英語とロシア語でご覧いただけます。',
   topics: {
     'baby-nap-schedule-by-age': '月齢別のお昼寝スケジュール',

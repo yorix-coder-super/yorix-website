@@ -465,7 +465,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Produto', features: 'Funcionalidades', guides: 'Guias', support: 'Apoio', write: 'Escreva-nos', badgeTop: 'Descarregar na' },
+  footerLabels: { product: 'Produto', features: 'Funcionalidades', guides: 'Guias', support: 'Apoio', write: 'Escreva-nos', redeem: 'Resgatar um presente', badgeTop: 'Descarregar na' },
   docsNote: 'Os documentos estão disponíveis em inglês e russo.',
   topics: {
     'baby-nap-schedule-by-age': 'Rotina de sestas do bebé por idade',

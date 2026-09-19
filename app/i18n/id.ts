@@ -474,7 +474,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Produk', features: 'Fitur', guides: 'Panduan', support: 'Dukungan', write: 'Kirim email ke kami', badgeTop: 'Download di' },
+  footerLabels: { product: 'Produk', features: 'Fitur', guides: 'Panduan', support: 'Dukungan', write: 'Kirim email ke kami', redeem: 'Tukarkan hadiah', badgeTop: 'Download di' },
   docsNote: 'Dokumen tersedia dalam bahasa Inggris dan Rusia.',
   topics: {
     'baby-nap-schedule-by-age': 'Jadwal tidur siang bayi berdasarkan usia',

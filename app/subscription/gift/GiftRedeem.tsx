@@ -8,41 +8,58 @@ import { subscriptionCopy } from '../copy';
 import { formatDate, subscriptionPath, type Lang } from '../i18n';
 import { planCopy, type PlanId } from '../merchant';
 import { Button, Spinner } from '../ui';
+import { codeFromInput, formatGiftCode, giftCodeChecks } from './code';
 import { GiftCardView } from './GiftCardView';
 
-type PublicGift = { planId: PlanId; to: string | null; message: string | null; status: 'active' | 'redeemed' | 'cancelled' | 'expired' };
+type PublicGift = {
+  planId: PlanId;
+  to: string | null;
+  message: string | null;
+  status: 'active' | 'redeemed' | 'cancelled' | 'expired' | 'replaced';
+  expiresAt: string;
+};
 type Problem = keyof (typeof subscriptionCopy)['ru']['gift']['errors'];
 
 const problemFor: Record<string, Problem> = {
   not_found: 'notFound',
+  invalid_code: 'typo',
   gift_redeemed: 'redeemed',
   gift_expired: 'expired',
   gift_cancelled: 'cancelled',
+  gift_replaced: 'replaced',
+  too_many_attempts: 'locked',
+  rate_limited: 'rateLimited',
 };
 
-function GiftRedeem({ code, appUrl }: { code: string; appUrl: string }) {
-  const { lang, configured, signedIn, signIn, getToken } = useAccount();
+function problemOf(status: number, error: string | undefined): Problem {
+  return problemFor[error ?? ''] ?? (status === 429 ? 'rateLimited' : 'error');
+}
+
+function GiftRedeem({ code: rawCode, appUrl }: { code: string; appUrl: string }) {
+  const { lang, configured, signedIn, signIn, getToken, error: accountError, copy } = useAccount();
   const text = subscriptionCopy[lang].gift;
+  const code = codeFromInput(rawCode);
+  // A typo in a hand-typed link is known without asking the worker.
+  const typo = !giftCodeChecks(code);
   const [gift, setGift] = useState<PublicGift | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!typo);
   const [busy, setBusy] = useState(false);
-  const [problem, setProblem] = useState<Problem | null>(null);
+  const [problem, setProblem] = useState<Problem | null>(typo ? 'typo' : null);
   const [until, setUntil] = useState<string | null>(null);
 
   useEffect(() => {
+    if (typo) return;
     let cancelled = false;
-    fetch(`${API_BASE}/v1/web/gifts/${encodeURIComponent(code)}`)
+    fetch(`${API_BASE}/v1/web/gifts/${formatGiftCode(code)}`)
       .then(async (res) => {
         if (cancelled) return;
-        if (res.status === 404) {
-          setProblem('notFound');
-          return;
-        }
         if (!res.ok) {
-          setProblem('error');
+          const body = (await res.json().catch(() => ({}))) as { error?: string };
+          if (!cancelled) setProblem(problemOf(res.status, body.error));
           return;
         }
         const body = (await res.json()) as PublicGift;
+        if (cancelled) return;
         setGift(body);
         if (body.status !== 'active') setProblem(body.status);
       })
@@ -55,7 +72,7 @@ function GiftRedeem({ code, appUrl }: { code: string; appUrl: string }) {
     return () => {
       cancelled = true;
     };
-  }, [code]);
+  }, [code, typo]);
 
   const redeem = async () => {
     if (busy) return;
@@ -68,13 +85,18 @@ function GiftRedeem({ code, appUrl }: { code: string; appUrl: string }) {
     setProblem(null);
     try {
       const token = await getToken();
-      const res = await fetch(`${API_BASE}/v1/web/gifts/${encodeURIComponent(code)}/redeem`, {
+      const res = await fetch(`${API_BASE}/v1/web/gifts/${formatGiftCode(code)}/redeem`, {
         method: 'POST',
         headers: token ? { 'X-Firebase-Token': token } : {},
       });
       const body = (await res.json().catch(() => ({}))) as { premiumUntil?: string | null; error?: string };
       if (res.ok) setUntil(body.premiumUntil ?? null);
-      else setProblem(problemFor[body.error ?? ''] ?? 'error');
+      else {
+        const next = problemOf(res.status, body.error);
+        setProblem(next);
+        // Someone was quicker, or the gift ended meanwhile: no button to press again.
+        if (next === 'redeemed' || next === 'expired' || next === 'cancelled' || next === 'replaced') setGift((current) => (current ? { ...current, status: next } : current));
+      }
     } catch {
       setProblem('error');
     }
@@ -83,6 +105,9 @@ function GiftRedeem({ code, appUrl }: { code: string; appUrl: string }) {
 
   const period = gift ? text.cardPlan(planCopy[lang][gift.planId].forPeriod) : '';
   const link = 'font-semibold text-white underline decoration-white/40 underline-offset-2 hover:decoration-white';
+  const signInProblem = accountError === 'popupBlocked' || accountError === 'signInError' ? accountError : null;
+  const retype = problem === 'notFound' || problem === 'typo';
+  const home = lang === 'ru' ? '/ru' : '';
 
   return (
     <section className="mx-auto grid max-w-6xl gap-8 px-5 pb-20 pt-4 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-10">
@@ -117,6 +142,16 @@ function GiftRedeem({ code, appUrl }: { code: string; appUrl: string }) {
                 {text.errors[problem]}
               </p>
             ) : null}
+            {retype ? (
+              <a className={`mt-4 inline-flex text-sm ${link}`} href={`${home}/gift`}>
+                {text.enterCode}
+              </a>
+            ) : null}
+            {signInProblem && !busy ? (
+              <p className="mt-6 rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm text-[#FDE68A]" role="alert">
+                {copy.account[signInProblem]} {text.popupHint}
+              </p>
+            ) : null}
             {!loading && gift?.status === 'active' && configured ? (
               <>
                 <Button className="mt-6 w-full whitespace-normal! text-center sm:w-auto" disabled={busy} onClick={() => void redeem()} variant="light">
@@ -130,6 +165,7 @@ function GiftRedeem({ code, appUrl }: { code: string; appUrl: string }) {
                   </a>
                   {text.redeemAccept[2]}
                 </p>
+                <p className="mt-4 text-sm leading-6 text-white/70">{text.alreadySubscribed(formatDate(gift.expiresAt, lang))}</p>
               </>
             ) : null}
           </>

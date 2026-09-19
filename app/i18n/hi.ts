@@ -466,7 +466,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'प्रोडक्ट', features: 'फ़ीचर्स', guides: 'गाइड', support: 'सहायता', write: 'हमें लिखें', badgeTop: 'डाउनलोड करें' },
+  footerLabels: { product: 'प्रोडक्ट', features: 'फ़ीचर्स', guides: 'गाइड', support: 'सहायता', write: 'हमें लिखें', redeem: 'उपहार रिडीम करें', badgeTop: 'डाउनलोड करें' },
   docsNote: 'दस्तावेज़ अंग्रेज़ी और रूसी में उपलब्ध हैं।',
   topics: {
     'baby-nap-schedule-by-age': 'उम्र के हिसाब से झपकियों का शेड्यूल',

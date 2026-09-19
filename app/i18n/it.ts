@@ -474,7 +474,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Prodotto', features: 'Funzioni', guides: 'Guide', support: 'Assistenza', write: 'Scrivici', badgeTop: 'Scarica su' },
+  footerLabels: { product: 'Prodotto', features: 'Funzioni', guides: 'Guide', support: 'Assistenza', write: 'Scrivici', redeem: 'Riscatta un regalo', badgeTop: 'Scarica su' },
   docsNote: 'I documenti sono disponibili in inglese e in russo.',
   topics: {
     'baby-nap-schedule-by-age': 'Programma delle nanne per età',

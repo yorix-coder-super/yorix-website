@@ -79,7 +79,28 @@ export type SubscriptionCopy = {
     openApp: string;
     download: string;
     loading: string;
-    errors: { notFound: string; redeemed: string; expired: string; cancelled: string; error: string };
+    errors: { notFound: string; redeemed: string; expired: string; cancelled: string; replaced: string; typo: string; locked: string; rateLimited: string; error: string };
+    alreadySubscribed: (date: string) => string;
+    popupHint: string;
+    enterCode: string;
+    entryTitle: string;
+    entryBody: string;
+    entryLabel: string;
+    entryGo: string;
+    entryShort: string;
+    entryHint: string;
+    status: { active: (date: string) => string; redeemed: (date: string) => string; cancelled: string; expired: string; replaced: string };
+    safety: [string, string, string];
+    replace: string;
+    replaceConfirm: string;
+    replaceDone: string;
+    cardDownload: string;
+    cardError: string;
+    cardScan: string;
+    cardOr: (site: string) => string;
+    shareText: (period: string) => string;
+    listTitle: string;
+    listSignIn: string;
   };
   terms: {
     title: (period: string) => string;
@@ -196,7 +217,7 @@ const ru: SubscriptionCopy = {
     eyebrow: 'Подписка в подарок',
     title: 'Подарите спокойные ночи',
     body: 'Подписка Yorix на месяц или год — подарок молодым родителям: прогноз сна, ИИ-коуч и аналитика дневника с первого дня.',
-    steps: ['Выберите срок и подпишите открытку', 'Оплатите картой — сразу получите ссылку и код', 'Получатель откроет ссылку, войдёт через Apple, и подписка включится'],
+    steps: ['Выберите срок и подпишите открытку', 'Оплатите картой — сразу получите ссылку, код и открытку', 'Получатель откроет ссылку или введёт код, войдёт через Apple — и подписка включится'],
     plan: 'Срок',
     to: 'Кому',
     toPlaceholder: 'Например, Маше и Саше',
@@ -205,16 +226,16 @@ const ru: SubscriptionCopy = {
     // A Russian card dedication is in the dative, without «для»: «Маше и Саше».
     cardFor: (name) => name,
     cardPlan: (period) => `Подписка Yorix ${period}`,
-    note: 'Вход через Apple нужен, чтобы после оплаты показать вам ссылку и код подарка. Код действует 12 месяцев.',
+    note: 'Yorix работает на iPhone и iPad. Вход через Apple нужен, чтобы показать вам ссылку и код подарка — они останутся здесь, в «Ваших подарках». Код действует 12 месяцев.',
     pay: (price) => `Оплатить подарок · ${price}`,
     paidTitle: 'Подарок оплачен!',
-    paidBody: 'Отправьте получателю ссылку: он откроет её, войдёт через Apple — и подписка включится на его аккаунте.',
+    paidBody: 'Отправьте ссылку получателю или подарите открытку с кодом. Подписка включится, когда получатель откроет ссылку или введёт код и войдёт через Apple.',
     link: 'Ссылка на подарок',
     code: 'Код подарка',
     copyLink: 'Скопировать ссылку',
     copied: 'Скопировано',
     share: 'Поделиться',
-    validUntil: (date) => `Код действует до ${date}.`,
+    validUntil: (date) => `Код действует до ${date}`,
     redeemTitle: 'Вам подарили подписку Yorix',
     redeemBody: 'Войдите через Apple тем же аккаунтом, что и в приложении Yorix, — подписка включится сразу.',
     redeem: 'Активировать с Apple',
@@ -228,8 +249,44 @@ const ru: SubscriptionCopy = {
       redeemed: 'Этот подарок уже активирован.',
       expired: 'Срок действия подарка истёк.',
       cancelled: 'Подарок отменён.',
+      replaced: 'Эта ссылка больше не действует: код заменили на новый. Попросите новую ссылку у того, кто подарил.',
+      typo: 'Похоже, в коде опечатка — сверьте его с открыткой или сообщением.',
+      locked: 'Слишком много неверных кодов: активация для этого аккаунта приостановлена на сутки. Попробуйте завтра или напишите нам.',
+      rateLimited: 'Слишком много попыток подряд. Подождите минуту и попробуйте снова.',
       error: 'Не получилось активировать подарок. Попробуйте ещё раз через минуту.',
     },
+    alreadySubscribed: (date) =>
+      `Уже есть подписка? Если она оплачена на сайте, срок подарка добавится к ней. Если оформлена в App Store, подарок пойдёт параллельно — лучше отключить её продление и активировать подарок, когда она закончится: код действует до ${date}`,
+    popupHint: 'Окно входа не открылось? Откройте эту страницу в Safari или другом браузере — ссылка та же.',
+    enterCode: 'Ввести код вручную',
+    entryTitle: 'Активировать подарок',
+    entryBody: 'Введите код с открытки или из сообщения, затем войдите через Apple тем же аккаунтом, что и в приложении Yorix, — подписка включится сразу.',
+    entryLabel: 'Код подарка',
+    entryGo: 'Продолжить',
+    entryShort: 'В коде 12 символов — проверьте, всё ли введено.',
+    entryHint: 'Путать O и 0, I и 1 не страшно — прочитаем правильно. Можно вставить и ссылку на подарок целиком.',
+    status: {
+      active: (date) => `Ждёт активации · до ${date}`,
+      redeemed: (date) => `Активирован ${date}`,
+      cancelled: 'Отменён',
+      expired: 'Срок действия истёк',
+      replaced: 'Код заменён',
+    },
+    safety: [
+      'Активировать подарок может любой, у кого есть ссылка или код, — отправляйте их только получателю. Если ссылка ушла не туда, замените код: старая ссылка сразу перестанет работать. До активации подарок можно отменить с полным возвратом — ',
+      'напишите нам',
+      '.',
+    ],
+    replace: 'Заменить код',
+    replaceConfirm: 'Заменить код? Старая ссылка и код сразу перестанут работать — получателю нужно будет отправить новые.',
+    replaceDone: 'Готово: код заменён. Отправьте получателю новую ссылку.',
+    cardDownload: 'Скачать открытку',
+    cardError: 'Не получилось собрать открытку. Попробуйте ещё раз или в другом браузере.',
+    cardScan: 'Наведите камеру на QR-код',
+    cardOr: (site) => `или введите код на ${site}`,
+    shareText: (period) => `Подарок для вас — подписка Yorix ${period}. Откройте ссылку и войдите через Apple — подписка включится сама.`,
+    listTitle: 'Ваши подарки',
+    listSignIn: 'Уже покупали подарок? Войдите через Apple — покажем ссылки и коды.',
   },
   terms: {
     title: (period) => `Подписка ${period}`,
@@ -350,7 +407,7 @@ const en: SubscriptionCopy = {
     eyebrow: 'Gift a subscription',
     title: 'Give the gift of calm nights',
     body: 'A month or a year of Yorix for new parents: the sleep forecast, the AI coach and diary analytics from day one.',
-    steps: ['Pick a period and sign the card', 'Pay by card — get the link and code right away', 'The recipient opens the link, signs in with Apple and the subscription turns on'],
+    steps: ['Pick a period and sign the card', 'Pay by card — get the link, the code and a card to print right away', 'The recipient opens the link or enters the code, signs in with Apple — and the subscription turns on'],
     plan: 'Period',
     to: 'To',
     toPlaceholder: 'For example, Masha and Sasha',
@@ -358,10 +415,10 @@ const en: SubscriptionCopy = {
     messagePlaceholder: 'Calm nights and sweet dreams!',
     cardFor: (name) => `For ${name}`,
     cardPlan: (period) => `Yorix subscription ${period}`,
-    note: 'Signing in with Apple lets us show you the gift link and code after payment. The code is valid for 12 months.',
+    note: 'Yorix runs on iPhone and iPad. Signing in with Apple lets us show you the gift link and code — they stay here, under “Your gifts”. The code is valid for 12 months.',
     pay: (price) => `Pay for the gift · ${price}`,
     paidTitle: 'Your gift is paid!',
-    paidBody: 'Send the recipient the link: they open it, sign in with Apple — and the subscription turns on for their account.',
+    paidBody: 'Send the link to the recipient or give them the card with the code. The subscription turns on once they open the link or enter the code and sign in with Apple.',
     link: 'Gift link',
     code: 'Gift code',
     copyLink: 'Copy link',
@@ -381,8 +438,44 @@ const en: SubscriptionCopy = {
       redeemed: 'This gift has already been redeemed.',
       expired: 'This gift has expired.',
       cancelled: 'This gift was cancelled.',
+      replaced: 'This link no longer works: the code was replaced with a new one. Ask the person who gave you the gift for the new link.',
+      typo: 'The code seems to have a typo — check it against the card or the message.',
+      locked: 'Too many wrong codes: redeeming is paused for this account for a day. Try again tomorrow or write to us.',
+      rateLimited: 'Too many attempts in a row. Wait a minute and try again.',
       error: 'The gift could not be redeemed. Please try again in a minute.',
     },
+    alreadySubscribed: (date) =>
+      `Already subscribed? If you paid on the website, the gift adds to that period. If you subscribed in the App Store, the gift runs alongside it — better turn off its renewal and redeem the gift when it ends: the code is valid until ${date}.`,
+    popupHint: 'The sign-in window did not open? Open this page in Safari or another browser — the link stays the same.',
+    enterCode: 'Enter the code by hand',
+    entryTitle: 'Redeem a gift',
+    entryBody: 'Enter the code from the card or the message, then sign in with Apple using the same account as in the Yorix app — the subscription turns on right away.',
+    entryLabel: 'Gift code',
+    entryGo: 'Continue',
+    entryShort: 'The code has 12 characters — check that it is all there.',
+    entryHint: 'O and 0, I and 1 are read the same way. You can also paste the whole gift link here.',
+    status: {
+      active: (date) => `Waiting to be redeemed · until ${date}`,
+      redeemed: (date) => `Redeemed on ${date}`,
+      cancelled: 'Cancelled',
+      expired: 'Expired',
+      replaced: 'Code replaced',
+    },
+    safety: [
+      'Anyone who has the link or the code can redeem the gift — send them to the recipient only. If the link went to the wrong place, replace the code: the old link stops working at once. Until it is redeemed, the gift can be cancelled with a full refund — ',
+      'write to us',
+      '.',
+    ],
+    replace: 'Replace the code',
+    replaceConfirm: 'Replace the code? The old link and code stop working at once — you will need to send the new ones to the recipient.',
+    replaceDone: 'Done: the code is replaced. Send the recipient the new link.',
+    cardDownload: 'Download the card',
+    cardError: 'The card could not be made. Try again or in another browser.',
+    cardScan: 'Point your camera at the QR code',
+    cardOr: (site) => `or enter the code at ${site}`,
+    shareText: (period) => `A gift for you — a Yorix subscription ${period}. Open the link and sign in with Apple — the subscription turns on by itself.`,
+    listTitle: 'Your gifts',
+    listSignIn: 'Bought a gift before? Sign in with Apple — we will show your links and codes.',
   },
   terms: {
     title: (period) => `Subscription ${period}`,

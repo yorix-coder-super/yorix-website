@@ -465,7 +465,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Produkt', features: 'Funkce', guides: 'Články', support: 'Podpora', write: 'Napiš nám', badgeTop: 'Stáhnout v' },
+  footerLabels: { product: 'Produkt', features: 'Funkce', guides: 'Články', support: 'Podpora', write: 'Napiš nám', redeem: 'Uplatnit dárek', badgeTop: 'Stáhnout v' },
   docsNote: 'Dokumenty jsou k dispozici v angličtině a ruštině.',
   topics: {
     'baby-nap-schedule-by-age': 'Režim denního spánku podle věku',

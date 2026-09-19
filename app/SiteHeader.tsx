@@ -14,7 +14,18 @@ const item = 'rounded-full px-3.5 py-2 transition hover:text-white';
 // One header for every page: the same five items, the same menus and the
 // same app button whether the visitor is on a home page, a guide or the
 // subscription page — so the site never feels like two sites.
-export async function SiteHeader({ locale, current, page = '' }: { locale: SiteLocale; current?: 'subscription' | 'support' | 'about'; page?: SubscriptionPage }) {
+export async function SiteHeader({
+  locale,
+  current,
+  page = '',
+  giftPaths,
+}: {
+  locale: SiteLocale;
+  current?: 'subscription' | 'support' | 'about';
+  page?: SubscriptionPage;
+  // The redeem pages (/gift, /gift/<code>) live outside /subscription.
+  giftPaths?: { en: string; ru: string };
+}) {
   const isRoot = locale === 'en';
   const site = siteCopy(locale);
   const nav = site.home.nav;
@@ -22,22 +33,24 @@ export async function SiteHeader({ locale, current, page = '' }: { locale: SiteL
   const subscription = subscriptionPath(docsLang(locale));
   const web = await sellsHere();
   const gift = subscriptionPath(docsLang(locale), '/gift');
+  const samePage = (lang: 'en' | 'ru') => giftPaths?.[lang] ?? subscriptionPath(lang, page);
+  const onGift = current === 'subscription' && (page === '/gift' || giftPaths !== undefined);
   // On a subscription page the language links keep the visitor on the same
   // document; everywhere else they go to that language's home. `?lang=` makes
   // the choice stick over the automatic one (see proxy.ts).
   const languages: LanguageItem[] = [
-    { code: 'en', label: 'English', href: `${current === 'subscription' ? subscriptionPath('en', page) : current ? `/${current}` : '/'}?lang=en` },
+    { code: 'en', label: 'English', href: `${current === 'subscription' ? samePage('en') : current ? `/${current}` : '/'}?lang=en` },
     ...locales.map((code) => ({
       code,
       label: localeCopy[code].nativeName,
-      href: `${current === 'subscription' && code === 'ru' ? subscriptionPath('ru', page) : current && current !== 'subscription' ? `/${code}/${current}` : `/${code}`}?lang=${code}`,
+      href: `${current === 'subscription' && code === 'ru' ? samePage('ru') : current && current !== 'subscription' ? `/${code}/${current}` : `/${code}`}?lang=${code}`,
     })),
   ];
   const links = [
     { href: `${home}#features`, label: nav.features },
     { href: isRoot ? '/guides' : `/${locale}/guides`, label: nav.guides },
-    { href: subscription, label: site.subscription.home.nav, current: current === 'subscription' && page !== '/gift' },
-    { href: gift, label: subscriptionCopy[docsLang(locale)].gift.nav, current: current === 'subscription' && page === '/gift', wide: true },
+    { href: subscription, label: site.subscription.home.nav, current: current === 'subscription' && !onGift },
+    { href: gift, label: subscriptionCopy[docsLang(locale)].gift.nav, current: onGift, wide: true },
     { href: isRoot ? '/about' : `/${locale}/about`, label: site.about.nav, current: current === 'about', wide: true },
     { href: isRoot ? '/support' : `/${locale}/support`, label: site.support.nav, current: current === 'support' },
   ].filter((link) => (link.href !== subscription && link.href !== gift) || web);

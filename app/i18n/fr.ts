@@ -474,7 +474,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Produit', features: 'Fonctionnalités', guides: 'Guides', support: 'Assistance', write: 'Écrivez-nous', badgeTop: 'Télécharger sur' },
+  footerLabels: { product: 'Produit', features: 'Fonctionnalités', guides: 'Guides', support: 'Assistance', write: 'Écrivez-nous', redeem: 'Activer un cadeau', badgeTop: 'Télécharger sur' },
   docsNote: 'Les documents sont disponibles en anglais et en russe.',
   topics: {
     'baby-nap-schedule-by-age': 'Rythme des siestes de bébé selon l’âge',

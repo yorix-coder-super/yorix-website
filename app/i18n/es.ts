@@ -474,7 +474,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Producto', features: 'Funciones', guides: 'Guías', support: 'Soporte', write: 'Escríbenos', badgeTop: 'Descárgalo en el' },
+  footerLabels: { product: 'Producto', features: 'Funciones', guides: 'Guías', support: 'Soporte', write: 'Escríbenos', redeem: 'Canjear un regalo', badgeTop: 'Descárgalo en el' },
   docsNote: 'Los documentos están disponibles en inglés y ruso.',
   topics: {
     'baby-nap-schedule-by-age': 'Horario de siestas del bebé por edad',

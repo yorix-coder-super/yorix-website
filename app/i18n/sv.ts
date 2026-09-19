@@ -465,7 +465,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Produkt', features: 'Funktioner', guides: 'Guider', support: 'Support', write: 'Skriv till oss', badgeTop: 'Hämta i' },
+  footerLabels: { product: 'Produkt', features: 'Funktioner', guides: 'Guider', support: 'Support', write: 'Skriv till oss', redeem: 'Lös in en present', badgeTop: 'Hämta i' },
   docsNote: 'Dokumenten finns på engelska och ryska.',
   topics: {
     'baby-nap-schedule-by-age': 'Tupplursschema efter ålder',

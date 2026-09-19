@@ -466,7 +466,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'ผลิตภัณฑ์', features: 'ฟีเจอร์', guides: 'คู่มือ', support: 'ช่วยเหลือ', write: 'เขียนถึงเรา', badgeTop: 'ดาวน์โหลดบน' },
+  footerLabels: { product: 'ผลิตภัณฑ์', features: 'ฟีเจอร์', guides: 'คู่มือ', support: 'ช่วยเหลือ', write: 'เขียนถึงเรา', redeem: 'แลกรับของขวัญ', badgeTop: 'ดาวน์โหลดบน' },
   docsNote: 'เอกสารมีให้อ่านเป็นภาษาอังกฤษและภาษารัสเซีย',
   topics: {
     'baby-nap-schedule-by-age': 'ตารางงีบของทารกตามวัย',

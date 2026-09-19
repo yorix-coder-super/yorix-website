@@ -98,7 +98,7 @@ export type SiteTranslation = {
   testimonials: [string, string, string];
   support: SupportCopy;
   about: AboutCopy;
-  footerLabels: { product: string; features: string; guides: string; support: string; write: string; badgeTop: string };
+  footerLabels: { product: string; features: string; guides: string; support: string; write: string; redeem: string; badgeTop: string };
   // Under the acceptance box when the documents are not in this language.
   docsNote: string;
   // Short article titles in this language (the Russian ones are the model).

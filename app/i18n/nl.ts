@@ -465,7 +465,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Product', features: 'Functies', guides: 'Gidsen', support: 'Support', write: 'Neem contact op', badgeTop: 'Download in de' },
+  footerLabels: { product: 'Product', features: 'Functies', guides: 'Gidsen', support: 'Support', write: 'Neem contact op', redeem: 'Cadeau inwisselen', badgeTop: 'Download in de' },
   docsNote: 'De documenten zijn beschikbaar in het Engels en het Russisch.',
   topics: {
     'baby-nap-schedule-by-age': 'Dutjesschema per leeftijd',
