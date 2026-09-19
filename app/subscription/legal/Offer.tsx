@@ -22,7 +22,7 @@ function ru({ email, payment, privacy, seller }: Ctx): LegalSection[] {
         `1.1. Настоящий документ является публичной офертой (п. 2 ст. 407 Гражданского кодекса Республики Беларусь, далее — ГК) ${seller} (далее — Исполнитель) заключить договор на изложенных ниже условиях (далее — Договор) с любым дееспособным физическим лицом, достигшим 18 лет (далее — Пользователь).`,
         '1.2. Акцептом оферты является оплата выбранного Периода доступа на Сайте после проставления отметки о принятии условий Договора (п. 3 ст. 408 ГК). Договор считается заключённым с момента получения Исполнителем от Платёжного сервиса подтверждения успешной оплаты. Письменная форма Договора считается соблюдённой (п. 3 ст. 404 ГК).',
         '1.3. Договор является публичным (ст. 396 ГК) и договором присоединения (ст. 398 ГК): его условия одинаковы для всех Пользователей, за исключением льгот для отдельных категорий потребителей, установленных в порядке раздела 4.',
-        `1.4. Неотъемлемые части Договора — страница [«Оплата, доставка и возврат»](${payment}) и приложения к оферте. Персональные данные, необходимые для заключения и исполнения Договора, обрабатываются на основании Договора (абз. 15 ст. 6 Закона Республики Беларусь «О защите персональных данных») в порядке, описанном в [Политике обработки персональных данных](${privacy}). Сведения о здоровье ребёнка и данные для ИИ-функций обрабатываются только с отдельного согласия Пользователя; принятие Договора таким согласием не является.`,
+        `1.4. Неотъемлемая часть Договора — страница [«Оплата, доставка и возврат»](${payment}). Персональные данные, необходимые для заключения и исполнения Договора, обрабатываются на основании Договора (абз. 15 ст. 6 Закона Республики Беларусь «О защите персональных данных») в порядке, описанном в [Политике обработки персональных данных](${privacy}). Сведения о здоровье ребёнка и данные для ИИ-функций обрабатываются только с отдельного согласия Пользователя; принятие Договора таким согласием не является.`,
         '1.5. К Договору применяется редакция оферты, действовавшая в момент оплаты. Дата редакции указана в начале документа. Предыдущие редакции Исполнитель хранит и предоставляет по запросу.',
       ],
     },
@@ -49,7 +49,7 @@ function ru({ email, payment, privacy, seller }: Ctx): LegalSection[] {
         '3.2. Услуга оказывается дистанционно через сеть Интернет; физические носители не передаются. Для работы нужны iPhone или iPad с iOS 18 или новее, Приложение из App Store и вход в Аккаунт.',
         '3.3. **Сервис не является медицинской помощью.** Сервис — информационно-справочный инструмент для родителей: он помогает вести дневник ухода за ребёнком и получать общие сведения и ориентиры по режиму сна и бодрствования, сформированные автоматически на основании введённых Пользователем данных. Исполнитель не является медицинской организацией или медицинским работником, не оказывает медицинскую и психологическую помощь, не ставит диагнозы и не назначает лечение. Сервис не является медицинским изделием и не предназначен для диагностики, мониторинга, профилактики или лечения заболеваний.',
         '3.4. Информация Сервиса — статьи, аналитика, Прогнозы, ответы Коуча — носит общий характер и не заменяет консультацию врача-педиатра, которому известны состояние и история здоровья ребёнка. Не откладывайте обращение к врачу и не изменяйте его назначения на основании сведений Сервиса. Показатели, которые Пользователь вносит в дневник (температура, рост, вес, симптомы и др.), отображаются для удобства и не получают медицинской оценки.',
-        '3.5. **Сервис не предназначен для экстренных ситуаций.** Если жизни или здоровью ребёнка угрожает опасность, немедленно вызовите скорую помощь: 103 или 112 в Республике Беларусь и Российской Федерации или местный номер экстренной службы. Ни Коуч, ни служба поддержки не работают как экстренная линия.',
+        '3.5. **Сервис не предназначен для экстренных ситуаций.** Если жизни или здоровью ребёнка угрожает опасность, немедленно вызовите скорую помощь по номеру 103 или 112 либо по местному номеру экстренной службы. Ни Коуч, ни служба поддержки не работают как экстренная линия.',
         '3.6. **Безопасный сон.** Сервис не является радионяней или монитором дыхания, не наблюдает за ребёнком в реальном времени и не может обнаружить или предотвратить синдром внезапной детской смерти или иные опасные состояния. Рекомендации о режиме не заменяют правил безопасного сна и присмотра взрослого. Напоминания и уведомления могут не сработать из-за настроек устройства или сбоев связи — не полагайтесь на них в вопросах безопасности ребёнка.',
         '3.7. **ИИ-коуч.** Пользователь общается с программой, а не с человеком. Ответы Коуча формируются автоматически, не проверяются человеком перед отправкой и могут быть неточными, неполными или устаревшими, даже если выглядят убедительно. Коуч не обсуждает дозировки лекарств, не ставит диагнозы и может отказаться отвечать или порекомендовать обратиться к врачу. Пользователь самостоятельно оценивает применимость ответа и принимает решения как законный представитель ребёнка.',
         '3.8. **Прогнозы** — вероятностная оценка, а не предписание. Их точность зависит от полноты и своевременности записей, а фактическое поведение ребёнка может от них отличаться. Исполнитель не гарантирует конкретного результата, например продолжительности сна.',
@@ -187,7 +187,7 @@ function ru({ email, payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '15. Применимое право, претензии и споры',
       blocks: [
-        '15.1. К Договору применяется право Республики Беларусь (ст. 1124 ГК). Если Пользователь — потребитель, постоянно проживающий в другой стране, этот выбор не лишает его защиты, предоставляемой императивными нормами права страны его проживания, если такие нормы подлежат применению. Особые положения для потребителей из Российской Федерации — в Приложении 1.',
+        '15.1. К Договору применяется право Республики Беларусь (ст. 1124 ГК). Если Пользователь — потребитель, постоянно проживающий в другой стране, этот выбор не лишает его защиты, предоставляемой императивными нормами права страны его проживания, если такие нормы подлежат применению.',
         `15.2. Претензии направляются на ${email} или по почтовому адресу Исполнителя (раздел 17). Исполнитель рассматривает претензию и направляет ответ в течение 10 дней со дня её получения, если законодательством не установлен более короткий срок. Претензионный порядок не является обязательным условием обращения потребителя в суд.`,
         '15.3. Споры рассматриваются судами в соответствии с законодательством о гражданском судопроизводстве. Потребитель вправе предъявить иск по своему месту жительства или по месту исполнения Договора (ч. 16 ст. 48 Кодекса гражданского судопроизводства Республики Беларусь), а также по месту жительства Исполнителя.',
       ],
@@ -196,31 +196,10 @@ function ru({ email, payment, privacy, seller }: Ctx): LegalSection[] {
       title: '16. Заключительные положения',
       blocks: [
         '16.1. Если какое-либо положение Договора будет признано недействительным, остальные положения сохраняют силу.',
-        '16.2. Оферта с приложениями и страница «Оплата, доставка и возврат» составляют всё соглашение Сторон о Подписке.',
+        '16.2. Оферта и страница «Оплата, доставка и возврат» составляют всё соглашение Сторон о Подписке.',
         '16.3. Пользователь не вправе передавать права и обязанности по Договору третьим лицам. Исполнитель вправе передать их лицу, которое продолжит оказывать услуги на условиях не хуже действующих (например, при регистрации в качестве индивидуального предпринимателя или создании организации), уведомив Пользователя не менее чем за 30 дней. Не согласный с этим Пользователь вправе отказаться от Договора с возвратом за неиспользованные полные сутки без удержания расходов.',
         '16.4. Положения об ответственности, возвратах, интеллектуальной собственности, персональных данных и порядке разрешения споров действуют и после прекращения Договора.',
         '16.5. Договор действует до полного исполнения Сторонами своих обязательств.',
-      ],
-    },
-  ];
-}
-
-function ruAnnexes({ email, privacy }: Ctx): LegalSection[] {
-  return [
-    {
-      id: 'annex-1',
-      title: 'Приложение 1. Особые положения для потребителей из Российской Федерации',
-      blocks: [
-        'Положения ниже дополняют Договор для потребителей, постоянно проживающих в Российской Федерации. Если они противоречат основному тексту, применяются положения, более выгодные для потребителя.',
-        {
-          ul: [
-            'Выбор права Республики Беларусь не лишает вас защиты, предоставляемой Законом Российской Федерации «О защите прав потребителей» и иными императивными нормами права Российской Федерации.',
-            `Вы вправе отказаться от Договора в любое время (ст. 32 Закона РФ «О защите прав потребителей»). Мы вернём сумму, пропорциональную полным суткам, оставшимся до конца Периода доступа, за вычетом фактически понесённых нами и подтверждённых расходов, в течение 10 дней со дня получения заявления на ${email}, на карту, с которой производилась оплата.`,
-            'Цена договора — сумма, которая списывается при оплате; валюта списания указывается перед оплатой. Если она отличается от валюты карты, курс и комиссии определяет банк, выпустивший карту.',
-            'На претензию мы отвечаем в течение 10 дней. Претензионный порядок не обязателен; вы вправе обратиться в суд по месту своего жительства.',
-            `Обработка персональных данных пользователей из Российской Федерации описана в [Политике обработки персональных данных](${privacy}); для сведений о здоровье ребёнка запрашивается отдельное согласие.`,
-          ],
-        },
       ],
     },
   ];
@@ -234,7 +213,7 @@ function en({ email, payment, privacy, seller }: Ctx): LegalSection[] {
         `1.1. This document is a public offer (Article 407(2) of the Civil Code of the Republic of Belarus, the “Civil Code”) by ${seller} (the “Provider”) to conclude an agreement on the terms below (the “Agreement”) with any legally capable individual aged 18 or over (the “User”).`,
         '1.2. The offer is accepted by paying for the chosen Access Period on the Website after ticking the box that accepts the Agreement (Article 408(3) of the Civil Code). The Agreement is concluded when the Provider receives confirmation of a successful payment from the Payment Service. The written form of the Agreement is deemed observed (Article 404(3) of the Civil Code).',
         '1.3. The Agreement is a public contract (Article 396) and a contract of adhesion (Article 398): its terms are the same for all Users, except for benefits for certain categories of consumers set in accordance with section 4.',
-        `1.4. The [“Payment, delivery and refunds”](${payment}) page and the annexes form part of the Agreement. Personal data needed to conclude and perform the Agreement is processed on the basis of the Agreement (Article 6, paragraph 15, of the Belarusian Law on Personal Data Protection) as described in the [Personal data policy](${privacy}). The child’s health information and data for AI features are processed only with the User’s separate consent; accepting the Agreement is not such consent.`,
+        `1.4. The [“Payment, delivery and refunds”](${payment}) page forms part of the Agreement. Personal data needed to conclude and perform the Agreement is processed on the basis of the Agreement (Article 6, paragraph 15, of the Belarusian Law on Personal Data Protection) as described in the [Personal data policy](${privacy}). The child’s health information and data for AI features are processed only with the User’s separate consent; accepting the Agreement is not such consent.`,
         '1.5. The version of the offer in force at the moment of payment applies. The edition date is shown at the top of this document. The Provider keeps earlier editions and provides them on request.',
       ],
     },
@@ -261,7 +240,7 @@ function en({ email, payment, privacy, seller }: Ctx): LegalSection[] {
         '3.2. The service is provided remotely over the Internet; no physical media are delivered. It requires an iPhone or iPad with iOS 18 or later, the App from the App Store and signing in to the Account.',
         '3.3. **The Service is not medical care.** It is an information tool for parents: it helps keep a child-care diary and gives general information and guidance on sleep and wake routines, generated automatically from the data the User enters. The Provider is not a medical organisation or professional, does not provide medical or psychological care, diagnoses or treatment. The Service is not a medical device and is not intended to diagnose, monitor, prevent or treat any disease.',
         '3.4. Information in the Service — articles, analytics, Forecasts, Coach answers — is general and does not replace a consultation with a paediatrician who knows the child. Do not delay seeing a doctor or change a doctor’s instructions because of the Service. Values entered in the diary (temperature, height, weight, symptoms, etc.) are shown for convenience and are not medically assessed.',
-        '3.5. **Not for emergencies.** If a child’s life or health is at risk, call emergency services immediately: 103 or 112 in Belarus and Russia, or your local number. Neither the Coach nor support is an emergency line.',
+        '3.5. **Not for emergencies.** If a child’s life or health is at risk, call emergency services immediately on 103 or 112, or your local emergency number. Neither the Coach nor support is an emergency line.',
         '3.6. **Safe sleep.** The Service is not a baby monitor or breathing monitor, does not watch the child in real time and cannot detect or prevent sudden infant death syndrome or other dangerous conditions. Routine guidance does not replace safe-sleep rules and adult supervision. Reminders and notifications may fail because of device settings or connectivity — do not rely on them for the child’s safety.',
         '3.7. **AI coach.** The User talks to software, not a person. Coach answers are generated automatically, are not reviewed by a human before sending, and may be inaccurate, incomplete or out of date even when they sound convincing. The Coach does not discuss medication doses or diagnose and may decline to answer or recommend seeing a doctor. The User evaluates whether an answer applies and makes decisions as the child’s legal representative.',
         '3.8. **Forecasts** are probabilistic estimates, not instructions; their accuracy depends on complete and timely records, and the child’s actual behaviour may differ. The Provider does not guarantee a specific result such as sleep duration.',
@@ -399,7 +378,7 @@ function en({ email, payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '15. Governing law, claims and disputes',
       blocks: [
-        '15.1. The Agreement is governed by the law of the Republic of Belarus (Article 1124 of the Civil Code). If the User is a consumer habitually resident in another country, this choice does not deprive them of the protection of the mandatory rules of that country where they apply. Special provisions for consumers in Russia are in Annex 1.',
+        '15.1. The Agreement is governed by the law of the Republic of Belarus (Article 1124 of the Civil Code). If the User is a consumer habitually resident in another country, this choice does not deprive them of the protection of the mandatory rules of that country where they apply.',
         `15.2. Claims are sent to ${email} or to the Provider’s postal address (section 17). The Provider considers a claim and replies within 10 days of receipt unless the law sets a shorter time. The claims procedure is not a precondition for a consumer to go to court.`,
         '15.3. Disputes are heard by the courts under the law on civil proceedings. A consumer may sue at their place of residence or where the Agreement is performed (Article 48, part 16, of the Belarusian Code of Civil Proceedings), as well as at the Provider’s place of residence.',
       ],
@@ -408,31 +387,10 @@ function en({ email, payment, privacy, seller }: Ctx): LegalSection[] {
       title: '16. Final provisions',
       blocks: [
         '16.1. If any provision is held invalid, the rest remain in force.',
-        '16.2. The offer with its annexes and the “Payment, delivery and refunds” page make up the entire agreement of the parties on the Subscription.',
+        '16.2. The offer and the “Payment, delivery and refunds” page make up the entire agreement of the parties on the Subscription.',
         '16.3. The User may not assign rights and obligations under the Agreement. The Provider may assign them to a person who will continue the service on terms no worse (for example, on registering as an individual entrepreneur or setting up a company), giving at least 30 days’ notice; a User who disagrees may withdraw with a refund for the unused full days without deduction of costs.',
         '16.4. Provisions on liability, refunds, intellectual property, personal data and disputes survive termination.',
         '16.5. The Agreement remains in force until the parties have fully performed their obligations.',
-      ],
-    },
-  ];
-}
-
-function enAnnexes({ email, privacy }: Ctx): LegalSection[] {
-  return [
-    {
-      id: 'annex-1',
-      title: 'Annex 1. Special provisions for consumers in the Russian Federation',
-      blocks: [
-        'These provisions supplement the Agreement for consumers habitually resident in the Russian Federation. Where they conflict with the main text, the provisions more favourable to the consumer apply.',
-        {
-          ul: [
-            'The choice of Belarusian law does not deprive you of the protection of the Russian Consumer Protection Law and other mandatory Russian rules.',
-            `You may withdraw at any time (Article 32 of the Russian Consumer Protection Law). We refund the amount for the full days remaining in the Access Period, less our actual documented costs, within 10 days of receiving your notice at ${email}, to the card used for payment.`,
-            'The contract price is the amount charged at payment; the charge currency is shown before you pay. If it differs from your card’s currency, the exchange rate and fees are set by your card-issuing bank.',
-            'We reply to claims within 10 days. The claims procedure is optional; you may sue at your place of residence.',
-            `Processing of personal data of users from Russia is described in the [Personal data policy](${privacy}); separate consent is requested for the child’s health information.`,
-          ],
-        },
       ],
     },
   ];
@@ -450,7 +408,6 @@ export function Offer({ lang }: { lang: Lang }) {
       <LegalBody sections={lang === 'ru' ? ru(ctx) : en(ctx)} />
       <h2>{lang === 'ru' ? '17. Исполнитель' : '17. Provider'}</h2>
       <SellerBlock lang={lang} />
-      <LegalBody sections={lang === 'ru' ? ruAnnexes(ctx) : enAnnexes(ctx)} />
     </DocumentPage>
   );
 }

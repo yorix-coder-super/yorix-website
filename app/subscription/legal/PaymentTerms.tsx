@@ -126,7 +126,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
           confirmation showing the wrong charge. Cash refunds are not made for card payments.
         </p>
         <p>
-          We make the refund within 7 days of receiving the request (for consumers in Russia — within 10 days at the latest). The time until the money
+          We make the refund within 7 days of receiving the request. The time until the money
           reaches the card depends on the issuing bank.
         </p>
 
@@ -226,7 +226,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         показывающее ошибочное списание. Возврат наличными при оплате картой не производится.
       </p>
       <p>
-        Мы возвращаем деньги в течение 7 дней после получения заявления (потребителям из России — не позднее 10 дней). Срок поступления денег на карту
+        Мы возвращаем деньги в течение 7 дней после получения заявления. Срок поступления денег на карту
         зависит от банка, выпустившего карту.
       </p>
 
