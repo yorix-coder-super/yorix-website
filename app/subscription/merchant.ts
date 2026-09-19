@@ -1,4 +1,4 @@
-import type { Currency } from './currency';
+import type { WebCurrency } from './currency';
 import type { Lang } from './i18n';
 
 // Single source for everything the acquiring bank checks on the site:
@@ -46,23 +46,23 @@ export const plans: Plan[] = [
   { id: 'year', days: 365, priceByn: 119.9 },
 ];
 
-// Regional pricing mirrored from the App Store (verified 2026-09-18):
-// Belarus $3.99 / $7.99 / $39.99, Russia 299 / 599 / 2 990 ₽, euro zone
-// €5.99 / €17.99 / €55.99, the rest $5.99 / $14.99 / $59.99. The web never
-// looks dearer than the store the buyer could have used.
-export const prices: Record<PlanId, Record<Currency, number>> = {
-  week: { BYN: 11.9, RUB: 299, EUR: 5.99, USD: 5.99 },
-  month: { BYN: 23.9, RUB: 599, EUR: 17.99, USD: 14.99 },
-  year: { BYN: 119.9, RUB: 2990, EUR: 55.99, USD: 59.99 },
+// Prices mirror the App Store in the two countries the site sells to
+// (verified 2026-09-18): Belarus $3.99 / $7.99 / $39.99, Russia 299 / 599 /
+// 2 990 ₽. The web never looks dearer than the store the buyer could have
+// used. Other countries buy in the App Store, so no other price is kept here.
+export const prices: Record<PlanId, Record<WebCurrency, number>> = {
+  week: { BYN: 11.9, RUB: 299 },
+  month: { BYN: 23.9, RUB: 599 },
+  year: { BYN: 119.9, RUB: 2990 },
 };
 
 // What WebPay actually charges for that price, in BYN — the receipt says
 // this number, so the page says it too before the buyer leaves. Mirrors
 // `amounts` in the worker's src/web/plans.ts; the worker is the authority.
-export const charges: Record<PlanId, Record<Currency, number>> = {
-  week: { BYN: 11.9, RUB: 10.5, EUR: 20.4, USD: 17.6 },
-  month: { BYN: 23.9, RUB: 21, EUR: 61.2, USD: 44.2 },
-  year: { BYN: 119.9, RUB: 104.9, EUR: 190.4, USD: 176.8 },
+export const charges: Record<PlanId, Record<WebCurrency, number>> = {
+  week: { BYN: 11.9, RUB: 10.5 },
+  month: { BYN: 23.9, RUB: 21 },
+  year: { BYN: 119.9, RUB: 104.9 },
 };
 
 export const planCopy: Record<Lang, Record<PlanId, { title: string; forPeriod: string; days: string; purpose: string }>> = {

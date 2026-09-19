@@ -5,6 +5,7 @@ import type { Lang } from './i18n';
 // of exactly that price. The visitor cannot switch the currency by hand —
 // that would be a price-shopping tool.
 export type Currency = 'BYN' | 'RUB' | 'EUR' | 'USD';
+export type WebCurrency = 'BYN' | 'RUB';
 
 const EURO_COUNTRIES = new Set([
   'AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE',
@@ -30,7 +31,7 @@ export function currencyForVisitor(country: string | null | undefined, acceptLan
 // The site sells by card to buyers in Belarus and Russia (and to Russian-
 // language browsers elsewhere, which are priced like them). Everyone else
 // subscribes in the app through the App Store and never sees web prices.
-export function sellsOnWeb(currency: Currency) {
+export function sellsOnWeb(currency: Currency): currency is WebCurrency {
   return currency === 'BYN' || currency === 'RUB';
 }
 

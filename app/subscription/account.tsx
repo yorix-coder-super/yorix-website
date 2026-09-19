@@ -8,7 +8,7 @@ import type { SiteTranslation } from '../i18n/types';
 import { fromWire, type Wire } from '../i18n/wire';
 import { API_BASE, firebaseConfig, isFirebaseConfigured } from './config';
 import { subscriptionCopy, type SubscriptionCopy } from './copy';
-import { currencyForVisitor, formatMoney, type Currency } from './currency';
+import { currencyForVisitor, formatMoney, sellsOnWeb, type WebCurrency } from './currency';
 import { formatDate, subscriptionPath, type Lang } from './i18n';
 import { legalVersion } from './legal/versions';
 import { charges, merchant, planCopy, plans, prices, type Plan } from './merchant';
@@ -46,7 +46,7 @@ type Api = State & {
   copy: ClientCopy;
   plans: PlanTexts;
   docsNote: string;
-  currency: Currency;
+  currency: WebCurrency;
   signIn: () => Promise<boolean>;
   createOrder: (planId: string, terms: Terms) => Promise<boolean>;
   getToken: () => Promise<string | null>;
@@ -121,7 +121,8 @@ export function AccountProvider({
     error: null,
     termsPlan: null,
   });
-  const currency = currencyForVisitor(country, acceptLanguage);
+  const visitorCurrency = currencyForVisitor(country, acceptLanguage);
+  const currency: WebCurrency = sellsOnWeb(visitorCurrency) ? visitorCurrency : 'BYN';
 
   const getToken = useCallback(async () => {
     const user = authRef.current?.currentUser;
