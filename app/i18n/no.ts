@@ -97,7 +97,7 @@ export const translation: SiteTranslation = {
     highlight: { soft: 'før', warm: 'sutringen begynner.' },
     screenAlt: 'Yorix-skjermen «I dag» med vinduet for nattesøvn',
     showcaseAlt: { progress: 'Fremgang i Yorix: statistikk for søvn og mating', bedtime: 'Sovelyder i Yorix', coach: 'Chat med AI-coachen i Yorix' },
-    appStore: { title: "Abonner i Yorix-appen", body: "I ditt land selges abonnementet i Yorix-appen via App Store. Last ned appen og abonner med noen få trykk." },
+    appStore: { title: "Yorix på iPhonen din", body: "Søvndagbok, prognose for neste lur og AI-coach – alt samlet i Yorix-appen. Last den ned fra App Store og kom i gang i dag." },
   },
   guides: {
     eyebrow: 'Yorix-guider',

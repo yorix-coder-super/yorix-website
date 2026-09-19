@@ -97,7 +97,7 @@ export const translation: SiteTranslation = {
     highlight: { soft: 'önceden', warm: 'huzursuzluk başlamadan.' },
     screenAlt: 'Gece uykusu penceresini gösteren Yorix Bugün ekranı',
     showcaseAlt: { progress: 'Yorix’te ilerleme: uyku ve beslenme istatistikleri', bedtime: 'Yorix uyku sesleri', coach: 'Yorix yapay zekâ koçuyla sohbet' },
-    appStore: { title: "Yorix uygulamasında abone olun", body: "Ülkenizde abonelik, App Store üzerinden Yorix uygulamasında satılıyor. Uygulamayı indirin ve birkaç dokunuşla abone olun." },
+    appStore: { title: "Yorix iPhone’unuzda", body: "Uyku günlüğü, sonraki uyku tahmini ve yapay zekâ koçu Yorix uygulamasında. App Store’dan indirin ve bugün başlayın." },
   },
   guides: {
     eyebrow: 'Yorix rehberleri',

@@ -97,7 +97,7 @@ export const translation: SiteTranslation = {
     highlight: { soft: 'dřív,', warm: 'začne fňukat.' },
     screenAlt: 'Hlavní obrazovka aplikace Yorix s oknem nočního spánku',
     showcaseAlt: { progress: 'Pokrok v aplikaci Yorix: statistiky spánku a krmení', bedtime: 'Zvuky na spaní v aplikaci Yorix', coach: 'Chat s AI koučem v aplikaci Yorix' },
-    appStore: { title: "Předplatné si pořiď v aplikaci Yorix", body: "Ve tvé zemi se předplatné prodává v aplikaci Yorix přes App Store. Stáhni si aplikaci a předplatné si pořídíš několika klepnutími." },
+    appStore: { title: "Yorix ve tvém iPhonu", body: "Spánkový deník, předpověď dalšího spánku a AI kouč — vše v aplikaci Yorix. Stáhni si ji z App Store a začni ještě dnes." },
   },
   guides: {
     eyebrow: 'Články Yorix',

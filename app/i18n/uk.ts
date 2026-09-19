@@ -97,7 +97,7 @@ export const translation: SiteTranslation = {
     highlight: { soft: 'раніше,', warm: 'почнеться вередування.' },
     screenAlt: 'Екран «Сьогодні» в Yorix: вікно нічного сну',
     showcaseAlt: { progress: 'Прогрес у Yorix: статистика сну й годувань', bedtime: 'Звуки для сну в Yorix', coach: 'Чат із ШІ-коучем Yorix' },
-    appStore: { title: "Оформіть підписку в застосунку Yorix", body: "У вашій країні підписка продається в застосунку Yorix через App Store. Завантажте застосунок і оформіть її в кілька дотиків." },
+    appStore: { title: "Yorix на вашому iPhone", body: "Щоденник сну, прогноз наступного сну та ШІ-коуч — усе в застосунку Yorix. Завантажте його з App Store і почніть уже сьогодні." },
   },
   guides: {
     eyebrow: 'Гайди Yorix',

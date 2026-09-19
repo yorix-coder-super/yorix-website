@@ -103,8 +103,8 @@ export const translation: SiteTranslation = {
     screenAlt: 'Yorix today screen with the night sleep window',
     showcaseAlt: { progress: 'Yorix progress: sleep and feeding statistics', bedtime: 'Yorix bedtime sounds', coach: 'Yorix AI coach chat' },
     appStore: {
-      title: 'Subscribe in the Yorix app',
-      body: 'In your country the subscription is sold in the Yorix app through the App Store. Download the app and subscribe in a couple of taps.',
+      title: 'Get Yorix on your iPhone',
+      body: 'The sleep diary, the next-nap forecast and the AI coach are all in the Yorix app. Download it from the App Store and start tonight.',
     },
   },
   guides: {

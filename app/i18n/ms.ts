@@ -97,7 +97,7 @@ export const translation: SiteTranslation = {
     highlight: { soft: 'sebelum', warm: 'mula meragam.' },
     screenAlt: 'Skrin Hari Ini dalam Yorix dengan waktu tidur malam',
     showcaseAlt: { progress: 'Kemajuan dalam Yorix: statistik tidur dan penyusuan', bedtime: 'Bunyi pengantar tidur dalam Yorix', coach: 'Sembang dengan jurulatih AI Yorix' },
-    appStore: { title: "Langgan dalam aplikasi Yorix", body: "Di negara anda, langganan dijual dalam aplikasi Yorix melalui App Store. Muat turun aplikasi dan langgan dengan beberapa ketikan." },
+    appStore: { title: "Yorix pada iPhone anda", body: "Diari tidur, ramalan tidur siang seterusnya dan jurulatih AI — semuanya dalam aplikasi Yorix. Muat turun dari App Store dan mulakan hari ini." },
   },
   guides: {
     eyebrow: 'Panduan Yorix',

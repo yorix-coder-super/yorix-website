@@ -5,6 +5,7 @@ import { docsLang, siteCopy, type SiteLocale } from './i18n';
 import { PaymentLogos } from './subscription/PaymentLogos';
 import { subscriptionPath } from './subscription/i18n';
 import { merchant } from './subscription/merchant';
+import { sellsHere } from './subscription/region';
 
 const heading = 'text-xs font-semibold uppercase tracking-wide text-white/45';
 const link = 'text-white/70 transition hover:text-white';
@@ -13,7 +14,7 @@ const link = 'text-white/70 transition hover:text-white';
 // requisites; the requisites themselves live in the public offer, so the
 // footer links there instead of repeating them on every page. The documents
 // exist in Russian and English; every other language links the English ones.
-export function SellerFooter({ note, locale = 'en', home }: { note: string; locale?: SiteLocale; home?: string }) {
+export async function SellerFooter({ note, locale = 'en', home }: { note: string; locale?: SiteLocale; home?: string }) {
   const site = siteCopy(locale);
   const copy = site.subscription;
   const text = site.footerLabels;
@@ -22,29 +23,39 @@ export function SellerFooter({ note, locale = 'en', home }: { note: string; loca
   const subscription = subscriptionPath(docs);
   const year = new Date().getFullYear();
   const years = year > 2026 ? `2026–${year}` : '2026';
+  const web = await sellsHere();
+  const faq = web ? `${subscription}#faq` : homePath === '/' ? '/#faq' : `${homePath}#faq`;
   const columns = [
     {
       title: text.product,
       links: [
         { href: homePath === '/' ? '/#features' : `${homePath}#features`, label: text.features },
         { href: locale === 'en' ? '/guides' : `/${locale}/guides`, label: text.guides },
-        { href: `${subscription}#plans`, label: copy.nav.plans },
-        { href: `${subscription}#reviews`, label: copy.nav.reviews },
+        ...(web
+          ? [
+              { href: `${subscription}#plans`, label: copy.nav.plans },
+              { href: `${subscription}#reviews`, label: copy.nav.reviews },
+            ]
+          : []),
       ],
     },
     {
       title: text.support,
       links: [
-        { href: `${subscription}#faq`, label: copy.nav.faq },
+        { href: faq, label: copy.nav.faq },
         { href: `mailto:${merchant.email}`, label: text.write },
-        { href: subscriptionPath(docs, '/offer'), label: copy.footer.requisites },
+        ...(web ? [{ href: subscriptionPath(docs, '/offer'), label: copy.footer.requisites }] : []),
       ],
     },
     {
       title: copy.footer.documents,
       links: [
-        { href: subscriptionPath(docs, '/offer'), label: copy.docs.offer },
-        { href: subscriptionPath(docs, '/payment'), label: copy.docs.payment },
+        ...(web
+          ? [
+              { href: subscriptionPath(docs, '/offer'), label: copy.docs.offer },
+              { href: subscriptionPath(docs, '/payment'), label: copy.docs.payment },
+            ]
+          : []),
         { href: subscriptionPath(docs, '/privacy'), label: copy.docs.privacy },
       ],
     },
@@ -88,10 +99,12 @@ export function SellerFooter({ note, locale = 'en', home }: { note: string; loca
       </div>
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-6 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10">
-          <div className="w-full max-w-[420px]">
-            <PaymentLogos lang={docs} />
-          </div>
-          <p className="text-xs leading-5 text-white/45 lg:max-w-xl lg:text-end">
+          {web ? (
+            <div className="w-full max-w-[420px]">
+              <PaymentLogos lang={docs} />
+            </div>
+          ) : null}
+          <p className={`text-xs leading-5 text-white/45 lg:max-w-xl ${web ? 'lg:text-end' : ''}`}>
             {note} © {years} Yorix.
           </p>
         </div>

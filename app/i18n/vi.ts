@@ -97,7 +97,7 @@ export const translation: SiteTranslation = {
     highlight: { soft: 'trước khi', warm: 'quấy khóc.' },
     screenAlt: 'Màn hình Hôm nay của Yorix với khung giờ ngủ đêm',
     showcaseAlt: { progress: 'Tiến trình trong Yorix: thống kê giấc ngủ và cữ ăn', bedtime: 'Âm thanh ru ngủ trong Yorix', coach: 'Trò chuyện với cố vấn AI của Yorix' },
-    appStore: { title: "Đăng ký trong ứng dụng Yorix", body: "Tại quốc gia của bạn, gói đăng ký được bán trong ứng dụng Yorix qua App Store. Hãy tải ứng dụng và đăng ký chỉ với vài lần chạm." },
+    appStore: { title: "Yorix trên iPhone của bạn", body: "Nhật ký giấc ngủ, dự báo giấc ngủ ngày tiếp theo và cố vấn AI — tất cả trong ứng dụng Yorix. Tải về từ App Store và bắt đầu ngay hôm nay." },
   },
   guides: {
     eyebrow: 'Hướng dẫn của Yorix',

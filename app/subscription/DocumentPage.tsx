@@ -3,11 +3,12 @@ import { Art } from '../home/art';
 import { subscriptionCopy } from './copy';
 import { Reveal } from './Reveal';
 import { subscriptionPath, type Lang, type SubscriptionPage } from './i18n';
+import { sellsHere } from './region';
 import { documentLinks, SubscriptionShell } from './SubscriptionShell';
 
 const docIcons = ['icon-document', 'icon-card', 'icon-lock'];
 
-export function DocumentPage({
+export async function DocumentPage({
   lang,
   page,
   title,
@@ -21,13 +22,16 @@ export function DocumentPage({
   children: ReactNode;
 }) {
   const copy = subscriptionCopy[lang];
-  const links = documentLinks(lang);
+  const all = documentLinks(lang);
+  // Outside Belarus and Russia only the privacy policy is reachable, so there is nothing to switch between.
+  const links = (await sellsHere()) ? all : [];
   const current = subscriptionPath(lang, page);
-  const icon = docIcons[Math.max(0, links.findIndex((link) => link.href === current))];
+  const icon = docIcons[Math.max(0, all.findIndex((link) => link.href === current))];
 
   return (
     <SubscriptionShell lang={lang} page={page}>
       <article className="relative mx-auto max-w-4xl px-5 pb-20 pt-4 sm:px-8">
+        {links.length ? (
         <Reveal animation="fadeIn" load>
         <nav aria-label={copy.footer.documents} className="flex flex-wrap gap-2">
           {links.map((link, index) => {
@@ -48,8 +52,9 @@ export function DocumentPage({
           })}
         </nav>
         </Reveal>
+        ) : null}
         <Reveal delay={120} load>
-        <header className="mt-8 flex items-center gap-5">
+        <header className={`${links.length ? 'mt-8' : 'mt-2'} flex items-center gap-5`}>
           <span className="grid h-20 w-20 shrink-0 place-items-center rounded-3xl bg-[radial-gradient(circle_at_32%_28%,#5B55E8,#2E2A7A_70%)] shadow-[0_0_50px_rgb(99_102_241/40%)] ring-1 ring-white/15">
             <Art className="h-12 w-12 object-contain" height={192} name={icon} priority width={192} />
           </span>

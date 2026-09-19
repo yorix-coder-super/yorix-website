@@ -97,7 +97,7 @@ export const translation: SiteTranslation = {
     highlight: { soft: 'قبل أن', warm: 'يبدأ التذمّر.' },
     screenAlt: 'شاشة «اليوم» في Yorix مع نافذة النوم الليلي',
     showcaseAlt: { progress: 'التقدم في Yorix: إحصاءات النوم والرضاعة', bedtime: 'أصوات وقت النوم في Yorix', coach: 'محادثة مع مدرب الذكاء الاصطناعي في Yorix' },
-    appStore: { title: "اشترك في تطبيق Yorix", body: "في بلدك، يُباع الاشتراك في تطبيق Yorix عبر App Store. نزّل التطبيق واشترك ببضع نقرات." },
+    appStore: { title: "Yorix على iPhone الخاص بك", body: "يوميات النوم وتوقّع القيلولة التالية ومدرب الذكاء الاصطناعي — كلها في تطبيق Yorix. نزّله من App Store وابدأ اليوم." },
   },
   guides: {
     eyebrow: 'أدلة Yorix',

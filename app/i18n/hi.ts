@@ -98,7 +98,7 @@ export const translation: SiteTranslation = {
     highlight: { soft: 'इससे पहले कि', warm: 'चिड़चिड़ाहट शुरू हो।' },
     screenAlt: 'Yorix की “आज” स्क्रीन, रात की नींद की विंडो के साथ',
     showcaseAlt: { progress: 'Yorix में प्रगति: नींद और फ़ीडिंग के आँकड़े', bedtime: 'Yorix में सोने के समय की आवाज़ें', coach: 'Yorix के AI कोच से चैट' },
-    appStore: { title: "Yorix ऐप में सदस्यता लें", body: "आपके देश में सदस्यता App Store के ज़रिए Yorix ऐप में बेची जाती है। ऐप डाउनलोड करें और कुछ ही टैप में सदस्यता लें।" },
+    appStore: { title: "आपके iPhone पर Yorix", body: "नींद की डायरी, अगली झपकी का पूर्वानुमान और AI कोच — सब कुछ Yorix ऐप में। इसे App Store से डाउनलोड करें और आज ही शुरू करें।" },
   },
   guides: {
     eyebrow: 'Yorix गाइड',

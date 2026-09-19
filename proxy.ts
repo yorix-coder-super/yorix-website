@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { isSiteLang, LANG_COOKIE, localizedPath, preferredLanguage, type SiteLang } from './app/language';
+import { currencyForVisitor, sellsOnWeb } from './app/subscription/currency';
 
 const apiHost = process.env.NEXT_PUBLIC_YORIX_API ?? 'https://babysleepcoach-ai-proxy.babysleepcoach.workers.dev';
 
@@ -76,6 +77,26 @@ function languageRedirect(request: NextRequest): NextResponse | null {
   return response;
 }
 
+// The site sells by card only to Belarus and Russia; for everyone else it is
+// the app's showcase. The storefront, the offer and the payment terms send
+// those visitors home. The privacy policy (the app's too) and the acquirer's
+// return pages stay reachable.
+const SALES_PAGE = /^\/(ru\/)?subscription(?:\/(?:offer|payment))?\/?$/;
+
+function salesRedirect(request: NextRequest): NextResponse | null {
+  if (request.method !== 'GET' && request.method !== 'HEAD') return null;
+  const match = SALES_PAGE.exec(request.nextUrl.pathname);
+  if (!match) return null;
+  if (sellsOnWeb(currencyForVisitor(request.headers.get('cf-ipcountry'), request.headers.get('accept-language')))) return null;
+  const home = request.nextUrl.clone();
+  home.pathname = match[1] ? '/ru' : '/';
+  home.search = '';
+  const response = NextResponse.redirect(home, 302);
+  response.headers.set('Vary', 'Accept-Language, CF-IPCountry');
+  response.headers.set('Cache-Control', 'private, no-store');
+  return response;
+}
+
 export function proxy(request: NextRequest) {
   const hostname = request.nextUrl.hostname.toLowerCase();
   const pathname = request.nextUrl.pathname;
@@ -88,7 +109,7 @@ export function proxy(request: NextRequest) {
     return withSecurityHeaders(NextResponse.redirect(url, 308));
   }
 
-  const redirect = languageRedirect(request);
+  const redirect = salesRedirect(request) ?? languageRedirect(request);
   if (redirect) return withSecurityHeaders(redirect);
 
   return withSecurityHeaders(NextResponse.next());

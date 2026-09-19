@@ -97,7 +97,7 @@ export const translation: SiteTranslation = {
     highlight: { soft: 'antes', warm: 'empiecen los lloriqueos.' },
     screenAlt: 'Pantalla «Hoy» de Yorix con la ventana de sueño nocturno',
     showcaseAlt: { progress: 'Progreso en Yorix: estadísticas de sueño y tomas', bedtime: 'Sonidos para dormir de Yorix', coach: 'Chat con el coach de IA de Yorix' },
-    appStore: { title: "Suscríbete en la app Yorix", body: "En tu país, la suscripción se vende en la app Yorix a través del App Store. Descarga la app y suscríbete en un par de toques." },
+    appStore: { title: "Yorix en tu iPhone", body: "Diario de sueño, pronóstico de la próxima siesta y coach con IA: todo está en la app Yorix. Descárgala en el App Store y empieza hoy mismo." },
   },
   guides: {
     eyebrow: 'Guías Yorix',

@@ -98,7 +98,7 @@ export const translation: SiteTranslation = {
     highlight: { soft: 'ひと足先に', warm: 'ぐずり出す' },
     screenAlt: 'Yorixの「今日」画面：夜間睡眠のウィンドウ',
     showcaseAlt: { progress: 'Yorixの経過画面：睡眠と授乳の統計', bedtime: 'Yorixの寝かしつけサウンド', coach: 'YorixのAIコーチとのチャット' },
-    appStore: { title: "Yorixアプリからお申し込みください", body: "お住まいの国では、サブスクリプションはApp Storeを通じてYorixアプリ内で販売しています。アプリをダウンロードして、数タップでお申し込みいただけます。" },
+    appStore: { title: "iPhoneでYorixを", body: "睡眠日記、次のお昼寝の予測、AIコーチがYorixアプリにそろっています。App Storeからダウンロードして、今日から始めましょう。" },
   },
   guides: {
     eyebrow: 'Yorixのガイド',

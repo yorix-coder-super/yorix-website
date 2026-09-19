@@ -97,7 +97,7 @@ export const translation: SiteTranslation = {
     highlight: { soft: 'zanim', warm: 'zacznie marudzić.' },
     screenAlt: 'Ekran „Dziś” w aplikacji Yorix z oknem snu nocnego',
     showcaseAlt: { progress: 'Postęp w aplikacji Yorix: statystyki snu i karmienia', bedtime: 'Dźwięki do snu w aplikacji Yorix', coach: 'Czat z trenerem AI w aplikacji Yorix' },
-    appStore: { title: "Subskrybuj w aplikacji Yorix", body: "W Twoim kraju subskrypcja jest sprzedawana w aplikacji Yorix przez App Store. Pobierz aplikację i subskrybuj kilkoma dotknięciami." },
+    appStore: { title: "Yorix na iPhone’a", body: "Dziennik snu, prognoza kolejnej drzemki i trener AI — wszystko w aplikacji Yorix. Pobierz ją z App Store i zacznij jeszcze dziś." },
   },
   guides: {
     eyebrow: 'Poradniki Yorix',

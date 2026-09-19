@@ -98,7 +98,7 @@ export const translation: SiteTranslation = {
     highlight: { soft: 'ก่อน', warm: 'เริ่มงอแง' },
     screenAlt: 'หน้าวันนี้ของ Yorix พร้อมช่วงนอนกลางคืน',
     showcaseAlt: { progress: 'ความคืบหน้าใน Yorix: สถิติการนอนและการให้นม', bedtime: 'เสียงก่อนนอนใน Yorix', coach: 'แชทกับโค้ช AI ของ Yorix' },
-    appStore: { title: "สมัครสมาชิกในแอป Yorix", body: "ในประเทศของคุณ การสมัครสมาชิกมีจำหน่ายในแอป Yorix ผ่าน App Store ดาวน์โหลดแอปแล้วสมัครได้ในไม่กี่แตะ" },
+    appStore: { title: "Yorix บน iPhone ของคุณ", body: "บันทึกการนอน การคาดการณ์งีบถัดไป และโค้ช AI ครบในแอป Yorix ดาวน์โหลดจาก App Store แล้วเริ่มใช้ได้วันนี้" },
   },
   guides: {
     eyebrow: 'คู่มือ Yorix',

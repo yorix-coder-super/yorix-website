@@ -6,18 +6,20 @@ import { docsLang, siteCopy, type SiteLocale } from './i18n';
 import { localeCopy, locales } from './locales';
 import { HeaderMenus, type LanguageItem } from './subscription/HeaderMenus';
 import { subscriptionPath, type SubscriptionPage } from './subscription/i18n';
+import { sellsHere } from './subscription/region';
 
 const item = 'rounded-full px-3.5 py-2 transition hover:text-white';
 
 // One header for every page: the same five items, the same menus and the
 // same app button whether the visitor is on a home page, a guide or the
 // subscription page — so the site never feels like two sites.
-export function SiteHeader({ locale, current, page = '' }: { locale: SiteLocale; current?: 'subscription'; page?: SubscriptionPage }) {
+export async function SiteHeader({ locale, current, page = '' }: { locale: SiteLocale; current?: 'subscription'; page?: SubscriptionPage }) {
   const isRoot = locale === 'en';
   const site = siteCopy(locale);
   const nav = site.home.nav;
   const home = isRoot ? '/' : `/${locale}`;
   const subscription = subscriptionPath(docsLang(locale));
+  const web = await sellsHere();
   // On a subscription page the language links keep the visitor on the same
   // document; everywhere else they go to that language's home. `?lang=` makes
   // the choice stick over the automatic one (see proxy.ts).
@@ -35,7 +37,7 @@ export function SiteHeader({ locale, current, page = '' }: { locale: SiteLocale;
     { href: isRoot ? '/guides' : `/${locale}/guides`, label: nav.guides },
     { href: subscription, label: site.subscription.home.nav, current: current === 'subscription' },
     { href: `${home}#faq`, label: nav.faq },
-  ];
+  ].filter((link) => link.href !== subscription || web);
 
   return (
     <header className="relative z-50 mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-5 py-5 sm:px-8 lg:px-10">

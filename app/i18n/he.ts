@@ -97,7 +97,7 @@ export const translation: SiteTranslation = {
     highlight: { soft: 'עוד לפני', warm: 'שמתחילה העצבנות.' },
     screenAlt: 'מסך ״היום״ ב-Yorix עם חלון שינת הלילה',
     showcaseAlt: { progress: 'התקדמות ב-Yorix: נתוני שינה והאכלה', bedtime: 'צלילי שינה ב-Yorix', coach: 'צ׳אט עם מאמן ה-AI של Yorix' },
-    appStore: { title: "רכישת מינוי באפליקציית Yorix", body: "במדינה שלכם המינוי נמכר באפליקציית Yorix דרך App Store. הורידו את האפליקציה ורכשו מינוי בכמה הקשות." },
+    appStore: { title: "Yorix ב-iPhone שלכם", body: "יומן שינה, תחזית לתנומה הבאה ומאמן AI — הכול באפליקציית Yorix. הורידו אותה מ-App Store והתחילו כבר היום." },
   },
   guides: {
     eyebrow: 'המדריכים של Yorix',
