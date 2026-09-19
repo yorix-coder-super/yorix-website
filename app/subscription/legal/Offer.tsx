@@ -32,7 +32,7 @@ function ru({ email, payment, privacy, seller }: Ctx): LegalSection[] {
         {
           ul: [
             '**Сервис** — мобильное приложение «Yorix» для iPhone и iPad (далее — Приложение) и связанные с ним онлайн-сервисы, включая сайт yorix.website (далее — Сайт).',
-            '**Аккаунт** — учётная запись Пользователя в Сервисе, созданная входом через Apple (Apple ID) или Google.',
+            '**Аккаунт** — учётная запись Пользователя в Сервисе, созданная входом через Apple («Вход с Apple»).',
             '**Подписка** — предоставляемый за плату на Период доступа доступ к платным функциям Сервиса: ИИ-коучу, персональному прогнозу следующего сна, аналитике дневника и ежедневным рекомендациям (далее — Основные функции) в объёме, описанном на странице тарифов Сайта на дату оплаты. Программы из раздела «Программы» в Подписку не входят.',
             '**Период доступа** — 7, 30 или 365 календарных суток, исчисляемых с момента активации Подписки; сутки — 24 часа.',
             '**Платёжный сервис** — процессинговая система и банк-эквайер, через которые принимается оплата; они указаны на странице «Оплата, доставка и возврат».',
@@ -82,7 +82,7 @@ function ru({ email, payment, privacy, seller }: Ctx): LegalSection[] {
       title: '6. Доступность Сервиса',
       blocks: [
         '6.1. Сервис доступен круглосуточно, за исключением плановых технических работ (не более 8 часов в месяц, по возможности в часы наименьшей нагрузки, с уведомлением в Приложении не менее чем за 24 часа) и перерывов по обстоятельствам раздела 12.',
-        '6.2. Работа Сервиса зависит от средств, которые Пользователь использует самостоятельно: устройства и его операционной системы, операторов связи, App Store, Apple ID и iCloud, входа через Google.',
+        '6.2. Работа Сервиса зависит от средств, которые Пользователь использует самостоятельно: устройства и его операционной системы, операторов связи, App Store, аккаунта Apple и iCloud.',
         '6.3. **Компенсация перерывов.** Если платные функции были недоступны по причинам, зависящим от Исполнителя, более 12 часов подряд, Период доступа продлевается на время недоступности, округлённое до целых суток в большую сторону, без дополнительной оплаты. Это не ограничивает иных прав потребителя.',
       ],
     },
@@ -103,7 +103,7 @@ function ru({ email, payment, privacy, seller }: Ctx): LegalSection[] {
       blocks: [
         '8.1. Исполнитель обязуется: активировать Подписку в сроки раздела 5; обеспечивать доступ к платным функциям в течение Периода доступа с учётом раздела 6; рассматривать обращения Пользователя; обрабатывать персональные данные в соответствии с законодательством и Политикой обработки персональных данных.',
         '8.2. Исполнитель вправе: развивать Сервис, добавлять, изменять и заменять функции с соблюдением п. 7.5 и раздела 13; проводить технические работы; приостанавливать и прекращать доступ в случаях раздела 9; привлекать третьих лиц к обеспечению работы Сервиса, оставаясь ответственным за их действия перед Пользователем.',
-        '8.3. Пользователь обязуется: оплачивать Подписку и использовать Сервис в соответствии с Договором и законодательством; входить с тем Аккаунтом, на котором должна действовать Подписка; обеспечивать конфиденциальность доступа к своему Apple ID или аккаунту Google и устройствам и незамедлительно сообщать о несанкционированном доступе; вносить достоверные сведения; соблюдать правила использования (раздел 9).',
+        '8.3. Пользователь обязуется: оплачивать Подписку и использовать Сервис в соответствии с Договором и законодательством; входить с тем Аккаунтом, на котором должна действовать Подписка; обеспечивать конфиденциальность доступа к своему аккаунту Apple и устройствам и незамедлительно сообщать о несанкционированном доступе; вносить достоверные сведения; соблюдать правила использования (раздел 9).',
         '8.4. Пользователь вправе: пользоваться платными функциями в течение Периода доступа; отказаться от Договора (раздел 7); удалить Аккаунт и данные в Приложении; получать информацию о Сервисе и об обработке своих персональных данных.',
       ],
     },
@@ -142,7 +142,7 @@ function ru({ email, payment, privacy, seller }: Ctx): LegalSection[] {
       blocks: [
         '11.1. Стороны несут ответственность в соответствии с законодательством Республики Беларусь.',
         '11.2. Исполнитель не несёт ответственности за неисполнение или ненадлежащее исполнение обязательств, если оно произошло: вследствие непреодолимой силы (раздел 12); по вине Пользователя, в том числе из-за внесения недостоверных сведений или нарушения правил использования, доведённых до его сведения; вследствие действий третьих лиц, не привлечённых Исполнителем к исполнению Договора.',
-        '11.3. Исполнитель не отвечает за неработоспособность оборудования, программного обеспечения и каналов связи Пользователя, за последствия утраты Пользователем доступа к своему Apple ID или аккаунту Google, а также за решения, принятые Пользователем вопреки разделу 3 без обращения к врачу.',
+        '11.3. Исполнитель не отвечает за неработоспособность оборудования, программного обеспечения и каналов связи Пользователя, за последствия утраты Пользователем доступа к своему аккаунту Apple, а также за решения, принятые Пользователем вопреки разделу 3 без обращения к врачу.',
         '11.4. Положения Договора об ответственности применяются в пределах, допускаемых законодательством, и не ограничивают права потребителя, предусмотренные законодательством о защите прав потребителей, в том числе право на возмещение вреда, причинённого жизни или здоровью, и ответственность за умышленное нарушение обязательств.',
       ],
     },
@@ -244,7 +244,7 @@ function en({ email, payment, privacy, seller }: Ctx): LegalSection[] {
         {
           ul: [
             '**Service** — the Yorix mobile app for iPhone and iPad (the “App”) and related online services, including the yorix.website site (the “Website”).',
-            '**Account** — the User’s account in the Service, created by signing in with Apple (Apple ID) or Google.',
+            '**Account** — the User’s account in the Service, created with Sign in with Apple.',
             '**Subscription** — paid access, for an Access Period, to the Service’s paid features: the AI coach, the personal next-sleep forecast, diary analytics and daily recommendations (the “Core Features”), as described on the Website’s plans page on the date of payment. Programs from the “Programs” section are not included.',
             '**Access Period** — 7, 30 or 365 calendar days counted from activation of the Subscription; a day is 24 hours.',
             '**Payment Service** — the processing system and the acquiring bank that accept the payment, named on the “Payment, delivery and refunds” page.',
@@ -294,7 +294,7 @@ function en({ email, payment, privacy, seller }: Ctx): LegalSection[] {
       title: '6. Availability',
       blocks: [
         '6.1. The Service is available around the clock, except for planned maintenance (no more than 8 hours a month, at low-traffic times where possible, announced in the App at least 24 hours ahead) and interruptions under section 12.',
-        '6.2. The Service depends on means the User uses independently: the device and its operating system, telecom operators, the App Store, Apple ID and iCloud, Google sign-in.',
+        '6.2. The Service depends on means the User uses independently: the device and its operating system, telecom operators, the App Store, their Apple Account and iCloud.',
         '6.3. **Downtime compensation.** If the paid features were unavailable for reasons within the Provider’s control for more than 12 consecutive hours, the Access Period is extended by the downtime rounded up to whole days, free of charge. This does not limit the consumer’s other rights.',
       ],
     },
@@ -315,7 +315,7 @@ function en({ email, payment, privacy, seller }: Ctx): LegalSection[] {
       blocks: [
         '8.1. The Provider shall: activate the Subscription within the times in section 5; keep the paid features available during the Access Period subject to section 6; consider the User’s requests; process personal data in line with the law and the Personal data policy.',
         '8.2. The Provider may: develop the Service and add, change and replace features subject to clause 7.5 and section 13; carry out maintenance; suspend and end access in the cases in section 9; engage third parties to run the Service, remaining responsible to the User for them.',
-        '8.3. The User shall: pay for the Subscription and use the Service in line with the Agreement and the law; sign in with the Account that is to carry the Subscription; keep access to their Apple ID or Google account and devices confidential and report unauthorised access promptly; enter accurate information; follow the rules of use (section 9).',
+        '8.3. The User shall: pay for the Subscription and use the Service in line with the Agreement and the law; sign in with the Account that is to carry the Subscription; keep access to their Apple Account and devices confidential and report unauthorised access promptly; enter accurate information; follow the rules of use (section 9).',
         '8.4. The User may: use the paid features during the Access Period; withdraw from the Agreement (section 7); delete the Account and data in the App; obtain information about the Service and the processing of their personal data.',
       ],
     },
@@ -354,7 +354,7 @@ function en({ email, payment, privacy, seller }: Ctx): LegalSection[] {
       blocks: [
         '11.1. The parties are liable under the law of the Republic of Belarus.',
         '11.2. The Provider is not liable for non-performance or improper performance caused by force majeure (section 12); by the User’s fault, including inaccurate information or breach of rules of use brought to their attention; or by acts of third parties not engaged by the Provider to perform the Agreement.',
-        '11.3. The Provider is not liable for the User’s own equipment, software and connections not working, for the consequences of the User losing access to their Apple ID or Google account, or for decisions the User makes contrary to section 3 without seeing a doctor.',
+        '11.3. The Provider is not liable for the User’s own equipment, software and connections not working, for the consequences of the User losing access to their Apple Account, or for decisions the User makes contrary to section 3 without seeing a doctor.',
         '11.4. The liability provisions apply to the extent permitted by law and do not limit consumer rights under consumer protection law, including compensation for harm to life or health and liability for intentional breach.',
       ],
     },

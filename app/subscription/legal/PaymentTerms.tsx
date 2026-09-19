@@ -58,10 +58,10 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
           </li>
           <li>
             Tick that you accept the <a href={offer}>public offer</a> and these terms, and press “Continue with Apple”: sign in with the Apple
-            account you use in the Yorix app. There is nothing to type in — no Apple ID, no codes.
+            account you use in the Yorix app.
           </li>
           <li>The secure WEBPAY payment page opens: enter your card details and confirm the payment.</li>
-          <li>Right after payment the subscription turns on automatically in the Yorix app on your account.</li>
+          <li>Right after payment the subscription turns on automatically in the Yorix app on your account — no codes, no manual activation.</li>
         </ol>
 
         <h2>Payment methods</h2>
@@ -157,10 +157,10 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         </li>
         <li>
           Отметьте, что принимаете <a href={offer}>публичный договор</a> и эти условия, и нажмите «Продолжить с Apple»: войдите тем же аккаунтом
-          Apple, что и в приложении Yorix. Ничего вводить не нужно — ни Apple ID, ни кодов.
+          Apple, что и в приложении Yorix.
         </li>
         <li>Откроется защищённая платёжная страница WEBPAY: введите данные карты и подтвердите оплату.</li>
-        <li>Сразу после оплаты подписка автоматически включится в приложении Yorix на вашем аккаунте.</li>
+        <li>Сразу после оплаты подписка автоматически включится в приложении Yorix на вашем аккаунте — без кодов и ручной активации.</li>
       </ol>
 
       <h2>Способы оплаты</h2>
