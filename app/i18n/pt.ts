@@ -254,7 +254,7 @@ export const translation: SiteTranslation = {
       next: 'Continuar',
       cancel: 'Cancelar',
     },
-    currency: { note: (amounts) => `O cartão é cobrado em rublos bielorrussos: ${amounts}. O seu banco faz a conversão à sua própria taxa de câmbio.` },
+    currency: { note: (amounts) => `Aceitamos cartões Mir. O cartão é cobrado em rublos bielorrussos: ${amounts}. O seu banco faz a conversão à sua própria taxa de câmbio.` },
     docs: { offer: 'Contrato de oferta pública', payment: 'Pagamento, entrega e reembolsos', privacy: 'Política de dados pessoais' },
     home: {
       nav: 'Subscrição',

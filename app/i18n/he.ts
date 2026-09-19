@@ -254,7 +254,7 @@ export const translation: SiteTranslation = {
       next: 'המשך',
       cancel: 'ביטול',
     },
-    currency: { note: (amounts) => `החיוב בכרטיס מתבצע ברובל בלארוסי: ${amounts}. הבנק שלכם ימיר לפי השער שלו.` },
+    currency: { note: (amounts) => `כרטיסי Mir מתקבלים. החיוב בכרטיס מתבצע ברובל בלארוסי: ${amounts}. הבנק שלכם ימיר לפי השער שלו.` },
     docs: { offer: 'הסכם ההצעה הפומבית', payment: 'תשלום, אספקה והחזרים', privacy: 'מדיניות המידע האישי' },
     home: {
       nav: 'מינוי',

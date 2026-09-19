@@ -254,7 +254,7 @@ export const translation: SiteTranslation = {
       next: 'Continuer',
       cancel: 'Annuler',
     },
-    currency: { note: (amounts) => `Le débit sur la carte se fait en roubles biélorusses : ${amounts}. Votre banque applique son propre taux de change.` },
+    currency: { note: (amounts) => `Nous acceptons les cartes Mir. Le débit sur la carte se fait en roubles biélorusses : ${amounts}. Votre banque applique son propre taux de change.` },
     docs: { offer: 'Contrat d’offre publique', payment: 'Paiement, livraison et remboursement', privacy: 'Politique de traitement des données personnelles' },
     home: {
       nav: 'Abonnement',

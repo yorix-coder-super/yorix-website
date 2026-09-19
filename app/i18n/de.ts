@@ -254,7 +254,7 @@ export const translation: SiteTranslation = {
       next: 'Weiter',
       cancel: 'Abbrechen',
     },
-    currency: { note: (amounts) => `Die Karte wird in belarussischen Rubeln belastet: ${amounts}. Deine Bank rechnet zu ihrem eigenen Kurs um.` },
+    currency: { note: (amounts) => `Mir-Karten werden akzeptiert. Die Karte wird in belarussischen Rubeln belastet: ${amounts}. Deine Bank rechnet zu ihrem eigenen Kurs um.` },
     docs: { offer: 'Öffentliches Vertragsangebot', payment: 'Zahlung, Lieferung und Rückerstattung', privacy: 'Datenschutzrichtlinie' },
     home: {
       nav: 'Abo',

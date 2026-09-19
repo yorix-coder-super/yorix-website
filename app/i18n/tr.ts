@@ -254,7 +254,7 @@ export const translation: SiteTranslation = {
       next: 'Devam et',
       cancel: 'İptal',
     },
-    currency: { note: (amounts) => `Kartınızdan Belarus rublesiyle tahsilat yapılır: ${amounts}. Bankanız kendi kuruyla çevirir.` },
+    currency: { note: (amounts) => `Mir kartları kabul edilir. Kartınızdan Belarus rublesiyle tahsilat yapılır: ${amounts}. Bankanız kendi kuruyla çevirir.` },
     docs: { offer: 'Kamuya açık teklif sözleşmesi', payment: 'Ödeme, teslimat ve iade', privacy: 'Kişisel veri politikası' },
     home: {
       nav: 'Abonelik',

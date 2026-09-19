@@ -157,7 +157,7 @@ const ru: SubscriptionCopy = {
     body: 'Прогноз следующего сна, коуч 24/7, аналитика и советы на день — на неделю, месяц или год.',
     more: 'Всё о подписке: условия, возврат, вопросы',
   },
-  currency: { note: (amounts) => `Оплата проходит в белорусских рублях: ${amounts}. Банк карты пересчитает по своему курсу.` },
+  currency: { note: (amounts) => `Принимаем карты «Мир». Оплата проходит в белорусских рублях: ${amounts}. Банк карты пересчитает по своему курсу.` },
   terms: {
     title: (period) => `Подписка ${period}`,
     period: 'Срок',
@@ -271,7 +271,7 @@ const en: SubscriptionCopy = {
     body: 'Next-nap forecast, 24/7 coach, analytics and daily advice — for a week, a month or a year.',
     more: 'All about the subscription: terms, refunds, FAQ',
   },
-  currency: { note: (amounts) => `The card is charged in Belarusian rubles: ${amounts}. Your bank converts at its own rate.` },
+  currency: { note: (amounts) => `Mir cards are accepted. The card is charged in Belarusian rubles: ${amounts}. Your bank converts at its own rate.` },
   terms: {
     title: (period) => `Subscription ${period}`,
     period: 'Period',

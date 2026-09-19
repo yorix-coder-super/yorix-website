@@ -254,7 +254,7 @@ export const translation: SiteTranslation = {
       next: 'Pokračovat',
       cancel: 'Zrušit',
     },
-    currency: { note: (amounts) => `Platba se z karty strhne v běloruských rublech: ${amounts}. Tvoje banka ji přepočítá podle svého kurzu.` },
+    currency: { note: (amounts) => `Přijímáme karty Mir. Platba se z karty strhne v běloruských rublech: ${amounts}. Tvoje banka ji přepočítá podle svého kurzu.` },
     docs: { offer: 'Smlouva (veřejná nabídka)', payment: 'Platba, dodání a vrácení peněz', privacy: 'Zásady zpracování osobních údajů' },
     home: {
       nav: 'Předplatné',

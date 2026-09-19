@@ -254,7 +254,7 @@ export const translation: SiteTranslation = {
       next: 'Doorgaan',
       cancel: 'Annuleren',
     },
-    currency: { note: (amounts) => `Het bedrag wordt afgeschreven in Belarussische roebels: ${amounts}. Je bank rekent om tegen de eigen koers.` },
+    currency: { note: (amounts) => `Mir-kaarten worden geaccepteerd. Het bedrag wordt afgeschreven in Belarussische roebels: ${amounts}. Je bank rekent om tegen de eigen koers.` },
     docs: { offer: 'Openbaar aanbod (overeenkomst)', payment: 'Betaling, levering en terugbetaling', privacy: 'Beleid voor persoonsgegevens' },
     home: {
       nav: 'Abonnement',

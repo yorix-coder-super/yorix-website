@@ -255,7 +255,7 @@ export const translation: SiteTranslation = {
       next: 'जारी रखें',
       cancel: 'रद्द करें',
     },
-    currency: { note: (amounts) => `कार्ड से बेलारूसी रूबल में राशि कटेगी: ${amounts}। आपका बैंक इसे अपनी दर पर बदलेगा।` },
+    currency: { note: (amounts) => `Mir कार्ड स्वीकार किए जाते हैं। कार्ड से बेलारूसी रूबल में राशि कटेगी: ${amounts}। आपका बैंक इसे अपनी दर पर बदलेगा।` },
     docs: { offer: 'सार्वजनिक प्रस्ताव अनुबंध', payment: 'भुगतान, डिलीवरी और रिफ़ंड', privacy: 'व्यक्तिगत डेटा नीति' },
     home: {
       nav: 'सदस्यता',

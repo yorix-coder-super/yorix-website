@@ -254,7 +254,7 @@ export const translation: SiteTranslation = {
       next: 'Teruskan',
       cancel: 'Batal',
     },
-    currency: { note: (amounts) => `Kad anda dicaj dalam rubel Belarus: ${amounts}. Bank anda akan menukarnya mengikut kadar bank sendiri.` },
+    currency: { note: (amounts) => `Kad Mir diterima. Kad anda dicaj dalam rubel Belarus: ${amounts}. Bank anda akan menukarnya mengikut kadar bank sendiri.` },
     docs: { offer: 'Perjanjian tawaran awam', payment: 'Pembayaran, penghantaran dan bayaran balik', privacy: 'Dasar data peribadi' },
     home: {
       nav: 'Langganan',

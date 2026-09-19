@@ -20,16 +20,14 @@ export const merchant = {
     ru: 'Ежедневно с 10:00 до 20:00 (время минское)',
     en: 'Daily, 10:00–20:00 Minsk time',
   },
-  hoursNote: {
-    ru: 'заявки по e-mail принимаются круглосуточно',
-    en: 'orders by e-mail are accepted around the clock',
-  },
-  activationHours: 24,
   tradeRegister: '',
   // WebPay ships a separate logo strip for МТБанк; every other acquirer uses the generic one.
   acquirer: 'other' as 'mtbank' | 'other',
-  // «Мир» is absent from WebPay's logo packs — add it only once the acquirer confirms it.
-  cards: ['Visa', 'Mastercard', 'Белкарт'],
+  // WebPay's logo packs have no «Мир»; its mark is NSPK's own white logo (public/payments/mir-white.svg).
+  cards: {
+    ru: ['Visa', 'Mastercard', 'Белкарт', 'Мир'],
+    en: ['Visa', 'Mastercard', 'Belkart', 'Mir'],
+  },
 };
 
 export type PlanId = 'week' | 'month' | 'year';
@@ -93,34 +91,6 @@ export function perWeek(plan: Plan) {
 
 export function savingVsWeek(plan: Plan) {
   return Math.round((1 - perWeek(plan) / plans[0].priceByn) * 100);
-}
-
-// The account code is the Firebase uid the buyer sees after signing in; it
-// names the account to grant without asking for an e-mail address.
-export function orderTemplate(lang: Lang, plan?: Plan, accountCode?: string) {
-  const code = accountCode ?? '';
-  if (lang === 'en') {
-    return [
-      'Hello!',
-      '',
-      `I would like a Yorix subscription ${plan ? `${planCopy.en[plan.id].forPeriod} — ${formatByn(plan.priceByn, 'en', 'code')}` : '(week / month / year)'}`,
-      `Account code (Settings → Account in the app): ${code}`,
-    ].join('\n');
-  }
-  return [
-    'Здравствуйте!',
-    '',
-    `Хочу подписку Yorix ${plan ? `${planCopy.ru[plan.id].forPeriod} — ${formatByn(plan.priceByn, 'ru', 'code')}` : '(неделя / месяц / год)'}`,
-    `Код аккаунта (Настройки → Аккаунт в приложении): ${code}`,
-  ].join('\n');
-}
-
-export function mailtoOrder(lang: Lang, plan?: Plan, accountCode?: string) {
-  const subject =
-    lang === 'en'
-      ? `Yorix subscription order${plan ? ` ${planCopy.en[plan.id].forPeriod}` : ''}`
-      : `Заказ подписки Yorix${plan ? ` ${planCopy.ru[plan.id].forPeriod}` : ''}`;
-  return `mailto:${merchant.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(orderTemplate(lang, plan, accountCode))}`;
 }
 
 export function listJoin(items: string[], lang: Lang) {

@@ -254,7 +254,7 @@ export const translation: SiteTranslation = {
       next: 'Fortsett',
       cancel: 'Avbryt',
     },
-    currency: { note: (amounts) => `Kortet belastes i belarusiske rubler: ${amounts}. Banken din regner om etter sin egen kurs.` },
+    currency: { note: (amounts) => `Mir-kort godtas. Kortet belastes i belarusiske rubler: ${amounts}. Banken din regner om etter sin egen kurs.` },
     docs: { offer: 'Offentlig tilbud (avtale)', payment: 'Betaling, levering og refusjon', privacy: 'Retningslinjer for personopplysninger' },
     home: {
       nav: 'Abonnement',

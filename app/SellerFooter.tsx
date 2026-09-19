@@ -88,8 +88,8 @@ export function SellerFooter({ note, locale = 'en', home }: { note: string; loca
       </div>
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-6 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10">
-          <div className="w-full max-w-[300px]">
-            <PaymentLogos />
+          <div className="w-full max-w-[420px]">
+            <PaymentLogos lang={docs} />
           </div>
           <p className="text-xs leading-5 text-white/45 lg:max-w-xl lg:text-end">
             {note} © {years} Yorix.

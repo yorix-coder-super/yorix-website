@@ -254,7 +254,7 @@ export const translation: SiteTranslation = {
       next: 'Continua',
       cancel: 'Annulla',
     },
-    currency: { note: (amounts) => `L’addebito sulla carta avviene in rubli bielorussi: ${amounts}. La tua banca applica il proprio tasso di cambio.` },
+    currency: { note: (amounts) => `Accettiamo le carte Mir. L’addebito sulla carta avviene in rubli bielorussi: ${amounts}. La tua banca applica il proprio tasso di cambio.` },
     docs: { offer: 'Contratto di offerta al pubblico', payment: 'Pagamento, consegna e rimborsi', privacy: 'Informativa sul trattamento dei dati personali' },
     home: {
       nav: 'Abbonamento',

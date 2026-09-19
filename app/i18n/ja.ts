@@ -255,7 +255,7 @@ export const translation: SiteTranslation = {
       next: '続ける',
       cancel: 'キャンセル',
     },
-    currency: { note: (amounts) => `カードにはベラルーシ・ルーブルで請求されます：${amounts}。換算はお使いの銀行のレートで行われます。` },
+    currency: { note: (amounts) => `Mirカードもご利用いただけます。カードにはベラルーシ・ルーブルで請求されます：${amounts}。換算はお使いの銀行のレートで行われます。` },
     docs: { offer: '公開オファー契約', payment: 'お支払い・提供・返金', privacy: '個人情報の取り扱い方針' },
     home: {
       nav: 'サブスクリプション',

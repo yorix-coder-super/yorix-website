@@ -254,7 +254,7 @@ export const translation: SiteTranslation = {
       next: 'Fortsæt',
       cancel: 'Annuller',
     },
-    currency: { note: (amounts) => `Kortet trækkes i hviderussiske rubler: ${amounts}. Din bank omregner til sin egen kurs.` },
+    currency: { note: (amounts) => `Mir-kort accepteres. Kortet trækkes i hviderussiske rubler: ${amounts}. Din bank omregner til sin egen kurs.` },
     docs: { offer: 'Offentligt aftaletilbud', payment: 'Betaling, levering og refusion', privacy: 'Persondatapolitik' },
     home: {
       nav: 'Abonnement',

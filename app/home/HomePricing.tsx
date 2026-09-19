@@ -3,7 +3,7 @@ import { headers } from 'next/headers';
 import { appDownloadUrl } from '../content';
 import { docsLang, siteCopy, type SiteLocale } from '../i18n';
 import { toWire } from '../i18n/wire';
-import { AccountProvider, CheckoutDialog, PlanCard } from '../subscription/account';
+import { AccountProvider, ChargeNote, CheckoutDialog, PlanCard } from '../subscription/account';
 import { currencyForVisitor, sellsOnWeb } from '../subscription/currency';
 import { subscriptionPath } from '../subscription/i18n';
 import { merchant, plans } from '../subscription/merchant';
@@ -48,6 +48,7 @@ export async function HomePricing({ locale }: { locale: SiteLocale }) {
             {copy.home.title.replace(/\.$/, '')}
           </p>
           <PlanGrid locale={locale} />
+          <ChargeNote className="mt-6 text-sm leading-6 text-white/50" />
           <a className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-white underline decoration-white/30 hover:decoration-white" href={subscriptionPath(lang)}>
             {copy.home.more}
             <ArrowRight className="h-4 w-4 rtl:-scale-x-100" aria-hidden="true" />

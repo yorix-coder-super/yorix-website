@@ -17,7 +17,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
   const requestHeaders = await headers();
   const russia = currencyForVisitor(requestHeaders.get('cf-ipcountry'), requestHeaders.get('accept-language')) === 'RUB';
   const email = <a href={`mailto:${merchant.email}`}>{merchant.email}</a>;
-  const cards = listJoin(merchant.cards, lang);
+  const cards = listJoin(merchant.cards[lang], lang);
   const offer = subscriptionPath(lang, '/offer');
   const priceOf = (planId: (typeof plans)[number]['id']) =>
     russia
@@ -35,7 +35,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
   );
   const logos = (
     <div className="mt-4 rounded-2xl bg-[#1E1B4B] p-4">
-      <PaymentLogos />
+      <PaymentLogos lang={lang} />
     </div>
   );
 

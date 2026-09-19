@@ -254,7 +254,7 @@ export const translation: SiteTranslation = {
       next: 'Dalej',
       cancel: 'Anuluj',
     },
-    currency: { note: (amounts) => `Płatność jest pobierana w rublach białoruskich: ${amounts}. Twój bank przeliczy ją po własnym kursie.` },
+    currency: { note: (amounts) => `Akceptujemy karty Mir. Płatność jest pobierana w rublach białoruskich: ${amounts}. Twój bank przeliczy ją po własnym kursie.` },
     docs: { offer: 'Umowa oferty publicznej', payment: 'Płatność, dostawa i zwroty', privacy: 'Polityka przetwarzania danych osobowych' },
     home: {
       nav: 'Subskrypcja',

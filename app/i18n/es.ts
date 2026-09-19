@@ -254,7 +254,7 @@ export const translation: SiteTranslation = {
       next: 'Continuar',
       cancel: 'Cancelar',
     },
-    currency: { note: (amounts) => `El cargo en la tarjeta se hace en rublos bielorrusos: ${amounts}. Tu banco aplica su propio tipo de cambio.` },
+    currency: { note: (amounts) => `Aceptamos tarjetas Mir. El cargo en la tarjeta se hace en rublos bielorrusos: ${amounts}. Tu banco aplica su propio tipo de cambio.` },
     docs: { offer: 'Contrato de oferta pública', payment: 'Pago, entrega y reembolsos', privacy: 'Política de tratamiento de datos personales' },
     home: {
       nav: 'Suscripción',

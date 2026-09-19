@@ -254,7 +254,7 @@ export const translation: SiteTranslation = {
       next: 'Tiếp tục',
       cancel: 'Hủy',
     },
-    currency: { note: (amounts) => `Thẻ được trừ tiền bằng rúp Belarus: ${amounts}. Ngân hàng của bạn sẽ quy đổi theo tỷ giá riêng.` },
+    currency: { note: (amounts) => `Chấp nhận thẻ Mir. Thẻ được trừ tiền bằng rúp Belarus: ${amounts}. Ngân hàng của bạn sẽ quy đổi theo tỷ giá riêng.` },
     docs: { offer: 'Đề nghị hợp đồng công khai', payment: 'Thanh toán, giao hàng và hoàn tiền', privacy: 'Chính sách dữ liệu cá nhân' },
     home: {
       nav: 'Gói đăng ký',

@@ -254,7 +254,7 @@ export const translation: SiteTranslation = {
       next: 'Lanjutkan',
       cancel: 'Batal',
     },
-    currency: { note: (amounts) => `Kartu Anda ditagih dalam rubel Belarus: ${amounts}. Bank Anda akan mengonversinya dengan kursnya sendiri.` },
+    currency: { note: (amounts) => `Kartu Mir diterima. Kartu Anda ditagih dalam rubel Belarus: ${amounts}. Bank Anda akan mengonversinya dengan kursnya sendiri.` },
     docs: { offer: 'Perjanjian penawaran publik', payment: 'Pembayaran, pengiriman, dan pengembalian dana', privacy: 'Kebijakan data pribadi' },
     home: {
       nav: 'Langganan',

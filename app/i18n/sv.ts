@@ -254,7 +254,7 @@ export const translation: SiteTranslation = {
       next: 'Fortsätt',
       cancel: 'Avbryt',
     },
-    currency: { note: (amounts) => `Kortet debiteras i belarusiska rubel: ${amounts}. Din bank räknar om till sin egen kurs.` },
+    currency: { note: (amounts) => `Mir-kort accepteras. Kortet debiteras i belarusiska rubel: ${amounts}. Din bank räknar om till sin egen kurs.` },
     docs: { offer: 'Offentligt erbjudande (avtal)', payment: 'Betalning, leverans och återbetalning', privacy: 'Policy för personuppgifter' },
     home: {
       nav: 'Prenumeration',
