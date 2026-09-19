@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useSyncExternalStore, type FormEvent } from 'react';
+import { useState, useSyncExternalStore, type SubmitEvent } from 'react';
 import { subscriptionCopy } from '../copy';
 import type { Lang } from '../i18n';
 import { Button } from '../ui';
@@ -29,7 +29,7 @@ export function GiftCodeEntry({ lang }: { lang: Lang }) {
   const valid = complete && giftCodeChecks(code);
   const problem = complete && !valid ? text.errors.typo : tried && !complete ? text.entryShort : null;
 
-  const submit = (event: FormEvent<HTMLFormElement>) => {
+  const submit = (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     setTried(true);
     if (!valid) return;

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { useEffect, useEffectEvent, useRef, useState, useSyncExternalStore } from 'react';
 import { useAccount } from '../account';
 import { API_BASE } from '../config';
 import { subscriptionCopy } from '../copy';
@@ -92,11 +92,10 @@ export function GiftShare({
     if (card.current?.code !== code) card.current = { code, blob: giftCardImage({ code, url, text: cardText }) };
     return card.current.blob;
   };
-  useEffect(() => {
+  const warmCard = useEffectEvent(() => {
     if (gift.status === 'active') cardBlob().catch(() => {});
-    // The card follows the code; its texts do not change while it is shown.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [code, gift.status]);
+  });
+  useEffect(() => warmCard(), [code, gift.status]);
 
   const replace = async () => {
     if (busy || !window.confirm(text.replaceConfirm)) return;

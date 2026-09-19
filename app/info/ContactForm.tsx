@@ -1,12 +1,15 @@
 'use client';
 
-import { useRef, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type SubmitEvent } from 'react';
 import type { SupportCopy } from '../i18n/types';
 import { API_BASE } from '../subscription/config';
 
 type State = 'idle' | 'sending' | 'sent' | 'invalid' | 'error';
 
-const EMAIL = /^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/;
+// The worker accepts plain addresses only (no quotes, brackets or display names).
+const EMAIL = /^[A-Za-z0-9._%+'-]{1,64}@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,24}$/;
+
+const text = (value: FormDataEntryValue | null) => (typeof value === 'string' ? value : '');
 
 // «Write to us» without a mail app: the worker mails the message to support
 // with the writer as Reply-To. The hidden field and the time on the page are
@@ -26,18 +29,21 @@ export function ContactForm({
   lang: string;
   page: string;
 }) {
-  const opened = useRef(Date.now());
+  const opened = useRef(0);
   const [state, setState] = useState<State>('idle');
+  useEffect(() => {
+    opened.current = Date.now();
+  }, []);
 
-  const submit = async (event: FormEvent<HTMLFormElement>) => {
+  const submit = async (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (state === 'sending') return;
     const form = new FormData(event.currentTarget);
     const payload = {
-      name: String(form.get('name') ?? '').trim(),
-      email: String(form.get('email') ?? '').trim(),
-      message: String(form.get('message') ?? '').trim(),
-      website: String(form.get('website') ?? ''),
+      name: text(form.get('name')).trim(),
+      email: text(form.get('email')).trim(),
+      message: text(form.get('message')).trim(),
+      website: text(form.get('website')),
       lang,
       page,
       elapsedMs: Date.now() - opened.current,
@@ -66,9 +72,9 @@ export function ContactForm({
 
   if (state === 'sent') {
     return (
-      <p className="rounded-2xl border border-[#A7F3D0]/30 bg-[#A7F3D0]/10 px-5 py-4 text-base leading-7 text-[#D1FAE5]" role="status">
+      <output className="block rounded-2xl border border-[#A7F3D0]/30 bg-[#A7F3D0]/10 px-5 py-4 text-base leading-7 text-[#D1FAE5]">
         {copy.sent}
-      </p>
+      </output>
     );
   }
 

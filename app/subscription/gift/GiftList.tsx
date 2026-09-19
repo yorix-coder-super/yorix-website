@@ -19,7 +19,7 @@ export function GiftList() {
 
   useEffect(() => {
     let cancelled = false;
-    (async () => {
+    void (async () => {
       const found = await Promise.all(
         storedGifts()
           .slice(0, 12)

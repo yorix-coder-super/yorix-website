@@ -5,7 +5,6 @@ import { docsLang, siteCopy, type SiteLocale } from './i18n';
 import { PaymentLogos } from './subscription/PaymentLogos';
 import { subscriptionPath } from './subscription/i18n';
 import { subscriptionCopy } from './subscription/copy';
-import { merchant } from './subscription/merchant';
 import { sellsHere } from './subscription/region';
 
 const heading = 'text-xs font-semibold uppercase tracking-wide text-white/45';
