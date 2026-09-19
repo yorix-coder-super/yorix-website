@@ -7,7 +7,7 @@ import { AccountProvider, ChargeNote, CheckoutDialog, PlanCard } from '../subscr
 import { currencyForVisitor, sellsOnWeb } from '../subscription/currency';
 import { subscriptionCopy } from '../subscription/copy';
 import { subscriptionPath } from '../subscription/i18n';
-import { merchant, plans } from '../subscription/merchant';
+import { plans } from '../subscription/merchant';
 import { Reveal } from '../subscription/Reveal';
 import { AppleGlyph, Art } from './art';
 import { whitePill } from './CtaBand';
@@ -103,8 +103,8 @@ export function PlanGrid({ locale }: { locale: SiteLocale }) {
             <span className="min-w-0">
               {home.pricing.questions}
               <br />
-              <a className="font-semibold text-white underline decoration-white/30 underline-offset-2 [overflow-wrap:anywhere] hover:decoration-white" href={`mailto:${merchant.email}`}>
-                {merchant.email}
+              <a className="font-semibold text-white underline decoration-white/30 underline-offset-2 hover:decoration-white" href={`${locale === 'en' ? '' : `/${locale}`}/support#contact`}>
+                {site.footerLabels.write}
               </a>
             </span>
           </li>

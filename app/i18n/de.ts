@@ -326,10 +326,22 @@ export const translation: SiteTranslation = {
     body: 'Antworten auf die Fragen, die Eltern uns am häufigsten zu Yorix stellen. Deine Frage ist nicht dabei? Schreib uns – bei uns liest ein echter Mensch jede Nachricht.',
     contact: {
       title: 'Noch Fragen offen?',
-      body: 'Melde dich direkt in der App – „Einstellungen“ → „Schreib uns“ öffnet einen Chat mit uns – oder schreib uns eine E-Mail.',
+      body: 'Schreib uns hier – oder direkt in der App: „Einstellungen“ → „Schreib uns“ öffnet einen Chat mit uns.',
       reply: 'Wir antworten innerhalb von 3 Werktagen.',
       include: 'Damit wir schneller helfen können, nenn uns dein iPhone-Modell, die Versionen von iOS und Yorix und beschreib kurz, was passiert ist.',
       email: 'E-Mail schreiben',
+    },
+    form: {
+      name: 'Dein Name',
+      email: 'E-Mail für unsere Antwort',
+      message: 'Nachricht',
+      messagePlaceholder: 'Erzähl uns, was passiert ist oder was du wissen möchtest',
+      send: 'Senden',
+      sending: 'Wird gesendet…',
+      sent: 'Danke! Wir haben deine Nachricht erhalten und antworten innerhalb von 3 Werktagen per E-Mail.',
+      error: 'Die Nachricht konnte nicht gesendet werden. Versuch es in einer Minute noch einmal oder schreib an',
+      invalid: 'Bitte gib deine E-Mail-Adresse und eine Nachricht mit mindestens 10 Zeichen ein.',
+      privacy: 'Deine E-Mail-Adresse und Nachricht nutzen wir nur, um dir zu antworten.',
     },
     topics: [
       {

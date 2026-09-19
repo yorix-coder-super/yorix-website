@@ -326,10 +326,22 @@ export const translation: SiteTranslation = {
     body: 'Antwoorden op de vragen die ouders ons het vaakst stellen over Yorix. Staat jouw vraag er niet bij? Schrijf ons – bij ons leest een echt mens elk bericht.',
     contact: {
       title: 'Nog hulp nodig?',
-      body: 'Neem contact op via de app – ‘Instellingen’ → ‘Schrijf ons’ opent een chat met ons – of stuur ons een e-mail.',
+      body: 'Schrijf ons hier – of via de app: ‘Instellingen’ → ‘Schrijf ons’ opent een chat met ons.',
       reply: 'We reageren binnen 3 werkdagen.',
       include: 'Zo kunnen we je sneller helpen: vermeld je iPhone-model, de versies van iOS en Yorix en wat er is gebeurd.',
       email: 'Stuur een e-mail',
+    },
+    form: {
+      name: 'Je naam',
+      email: 'E-mail voor ons antwoord',
+      message: 'Bericht',
+      messagePlaceholder: 'Vertel ons wat er gebeurde of wat je wilt weten',
+      send: 'Versturen',
+      sending: 'Bezig met versturen…',
+      sent: 'Dank je! We hebben je bericht ontvangen en antwoorden binnen 3 werkdagen per e-mail.',
+      error: 'Het bericht kon niet worden verstuurd. Probeer het over een minuut opnieuw of mail naar',
+      invalid: 'Vul je e-mailadres in en een bericht van minstens 10 tekens.',
+      privacy: 'We gebruiken je e-mailadres en bericht alleen om je te antwoorden.',
     },
     topics: [
       {

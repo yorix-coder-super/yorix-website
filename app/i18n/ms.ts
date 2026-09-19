@@ -335,10 +335,22 @@ export const translation: SiteTranslation = {
     body: 'Jawapan kepada soalan yang paling kerap ditanya oleh ibu bapa tentang Yorix. Tidak jumpa soalan anda? Tulis kepada kami — setiap mesej dibaca oleh manusia sebenar.',
     contact: {
       title: 'Masih perlukan bantuan?',
-      body: 'Tulis kepada kami dalam aplikasi — Settings → “Write to us” membuka sembang dengan kami — atau hantar e-mail.',
+      body: 'Tulis kepada kami di sini — atau dalam aplikasi: Settings → “Write to us” membuka sembang dengan kami.',
       reply: 'Kami membalas dalam tempoh 3 hari bekerja.',
       include: 'Untuk bantuan yang lebih pantas, beritahu kami model iPhone, versi iOS dan Yorix anda serta apa yang berlaku.',
       email: 'Hantar e-mail',
+    },
+    form: {
+      name: 'Nama anda',
+      email: 'E-mel untuk jawapan kami',
+      message: 'Mesej',
+      messagePlaceholder: 'Beritahu kami apa yang berlaku atau apa yang ingin anda tahu',
+      send: 'Hantar',
+      sending: 'Menghantar…',
+      sent: 'Terima kasih! Kami telah menerima mesej anda dan akan membalas melalui e-mel dalam tempoh 3 hari bekerja.',
+      error: 'Mesej tidak dapat dihantar. Cuba lagi dalam seminit atau tulis kepada',
+      invalid: 'Masukkan e-mel dan mesej sekurang-kurangnya 10 aksara.',
+      privacy: 'Kami menggunakan e-mel dan mesej anda hanya untuk membalas anda.',
     },
     topics: [
       {

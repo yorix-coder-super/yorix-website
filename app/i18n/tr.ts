@@ -326,10 +326,22 @@ export const translation: SiteTranslation = {
     body: 'Ebeveynlerin Yorix hakkında en sık sorduğu soruların yanıtları. Sorunuzu bulamadınız mı? Bize yazın — her mesajı gerçek bir insan okuyor.',
     contact: {
       title: 'Hâlâ yardıma mı ihtiyacınız var?',
-      body: 'Bize uygulamadan yazın — Ayarlar → “Bize yaz” seçeneği bizimle bir sohbet açar — ya da e-mail gönderin.',
+      body: 'Bize buradan yazın — ya da uygulamadan: Ayarlar → “Bize yaz” seçeneği bizimle bir sohbet açar.',
       reply: '3 iş günü içinde yanıt veriyoruz.',
       include: 'Size daha hızlı yardımcı olabilmemiz için iPhone modelinizi, iOS ve Yorix sürümlerinizi ve ne olduğunu yazın.',
       email: 'E-mail gönder',
+    },
+    form: {
+      name: 'Adınız',
+      email: 'Yanıt için e-posta',
+      message: 'Mesaj',
+      messagePlaceholder: 'Ne olduğunu ya da neyi öğrenmek istediğinizi anlatın',
+      send: 'Gönder',
+      sending: 'Gönderiliyor…',
+      sent: 'Teşekkürler! Mesajınızı aldık, 3 iş günü içinde e-postayla yanıt vereceğiz.',
+      error: 'Mesaj gönderilemedi. Bir dakika sonra tekrar deneyin ya da şu adrese yazın:',
+      invalid: 'E-posta adresinizi ve en az 10 karakterlik bir mesaj girin.',
+      privacy: 'E-posta adresinizi ve mesajınızı yalnızca size yanıt vermek için kullanırız.',
     },
     topics: [
       {

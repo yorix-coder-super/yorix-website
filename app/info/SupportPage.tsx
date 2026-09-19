@@ -3,6 +3,7 @@ import { Art, Sparkle } from '../home/art';
 import { CtaBand, FaqItem, whitePill } from '../home/CtaBand';
 import { docsLang, isRtl, siteCopy, type SiteLocale } from '../i18n';
 import { SellerFooter } from '../SellerFooter';
+import { ContactForm } from './ContactForm';
 import { SiteHeader } from '../SiteHeader';
 import { subscriptionPath } from '../subscription/i18n';
 import { merchant } from '../subscription/merchant';
@@ -20,7 +21,7 @@ export async function SupportPage({ locale }: { locale: SiteLocale }) {
   const copy = site.support;
   const home = locale === 'en' ? '/' : `/${locale}`;
   const web = await sellsHere();
-  const mail = `mailto:${merchant.email}`;
+  const docs = docsLang(locale);
 
   return (
     <main className="home-page relative min-h-screen overflow-hidden text-white" dir={isRtl(locale) ? 'rtl' : undefined} lang={locale}>
@@ -76,7 +77,7 @@ export async function SupportPage({ locale }: { locale: SiteLocale }) {
           ))}
           {web ? (
             <p className="text-sm leading-6 text-white/70">
-              <a className="font-semibold text-white underline decoration-white/30 underline-offset-2 hover:decoration-white" href={`${subscriptionPath(docsLang(locale))}#faq`}>
+              <a className="font-semibold text-white underline decoration-white/30 underline-offset-2 hover:decoration-white" href={`${subscriptionPath(docs)}#faq`}>
                 {copy.web}
               </a>
             </p>
@@ -85,21 +86,29 @@ export async function SupportPage({ locale }: { locale: SiteLocale }) {
 
         <section className="mx-auto max-w-7xl scroll-mt-6 px-5 py-10 sm:px-8 lg:px-10" id="contact">
           <Reveal>
-            <div className="flex flex-col items-start gap-6 rounded-[2rem] border border-white/10 bg-white/[0.05] p-6 shadow-[0_30px_90px_rgb(0_0_0/18%)] backdrop-blur-xl sm:p-8 lg:flex-row lg:items-center">
-              <span className="grid h-20 w-20 shrink-0 place-items-center rounded-3xl bg-[radial-gradient(circle_at_32%_28%,#5B55E8,#2E2A7A_70%)] shadow-[0_0_50px_rgb(99_102_241/40%)] ring-1 ring-white/15">
-                <Art className="h-12 w-12 object-contain" height={170} name="icon-chat" width={192} />
-              </span>
-              <div className="min-w-0 flex-1">
-                <h2 className="text-2xl font-semibold text-white sm:text-[1.7rem]">{copy.contact.title}</h2>
-                <p className="mt-2 max-w-2xl text-[15px] leading-6 text-white/75">{copy.contact.body}</p>
-                <p className="mt-2 max-w-2xl text-sm leading-6 text-white/55">
-                  {copy.contact.reply} {copy.contact.include}
-                </p>
+            <div className="rounded-[2rem] border border-white/10 bg-white/[0.05] p-6 shadow-[0_30px_90px_rgb(0_0_0/18%)] backdrop-blur-xl sm:p-8">
+              <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+                <span className="grid h-20 w-20 shrink-0 place-items-center rounded-3xl bg-[radial-gradient(circle_at_32%_28%,#5B55E8,#2E2A7A_70%)] shadow-[0_0_50px_rgb(99_102_241/40%)] ring-1 ring-white/15">
+                  <Art className="h-12 w-12 object-contain" height={170} name="icon-chat" width={192} />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <h2 className="text-2xl font-semibold text-white sm:text-[1.7rem]">{copy.contact.title}</h2>
+                  <p className="mt-2 max-w-2xl text-[15px] leading-6 text-white/75">{copy.contact.body}</p>
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-white/55">
+                    {copy.contact.reply} {copy.contact.include}
+                  </p>
+                </div>
               </div>
-              <a className={`${whitePill} max-w-full`} href={mail}>
-                <Mail className="h-5 w-5 shrink-0" aria-hidden="true" />
-                <span className="truncate">{merchant.email}</span>
-              </a>
+              <div className="mt-6">
+                <ContactForm
+                  copy={copy.form}
+                  email={merchant.email}
+                  lang={locale}
+                  page={locale === 'en' ? '/support' : `/${locale}/support`}
+                  privacyHref={subscriptionPath(docs, '/privacy')}
+                  privacyLabel={site.subscription.docs.privacy}
+                />
+              </div>
             </div>
           </Reveal>
         </section>

@@ -326,10 +326,22 @@ export const translation: SiteTranslation = {
     body: 'Odpovědi na otázky, které rodiče o aplikaci Yorix kladou nejčastěji. Chybí tu ta tvoje? Napiš nám — každou zprávu čte skutečný člověk.',
     contact: {
       title: 'Potřebuješ ještě pomoct?',
-      body: 'Napiš nám přímo v aplikaci — Settings → „Write to us“ otevře chat s námi — nebo pošli e-mail.',
+      body: 'Napiš nám tady — nebo přímo v aplikaci: Settings → „Write to us“ otevře chat s námi.',
       reply: 'Odpovídáme do 3 pracovních dnů.',
       include: 'Abychom ti pomohli rychleji, uveď model iPhonu, verze iOS a Yorix a popiš, co se stalo.',
       email: 'Poslat e-mail',
+    },
+    form: {
+      name: 'Tvoje jméno',
+      email: 'E-mail pro odpověď',
+      message: 'Zpráva',
+      messagePlaceholder: 'Napiš, co se stalo nebo co chceš vědět',
+      send: 'Odeslat',
+      sending: 'Odesíláme…',
+      sent: 'Děkujeme! Zprávu jsme dostali a odpovíme e-mailem do 3 pracovních dnů.',
+      error: 'Zprávu se nepodařilo odeslat. Zkus to znovu za minutu nebo napiš na',
+      invalid: 'Zadej e-mail a zprávu – aspoň 10 znaků.',
+      privacy: 'Tvůj e-mail a zprávu použijeme jen k odpovědi.',
     },
     topics: [
       {

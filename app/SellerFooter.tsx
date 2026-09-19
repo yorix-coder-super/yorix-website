@@ -46,7 +46,7 @@ export async function SellerFooter({ note, locale = 'en', home }: { note: string
       title: text.support,
       links: [
         { href: supportPage, label: copy.nav.faq },
-        { href: `mailto:${merchant.email}`, label: text.write },
+        { href: `${supportPage}#contact`, label: text.write },
         ...(web ? [{ href: subscriptionPath(docs, '/offer'), label: copy.footer.requisites }] : []),
       ],
     },

@@ -335,10 +335,22 @@ export const translation: SiteTranslation = {
     body: 'Giải đáp những câu hỏi cha mẹ thường hỏi nhất về Yorix. Chưa thấy câu hỏi của bạn? Hãy viết cho chúng tôi — mọi tin nhắn đều có người thật đọc.',
     contact: {
       title: 'Vẫn cần hỗ trợ?',
-      body: 'Viết cho chúng tôi ngay trong ứng dụng — Cài đặt → “Viết cho chúng tôi” sẽ mở cuộc trò chuyện với chúng tôi — hoặc gửi e-mail.',
+      body: 'Viết cho chúng tôi tại đây — hoặc ngay trong ứng dụng: Cài đặt → “Viết cho chúng tôi” sẽ mở cuộc trò chuyện với chúng tôi.',
       reply: 'Chúng tôi phản hồi trong vòng 3 ngày làm việc.',
       include: 'Để được hỗ trợ nhanh hơn, hãy cho chúng tôi biết mẫu iPhone, phiên bản iOS và Yorix, cùng điều đã xảy ra.',
       email: 'Gửi e-mail',
+    },
+    form: {
+      name: 'Tên của bạn',
+      email: 'Email để chúng tôi trả lời',
+      message: 'Tin nhắn',
+      messagePlaceholder: 'Hãy kể điều đã xảy ra hoặc điều bạn muốn biết',
+      send: 'Gửi',
+      sending: 'Đang gửi…',
+      sent: 'Cảm ơn bạn! Chúng tôi đã nhận được tin nhắn và sẽ trả lời qua email trong vòng 3 ngày làm việc.',
+      error: 'Không gửi được tin nhắn. Hãy thử lại sau một phút hoặc viết cho chúng tôi tại',
+      invalid: 'Hãy nhập email và tin nhắn ít nhất 10 ký tự.',
+      privacy: 'Chúng tôi chỉ dùng email và tin nhắn của bạn để trả lời bạn.',
     },
     topics: [
       {

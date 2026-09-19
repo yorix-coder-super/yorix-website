@@ -11,7 +11,6 @@ import { currencyForVisitor, sellsOnWeb } from './currency';
 import { subscriptionCopy } from './copy';
 import { subscriptionPath, type Lang } from './i18n';
 import { Magnetic } from './Magnetic';
-import { merchant } from './merchant';
 import { Parallax } from './Parallax';
 import { Reveal } from './Reveal';
 import { SocialProof } from './SocialProof';
@@ -149,7 +148,7 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
             ))}
           </div>
           <p className="mt-6 text-sm text-white/60">
-            <a className="inline-flex items-center gap-1 font-semibold text-white underline decoration-white/30 hover:decoration-white" href={`mailto:${merchant.email}`}>
+            <a className="inline-flex items-center gap-1 font-semibold text-white underline decoration-white/30 hover:decoration-white" href={`${lang === 'ru' ? '/ru' : ''}/support#contact`}>
               {copy.faq.more}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </a>

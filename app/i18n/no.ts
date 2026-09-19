@@ -326,10 +326,22 @@ export const translation: SiteTranslation = {
     body: 'Svar på spørsmålene foreldre oftest stiller om Yorix. Finner du ikke ditt? Skriv til oss – et ekte menneske leser hver eneste melding.',
     contact: {
       title: 'Trenger du mer hjelp?',
-      body: 'Skriv til oss i appen – Settings → «Write to us» åpner en chat med oss – eller send en e-mail.',
+      body: 'Skriv til oss her – eller i appen: Settings → «Write to us» åpner en chat med oss.',
       reply: 'Vi svarer innen 3 arbeidsdager.',
       include: 'Vi kan hjelpe raskere hvis du skriver hvilken iPhone-modell du har, hvilke versjoner av iOS og Yorix du bruker, og hva som skjedde.',
       email: 'Send en e-mail',
+    },
+    form: {
+      name: 'Navnet ditt',
+      email: 'E-post for svaret vårt',
+      message: 'Melding',
+      messagePlaceholder: 'Fortell oss hva som skjedde, eller hva du lurer på',
+      send: 'Send',
+      sending: 'Sender…',
+      sent: 'Takk! Vi har fått meldingen din og svarer på e-post innen 3 arbeidsdager.',
+      error: 'Meldingen kunne ikke sendes. Prøv igjen om et minutt, eller skriv til',
+      invalid: 'Skriv inn e-postadressen din og en melding på minst 10 tegn.',
+      privacy: 'Vi bruker e-postadressen og meldingen din bare til å svare deg.',
     },
     topics: [
       {

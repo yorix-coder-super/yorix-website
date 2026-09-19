@@ -335,10 +335,22 @@ export const translation: SiteTranslation = {
     body: 'Jawaban atas pertanyaan yang paling sering diajukan orang tua tentang Yorix. Tidak menemukan pertanyaan Anda? Tulis ke kami — setiap pesan dibaca oleh orang sungguhan.',
     contact: {
       title: 'Masih butuh bantuan?',
-      body: 'Tulis ke kami di aplikasi — Pengaturan → “Tulis ke kami” membuka obrolan dengan kami — atau kirim e-mail.',
+      body: 'Tulis ke kami di sini — atau di aplikasi: Pengaturan → “Tulis ke kami” membuka obrolan dengan kami.',
       reply: 'Kami membalas dalam 3 hari kerja.',
       include: 'Agar kami bisa membantu lebih cepat, sebutkan model iPhone, versi iOS dan Yorix, serta apa yang terjadi.',
       email: 'Kirim e-mail',
+    },
+    form: {
+      name: 'Nama Anda',
+      email: 'Email untuk balasan kami',
+      message: 'Pesan',
+      messagePlaceholder: 'Ceritakan apa yang terjadi atau apa yang ingin Anda ketahui',
+      send: 'Kirim',
+      sending: 'Mengirim…',
+      sent: 'Terima kasih! Pesan Anda sudah kami terima dan akan kami balas lewat email dalam 3 hari kerja.',
+      error: 'Pesan tidak dapat dikirim. Coba lagi dalam satu menit atau kirim email ke',
+      invalid: 'Masukkan email dan pesan minimal 10 karakter.',
+      privacy: 'Email dan pesan Anda hanya kami gunakan untuk membalas Anda.',
     },
     topics: [
       {
