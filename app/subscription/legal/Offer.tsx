@@ -71,7 +71,7 @@ function ru({ email, payment, privacy, seller }: Ctx): LegalSection[] {
       title: '5. Предоставление доступа',
       blocks: [
         '5.1. Подписка активируется автоматически после получения Исполнителем от Платёжного сервиса подтверждения успешной оплаты и привязывается к Аккаунту, от имени которого совершена оплата. Период доступа исчисляется с момента активации; дата и время окончания отображаются в Приложении.',
-        `5.2. Если Подписка не активировалась в течение 24 часов после оплаты, Пользователь сообщает об этом на ${email}. Исполнитель в течение одного рабочего дня активирует Подписку либо, по выбору Пользователя, возвращает оплату в полном объёме.`,
+        `5.2. Если Подписка не активировалась в течение 3 дней после оплаты, Пользователь сообщает об этом на ${email}. Исполнитель в течение одного рабочего дня активирует Подписку либо, по выбору Пользователя, возвращает оплату в полном объёме.`,
         '5.3. Если на момент оплаты у Пользователя есть действующая Подписка, новый Период доступа начинается после окончания текущего.',
         '5.4. Услуга считается оказанной надлежащим образом, если в течение Периода доступа платные функции доступны на Аккаунте Пользователя. Факт предоставления доступа подтверждается журналами Сервиса и Платёжного сервиса; это не лишает Пользователя права представлять иные доказательства.',
         '5.5. По окончании Периода доступа платные функции отключаются. Бесплатные функции и данные, внесённые Пользователем, сохраняются.',
@@ -262,7 +262,7 @@ function en({ email, payment, privacy, seller }: Ctx): LegalSection[] {
       title: '5. Provision of access',
       blocks: [
         '5.1. The Subscription is activated automatically once the Payment Service confirms a successful payment, and is tied to the Account used to pay. The Access Period runs from activation; its end date and time are shown in the App.',
-        `5.2. If the Subscription is not activated within 24 hours of payment, the User writes to ${email}. Within one working day the Provider activates it or, at the User’s choice, refunds the payment in full.`,
+        `5.2. If the Subscription is not activated within 3 days of payment, the User writes to ${email}. Within one working day the Provider activates it or, at the User’s choice, refunds the payment in full.`,
         '5.3. If the User already has an active Subscription, the new Access Period starts when the current one ends.',
         '5.4. The service is duly provided when the paid features are available on the User’s Account during the Access Period. This is evidenced by the logs of the Service and the Payment Service; the User may present other evidence.',
         '5.5. When the Access Period ends, the paid features switch off. Free features and the User’s data are kept.',

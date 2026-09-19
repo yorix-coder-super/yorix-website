@@ -102,7 +102,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         <h2>Service control</h2>
         <ul>
           <li>the period of the subscription is shown in the Yorix app — restart the app if the features have not appeared yet;</li>
-          <li>if the features have not opened within 24 hours of payment, write to {email} — we will switch the subscription on or refund the payment.</li>
+          <li>if the features have not opened within 3 days of payment, write to {email} — we will switch the subscription on or refund the payment.</li>
         </ul>
 
         <h2>Cancellation and refunds</h2>
@@ -202,7 +202,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
       <h2>Контроль оказания услуги</h2>
       <ul>
         <li>срок действия подписки отображается в приложении Yorix — если функции ещё не появились, перезапустите приложение;</li>
-        <li>если функции подписки не открылись в течение 24 часов после оплаты, напишите на {email} — мы включим подписку или вернём деньги.</li>
+        <li>если функции подписки не открылись в течение 3 дней после оплаты, напишите на {email} — мы включим подписку или вернём деньги.</li>
       </ul>
 
       <h2>Отмена заказа и возврат денежных средств</h2>
