@@ -32,8 +32,44 @@ export const translation: SiteTranslation = {
           answer: 'Carta memberi julat purata. Yorix menggunakan tidur siang, waktu berjaga, terjaga malam, penyusuan dan sejarah rutin sebenar bayi anda untuk melaraskan waktu tidur seterusnya.',
         },
         {
+          question: 'Apakah itu waktu berjaga?',
+          answer: 'Waktu berjaga ialah tempoh bayi boleh terus terjaga di antara dua waktu tidur tanpa menjadi terlalu letih. Bagi bayi baru lahir, tempohnya 30–60 minit; apabila mencecah usia setahun, 3–4 jam. Jika waktu ini terlepas, bayi menjadi terlalu teruja dan mengambil masa lebih lama untuk tertidur. Yorix mengira waktu berjaga berdasarkan umur bayi anda dan cara dia tidur hari ini.',
+        },
+        {
+          question: 'Berapa lama bayi perlu tidur?',
+          answer: 'Menurut garis panduan WHO, jumlah tidur dalam 24 jam, termasuk tidur siang, ialah 14–17 jam bagi usia 0–3 bulan, 12–16 jam bagi usia 4–11 bulan dan 11–14 jam bagi usia 1–2 tahun. Julatnya luas kerana setiap bayi berbeza. Yorix menjumlahkan tempoh tidur bayi anda dalam sehari, jadi mudah untuk dibandingkan.',
+        },
+        {
           question: 'Bolehkah saya menggunakan Yorix untuk bayi baru lahir?',
           answer: 'Boleh. Pada peringkat bayi baru lahir, Yorix paling berguna sebagai log ringkas untuk tidur, penyusuan, lampin dan penjagaan. Rutin menjadi lebih mudah diramal apabila pola mula kelihatan.',
+        },
+        {
+          question: 'Bagaimana jika bayi saya tidak tidur seperti yang diramalkan?',
+          answer: 'Catat sahaja apa yang benar-benar berlaku — Yorix terus mengira semula waktu tidur dan pelan untuk baki hari itu. Ramalan belajar daripada catatan anda dan menjadi lebih tepat setiap hari.',
+        },
+        {
+          question: 'Bolehkah ibu bapa mengisi diari bersama-sama?',
+          answer: 'Boleh. Dalam tetapan Yorix, ketik “Invite Partner” — orang dewasa yang seorang lagi akan melihat diari yang sama dan boleh menambah catatan daripada iPhone sendiri. Semuanya disegerakkan melalui iCloud.',
+        },
+        {
+          question: 'Apakah yang percuma dan apakah yang memerlukan langganan?',
+          answer: 'Memuat turun Yorix dan mula mengisi diari adalah percuma. Ramalan tidur seterusnya khusus untuk bayi anda, jurulatih AI, analitik dan nasihat harian disediakan melalui langganan.',
+        },
+        {
+          question: 'Bagaimana cara membatalkan langganan saya?',
+          answer: 'Batalkan langganan App Store dalam Seting iPhone anda: ketik nama anda → Langganan → Yorix. Anda masih boleh menggunakannya sehingga tamat tempoh yang telah dibayar.',
+        },
+        {
+          question: 'Di manakah data bayi saya disimpan?',
+          answer: 'Diari disimpan dalam iPhone anda dan iCloud peribadi anda — kami tidak mempunyai akses kepadanya. Jurulatih AI hanya menerima ringkasan yang diperlukan untuk menjawab. Kami tidak menjual data dan tidak memaparkan iklan.',
+        },
+        {
+          question: 'Yorix boleh digunakan pada peranti apa?',
+          answer: 'iPhone dan iPad dengan iOS 18 atau lebih baharu. Versi Android belum tersedia.',
+        },
+        {
+          question: 'Adakah Yorix berfungsi tanpa internet?',
+          answer: 'Ya. Diari dan ramalan berfungsi tanpa sambungan — semuanya dikira pada telefon anda. Jurulatih AI dan penyegerakan iCloud memerlukan internet.',
         },
         {
           question: 'Adakah Yorix menggantikan nasihat perubatan?',
@@ -57,7 +93,6 @@ export const translation: SiteTranslation = {
     notes: { hero: 'Bayi tenang, ibu bapa gembira', coach: 'Sokongan setiap masa', cta: 'Yang terbaik akan tiba' },
     more: 'Ketahui lebih lanjut',
     reviews: { title: 'Ibu bapa sebenar. Kisah sebenar.', body: 'Kata-kata ibu bapa tanpa suntingan — tiada yang dicantikkan, tiada yang direka.' },
-    allQuestions: 'Semua soalan',
     pricing: { secure: 'Pembayaran kad yang selamat melalui WebPay', activates: 'Langganan diaktifkan dalam aplikasi sejurus selepas pembayaran', questions: 'Ada soalan? E-mel kami' },
     highlight: { soft: 'sebelum', warm: 'mula meragam.' },
     screenAlt: 'Skrin Hari Ini dalam Yorix dengan waktu tidur malam',

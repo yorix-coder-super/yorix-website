@@ -32,8 +32,44 @@ export const translation: SiteTranslation = {
           answer: 'Een tabel geeft gemiddelden. Yorix gebruikt de echte dutjes, wakevensters, nachtelijke ontwakingen, voedingen en routinegeschiedenis van je baby om het volgende slaapvenster bij te stellen.',
         },
         {
+          question: 'Wat is een wakevenster?',
+          answer: 'Dat is de tijd dat je baby tussen twee slaapmomenten wakker kan blijven zonder oververmoeid te raken. Bij een pasgeborene is dat 30 tot 60 minuten, rond de eerste verjaardag 3 tot 4 uur. Is het venster voorbij, dan raakt je baby overprikkeld en duurt het inslapen langer. Yorix berekent het venster op basis van de leeftijd van je baby en de slaap van vandaag.',
+        },
+        {
+          question: 'Hoeveel slaap heeft een baby nodig?',
+          answer: 'De WHO adviseert per etmaal in totaal, dutjes meegerekend: 14–17 uur slaap bij 0–3 maanden, 12–16 uur bij 4–11 maanden en 11–14 uur bij 1–2 jaar. De marges zijn ruim, want elke baby is anders. Yorix telt de slaap van je baby per etmaal bij elkaar op, zodat je makkelijk kunt vergelijken.',
+        },
+        {
           question: 'Kan ik Yorix gebruiken bij een pasgeboren baby?',
           answer: 'Ja. Bij een pasgeborene is Yorix vooral handig als eenvoudig logboek voor slaap, voeding, luiers en verzorging. Naarmate er patronen ontstaan, wordt de routine voorspellender.',
+        },
+        {
+          question: 'Wat als mijn baby anders slaapt dan voorspeld?',
+          answer: 'Leg gewoon vast wat er echt is gebeurd – Yorix berekent de slaapvensters en het plan voor de rest van de dag meteen opnieuw. De voorspelling leert van wat je vastlegt en wordt elke dag nauwkeuriger.',
+        },
+        {
+          question: 'Kunnen we het dagboek met z’n tweeën bijhouden?',
+          answer: 'Ja. Tik in de instellingen van Yorix op ‘Partner uitnodigen’ – de ander ziet dan hetzelfde dagboek en kan vanaf de eigen iPhone ook dingen vastleggen. Alles synchroniseert via iCloud.',
+        },
+        {
+          question: 'Wat is gratis en wat zit in het abonnement?',
+          answer: 'Yorix downloaden en beginnen met het dagboek is gratis. De persoonlijke voorspelling van het volgende slaapmoment, de AI-coach, analyses en dagelijks advies krijg je met een abonnement.',
+        },
+        {
+          question: 'Hoe zeg ik mijn abonnement op?',
+          answer: 'Een abonnement via de App Store zeg je op in Instellingen op je iPhone: tik op je naam → Abonnementen → Yorix. Tot het einde van de betaalde periode houd je toegang.',
+        },
+        {
+          question: 'Waar worden de gegevens van mijn baby bewaard?',
+          answer: 'Het dagboek staat op je iPhone en in je eigen iCloud – wij kunnen er niet bij. De AI-coach krijgt alleen de samenvatting die nodig is om te antwoorden. We verkopen geen gegevens en tonen geen advertenties.',
+        },
+        {
+          question: 'Op welke apparaten werkt Yorix?',
+          answer: 'Op iPhone en iPad met iOS 18 of nieuwer, in 20 talen. Een Android-versie is er nog niet.',
+        },
+        {
+          question: 'Werkt Yorix zonder internet?',
+          answer: 'Ja: het dagboek en de voorspellingen werken zonder verbinding – alles wordt op je telefoon berekend. Alleen de AI-coach en de synchronisatie via iCloud hebben internet nodig.',
         },
         {
           question: 'Vervangt Yorix medisch advies?',
@@ -57,7 +93,6 @@ export const translation: SiteTranslation = {
     notes: { hero: 'Rustige baby’s, blije ouders', coach: 'Steun op elk moment', cta: 'Het beste moet nog komen' },
     more: 'Meer weten',
     reviews: { title: 'Echte ouders. Echte verhalen.', body: 'Onbewerkte woorden van ouders – niets opgepoetst, niets verzonnen.' },
-    allQuestions: 'Alle vragen',
     pricing: { secure: 'Veilig betalen met je kaart via WebPay', activates: 'Het abonnement staat direct na betaling aan in de app', questions: 'Vragen? Neem contact op' },
     highlight: { soft: 'voordat', warm: 'gejengel begint.' },
     screenAlt: 'Het scherm Vandaag in Yorix met het nachtslaapvenster',

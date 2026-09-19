@@ -32,8 +32,44 @@ export const translation: SiteTranslation = {
           answer: 'Un tableau donne des moyennes. Yorix utilise les vraies siestes, fenêtres d’éveil, réveils nocturnes, repas et l’historique de routine de votre bébé pour ajuster la prochaine fenêtre de sommeil.',
         },
         {
+          question: 'Qu’est-ce qu’une fenêtre d’éveil ?',
+          answer: 'C’est la durée pendant laquelle votre bébé peut rester éveillé entre deux périodes de sommeil sans devenir trop fatigué. Chez un nouveau-né, elle est de 30 à 60 minutes ; vers 1 an, de 3 à 4 heures. Passé ce délai, votre bébé devient surexcité et met plus de temps à s’endormir. Yorix calcule la fenêtre d’après l’âge de votre bébé et la façon dont il a dormi aujourd’hui.',
+        },
+        {
+          question: 'Combien de temps un bébé doit-il dormir ?',
+          answer: 'Les recommandations de l’OMS pour le sommeil total sur 24 heures, siestes comprises : 14 à 17 heures de 0 à 3 mois, 12 à 16 heures de 4 à 11 mois et 11 à 14 heures de 1 à 2 ans. Les fourchettes sont larges, car chaque bébé est différent. Yorix additionne le sommeil de votre bébé sur 24 heures, pour que vous puissiez comparer facilement.',
+        },
+        {
           question: 'Puis-je utiliser Yorix avec un nouveau-né ?',
           answer: 'Oui. Pendant la période néonatale, Yorix est surtout utile comme simple journal du sommeil, des repas, des couches et des soins. La routine devient plus prévisible à mesure que des tendances se dessinent.',
+        },
+        {
+          question: 'Et si mon bébé ne dort pas comme prévu ?',
+          answer: 'Notez simplement ce qui s’est vraiment passé — Yorix recalcule aussitôt les fenêtres de sommeil et le plan du reste de la journée. La prévision apprend de vos notes et devient plus précise de jour en jour.',
+        },
+        {
+          question: 'Peut-on tenir le journal à deux ?',
+          answer: 'Oui. Dans les réglages de Yorix, touchez « Inviter un partenaire » — la personne invitée voit le même journal et peut ajouter des notes depuis son propre iPhone. Tout se synchronise via iCloud.',
+        },
+        {
+          question: 'Qu’est-ce qui est gratuit, et que comprend l’abonnement ?',
+          answer: 'Télécharger Yorix et commencer le journal, c’est gratuit. La prévision personnalisée du prochain sommeil, le coach IA, les analyses et les conseils du jour sont inclus dans l’abonnement.',
+        },
+        {
+          question: 'Comment annuler mon abonnement ?',
+          answer: 'Un abonnement souscrit sur l’App Store s’annule dans les Réglages de votre iPhone : touchez votre nom → Abonnements → Yorix. Vous gardez l’accès jusqu’à la fin de la période payée.',
+        },
+        {
+          question: 'Où sont stockées les données de mon bébé ?',
+          answer: 'Le journal est conservé sur votre iPhone et dans votre iCloud personnel — nous n’y avons pas accès. Le coach IA ne reçoit que le résumé dont il a besoin pour répondre. Nous ne vendons aucune donnée et n’affichons aucune publicité.',
+        },
+        {
+          question: 'Sur quels appareils Yorix fonctionne-t-il ?',
+          answer: 'Sur iPhone et iPad sous iOS 18 ou version ultérieure, en 20 langues. Il n’existe pas encore de version Android.',
+        },
+        {
+          question: 'Yorix fonctionne-t-il sans Internet ?',
+          answer: 'Oui : le journal et les prévisions fonctionnent sans connexion — tout est calculé sur votre téléphone. Seuls le coach IA et la synchronisation iCloud ont besoin d’Internet.',
         },
         {
           question: 'Yorix remplace-t-il un avis médical ?',
@@ -57,7 +93,6 @@ export const translation: SiteTranslation = {
     notes: { hero: 'Bébés sereins, parents heureux', coach: 'Du soutien à toute heure', cta: 'Le meilleur reste à venir' },
     more: 'En savoir plus',
     reviews: { title: 'De vrais parents. De vraies histoires.', body: 'Les mots des parents, sans retouche — rien d’enjolivé, rien d’inventé.' },
-    allQuestions: 'Toutes les questions',
     pricing: { secure: 'Paiement sécurisé par carte via WebPay', activates: 'L’abonnement s’active dans l’app dès le paiement', questions: 'Des questions ? Écrivez-nous' },
     highlight: { soft: 'avant', warm: 'premiers pleurs.' },
     screenAlt: 'Écran « Aujourd’hui » de Yorix avec la fenêtre de sommeil de nuit',

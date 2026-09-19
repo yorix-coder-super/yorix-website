@@ -37,8 +37,44 @@ export const translation: SiteTranslation = {
           answer: 'A chart gives average ranges. Yorix uses your baby’s real naps, wake windows, night wakings, feeds, and routine history to adjust the next sleep window.',
         },
         {
+          question: 'What is a wake window?',
+          answer: 'It is how long your baby can stay awake between sleeps without getting overtired. For a newborn that is 30–60 minutes; by the first birthday, 3–4 hours. Miss the window and your baby gets wired and takes longer to fall asleep. Yorix works out the window from your baby’s age and how they slept today.',
+        },
+        {
+          question: 'How much sleep does a baby need?',
+          answer: 'WHO guidance for total sleep in 24 hours, naps included: 0–3 months — 14–17 hours, 4–11 months — 12–16, 1–2 years — 11–14. The ranges are wide because every baby is different. Yorix adds up how much your baby slept in the day, so it is easy to compare.',
+        },
+        {
           question: 'Can I use Yorix with a newborn?',
           answer: 'Yes. In the newborn stage, Yorix is most useful as a simple sleep, feeding, diaper, and care log. The routine becomes more predictive as patterns emerge.',
+        },
+        {
+          question: 'What if my baby doesn’t sleep as forecast?',
+          answer: 'Just log what really happened — Yorix recalculates the windows and the rest of the day’s plan right away. The forecast learns from your entries and gets more accurate every day.',
+        },
+        {
+          question: 'Can two parents keep the diary together?',
+          answer: 'Yes. In Yorix settings, tap “Invite Partner” — the other adult sees the same diary and can add entries from their own iPhone. Everything syncs through iCloud.',
+        },
+        {
+          question: 'What is free and what needs a subscription?',
+          answer: 'Downloading Yorix and starting the diary is free. The personal next-sleep forecast, the AI coach, analytics and daily recommendations come with a subscription.',
+        },
+        {
+          question: 'How do I cancel my subscription?',
+          answer: 'Cancel an App Store subscription in your iPhone Settings: tap your name → Subscriptions → Yorix. You keep access until the end of the paid period.',
+        },
+        {
+          question: 'Where is my baby’s data stored?',
+          answer: 'The diary lives on your iPhone and in your private iCloud — we have no access to it. The AI coach only receives the summary it needs to answer. We don’t sell data and show no ads.',
+        },
+        {
+          question: 'Which devices does Yorix work on?',
+          answer: 'iPhone and iPad with iOS 18 or later, in 20 languages. There is no Android version yet.',
+        },
+        {
+          question: 'Does Yorix work offline?',
+          answer: 'Yes: the diary and forecasts work without a connection — everything is calculated on your phone. The AI coach and iCloud sync need the internet.',
         },
         {
           question: 'Does Yorix replace medical advice?',
@@ -62,7 +98,6 @@ export const translation: SiteTranslation = {
     notes: { hero: 'Calm babies, happy parents', coach: 'Support at any hour', cta: 'The best is ahead' },
     more: 'Learn more',
     reviews: { title: 'Real parents. Real stories.', body: 'Unedited words from parents — nothing polished, nothing invented.' },
-    allQuestions: 'All questions',
     pricing: { secure: 'Secure card payment via WebPay', activates: 'The subscription turns on in the app right after payment', questions: 'Questions? Write to us' },
     highlight: { soft: 'before', warm: 'fussing starts.' },
     screenAlt: 'Yorix today screen with the night sleep window',

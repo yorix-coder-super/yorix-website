@@ -32,8 +32,44 @@ export const translation: SiteTranslation = {
           answer: 'Tabela podaje średnie zakresy. Yorix wykorzystuje prawdziwe drzemki Twojego dziecka, okna czuwania, nocne pobudki, karmienia i historię rutyny, aby dopasować kolejne okno snu.',
         },
         {
+          question: 'Czym jest okno czuwania?',
+          answer: 'To czas, przez który Twoje dziecko może czuwać między kolejnymi snami, zanim się przemęczy. U noworodka to 30–60 minut, a około pierwszych urodzin — 3–4 godziny. Gdy okno minie, dziecko robi się nakręcone i dłużej zasypia. Yorix wylicza okno na podstawie wieku dziecka i tego, jak spało dzisiaj.',
+        },
+        {
+          question: 'Ile snu potrzebuje dziecko?',
+          answer: 'Według zaleceń WHO łączny sen w ciągu doby, razem z drzemkami, wynosi: 0–3 miesiące — 14–17 godzin, 4–11 miesięcy — 12–16, 1–2 lata — 11–14. Zakresy są szerokie, bo każde dziecko jest inne. Yorix sumuje sen dziecka z całej doby, więc łatwo go porównać.',
+        },
+        {
           question: 'Czy Yorix sprawdzi się przy noworodku?',
           answer: 'Tak. W okresie noworodkowym Yorix najlepiej sprawdza się jako prosty dziennik snu, karmień, pieluch i pielęgnacji. Gdy pojawiają się wzorce, rutynę da się coraz lepiej przewidywać.',
+        },
+        {
+          question: 'Co zrobić, gdy dziecko nie śpi zgodnie z prognozą?',
+          answer: 'Po prostu zapisz, jak było naprawdę — Yorix od razu przeliczy okna snu i plan na resztę dnia. Prognoza uczy się na Twoich wpisach i z każdym dniem jest trafniejsza.',
+        },
+        {
+          question: 'Czy możemy prowadzić dziennik we dwoje?',
+          answer: 'Tak. W ustawieniach Yorix wybierz „Zaproś partnera” — zaproszona osoba zobaczy ten sam dziennik i będzie mogła dodawać wpisy ze swojego iPhone’a. Wszystko synchronizuje się przez iCloud.',
+        },
+        {
+          question: 'Co jest darmowe, a co wymaga subskrypcji?',
+          answer: 'Yorix pobierzesz i zaczniesz prowadzić dziennik za darmo. Osobista prognoza kolejnego snu, trener AI, analityka i codzienne porady są dostępne w subskrypcji.',
+        },
+        {
+          question: 'Jak anulować subskrypcję?',
+          answer: 'Subskrypcję z App Store anulujesz w Ustawieniach na iPhonie: stuknij w swoje imię i nazwisko → Subskrypcje → Yorix. Dostęp zachowasz do końca opłaconego okresu.',
+        },
+        {
+          question: 'Gdzie są przechowywane dane mojego dziecka?',
+          answer: 'Dziennik zostaje na Twoim iPhonie i w Twoim prywatnym iCloud — nie mamy do niego dostępu. Trener AI dostaje tylko podsumowanie potrzebne do odpowiedzi. Nie sprzedajemy danych i nie wyświetlamy reklam.',
+        },
+        {
+          question: 'Na jakich urządzeniach działa Yorix?',
+          answer: 'iPhone i iPad z iOS 18 lub nowszym, w 20 językach. Wersji na Androida na razie nie ma.',
+        },
+        {
+          question: 'Czy Yorix działa bez internetu?',
+          answer: 'Tak: dziennik i prognozy działają bez sieci — wszystkie obliczenia odbywają się na Twoim telefonie. Internetu potrzebują tylko trener AI i synchronizacja przez iCloud.',
         },
         {
           question: 'Czy Yorix zastępuje poradę lekarską?',
@@ -57,7 +93,6 @@ export const translation: SiteTranslation = {
     notes: { hero: 'Spokojne dzieci, szczęśliwi rodzice', coach: 'Wsparcie o każdej porze', cta: 'Najlepsze przed Tobą' },
     more: 'Dowiedz się więcej',
     reviews: { title: 'Prawdziwi rodzice. Prawdziwe historie.', body: 'Słowa rodziców bez poprawek — nic upiększonego, nic zmyślonego.' },
-    allQuestions: 'Wszystkie pytania',
     pricing: { secure: 'Bezpieczna płatność kartą przez WebPay', activates: 'Subskrypcja włącza się w aplikacji zaraz po płatności', questions: 'Masz pytania? Napisz do nas' },
     highlight: { soft: 'zanim', warm: 'zacznie marudzić.' },
     screenAlt: 'Ekran „Dziś” w aplikacji Yorix z oknem snu nocnego',

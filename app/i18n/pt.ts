@@ -32,8 +32,44 @@ export const translation: SiteTranslation = {
           answer: 'Uma tabela dá intervalos médios. O Yorix usa as sestas reais do seu bebé, as janelas de vigília, os despertares noturnos, as mamadas e o histórico da rotina para ajustar a próxima janela de sono.',
         },
         {
+          question: 'O que é uma janela de vigília?',
+          answer: 'É o tempo que o seu bebé consegue estar acordado entre dois sonos sem ficar demasiado cansado. Num recém-nascido, são 30–60 minutos; por volta de um ano, 3–4 horas. Se a janela passar, o bebé fica agitado e demora mais a adormecer. O Yorix calcula a janela com base na idade do seu bebé e em como dormiu hoje.',
+        },
+        {
+          question: 'Quanto deve dormir um bebé?',
+          answer: 'As recomendações da OMS para o sono total em 24 horas, sestas incluídas, são: 14–17 horas dos 0 aos 3 meses, 12–16 dos 4 aos 11 meses e 11–14 de 1 a 2 anos. Os intervalos são amplos porque cada bebé é diferente. O Yorix soma quanto o seu bebé dormiu em 24 horas, por isso é fácil comparar.',
+        },
+        {
           question: 'Posso usar o Yorix com um recém-nascido?',
           answer: 'Sim. Na fase de recém-nascido, o Yorix é mais útil como um registo simples de sono, alimentação, fraldas e cuidados. À medida que surgem padrões, a rotina torna-se mais preditiva.',
+        },
+        {
+          question: 'E se o meu bebé não dormir como previsto?',
+          answer: 'Basta registar o que realmente aconteceu — o Yorix recalcula de imediato as janelas de sono e o plano para o resto do dia. A previsão aprende com os seus registos e fica mais precisa a cada dia.',
+        },
+        {
+          question: 'Os dois pais podem manter o diário em conjunto?',
+          answer: 'Sim. Nas definições do Yorix, toque em «Convidar parceiro» — a pessoa convidada vê o mesmo diário e pode adicionar registos a partir do próprio iPhone. Tudo é sincronizado através do iCloud.',
+        },
+        {
+          question: 'O que é gratuito e o que inclui a subscrição?',
+          answer: 'Transferir o Yorix e começar o diário é gratuito. A previsão personalizada do próximo sono, o coach de IA, as análises e os conselhos diários fazem parte da subscrição.',
+        },
+        {
+          question: 'Como cancelo a minha subscrição?',
+          answer: 'Uma subscrição da App Store cancela-se nas Definições do iPhone: toque no seu nome → Subscrições → Yorix. Mantém o acesso até ao fim do período pago.',
+        },
+        {
+          question: 'Onde ficam guardados os dados do meu bebé?',
+          answer: 'O diário fica no seu iPhone e no seu iCloud privado — nós não temos acesso a ele. O coach de IA recebe apenas o resumo de que precisa para responder. Não vendemos dados nem mostramos anúncios.',
+        },
+        {
+          question: 'Em que dispositivos funciona o Yorix?',
+          answer: 'No iPhone e no iPad com iOS 18 ou posterior, em 20 idiomas. Ainda não existe versão para Android.',
+        },
+        {
+          question: 'O Yorix funciona sem internet?',
+          answer: 'Sim: o diário e as previsões funcionam sem ligação — tudo é calculado no seu telemóvel. Só o coach de IA e a sincronização com o iCloud precisam de internet.',
         },
         {
           question: 'O Yorix substitui o aconselhamento médico?',
@@ -57,7 +93,6 @@ export const translation: SiteTranslation = {
     notes: { hero: 'Bebés calmos, pais felizes', coach: 'Apoio a qualquer hora', cta: 'O melhor está para vir' },
     more: 'Saber mais',
     reviews: { title: 'Pais reais. Histórias reais.', body: 'Palavras de pais, sem edição — nada polido, nada inventado.' },
-    allQuestions: 'Todas as perguntas',
     pricing: { secure: 'Pagamento seguro com cartão através do WebPay', activates: 'A subscrição fica ativa na app logo após o pagamento', questions: 'Dúvidas? Escreva-nos' },
     highlight: { soft: 'antes', warm: 'começar a choramingar.' },
     screenAlt: 'Ecrã «Hoje» do Yorix com a janela de sono noturno',

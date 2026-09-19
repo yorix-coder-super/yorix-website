@@ -32,8 +32,44 @@ export const translation: SiteTranslation = {
           answer: 'Tabulka ukazuje průměrná rozmezí. Yorix vychází ze skutečných denních spánků tvého miminka, oken bdění, nočních probuzení, krmení a historie režimu a podle nich upraví další okno spánku.',
         },
         {
+          question: 'Co je okno bdění?',
+          answer: 'Je to doba, po kterou miminko zvládne být mezi spánky vzhůru bez přílišné únavy. U novorozence je to 30–60 minut, kolem prvních narozenin už 3–4 hodiny. Když okno propásneš, miminko se přetáhne a déle usíná. Yorix okno spočítá podle věku miminka a podle toho, jak dnes spalo.',
+        },
+        {
+          question: 'Kolik by mělo miminko spát?',
+          answer: 'Doporučení WHO pro celkový spánek za 24 hodin včetně denních spánků: 0–3 měsíce — 14–17 hodin, 4–11 měsíců — 12–16, 1–2 roky — 11–14. Rozmezí jsou široká, protože každé miminko je jiné. Yorix sečte, kolik miminko za celý den naspalo, takže to snadno porovnáš.',
+        },
+        {
           question: 'Můžu Yorix používat už s novorozencem?',
           answer: 'Ano. V novorozeneckém období je Yorix nejužitečnější jako jednoduchý záznam spánku, krmení, plenek a péče. Jak se objevují vzorce, režim jde stále lépe předvídat.',
+        },
+        {
+          question: 'Co když miminko neusne podle předpovědi?',
+          answer: 'Prostě zapiš, jak to bylo doopravdy — Yorix hned přepočítá okna i plán na zbytek dne. Předpověď se učí z tvých záznamů a každým dnem je přesnější.',
+        },
+        {
+          question: 'Můžou deník vést oba rodiče společně?',
+          answer: 'Ano. V nastavení aplikace Yorix klepni na „Invite Partner“ — druhý dospělý uvidí stejný deník a bude moct přidávat záznamy ze svého iPhonu. Všechno se synchronizuje přes iCloud.',
+        },
+        {
+          question: 'Co je zdarma a co patří do předplatného?',
+          answer: 'Stáhnout Yorix a začít vést deník můžeš zdarma. Osobní předpověď dalšího spánku, AI kouč, analýzy a denní rady jsou součástí předplatného.',
+        },
+        {
+          question: 'Jak zruším předplatné?',
+          answer: 'Předplatné z App Store zrušíš v Nastavení na iPhonu: klepni na své jméno → Předplatná → Yorix. Přístup ti zůstane až do konce zaplaceného období.',
+        },
+        {
+          question: 'Kde jsou uložená data o miminku?',
+          answer: 'Deník se ukládá na tvůj iPhone a na tvůj soukromý iCloud — my k němu přístup nemáme. AI kouč dostane jen shrnutí, které potřebuje k odpovědi. Data neprodáváme a reklamy nezobrazujeme.',
+        },
+        {
+          question: 'Na jakých zařízeních Yorix funguje?',
+          answer: 'Na iPhonu a iPadu s iOS 18 nebo novějším. Verze pro Android zatím není.',
+        },
+        {
+          question: 'Funguje Yorix bez internetu?',
+          answer: 'Ano: deník i předpovědi fungují bez připojení — všechno se počítá přímo v telefonu. Internet potřebuje AI kouč a synchronizace přes iCloud.',
         },
         {
           question: 'Nahrazuje Yorix lékařskou radu?',
@@ -57,7 +93,6 @@ export const translation: SiteTranslation = {
     notes: { hero: 'Klidná miminka, šťastní rodiče', coach: 'Podpora v kteroukoli hodinu', cta: 'To nejlepší teprve přijde' },
     more: 'Zjistit víc',
     reviews: { title: 'Skuteční rodiče. Skutečné příběhy.', body: 'Slova rodičů bez úprav — nic uhlazeného, nic vymyšleného.' },
-    allQuestions: 'Všechny otázky',
     pricing: { secure: 'Bezpečná platba kartou přes WebPay', activates: 'Předplatné se v aplikaci zapne hned po zaplacení', questions: 'Máš otázky? Napiš nám' },
     highlight: { soft: 'dřív,', warm: 'začne fňukat.' },
     screenAlt: 'Hlavní obrazovka aplikace Yorix s oknem nočního spánku',

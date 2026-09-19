@@ -1,9 +1,8 @@
 import { ArrowRight, BookOpen } from 'lucide-react';
-import { docsLang, isRtl, shotLocale } from '../i18n';
+import { isRtl, shotLocale } from '../i18n';
 import { SellerFooter } from '../SellerFooter';
 import { SiteHeader } from '../SiteHeader';
 import { appDownloadUrl } from '../content';
-import { subscriptionPath } from '../subscription/i18n';
 import { Parallax } from '../subscription/Parallax';
 import { Reveal } from '../subscription/Reveal';
 import { SocialProof } from '../subscription/SocialProof';
@@ -54,7 +53,7 @@ export async function HomeLanding({ locale }: { locale: HomeLocale }) {
               </Reveal>
               <Reveal delay={380} load>
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                  <a className={whitePill} href={appDownloadUrl} rel="noopener noreferrer" target="_blank">
+                  <a className={`${whitePill} whitespace-normal! text-center sm:whitespace-nowrap!`} href={appDownloadUrl} rel="noopener noreferrer" target="_blank">
                     <AppleGlyph />
                     {copy.hero.primary}
                     <ArrowRight className="h-5 w-5 rtl:-scale-x-100" aria-hidden="true" />
@@ -148,13 +147,7 @@ export async function HomeLanding({ locale }: { locale: HomeLocale }) {
 
         <section className="mx-auto max-w-7xl px-5 py-8 sm:px-8 lg:px-10" id="faq">
           <Reveal>
-            <div className="flex flex-wrap items-baseline gap-x-5 gap-y-2">
-              <h2 className="text-2xl font-semibold text-white sm:text-[1.7rem]">{copy.faq.title}</h2>
-              <a className="inline-flex items-center gap-1 text-sm font-medium text-white/70 transition hover:text-white" href={`${subscriptionPath(docsLang(locale))}#faq`}>
-                {copy.allQuestions}
-                <ArrowRight className="h-4 w-4 rtl:-scale-x-100" aria-hidden="true" />
-              </a>
-            </div>
+            <h2 className="text-2xl font-semibold text-white sm:text-[1.7rem]">{copy.faq.title}</h2>
           </Reveal>
           <div className="mt-5 grid items-start gap-3 md:grid-cols-3">
             {copy.faq.items.map((item, index) => (

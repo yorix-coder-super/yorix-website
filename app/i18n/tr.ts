@@ -32,8 +32,44 @@ export const translation: SiteTranslation = {
           answer: 'Bir çizelge ortalama aralıklar verir. Yorix, bir sonraki uyku penceresini ayarlamak için bebeğinizin gerçek gündüz uykularını, uyanıklık pencerelerini, gece uyanmalarını, beslenmelerini ve rutin geçmişini kullanır.',
         },
         {
+          question: 'Uyanıklık penceresi nedir?',
+          answer: 'Bebeğinizin iki uyku arasında aşırı yorulmadan uyanık kalabildiği süredir. Yenidoğanda bu süre 30–60 dakikadır, bir yaşına doğru 3–4 saate çıkar. Pencere kaçırılırsa bebek fazla uyarılır ve uykuya dalması daha uzun sürer. Yorix, pencereyi bebeğinizin yaşına ve bugün nasıl uyuduğuna göre hesaplar.',
+        },
+        {
+          question: 'Bebek ne kadar uyumalı?',
+          answer: 'DSÖ’nün gündüz uykuları dâhil 24 saatlik toplam uyku önerisi: 0–3 ay — 14–17 saat, 4–11 ay — 12–16, 1–2 yaş — 11–14. Aralıklar geniş, çünkü her bebek farklıdır. Yorix, bebeğinizin 24 saatte toplam ne kadar uyuduğunu hesaplar; böylece karşılaştırmak kolaylaşır.',
+        },
+        {
           question: 'Yorix’i yenidoğanla kullanabilir miyim?',
           answer: 'Evet. Yenidoğan döneminde Yorix en çok basit bir uyku, beslenme, bez ve bakım kaydı olarak işe yarar. Düzenler oluştukça rutin daha iyi öngörülür.',
+        },
+        {
+          question: 'Bebeğim tahmin edilen saatte uyumazsa ne yapmalıyım?',
+          answer: 'Olanı olduğu gibi kaydetmeniz yeterli — Yorix pencereleri ve günün geri kalanının planını hemen yeniden hesaplar. Tahmin, kayıtlarınızdan öğrenir ve her gün daha isabetli hâle gelir.',
+        },
+        {
+          question: 'Günlüğü iki ebeveyn birlikte tutabilir mi?',
+          answer: 'Evet. Yorix ayarlarında “Eşi davet et” seçeneğine dokunun — davet ettiğiniz kişi aynı günlüğü görür ve kendi iPhone’undan kayıt ekleyebilir. Her şey iCloud üzerinden senkronize edilir.',
+        },
+        {
+          question: 'Neler ücretsiz, neler abonelik gerektiriyor?',
+          answer: 'Yorix’i indirmek ve günlük tutmaya başlamak ücretsiz. Bebeğinize özel sonraki uyku tahmini, yapay zekâ koçu, analizler ve günlük öneriler aboneliğe dâhildir.',
+        },
+        {
+          question: 'Aboneliğimi nasıl iptal ederim?',
+          answer: 'App Store aboneliğinizi iPhone’unuzdan iptal edebilirsiniz: Ayarlar → adınız → Abonelikler → Yorix. Ödediğiniz dönemin sonuna kadar erişiminiz devam eder.',
+        },
+        {
+          question: 'Bebeğimin verileri nerede saklanıyor?',
+          answer: 'Günlüğünüz iPhone’unuzda ve size özel iCloud hesabınızda saklanır — biz ona erişemeyiz. Yapay zekâ koçu yalnızca yanıt vermek için ihtiyaç duyduğu özeti alır. Veri satmıyoruz, reklam da göstermiyoruz.',
+        },
+        {
+          question: 'Yorix hangi cihazlarda çalışır?',
+          answer: 'iOS 18 veya üzeri yüklü iPhone ve iPad’de, 20 dilde çalışır. Android sürümü henüz yok.',
+        },
+        {
+          question: 'Yorix internet olmadan çalışır mı?',
+          answer: 'Evet. Günlük ve tahminler bağlantı olmadan da çalışır — her şey telefonunuzda hesaplanır. Yapay zekâ koçu ve iCloud senkronizasyonu için internet gerekir.',
         },
         {
           question: 'Yorix tıbbi tavsiyenin yerini tutar mı?',
@@ -57,7 +93,6 @@ export const translation: SiteTranslation = {
     notes: { hero: 'Sakin bebekler, mutlu ebeveynler', coach: 'Her saatte destek', cta: 'En güzeli önünüzde' },
     more: 'Daha fazla bilgi',
     reviews: { title: 'Gerçek ebeveynler. Gerçek hikâyeler.', body: 'Ebeveynlerin düzenlenmemiş sözleri — süslenmemiş, uydurulmamış.' },
-    allQuestions: 'Tüm sorular',
     pricing: { secure: 'WebPay ile güvenli kartla ödeme', activates: 'Abonelik ödemeden hemen sonra uygulamada açılır', questions: 'Sorunuz mu var? Bize yazın' },
     highlight: { soft: 'önceden', warm: 'huzursuzluk başlamadan.' },
     screenAlt: 'Gece uykusu penceresini gösteren Yorix Bugün ekranı',

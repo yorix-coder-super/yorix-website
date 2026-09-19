@@ -32,8 +32,44 @@ export const translation: SiteTranslation = {
           answer: 'Tabel memberi rentang rata-rata. Yorix memakai tidur siang, jendela bangun, terbangun malam, menyusui, dan riwayat rutinitas bayi Anda yang sebenarnya untuk menyesuaikan jendela tidur berikutnya.',
         },
         {
+          question: 'Apa itu jendela bangun?',
+          answer: 'Jendela bangun adalah rentang waktu si kecil bisa tetap terjaga di antara dua waktu tidur tanpa menjadi terlalu lelah. Pada bayi baru lahir, lamanya 30–60 menit; saat genap setahun, 3–4 jam. Jika jendela ini terlewat, si kecil jadi terlalu terstimulasi dan butuh waktu lebih lama untuk tertidur. Yorix menghitung jendela bangun dari usia bayi Anda dan cara tidurnya hari ini.',
+        },
+        {
+          question: 'Berapa lama bayi perlu tidur?',
+          answer: 'Menurut panduan WHO, total tidur dalam 24 jam, termasuk tidur siang, adalah 14–17 jam untuk usia 0–3 bulan, 12–16 jam untuk usia 4–11 bulan, dan 11–14 jam untuk usia 1–2 tahun. Rentangnya lebar karena setiap bayi berbeda. Yorix menjumlahkan lama tidur si kecil dalam sehari, jadi Anda bisa membandingkannya dengan mudah.',
+        },
+        {
           question: 'Bisakah saya memakai Yorix untuk bayi baru lahir?',
           answer: 'Bisa. Pada masa bayi baru lahir, Yorix paling berguna sebagai catatan sederhana untuk tidur, menyusui, popok, dan perawatan. Rutinitasnya makin mudah diprediksi seiring munculnya pola.',
+        },
+        {
+          question: 'Bagaimana jika si kecil tidak tidur sesuai prakiraan?',
+          answer: 'Cukup catat apa yang benar-benar terjadi — Yorix langsung menghitung ulang jendela tidur dan rencana untuk sisa hari itu. Prakiraan belajar dari catatan Anda dan makin akurat setiap hari.',
+        },
+        {
+          question: 'Bisakah dua orang tua mengisi catatan harian bersama?',
+          answer: 'Bisa. Di pengaturan Yorix, ketuk “Undang Pasangan” — orang dewasa lainnya akan melihat catatan harian yang sama dan bisa menambahkan entri dari iPhone-nya sendiri. Semuanya disinkronkan lewat iCloud.',
+        },
+        {
+          question: 'Apa yang gratis dan apa yang perlu berlangganan?',
+          answer: 'Mengunduh Yorix dan mulai mengisi catatan harian itu gratis. Prakiraan tidur berikutnya khusus untuk si kecil, pelatih AI, analitik, dan saran harian tersedia dengan berlangganan.',
+        },
+        {
+          question: 'Bagaimana cara membatalkan langganan?',
+          answer: 'Langganan App Store dibatalkan lewat Pengaturan di iPhone: ketuk nama Anda → Langganan → Yorix. Akses tetap berlaku sampai akhir periode yang sudah dibayar.',
+        },
+        {
+          question: 'Di mana data si kecil disimpan?',
+          answer: 'Catatan harian tersimpan di iPhone Anda dan di iCloud pribadi Anda — kami tidak punya akses ke sana. Pelatih AI hanya menerima ringkasan yang dibutuhkan untuk menjawab. Kami tidak menjual data dan tidak menampilkan iklan.',
+        },
+        {
+          question: 'Yorix bisa dipakai di perangkat apa saja?',
+          answer: 'iPhone dan iPad dengan iOS 18 atau yang lebih baru, dalam 20 bahasa. Versi Android belum tersedia.',
+        },
+        {
+          question: 'Apakah Yorix bisa dipakai tanpa internet?',
+          answer: 'Bisa. Catatan harian dan prakiraan tetap berjalan tanpa koneksi — semuanya dihitung di ponsel Anda. Pelatih AI dan sinkronisasi iCloud memerlukan internet.',
         },
         {
           question: 'Apakah Yorix menggantikan saran medis?',
@@ -57,7 +93,6 @@ export const translation: SiteTranslation = {
     notes: { hero: 'Bayi tenang, orang tua bahagia', coach: 'Dukungan kapan saja', cta: 'Yang terbaik akan datang' },
     more: 'Pelajari lebih lanjut',
     reviews: { title: 'Orang tua nyata. Cerita nyata.', body: 'Kata-kata asli dari orang tua — tanpa dipoles, tanpa dikarang.' },
-    allQuestions: 'Semua pertanyaan',
     pricing: { secure: 'Pembayaran kartu yang aman lewat WebPay', activates: 'Langganan langsung aktif di aplikasi setelah pembayaran', questions: 'Ada pertanyaan? Kirim email ke kami' },
     highlight: { soft: 'sebelum', warm: 'mulai rewel.' },
     screenAlt: 'Layar Hari Ini di Yorix dengan jendela tidur malam',

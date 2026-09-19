@@ -49,6 +49,10 @@ export function CtaBand({ title, body, action, note }: { title: string; body: st
   );
 }
 
+// A line break right after the dash of «30–60» reads as a lone minus, so the
+// word joiner keeps number ranges on one line.
+const keepRanges = (text: string) => text.replace(/(\d[–-])(?=\d)/g, '$1\u2060');
+
 export function FaqItem({ question, answer }: { question: string; answer: string }) {
   return (
     <details className="group rounded-2xl border border-white/12 bg-white/[0.06] backdrop-blur-xl transition open:bg-white/[0.09] hover:border-white/25">
@@ -56,7 +60,7 @@ export function FaqItem({ question, answer }: { question: string; answer: string
         {question}
         <Plus className="h-5 w-5 shrink-0 text-white/70 transition duration-300 group-open:rotate-45" aria-hidden="true" />
       </summary>
-      <p className="px-5 pb-5 text-sm leading-6 text-white/65">{answer}</p>
+      <p className="px-5 pb-5 text-sm leading-6 text-white/65">{keepRanges(answer)}</p>
     </details>
   );
 }

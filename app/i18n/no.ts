@@ -32,8 +32,44 @@ export const translation: SiteTranslation = {
           answer: 'En tabell gir gjennomsnittlige intervaller. Yorix bruker babyens faktiske lurer, våkenvinduer, nattlige oppvåkninger, matinger og rutinehistorikk til å justere neste søvnvindu.',
         },
         {
+          question: 'Hva er et våkenvindu?',
+          answer: 'Det er hvor lenge babyen klarer å være våken mellom søvnperiodene uten å bli overtrøtt. For en nyfødt er det 30–60 minutter, og rundt ettårsalderen 3–4 timer. Går du glipp av vinduet, blir babyen oppspilt og bruker lengre tid på å sovne. Yorix beregner vinduet ut fra alderen og hvordan babyen har sovet i dag.',
+        },
+        {
+          question: 'Hvor mye søvn trenger en baby?',
+          answer: 'WHOs anbefalinger for samlet søvn i døgnet, lurer medregnet: 0–3 måneder – 14–17 timer, 4–11 måneder – 12–16, 1–2 år – 11–14. Intervallene er brede fordi alle babyer er forskjellige. Yorix summerer hvor mye babyen har sovet i løpet av døgnet, så det er lett å sammenligne.',
+        },
+        {
           question: 'Kan jeg bruke Yorix med en nyfødt?',
           answer: 'Ja. I nyfødtperioden er Yorix mest nyttig som en enkel logg for søvn, mating, bleier og stell. Jo tydeligere mønstrene blir, desto bedre kan rutinen forutsies.',
+        },
+        {
+          question: 'Hva om babyen ikke sover etter prognosen?',
+          answer: 'Bare logg det som faktisk skjedde – Yorix beregner straks vinduene og planen for resten av dagen på nytt. Prognosen lærer av det du logger, og blir mer treffsikker for hver dag.',
+        },
+        {
+          question: 'Kan to foreldre føre dagboken sammen?',
+          answer: 'Ja. Trykk på «Invite Partner» i innstillingene i Yorix – den andre voksne ser den samme dagboken og kan logge fra sin egen iPhone. Alt synkroniseres via iCloud.',
+        },
+        {
+          question: 'Hva er gratis, og hva krever abonnement?',
+          answer: 'Det er gratis å laste ned Yorix og begynne å føre dagbok. Den personlige prognosen for neste lur, AI-coachen, analyse og daglige råd følger med abonnementet.',
+        },
+        {
+          question: 'Hvordan avslutter jeg abonnementet?',
+          answer: 'Et abonnement fra App Store avslutter du i Innstillinger på iPhonen: Trykk på navnet ditt → Abonnementer → Yorix. Du beholder tilgangen ut den betalte perioden.',
+        },
+        {
+          question: 'Hvor lagres dataene om babyen min?',
+          answer: 'Dagboken ligger på iPhonen din og i din private iCloud – vi har ikke tilgang til den. AI-coachen får bare det sammendraget den trenger for å svare. Vi selger ikke data og viser ingen annonser.',
+        },
+        {
+          question: 'Hvilke enheter fungerer Yorix på?',
+          answer: 'iPhone og iPad med iOS 18 eller nyere. Det finnes ingen Android-versjon ennå.',
+        },
+        {
+          question: 'Fungerer Yorix uten internett?',
+          answer: 'Ja: Dagboken og prognosene fungerer uten nett – alt beregnes på telefonen. AI-coachen og synkroniseringen via iCloud trenger internett.',
         },
         {
           question: 'Erstatter Yorix medisinske råd?',
@@ -57,7 +93,6 @@ export const translation: SiteTranslation = {
     notes: { hero: 'Rolige babyer, glade foreldre', coach: 'Støtte når som helst', cta: 'Det beste venter' },
     more: 'Les mer',
     reviews: { title: 'Ekte foreldre. Ekte historier.', body: 'Foreldres egne, uredigerte ord – ingenting pyntet på, ingenting diktet opp.' },
-    allQuestions: 'Alle spørsmål',
     pricing: { secure: 'Sikker kortbetaling via WebPay', activates: 'Abonnementet aktiveres i appen rett etter betaling', questions: 'Spørsmål? Skriv til oss' },
     highlight: { soft: 'før', warm: 'sutringen begynner.' },
     screenAlt: 'Yorix-skjermen «I dag» med vinduet for nattesøvn',

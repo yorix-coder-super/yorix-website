@@ -19,7 +19,6 @@ export type HomeCopy = {
   notes: { hero: string; coach: string; cta: string };
   more: string;
   reviews: Pair;
-  allQuestions: string;
   pricing: { secure: string; activates: string; questions: string };
   // Two exact pieces of hero.title painted lavender and amber.
   highlight: { soft: string; warm: string };

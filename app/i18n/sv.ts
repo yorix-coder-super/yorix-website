@@ -32,8 +32,44 @@ export const translation: SiteTranslation = {
           answer: 'En tabell visar genomsnittliga intervall. Yorix använder bebisens verkliga tupplurar, vakentider, nattliga uppvaknanden, matningar och rutinhistorik för att justera nästa sömnfönster.',
         },
         {
+          question: 'Vad är vakentid?',
+          answer: 'Det är den tid bebisen orkar vara vaken mellan sömnperioderna utan att bli övertrött. För en nyfödd är det 30–60 minuter, och vid ett års ålder 3–4 timmar. Är bebisen vaken för länge, blir den uppvarvad och tar längre tid på sig att somna. Yorix räknar ut vakentiden utifrån bebisens ålder och hur den har sovit i dag.',
+        },
+        {
+          question: 'Hur mycket sömn behöver en bebis?',
+          answer: 'WHO:s rekommendationer för total sömn per dygn, tupplurar inräknade: 0–3 månader – 14–17 timmar, 4–11 månader – 12–16, 1–2 år – 11–14. Intervallen är breda eftersom alla bebisar är olika. Yorix summerar hur mycket bebisen har sovit under dygnet, så det är lätt att jämföra.',
+        },
+        {
           question: 'Kan jag använda Yorix med en nyfödd?',
           answer: 'Ja. Under nyföddhetsperioden är Yorix mest användbar som en enkel logg för sömn, matning, blöjor och omsorg. Ju tydligare mönstren blir, desto bättre kan rutinen förutsägas.',
+        },
+        {
+          question: 'Vad gör jag om bebisen inte sover enligt prognosen?',
+          answer: 'Logga bara det som faktiskt hände – Yorix räknar direkt om sömnfönstren och planen för resten av dagen. Prognosen lär sig av det du loggar och blir träffsäkrare för varje dag.',
+        },
+        {
+          question: 'Kan två föräldrar föra dagboken tillsammans?',
+          answer: 'Ja. Tryck på ”Invite Partner” i inställningarna i Yorix – den andra vuxna ser samma dagbok och kan logga från sin egen iPhone. Allt synkroniseras via iCloud.',
+        },
+        {
+          question: 'Vad är gratis och vad ingår i prenumerationen?',
+          answer: 'Det är gratis att hämta Yorix och börja föra dagbok. Den personliga prognosen för nästa tupplur, AI-coachen, analys och dagliga råd ingår i prenumerationen.',
+        },
+        {
+          question: 'Hur säger jag upp prenumerationen?',
+          answer: 'En prenumeration via App Store säger du upp i Inställningar på din iPhone: tryck på ditt namn → Abonnemang → Yorix. Du behåller tillgången till slutet av den betalda perioden.',
+        },
+        {
+          question: 'Var sparas uppgifterna om min bebis?',
+          answer: 'Dagboken finns på din iPhone och i din privata iCloud – vi har ingen åtkomst till den. AI-coachen får bara den sammanfattning den behöver för att svara. Vi säljer inga uppgifter och visar ingen reklam.',
+        },
+        {
+          question: 'Vilka enheter fungerar Yorix på?',
+          answer: 'iPhone och iPad med iOS 18 eller senare. Det finns ingen Android-version ännu.',
+        },
+        {
+          question: 'Fungerar Yorix utan internet?',
+          answer: 'Ja: dagboken och prognoserna fungerar utan uppkoppling – allt räknas ut på telefonen. AI-coachen och synkroniseringen via iCloud behöver internet.',
         },
         {
           question: 'Ersätter Yorix medicinsk rådgivning?',
@@ -57,7 +93,6 @@ export const translation: SiteTranslation = {
     notes: { hero: 'Lugna bebisar, glada föräldrar', coach: 'Stöd när som helst', cta: 'Det bästa väntar' },
     more: 'Läs mer',
     reviews: { title: 'Riktiga föräldrar. Riktiga berättelser.', body: 'Föräldrars egna, oredigerade ord – inget tillrättalagt, inget påhittat.' },
-    allQuestions: 'Alla frågor',
     pricing: { secure: 'Säker kortbetalning via WebPay', activates: 'Prenumerationen aktiveras i appen direkt efter betalningen', questions: 'Frågor? Skriv till oss' },
     highlight: { soft: 'innan', warm: 'kinkandet börjar.' },
     screenAlt: 'Yorix-vyn ”I dag” med fönstret för nattsömn',

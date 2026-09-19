@@ -32,8 +32,44 @@ export const translation: SiteTranslation = {
           answer: 'Bảng chỉ đưa ra các khoảng trung bình. Yorix dùng các giấc ngủ ngày, khoảng thức, những lần thức giấc đêm, cữ ăn và lịch sử nếp sinh hoạt thực tế của bé để điều chỉnh khung giờ ngủ tiếp theo.',
         },
         {
+          question: 'Khoảng thức là gì?',
+          answer: 'Đó là khoảng thời gian bé có thể thức giữa hai giấc ngủ mà không bị quá mệt. Với trẻ sơ sinh là 30–60 phút, đến khi tròn một tuổi là 3–4 giờ. Nếu lỡ khoảng thức, bé sẽ quá hưng phấn và lâu vào giấc hơn. Yorix tính khoảng thức dựa trên độ tuổi của bé và cách bé đã ngủ hôm nay.',
+        },
+        {
+          question: 'Bé cần ngủ bao lâu mỗi ngày?',
+          answer: 'Theo khuyến nghị của WHO, tổng thời gian ngủ trong 24 giờ, tính cả giấc ngủ ngày, là 14–17 giờ với bé 0–3 tháng, 12–16 giờ với bé 4–11 tháng và 11–14 giờ với bé 1–2 tuổi. Các khoảng này khá rộng vì mỗi bé mỗi khác. Yorix cộng dồn thời gian ngủ của bé trong ngày để bạn dễ so sánh.',
+        },
+        {
           question: 'Có thể dùng Yorix cho trẻ sơ sinh không?',
           answer: 'Có. Ở giai đoạn sơ sinh, Yorix hữu ích nhất như một cuốn nhật ký đơn giản về giấc ngủ, cữ ăn, tã và chăm sóc. Khi các quy luật dần hình thành, nếp sinh hoạt sẽ dễ dự đoán hơn.',
+        },
+        {
+          question: 'Nếu bé không ngủ đúng như dự báo thì sao?',
+          answer: 'Bạn chỉ cần ghi lại những gì thực sự diễn ra — Yorix sẽ tính lại ngay các khung giờ ngủ và kế hoạch cho phần còn lại của ngày. Dự báo học từ những gì bạn ghi và chính xác hơn mỗi ngày.',
+        },
+        {
+          question: 'Cha mẹ có thể cùng ghi nhật ký không?',
+          answer: 'Có. Trong phần cài đặt của Yorix, chạm vào “Mời bạn đời” — người còn lại sẽ thấy cùng cuốn nhật ký và có thể thêm ghi chép từ iPhone của mình. Mọi thứ được đồng bộ qua iCloud.',
+        },
+        {
+          question: 'Tính năng nào miễn phí, tính năng nào cần gói đăng ký?',
+          answer: 'Tải Yorix và bắt đầu ghi nhật ký hoàn toàn miễn phí. Dự báo giấc ngủ tiếp theo dành riêng cho bé, cố vấn AI, phân tích và lời khuyên mỗi ngày có trong gói đăng ký.',
+        },
+        {
+          question: 'Làm cách nào để hủy gói đăng ký?',
+          answer: 'Gói đăng ký qua App Store được hủy trong Cài đặt trên iPhone: chạm vào tên của bạn → Đăng ký → Yorix. Bạn vẫn dùng được đến hết thời hạn đã thanh toán.',
+        },
+        {
+          question: 'Dữ liệu của bé được lưu ở đâu?',
+          answer: 'Nhật ký được lưu trên iPhone và trong iCloud riêng của bạn — chúng tôi không có quyền truy cập. Cố vấn AI chỉ nhận phần tóm tắt cần thiết để trả lời. Chúng tôi không bán dữ liệu và không hiển thị quảng cáo.',
+        },
+        {
+          question: 'Yorix dùng được trên những thiết bị nào?',
+          answer: 'iPhone và iPad chạy iOS 18 trở lên, với 20 ngôn ngữ. Hiện chưa có phiên bản Android.',
+        },
+        {
+          question: 'Yorix có dùng được khi không có mạng không?',
+          answer: 'Có. Nhật ký và dự báo vẫn hoạt động khi không có mạng — mọi thứ đều được tính ngay trên điện thoại của bạn. Cố vấn AI và đồng bộ iCloud thì cần internet.',
         },
         {
           question: 'Yorix có thay thế lời khuyên y tế không?',
@@ -57,7 +93,6 @@ export const translation: SiteTranslation = {
     notes: { hero: 'Bé bình yên, cha mẹ hạnh phúc', coach: 'Hỗ trợ bất cứ lúc nào', cta: 'Điều tốt nhất còn ở phía trước' },
     more: 'Tìm hiểu thêm',
     reviews: { title: 'Cha mẹ thật. Câu chuyện thật.', body: 'Nguyên văn lời cha mẹ — không tô vẽ, không bịa đặt.' },
-    allQuestions: 'Tất cả câu hỏi',
     pricing: { secure: 'Thanh toán thẻ an toàn qua WebPay', activates: 'Gói đăng ký được kích hoạt trong ứng dụng ngay sau khi thanh toán', questions: 'Có thắc mắc? Gửi email cho chúng tôi' },
     highlight: { soft: 'trước khi', warm: 'quấy khóc.' },
     screenAlt: 'Màn hình Hôm nay của Yorix với khung giờ ngủ đêm',

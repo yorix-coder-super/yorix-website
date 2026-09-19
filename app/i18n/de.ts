@@ -32,8 +32,44 @@ export const translation: SiteTranslation = {
           answer: 'Eine Tabelle zeigt Durchschnittswerte. Yorix nutzt die echten Nickerchen, Wachfenster, nächtlichen Wachphasen, Mahlzeiten und die bisherige Routine deines Babys, um das nächste Schlaffenster anzupassen.',
         },
         {
+          question: 'Was ist ein Wachfenster?',
+          answer: 'Das ist die Zeitspanne, in der dein Baby zwischen zwei Schlafphasen wach bleiben kann, ohne übermüdet zu werden. Bei Neugeborenen sind es 30–60 Minuten, mit einem Jahr 3–4 Stunden. Wird das Fenster verpasst, ist dein Baby schnell überdreht und braucht länger zum Einschlafen. Yorix berechnet das Fenster aus dem Alter deines Babys und seinem Schlaf von heute.',
+        },
+        {
+          question: 'Wie viel Schlaf braucht ein Baby?',
+          answer: 'Die WHO empfiehlt als Gesamtschlaf in 24 Stunden, Nickerchen eingerechnet: mit 0–3 Monaten 14–17 Stunden, mit 4–11 Monaten 12–16, mit 1–2 Jahren 11–14. Die Spannen sind weit gefasst, denn jedes Baby ist anders. Yorix rechnet zusammen, wie viel dein Baby in 24 Stunden geschlafen hat – so lässt sich das leicht vergleichen.',
+        },
+        {
           question: 'Kann ich Yorix mit einem Neugeborenen nutzen?',
           answer: 'Ja. In der Neugeborenenzeit ist Yorix vor allem als einfaches Tagebuch für Schlaf, Mahlzeiten, Windeln und Pflege hilfreich. Je mehr Muster sichtbar werden, desto vorausschauender wird die Routine.',
+        },
+        {
+          question: 'Was tun, wenn mein Baby anders schläft als vorhergesagt?',
+          answer: 'Trag einfach ein, wie es wirklich war – Yorix berechnet die Schlaffenster und den Plan für den Rest des Tages sofort neu. Die Prognose lernt aus deinen Einträgen und wird mit jedem Tag genauer.',
+        },
+        {
+          question: 'Können wir das Tagebuch zu zweit führen?',
+          answer: 'Ja. Tippe in den Yorix-Einstellungen auf „Partner einladen“ – die eingeladene Person sieht dasselbe Tagebuch und kann von ihrem eigenen iPhone aus Einträge hinzufügen. Alles wird über iCloud synchronisiert.',
+        },
+        {
+          question: 'Was ist kostenlos und was gehört zum Abo?',
+          answer: 'Yorix herunterzuladen und mit dem Tagebuch zu beginnen, kostet nichts. Die persönliche Prognose für den nächsten Schlaf, der KI-Coach, Analysen und Tagestipps gehören zum Abo.',
+        },
+        {
+          question: 'Wie kündige ich mein Abo?',
+          answer: 'Ein Abo über den App Store kündigst du in den Einstellungen auf deinem iPhone: Tippe auf deinen Namen → Abonnements → Yorix. Den Zugang behältst du bis zum Ende des bezahlten Zeitraums.',
+        },
+        {
+          question: 'Wo werden die Daten meines Babys gespeichert?',
+          answer: 'Das Tagebuch liegt auf deinem iPhone und in deiner privaten iCloud – wir haben keinen Zugriff darauf. Der KI-Coach bekommt nur die Zusammenfassung, die er für eine Antwort braucht. Wir verkaufen keine Daten und zeigen keine Werbung.',
+        },
+        {
+          question: 'Auf welchen Geräten läuft Yorix?',
+          answer: 'Auf iPhone und iPad mit iOS 18 oder neuer, in 20 Sprachen. Eine Android-Version gibt es noch nicht.',
+        },
+        {
+          question: 'Funktioniert Yorix ohne Internet?',
+          answer: 'Ja: Tagebuch und Prognosen funktionieren ohne Verbindung – alles wird direkt auf deinem Handy berechnet. Internet brauchen nur der KI-Coach und die Synchronisierung über iCloud.',
         },
         {
           question: 'Ersetzt Yorix ärztlichen Rat?',
@@ -57,7 +93,6 @@ export const translation: SiteTranslation = {
     notes: { hero: 'Ruhige Babys, glückliche Eltern', coach: 'Hilfe zu jeder Stunde', cta: 'Das Beste kommt noch' },
     more: 'Mehr erfahren',
     reviews: { title: 'Echte Eltern. Echte Geschichten.', body: 'Unbearbeitete Worte von Eltern – nichts geschönt, nichts erfunden.' },
-    allQuestions: 'Alle Fragen',
     pricing: { secure: 'Sichere Kartenzahlung über WebPay', activates: 'Das Abo ist direkt nach der Zahlung in der App aktiv', questions: 'Fragen? Schreib uns' },
     highlight: { soft: 'bevor', warm: 'Quengeln losgeht.' },
     screenAlt: 'Yorix-Bildschirm „Heute“ mit dem Nachtschlaf-Fenster',
