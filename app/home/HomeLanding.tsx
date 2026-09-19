@@ -8,12 +8,11 @@ import { Reveal } from '../subscription/Reveal';
 import { SocialProof } from '../subscription/SocialProof';
 import { StarField } from '../subscription/StarField';
 import { WordReveal } from '../subscription/WordReveal';
-import { AppleGlyph, Art, DoodleArrow, DoodleHeart, Hand, PhoneFrame, Sparkle } from './art';
+import { AppleGlyph, Art, DoodleArrow, DoodleHeart, featureIcons, Hand, PhoneFrame, Sparkle } from './art';
 import { headlineParts, homeCopy, type HomeLocale } from './copy';
 import { CtaBand, FaqItem, whitePill } from './CtaBand';
 import { HomePricing } from './HomePricing';
 
-const featureIcons = ['icon-bolt', 'icon-chart', 'icon-chat', 'icon-heart'];
 
 // Real screenshots of the current build in the page's language (English
 // where the app itself is not translated).

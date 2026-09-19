@@ -69,7 +69,6 @@ export type SubscriptionCopy = {
     code: string;
     copyLink: string;
     copied: string;
-    share: string;
     validUntil: (date: string) => string;
     redeemTitle: string;
     redeemBody: string;
@@ -100,7 +99,11 @@ export type SubscriptionCopy = {
     cardOr: (site: string) => string;
     shareText: (period: string) => string;
     listTitle: string;
-    listSignIn: string;
+    shareCard: string;
+    cardContact: string;
+    scamNote: string;
+    ownGiftConfirm: string;
+    lostKey: string;
   };
   terms: {
     title: (period: string) => string;
@@ -226,7 +229,7 @@ const ru: SubscriptionCopy = {
     // A Russian card dedication is in the dative, without «для»: «Маше и Саше».
     cardFor: (name) => name,
     cardPlan: (period) => `Подписка Yorix ${period}`,
-    note: 'Yorix работает на iPhone и iPad. Вход через Apple нужен, чтобы показать вам ссылку и код подарка — они останутся здесь, в «Ваших подарках». Код действует 12 месяцев.',
+    note: 'Yorix работает на iPhone и iPad. Аккаунт для покупки не нужен: сразу после оплаты вы получите ссылку, код и открытку с QR — они останутся здесь, в «Ваших подарках», на этом устройстве. Код действует 12 месяцев.',
     pay: (price) => `Оплатить подарок · ${price}`,
     paidTitle: 'Подарок оплачен!',
     paidBody: 'Отправьте ссылку получателю или подарите открытку с кодом. Подписка включится, когда получатель откроет ссылку или введёт код и войдёт через Apple.',
@@ -234,7 +237,6 @@ const ru: SubscriptionCopy = {
     code: 'Код подарка',
     copyLink: 'Скопировать ссылку',
     copied: 'Скопировано',
-    share: 'Поделиться',
     validUntil: (date) => `Код действует до ${date}`,
     redeemTitle: 'Вам подарили подписку Yorix',
     redeemBody: 'Войдите через Apple тем же аккаунтом, что и в приложении Yorix, — подписка включится сразу.',
@@ -286,7 +288,11 @@ const ru: SubscriptionCopy = {
     cardOr: (site) => `или введите код на ${site}`,
     shareText: (period) => `Подарок для вас — подписка Yorix ${period}. Откройте ссылку и войдите через Apple — подписка включится сама.`,
     listTitle: 'Ваши подарки',
-    listSignIn: 'Уже покупали подарок? Войдите через Apple — покажем ссылки и коды.',
+    shareCard: 'Отправить открытку',
+    cardContact: 'Открытка — без контактов: уберите ссылки, адреса сайтов, e-mail, @ники и номера телефонов.',
+    scamNote: 'Yorix никогда не просит звонить, платить или пересылать код, чтобы активировать подарок.',
+    ownGiftConfirm: 'Этот подарок куплен в этом браузере. Если активировать его на ваш аккаунт, у получателя ссылка перестанет работать. Активировать на себя?',
+    lostKey: 'Если вы оплачивали подарок, откройте эту страницу в том же браузере, где платили, — или напишите нам и укажите номер заказа из чека WEBPAY.',
   },
   terms: {
     title: (period) => `Подписка ${period}`,
@@ -415,7 +421,7 @@ const en: SubscriptionCopy = {
     messagePlaceholder: 'Calm nights and sweet dreams!',
     cardFor: (name) => `For ${name}`,
     cardPlan: (period) => `Yorix subscription ${period}`,
-    note: 'Yorix runs on iPhone and iPad. Signing in with Apple lets us show you the gift link and code — they stay here, under “Your gifts”. The code is valid for 12 months.',
+    note: 'Yorix runs on iPhone and iPad. No account is needed to buy: right after payment you get the link, the code and a card with a QR code — they stay here, under “Your gifts”, on this device. The code is valid for 12 months.',
     pay: (price) => `Pay for the gift · ${price}`,
     paidTitle: 'Your gift is paid!',
     paidBody: 'Send the link to the recipient or give them the card with the code. The subscription turns on once they open the link or enter the code and sign in with Apple.',
@@ -423,7 +429,6 @@ const en: SubscriptionCopy = {
     code: 'Gift code',
     copyLink: 'Copy link',
     copied: 'Copied',
-    share: 'Share',
     validUntil: (date) => `The code is valid until ${date}.`,
     redeemTitle: 'Someone gave you a Yorix subscription',
     redeemBody: 'Sign in with Apple using the same account as in the Yorix app — the subscription turns on right away.',
@@ -475,7 +480,11 @@ const en: SubscriptionCopy = {
     cardOr: (site) => `or enter the code at ${site}`,
     shareText: (period) => `A gift for you — a Yorix subscription ${period}. Open the link and sign in with Apple — the subscription turns on by itself.`,
     listTitle: 'Your gifts',
-    listSignIn: 'Bought a gift before? Sign in with Apple — we will show your links and codes.',
+    shareCard: 'Send the card',
+    cardContact: 'No contacts on the card: remove links, website addresses, e-mails, @handles and phone numbers.',
+    scamNote: 'Yorix never asks you to call, pay or pass on a code to redeem a gift.',
+    ownGiftConfirm: 'This gift was bought in this browser. If you redeem it on your account, the link stops working for the recipient. Redeem it for yourself?',
+    lostKey: 'If you paid for a gift, open this page in the browser you paid in — or write to us with the order number from the WEBPAY receipt.',
   },
   terms: {
     title: (period) => `Subscription ${period}`,

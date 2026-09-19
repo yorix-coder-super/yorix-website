@@ -1,16 +1,29 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useState, useSyncExternalStore, type FormEvent } from 'react';
 import { subscriptionCopy } from '../copy';
 import type { Lang } from '../i18n';
 import { Button } from '../ui';
 import { codeFromInput, formatGiftCode, giftCodeChecks } from './code';
 
+const noSubscription = () => () => {};
+
+// A redeem page that was reloaded after it hid its code from the address bar.
+function storedCode(): string {
+  try {
+    return codeFromInput(sessionStorage.getItem('yorix-gift-code') ?? '');
+  } catch {
+    return '';
+  }
+}
+
 // For a gift that came as a printed card or a dictated code: the code is
 // checked here, then the redeem page takes over exactly as from a link.
 export function GiftCodeEntry({ lang }: { lang: Lang }) {
   const text = subscriptionCopy[lang].gift;
-  const [code, setCode] = useState('');
+  const stored = useSyncExternalStore(noSubscription, storedCode, () => '');
+  const [typed, setTyped] = useState<string | null>(null);
+  const code = typed ?? stored;
   const [tried, setTried] = useState(false);
   const complete = code.length === 12;
   const valid = complete && giftCodeChecks(code);
@@ -39,7 +52,7 @@ export function GiftCodeEntry({ lang }: { lang: Lang }) {
         enterKeyHint="go"
         id="gift-code"
         onChange={(event) => {
-          setCode(codeFromInput(event.target.value));
+          setTyped(codeFromInput(event.target.value));
           setTried(false);
         }}
         placeholder="XXXX-XXXX-XXXX"

@@ -10,6 +10,9 @@ export function AppleGlyph({ className = 'h-5 w-5' }: { className?: string }) {
 
 // A real app screenshot in a dark bezel. The radii are elliptical percentages
 // so the corners stay in proportion from a 150 px phone to a 280 px one.
+// The four feature icons, in the order of `home.features`.
+export const featureIcons = ['icon-bolt', 'icon-chart', 'icon-chat', 'icon-heart'];
+
 export function PhoneFrame({ src, alt, className = '', priority = false }: { src: string; alt: string; className?: string; priority?: boolean }) {
   return (
     <div className={`rounded-[16%/7.4%] bg-[#0B0A1F] p-[3%] shadow-[0_30px_80px_rgb(0_0_0/45%)] ring-1 ring-white/20 ${className}`}>

@@ -12,18 +12,29 @@ const EURO_COUNTRIES = new Set([
   'IS', 'LI', 'NO', 'CH', 'GB', 'UA', 'MD', 'RS', 'ME', 'MK', 'AL', 'BA', 'XK', 'AD', 'MC', 'SM', 'VA', 'GE', 'AM',
 ]);
 
-// Country first; when the connection comes from elsewhere (VPN exits are
-// common among Belarusian and Russian parents) the browser language decides:
-// a Russian-language browser is in the BYN/RUB market, and plain «ru» gets
-// the currency the card is actually charged in.
+// The languages a browser accepts; «q=0» means "not this one".
+function acceptedLanguages(header: string | null | undefined): string[] {
+  return (header ?? '')
+    .toLowerCase()
+    .split(',')
+    .map((part) => {
+      const [tag = '', ...params] = part.split(';').map((piece) => piece.trim());
+      const q = params.find((param) => param.startsWith('q='));
+      return q && !(Number(q.slice(2)) > 0) ? '' : tag;
+    })
+    .filter(Boolean);
+}
+
+// The country decides, as Cloudflare sees it. When the connection comes from
+// elsewhere (VPN exits are common among Belarusian and Russian parents), a
+// Russian- or Belarusian-language browser may still buy — at the Belarusian
+// price: a header the visitor controls never picks the cheaper Russian tier.
+// Mirrored by webRegion in the worker (CloudflareWorker/src/web/plans.ts).
 export function currencyForVisitor(country: string | null | undefined, acceptLanguage?: string | null): Currency {
   const cc = (country ?? '').toUpperCase();
   if (cc === 'BY') return 'BYN';
   if (cc === 'RU') return 'RUB';
-  const langs = (acceptLanguage ?? '').toLowerCase();
-  if (/(^|,)\s*(ru-by|be)(-|;|,|$)/.test(langs)) return 'BYN';
-  if (/(^|,)\s*ru-ru(;|,|$)/.test(langs)) return 'RUB';
-  if (/(^|,)\s*ru(;|,|$)/.test(langs)) return 'BYN';
+  if (acceptedLanguages(acceptLanguage).some((tag) => /^(ru|be)(-|$)/.test(tag))) return 'BYN';
   if (EURO_COUNTRIES.has(cc)) return 'EUR';
   return 'USD';
 }

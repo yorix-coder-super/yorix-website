@@ -11,6 +11,7 @@ import { subscriptionCopy, type SubscriptionCopy } from './copy';
 import { currencyForVisitor, formatMoney, sellsOnWeb, type WebCurrency } from './currency';
 import { formatDate, subscriptionPath, type Lang } from './i18n';
 import { legalVersion } from './legal/versions';
+import { rememberGift } from './gift/keys';
 import { charges, merchant, planCopy, plans, prices, type Plan } from './merchant';
 import { Money } from './Money';
 import { Button, Spinner } from './ui';
@@ -65,9 +66,10 @@ async function getAuthInstance(): Promise<Auth> {
   ]);
   const app = getApps()[0] ?? initializeApp(firebaseConfig);
   const auth = getAuth(app);
-  // Session persistence: a token stolen from storage is worth nothing once
-  // the tab closes, and a shared family computer never keeps the parent
-  // signed in by accident.
+  // Session persistence: closing the tab signs the parent out, so a shared
+  // family computer never stays signed in by accident. (A refresh token lifted
+  // from the tab stays valid until revoked — the page's CSP is what keeps
+  // scripts from reading it.)
   await setPersistence(auth, browserSessionPersistence).catch(() => {});
   return auth;
 }
@@ -86,8 +88,11 @@ function signInErrorFor(code: string): ErrorKey | null {
 }
 
 // The acquirer's hosted payment page — the only place an order may send the
-// buyer.
-const PAYMENT_PAGE = /^https:\/\/(securesandbox|payment)\.webpay\.by\//;
+// buyer — for the mode checkout runs in (the sandbox never in production).
+const PAYMENT_PAGES: Record<'test' | 'prod', RegExp> = {
+  test: /^https:\/\/securesandbox\.webpay\.by\//,
+  prod: /^https:\/\/payment\.webpay\.by\//,
+};
 
 export function AccountProvider({
   lang,
@@ -199,17 +204,21 @@ export function AccountProvider({
   const createOrder = useCallback(
     async (planId: string, terms: Terms, gift?: GiftCard) => {
       const token = await getToken();
-      if (!token) return false;
+      // A gift needs no account; a plan is credited to the signed-in one.
+      if (!token && !gift) return false;
       setState((s) => ({ ...s, busy: 'order', error: null }));
       let error: ErrorKey = 'error';
       try {
         const res = await fetch(`${API_BASE}/v1/web/orders`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'X-Firebase-Token': token },
+          headers: { 'Content-Type': 'application/json', ...(token ? { 'X-Firebase-Token': token } : {}) },
           body: JSON.stringify({ planId, lang, terms, ...(gift ? { gift } : {}) }),
         });
-        const body = (await res.json().catch(() => ({}))) as { redirectUrl?: string; error?: string };
-        if (res.ok && body.redirectUrl && PAYMENT_PAGE.test(body.redirectUrl)) {
+        const body = (await res.json().catch(() => ({}))) as { redirectUrl?: string; error?: string; orderId?: string; giftKey?: string };
+        const paymentPage = checkoutMode === 'test' || checkoutMode === 'prod' ? PAYMENT_PAGES[checkoutMode] : null;
+        if (res.ok && body.redirectUrl && paymentPage?.test(body.redirectUrl)) {
+          // Kept before leaving for the bank: the only way back to this gift.
+          if (gift && body.orderId && body.giftKey) rememberGift(body.orderId, body.giftKey);
           setState((s) => ({ ...s, busy: 'redirect' }));
           window.location.assign(body.redirectUrl);
           return true;

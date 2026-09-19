@@ -51,6 +51,12 @@ function ru({ email, operator, offer }: Ctx): LegalSection[] {
                 '3 года после окончания срока доступа; документы учёта дохода — в сроки налогового законодательства',
               ],
               [
+                'Подписка в подарок',
+                'Без аккаунта: тариф, цена, номер заказа, данные операции WEBPAY, текст открытки (кому и пожелание — вводит покупатель), код подарка и его статус, хэш ключа браузера покупателя; при активации — аккаунт получателя',
+                'Договор; обязанности по законодательству — учёт дохода и чеки (абз. 20 ст. 6)',
+                '3 года после активации или окончания срока кода; документы учёта дохода — в сроки налогового законодательства',
+              ],
+              [
                 'Покупки в App Store',
                 'Сведения Apple о покупке: продукт, даты, статус, страна магазина. Платёжные данные мы не получаем',
                 'Договор',
@@ -263,6 +269,12 @@ function en({ email, operator, offer }: Ctx): LegalSection[] {
                 'Account code, e-mail, plan, price and currency, order number, WEBPAY transaction number and status, payment and access dates, language',
                 'Contract; legal obligations — income accounting and receipts (Article 6, paragraph 20)',
                 '3 years after the access period ends; income accounting documents — as required by tax law',
+              ],
+              [
+                'Gift subscriptions',
+                'No account: plan, price, order number, WEBPAY transaction details, the card text (recipient and message, typed by the buyer), the gift code and its status, a hash of the buyer’s browser key; on redemption — the recipient’s account',
+                'Contract; legal obligations — income accounting and receipts (Article 6, paragraph 20)',
+                '3 years after redemption or the end of the code’s validity; income accounting documents — as required by tax law',
               ],
               [
                 'App Store purchases',

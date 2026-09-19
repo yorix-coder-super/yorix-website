@@ -37,8 +37,9 @@ export function formatGiftCode(code: string): string {
   return code.replace(/(.{4})(?=.)/g, '$1-');
 }
 
-export function giftUrl(origin: string, lang: 'ru' | 'en', code: string): string {
-  return `${origin}${lang === 'ru' ? '/ru' : ''}/gift/${formatGiftCode(code)}`;
+/** The short link that is shared: yorix.website/g/<code>; the site opens it in the visitor's language. */
+export function giftUrl(origin: string, code: string): string {
+  return `${origin}/g/${codeFromInput(code)}`;
 }
 
 export function redeemPageUrl(origin: string, lang: 'ru' | 'en'): string {

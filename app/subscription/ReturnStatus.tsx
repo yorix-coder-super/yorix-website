@@ -1,16 +1,22 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useSyncExternalStore } from 'react';
 import { Art, Sparkle } from '../home/art';
 import { AccountProvider, useAccount } from './account';
 import { Reveal } from './Reveal';
 import { API_BASE } from './config';
 import { subscriptionCopy } from './copy';
 import { GiftShare, type BuyerGift } from './gift/GiftShare';
+import { giftKeyFor, rememberCode } from './gift/keys';
 import { formatDate, subscriptionPath, type Lang } from './i18n';
 import { Button, Spinner } from './ui';
 
 type Status = 'checking' | 'paid' | 'pending' | 'failed';
+
+const noSubscription = () => () => {};
+const orderInUrl = () => new URLSearchParams(window.location.search).get('order') ?? '';
+// WEBPAY returns gift buyers with `gift=1`: they have no account to sign in with.
+const giftInUrl = () => new URLSearchParams(window.location.search).get('gift') === '1';
 
 function ReturnStatus() {
   const { ready, configured, signedIn, lang, getToken, signIn } = useAccount();
@@ -18,29 +24,36 @@ function ReturnStatus() {
   const [status, setStatus] = useState<Status>('checking');
   const [until, setUntil] = useState<string | null>(null);
   const [gift, setGift] = useState<BuyerGift | null>(null);
-  const needsSignIn = ready && (!configured || !signedIn);
+  // A gift is read with the key this browser kept when it paid; a plan with the account.
+  const giftKey = useSyncExternalStore(noSubscription, () => giftKeyFor(orderInUrl()), () => null);
+  const giftOrder = useSyncExternalStore(noSubscription, giftInUrl, () => false);
+  const lostGift = giftOrder && !giftKey;
+  const needsSignIn = !giftKey && !lostGift && ready && (!configured || !signedIn);
 
   useEffect(() => {
-    if (!ready || !configured || !signedIn) return;
+    if (!giftKey && (!ready || !configured || !signedIn)) return;
     let cancelled = false;
     let attempts = 0;
     // Everything below runs after an await, so state updates never cascade
     // out of the effect body itself.
     const poll = async () => {
-      const token = await getToken();
-      if (!token || cancelled) return;
-      const orderId = new URLSearchParams(window.location.search).get('order') ?? '';
+      const token = giftKey ? null : await getToken();
+      if ((!giftKey && !token) || cancelled) return;
+      const orderId = orderInUrl();
       if (!/^Y-[0-9A-Z]{10,32}$/.test(orderId)) {
         setStatus('failed');
         return;
       }
       try {
-        const res = await fetch(`${API_BASE}/v1/web/orders/${orderId}`, { headers: { 'X-Firebase-Token': token } });
+        const res = await fetch(`${API_BASE}/v1/web/orders/${orderId}`, {
+          headers: giftKey ? { 'X-Gift-Key': giftKey } : { 'X-Firebase-Token': token ?? '' },
+        });
         if (cancelled) return;
         if (res.ok) {
           const body = (await res.json()) as { status: string; premiumUntil?: string | null; gift?: BuyerGift | null };
           // A gift order is done once its code exists; the buyer gets no pass of their own.
           if (body.status === 'paid' && body.gift) {
+            rememberCode(orderId, body.gift.code);
             setGift(body.gift);
             setStatus('paid');
             return;
@@ -75,7 +88,7 @@ function ReturnStatus() {
     return () => {
       cancelled = true;
     };
-  }, [ready, configured, signedIn, getToken]);
+  }, [ready, configured, signedIn, getToken, giftKey]);
 
   return (
     <section className="relative mx-auto max-w-2xl px-5 pb-24 pt-6 text-center sm:px-8">
@@ -98,7 +111,7 @@ function ReturnStatus() {
         {gift ? copy.gift.paidTitle : status === 'paid' && until ? copy.ret.paid(formatDate(until, lang)) : copy.ret.checking}
       </h1>
       <div className="mt-8 rounded-[2rem] border border-white/12 bg-white/[0.06] p-8 backdrop-blur-xl">
-        {!needsSignIn && (status === 'checking' || status === 'pending') ? (
+        {!needsSignIn && !lostGift && (status === 'checking' || status === 'pending') ? (
           <p className="inline-flex items-center gap-3 text-lg text-white/80">
             <Spinner className="h-5 w-5" />
             {status === 'pending' ? copy.ret.pending : copy.ret.checking}
@@ -108,10 +121,11 @@ function ReturnStatus() {
         {gift ? (
           <div className="text-start">
             <p className="mb-5 text-base leading-7 text-white/85">{copy.gift.paidBody}</p>
-            <GiftShare gift={gift} onReplaced={setGift} />
+            <GiftShare gift={gift} giftKey={giftKey} onReplaced={setGift} order={orderInUrl()} />
           </div>
         ) : null}
-        {!needsSignIn && status === 'failed' ? <p className="text-base leading-7 text-white/80">{copy.ret.failed}</p> : null}
+        {!needsSignIn && !lostGift && status === 'failed' ? <p className="text-base leading-7 text-white/80">{copy.ret.failed}</p> : null}
+        {lostGift ? <p className="text-base leading-7 text-white/80">{copy.gift.lostKey}</p> : null}
         {needsSignIn ? (
           <>
             <p className="text-base leading-7 text-white/80">{copy.ret.signIn}</p>

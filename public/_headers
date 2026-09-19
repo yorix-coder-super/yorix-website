@@ -1,0 +1,10 @@
+# Static files skip the proxy (proxy.ts), so they get their own headers here.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Frame-Options: SAMEORIGIN
+
+# An SVG opened on its own is a document: no scripts, no outside requests.
+/*.svg
+  Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; img-src data:

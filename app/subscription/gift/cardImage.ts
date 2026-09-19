@@ -145,12 +145,11 @@ export async function giftCardImage({ code, url, text }: { code: string; url: st
   return new Promise((resolve, reject) => canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error('no image'))), 'image/png'));
 }
 
-export async function downloadGiftCard(args: { code: string; url: string; text: CardImageText }): Promise<void> {
-  const blob = await giftCardImage(args);
+export function saveBlob(blob: Blob, name: string): void {
   const href = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = href;
-  link.download = `yorix-gift-${args.code}.png`;
+  link.download = name;
   document.body.appendChild(link);
   link.click();
   link.remove();

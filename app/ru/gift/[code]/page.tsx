@@ -8,6 +8,8 @@ const text = subscriptionCopy['ru'].gift;
 
 // A gift link is personal: it is shared by hand and never indexed.
 export const metadata: Metadata = {
+  // A number or address in a card's text must not become a tap-to-call link.
+  formatDetection: { telephone: false, email: false, address: false },
   title: `${text.redeemTitle} | Yorix`,
   description: text.redeemBody,
   robots: { index: false, follow: false },

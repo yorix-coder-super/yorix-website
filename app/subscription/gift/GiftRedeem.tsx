@@ -9,6 +9,7 @@ import { formatDate, subscriptionPath, type Lang } from '../i18n';
 import { planCopy, type PlanId } from '../merchant';
 import { Button, Spinner } from '../ui';
 import { codeFromInput, formatGiftCode, giftCodeChecks } from './code';
+import { boughtHere } from './keys';
 import { GiftCardView } from './GiftCardView';
 
 type PublicGift = {
@@ -47,6 +48,19 @@ function GiftRedeem({ code: rawCode, appUrl }: { code: string; appUrl: string })
   const [problem, setProblem] = useState<Problem | null>(typo ? 'typo' : null);
   const [until, setUntil] = useState<string | null>(null);
 
+  // The code is a bearer secret: once read, it leaves the address bar, so the
+  // sign-in popup (which reports the page URL to Firebase), the history and
+  // any error report never see it. A reload lands on /gift with it prefilled.
+  useEffect(() => {
+    if (typo || !window.location.pathname.includes('/gift/')) return;
+    try {
+      sessionStorage.setItem('yorix-gift-code', code);
+    } catch {
+      // Private mode: the recipient types the code again after a reload.
+    }
+    window.history.replaceState(window.history.state, '', `${lang === 'ru' ? '/ru' : ''}/gift`);
+  }, [code, typo, lang]);
+
   useEffect(() => {
     if (typo) return;
     let cancelled = false;
@@ -76,6 +90,8 @@ function GiftRedeem({ code: rawCode, appUrl }: { code: string; appUrl: string })
 
   const redeem = async () => {
     if (busy) return;
+    // The buyer opening their own link to check it must not use it up by accident.
+    if (boughtHere(code) && !window.confirm(text.ownGiftConfirm)) return;
     // Sign-in first, inside the click: Safari only opens the popup from it.
     if (!signedIn) {
       const ok = await signIn();
@@ -166,6 +182,7 @@ function GiftRedeem({ code: rawCode, appUrl }: { code: string; appUrl: string })
                   {text.redeemAccept[2]}
                 </p>
                 <p className="mt-4 text-sm leading-6 text-white/70">{text.alreadySubscribed(formatDate(gift.expiresAt, lang))}</p>
+                <p className="mt-3 text-xs leading-5 text-white/55">{text.scamNote}</p>
               </>
             ) : null}
           </>

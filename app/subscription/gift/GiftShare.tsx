@@ -1,14 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { useAccount } from '../account';
 import { API_BASE } from '../config';
 import { subscriptionCopy } from '../copy';
 import { formatDate, type Lang } from '../i18n';
 import { planCopy, type PlanId } from '../merchant';
 import { Button, Spinner } from '../ui';
-import { downloadGiftCard } from './cardImage';
-import { codeFromInput, giftUrl, redeemPageUrl } from './code';
+import { giftCardImage, saveBlob, type CardImageText } from './cardImage';
+import { giftUrl, redeemPageUrl } from './code';
+import { rememberCode } from './keys';
 
 // A gift as its buyer sees it (the worker's publicGift with the code).
 export type BuyerGift = {
@@ -36,34 +37,81 @@ export function GiftStatus({ gift, lang }: { gift: BuyerGift; lang: Lang }) {
   return <p className={`inline-flex w-fit rounded-full px-3 py-1 text-sm font-semibold ${tone}`}>{label}</p>;
 }
 
-// What the buyer passes on while the gift waits: the link (copy, share), the
-// code, a card to print, and the way out when the link went astray.
-export function GiftShare({ gift, onReplaced }: { gift: BuyerGift; onReplaced: (next: BuyerGift) => void }) {
+const noSubscription = () => () => {};
+
+function canShareFiles(): boolean {
+  try {
+    return typeof navigator !== 'undefined' && typeof navigator.canShare === 'function' && navigator.canShare({ files: [new File([''], 'card.png', { type: 'image/png' })] });
+  } catch {
+    return false;
+  }
+}
+
+// What the buyer passes on while the gift waits: the card (a picture with the
+// QR code, sent straight into a messenger), the link, the code, and the way
+// out when the link went astray. `giftKey` is the order's key on this device.
+export function GiftShare({
+  gift,
+  giftKey,
+  order,
+  onReplaced,
+}: {
+  gift: BuyerGift;
+  giftKey?: string | null;
+  order?: string;
+  onReplaced: (next: BuyerGift) => void;
+}) {
   const { lang, getToken } = useAccount();
   const text = subscriptionCopy[lang].gift;
   const [copied, setCopied] = useState(false);
   const [busy, setBusy] = useState<'replace' | 'card' | null>(null);
   const [notice, setNotice] = useState<Notice | null>(null);
+  // Known in the browser only; the server renders the copy-first layout.
+  const shareFiles = useSyncExternalStore(noSubscription, canShareFiles, () => false);
+  const card = useRef<{ code: string; blob: Promise<Blob> } | null>(null);
   const origin = typeof window === 'undefined' ? '' : window.location.origin;
   const code = gift.code;
-  const url = giftUrl(origin, lang, codeFromInput(code));
-  const canShare = typeof navigator !== 'undefined' && typeof navigator.share === 'function';
+  const url = giftUrl(origin, code);
   const period = planCopy[lang][gift.planId]?.forPeriod ?? '';
   const support = `${lang === 'ru' ? '/ru' : ''}/support#contact`;
   const link = 'font-semibold text-white underline decoration-white/40 underline-offset-2 hover:decoration-white';
+  const fileName = `yorix-gift-${code}.png`;
+
+  const cardText: CardImageText = {
+    eyebrow: text.eyebrow,
+    title: gift.to ? text.cardFor(gift.to) : text.redeemTitle,
+    message: gift.message ?? '',
+    period: text.cardPlan(period),
+    codeLabel: text.code,
+    scan: text.cardScan,
+    or: text.cardOr(redeemPageUrl(origin, lang).replace(/^https?:\/\//, '')),
+    validUntil: text.validUntil(formatDate(gift.expiresAt, lang)),
+  };
+  // Drawn ahead of the tap: a share sheet opens only while the tap is fresh.
+  const cardBlob = () => {
+    if (card.current?.code !== code) card.current = { code, blob: giftCardImage({ code, url, text: cardText }) };
+    return card.current.blob;
+  };
+  useEffect(() => {
+    if (gift.status === 'active') cardBlob().catch(() => {});
+    // The card follows the code; its texts do not change while it is shown.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [code, gift.status]);
 
   const replace = async () => {
     if (busy || !window.confirm(text.replaceConfirm)) return;
     setBusy('replace');
     setNotice(null);
     try {
-      const token = await getToken();
+      const token = giftKey ? null : await getToken();
       const res = await fetch(`${API_BASE}/v1/web/gifts/${encodeURIComponent(code)}/replace`, {
         method: 'POST',
-        headers: token ? { 'X-Firebase-Token': token } : {},
+        headers: giftKey ? { 'X-Gift-Key': giftKey } : token ? { 'X-Firebase-Token': token } : {},
       });
       if (res.ok) {
-        onReplaced((await res.json()) as BuyerGift);
+        const next = (await res.json()) as BuyerGift;
+        if (order) rememberCode(order, next.code);
+        onReplaced(next);
         setCopied(false);
         setNotice('replaced');
       } else {
@@ -76,26 +124,31 @@ export function GiftShare({ gift, onReplaced }: { gift: BuyerGift; onReplaced: (
     setBusy(null);
   };
 
-  const card = async () => {
+  const sendCard = async () => {
     if (busy) return;
     setBusy('card');
     setNotice(null);
     try {
-      const host = redeemPageUrl(origin, lang).replace(/^https?:\/\//, '');
-      await downloadGiftCard({
-        code,
-        url,
-        text: {
-          eyebrow: text.eyebrow,
-          title: gift.to ? text.cardFor(gift.to) : text.redeemTitle,
-          message: gift.message ?? '',
-          period: text.cardPlan(period),
-          codeLabel: text.code,
-          scan: text.cardScan,
-          or: text.cardOr(host),
-          validUntil: text.validUntil(formatDate(gift.expiresAt, lang)),
-        },
-      });
+      const blob = await cardBlob();
+      const file = new File([blob], fileName, { type: 'image/png' });
+      if (shareFiles && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], text: `${text.shareText(period)} ${url}` });
+      } else {
+        saveBlob(blob, fileName);
+      }
+    } catch (error) {
+      // Closing the share sheet is not a failure.
+      if ((error as { name?: string })?.name !== 'AbortError') setNotice('cardError');
+    }
+    setBusy(null);
+  };
+
+  const downloadCard = async () => {
+    if (busy) return;
+    setBusy('card');
+    setNotice(null);
+    try {
+      saveBlob(await cardBlob(), fileName);
     } catch {
       setNotice('cardError');
     }
@@ -112,22 +165,23 @@ export function GiftShare({ gift, onReplaced }: { gift: BuyerGift; onReplaced: (
         <p className="mt-1 break-all rounded-2xl border border-white/15 bg-white/[0.06] px-4 py-3 font-mono text-sm text-white">{url}</p>
       </div>
       <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        {shareFiles ? (
+          <Button className="w-full sm:w-auto" disabled={busy === 'card'} onClick={() => void sendCard()} variant="light">
+            {busy === 'card' ? <Spinner className="h-5 w-5" /> : null}
+            {text.shareCard}
+          </Button>
+        ) : null}
         <Button
           className="w-full sm:w-auto"
           onClick={() => {
             void navigator.clipboard?.writeText(url).then(() => setCopied(true));
           }}
-          variant="light"
+          variant={shareFiles ? 'ghost' : 'light'}
         >
           {copied ? text.copied : text.copyLink}
         </Button>
-        {canShare ? (
-          <Button className="w-full sm:w-auto" onClick={() => void navigator.share({ title: text.eyebrow, text: text.shareText(period), url }).catch(() => {})} variant="ghost">
-            {text.share}
-          </Button>
-        ) : null}
-        <Button className="w-full sm:w-auto" disabled={busy === 'card'} onClick={() => void card()} variant="ghost">
-          {busy === 'card' ? <Spinner className="h-5 w-5" /> : null}
+        <Button className="w-full sm:w-auto" disabled={busy === 'card'} onClick={() => void downloadCard()} variant="ghost">
+          {!shareFiles && busy === 'card' ? <Spinner className="h-5 w-5" /> : null}
           {text.cardDownload}
         </Button>
       </div>

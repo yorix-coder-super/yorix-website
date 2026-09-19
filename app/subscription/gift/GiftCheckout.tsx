@@ -10,15 +10,16 @@ import { legalVersion } from '../legal/versions';
 import { charges, merchant, planCopy, prices } from '../merchant';
 import { Money } from '../Money';
 import { Button, Spinner } from '../ui';
+import { cardHasContact } from './cardText';
 import { GiftCardView } from './GiftCardView';
 
 const GIFT_PLANS = ['year', 'month'] as const;
 type GiftPlan = (typeof GIFT_PLANS)[number];
 
 // Napper-style gift checkout: the card on the left follows what the buyer
-// types; on the right the period, the card text, the one acceptance box and
-// the same Apple → WEBPAY path as the plans. After payment the return page
-// shows the link and the code — nothing is sent by e-mail.
+// types; on the right the period, the card text and the one acceptance box.
+// No account: the buyer may have no iPhone at all. After payment the return
+// page shows the link, the code and the card — nothing is sent by e-mail.
 export function GiftCheckout() {
   const { lang, currency, configured, config, signedIn, error, signIn, createOrder, copy } = useAccount();
   const text = subscriptionCopy[lang].gift;
@@ -27,6 +28,7 @@ export function GiftCheckout() {
   const [message, setMessage] = useState('');
   const [accepted, setAccepted] = useState(false);
   const [missing, setMissing] = useState(false);
+  const [contact, setContact] = useState(false);
   const [closed, setClosed] = useState(false);
   const [stage, setStage] = useState<'idle' | 'signin' | 'order' | 'redirect'>('idle');
   const acceptRef = useRef<HTMLInputElement>(null);
@@ -34,10 +36,15 @@ export function GiftCheckout() {
   const price = formatMoney(prices[planId][currency], currency, lang);
   const charge = currency === 'BYN' ? null : formatMoney(charges[planId][currency], 'BYN', lang);
   const live = configured && config !== null && config.checkoutMode !== 'off';
+  const testing = config?.checkoutMode === 'test';
   const terms: Terms = { offer: legalVersion.offer, payment: legalVersion.payment, privacy: legalVersion.privacy };
 
   const proceed = async () => {
     if (stage !== 'idle') return;
+    if (cardHasContact(to, message)) {
+      setContact(true);
+      return;
+    }
     if (!accepted) {
       setMissing(true);
       acceptRef.current?.focus();
@@ -48,7 +55,9 @@ export function GiftCheckout() {
       setClosed(true);
       return;
     }
-    if (!signedIn) {
+    // A gift needs no account. Only while checkout runs on test cards does a
+    // tester sign in first (the worker refuses anyone else).
+    if (testing && !signedIn) {
       setStage('signin');
       const ok = await signIn();
       if (!ok) {
@@ -75,8 +84,8 @@ export function GiftCheckout() {
     stage === 'signin' ? copy.checkout.signingIn
     : stage === 'order' ? copy.checkout.creating
     : stage === 'redirect' ? copy.checkout.redirecting
-    : signedIn ? text.pay(price)
-    : copy.terms.withApple;
+    : testing && !signedIn ? copy.terms.withApple
+    : text.pay(price);
   const field = 'mt-2 w-full rounded-2xl border border-white/15 bg-white/[0.06] px-4 py-3 text-base text-white placeholder:text-white/35 focus:border-white/40 focus:outline-none';
   const link = 'font-semibold text-white underline decoration-white/40 underline-offset-2 hover:decoration-white';
 
@@ -134,11 +143,29 @@ export function GiftCheckout() {
 
         <label className="block text-sm font-semibold text-white/80">
           {text.to}
-          <input className={field} maxLength={40} onChange={(event) => setTo(event.target.value)} placeholder={text.toPlaceholder} value={to} />
+          <input
+            className={field}
+            maxLength={40}
+            onChange={(event) => {
+              setTo(event.target.value);
+              setContact(false);
+            }}
+            placeholder={text.toPlaceholder}
+            value={to}
+          />
         </label>
         <label className="block text-sm font-semibold text-white/80">
           {text.message}
-          <textarea className={`${field} min-h-24 resize-y`} maxLength={200} onChange={(event) => setMessage(event.target.value)} placeholder={text.messagePlaceholder} value={message} />
+          <textarea
+            className={`${field} min-h-24 resize-y`}
+            maxLength={200}
+            onChange={(event) => {
+              setMessage(event.target.value);
+              setContact(false);
+            }}
+            placeholder={text.messagePlaceholder}
+            value={message}
+          />
         </label>
 
         <label className="flex items-start gap-3 text-sm leading-6 text-white/80">
@@ -172,6 +199,11 @@ export function GiftCheckout() {
           {copy.terms.privacy[2]}
         </p>
 
+        {contact ? (
+          <p className="rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm text-[#FDE68A]" role="alert">
+            {text.cardContact}
+          </p>
+        ) : null}
         {missing ? (
           <p className="rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm text-[#FDE68A]" role="alert">
             {copy.terms.required}
@@ -184,7 +216,7 @@ export function GiftCheckout() {
         ) : null}
 
         <Button className="w-full whitespace-normal! text-center" disabled={stage !== 'idle'} type="submit" variant="light">
-          {stage !== 'idle' ? <Spinner className="h-5 w-5" /> : signedIn ? null : <AppleGlyph className="h-5 w-5" />}
+          {stage !== 'idle' ? <Spinner className="h-5 w-5" /> : testing && !signedIn ? <AppleGlyph className="h-5 w-5" /> : null}
           <Money text={label} />
         </Button>
         <p className="text-xs leading-5 text-white/55">{text.note}</p>

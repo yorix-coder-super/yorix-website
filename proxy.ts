@@ -1,35 +1,41 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { isSiteLang, LANG_COOKIE, localizedPath, preferredLanguage, type SiteLang } from './app/language';
 import { currencyForVisitor, sellsOnWeb } from './app/subscription/currency';
+import { codeFromInput, formatGiftCode } from './app/subscription/gift/code';
 
 const apiHost = process.env.NEXT_PUBLIC_YORIX_API ?? 'https://babysleepcoach-ai-proxy.babysleepcoach.workers.dev';
 
-// Enforced everywhere: nothing here can break rendering, and framing the
-// checkout from another origin is the one thing we must never allow.
-const enforcedPolicy = ["frame-ancestors 'self'", "base-uri 'self'", "object-src 'none'"].join('; ');
+// Enforced on every page: scripts run only with this response's nonce (vinext
+// puts it on its own tags) or when a trusted script loads them ('strict-dynamic'
+// — how Firebase brings in Google's sign-in loader). An injected script cannot
+// run, and nothing can phone home to a foreign host or frame the checkout.
+function contentPolicy(nonce: string) {
+  return [
+    "default-src 'self'",
+    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https://apis.google.com`,
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: blob:",
+    "font-src 'self' data:",
+    `connect-src 'self' ${apiHost} https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.googleapis.com https://apis.google.com`,
+    'frame-src https://yorix-app.firebaseapp.com https://accounts.google.com https://appleid.apple.com',
+    "form-action 'self' https://payment.webpay.by https://securesandbox.webpay.by",
+    "frame-ancestors 'self'",
+    "base-uri 'none'",
+    "object-src 'none'",
+    'report-uri /csp-report',
+    'report-to csp',
+  ].join('; ');
+}
 
-// Report-only first: vinext hydration and the Firebase popup flow decide the
-// final allow-list. Promote to Content-Security-Policy after a clean window.
-const reportOnlyPolicy = [
-  "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://apis.google.com",
-  "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: https:",
-  "font-src 'self' data:",
-  `connect-src 'self' ${apiHost} https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.googleapis.com https://apis.google.com`,
-  'frame-src https://yorix-app.firebaseapp.com https://accounts.google.com https://appleid.apple.com',
-  "form-action 'self' https://payment.webpay.by https://securesandbox.webpay.by",
-  "frame-ancestors 'self'",
-  "base-uri 'self'",
-  "object-src 'none'",
-  'report-uri /csp-report',
-  'report-to csp',
-].join('; ');
+function newNonce() {
+  return btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(16))));
+}
 
-function withSecurityHeaders(response: NextResponse) {
-  response.headers.set('Content-Security-Policy', enforcedPolicy);
+function withSecurityHeaders(response: NextResponse, nonce = newNonce()) {
+  response.headers.set('Content-Security-Policy', contentPolicy(nonce));
   response.headers.set('Reporting-Endpoints', 'csp="/csp-report"');
-  response.headers.set('Content-Security-Policy-Report-Only', reportOnlyPolicy);
+  // Keeps the Firebase sign-in popup able to report back, and cuts every other window's handle on this one.
+  response.headers.set('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
   response.headers.set('X-Frame-Options', 'SAMEORIGIN');
   response.headers.set('X-Content-Type-Options', 'nosniff');
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
@@ -97,6 +103,30 @@ function salesRedirect(request: NextRequest): NextResponse | null {
   return response;
 }
 
+// Short gift links (yorix.website/g/<code>) open the redeem page in the
+// visitor's language. Link-preview bots get Russian: gifts are bought in
+// Belarus and Russia. Only the code's own characters reach the new path.
+const SHORT_GIFT = /^\/g\/([A-Za-z0-9-]{12,20})\/?$/;
+
+function shortGiftRedirect(request: NextRequest): NextResponse | null {
+  if (request.method !== 'GET' && request.method !== 'HEAD') return null;
+  const match = SHORT_GIFT.exec(request.nextUrl.pathname);
+  if (!match) return null;
+  const saved = request.cookies.get(LANG_COOKIE)?.value;
+  const lang = isSiteLang(saved)
+    ? saved
+    : CRAWLER.test(request.headers.get('user-agent') ?? '')
+      ? 'ru'
+      : preferredLanguage(request.headers.get('accept-language'), request.headers.get('cf-ipcountry'));
+  const target = request.nextUrl.clone();
+  target.pathname = `${lang === 'ru' ? '/ru' : ''}/gift/${formatGiftCode(codeFromInput(match[1]))}`;
+  target.search = '';
+  const response = NextResponse.redirect(target, 302);
+  response.headers.set('Vary', 'Accept-Language, Cookie');
+  response.headers.set('Cache-Control', 'private, no-store');
+  return response;
+}
+
 export function proxy(request: NextRequest) {
   const hostname = request.nextUrl.hostname.toLowerCase();
   const pathname = request.nextUrl.pathname;
@@ -109,7 +139,7 @@ export function proxy(request: NextRequest) {
     return withSecurityHeaders(NextResponse.redirect(url, 308));
   }
 
-  const redirect = salesRedirect(request) ?? languageRedirect(request);
+  const redirect = shortGiftRedirect(request) ?? salesRedirect(request) ?? languageRedirect(request);
   if (redirect) return withSecurityHeaders(redirect);
 
   return withSecurityHeaders(NextResponse.next());

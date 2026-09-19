@@ -65,8 +65,8 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         </ol>
         <p>
           A month or a year can be given as a gift: on the <a href={subscriptionPath(lang, '/gift')}>gift page</a> sign the card and pay the same way.
-          After payment you see a link, a code and a card to print — they stay on the gift page when you sign in with Apple. Pass them to the
-          recipient only: anyone who has the link or the code can redeem the gift, and if the link went astray the code can be replaced. The
+          No account is needed: after payment you see a link, a code and a card with a QR code, and they stay on the gift page in the
+          browser you paid in. Pass them to the recipient only: anyone who has the link or the code can redeem the gift, and if the link went astray the code can be replaced. The
           recipient opens the link or enters the code on the <a href="/gift">“Redeem a gift”</a> page and signs in with Apple. The code is valid
           for 12 months (clauses 5.7–5.10 of the offer).
         </p>
@@ -171,8 +171,8 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
       </ol>
       <p>
         Подписку на месяц или год можно подарить: на странице <a href={subscriptionPath(lang, '/gift')}>подарка</a> подпишите открытку и оплатите так
-        же. После оплаты вы увидите ссылку, код и открытку для печати — они останутся на странице подарка, если войти через Apple. Передайте их
-        только получателю: активировать подарок может любой, у кого есть ссылка или код, а если ссылка ушла не туда, код можно заменить.
+        же. Аккаунт не нужен: после оплаты вы увидите ссылку, код и открытку с QR — они останутся на странице подарка в браузере, где вы
+        платили. Передайте их только получателю: активировать подарок может любой, у кого есть ссылка или код, а если ссылка ушла не туда, код можно заменить.
         Получатель открывает ссылку или вводит код на странице <a href="/ru/gift">«Активировать подарок»</a> и входит через Apple. Код действует
         12 месяцев (п. 5.7–5.10 оферты).
       </p>
