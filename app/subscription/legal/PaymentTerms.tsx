@@ -101,7 +101,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
 
         <h2>Service control</h2>
         <ul>
-          <li>the period of the subscription is shown in the Yorix app — restart the app if the features have not appeared yet;</li>
+          <li>restart the Yorix app if the paid features have not appeared yet;</li>
           <li>if the features have not opened within 3 days of payment, write to {email} — we will switch the subscription on or refund the payment.</li>
         </ul>
 
@@ -126,14 +126,14 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
           confirmation showing the wrong charge. Cash refunds are not made for card payments.
         </p>
         <p>
-          We make the refund within 7 days of receiving the request. The time until the money
+          We make the refund within 10 days of receiving the request (7 days where the service had defects). The time until the money
           reaches the card depends on the issuing bank.
         </p>
 
         <h2>Payment confirmation document</h2>
         <p>
-          After payment you receive two documents: the WEBPAY card receipt confirming the card payment, and a receipt from the “Professional income
-          tax” app confirming that the seller received the payment. Personal data in the samples is illustrative.
+          Two documents confirm the payment: the WEBPAY card receipt confirming the card payment, and a receipt from the “Professional income
+          tax” app confirming that the seller received the payment, which we send within the time set by tax law. Personal data in the samples is illustrative.
         </p>
         <SampleReceipt lang={lang} />
       </DocumentPage>
@@ -201,7 +201,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
 
       <h2>Контроль оказания услуги</h2>
       <ul>
-        <li>срок действия подписки отображается в приложении Yorix — если функции ещё не появились, перезапустите приложение;</li>
+        <li>если функции подписки ещё не появились, перезапустите приложение Yorix;</li>
         <li>если функции подписки не открылись в течение 3 дней после оплаты, напишите на {email} — мы включим подписку или вернём деньги.</li>
       </ul>
 
@@ -226,14 +226,14 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         показывающее ошибочное списание. Возврат наличными при оплате картой не производится.
       </p>
       <p>
-        Мы возвращаем деньги в течение 7 дней после получения заявления. Срок поступления денег на карту
+        Мы возвращаем деньги в течение 10 дней после получения заявления (при недостатках услуги — в течение 7 дней). Срок поступления денег на карту
         зависит от банка, выпустившего карту.
       </p>
 
       <h2>Документ, подтверждающий оплату</h2>
       <p>
-        После оплаты вы получаете два документа: карт-чек WEBPAY — подтверждение оплаты картой, и чек из приложения «Налог на профессиональный
-        доход» — документ, подтверждающий получение оплаты продавцом. Персональные данные в образцах условные.
+        Оплату подтверждают два документа: карт-чек WEBPAY — подтверждение оплаты картой, и чек из приложения «Налог на профессиональный
+        доход» — документ, подтверждающий получение оплаты продавцом; его направляем в срок, установленный налоговым законодательством. Персональные данные в образцах условные.
       </p>
       <SampleReceipt lang={lang} />
     </DocumentPage>

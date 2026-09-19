@@ -6,7 +6,7 @@ import type { Lang } from '../i18n';
 export const legalVersion = {
   offer: '2026-09-19',
   payment: '2026-09-19',
-  privacy: '2026-09-18',
+  privacy: '2026-09-19',
 } as const;
 
 export type LegalDoc = keyof typeof legalVersion;

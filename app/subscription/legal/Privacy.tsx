@@ -205,7 +205,7 @@ function ru({ email, operator, offer }: Ctx): LegalSection[] {
     {
       title: '11. Защита данных',
       blocks: [
-        '11.1. Мы шифруем данные при передаче (TLS), ограничиваем доступ к ним, используем двухфакторную аутентификацию служебных учётных записей и проверку подлинности Приложения, храним данные минимально необходимое время.',
+        '11.1. Мы шифруем данные при передаче (TLS), ограничиваем доступ к ним, используем проверку подлинности Приложения, храним данные минимально необходимое время.',
         '11.2. О нарушении систем защиты мы уведомляем Национальный центр защиты персональных данных незамедлительно, но не позднее трёх рабочих дней, а вас — без неоправданной задержки, если нарушение может затронуть ваши права.',
       ],
     },
@@ -220,7 +220,7 @@ function ru({ email, operator, offer }: Ctx): LegalSection[] {
     {
       title: '13. Изменения Политики',
       blocks: [
-        '13.1. Новая редакция публикуется на этой странице с датой. О существенных изменениях мы сообщаем не менее чем за 30 дней по e-mail или в Приложении. Для новых целей обработки мы запрашиваем новое согласие.',
+        '13.1. Новая редакция публикуется на этой странице с датой. О существенных изменениях мы сообщаем заранее на этой странице или в Приложении. Для новых целей обработки мы запрашиваем новое согласие.',
       ],
     },
   ];
@@ -419,7 +419,7 @@ function en({ email, operator, offer }: Ctx): LegalSection[] {
     {
       title: '11. Security',
       blocks: [
-        '11.1. We encrypt data in transit (TLS), restrict access to it, use two-factor authentication for service accounts and App attestation, and keep data no longer than necessary.',
+        '11.1. We encrypt data in transit (TLS), restrict access to it, use App attestation, and keep data no longer than necessary.',
         '11.2. We notify the National Personal Data Protection Center of a security breach without delay and within three working days, and you — without undue delay if the breach may affect your rights.',
       ],
     },
@@ -434,7 +434,7 @@ function en({ email, operator, offer }: Ctx): LegalSection[] {
     {
       title: '13. Changes',
       blocks: [
-        '13.1. A new edition is published on this page with its date. We give at least 30 days’ notice of material changes by e-mail or in the App. For new purposes we ask for new consent.',
+        '13.1. A new edition is published on this page with its date. We announce material changes in advance on this page or in the App. For new purposes we ask for new consent.',
       ],
     },
   ];
