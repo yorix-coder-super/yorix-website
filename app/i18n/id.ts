@@ -25,7 +25,7 @@ export const translation: SiteTranslation = {
     },
     faq: {
       eyebrow: 'FAQ',
-      title: 'Pertanyaan seputar tidur bayi, dijawab dengan tenang.',
+      title: 'Pertanyaan yang sering diajukan',
       items: [
         {
           question: 'Apa bedanya Yorix dengan tabel tidur bayi?',

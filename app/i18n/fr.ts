@@ -25,7 +25,7 @@ export const translation: SiteTranslation = {
     },
     faq: {
       eyebrow: 'FAQ',
-      title: 'Sommeil de bébé : vos questions, des réponses sereines.',
+      title: 'Questions fréquentes',
       items: [
         {
           question: 'En quoi Yorix est-il différent d’un tableau de sommeil ?',

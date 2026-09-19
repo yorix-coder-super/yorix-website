@@ -25,7 +25,7 @@ export const translation: SiteTranslation = {
     },
     faq: {
       eyebrow: 'Vanliga frågor',
-      title: 'Frågor om bebissömn, lugnt besvarade.',
+      title: 'Vanliga frågor',
       items: [
         {
           question: 'Hur skiljer sig Yorix från en sömntabell för bebisar?',

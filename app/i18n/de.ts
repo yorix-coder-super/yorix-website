@@ -25,7 +25,7 @@ export const translation: SiteTranslation = {
     },
     faq: {
       eyebrow: 'FAQ',
-      title: 'Fragen zum Babyschlaf, ruhig beantwortet.',
+      title: 'Häufige Fragen',
       items: [
         {
           question: 'Was unterscheidet Yorix von einer Babyschlaf-Tabelle?',

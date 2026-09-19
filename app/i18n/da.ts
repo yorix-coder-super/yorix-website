@@ -25,7 +25,7 @@ export const translation: SiteTranslation = {
     },
     faq: {
       eyebrow: 'FAQ',
-      title: 'Spørgsmål om babysøvn, roligt besvaret.',
+      title: 'Ofte stillede spørgsmål',
       items: [
         {
           question: 'Hvad gør Yorix anderledes end en søvntabel?',

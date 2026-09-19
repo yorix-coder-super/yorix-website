@@ -25,7 +25,7 @@ export const translation: SiteTranslation = {
     },
     faq: {
       eyebrow: 'Preguntas frecuentes',
-      title: 'Preguntas sobre el sueño del bebé, respondidas con calma.',
+      title: 'Preguntas frecuentes',
       items: [
         {
           question: '¿En qué se diferencia Yorix de una tabla de sueño?',

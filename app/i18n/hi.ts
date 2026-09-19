@@ -26,7 +26,7 @@ export const translation: SiteTranslation = {
     },
     faq: {
       eyebrow: 'सवाल-जवाब',
-      title: 'शिशु की नींद के सवाल, शांति से जवाब।',
+      title: 'अक्सर पूछे जाने वाले सवाल',
       items: [
         {
           question: 'Yorix शिशु की नींद के चार्ट से कैसे अलग है?',

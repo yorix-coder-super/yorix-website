@@ -25,7 +25,7 @@ export const translation: SiteTranslation = {
     },
     faq: {
       eyebrow: 'Câu hỏi thường gặp',
-      title: 'Những câu hỏi về giấc ngủ của bé, giải đáp nhẹ nhàng.',
+      title: 'Câu hỏi thường gặp',
       items: [
         {
           question: 'Yorix khác gì so với bảng giờ ngủ của bé?',

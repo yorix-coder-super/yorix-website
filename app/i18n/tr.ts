@@ -25,7 +25,7 @@ export const translation: SiteTranslation = {
     },
     faq: {
       eyebrow: 'SSS',
-      title: 'Bebek uykusu soruları, sakin cevaplarla.',
+      title: 'Sık sorulan sorular',
       items: [
         {
           question: 'Yorix’i bir bebek uyku çizelgesinden farklı kılan ne?',

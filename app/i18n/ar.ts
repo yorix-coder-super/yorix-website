@@ -25,7 +25,7 @@ export const translation: SiteTranslation = {
     },
     faq: {
       eyebrow: 'الأسئلة الشائعة',
-      title: 'أسئلة عن نوم الطفل، بإجابات هادئة.',
+      title: 'الأسئلة الشائعة',
       items: [
         {
           question: 'ما الذي يميّز Yorix عن جدول نوم الأطفال؟',

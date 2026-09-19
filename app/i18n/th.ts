@@ -26,7 +26,7 @@ export const translation: SiteTranslation = {
     },
     faq: {
       eyebrow: 'คำถามที่พบบ่อย',
-      title: 'คำถามเรื่องการนอนของลูก ตอบอย่างใจเย็น',
+      title: 'คำถามที่พบบ่อย',
       items: [
         {
           question: 'Yorix ต่างจากตารางการนอนของทารกอย่างไร?',

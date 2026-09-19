@@ -30,7 +30,7 @@ export const translation: SiteTranslation = {
     },
     faq: {
       eyebrow: 'FAQ',
-      title: 'Baby sleep questions, answered calmly.',
+      title: 'Frequently asked questions',
       items: [
         {
           question: 'What makes Yorix different from a baby sleep chart?',

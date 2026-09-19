@@ -25,7 +25,7 @@ export const translation: SiteTranslation = {
     },
     faq: {
       eyebrow: 'Запитання',
-      title: 'Запитання про сон малюка — відповідаємо спокійно.',
+      title: 'Часті запитання',
       items: [
         {
           question: 'Чим Yorix відрізняється від таблиці сну?',

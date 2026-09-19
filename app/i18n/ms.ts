@@ -25,7 +25,7 @@ export const translation: SiteTranslation = {
     },
     faq: {
       eyebrow: 'Soalan lazim',
-      title: 'Soalan tentang tidur bayi, dijawab dengan tenang.',
+      title: 'Soalan lazim',
       items: [
         {
           question: 'Apakah beza Yorix dengan carta tidur bayi?',

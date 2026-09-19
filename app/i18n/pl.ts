@@ -25,7 +25,7 @@ export const translation: SiteTranslation = {
     },
     faq: {
       eyebrow: 'FAQ',
-      title: 'Pytania o sen dziecka — spokojne odpowiedzi.',
+      title: 'Najczęstsze pytania',
       items: [
         {
           question: 'Czym Yorix różni się od tabeli snu?',

@@ -26,7 +26,7 @@ export const translation: SiteTranslation = {
     },
     faq: {
       eyebrow: 'よくある質問',
-      title: '赤ちゃんの睡眠の疑問に、落ち着いてお答えします。',
+      title: 'よくある質問',
       items: [
         {
           question: 'Yorixは、赤ちゃんの睡眠表と何が違いますか？',

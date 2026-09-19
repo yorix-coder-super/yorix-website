@@ -56,7 +56,7 @@ const keepRanges = (text: string) => text.replace(/(\d[–-])(?=\d)/g, '$1\u2060
 export function FaqItem({ question, answer }: { question: string; answer: string }) {
   return (
     <details className="group rounded-2xl border border-white/12 bg-white/[0.06] backdrop-blur-xl transition open:bg-white/[0.09] hover:border-white/25">
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-[15px] font-medium leading-6 text-white focus:outline-none focus-visible:underline [&::-webkit-details-marker]:hidden">
+      <summary className="flex min-h-20 cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-[15px] font-medium leading-6 text-white focus:outline-none focus-visible:underline [&::-webkit-details-marker]:hidden">
         {question}
         <Plus className="h-5 w-5 shrink-0 text-white/70 transition duration-300 group-open:rotate-45" aria-hidden="true" />
       </summary>

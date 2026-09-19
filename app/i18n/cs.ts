@@ -25,7 +25,7 @@ export const translation: SiteTranslation = {
     },
     faq: {
       eyebrow: 'FAQ',
-      title: 'Otázky o spánku miminka, zodpovězené v klidu.',
+      title: 'Časté dotazy',
       items: [
         {
           question: 'Čím se Yorix liší od tabulky spánku?',

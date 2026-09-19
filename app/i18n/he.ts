@@ -25,7 +25,7 @@ export const translation: SiteTranslation = {
     },
     faq: {
       eyebrow: 'שאלות נפוצות',
-      title: 'שאלות על שינת תינוקות, עם תשובות רגועות.',
+      title: 'שאלות נפוצות',
       items: [
         {
           question: 'במה Yorix שונה מטבלת שינה לתינוקות?',

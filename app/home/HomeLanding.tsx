@@ -149,7 +149,7 @@ export async function HomeLanding({ locale }: { locale: HomeLocale }) {
           <Reveal>
             <h2 className="text-2xl font-semibold text-white sm:text-[1.7rem]">{copy.faq.title}</h2>
           </Reveal>
-          <div className="mt-5 grid items-start gap-3 md:grid-cols-3">
+          <div className="mt-5 grid items-start gap-3 md:grid-cols-2 xl:grid-cols-3">
             {copy.faq.items.map((item, index) => (
               <Reveal animation="fadeIn" delay={index * 90} key={item.question}>
                 <FaqItem answer={item.answer} question={item.question} />
