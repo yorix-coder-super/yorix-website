@@ -13,3 +13,7 @@ export const firebaseConfig = {
 };
 
 export const isFirebaseConfigured = Boolean(firebaseConfig.apiKey && firebaseConfig.appId);
+
+// Cloudflare Turnstile guards the contact form once the owner sets a key
+// here and TURNSTILE_SECRET in the worker; empty means the form runs plain.
+export const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? '';

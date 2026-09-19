@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type SubmitEvent } from 'react';
 import type { SupportCopy } from '../i18n/types';
-import { API_BASE } from '../subscription/config';
+import { API_BASE, turnstileSiteKey } from '../subscription/config';
 
 type State = 'idle' | 'sending' | 'sent' | 'invalid' | 'error';
 
@@ -34,6 +34,16 @@ export function ContactForm({
   useEffect(() => {
     opened.current = Date.now();
   }, []);
+  // The widget writes its answer into a hidden field of this form.
+  useEffect(() => {
+    if (!turnstileSiteKey || document.querySelector('script[data-turnstile]')) return;
+    const script = document.createElement('script');
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+    script.async = true;
+    script.defer = true;
+    script.dataset.turnstile = 'true';
+    document.head.appendChild(script);
+  }, []);
 
   const submit = async (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -44,6 +54,7 @@ export function ContactForm({
       email: text(form.get('email')).trim(),
       message: text(form.get('message')).trim(),
       website: text(form.get('website')),
+      turnstile: text(form.get('cf-turnstile-response')),
       lang,
       page,
       elapsedMs: Date.now() - opened.current,
@@ -95,6 +106,7 @@ export function ContactForm({
         {copy.message}
         <textarea className={`${field} min-h-32 resize-y`} maxLength={4000} minLength={10} name="message" placeholder={copy.messagePlaceholder} required />
       </label>
+      {turnstileSiteKey ? <div className="cf-turnstile" data-language={lang} data-sitekey={turnstileSiteKey} data-theme="dark" /> : null}
       {/* Humans never see or fill this; bots do. */}
       <input aria-hidden="true" autoComplete="off" className="absolute -left-[9999px] h-px w-px opacity-0" name="website" tabIndex={-1} />
       {state === 'invalid' ? (

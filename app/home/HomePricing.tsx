@@ -58,6 +58,9 @@ export async function HomePricing({ locale }: { locale: SiteLocale }) {
               <Art className="h-5 w-5 object-contain" height={250} name="icon-gift" width={192} />
               {subscriptionCopy[lang].gift.eyebrow}
             </a>
+            <a className="inline-flex items-center gap-2 text-sm font-semibold text-white/80 underline decoration-white/30 hover:text-white hover:decoration-white" href={`${lang === 'ru' ? '/ru' : ''}/gift`}>
+              {subscriptionCopy[lang].gift.entryTitle}
+            </a>
           </div>
         </div>
       </AccountProvider>

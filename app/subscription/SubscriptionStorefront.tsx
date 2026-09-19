@@ -123,6 +123,15 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
                 . {copy.plans.device}
               </p>
               <ChargeNote className="mt-2 text-sm leading-6 text-white/50" />
+              <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-white/10 pt-5">
+                <a className="inline-flex items-center gap-2 text-sm font-semibold text-white underline decoration-white/30 underline-offset-2 hover:decoration-white" href={subscriptionPath(lang, '/gift')}>
+                  <Art className="h-5 w-5 object-contain" height={250} name="icon-gift" width={192} />
+                  {copy.gift.eyebrow}
+                </a>
+                <a className="inline-flex items-center gap-2 text-sm font-semibold text-white/80 underline decoration-white/30 underline-offset-2 hover:text-white hover:decoration-white" href={`${lang === 'ru' ? '/ru' : ''}/gift`}>
+                  {copy.gift.entryTitle}
+                </a>
+              </div>
             </div>
           ) : (
             <AppStorePanel locale={lang} />

@@ -179,10 +179,30 @@ const ru: SubscriptionCopy = {
   faq: {
     title: 'Вопросы',
     items: [
-      { q: 'Что будет, когда срок закончится?', a: 'Подписка выключится, записи останутся. Ничего не спишется — карту мы не храним. Чтобы продлить, оформите новый срок: дни добавятся к текущему.' },
-      { q: 'Зачем входить через Apple?', a: 'Так подписка сама включится в приложении на вашем аккаунте — без кодов и ручной активации: после оплаты всё подключается автоматически.' },
-      { q: 'Можно ли вернуть деньги?', a: 'Да, по разделу 7 оферты. Если подписка не включилась, не работала по нашей вине или списание ошибочное, вернём всю сумму. Если откажетесь сами — стоимость неиспользованных дней за вычетом наших подтверждённых расходов.' },
-      { q: 'У меня уже есть подписка в App Store.', a: 'Отключите автопродление: Настройки → ваше имя → Подписки. Срок с сайта начинается сразу после оплаты, поэтому оформляйте его, когда закончится подписка Apple.' },
+      {
+        q: 'Что будет, когда срок закончится?',
+        a: 'Ничего не спишется: карту мы не храним, автопродления нет. В день окончания выключатся только платные функции — прогноз следующего сна, ИИ-коуч, аналитика и советы на день. Всё, что вы записали, остаётся с вами: дневник снов, кормлений и ухода никуда не денется, им можно пользоваться и дальше. Чтобы продолжить, оформите любой срок заново — если что-то осталось от прежнего, новые дни добавятся к остатку.',
+      },
+      {
+        q: 'Зачем входить через Apple?',
+        a: 'Подписку нужно к чему-то привязать, иначе её некуда включить. Вход через Apple — самый короткий путь: ни пароля, ни анкеты, а если выбрать «Скрыть e-mail», мы даже не увидим ваш адрес. Дальше всё само: откройте Yorix на iPhone с тем же аккаунтом Apple — платные функции уже включены, никаких кодов вводить не нужно.',
+      },
+      {
+        q: 'Можно ли вернуть деньги?',
+        a: 'Да. Если подписка не включилась, работала с перебоями по нашей вине или деньги списались по ошибке — вернём всю сумму: напишите нам через форму на странице поддержки и укажите номер заказа. Если просто передумали, вернём стоимость неиспользованных дней за вычетом наших подтверждённых расходов. Деньги возвращаем на ту же карту: в течение 10 дней с даты требования, а если причина в недостатке — в течение 7 дней. Полные условия — в разделе 7 публичного договора.',
+      },
+      {
+        q: 'У меня уже есть подписка в App Store.',
+        a: 'Две подписки не складываются. Срок, купленный на сайте, начинает идти сразу после оплаты, то есть пойдёт параллельно с подпиской Apple, и часть дней пропадёт зря. Выгоднее сначала отключить автопродление (Настройки → ваше имя → Подписки → Yorix), дождаться конца оплаченного периода и только потом оформить срок здесь. Если ждать не хочется, купите подарок себе: код действует 12 месяцев, активируете его в нужный день.',
+      },
+      {
+        q: 'Мне подарили подписку — что делать?',
+        a: 'Откройте присланную ссылку или введите код с открытки на странице «Активировать подарок» — код из 12 символов, его можно вписать вручную или навести камеру на QR-код с открытки. Дальше нажмите «Активировать с Apple» и войдите тем же аккаунтом Apple, которым пользуетесь в приложении: подписка включится сразу, вводить что-то ещё не нужно. Код действует 12 месяцев с даты покупки и срабатывает один раз — после активации ссылка перестаёт работать, а срок появляется в приложении.',
+      },
+      {
+        q: 'Хочу подарить подписку.',
+        a: 'Откройте страницу «Подписка в подарок», выберите месяц или год, напишите, кому и что пожелать, и оплатите картой. Аккаунт для этого не нужен: подарок можно купить даже с Android, лишь бы у получателя был iPhone или iPad. Сразу после оплаты вы получите ссылку, код и готовую открытку с QR-кодом — отправьте её в мессенджер или распечатайте. Пока подарок не активирован, код можно заменить, если ссылка ушла не тому человеку, или отменить подарок и вернуть деньги.',
+      },
     ],
     more: 'Другой вопрос? Напишите нам',
   },
@@ -368,10 +388,30 @@ const en: SubscriptionCopy = {
   faq: {
     title: 'FAQ',
     items: [
-      { q: 'What happens when the period ends?', a: 'It switches off; your records stay. Nothing is charged — we keep no card. To extend, buy a new period: the days are added on.' },
-      { q: 'Why sign in with Apple?', a: 'So the subscription turns on by itself in the app on your account — no codes, no manual activation: everything connects automatically after payment.' },
-      { q: 'Can I get a refund?', a: 'Yes, under section 7 of the offer. If it never switched on, failed through our fault or was charged by mistake, we refund everything. If you cancel yourself — the unused days less our documented costs.' },
-      { q: 'I already have an App Store subscription.', a: 'Turn off auto-renewal: Settings → your name → Subscriptions. A site period starts right after payment, so buy it when the Apple period ends.' },
+      {
+        q: 'What happens when the period ends?',
+        a: 'Nothing is charged: we keep no card and there is no auto-renewal. On the last day only the paid features switch off — the next-nap forecast, the AI coach, the analytics and the daily advice. Everything you wrote stays with you: the diary of sleep, feeds and care is still there to use. To carry on, buy any period again — whatever is left of the old one is added to it.',
+      },
+      {
+        q: 'Why sign in with Apple?',
+        a: 'A subscription has to belong to an account, otherwise there is nothing to switch on. Signing in with Apple is the shortest way there: no password, no form, and with «Hide My Email» we never even see your address. After that it happens by itself: open Yorix on your iPhone with the same Apple account and the paid features are already on — no codes to type.',
+      },
+      {
+        q: 'Can I get a refund?',
+        a: 'Yes. If the subscription never switched on, worked badly through our fault or was charged by mistake, we refund everything — write to us through the form on the support page and give the order number. If you simply changed your mind, we refund the unused days less our documented costs. The money goes back to the same card within 10 days of the request, or within 7 days when the reason is a defect. The full terms are in section 7 of the public offer.',
+      },
+      {
+        q: 'I already have an App Store subscription.',
+        a: 'The two do not add up. A period bought here starts the moment you pay, so it would run alongside the Apple one and part of it would be wasted. It is better to turn off auto-renewal first (Settings → your name → Subscriptions → Yorix), let the paid period run out, and buy here after that. If you would rather not wait, buy a gift for yourself: the code is good for 12 months and you redeem it on the day you need it.',
+      },
+      {
+        q: 'Someone gave me a subscription — what now?',
+        a: 'Open the link you were sent, or enter the code from the card on the «Redeem a gift» page — it is 12 characters, and the card also carries a QR code you can simply point a camera at. Then press «Redeem with Apple» and sign in with the same Apple account you use in the app: the subscription turns on at once, with nothing else to type. The code is valid for 12 months from the purchase and works once — after that the link stops working and the period shows up in the app.',
+      },
+      {
+        q: 'I want to give a subscription as a gift.',
+        a: 'Open the «Gift a subscription» page, pick a month or a year, write who it is for and a few words, and pay by card. No account is needed: you can buy the gift from an Android phone as long as the recipient has an iPhone or iPad. Right after payment you get the link, the code and a ready-made card with a QR code — send it in a messenger or print it. While the gift is unredeemed you can replace the code if the link went to the wrong person, or cancel the gift and get the money back.',
+      },
     ],
     more: 'Another question? Write to us',
   },

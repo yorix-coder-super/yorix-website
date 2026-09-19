@@ -4,6 +4,8 @@ import { currencyForVisitor, sellsOnWeb } from './app/subscription/currency';
 import { codeFromInput, formatGiftCode } from './app/subscription/gift/code';
 
 const apiHost = process.env.NEXT_PUBLIC_YORIX_API ?? 'https://babysleepcoach-ai-proxy.babysleepcoach.workers.dev';
+// Cloudflare Turnstile on the contact form: allowed only while it is configured.
+const turnstile = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ? ' https://challenges.cloudflare.com' : '';
 
 // Enforced on every page: scripts run only with this response's nonce (vinext
 // puts it on its own tags) or when a trusted script loads them ('strict-dynamic'
@@ -12,12 +14,12 @@ const apiHost = process.env.NEXT_PUBLIC_YORIX_API ?? 'https://babysleepcoach-ai-
 function contentPolicy(nonce: string) {
   return [
     "default-src 'self'",
-    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https://apis.google.com`,
+    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https://apis.google.com${turnstile}`,
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob:",
     "font-src 'self' data:",
     `connect-src 'self' ${apiHost} https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.googleapis.com https://apis.google.com`,
-    'frame-src https://yorix-app.firebaseapp.com https://accounts.google.com https://appleid.apple.com',
+    `frame-src https://yorix-app.firebaseapp.com https://accounts.google.com https://appleid.apple.com${turnstile}`,
     "form-action 'self' https://payment.webpay.by https://securesandbox.webpay.by",
     "frame-ancestors 'self'",
     "base-uri 'none'",
