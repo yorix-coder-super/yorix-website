@@ -15,19 +15,13 @@ export type SubscriptionCopy = {
     extend: (period: string) => string;
     trust: string;
     steps: string;
-    googleQuestion: string;
-    googleLink: string;
-    goesTo: (email: string) => string;
-    activeUntil: (email: string, date: string) => string;
-    wrongAccount: string;
-    signOut: string;
     acceptBefore: string;
     offer: string;
     and: string;
     refundTerms: string;
     device: string;
   };
-  account: { signInApple: string; signInGoogle: string; popupBlocked: string; signInError: string };
+  account: { signInApple: string; popupBlocked: string; signInError: string };
   checkout: {
     signingIn: string;
     creating: string;
@@ -37,7 +31,6 @@ export type SubscriptionCopy = {
     error: string;
     blocked: (email: string) => string;
     rateLimited: string;
-    request: string;
   };
   faq: { title: string; items: { q: string; a: string }[]; more: string };
   ret: { checking: string; paid: (date: string) => string; openApp: string; pending: string; failed: string; signIn: string; back: string };
@@ -62,35 +55,15 @@ export type SubscriptionCopy = {
     price: string;
     charge: (amount: string) => string;
     oneOff: string;
-    goesTo: (email: string) => string;
     signInNote: string;
+    active: (date: string) => string;
     accept: [string, string, string, string, string];
-    immediate: string;
     privacy: [string, string, string];
     required: string;
-    requiredImmediate: string;
     withApple: string;
     pay: (price: string) => string;
     next: string;
-    google: string;
     cancel: string;
-  };
-  request: {
-    title: string;
-    body: string;
-    plan: string;
-    email: string;
-    code: string;
-    optional: string;
-    codeHint: string;
-    submit: string;
-    cancel: string;
-    consent: string;
-    sentTitle: string;
-    sentBody: string;
-    close: string;
-    error: string;
-    errorMail: string;
   };
 };
 
@@ -124,13 +97,7 @@ const ru: SubscriptionCopy = {
     subscribe: (period) => `Оформить ${period}`,
     extend: (period) => `Продлить ${period}`,
     trust: 'Одна оплата за выбранный срок. Без автопродления, карту не сохраняем.',
-    steps: 'Apple ID из приложения → карта на WebPay → подписка включена',
-    googleQuestion: 'В приложении вошли через Google?',
-    googleLink: 'Войти через Google',
-    goesTo: (email) => `Подписка включится на ${email}.`,
-    activeUntil: (email, date) => `На ${email} подписка до ${date} — новый срок добавится к нему.`,
-    wrongAccount: 'Не тот аккаунт?',
-    signOut: 'Выйти',
+    steps: 'Вход через Apple → оплата картой → подписка в приложении',
     acceptBefore: 'Оплачивая, вы принимаете',
     offer: 'публичный договор',
     and: 'и',
@@ -139,7 +106,6 @@ const ru: SubscriptionCopy = {
   },
   account: {
     signInApple: 'Войти через Apple',
-    signInGoogle: 'Войти через Google',
     popupBlocked: 'Браузер закрыл окно входа. Разрешите всплывающие окна и нажмите ещё раз.',
     signInError: 'Войти не удалось. Попробуйте ещё раз.',
   },
@@ -147,18 +113,17 @@ const ru: SubscriptionCopy = {
     signingIn: 'Открываем вход через Apple…',
     creating: 'Создаём оплату…',
     redirecting: 'Переходим в WebPay…',
-    unavailable: 'Оплата на сайте пока закрыта — оставьте заявку, пришлём ссылку.',
-    testOnly: 'Оплата пока открыта только тестировщикам — оставьте заявку.',
-    error: 'Не получилось создать оплату. Попробуйте ещё раз или оставьте заявку.',
+    unavailable: 'Оплата картой на сайте скоро откроется.',
+    testOnly: 'Оплата картой пока открыта только для тестирования.',
+    error: 'Не получилось создать оплату. Попробуйте ещё раз через минуту.',
     blocked: (email) => `Для этого аккаунта оплата недоступна. Напишите нам: ${email}.`,
     rateLimited: 'Слишком много попыток. Подождите минуту.',
-    request: 'Оставить заявку',
   },
   faq: {
     title: 'Вопросы',
     items: [
       { q: 'Что будет, когда срок закончится?', a: 'Подписка выключится, записи останутся. Ничего не спишется — карту мы не храним. Чтобы продлить, оформите новый срок: дни добавятся к текущему.' },
-      { q: 'Зачем входить через Apple ID?', a: 'Подписка привязана к аккаунту, не к телефону. Войдите тем же Apple ID, что и в приложении, — включится именно там. Вошли через Google? Здесь тоже.' },
+      { q: 'Зачем входить через Apple?', a: 'Так подписка сама включится в приложении на вашем аккаунте. Вводить Apple ID или коды не нужно: после оплаты всё подключается автоматически.' },
       { q: 'Можно ли вернуть деньги?', a: 'Да, по разделу 7 оферты. Если подписка не включилась, не работала по нашей вине или списание ошибочное, вернём всю сумму. Если откажетесь сами — стоимость неиспользованных дней за вычетом наших подтверждённых расходов.' },
       { q: 'У меня уже есть подписка в App Store.', a: 'Отключите автопродление: Настройки → ваше имя → Подписки. Подписка Apple доработает до конца периода, срок с сайта добавится после него.' },
     ],
@@ -167,7 +132,7 @@ const ru: SubscriptionCopy = {
   ret: {
     checking: 'Проверяем оплату…',
     paid: (date) => `Подписка включена до ${date}`,
-    openApp: 'Откройте Yorix на iPhone — всё уже работает. Чек придёт на e-mail.',
+    openApp: 'Откройте Yorix на iPhone — всё уже работает. Чек об оплате пришлёт платёжная система.',
     pending: 'Банк подтверждает оплату — обычно меньше минуты. Страница обновится сама.',
     failed: 'Оплаченный заказ не найден. Если деньги списаны, напишите нам — дату и сумму.',
     signIn: 'Войдите через Apple, чтобы увидеть статус заказа.',
@@ -200,36 +165,15 @@ const ru: SubscriptionCopy = {
     price: 'Цена',
     charge: (amount) => `к списанию ${amount}`,
     oneOff: 'Платёж разовый, без автопродления. Карту мы не сохраняем.',
-    goesTo: (email) => `Подписка откроется на ${email} сразу после оплаты.`,
-    signInNote: 'Войдите тем же Apple ID, что и в приложении: подписка откроется на нём сразу после оплаты.',
+    signInNote: 'Подписка включится в приложении Yorix на вашем аккаунте Apple сразу после оплаты — ничего вводить не нужно.',
+    active: (date) => `Подписка уже действует до ${date} — новый срок добавится к ней.`,
     accept: ['Я принимаю условия ', 'публичного договора', ' и ', 'оплаты и возврата', '. Мне есть 18 лет.'],
-    immediate:
-      'Прошу открыть доступ сразу после оплаты. Понимаю, что при отказе в течение 14 дней оплачу уже предоставленные дни, а после окончания оплаченного срока право на отказ утрачивается.',
     privacy: ['Данные аккаунта и заказа обрабатываем для исполнения договора — ', 'Политика обработки персональных данных', '. Данные карты вводятся только на странице WEBPAY.'],
     required: 'Отметьте, что принимаете условия: без этого оплата недоступна.',
-    requiredImmediate: 'Для покупателей из Европы нужна и эта отметка: без неё мы не можем открыть доступ сразу после оплаты.',
     withApple: 'Продолжить с Apple',
     pay: (price) => `Перейти к оплате · ${price}`,
     next: 'Продолжить',
-    google: 'В приложении вход через Google? Войти через Google',
     cancel: 'Отмена',
-  },
-  request: {
-    title: 'Заявка на подписку',
-    body: 'Оставьте e-mail — в течение дня пришлём ссылку на оплату. Платить пока не нужно.',
-    plan: 'Срок',
-    email: 'E-mail',
-    code: 'Код аккаунта',
-    optional: '(если есть)',
-    codeHint: 'В приложении: Настройки → Аккаунт',
-    submit: 'Получить ссылку',
-    cancel: 'Отмена',
-    consent: 'E-mail нужен только для этого заказа. Как мы обрабатываем данные:',
-    sentTitle: 'Заявка принята',
-    sentBody: 'Ссылка придёт на e-mail в течение дня — загляните и в «Спам».',
-    close: 'Понятно',
-    error: 'Не отправилось.',
-    errorMail: 'Написать письмом',
   },
 };
 
@@ -263,13 +207,7 @@ const en: SubscriptionCopy = {
     subscribe: (period) => `Subscribe ${period}`,
     extend: (period) => `Extend ${period}`,
     trust: 'One payment for the period. No auto-renewal, no card on file.',
-    steps: 'Apple ID as in the app → card via WebPay → on in the app',
-    googleQuestion: 'Signed in to the app with Google?',
-    googleLink: 'Sign in with Google',
-    goesTo: (email) => `The subscription goes to ${email}.`,
-    activeUntil: (email, date) => `${email} is subscribed until ${date} — a new period is added on.`,
-    wrongAccount: 'Wrong account?',
-    signOut: 'Sign out',
+    steps: 'Sign in with Apple → pay by card → it’s on in the app',
     acceptBefore: 'By paying you accept the',
     offer: 'public offer',
     and: 'and the',
@@ -278,7 +216,6 @@ const en: SubscriptionCopy = {
   },
   account: {
     signInApple: 'Sign in with Apple',
-    signInGoogle: 'Sign in with Google',
     popupBlocked: 'The browser closed the sign-in window. Allow pop-ups and press again.',
     signInError: 'Sign-in failed. Please try again.',
   },
@@ -286,18 +223,17 @@ const en: SubscriptionCopy = {
     signingIn: 'Opening Apple sign-in…',
     creating: 'Creating your payment…',
     redirecting: 'Taking you to WebPay…',
-    unavailable: "Card payment on the site isn't open yet — leave a request and we'll send a link.",
-    testOnly: 'Payment is open to testers only for now — leave a request.',
-    error: "Couldn't create the payment. Try again or leave a request.",
+    unavailable: 'Card payment on the site opens soon.',
+    testOnly: 'Card payment is open for testing only for now.',
+    error: 'Couldn’t create the payment. Please try again in a minute.',
     blocked: (email) => `Payment isn't available for this account. Write to us: ${email}.`,
     rateLimited: 'Too many attempts. Wait a minute.',
-    request: 'Leave a request',
   },
   faq: {
     title: 'FAQ',
     items: [
       { q: 'What happens when the period ends?', a: 'It switches off; your records stay. Nothing is charged — we keep no card. To extend, buy a new period: the days are added on.' },
-      { q: 'Why sign in with my Apple ID?', a: 'Tied to your account, not your phone. Same Apple ID as in the app — and it switches on there. Google in the app? Google here.' },
+      { q: 'Why sign in with Apple?', a: 'So the subscription turns on by itself in the app on your account. No Apple ID or codes to type in: everything connects automatically after payment.' },
       { q: 'Can I get a refund?', a: 'Yes, under section 7 of the offer. If it never switched on, failed through our fault or was charged by mistake, we refund everything. If you cancel yourself — the unused days less our documented costs.' },
       { q: 'I already have an App Store subscription.', a: 'Turn off auto-renewal: Settings → your name → Subscriptions. The Apple period runs to its end; the site period is added after it.' },
     ],
@@ -306,7 +242,7 @@ const en: SubscriptionCopy = {
   ret: {
     checking: 'Checking the payment…',
     paid: (date) => `Subscription on until ${date}`,
-    openApp: "Open Yorix on your iPhone — it's already working. The receipt arrives by e-mail.",
+    openApp: 'Open Yorix on your iPhone — it’s already working. The payment system sends the receipt.',
     pending: 'The bank is confirming the payment — usually under a minute. This page refreshes itself.',
     failed: 'No paid order found. If money was charged, write to us with the date and amount.',
     signIn: 'Sign in with Apple to see the order status.',
@@ -343,36 +279,15 @@ const en: SubscriptionCopy = {
     price: 'Price',
     charge: (amount) => `charged as ${amount}`,
     oneOff: 'One-off payment, no auto-renewal. We keep no card on file.',
-    goesTo: (email) => `The subscription opens on ${email} right after payment.`,
-    signInNote: 'Sign in with the same Apple ID as in the app: the subscription opens there right after payment.',
+    signInNote: 'It turns on in the Yorix app on your Apple account right after payment — nothing to type in.',
+    active: (date) => `You already have a subscription until ${date} — the new period is added on.`,
     accept: ['I accept the ', 'public offer', ' and the ', 'payment and refund terms', '. I am 18 or older.'],
-    immediate:
-      'Please start my subscription right after payment. I understand that if I withdraw within 14 days I pay for the days already provided, and that I lose the right of withdrawal once the paid period has been fully provided.',
     privacy: ['We process account and order data to perform the contract — see the ', 'personal data policy', '. Card details are entered only on the WEBPAY page.'],
     required: 'Tick the box to accept the terms — payment is not available without it.',
-    requiredImmediate: 'Buyers in Europe need this box too: without it we cannot open access right after payment.',
     withApple: 'Continue with Apple',
     pay: (price) => `Continue to payment · ${price}`,
     next: 'Continue',
-    google: 'Google account in the app? Sign in with Google',
     cancel: 'Cancel',
-  },
-  request: {
-    title: 'Subscription request',
-    body: "Leave your e-mail — we'll send a payment link within a day. Nothing to pay yet.",
-    plan: 'Period',
-    email: 'E-mail',
-    code: 'Account code',
-    optional: '(if you have one)',
-    codeHint: 'In the app: Settings → Account',
-    submit: 'Send me the link',
-    cancel: 'Cancel',
-    consent: 'We use your e-mail only for this order. How we handle data:',
-    sentTitle: 'Request received',
-    sentBody: 'The link arrives by e-mail within a day — check spam too.',
-    close: 'Got it',
-    error: "Didn't send.",
-    errorMail: 'Write by e-mail',
   },
 };
 

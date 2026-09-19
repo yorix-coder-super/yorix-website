@@ -25,6 +25,8 @@ export type HomeCopy = {
   highlight: { soft: string; warm: string };
   screenAlt: string;
   showcaseAlt: { progress: string; bedtime: string; coach: string };
+  // In place of the plans for visitors whose country buys in the App Store.
+  appStore: { title: string; body: string };
 };
 
 // The article every topic falls back to when it has no hand-written
@@ -67,7 +69,7 @@ export type SiteTranslation = {
   // Hand-written line beside each section illustration.
   sceneNotes: Record<SceneName, string>;
   sharedArticle: SharedArticleCopy;
-  subscription: Pick<SubscriptionCopy, 'nav' | 'plans' | 'account' | 'checkout' | 'terms' | 'request' | 'currency' | 'docs' | 'home' | 'proof' | 'footer'>;
+  subscription: Pick<SubscriptionCopy, 'nav' | 'plans' | 'account' | 'checkout' | 'terms' | 'currency' | 'docs' | 'home' | 'proof' | 'footer'>;
   plans: Record<PlanId, { title: string; forPeriod: string; days: string; purpose: string }>;
   // The three parent quotes (subscription/testimonials.ts), in that order.
   testimonials: [string, string, string];

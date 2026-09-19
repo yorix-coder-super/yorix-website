@@ -67,6 +67,10 @@ export const translation: SiteTranslation = {
     highlight: { soft: 'before', warm: 'fussing starts.' },
     screenAlt: 'Yorix today screen with the night sleep window',
     showcaseAlt: { progress: 'Yorix progress: sleep and feeding statistics', bedtime: 'Yorix bedtime sounds', coach: 'Yorix AI coach chat' },
+    appStore: {
+      title: 'Subscribe in the Yorix app',
+      body: 'In your country the subscription is sold in the Yorix app through the App Store. Download the app and subscribe in a couple of taps.',
+    },
   },
   guides: {
     eyebrow: 'Yorix guides',
@@ -215,7 +219,6 @@ export const translation: SiteTranslation = {
     account: sub.account,
     checkout: sub.checkout,
     terms: sub.terms,
-    request: sub.request,
     currency: sub.currency,
     docs: sub.docs,
     home: sub.home,

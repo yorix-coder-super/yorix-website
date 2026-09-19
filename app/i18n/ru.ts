@@ -30,6 +30,10 @@ export const translation: SiteTranslation = {
     highlight: { soft: 'раньше,', warm: 'начнутся капризы.' },
     screenAlt: 'Экран «Сегодня» в Yorix: окно ночного сна',
     showcaseAlt: { progress: 'Прогресс в Yorix: статистика сна и кормлений', bedtime: 'Звуки для сна в Yorix', coach: 'Чат с ИИ-коучем Yorix' },
+    appStore: {
+      title: 'Подписка оформляется в приложении',
+      body: 'В вашей стране подписка оформляется в приложении Yorix через App Store. Скачайте приложение и подключите её в пару касаний.',
+    },
   },
   guides: {
     eyebrow: 'Гайды Yorix',
@@ -179,7 +183,6 @@ export const translation: SiteTranslation = {
     account: sub.account,
     checkout: sub.checkout,
     terms: sub.terms,
-    request: sub.request,
     currency: sub.currency,
     docs: sub.docs,
     home: sub.home,

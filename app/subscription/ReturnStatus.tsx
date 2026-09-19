@@ -12,14 +12,14 @@ import { Button, Spinner } from './ui';
 type Status = 'checking' | 'paid' | 'pending' | 'failed';
 
 function ReturnStatus() {
-  const { ready, configured, user, lang, getToken, signIn } = useAccount();
+  const { ready, configured, signedIn, lang, getToken, signIn } = useAccount();
   const copy = subscriptionCopy[lang];
   const [status, setStatus] = useState<Status>('checking');
   const [until, setUntil] = useState<string | null>(null);
-  const needsSignIn = ready && (!configured || !user);
+  const needsSignIn = ready && (!configured || !signedIn);
 
   useEffect(() => {
-    if (!ready || !configured || !user) return;
+    if (!ready || !configured || !signedIn) return;
     let cancelled = false;
     let attempts = 0;
     // Everything below runs after an await, so state updates never cascade
@@ -67,7 +67,7 @@ function ReturnStatus() {
     return () => {
       cancelled = true;
     };
-  }, [ready, configured, user, getToken]);
+  }, [ready, configured, signedIn, getToken]);
 
   return (
     <section className="relative mx-auto max-w-2xl px-5 pb-24 pt-6 text-center sm:px-8">
@@ -102,7 +102,7 @@ function ReturnStatus() {
           <>
             <p className="text-base leading-7 text-white/80">{copy.ret.signIn}</p>
             {configured ? (
-              <Button className="mt-5" onClick={() => void signIn('apple.com')} variant="light">
+              <Button className="mt-5" onClick={() => void signIn()} variant="light">
                 {copy.account.signInApple}
               </Button>
             ) : null}

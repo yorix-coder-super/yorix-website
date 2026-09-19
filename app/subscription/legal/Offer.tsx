@@ -35,7 +35,7 @@ function ru({ email, payment, privacy, seller }: Ctx): LegalSection[] {
             '**Аккаунт** — учётная запись Пользователя в Сервисе, созданная входом через Apple (Apple ID) или Google.',
             '**Подписка** — предоставляемый за плату на Период доступа доступ к платным функциям Сервиса: ИИ-коучу, персональному прогнозу следующего сна, аналитике дневника и ежедневным рекомендациям (далее — Основные функции) в объёме, описанном на странице тарифов Сайта на дату оплаты. Программы из раздела «Программы» в Подписку не входят.',
             '**Период доступа** — 7, 30 или 365 календарных суток, исчисляемых с момента активации Подписки; сутки — 24 часа.',
-            '**Платёжный сервис** — процессинговая система WEBPAY и банк-эквайер, через которые принимается оплата.',
+            '**Платёжный сервис** — процессинговая система и банк-эквайер, через которые принимается оплата; они указаны на странице «Оплата, доставка и возврат».',
             '**ИИ-коуч (Коуч)** — функция Сервиса, формирующая ответы автоматически с помощью моделей искусственного интеллекта, в том числе сторонних поставщиков.',
             '**Прогнозы** — рассчитанные алгоритмом окна сна и бодрствования, план дня и иные расчётные показатели.',
           ],
@@ -49,7 +49,7 @@ function ru({ email, payment, privacy, seller }: Ctx): LegalSection[] {
         '3.2. Услуга оказывается дистанционно через сеть Интернет; физические носители не передаются. Для работы нужны iPhone или iPad с iOS 18 или новее, Приложение из App Store и вход в Аккаунт.',
         '3.3. **Сервис не является медицинской помощью.** Сервис — информационно-справочный инструмент для родителей: он помогает вести дневник ухода за ребёнком и получать общие сведения и ориентиры по режиму сна и бодрствования, сформированные автоматически на основании введённых Пользователем данных. Исполнитель не является медицинской организацией или медицинским работником, не оказывает медицинскую и психологическую помощь, не ставит диагнозы и не назначает лечение. Сервис не является медицинским изделием и не предназначен для диагностики, мониторинга, профилактики или лечения заболеваний.',
         '3.4. Информация Сервиса — статьи, аналитика, Прогнозы, ответы Коуча — носит общий характер и не заменяет консультацию врача-педиатра, которому известны состояние и история здоровья ребёнка. Не откладывайте обращение к врачу и не изменяйте его назначения на основании сведений Сервиса. Показатели, которые Пользователь вносит в дневник (температура, рост, вес, симптомы и др.), отображаются для удобства и не получают медицинской оценки.',
-        '3.5. **Сервис не предназначен для экстренных ситуаций.** Если жизни или здоровью ребёнка угрожает опасность, немедленно вызовите скорую помощь: 103 или 112 в Республике Беларусь и Российской Федерации, 112 в странах ЕС, 911 в США или местный номер экстренной службы. Ни Коуч, ни служба поддержки не работают как экстренная линия.',
+        '3.5. **Сервис не предназначен для экстренных ситуаций.** Если жизни или здоровью ребёнка угрожает опасность, немедленно вызовите скорую помощь: 103 или 112 в Республике Беларусь и Российской Федерации или местный номер экстренной службы. Ни Коуч, ни служба поддержки не работают как экстренная линия.',
         '3.6. **Безопасный сон.** Сервис не является радионяней или монитором дыхания, не наблюдает за ребёнком в реальном времени и не может обнаружить или предотвратить синдром внезапной детской смерти или иные опасные состояния. Рекомендации о режиме не заменяют правил безопасного сна и присмотра взрослого. Напоминания и уведомления могут не сработать из-за настроек устройства или сбоев связи — не полагайтесь на них в вопросах безопасности ребёнка.',
         '3.7. **ИИ-коуч.** Пользователь общается с программой, а не с человеком. Ответы Коуча формируются автоматически, не проверяются человеком перед отправкой и могут быть неточными, неполными или устаревшими, даже если выглядят убедительно. Коуч не обсуждает дозировки лекарств, не ставит диагнозы и может отказаться отвечать или порекомендовать обратиться к врачу. Пользователь самостоятельно оценивает применимость ответа и принимает решения как законный представитель ребёнка.',
         '3.8. **Прогнозы** — вероятностная оценка, а не предписание. Их точность зависит от полноты и своевременности записей, а фактическое поведение ребёнка может от них отличаться. Исполнитель не гарантирует конкретного результата, например продолжительности сна.',
@@ -59,18 +59,18 @@ function ru({ email, payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '4. Цена и порядок оплаты',
       blocks: [
-        `4.1. Цена Подписки указывается на странице тарифов Сайта в белорусских рублях. Для покупателей из отдельных стран действуют региональные цены — льготы для категорий потребителей, установленные письменным решением Исполнителя (п. 2 ст. 396 ГК) и опубликованные на странице [«Оплата, доставка и возврат»](${payment}). Цена в иной валюте носит справочный характер; сумму в валюте карты и комиссию определяет банк, выпустивший карту.`,
+        '4.1. Цена Подписки указывается на странице тарифов Сайта в валюте страны покупателя — в белорусских или российских рублях. Перед оплатой Пользователю показывается сумма к списанию; если валюта списания отличается от валюты карты, сумму в валюте карты и комиссию определяет банк, выпустивший карту. Цены для отдельных категорий потребителей устанавливаются решением Исполнителя (п. 2 ст. 396 ГК).',
         '4.2. Цена фиксируется на момент оплаты. Её последующее изменение не влияет на оплаченные Подписки.',
         '4.3. Оплата производится банковской платёжной картой через Платёжный сервис на его защищённой странице. Данные карты вводятся только на стороне Платёжного сервиса; Исполнитель их не получает и не хранит.',
         '4.4. **Платёж разовый.** Автоматическое продление и повторные списания не производятся. Для продления Пользователь оформляет новый заказ.',
-        '4.5. Оплату подтверждают электронный чек Платёжного сервиса и чек, сформированный Исполнителем в приложении «Налог на профессиональный доход». Чеки направляются на адрес электронной почты Пользователя. По требованию Пользователя Исполнитель выдаёт документ с указанием своих фамилии, имени, отчества, наименования и цены услуги.',
+        '4.5. Оплату подтверждает электронный чек Платёжного сервиса. Чек, сформированный Исполнителем в приложении «Налог на профессиональный доход», предоставляется Пользователю в электронном виде. По требованию Пользователя Исполнитель выдаёт документ с указанием своих фамилии, имени, отчества, наименования и цены услуги.',
         '4.6. Если цена указана с явной технической ошибкой, Исполнитель сообщает об этом Пользователю. Пользователь вправе подтвердить заказ по правильной цене или отказаться от него с полным возвратом оплаты.',
       ],
     },
     {
       title: '5. Предоставление доступа',
       blocks: [
-        '5.1. Подписка активируется автоматически после получения Исполнителем от Платёжного сервиса подтверждения успешной оплаты и привязывается к Аккаунту, от имени которого совершена оплата. Период доступа исчисляется с момента активации; дата и время окончания отображаются в Приложении и направляются по электронной почте.',
+        '5.1. Подписка активируется автоматически после получения Исполнителем от Платёжного сервиса подтверждения успешной оплаты и привязывается к Аккаунту, от имени которого совершена оплата. Период доступа исчисляется с момента активации; дата и время окончания отображаются в Приложении.',
         `5.2. Если Подписка не активировалась в течение 24 часов после оплаты, Пользователь сообщает об этом на ${email}. Исполнитель в течение одного рабочего дня активирует Подписку либо, по выбору Пользователя, возвращает оплату в полном объёме.`,
         '5.3. Если на момент оплаты у Пользователя есть действующая Подписка, новый Период доступа начинается после окончания текущего.',
         '5.4. Услуга считается оказанной надлежащим образом, если в течение Периода доступа платные функции доступны на Аккаунте Пользователя. Факт предоставления доступа подтверждается журналами Сервиса и Платёжного сервиса; это не лишает Пользователя права представлять иные доказательства.',
@@ -187,7 +187,7 @@ function ru({ email, payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '15. Применимое право, претензии и споры',
       blocks: [
-        '15.1. К Договору применяется право Республики Беларусь (ст. 1124 ГК). Если Пользователь — потребитель, постоянно проживающий в другой стране, этот выбор не лишает его защиты, предоставляемой императивными нормами права страны его проживания, если такие нормы подлежат применению (Приложение 1).',
+        '15.1. К Договору применяется право Республики Беларусь (ст. 1124 ГК). Если Пользователь — потребитель, постоянно проживающий в другой стране, этот выбор не лишает его защиты, предоставляемой императивными нормами права страны его проживания, если такие нормы подлежат применению. Особые положения для потребителей из Российской Федерации — в Приложении 1.',
         `15.2. Претензии направляются на ${email} или по почтовому адресу Исполнителя (раздел 17). Исполнитель рассматривает претензию и направляет ответ в течение 10 дней со дня её получения, если законодательством не установлен более короткий срок. Претензионный порядок не является обязательным условием обращения потребителя в суд.`,
         '15.3. Споры рассматриваются судами в соответствии с законодательством о гражданском судопроизводстве. Потребитель вправе предъявить иск по своему месту жительства или по месту исполнения Договора (ч. 16 ст. 48 Кодекса гражданского судопроизводства Республики Беларусь), а также по месту жительства Исполнителя.',
       ],
@@ -205,52 +205,21 @@ function ru({ email, payment, privacy, seller }: Ctx): LegalSection[] {
   ];
 }
 
-function ruAnnexes({ email, privacy, seller }: Ctx): LegalSection[] {
+function ruAnnexes({ email, privacy }: Ctx): LegalSection[] {
   return [
     {
       id: 'annex-1',
-      title: 'Приложение 1. Особые положения для потребителей из других стран',
+      title: 'Приложение 1. Особые положения для потребителей из Российской Федерации',
       blocks: [
-        'Положения ниже дополняют Договор для потребителей, постоянно проживающих в указанных странах. Если они противоречат основному тексту, применяются положения, более выгодные для потребителя.',
-        '**А. Российская Федерация.**',
+        'Положения ниже дополняют Договор для потребителей, постоянно проживающих в Российской Федерации. Если они противоречат основному тексту, применяются положения, более выгодные для потребителя.',
         {
           ul: [
             'Выбор права Республики Беларусь не лишает вас защиты, предоставляемой Законом Российской Федерации «О защите прав потребителей» и иными императивными нормами права Российской Федерации.',
-            'Вы вправе отказаться от Договора в любое время (ст. 32 Закона РФ «О защите прав потребителей»). Мы вернём сумму, пропорциональную полным суткам, оставшимся до конца Периода доступа, за вычетом фактически понесённых нами и подтверждённых расходов, в течение 10 дней со дня получения заявления, на карту, с которой производилась оплата.',
-            'Цена Договора — сумма в белорусских рублях, списываемая при оплате. Цена в российских рублях на Сайте указана справочно; курс и комиссии определяет банк, выпустивший карту.',
+            `Вы вправе отказаться от Договора в любое время (ст. 32 Закона РФ «О защите прав потребителей»). Мы вернём сумму, пропорциональную полным суткам, оставшимся до конца Периода доступа, за вычетом фактически понесённых нами и подтверждённых расходов, в течение 10 дней со дня получения заявления на ${email}, на карту, с которой производилась оплата.`,
+            'Цена договора — сумма, которая списывается при оплате; валюта списания указывается перед оплатой. Если она отличается от валюты карты, курс и комиссии определяет банк, выпустивший карту.',
             'На претензию мы отвечаем в течение 10 дней. Претензионный порядок не обязателен; вы вправе обратиться в суд по месту своего жительства.',
             `Обработка персональных данных пользователей из Российской Федерации описана в [Политике обработки персональных данных](${privacy}); для сведений о здоровье ребёнка запрашивается отдельное согласие.`,
           ],
-        },
-        '**Б. Европейский союз, Европейская экономическая зона и Великобритания.**',
-        {
-          ul: [
-            `**Право на отказ.** Вы вправе отказаться от Договора в течение 14 дней без объяснения причин. Срок истекает через 14 дней со дня заключения Договора. Чтобы воспользоваться правом, сообщите нам о своём решении недвусмысленным заявлением на ${email} (можно использовать типовую форму — Приложение 2). Мы вернём все полученные от вас платежи без необоснованной задержки, не позднее 14 дней со дня получения уведомления, тем же способом оплаты.`,
-            '**Начало до истечения срока отказа.** Мы начинаем предоставлять Подписку сразу после оплаты только по вашему прямому запросу, который вы подтверждаете отметкой при оформлении заказа. Если вы откажетесь в течение 14 дней, вы оплатите сумму, пропорциональную сроку, предоставленному до получения нами уведомления об отказе. После полного предоставления оплаченного Периода доступа право на отказ утрачивается.',
-            'Подтверждение Договора с условиями и отметкой о запросе направляется вам по электронной почте после оплаты. После 14 дней действуют общие правила раздела 7.',
-            'Мы можем изменять функции по обоснованным причинам (безопасность, требования закона или Apple, смена поставщика ИИ, улучшения) без доплаты. Если изменение существенно ухудшает доступ к оплаченным функциям, мы заранее сообщим об этом, и в течение 30 дней вы сможете бесплатно расторгнуть Договор с возвратом за неиспользованный период.',
-            'Выбор права Республики Беларусь не лишает вас защиты императивных норм страны вашего проживания; вы вправе обратиться в суд этой страны.',
-            'Вы общаетесь с ИИ-коучем, а не с человеком; его ответы могут содержать ошибки.',
-          ],
-        },
-        '**В. Соединённые Штаты Америки.**',
-        {
-          ul: [
-            'Yorix — инструмент общего благополучия и режима дня (general wellness). Он не является медицинской консультацией и не предназначен для диагностики, лечения, мониторинга или предотвращения заболеваний. Всегда советуйтесь с педиатром; в экстренной ситуации звоните 911.',
-            'Правила возврата раздела 7 применяются и к пользователям из США.',
-            'Прежде чем обращаться в суд, напишите нам: мы постараемся урегулировать спор в течение 30 дней. Это не ограничивает ваше право на иск в суде мелких требований (small claims court) и иные права по законодательству вашего штата.',
-            `Сведения для жителей штатов Вашингтон, Невада и Коннектикут о данных о здоровье потребителей (consumer health data) приведены в [Политике обработки персональных данных](${privacy}).`,
-          ],
-        },
-      ],
-    },
-    {
-      id: 'annex-2',
-      title: 'Приложение 2. Типовая форма отказа (ЕС, ЕЭЗ, Великобритания)',
-      blocks: [
-        'Заполните и отправьте эту форму, только если хотите отказаться от Договора.',
-        {
-          note: `Кому: ${seller}, e-mail: ${email}. Настоящим я сообщаю об отказе от договора о предоставлении Подписки Yorix. Номер заказа: ___. Дата заказа: ___. Имя: ___. Адрес электронной почты Аккаунта: ___. Дата: ___.`,
         },
       ],
     },
@@ -278,7 +247,7 @@ function en({ email, payment, privacy, seller }: Ctx): LegalSection[] {
             '**Account** — the User’s account in the Service, created by signing in with Apple (Apple ID) or Google.',
             '**Subscription** — paid access, for an Access Period, to the Service’s paid features: the AI coach, the personal next-sleep forecast, diary analytics and daily recommendations (the “Core Features”), as described on the Website’s plans page on the date of payment. Programs from the “Programs” section are not included.',
             '**Access Period** — 7, 30 or 365 calendar days counted from activation of the Subscription; a day is 24 hours.',
-            '**Payment Service** — the WEBPAY processing system and the acquiring bank that accept the payment.',
+            '**Payment Service** — the processing system and the acquiring bank that accept the payment, named on the “Payment, delivery and refunds” page.',
             '**AI coach (Coach)** — a Service feature that generates answers automatically using artificial intelligence models, including those of third-party providers.',
             '**Forecasts** — sleep and wake windows, the day plan and other figures calculated by the algorithm.',
           ],
@@ -292,7 +261,7 @@ function en({ email, payment, privacy, seller }: Ctx): LegalSection[] {
         '3.2. The service is provided remotely over the Internet; no physical media are delivered. It requires an iPhone or iPad with iOS 18 or later, the App from the App Store and signing in to the Account.',
         '3.3. **The Service is not medical care.** It is an information tool for parents: it helps keep a child-care diary and gives general information and guidance on sleep and wake routines, generated automatically from the data the User enters. The Provider is not a medical organisation or professional, does not provide medical or psychological care, diagnoses or treatment. The Service is not a medical device and is not intended to diagnose, monitor, prevent or treat any disease.',
         '3.4. Information in the Service — articles, analytics, Forecasts, Coach answers — is general and does not replace a consultation with a paediatrician who knows the child. Do not delay seeing a doctor or change a doctor’s instructions because of the Service. Values entered in the diary (temperature, height, weight, symptoms, etc.) are shown for convenience and are not medically assessed.',
-        '3.5. **Not for emergencies.** If a child’s life or health is at risk, call emergency services immediately: 103 or 112 in Belarus and Russia, 112 in the EU, 911 in the US, or your local number. Neither the Coach nor support is an emergency line.',
+        '3.5. **Not for emergencies.** If a child’s life or health is at risk, call emergency services immediately: 103 or 112 in Belarus and Russia, or your local number. Neither the Coach nor support is an emergency line.',
         '3.6. **Safe sleep.** The Service is not a baby monitor or breathing monitor, does not watch the child in real time and cannot detect or prevent sudden infant death syndrome or other dangerous conditions. Routine guidance does not replace safe-sleep rules and adult supervision. Reminders and notifications may fail because of device settings or connectivity — do not rely on them for the child’s safety.',
         '3.7. **AI coach.** The User talks to software, not a person. Coach answers are generated automatically, are not reviewed by a human before sending, and may be inaccurate, incomplete or out of date even when they sound convincing. The Coach does not discuss medication doses or diagnose and may decline to answer or recommend seeing a doctor. The User evaluates whether an answer applies and makes decisions as the child’s legal representative.',
         '3.8. **Forecasts** are probabilistic estimates, not instructions; their accuracy depends on complete and timely records, and the child’s actual behaviour may differ. The Provider does not guarantee a specific result such as sleep duration.',
@@ -302,18 +271,18 @@ function en({ email, payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '4. Price and payment',
       blocks: [
-        `4.1. The Subscription price is shown on the Website’s plans page in Belarusian rubles. Buyers from certain countries get regional prices — benefits for categories of consumers set by the Provider’s written decision (Article 396(2) of the Civil Code) and published on the [“Payment, delivery and refunds”](${payment}) page. Prices in other currencies are for reference; the amount in the card’s currency and any fee are set by the card-issuing bank.`,
+        '4.1. The Subscription price is shown on the Website’s plans page in the buyer’s currency — Belarusian or Russian rubles. Before paying, the User sees the amount to be charged; if it is in a currency other than the card’s, the amount in the card’s currency and any fee are set by the card-issuing bank. Prices for certain categories of consumers are set by the Provider’s decision (Article 396(2) of the Civil Code).',
         '4.2. The price is fixed at the moment of payment; later changes do not affect paid Subscriptions.',
         '4.3. Payment is made by bank card through the Payment Service on its secure page. Card details are entered only with the Payment Service; the Provider neither receives nor stores them.',
         '4.4. **One-off payment.** There is no automatic renewal and no repeat charge. To extend, the User places a new order.',
-        '4.5. Payment is confirmed by the Payment Service’s electronic receipt and by a receipt the Provider issues in the “Professional income tax” app, both sent to the User’s e-mail. On request the Provider issues a document stating his full name and the name and price of the service.',
+        '4.5. Payment is confirmed by the Payment Service’s electronic receipt. The receipt the Provider issues in the “Professional income tax” app is provided to the User electronically. On request the Provider issues a document stating his full name and the name and price of the service.',
         '4.6. If a price is shown with an obvious technical error, the Provider informs the User, who may confirm the order at the correct price or cancel it with a full refund.',
       ],
     },
     {
       title: '5. Provision of access',
       blocks: [
-        '5.1. The Subscription is activated automatically once the Payment Service confirms a successful payment, and is tied to the Account used to pay. The Access Period runs from activation; its end date and time are shown in the App and sent by e-mail.',
+        '5.1. The Subscription is activated automatically once the Payment Service confirms a successful payment, and is tied to the Account used to pay. The Access Period runs from activation; its end date and time are shown in the App.',
         `5.2. If the Subscription is not activated within 24 hours of payment, the User writes to ${email}. Within one working day the Provider activates it or, at the User’s choice, refunds the payment in full.`,
         '5.3. If the User already has an active Subscription, the new Access Period starts when the current one ends.',
         '5.4. The service is duly provided when the paid features are available on the User’s Account during the Access Period. This is evidenced by the logs of the Service and the Payment Service; the User may present other evidence.',
@@ -430,7 +399,7 @@ function en({ email, payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '15. Governing law, claims and disputes',
       blocks: [
-        '15.1. The Agreement is governed by the law of the Republic of Belarus (Article 1124 of the Civil Code). If the User is a consumer habitually resident in another country, this choice does not deprive them of the protection of the mandatory rules of that country where they apply (Annex 1).',
+        '15.1. The Agreement is governed by the law of the Republic of Belarus (Article 1124 of the Civil Code). If the User is a consumer habitually resident in another country, this choice does not deprive them of the protection of the mandatory rules of that country where they apply. Special provisions for consumers in Russia are in Annex 1.',
         `15.2. Claims are sent to ${email} or to the Provider’s postal address (section 17). The Provider considers a claim and replies within 10 days of receipt unless the law sets a shorter time. The claims procedure is not a precondition for a consumer to go to court.`,
         '15.3. Disputes are heard by the courts under the law on civil proceedings. A consumer may sue at their place of residence or where the Agreement is performed (Article 48, part 16, of the Belarusian Code of Civil Proceedings), as well as at the Provider’s place of residence.',
       ],
@@ -448,52 +417,21 @@ function en({ email, payment, privacy, seller }: Ctx): LegalSection[] {
   ];
 }
 
-function enAnnexes({ email, privacy, seller }: Ctx): LegalSection[] {
+function enAnnexes({ email, privacy }: Ctx): LegalSection[] {
   return [
     {
       id: 'annex-1',
-      title: 'Annex 1. Special provisions for consumers from other countries',
+      title: 'Annex 1. Special provisions for consumers in the Russian Federation',
       blocks: [
-        'These provisions supplement the Agreement for consumers habitually resident in the countries named. Where they conflict with the main text, the provisions more favourable to the consumer apply.',
-        '**A. Russian Federation.**',
+        'These provisions supplement the Agreement for consumers habitually resident in the Russian Federation. Where they conflict with the main text, the provisions more favourable to the consumer apply.',
         {
           ul: [
             'The choice of Belarusian law does not deprive you of the protection of the Russian Consumer Protection Law and other mandatory Russian rules.',
-            'You may withdraw at any time (Article 32 of the Russian Consumer Protection Law). We refund the amount for the full days remaining in the Access Period, less our actual documented costs, within 10 days of receiving your notice, to the card used for payment.',
-            'The contract price is the amount in Belarusian rubles charged at payment. The price in Russian rubles on the Website is for reference; the exchange rate and fees are set by your card-issuing bank.',
+            `You may withdraw at any time (Article 32 of the Russian Consumer Protection Law). We refund the amount for the full days remaining in the Access Period, less our actual documented costs, within 10 days of receiving your notice at ${email}, to the card used for payment.`,
+            'The contract price is the amount charged at payment; the charge currency is shown before you pay. If it differs from your card’s currency, the exchange rate and fees are set by your card-issuing bank.',
             'We reply to claims within 10 days. The claims procedure is optional; you may sue at your place of residence.',
             `Processing of personal data of users from Russia is described in the [Personal data policy](${privacy}); separate consent is requested for the child’s health information.`,
           ],
-        },
-        '**B. European Union, European Economic Area and United Kingdom.**',
-        {
-          ul: [
-            `**Right of withdrawal.** You have the right to withdraw from the Agreement within 14 days without giving any reason. The period expires 14 days after the day the Agreement is concluded. To exercise it, inform us of your decision by a clear statement to ${email} (you may use the model form in Annex 2). We will reimburse all payments received from you without undue delay and no later than 14 days after receiving your notice, using the same means of payment.`,
-            '**Starting before the withdrawal period ends.** We start providing the Subscription immediately after payment only at your express request, which you confirm with a tick box when ordering. If you withdraw within 14 days, you pay an amount proportionate to the period provided until we receive your notice of withdrawal. Once the paid Access Period has been fully provided, the right of withdrawal is lost.',
-            'A confirmation of the Agreement with its terms and your request is sent to you by e-mail after payment. After 14 days the general rules of section 7 apply.',
-            'We may change features for valid reasons (security, legal or Apple requirements, a change of AI provider, improvements) at no extra cost. If a change materially worsens access to paid features, we will tell you in advance, and within 30 days you may terminate free of charge with a refund for the unused period.',
-            'The choice of Belarusian law does not deprive you of the protection of the mandatory rules of your country of residence; you may bring proceedings in its courts.',
-            'You are talking to an AI coach, not a person; its answers may contain mistakes.',
-          ],
-        },
-        '**C. United States.**',
-        {
-          ul: [
-            'Yorix is a general wellness and daily-routine tool. It is not medical advice and is not intended to diagnose, treat, cure, monitor or prevent any disease. Always consult your pediatrician; in an emergency call 911.',
-            'The refund rules of section 7 also apply to users in the United States.',
-            'Before going to court, write to us: we will try to resolve the dispute within 30 days. This does not limit your right to sue in small claims court or your other rights under the laws of your state.',
-            `Information on consumer health data for residents of Washington, Nevada and Connecticut is in the [Personal data policy](${privacy}).`,
-          ],
-        },
-      ],
-    },
-    {
-      id: 'annex-2',
-      title: 'Annex 2. Model withdrawal form (EU, EEA, UK)',
-      blocks: [
-        'Complete and return this form only if you wish to withdraw from the Agreement.',
-        {
-          note: `To: ${seller}, e-mail: ${email}. I hereby give notice that I withdraw from my contract for the provision of the Yorix Subscription. Order number: ___. Ordered on: ___. Name: ___. Account e-mail: ___. Date: ___.`,
         },
       ],
     },

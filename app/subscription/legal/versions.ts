@@ -4,10 +4,9 @@ import type { Lang } from '../i18n';
 // order and request, so the seller can prove which text the buyer accepted
 // (99-З ст. 5 п. 7 puts that burden on the operator).
 export const legalVersion = {
-  offer: '2026-09-18',
-  payment: '2026-09-18',
+  offer: '2026-09-19',
+  payment: '2026-09-19',
   privacy: '2026-09-18',
-  consent: '2026-09-18',
 } as const;
 
 export type LegalDoc = keyof typeof legalVersion;

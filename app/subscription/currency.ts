@@ -27,6 +27,13 @@ export function currencyForVisitor(country: string | null | undefined, acceptLan
   return 'USD';
 }
 
+// The site sells by card to buyers in Belarus and Russia (and to Russian-
+// language browsers elsewhere, which are priced like them). Everyone else
+// subscribes in the app through the App Store and never sees web prices.
+export function sellsOnWeb(currency: Currency) {
+  return currency === 'BYN' || currency === 'RUB';
+}
+
 const symbol: Record<Currency, string> = { BYN: 'BYN', RUB: '₽', EUR: '€', USD: '$' };
 
 export function formatMoney(amount: number, currency: Currency, lang: Lang): string {

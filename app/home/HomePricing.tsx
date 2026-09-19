@@ -1,41 +1,54 @@
 import { ArrowRight } from 'lucide-react';
 import { headers } from 'next/headers';
+import { appDownloadUrl } from '../content';
 import { docsLang, siteCopy, type SiteLocale } from '../i18n';
 import { toWire } from '../i18n/wire';
-import { AccountLine, AccountProvider, PlanCard, RequestForm } from '../subscription/account';
+import { AccountProvider, CheckoutDialog, PlanCard } from '../subscription/account';
+import { currencyForVisitor, sellsOnWeb } from '../subscription/currency';
 import { subscriptionPath } from '../subscription/i18n';
 import { merchant, plans } from '../subscription/merchant';
 import { Reveal } from '../subscription/Reveal';
-import { Art } from './art';
+import { AppleGlyph, Art } from './art';
+import { whitePill } from './CtaBand';
 
 // The home page's storefront: the same plan buttons as /subscription
-// (sign in with Apple → WebPay, regional prices from cf-ipcountry), laid out
-// as the concept's glass panel with the trust points beside the cards.
+// (sign in with Apple → the acquirer's page), laid out as the concept's glass
+// panel with the trust points beside the cards. Visitors outside Belarus and
+// Russia get the App Store instead of web prices.
 export async function HomePricing({ locale }: { locale: SiteLocale }) {
   const site = siteCopy(locale);
   const copy = site.subscription;
   const lang = docsLang(locale);
   const requestHeaders = await headers();
+  const country = requestHeaders.get('cf-ipcountry');
+  const acceptLanguage = requestHeaders.get('accept-language');
+
+  if (!sellsOnWeb(currencyForVisitor(country, acceptLanguage))) {
+    return (
+      <section className="mx-auto max-w-7xl scroll-mt-6 px-5 py-8 sm:px-8 lg:px-10" id="subscription">
+        <AppStorePanel locale={locale} />
+      </section>
+    );
+  }
 
   return (
     <section className="mx-auto max-w-7xl scroll-mt-6 px-5 py-8 sm:px-8 lg:px-10" id="subscription">
       <AccountProvider
-        acceptLanguage={requestHeaders.get('accept-language')}
+        acceptLanguage={acceptLanguage}
         copy={toWire(copy)}
-        country={requestHeaders.get('cf-ipcountry')}
+        country={country}
         docsNote={site.docsNote}
         lang={lang}
         locale={locale}
         plans={site.plans}
       >
-        <RequestForm />
+        <CheckoutDialog />
         <div className="rounded-[2rem] border border-white/10 bg-white/[0.05] p-5 shadow-[0_30px_90px_rgb(0_0_0/18%)] backdrop-blur-xl sm:p-7">
           <p className="inline-flex rounded-full border border-white/15 bg-white/[0.08] px-4 py-1.5 text-sm font-medium text-white/90">
             {copy.home.title.replace(/\.$/, '')}
           </p>
           <PlanGrid locale={locale} />
-          <AccountLine className="mt-6 text-sm leading-6 text-white/60" />
-          <a className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-white underline decoration-white/30 hover:decoration-white" href={subscriptionPath(lang)}>
+          <a className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-white underline decoration-white/30 hover:decoration-white" href={subscriptionPath(lang)}>
             {copy.home.more}
             <ArrowRight className="h-4 w-4 rtl:-scale-x-100" aria-hidden="true" />
           </a>
@@ -90,5 +103,27 @@ export function PlanGrid({ locale }: { locale: SiteLocale }) {
         </ul>
       </Reveal>
     </div>
+  );
+}
+
+// Where the site does not sell by card: the subscription lives in the app.
+export function AppStorePanel({ locale }: { locale: SiteLocale }) {
+  const site = siteCopy(locale);
+  return (
+    <Reveal>
+      <div className="flex flex-col items-start gap-6 rounded-[2rem] border border-white/10 bg-white/[0.05] p-6 shadow-[0_30px_90px_rgb(0_0_0/18%)] backdrop-blur-xl sm:flex-row sm:items-center sm:p-8">
+        <span className="grid h-20 w-20 shrink-0 place-items-center rounded-3xl bg-[radial-gradient(circle_at_32%_28%,#5B55E8,#2E2A7A_70%)] shadow-[0_0_50px_rgb(99_102_241/40%)] ring-1 ring-white/15">
+          <Art className="h-12 w-12 object-contain" height={192} name="icon-phone" width={192} />
+        </span>
+        <div className="min-w-0 flex-1">
+          <h2 className="text-2xl font-semibold text-white sm:text-[1.7rem]">{site.home.appStore.title}</h2>
+          <p className="mt-2 max-w-2xl text-[15px] leading-6 text-white/70">{site.home.appStore.body}</p>
+        </div>
+        <a className={whitePill} href={appDownloadUrl} rel="noopener noreferrer" target="_blank">
+          <AppleGlyph />
+          {site.home.nav.download}
+        </a>
+      </div>
+    </Reveal>
   );
 }

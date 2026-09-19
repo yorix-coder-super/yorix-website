@@ -1,10 +1,13 @@
 import { ArrowRight } from 'lucide-react';
 import { headers } from 'next/headers';
-import { Art, PhoneFrame, Sparkle } from '../home/art';
+import { AppleGlyph, Art, PhoneFrame, Sparkle } from '../home/art';
 import { headlineTones } from '../home/copy';
 import { FaqItem, whitePill } from '../home/CtaBand';
-import { PlanGrid } from '../home/HomePricing';
-import { AccountLine, AccountProvider, ChargeNote, HeroCta, RequestForm } from './account';
+import { AppStorePanel, PlanGrid } from '../home/HomePricing';
+import { appDownloadUrl } from '../content';
+import { siteCopy } from '../i18n';
+import { AccountProvider, ChargeNote, CheckoutDialog, HeroCta } from './account';
+import { currencyForVisitor, sellsOnWeb } from './currency';
 import { subscriptionCopy } from './copy';
 import { subscriptionPath, type Lang } from './i18n';
 import { Magnetic } from './Magnetic';
@@ -26,6 +29,8 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
   const requestHeaders = await headers();
   const country = requestHeaders.get('cf-ipcountry');
   const acceptLanguage = requestHeaders.get('accept-language');
+  // Outside Belarus and Russia the subscription is sold in the App Store.
+  const web = sellsOnWeb(currencyForVisitor(country, acceptLanguage));
   // One verbatim sentence from a real parent is the hero's only trust signal.
   const voice = testimonials[1];
   const quote = (voice.locale === lang ? voice.quote : voice.translations[lang]).split(/(?<=\.)\s/)[0];
@@ -33,7 +38,7 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
   return (
     <SubscriptionShell lang={lang}>
       <AccountProvider acceptLanguage={acceptLanguage} country={country} lang={lang}>
-        <RequestForm />
+        <CheckoutDialog />
         <section className="relative">
           <div className="hero-clouds pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[42%] min-h-[200px] overflow-hidden">
             <Parallax className="absolute inset-x-[-4%] bottom-[-8%]" offset={['start start', 'end start']} y={[0, 40]}>
@@ -56,10 +61,17 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
               <Reveal delay={380} load>
                 <div className="mt-7">
                   <Magnetic className="flex sm:inline-flex">
-                    <a className={`${whitePill} flex-1`} href="#plans">
-                      <HeroCta />
-                      <ArrowRight className="h-5 w-5" aria-hidden="true" />
-                    </a>
+                    {web ? (
+                      <a className={`${whitePill} flex-1`} href="#plans">
+                        <HeroCta />
+                        <ArrowRight className="h-5 w-5 rtl:-scale-x-100" aria-hidden="true" />
+                      </a>
+                    ) : (
+                      <a className={`${whitePill} flex-1`} href={appDownloadUrl} rel="noopener noreferrer" target="_blank">
+                        <AppleGlyph />
+                        {siteCopy(lang).home.nav.download}
+                      </a>
+                    )}
                   </Magnetic>
                 </div>
                 <p className="mt-5 max-w-xl text-sm leading-6 text-white/60">
@@ -92,27 +104,30 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
         </section>
 
         <section className="relative mx-auto max-w-7xl scroll-mt-6 px-5 py-8 sm:px-8 lg:px-10" id="plans">
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.05] p-5 shadow-[0_30px_90px_rgb(0_0_0/18%)] backdrop-blur-xl sm:p-7">
-            <Reveal>
-              <h2 className="text-2xl font-semibold text-white sm:text-[1.9rem]">{copy.plans.title}</h2>
-              <p className="mt-3 text-[15px] leading-6 text-white/65">{copy.plans.included}</p>
-            </Reveal>
-            <PlanGrid locale={lang} />
-            <p className="mt-6 text-sm leading-6 text-white/60">{copy.plans.steps}</p>
-            <AccountLine className="mt-2 text-sm leading-6 text-white/60" />
-            <p className="mt-3 text-sm leading-6 text-white/50">
-              {copy.plans.acceptBefore}{' '}
-              <a className="text-white/80 underline decoration-white/30 hover:text-white hover:decoration-white" href={subscriptionPath(lang, '/offer')}>
-                {copy.plans.offer}
-              </a>{' '}
-              {copy.plans.and}{' '}
-              <a className="text-white/80 underline decoration-white/30 hover:text-white hover:decoration-white" href={subscriptionPath(lang, '/payment')}>
-                {copy.plans.refundTerms}
-              </a>
-              . {copy.plans.device}
-            </p>
-            <ChargeNote className="mt-2 text-sm leading-6 text-white/50" />
-          </div>
+          {web ? (
+            <div className="rounded-[2rem] border border-white/10 bg-white/[0.05] p-5 shadow-[0_30px_90px_rgb(0_0_0/18%)] backdrop-blur-xl sm:p-7">
+              <Reveal>
+                <h2 className="text-2xl font-semibold text-white sm:text-[1.9rem]">{copy.plans.title}</h2>
+                <p className="mt-3 text-[15px] leading-6 text-white/65">{copy.plans.included}</p>
+              </Reveal>
+              <PlanGrid locale={lang} />
+              <p className="mt-6 text-sm leading-6 text-white/60">{copy.plans.steps}</p>
+              <p className="mt-3 text-sm leading-6 text-white/50">
+                {copy.plans.acceptBefore}{' '}
+                <a className="text-white/80 underline decoration-white/30 hover:text-white hover:decoration-white" href={subscriptionPath(lang, '/offer')}>
+                  {copy.plans.offer}
+                </a>{' '}
+                {copy.plans.and}{' '}
+                <a className="text-white/80 underline decoration-white/30 hover:text-white hover:decoration-white" href={subscriptionPath(lang, '/payment')}>
+                  {copy.plans.refundTerms}
+                </a>
+                . {copy.plans.device}
+              </p>
+              <ChargeNote className="mt-2 text-sm leading-6 text-white/50" />
+            </div>
+          ) : (
+            <AppStorePanel locale={lang} />
+          )}
         </section>
 
         <SocialProof locale={lang} />

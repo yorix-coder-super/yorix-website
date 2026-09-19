@@ -1,42 +1,37 @@
 'use client';
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import type { Auth, User as FirebaseUser } from 'firebase/auth';
+import type { Auth } from 'firebase/auth';
 import { AppleGlyph } from '../home/art';
-import { API_BASE, firebaseConfig, isFirebaseConfigured } from './config';
 import type { SiteLocale } from '../i18n';
 import type { SiteTranslation } from '../i18n/types';
 import { fromWire, type Wire } from '../i18n/wire';
+import { API_BASE, firebaseConfig, isFirebaseConfigured } from './config';
 import { subscriptionCopy, type SubscriptionCopy } from './copy';
 import { currencyForVisitor, formatMoney, type Currency } from './currency';
 import { formatDate, subscriptionPath, type Lang } from './i18n';
-import { charges, formatByn, mailtoOrder, merchant, planCopy, plans, prices, type Plan } from './merchant';
 import { legalVersion } from './legal/versions';
+import { charges, merchant, planCopy, plans, prices, type Plan } from './merchant';
 import { Money } from './Money';
 import { Button, Spinner } from './ui';
 
-type Provider = 'apple.com' | 'google.com';
 type CheckoutMode = 'off' | 'test' | 'prod';
-type WebConfig = { checkoutMode: CheckoutMode; plans: { id: string; days: number; priceByn: number }[] };
+type WebConfig = { checkoutMode: CheckoutMode };
 type Me = { premiumUntil: string | null; blocked: boolean };
-type Account = { uid: string; email: string | null; provider: string };
-// What the buyer ticked before paying, with the document editions they saw —
-// sent with the order so the acceptance can be proven later.
-type Terms = { offer: string; payment: string; privacy: string; immediateStart?: true };
+// The document editions the buyer accepted — sent with the order so the
+// acceptance can be proven later.
+type Terms = { offer: string; payment: string; privacy: string };
 type ErrorKey = keyof SubscriptionCopy['checkout'] | 'popupBlocked' | 'signInError';
 
 type State = {
   ready: boolean;
   configured: boolean;
   config: WebConfig | null;
-  user: Account | null;
+  signedIn: boolean;
   me: Me | null;
   busy: 'signin' | 'order' | 'redirect' | null;
   error: ErrorKey | null;
-  errorOrigin: string | null;
   termsPlan: Plan | null;
-  requestPlan: Plan | null;
-  requestTerms: Terms | null;
 };
 
 // The subscription UI in the page's language; the storefront adds its hero.
@@ -44,21 +39,19 @@ export type ClientCopy = SiteTranslation['subscription'] & { hero?: Subscription
 type PlanTexts = SiteTranslation['plans'];
 
 type Api = State & {
-  // `lang` is the language of the documents and of the order e-mails (Russian
-  // or English); `locale` is the language the page is written in.
+  // `lang` is the language of the documents (Russian or English); `locale`
+  // is the language the page is written in.
   lang: Lang;
   locale: SiteLocale;
   copy: ClientCopy;
   plans: PlanTexts;
   docsNote: string;
   currency: Currency;
-  signIn: (provider: Provider, origin?: string) => Promise<Account | null>;
-  signOut: () => Promise<void>;
+  signIn: () => Promise<boolean>;
   createOrder: (planId: string, terms: Terms) => Promise<boolean>;
   getToken: () => Promise<string | null>;
   clearError: () => void;
   openTerms: (plan: Plan | null) => void;
-  openRequest: (plan: Plan | null, terms?: Terms) => void;
 };
 
 const Ctx = createContext<Api | null>(null);
@@ -77,10 +70,6 @@ async function getAuthInstance(): Promise<Auth> {
   return auth;
 }
 
-// Updater factories live outside the components so no catch-block local is
-// captured by a closure (the React Compiler lint rejects that shape).
-const settled = (error: ErrorKey | null, origin: string) => (s: State): State => ({ ...s, busy: null, error, errorOrigin: error ? origin : null });
-
 function orderErrorFor(status: number, code: string | undefined, mode: CheckoutMode | undefined): ErrorKey {
   if (status === 429) return 'rateLimited';
   if (code === 'checkout_unavailable') return mode === 'test' ? 'testOnly' : 'unavailable';
@@ -94,16 +83,15 @@ function signInErrorFor(code: string): ErrorKey | null {
   return 'signInError';
 }
 
-function toAccount(user: FirebaseUser): Account {
-  const provider = user.providerData[0]?.providerId ?? 'apple.com';
-  return { uid: user.uid, email: user.email, provider };
-}
+// The acquirer's hosted payment page — the only place an order may send the
+// buyer.
+const PAYMENT_PAGE = /^https:\/\/(securesandbox|payment)\.webpay\.by\//;
 
 export function AccountProvider({
   lang,
   locale = lang,
   copy: wire,
-  plans,
+  plans: planTexts = planCopy[lang],
   docsNote = '',
   country,
   acceptLanguage,
@@ -119,7 +107,6 @@ export function AccountProvider({
   children: ReactNode;
 }) {
   const copy = useMemo<ClientCopy>(() => (wire ? fromWire<ClientCopy>(wire) : subscriptionCopy[lang]), [wire, lang]);
-  const planTexts = plans ?? planCopy[lang];
   const authRef = useRef<Auth | null>(null);
   // Kept from initialisation so sign-in opens its popup synchronously inside
   // the click — Safari blocks a window opened after an awaited import.
@@ -128,14 +115,11 @@ export function AccountProvider({
     ready: !isFirebaseConfigured,
     configured: isFirebaseConfigured,
     config: null,
-    user: null,
+    signedIn: false,
     me: null,
     busy: null,
     error: null,
-    errorOrigin: null,
     termsPlan: null,
-    requestPlan: null,
-    requestTerms: null,
   });
   const currency = currencyForVisitor(country, acceptLanguage);
 
@@ -154,7 +138,7 @@ export function AccountProvider({
       const me = (await res.json()) as Me;
       setState((s) => ({ ...s, me }));
     } catch {
-      // The account still works without the entitlement line.
+      // Without it the dialog just doesn't mention the current period.
     }
   }, [getToken]);
 
@@ -176,7 +160,7 @@ export function AccountProvider({
       const mod = await import('firebase/auth');
       authModRef.current = mod;
       unsubscribe = mod.onAuthStateChanged(auth, (user) => {
-        setState((s) => ({ ...s, ready: true, user: user ? toAccount(user) : null, me: user ? s.me : null }));
+        setState((s) => ({ ...s, ready: true, signedIn: Boolean(user), me: user ? s.me : null }));
         if (user) void loadMe();
       });
     })().catch(() => setState((s) => ({ ...s, ready: true })));
@@ -186,46 +170,35 @@ export function AccountProvider({
     };
   }, [loadMe]);
 
-  const signIn = useCallback(
-    async (providerId: Provider, origin = 'panel') => {
-      const auth = authRef.current;
-      if (!auth) return null;
-      setState((s) => ({ ...s, busy: 'signin', error: null, errorOrigin: null }));
-      try {
-        const { GoogleAuthProvider, OAuthProvider, signInWithPopup } = authModRef.current ?? (await import('firebase/auth'));
-        const provider = providerId === 'apple.com' ? new OAuthProvider('apple.com') : new GoogleAuthProvider();
-        if (provider instanceof OAuthProvider) {
-          provider.addScope('email');
-          provider.addScope('name');
-          provider.setCustomParameters({ locale: lang });
-        }
-        const result = await signInWithPopup(auth, provider);
-        const account = toAccount(result.user);
-        setState((s) => ({ ...s, busy: null, user: account }));
-        void loadMe();
-        return account;
-      } catch (err) {
-        setState(settled(signInErrorFor((err as { code?: string }).code ?? ''), origin));
-        return null;
-      }
-    },
-    [lang, loadMe],
-  );
-
-  const signOut = useCallback(async () => {
+  // Sign in with Apple only: the subscription is credited to the Apple
+  // account the parent uses in the app. Nothing about the account is shown.
+  const signIn = useCallback(async () => {
     const auth = authRef.current;
-    if (!auth) return;
-    const { signOut: fbSignOut } = await import('firebase/auth');
-    await fbSignOut(auth);
-    setState((s) => ({ ...s, user: null, me: null, error: null }));
-  }, []);
+    if (!auth) return false;
+    setState((s) => ({ ...s, busy: 'signin', error: null }));
+    try {
+      const { OAuthProvider, signInWithPopup } = authModRef.current ?? (await import('firebase/auth'));
+      const provider = new OAuthProvider('apple.com');
+      provider.addScope('email');
+      provider.setCustomParameters({ locale: lang });
+      await signInWithPopup(auth, provider);
+      setState((s) => ({ ...s, busy: null, signedIn: true }));
+      void loadMe();
+      return true;
+    } catch (err) {
+      const error = signInErrorFor((err as { code?: string }).code ?? '');
+      setState((s) => ({ ...s, busy: null, error }));
+      return false;
+    }
+  }, [lang, loadMe]);
 
   const checkoutMode = state.config?.checkoutMode;
   const createOrder = useCallback(
     async (planId: string, terms: Terms) => {
       const token = await getToken();
       if (!token) return false;
-      setState((s) => ({ ...s, busy: 'order', error: null, errorOrigin: null }));
+      setState((s) => ({ ...s, busy: 'order', error: null }));
+      let error: ErrorKey = 'error';
       try {
         const res = await fetch(`${API_BASE}/v1/web/orders`, {
           method: 'POST',
@@ -233,31 +206,27 @@ export function AccountProvider({
           body: JSON.stringify({ planId, lang, terms }),
         });
         const body = (await res.json().catch(() => ({}))) as { redirectUrl?: string; error?: string };
-        if (res.ok && body.redirectUrl && /^https:\/\/(securesandbox|payment)\.webpay\.by\//.test(body.redirectUrl)) {
+        if (res.ok && body.redirectUrl && PAYMENT_PAGE.test(body.redirectUrl)) {
           setState((s) => ({ ...s, busy: 'redirect' }));
           window.location.assign(body.redirectUrl);
           return true;
         }
-        setState(settled(orderErrorFor(res.status, body.error, checkoutMode), planId));
+        error = orderErrorFor(res.status, body.error, checkoutMode);
       } catch {
-        setState(settled('error', planId));
+        // network failure: the generic message
       }
+      setState((s) => ({ ...s, busy: null, error }));
       return false;
     },
     [getToken, lang, checkoutMode],
   );
 
-  const clearError = useCallback(() => setState((s) => ({ ...s, error: null, errorOrigin: null })), []);
-  const openTerms = useCallback((plan: Plan | null) => setState((s) => ({ ...s, termsPlan: plan, error: null, errorOrigin: null })), []);
-  const openRequest = useCallback(
-    (plan: Plan | null, terms?: Terms) =>
-      setState((s) => ({ ...s, termsPlan: null, requestPlan: plan, requestTerms: plan ? (terms ?? s.requestTerms) : null, error: null, errorOrigin: null })),
-    [],
-  );
+  const clearError = useCallback(() => setState((s) => ({ ...s, error: null })), []);
+  const openTerms = useCallback((plan: Plan | null) => setState((s) => ({ ...s, termsPlan: plan, error: null })), []);
 
   const api = useMemo<Api>(
-    () => ({ ...state, lang, locale, copy, plans: planTexts, docsNote, currency, signIn, signOut, createOrder, getToken, clearError, openTerms, openRequest }),
-    [state, lang, locale, copy, planTexts, docsNote, currency, signIn, signOut, createOrder, getToken, clearError, openTerms, openRequest],
+    () => ({ ...state, lang, locale, copy, plans: planTexts, docsNote, currency, signIn, createOrder, getToken, clearError, openTerms }),
+    [state, lang, locale, copy, planTexts, docsNote, currency, signIn, createOrder, getToken, clearError, openTerms],
   );
 
   return <Ctx.Provider value={api}>{children}</Ctx.Provider>;
@@ -269,43 +238,6 @@ export function useAccount() {
   return api;
 }
 
-// Under the plan grid: which account the subscription goes to once signed
-// in (with a way out of the wrong one), and the Google door for parents who
-// use Google in the app. Shown whenever sign-in is available — the request
-// form credits the same account as the live checkout.
-export function AccountLine({ className = '' }: { className?: string }) {
-  const { ready, configured, user, me, busy, error, errorOrigin, copy, locale, signIn, signOut } = useAccount();
-  if (!configured || !ready) return null;
-  const link = 'font-semibold text-white underline decoration-white/30 hover:decoration-white disabled:opacity-60';
-  if (!user) {
-    const lineError = errorOrigin === 'line' && (error === 'popupBlocked' || error === 'signInError') ? copy.account[error] : null;
-    return (
-      <p className={className}>
-        {copy.plans.googleQuestion}{' '}
-        <button className={link} disabled={busy !== null} onClick={() => void signIn('google.com', 'line')} type="button">
-          {copy.plans.googleLink}
-        </button>
-        {lineError ? (
-          <span className="block text-[#FCA5A5]" role="alert">
-            {lineError}
-          </span>
-        ) : null}
-      </p>
-    );
-  }
-  const active = Boolean(me?.premiumUntil && new Date(me.premiumUntil) > new Date());
-  const email = user.email ?? user.uid;
-  return (
-    <p className={className}>
-      {active && me?.premiumUntil ? copy.plans.activeUntil(email, formatDate(me.premiumUntil, locale)) : copy.plans.goesTo(email)}{' '}
-      {active ? null : `${copy.plans.wrongAccount} `}
-      <button className={link} onClick={() => void signOut()} type="button">
-        {copy.plans.signOut}
-      </button>
-    </p>
-  );
-}
-
 const planIcon = { week: 'icon-moon-crescent', month: 'icon-moon-full', year: 'icon-sun' } as const;
 
 // Centres a dialog but never wider than the screen (a minmax(0) track, so a
@@ -314,8 +246,8 @@ const planIcon = { week: 'icon-moon-crescent', month: 'icon-moon-full', year: 'i
 const dialogFrame = 'pointer-events-none relative grid min-h-full grid-cols-[minmax(0,1fr)] place-items-center p-4';
 
 export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) {
-  const { me, copy, lang, plans, currency, openTerms } = useAccount();
-  const text = plans[plan.id];
+  const { me, copy, lang, plans: planTexts, currency, openTerms } = useAccount();
+  const text = planTexts[plan.id];
   const amount = prices[plan.id][currency];
   const price = formatMoney(amount, currency, lang);
   const perWeek = formatMoney((amount / plan.days) * 7, currency, lang);
@@ -350,7 +282,7 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
         <Money text={price} />
       </p>
       <p className={`mt-2 min-h-6 text-sm leading-6 ${muted}`}>
-        <Money text={plan.id === 'week' ? '\u00A0' : copy.plans.perWeek(perWeek, base)} />
+        <Money text={plan.id === 'week' ? ' ' : copy.plans.perWeek(perWeek, base)} />
       </p>
       <div className="mt-auto pt-6">
         <Button className="w-full text-center leading-5 whitespace-normal!" onClick={() => openTerms(plan)} variant={variant}>
@@ -368,7 +300,7 @@ export function HeroCta() {
   return <Money text={subscriptionCopy[lang].hero.primary(formatMoney(prices.week[currency], currency, lang))} />;
 }
 
-// WebPay charges in BYN, so a buyer outside Belarus sees those amounts once,
+// The acquirer charges in BYN, so a buyer from Russia sees those amounts once,
 // under the plans, before they leave for the bank's page — the screen must
 // never disagree with the receipt.
 export function ChargeNote({ className = '' }: { className?: string }) {
@@ -382,20 +314,19 @@ export function ChargeNote({ className = '' }: { className?: string }) {
   );
 }
 
-// The step between a plan and the bank: what is being bought, for how much and
-// on which account, then the acceptance box (never pre-ticked). Buyers in
-// Europe also ask for the service to start at once — without that request
-// an EU consumer could withdraw within 14 days and owe nothing. Sign-in and
-// the order both start from this dialog's button, inside the click, so
-// Safari keeps the Apple window.
-function TermsDialog() {
-  const { termsPlan, openTerms, openRequest, user, me, ready, configured, config, currency, lang, locale, copy, plans, docsNote, busy, error, errorOrigin, signIn, createOrder, clearError } = useAccount();
+// «Оформить» → this dialog: what is bought and for how much, the unticked
+// acceptance box, then one button — Sign in with Apple (inside the click, so
+// Safari keeps the popup) and straight on to the acquirer's page. After the
+// payment the server switches the subscription on by itself; nobody types an
+// Apple ID or a code, and no account detail is shown.
+export function CheckoutDialog() {
+  const { termsPlan, openTerms, signedIn, me, ready, configured, config, currency, lang, locale, copy, plans: planTexts, docsNote, busy, error, signIn, createOrder, clearError } =
+    useAccount();
   const [accepted, setAccepted] = useState(false);
-  const [immediate, setImmediate] = useState(false);
-  const [missing, setMissing] = useState<'accept' | 'immediate' | null>(null);
+  const [missing, setMissing] = useState(false);
+  const [closed, setClosed] = useState(false);
   const [stage, setStage] = useState<'idle' | 'signin' | 'order' | 'redirect'>('idle');
   const acceptRef = useRef<HTMLInputElement>(null);
-  const immediateRef = useRef<HTMLInputElement>(null);
   const open = termsPlan !== null;
   const openedFor = termsPlan?.id ?? null;
 
@@ -403,8 +334,8 @@ function TermsDialog() {
     if (!open) return;
     const frame = requestAnimationFrame(() => {
       setAccepted(false);
-      setImmediate(false);
-      setMissing(null);
+      setMissing(false);
+      setClosed(false);
       setStage('idle');
     });
     return () => cancelAnimationFrame(frame);
@@ -422,13 +353,14 @@ function TermsDialog() {
 
   if (!termsPlan) return null;
   const plan = termsPlan;
-  const text = plans[plan.id];
-  const europe = currency === 'EUR';
-  const live = configured && (config?.checkoutMode ?? 'off') !== 'off';
+  const text = planTexts[plan.id];
+  // The worker is the authority; this only spares a sign-in when the site's
+  // checkout is closed anyway.
+  const live = configured && config !== null && config.checkoutMode !== 'off';
   const price = formatMoney(prices[plan.id][currency], currency, lang);
   const charge = currency === 'BYN' ? null : formatMoney(charges[plan.id][currency], 'BYN', lang);
   const active = Boolean(me?.premiumUntil && new Date(me.premiumUntil) > new Date());
-  const terms: Terms = { offer: legalVersion.offer, payment: legalVersion.payment, privacy: legalVersion.privacy, ...(europe ? { immediateStart: true as const } : {}) };
+  const terms: Terms = { offer: legalVersion.offer, payment: legalVersion.payment, privacy: legalVersion.privacy };
 
   const close = () => {
     if (!closable) return;
@@ -439,54 +371,44 @@ function TermsDialog() {
   const proceed = async () => {
     if (stage !== 'idle' || busy !== null) return;
     if (!accepted) {
-      setMissing('accept');
+      setMissing(true);
       acceptRef.current?.focus();
       return;
     }
-    if (europe && !immediate) {
-      setMissing('immediate');
-      immediateRef.current?.focus();
+    setMissing(false);
+    if (!live) {
+      setClosed(true);
       return;
     }
-    setMissing(null);
-    if (!configured) {
-      openRequest(plan, terms);
-      return;
-    }
-    let account = user;
-    if (!account) {
+    if (!signedIn) {
       setStage('signin');
-      account = await signIn('apple.com', 'terms');
-      if (!account) {
+      const ok = await signIn();
+      if (!ok) {
         setStage('idle');
         return;
       }
-    }
-    if (!live) {
-      setStage('idle');
-      openRequest(plan, terms);
-      return;
     }
     setStage('order');
     const redirecting = await createOrder(plan.id, terms);
     setStage(redirecting ? 'redirect' : 'idle');
   };
 
-  const shownError = stage !== 'idle' || (errorOrigin !== 'terms' && errorOrigin !== plan.id) ? null : error;
-  const message =
-    shownError === 'popupBlocked' || shownError === 'signInError' ? copy.account[shownError]
-    : shownError === 'blocked' ? copy.checkout.blocked(merchant.email)
-    : shownError ? copy.checkout[shownError]
-    : null;
-  const offerRequest = shownError === 'unavailable' || shownError === 'testOnly' || shownError === 'error';
+  const shownError = stage !== 'idle' ? null : error;
+  const message = closed
+    ? copy.checkout.unavailable
+    : shownError === 'popupBlocked' || shownError === 'signInError'
+      ? copy.account[shownError]
+      : shownError === 'blocked'
+        ? copy.checkout.blocked(merchant.email)
+        : shownError
+          ? copy.checkout[shownError]
+          : null;
   const label =
     stage === 'signin' ? copy.checkout.signingIn
     : stage === 'order' ? copy.checkout.creating
     : stage === 'redirect' ? copy.checkout.redirecting
-    : !configured ? copy.terms.next
-    : !user ? copy.terms.withApple
-    : live ? copy.terms.pay(price)
-    : copy.terms.next;
+    : signedIn ? copy.terms.pay(price)
+    : copy.terms.withApple;
   const box = 'mt-0.5 h-5 w-5 shrink-0 cursor-pointer rounded accent-[#A78BFA]';
   const link = 'font-semibold text-white underline decoration-white/40 underline-offset-2 hover:decoration-white';
 
@@ -494,281 +416,94 @@ function TermsDialog() {
     <div className="fixed inset-0 z-[100] overflow-y-auto">
       <button aria-label={copy.terms.cancel} className="fixed inset-0 bg-[#0B0B1E]/70 backdrop-blur-sm" onClick={close} type="button" />
       <div className={dialogFrame}>
-      <dialog
-        aria-labelledby="terms-title"
-        className="pointer-events-auto relative z-10 m-0 w-full max-w-lg rounded-[1.75rem] border border-white/15 bg-[#1E1B4B] p-6 text-white shadow-[0_40px_120px_rgb(0_0_0/50%)] sm:p-7"
-        open
-      >
-        <p className="text-2xl font-semibold" id="terms-title">
-          {copy.terms.title(text.forPeriod)}
-        </p>
-        <dl className="mt-5 grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-2 rounded-2xl border border-white/10 bg-white/[0.05] p-4 text-sm">
-          <dt className="text-white/60">{copy.terms.period}</dt>
-          <dd className="font-medium">{copy.terms.days(text.days)}</dd>
-          <dt className="text-white/60">{copy.terms.price}</dt>
-          <dd className="font-medium">
-            <Money text={price} />
-            {charge ? (
-              <span className="font-normal text-white/60">
-                {' '}
-                (<Money text={copy.terms.charge(charge)} />)
-              </span>
-            ) : null}
-          </dd>
-        </dl>
-        <ul className="mt-4 grid gap-1.5 text-sm leading-6 text-white/75">
-          <li>{copy.terms.oneOff}</li>
-          <li>
-            {user
-              ? active && me?.premiumUntil
-                ? copy.plans.activeUntil(user.email ?? user.uid, formatDate(me.premiumUntil, locale))
-                : copy.terms.goesTo(user.email ?? user.uid)
-              : copy.terms.signInNote}
-          </li>
-        </ul>
+        <dialog
+          aria-labelledby="terms-title"
+          className="pointer-events-auto relative z-10 m-0 w-full max-w-lg rounded-[1.75rem] border border-white/15 bg-[#1E1B4B] p-6 text-white shadow-[0_40px_120px_rgb(0_0_0/50%)] sm:p-7"
+          open
+        >
+          <p className="text-2xl font-semibold" id="terms-title">
+            {copy.terms.title(text.forPeriod)}
+          </p>
+          <dl className="mt-5 grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-2 rounded-2xl border border-white/10 bg-white/[0.05] p-4 text-sm">
+            <dt className="text-white/60">{copy.terms.period}</dt>
+            <dd className="font-medium">{copy.terms.days(text.days)}</dd>
+            <dt className="text-white/60">{copy.terms.price}</dt>
+            <dd className="font-medium">
+              <Money text={price} />
+              {charge ? (
+                <span className="font-normal text-white/60">
+                  {' '}
+                  (<Money text={copy.terms.charge(charge)} />)
+                </span>
+              ) : null}
+            </dd>
+          </dl>
+          <ul className="mt-4 grid gap-1.5 text-sm leading-6 text-white/75">
+            <li>{copy.terms.oneOff}</li>
+            <li>{active && me?.premiumUntil ? copy.terms.active(formatDate(me.premiumUntil, locale)) : copy.terms.signInNote}</li>
+          </ul>
 
-        <label className="mt-5 flex cursor-pointer items-start gap-3 text-sm leading-6">
-          <input
-            aria-describedby={missing === 'accept' ? 'terms-missing' : undefined}
-            aria-invalid={missing === 'accept'}
-            checked={accepted}
-            className={box}
-            onChange={(e) => {
-              setAccepted(e.target.checked);
-              if (e.target.checked && missing === 'accept') setMissing(null);
-            }}
-            ref={acceptRef}
-            type="checkbox"
-          />
-          <span>
-            {copy.terms.accept[0]}
-            <a className={link} href={subscriptionPath(lang, '/offer')} rel="noopener" target="_blank">
-              {copy.terms.accept[1]}
-            </a>
-            {copy.terms.accept[2]}
-            <a className={link} href={subscriptionPath(lang, '/payment')} rel="noopener" target="_blank">
-              {copy.terms.accept[3]}
-            </a>
-            {copy.terms.accept[4]}
-          </span>
-        </label>
-        {europe ? (
-          <label className="mt-3 flex cursor-pointer items-start gap-3 text-sm leading-6">
+          <label className="mt-5 flex cursor-pointer items-start gap-3 text-sm leading-6">
             <input
-              aria-describedby={missing === 'immediate' ? 'terms-missing' : undefined}
-              aria-invalid={missing === 'immediate'}
-              checked={immediate}
+              aria-describedby={missing ? 'terms-missing' : undefined}
+              aria-invalid={missing}
+              checked={accepted}
               className={box}
               onChange={(e) => {
-                setImmediate(e.target.checked);
-                if (e.target.checked && missing === 'immediate') setMissing(null);
+                setAccepted(e.target.checked);
+                if (e.target.checked) setMissing(false);
               }}
-              ref={immediateRef}
+              ref={acceptRef}
               type="checkbox"
             />
-            <span>{copy.terms.immediate}</span>
-          </label>
-        ) : null}
-        {docsNote ? <p className="mt-2 ps-8 text-xs leading-5 text-white/55">{docsNote}</p> : null}
-        {missing ? (
-          <p className="mt-3 text-sm leading-5 text-[#FCA5A5]" id="terms-missing" role="alert">
-            {missing === 'accept' ? copy.terms.required : copy.terms.requiredImmediate}
-          </p>
-        ) : null}
-        <p className="mt-4 text-xs leading-5 text-white/55">
-          {copy.terms.privacy[0]}
-          <a className="underline hover:text-white" href={subscriptionPath(lang, '/privacy')} rel="noopener" target="_blank">
-            {copy.terms.privacy[1]}
-          </a>
-          {copy.terms.privacy[2]}
-        </p>
-
-        {message ? (
-          <p className="mt-4 text-sm leading-5 text-[#FCA5A5]" role="alert">
-            {message}
-            {offerRequest ? (
-              <>
-                {' '}
-                <button className="font-semibold underline" onClick={() => openRequest(plan, terms)} type="button">
-                  {copy.checkout.request}
-                </button>
-              </>
-            ) : null}
-          </p>
-        ) : null}
-
-        <div className="mt-6 flex flex-col gap-2 sm:flex-row">
-          <Button
-            aria-busy={stage !== 'idle'}
-            className={`flex-1 text-center leading-5 whitespace-normal! ${stage !== 'idle' ? 'cursor-wait' : ''}`}
-            disabled={configured && !ready}
-            onClick={() => void proceed()}
-            variant="light"
-          >
-            {stage !== 'idle' ? <Spinner /> : !user && configured ? <AppleGlyph className="h-4 w-4 shrink-0" /> : null}
-            {label}
-          </Button>
-          <Button disabled={!closable} onClick={close} variant="ghost">
-            {copy.terms.cancel}
-          </Button>
-        </div>
-        {configured && !user && stage === 'idle' ? (
-          <button
-            className="mt-3 w-full text-center text-sm text-white/65 underline decoration-white/30 underline-offset-2 hover:text-white disabled:opacity-60"
-            disabled={!ready || busy !== null}
-            onClick={() => void signIn('google.com', 'terms')}
-            type="button"
-          >
-            {copy.terms.google}
-          </button>
-        ) : null}
-      </dialog>
-      </div>
-    </div>
-  );
-}
-
-// The fallback funnel step: a request instead of a mailto. The plan comes
-// pre-selected, the account code is optional, and the owner answers with a
-// payment link. If the worker is unreachable the form falls back to e-mail.
-export function RequestForm() {
-  return (
-    <>
-      <TermsDialog />
-      <RequestDialog />
-    </>
-  );
-}
-
-function RequestDialog() {
-  const { requestPlan, requestTerms, openRequest, user, copy, lang, plans: planTexts, currency } = useAccount();
-  const [planId, setPlanId] = useState<Plan['id']>('year');
-  const [email, setEmail] = useState('');
-  const [code, setCode] = useState('');
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error' | 'rate_limited'>('idle');
-  const open = requestPlan !== null;
-  const openedFor = requestPlan?.id ?? null;
-
-  useEffect(() => {
-    if (!open) return;
-    const frame = requestAnimationFrame(() => {
-      setPlanId(openedFor ?? 'year');
-      setStatus('idle');
-      if (user?.uid) setCode(user.uid);
-      if (user?.email) setEmail((current) => current || user.email || '');
-    });
-    return () => cancelAnimationFrame(frame);
-  }, [open, openedFor, user]);
-
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') openRequest(null);
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [open, openRequest]);
-
-  if (!open) return null;
-  const plan = plans.find((p) => p.id === planId) ?? plans[2];
-  const local = formatMoney(prices[plan.id][currency], currency, lang);
-
-  const submit = async (event: React.SubmitEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const honeypot = new FormData(event.currentTarget).get('website');
-    setStatus('sending');
-    try {
-      const res = await fetch(`${API_BASE}/v1/web/requests`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          planId,
-          email: email.trim(),
-          accountCode: code.trim() || undefined,
-          lang,
-          terms: requestTerms ?? undefined,
-          website: typeof honeypot === 'string' ? honeypot : '',
-        }),
-      });
-      setStatus(res.status === 429 ? 'rate_limited' : res.ok ? 'sent' : 'error');
-    } catch {
-      setStatus('error');
-    }
-  };
-
-  const field = 'mt-1.5 w-full rounded-xl border border-white/15 bg-white/10 px-3 py-2.5 text-base text-white outline-none placeholder:text-white/35 focus:ring-4 focus:ring-white/20';
-
-  return (
-    <div className="fixed inset-0 z-[100] overflow-y-auto">
-      <button aria-label={copy.request.cancel} className="fixed inset-0 bg-[#0B0B1E]/70 backdrop-blur-sm" onClick={() => openRequest(null)} type="button" />
-      <div className={dialogFrame}>
-      <dialog aria-labelledby="request-title" className="pointer-events-auto relative z-10 m-0 w-full max-w-md rounded-[1.75rem] border border-white/15 bg-[#1E1B4B] p-6 text-white shadow-[0_40px_120px_rgb(0_0_0/50%)]" open>
-        {status === 'sent' ? (
-          <>
-            <p className="text-2xl font-semibold" id="request-title">{copy.request.sentTitle}</p>
-            <p className="mt-3 text-base leading-7 text-white/75">{copy.request.sentBody}</p>
-            <Button className="mt-6 w-full" onClick={() => openRequest(null)} variant="light">
-              {copy.request.close}
-            </Button>
-          </>
-        ) : (
-          <form onSubmit={submit}>
-            <p className="text-2xl font-semibold" id="request-title">{copy.request.title}</p>
-            <p className="mt-2 text-sm leading-6 text-white/65">{copy.request.body}</p>
-            <label className="mt-5 block text-sm font-semibold">
-              {copy.request.plan}
-              <select className={field} onChange={(e) => setPlanId(e.target.value as Plan['id'])} value={planId}>
-                {plans.map((p) => (
-                  <option className="text-[#1E1B4B]" key={p.id} value={p.id}>
-                    {planTexts[p.id].title} — {formatByn(p.priceByn, lang)}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <p className="mt-1.5 text-sm text-white/60">
-              <Money text={local} />
-            </p>
-            <label className="mt-4 block text-sm font-semibold">
-              {copy.request.email}
-              <input autoComplete="email" className={field} inputMode="email" onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" required type="email" value={email} />
-            </label>
-            <label className="mt-4 block text-sm font-semibold">
-              {copy.request.code} <span className="font-normal text-white/50">{copy.request.optional}</span>
-              <input className={`${field} font-mono text-sm`} onChange={(e) => setCode(e.target.value)} pattern="[A-Za-z0-9_\-]{6,64}" placeholder="Xy12…" value={code} />
-              <span className="mt-1 block text-xs font-normal leading-5 text-white/50">{copy.request.codeHint}</span>
-            </label>
-            <input aria-hidden="true" autoComplete="off" className="hidden" name="website" tabIndex={-1} />
-            {status === 'error' ? (
-              <p className="mt-3 text-sm text-[#FCA5A5]" role="alert">
-                {copy.request.error}{' '}
-                <a className="underline" href={mailtoOrder(lang, plan, code || user?.uid)}>
-                  {copy.request.errorMail}
-                </a>
-              </p>
-            ) : null}
-            {status === 'rate_limited' ? (
-              <p className="mt-3 text-sm text-[#FCA5A5]" role="alert">
-                {copy.checkout.rateLimited}
-              </p>
-            ) : null}
-            <div className="mt-6 flex flex-col gap-2 sm:flex-row">
-              <Button className="flex-1" disabled={status === 'sending'} type="submit">
-                {status === 'sending' ? <Spinner /> : null}
-                {copy.request.submit}
-              </Button>
-              <Button onClick={() => openRequest(null)} variant="ghost">
-                {copy.request.cancel}
-              </Button>
-            </div>
-            <p className="mt-3 text-xs leading-5 text-white/45">
-              {copy.request.consent}{' '}
-              <a className="underline" href={subscriptionPath(lang, '/privacy')}>
-                {copy.docs.privacy}
+            <span>
+              {copy.terms.accept[0]}
+              <a className={link} href={subscriptionPath(lang, '/offer')} rel="noopener" target="_blank">
+                {copy.terms.accept[1]}
               </a>
+              {copy.terms.accept[2]}
+              <a className={link} href={subscriptionPath(lang, '/payment')} rel="noopener" target="_blank">
+                {copy.terms.accept[3]}
+              </a>
+              {copy.terms.accept[4]}
+            </span>
+          </label>
+          {docsNote ? <p className="mt-2 ps-8 text-xs leading-5 text-white/55">{docsNote}</p> : null}
+          {missing ? (
+            <p className="mt-3 text-sm leading-5 text-[#FCA5A5]" id="terms-missing" role="alert">
+              {copy.terms.required}
             </p>
-          </form>
-        )}
-      </dialog>
+          ) : null}
+          <p className="mt-4 text-xs leading-5 text-white/55">
+            {copy.terms.privacy[0]}
+            <a className="underline hover:text-white" href={subscriptionPath(lang, '/privacy')} rel="noopener" target="_blank">
+              {copy.terms.privacy[1]}
+            </a>
+            {copy.terms.privacy[2]}
+          </p>
+
+          {message ? (
+            <p className="mt-4 text-sm leading-5 text-[#FCA5A5]" role="alert">
+              {message}
+            </p>
+          ) : null}
+
+          <div className="mt-6 flex flex-col gap-2 sm:flex-row">
+            <Button
+              aria-busy={stage !== 'idle'}
+              className={`flex-1 text-center leading-5 whitespace-normal! ${stage !== 'idle' ? 'cursor-wait' : ''}`}
+              disabled={(configured && !ready) || closed}
+              onClick={() => void proceed()}
+              variant="light"
+            >
+              {stage !== 'idle' ? <Spinner /> : signedIn ? null : <AppleGlyph className="h-4 w-4 shrink-0" />}
+              {label}
+            </Button>
+            <Button disabled={!closable} onClick={close} variant="ghost">
+              {copy.terms.cancel}
+            </Button>
+          </div>
+        </dialog>
       </div>
     </div>
   );

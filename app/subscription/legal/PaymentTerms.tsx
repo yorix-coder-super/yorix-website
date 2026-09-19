@@ -1,6 +1,7 @@
+import { headers } from 'next/headers';
 import { DocumentPage } from '../DocumentPage';
+import { currencyForVisitor, formatMoney } from '../currency';
 import { subscriptionPath, type Lang } from '../i18n';
-import { formatMoney, type Currency } from '../currency';
 import { charges, formatByn, listJoin, merchant, planCopy, plans, prices } from '../merchant';
 import { PaymentLogos } from '../PaymentLogos';
 import { SampleReceipt } from '../SampleReceipt';
@@ -8,51 +9,29 @@ import { editionLabel } from './versions';
 
 export const paymentTermsTitle = { ru: 'Оплата, доставка и возврат', en: 'Payment, delivery and refunds' } as const;
 
-export function PaymentTerms({ lang }: { lang: Lang }) {
+// The page lists the prices in the visitor's own currency only — roubles for
+// Russia (with the amount the card is charged), Belarusian rubles for
+// everyone else; the site sells by card to Belarus and Russia, other
+// countries buy in the App Store.
+export async function PaymentTerms({ lang }: { lang: Lang }) {
+  const requestHeaders = await headers();
+  const russia = currencyForVisitor(requestHeaders.get('cf-ipcountry'), requestHeaders.get('accept-language')) === 'RUB';
   const email = <a href={`mailto:${merchant.email}`}>{merchant.email}</a>;
   const cards = listJoin(merchant.cards, lang);
+  const offer = subscriptionPath(lang, '/offer');
+  const priceOf = (planId: (typeof plans)[number]['id']) =>
+    russia
+      ? `${formatMoney(prices[planId].RUB, 'RUB', lang)} (${lang === 'ru' ? 'к списанию' : 'charged as'} ${formatByn(charges[planId].RUB, lang, 'code')})`
+      : formatByn(prices[planId].BYN, lang, 'code');
   const planList = (
     <ul>
       {plans.map((plan) => (
         <li key={plan.id}>
           {lang === 'ru' ? `Подписка ${planCopy.ru[plan.id].forPeriod} (${planCopy.ru[plan.id].days})` : `Subscription ${planCopy.en[plan.id].forPeriod} (${planCopy.en[plan.id].days})`} —{' '}
-          {formatByn(plan.priceByn, lang, 'code')}
+          {priceOf(plan.id)}
         </li>
       ))}
     </ul>
-  );
-  const regions: { currency: Currency; label: Record<Lang, string> }[] = [
-    { currency: 'EUR', label: { ru: 'Европа — базовая цена', en: 'Europe — base price' } },
-    { currency: 'BYN', label: { ru: 'Беларусь', en: 'Belarus' } },
-    { currency: 'RUB', label: { ru: 'Россия', en: 'Russia' } },
-    { currency: 'USD', label: { ru: 'Другие страны', en: 'Other countries' } },
-  ];
-  const priceTable = (
-    <div className="legal-table">
-      <table>
-        <thead>
-          <tr>
-            <th>{lang === 'ru' ? 'Регион покупателя' : 'Buyer’s region'}</th>
-            {plans.map((plan) => (
-              <th key={plan.id}>{planCopy[lang][plan.id].days}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {regions.map((region) => (
-            <tr key={region.currency}>
-              <td>{region.label[lang]}</td>
-              {plans.map((plan) => (
-                <td data-label={planCopy[lang][plan.id].days} key={plan.id}>
-                  <strong>{formatByn(charges[plan.id][region.currency], lang, 'code')}</strong>
-                  {region.currency === 'BYN' ? null : <> ({formatMoney(prices[plan.id][region.currency], region.currency, lang)})</>}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
   );
   const logos = (
     <div className="mt-4 rounded-2xl bg-[#1E1B4B] p-4">
@@ -70,34 +49,20 @@ export function PaymentTerms({ lang }: { lang: Lang }) {
           {merchant.status.en.toLowerCase()}, {merchant.country.en}.
         </p>
         {planList}
-        <p>Prices are in Belarusian rubles. The payment is one-off; there is no automatic renewal.</p>
-
-        <h2>Prices for different regions</h2>
-        <p>
-          The price depends on the buyer’s region, which the site detects from the connection country and the browser language. The contract price is the
-          amount in Belarusian rubles charged to the card; the price in the local currency in brackets is for reference, and the amount in the card’s currency is
-          set by the card-issuing bank.
-        </p>
-        {priceTable}
-        <p>
-          The prices for Belarus, Russia and other countries are discounts for categories of consumers by location, set by the seller’s decision of
-          18 September 2026 (Article 396(2) of the Civil Code of the Republic of Belarus). A price is fixed at the moment of payment.
-        </p>
+        <p>The payment is one-off; there is no automatic renewal and the card is not saved.</p>
 
         <h2>Order procedure</h2>
         <ol>
           <li>
-            On the <a href={`${subscriptionPath(lang)}#plans`}>plans page</a>, sign in with the Apple ID or Google account you use in the Yorix app. The subscription is
-            tied to that account.
+            On the <a href={`${subscriptionPath(lang)}#plans`}>plans page</a>, choose a period and press “Subscribe”.
           </li>
-          <li>Choose a period and press “Pay”. We create the order and open the secure payment page of the WebPay processing system.</li>
-          <li>Enter your bank card details on the WebPay page and confirm the payment with the “Pay” button.</li>
-          <li>Right after payment the subscription is switched on for your account; a confirmation with the end date and a receipt are sent by e-mail.</li>
+          <li>
+            Tick that you accept the <a href={offer}>public offer</a> and these terms, and press “Continue with Apple”: sign in with the Apple
+            account you use in the Yorix app. There is nothing to type in — no Apple ID, no codes.
+          </li>
+          <li>The secure WEBPAY payment page opens: enter your card details and confirm the payment.</li>
+          <li>Right after payment the subscription turns on automatically in the Yorix app on your account.</li>
         </ol>
-        <p>
-          If payment on the site is unavailable, write to {email}, stating the period and your account code (shown after signing in on the site and in the
-          app under Settings → Account). We reply with a payment link to the same WebPay page, and switch the subscription on within 24 hours of payment.
-        </p>
 
         <h2>Payment methods</h2>
         <p>
@@ -121,27 +86,23 @@ export function PaymentTerms({ lang }: { lang: Lang }) {
           </p>
         </blockquote>
         <p>
-          If the subscription is not switched on, or no confirmation e-mail arrives after payment, contact support at {email}
+          If the subscription has not turned on after payment, contact support at {email}
           {merchant.phone ? ` or by phone ${merchant.phone}` : ''}. State the date and amount of the payment — we will check it and help.
         </p>
 
         <h2>Receiving the service (delivery)</h2>
         <p>
-          Nothing is shipped. The subscription is switched on remotely for your Yorix account: immediately after paying on the site, or within 24 hours for an
-          e-mail order. Delivery is free of charge.
+          Nothing is shipped. The subscription turns on remotely in the Yorix app on your account right after payment. Delivery is free of charge.
         </p>
         <p>
-          The period starts when the subscription is switched on. You need the Yorix app from the App Store on an iPhone or iPad with iOS 18 or later and to be
-          signed in to your Yorix account.
+          The period starts when the subscription is switched on. You need the Yorix app from the App Store on an iPhone or iPad with iOS 18 or later,
+          signed in with the same Apple account.
         </p>
 
         <h2>Service control</h2>
         <ul>
-          <li>after the subscription is switched on, we send an e-mail with the start and end dates of the period;</li>
-          <li>the subscription features become available in the Yorix app — restart the app if needed;</li>
-          <li>
-            if the features have not opened within 24 hours of payment, write to {email} — we will switch the subscription on or refund the payment.
-          </li>
+          <li>the period of the subscription is shown in the Yorix app — restart the app if the features have not appeared yet;</li>
+          <li>if the features have not opened within 24 hours of payment, write to {email} — we will switch the subscription on or refund the payment.</li>
         </ul>
 
         <h2>Cancellation and refunds</h2>
@@ -153,17 +114,16 @@ export function PaymentTerms({ lang }: { lang: Lang }) {
           <li>before the subscription is switched on, an order can be cancelled at any time — we refund the full amount;</li>
           <li>
             after it is switched on you may withdraw at any time: we refund the price of the unused full days of the period, less our documented actual
-            costs (clause 7.2 of the <a href={subscriptionPath(lang, '/offer')}>offer</a>);
+            costs (clause 7.2 of the <a href={offer}>offer</a>);
           </li>
           <li>
             we refund in full if the subscription was not switched on, if a charge was mistaken or duplicated, or if the service did not work through our
-            fault (clause 7.3 of the offer);
+            fault (clause 7.3 of the offer).
           </li>
-          <li>consumers in the EU, EEA and UK also have a 14-day right of withdrawal (Annex 1 to the offer).</li>
         </ul>
         <p>
-          To request a refund, write to {email} from the account’s e-mail address and state the order number, date and amount of the payment. For operations
-          made in error, attach the receipt or confirmation showing the wrong charge. Cash refunds are not made for card payments.
+          To request a refund, write to {email} and state the date and amount of the payment. For operations made in error, attach the receipt or
+          confirmation showing the wrong charge. Cash refunds are not made for card payments.
         </p>
         <p>
           We make the refund within 7 days of receiving the request (for consumers in Russia — within 10 days at the latest). The time until the money
@@ -188,33 +148,20 @@ export function PaymentTerms({ lang }: { lang: Lang }) {
         аналитика и ежедневные рекомендации. Услугу оказывает {merchant.fullName}, {merchant.status.ru.toLowerCase()}, {merchant.country.ru}.
       </p>
       {planList}
-      <p>Цены указаны в белорусских рублях. Платёж разовый, автоматического продления нет.</p>
-
-      <h2>Цены для разных регионов</h2>
-      <p>
-        Цена зависит от региона покупателя, который сайт определяет по стране подключения и языку браузера. Цена договора — сумма в белорусских рублях,
-        которая списывается с карты; цена в местной валюте в скобках справочная, а сумму в валюте карты определяет банк, выпустивший карту.
-      </p>
-      {priceTable}
-      <p>
-        Цены для Беларуси, России и других стран — льготы для категорий потребителей по месту нахождения, установленные решением продавца от
-        18 сентября 2026 г. (п. 2 ст. 396 Гражданского кодекса Республики Беларусь). Цена фиксируется в момент оплаты.
-      </p>
+      <p>Платёж разовый: автоматического продления нет, карта не сохраняется.</p>
 
       <h2>Процедура оформления заказа</h2>
       <ol>
         <li>
-          На странице <a href={`${subscriptionPath(lang)}#plans`}>тарифов</a> войдите с тем Apple ID или аккаунтом Google, которым вы пользуетесь в
-          приложении Yorix. Подписка привязывается к этому аккаунту.
+          На странице <a href={`${subscriptionPath(lang)}#plans`}>тарифов</a> выберите срок и нажмите «Оформить».
         </li>
-        <li>Выберите срок и нажмите «Оплатить». Мы создадим заказ и откроем защищённую платёжную страницу процессинговой системы WebPay.</li>
-        <li>Введите данные банковской карты на странице WebPay и подтвердите платёж, нажав кнопку «Оплатить».</li>
-        <li>Сразу после оплаты подписка включается на вашем аккаунте; письмо с датой окончания срока и чек приходят на e-mail.</li>
+        <li>
+          Отметьте, что принимаете <a href={offer}>публичный договор</a> и эти условия, и нажмите «Продолжить с Apple»: войдите тем же аккаунтом
+          Apple, что и в приложении Yorix. Ничего вводить не нужно — ни Apple ID, ни кодов.
+        </li>
+        <li>Откроется защищённая платёжная страница WEBPAY: введите данные карты и подтвердите оплату.</li>
+        <li>Сразу после оплаты подписка автоматически включится в приложении Yorix на вашем аккаунте.</li>
       </ol>
-      <p>
-        Если оплата на сайте недоступна, напишите на {email}, указав срок и код аккаунта (он показан после входа на сайте и в приложении в разделе
-        «Настройки → Аккаунт»). В ответ мы пришлём ссылку на ту же платёжную страницу WebPay, а после оплаты включим подписку в течение 24 часов.
-      </p>
 
       <h2>Способы оплаты</h2>
       <p>
@@ -238,24 +185,23 @@ export function PaymentTerms({ lang }: { lang: Lang }) {
         </p>
       </blockquote>
       <p>
-        Если подписка не включена, в том числе после оплаты не пришло письмо-подтверждение, обратитесь в службу поддержки по e-mail {email}
+        Если после оплаты подписка не включилась, обратитесь в службу поддержки по e-mail {email}
         {merchant.phone ? ` или по телефону ${merchant.phone}` : ''}. Укажите дату и сумму оплаты — мы проверим платёж и поможем.
       </p>
 
       <h2>Получение услуги (доставка)</h2>
       <p>
-        Физической доставки нет. Подписка включается удалённо на вашем аккаунте Yorix: сразу после оплаты на сайте или в течение 24 часов после оплаты
-        по заказу письмом. Стоимость доставки не взимается.
+        Физической доставки нет. Подписка включается удалённо в приложении Yorix на вашем аккаунте сразу после оплаты. Стоимость доставки не
+        взимается.
       </p>
       <p>
-        Срок подписки начинается с момента включения. Для работы нужны приложение Yorix из App Store на iPhone или iPad с iOS 18 и новее и вход в
-        аккаунт Yorix.
+        Срок подписки начинается с момента включения. Для работы нужны приложение Yorix из App Store на iPhone или iPad с iOS 18 и новее и вход тем же
+        аккаунтом Apple.
       </p>
 
       <h2>Контроль оказания услуги</h2>
       <ul>
-        <li>после включения подписки мы присылаем письмо с датой начала и окончания срока;</li>
-        <li>в приложении Yorix становятся доступны функции подписки — при необходимости перезапустите приложение;</li>
+        <li>срок действия подписки отображается в приложении Yorix — если функции ещё не появились, перезапустите приложение;</li>
         <li>если функции подписки не открылись в течение 24 часов после оплаты, напишите на {email} — мы включим подписку или вернём деньги.</li>
       </ul>
 
@@ -271,14 +217,13 @@ export function PaymentTerms({ lang }: { lang: Lang }) {
         <li>до включения подписки заказ можно отменить в любой момент — вернём всю сумму;</li>
         <li>
           после включения от подписки можно отказаться в любой момент: вернём стоимость неиспользованных полных суток срока за вычетом подтверждённых
-          фактических расходов (п. 7.2 <a href={subscriptionPath(lang, '/offer')}>оферты</a>);
+          фактических расходов (п. 7.2 <a href={offer}>оферты</a>);
         </li>
-        <li>полностью возвращаем, если подписка не была включена, списание было ошибочным или повторным либо услуга не работала по нашей вине (п. 7.3 оферты);</li>
-        <li>у потребителей из ЕС, ЕЭЗ и Великобритании есть также 14-дневное право отказа (Приложение 1 к оферте).</li>
+        <li>полностью возвращаем, если подписка не была включена, списание было ошибочным или повторным либо услуга не работала по нашей вине (п. 7.3 оферты).</li>
       </ul>
       <p>
-        Для возврата напишите на {email} с адреса электронной почты аккаунта и укажите номер заказа, дату и сумму оплаты. По операциям, проведённым с
-        ошибками, приложите чек или подтверждение, показывающее ошибочное списание. Возврат наличными при оплате картой не производится.
+        Для возврата напишите на {email} и укажите дату и сумму оплаты. По операциям, проведённым с ошибками, приложите чек или подтверждение,
+        показывающее ошибочное списание. Возврат наличными при оплате картой не производится.
       </p>
       <p>
         Мы возвращаем деньги в течение 7 дней после получения заявления (потребителям из России — не позднее 10 дней). Срок поступления денег на карту
