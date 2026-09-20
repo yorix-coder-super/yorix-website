@@ -1,6 +1,5 @@
 import { DocumentPage } from '../DocumentPage';
 import { subscriptionPath, type Lang } from '../i18n';
-import { merchant } from '../merchant';
 import { sellsHere } from '../region';
 import { LegalBody, type LegalSection } from './LegalBody';
 import { sellerLine } from './SellerBlock';
@@ -8,7 +7,7 @@ import { editionLabel } from './versions';
 
 export const termsTitle = { ru: 'Условия использования', en: 'Terms of use' } as const;
 
-type Ctx = { email: string; seller: string; privacy: string; offer: string; web: boolean };
+type Ctx = { seller: string; privacy: string; offer: string; web: boolean };
 
 const appleEula = 'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/';
 
@@ -16,7 +15,7 @@ const appleEula = 'https://www.apple.com/legal/internet-services/itunes/dev/stde
 // Huckleberry's Terms of Use): what the service is and is not, the rules of
 // use and the limits of liability. Only what the law already implies is
 // promised; purchases stay with Apple's terms and, on the site, the offer.
-function ru({ email, seller, privacy, offer, web }: Ctx): LegalSection[] {
+function ru({ seller, privacy, offer, web }: Ctx): LegalSection[] {
   return [
     {
       title: '1. Общие положения',
@@ -65,13 +64,13 @@ function ru({ email, seller, privacy, offer, web }: Ctx): LegalSection[] {
       title: '7. Применимое право и контакты',
       blocks: [
         '7.1. К условиям применяется право Республики Беларусь. Если вы потребитель из другой страны, это не лишает вас защиты, которую дают императивные нормы права страны вашего проживания.',
-        `7.2. Вопросы об условиях направляйте на ${email}.`,
+        '7.2. Вопросы об условиях направляйте через форму «Написать нам» на сайте yorix.website.',
       ],
     },
   ];
 }
 
-function en({ email, seller, privacy, offer, web }: Ctx): LegalSection[] {
+function en({ seller, privacy, offer, web }: Ctx): LegalSection[] {
   return [
     {
       title: '1. General',
@@ -120,7 +119,7 @@ function en({ email, seller, privacy, offer, web }: Ctx): LegalSection[] {
       title: '7. Governing law and contact',
       blocks: [
         '7.1. These terms are governed by the law of the Republic of Belarus. If you are a consumer from another country, this does not deprive you of the protection of the mandatory rules of your country of residence.',
-        `7.2. Questions about these terms: ${email}.`,
+        '7.2. Questions about these terms: use the “Write to us” form on yorix.website.',
       ],
     },
   ];
@@ -128,7 +127,6 @@ function en({ email, seller, privacy, offer, web }: Ctx): LegalSection[] {
 
 export async function Terms({ lang }: { lang: Lang }) {
   const ctx: Ctx = {
-    email: merchant.email,
     seller: sellerLine(lang),
     privacy: subscriptionPath(lang, '/privacy'),
     offer: subscriptionPath(lang, '/offer'),

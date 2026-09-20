@@ -1,8 +1,10 @@
 'use client';
 
+import { CircleCheck, Send } from 'lucide-react';
 import { useEffect, useRef, useState, type SubmitEvent } from 'react';
 import type { SupportCopy } from '../i18n/types';
 import { API_BASE, turnstileSiteKey } from '../subscription/config';
+import { Spinner } from '../subscription/ui';
 
 type State = 'idle' | 'sending' | 'sent' | 'invalid' | 'error';
 
@@ -11,19 +13,18 @@ const EMAIL = /^[A-Za-z0-9._%+'-]{1,64}@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za
 
 const text = (value: FormDataEntryValue | null) => (typeof value === 'string' ? value : '');
 
-// «Write to us» without a mail app: the worker mails the message to support
-// with the writer as Reply-To. The hidden field and the time on the page are
-// what the worker uses to drop bots without telling them.
+// «Write to us» without a mail app and without an address on the page: the
+// worker mails the message to support with the writer as Reply-To. The hidden
+// field and the time on the page are what the worker uses to drop bots
+// without telling them.
 export function ContactForm({
   copy,
-  email,
   privacyHref,
   privacyLabel,
   lang,
   page,
 }: {
   copy: SupportCopy['form'];
-  email: string;
   privacyHref: string;
   privacyLabel: string;
   lang: string;
@@ -83,61 +84,60 @@ export function ContactForm({
 
   if (state === 'sent') {
     return (
-      <output className="block rounded-2xl border border-[#A7F3D0]/30 bg-[#A7F3D0]/10 px-5 py-4 text-base leading-7 text-[#D1FAE5]">
-        {copy.sent}
+      <output className="flex min-h-[16rem] flex-col items-center justify-center gap-4 text-center">
+        <CircleCheck aria-hidden="true" className="h-14 w-14 text-[#A7F3D0]" />
+        <span className="max-w-sm text-lg font-semibold leading-7 text-white">{copy.sent}</span>
       </output>
     );
   }
 
-  const field = 'mt-2 w-full rounded-2xl border border-white/15 bg-white/[0.06] px-4 py-3 text-base text-white placeholder:text-white/35 focus:border-white/40 focus:outline-none';
+  const label = 'block text-sm font-semibold text-white';
+  const field =
+    'mt-2 w-full rounded-2xl border-2 border-transparent bg-white px-4 py-3 text-base text-[#1E1B4B] shadow-[0_10px_30px_rgb(30_27_75/18%)] placeholder:text-[#1E1B4B]/40 focus:border-[#FDE68A] focus:outline-none';
+  const alert = 'rounded-2xl bg-[#1E1B4B]/55 px-4 py-3 text-sm font-medium text-[#FDE68A]';
   return (
     <form className="grid gap-4" noValidate onSubmit={(event) => void submit(event)}>
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="block text-sm font-semibold text-white/80">
+        <label className={label}>
           {copy.name}
           <input autoComplete="name" className={field} maxLength={80} name="name" />
         </label>
-        <label className="block text-sm font-semibold text-white/80">
+        <label className={label}>
           {copy.email}
           <input autoComplete="email" className={field} inputMode="email" maxLength={254} name="email" required type="email" />
         </label>
       </div>
-      <label className="block text-sm font-semibold text-white/80">
+      <label className={label}>
         {copy.message}
-        <textarea className={`${field} min-h-32 resize-y`} maxLength={4000} minLength={10} name="message" placeholder={copy.messagePlaceholder} required />
+        <textarea className={`${field} min-h-36 resize-y`} maxLength={4000} minLength={10} name="message" placeholder={copy.messagePlaceholder} required />
       </label>
       {turnstileSiteKey ? <div className="cf-turnstile" data-language={lang} data-sitekey={turnstileSiteKey} data-theme="dark" /> : null}
       {/* Humans never see or fill this; bots do. */}
       <input aria-hidden="true" autoComplete="off" className="absolute -left-[9999px] h-px w-px opacity-0" name="website" tabIndex={-1} />
       {state === 'invalid' ? (
-        <p className="rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm text-[#FDE68A]" role="alert">
+        <p className={alert} role="alert">
           {copy.invalid}
         </p>
       ) : null}
       {state === 'error' ? (
-        <p className="rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm text-[#FDE68A]" role="alert">
-          {copy.error}{' '}
-          <a className="font-semibold underline" href={`mailto:${email}`}>
-            {email}
-          </a>
-          .
+        <p className={alert} role="alert">
+          {copy.error}
         </p>
       ) : null}
-      <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-xs leading-5 text-white/55">
-          {copy.privacy}{' '}
-          <a className="font-semibold text-white/80 underline decoration-white/30 underline-offset-2 hover:decoration-white" href={privacyHref}>
-            {privacyLabel}
-          </a>
-        </p>
-        <button
-          className="inline-flex min-h-[3.25rem] shrink-0 items-center justify-center gap-2 rounded-full bg-white px-7 text-base font-semibold text-[#1E1B4B] transition hover:bg-[#EEF2FF] disabled:opacity-60"
-          disabled={state === 'sending'}
-          type="submit"
-        >
-          {state === 'sending' ? copy.sending : copy.send}
-        </button>
-      </div>
+      <button
+        className="inline-flex min-h-14 w-full items-center justify-center gap-2.5 rounded-full bg-[#FDE68A] px-7 text-base font-semibold text-[#1E1B4B] shadow-[0_18px_44px_rgb(253_230_138/28%)] transition hover:-translate-y-0.5 hover:bg-[#FCD34D] focus:outline-none focus-visible:ring-4 focus-visible:ring-white/50 disabled:translate-y-0 disabled:opacity-70"
+        disabled={state === 'sending'}
+        type="submit"
+      >
+        {state === 'sending' ? <Spinner className="h-5 w-5" /> : <Send aria-hidden="true" className="h-5 w-5 rtl:-scale-x-100" />}
+        {state === 'sending' ? copy.sending : copy.send}
+      </button>
+      <p className="text-center text-xs leading-5 text-white/70">
+        {copy.privacy}{' '}
+        <a className="font-semibold text-white underline decoration-white/40 underline-offset-2 hover:decoration-white" href={privacyHref}>
+          {privacyLabel}
+        </a>
+      </p>
     </form>
   );
 }

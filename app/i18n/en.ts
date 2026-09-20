@@ -85,7 +85,7 @@ export const translation: SiteTranslation = {
     cta: {
       badge: 'Built for real family life',
       title: 'Log one nap tonight. Tomorrow’s plan is already there.',
-      body: 'The diary is free forever. Sleep, feeds, diapers, growth and care in one tap — and a plan for tomorrow built from what you logged.',
+      body: 'Sleep, feeds, diapers, growth and care in one tap — and a plan for tomorrow built from what you logged.',
       action: 'Download Yorix',
     },
     footer: 'Yorix is a routine helper for parents. It does not provide medical diagnosis or emergency advice.',
@@ -271,8 +271,6 @@ export const translation: SiteTranslation = {
       title: 'Still need help?',
       body: 'Write to us here — or in the app: Settings → “Write to us” opens a chat with us.',
       reply: 'We reply within 3 working days.',
-      include: 'To help faster, tell us your iPhone model, iOS and Yorix versions and what happened.',
-      email: 'Send an e-mail',
     },
     form: {
       name: 'Your name',
@@ -282,7 +280,7 @@ export const translation: SiteTranslation = {
       send: 'Send',
       sending: 'Sending…',
       sent: 'Thank you! We’ve got your message and will reply to your e-mail within 3 working days.',
-      error: 'The message could not be sent. Please try again in a minute or write to',
+      error: 'The message could not be sent. Please try again in a minute — or write to us in the app: Settings → “Write to us”.',
       invalid: 'Please enter your e-mail and a message of at least 10 characters.',
       privacy: 'We use your e-mail and message only to reply to you.',
     },

@@ -16,7 +16,8 @@ export const paymentTermsTitle = { ru: 'Оплата, доставка и воз
 export async function PaymentTerms({ lang }: { lang: Lang }) {
   const requestHeaders = await headers();
   const russia = currencyForVisitor(requestHeaders.get('cf-ipcountry'), requestHeaders.get('accept-language')) === 'RUB';
-  const email = <a href={`mailto:${merchant.email}`}>{merchant.email}</a>;
+  // Support is reached through the site's form; the address itself stays in the offer's requisites.
+  const form = <a href={`${lang === 'ru' ? '/ru' : ''}/support#contact`}>{lang === 'ru' ? 'форму «Написать нам»' : 'the “Write to us” form'}</a>;
   const cards = listJoin(merchant.cards[lang], lang);
   const offer = subscriptionPath(lang, '/offer');
   const priceOf = (planId: (typeof plans)[number]['id']) =>
@@ -93,7 +94,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
           </p>
         </blockquote>
         <p>
-          If the subscription has not turned on after payment, contact support at {email}
+          If the subscription has not turned on after payment, contact support through {form}
           {merchant.phone ? ` or by phone ${merchant.phone}` : ''}. State the date and amount of the payment — we will check it and help.
         </p>
 
@@ -109,7 +110,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         <h2>Service control</h2>
         <ul>
           <li>restart the Yorix app if the paid features have not appeared yet;</li>
-          <li>if the features have not opened within 3 days of payment, write to {email} — we will switch the subscription on or refund the payment.</li>
+          <li>if the features have not opened within 3 days of payment, write to us through {form} — we will switch the subscription on or refund the payment.</li>
         </ul>
 
         <h2>Cancellation and refunds</h2>
@@ -129,7 +130,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
           </li>
         </ul>
         <p>
-          To request a refund, write to {email} and state the date and amount of the payment. For operations made in error, attach the receipt or
+          To request a refund, write to us through {form} and state the date and amount of the payment. For operations made in error, attach the receipt or
           confirmation showing the wrong charge. Cash refunds are not made for card payments.
         </p>
         <p>
@@ -199,7 +200,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         </p>
       </blockquote>
       <p>
-        Если после оплаты подписка не включилась, обратитесь в службу поддержки по e-mail {email}
+        Если после оплаты подписка не включилась, обратитесь в службу поддержки через {form}
         {merchant.phone ? ` или по телефону ${merchant.phone}` : ''}. Укажите дату и сумму оплаты — мы проверим платёж и поможем.
       </p>
 
@@ -216,7 +217,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
       <h2>Контроль оказания услуги</h2>
       <ul>
         <li>если функции подписки ещё не появились, перезапустите приложение Yorix;</li>
-        <li>если функции подписки не открылись в течение 3 дней после оплаты, напишите на {email} — мы включим подписку или вернём деньги.</li>
+        <li>если функции подписки не открылись в течение 3 дней после оплаты, напишите нам через {form} — мы включим подписку или вернём деньги.</li>
       </ul>
 
       <h2>Отмена заказа и возврат денежных средств</h2>
@@ -236,7 +237,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         <li>полностью возвращаем, если подписка не была включена, списание было ошибочным или повторным либо услуга не работала по нашей вине (п. 7.3 оферты).</li>
       </ul>
       <p>
-        Для возврата напишите на {email} и укажите дату и сумму оплаты. По операциям, проведённым с ошибками, приложите чек или подтверждение,
+        Для возврата напишите нам через {form} и укажите дату и сумму оплаты. По операциям, проведённым с ошибками, приложите чек или подтверждение,
         показывающее ошибочное списание. Возврат наличными при оплате картой не производится.
       </p>
       <p>

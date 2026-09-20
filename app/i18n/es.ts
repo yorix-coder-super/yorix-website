@@ -80,7 +80,7 @@ export const translation: SiteTranslation = {
     cta: {
       badge: 'Pensado para la vida familiar real',
       title: 'Registra una siesta esta noche. El plan de mañana ya está listo.',
-      body: 'El diario es gratis para siempre. Sueño, tomas, pañales, crecimiento y cuidados con un toque, y un plan para mañana hecho con lo que registraste.',
+      body: 'Sueño, tomas, pañales, crecimiento y cuidados con un toque, y un plan para mañana hecho con lo que registraste.',
       action: 'Descargar Yorix',
     },
     footer: 'Yorix es una ayuda para la rutina de madres y padres. No ofrece diagnósticos médicos ni consejos de emergencia.',
@@ -255,7 +255,6 @@ export const translation: SiteTranslation = {
       offer: 'oferta pública',
       and: 'y las',
       refundTerms: 'condiciones de reembolso',
-      device: 'iPhone y iPad, iOS 18+.',
     },
     account: {
       signInApple: 'Iniciar sesión con Apple',
@@ -269,7 +268,7 @@ export const translation: SiteTranslation = {
       unavailable: "Pronto podrás pagar con tarjeta en la web.",
       testOnly: "Por ahora el pago con tarjeta solo está abierto para pruebas.",
       error: "No se pudo crear el pago. Inténtalo de nuevo en un minuto.",
-      blocked: (email) => `El pago no está disponible para esta cuenta. Escríbenos: ${email}.`,
+      blocked: 'El pago no está disponible para esta cuenta. Escríbenos a través del formulario de la página de soporte.',
       rateLimited: 'Demasiados intentos. Espera un minuto.',
     },
     terms: {
@@ -337,8 +336,6 @@ export const translation: SiteTranslation = {
       title: '¿Todavía necesitas ayuda?',
       body: 'Escríbenos aquí o desde la app (en «Ajustes» → «Escríbenos» se abre un chat con nosotros).',
       reply: 'Respondemos en un plazo de 3 días laborables.',
-      include: 'Para ayudarte más rápido, indícanos el modelo de tu iPhone, las versiones de iOS y de Yorix, y cuéntanos qué pasó.',
-      email: 'Enviar un e-mail',
     },
     form: {
       name: 'Tu nombre',
@@ -348,7 +345,7 @@ export const translation: SiteTranslation = {
       send: 'Enviar',
       sending: 'Enviando…',
       sent: '¡Gracias! Recibimos tu mensaje y te responderemos por e-mail en un plazo de 3 días laborables.',
-      error: 'No se pudo enviar el mensaje. Vuelve a intentarlo en un minuto o escribe a',
+      error: 'No se pudo enviar el mensaje. Vuelve a intentarlo en un minuto o escríbenos desde la app: «Ajustes» → «Escríbenos».',
       invalid: 'Escribe tu e-mail y un mensaje de al menos 10 caracteres.',
       privacy: 'Usamos tu e-mail y tu mensaje solo para responderte.',
     },

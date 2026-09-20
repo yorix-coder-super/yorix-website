@@ -11,6 +11,7 @@ import { WordReveal } from '../subscription/WordReveal';
 import { AppleGlyph, Art, DoodleArrow, DoodleHeart, featureIcons, Hand, PhoneFrame, Sparkle } from './art';
 import { headlineParts, homeCopy, type HomeLocale } from './copy';
 import { CtaBand, FaqItem, whitePill } from './CtaBand';
+import { ContactTeaser } from '../info/ContactTeaser';
 import { HomePricing } from './HomePricing';
 
 
@@ -155,6 +156,7 @@ export async function HomeLanding({ locale }: { locale: HomeLocale }) {
               </Reveal>
             ))}
           </div>
+          <ContactTeaser locale={locale} />
         </section>
 
         <CtaBand action={copy.cta.action} body={copy.cta.body} note={copy.notes.cta} title={copy.cta.title} />

@@ -80,7 +80,7 @@ export const translation: SiteTranslation = {
     cta: {
       badge: 'Dành cho cuộc sống gia đình thực tế',
       title: 'Hôm nay ghi lại một giấc ngủ ngày. Kế hoạch ngày mai đã có sẵn.',
-      body: 'Nhật ký miễn phí mãi mãi. Giấc ngủ, cữ ăn, tã, tăng trưởng và chăm sóc chỉ với một chạm — cùng kế hoạch cho ngày mai được lập từ chính những gì bạn đã ghi.',
+      body: 'Giấc ngủ, cữ ăn, tã, tăng trưởng và chăm sóc chỉ với một chạm — cùng kế hoạch cho ngày mai được lập từ chính những gì bạn đã ghi.',
       action: 'Tải Yorix',
     },
     footer: 'Yorix là công cụ hỗ trợ nếp sinh hoạt dành cho cha mẹ. Yorix không đưa ra chẩn đoán y tế hay tư vấn cấp cứu.',
@@ -255,7 +255,6 @@ export const translation: SiteTranslation = {
       offer: 'đề nghị hợp đồng công khai',
       and: 'và',
       refundTerms: 'điều khoản hoàn tiền',
-      device: 'iPhone và iPad, iOS 18+.',
     },
     account: {
       signInApple: 'Đăng nhập bằng Apple',
@@ -269,7 +268,7 @@ export const translation: SiteTranslation = {
       unavailable: "Thanh toán bằng thẻ trên trang web sẽ sớm mở.",
       testOnly: "Hiện thanh toán bằng thẻ chỉ mở để thử nghiệm.",
       error: "Không tạo được thanh toán. Vui lòng thử lại sau một phút.",
-      blocked: (email) => `Tài khoản này không thể thanh toán. Hãy gửi email cho chúng tôi: ${email}.`,
+      blocked: 'Tài khoản này không thể thanh toán. Hãy viết cho chúng tôi qua biểu mẫu trên trang hỗ trợ.',
       rateLimited: 'Quá nhiều lần thử. Vui lòng đợi một phút.',
     },
     terms: {
@@ -337,8 +336,6 @@ export const translation: SiteTranslation = {
       title: 'Vẫn cần hỗ trợ?',
       body: 'Viết cho chúng tôi tại đây — hoặc ngay trong ứng dụng: Cài đặt → “Viết cho chúng tôi” sẽ mở cuộc trò chuyện với chúng tôi.',
       reply: 'Chúng tôi phản hồi trong vòng 3 ngày làm việc.',
-      include: 'Để được hỗ trợ nhanh hơn, hãy cho chúng tôi biết mẫu iPhone, phiên bản iOS và Yorix, cùng điều đã xảy ra.',
-      email: 'Gửi e-mail',
     },
     form: {
       name: 'Tên của bạn',
@@ -348,7 +345,7 @@ export const translation: SiteTranslation = {
       send: 'Gửi',
       sending: 'Đang gửi…',
       sent: 'Cảm ơn bạn! Chúng tôi đã nhận được tin nhắn và sẽ trả lời qua email trong vòng 3 ngày làm việc.',
-      error: 'Không gửi được tin nhắn. Hãy thử lại sau một phút hoặc viết cho chúng tôi tại',
+      error: 'Không gửi được tin nhắn. Hãy thử lại sau một phút — hoặc viết cho chúng tôi ngay trong ứng dụng: Cài đặt → “Viết cho chúng tôi”.',
       invalid: 'Hãy nhập email và tin nhắn ít nhất 10 ký tự.',
       privacy: 'Chúng tôi chỉ dùng email và tin nhắn của bạn để trả lời bạn.',
     },
@@ -474,7 +471,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Sản phẩm', features: 'Tính năng', guides: 'Hướng dẫn', support: 'Hỗ trợ', write: 'Gửi email cho chúng tôi', redeem: 'Đổi quà tặng', badgeTop: 'Tải về trên' },
+  footerLabels: { product: 'Sản phẩm', features: 'Tính năng', guides: 'Hướng dẫn', support: 'Hỗ trợ', write: 'Viết cho chúng tôi', redeem: 'Đổi quà tặng', badgeTop: 'Tải về trên' },
   docsNote: 'Các tài liệu hiện có bằng tiếng Anh và tiếng Nga.',
   topics: {
     'baby-nap-schedule-by-age': 'Lịch ngủ ngày của bé theo độ tuổi',

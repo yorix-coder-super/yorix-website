@@ -80,7 +80,7 @@ export const translation: SiteTranslation = {
     cta: {
       badge: 'Laget for ekte familieliv',
       title: 'Logg én lur i kveld. Morgendagens plan er allerede klar.',
-      body: 'Dagboken er gratis for alltid. Søvn, mating, bleier, vekst og stell med ett trykk – og en plan for i morgen, bygd på det du har logget.',
+      body: 'Søvn, mating, bleier, vekst og stell med ett trykk – og en plan for i morgen, bygd på det du har logget.',
       action: 'Last ned Yorix',
     },
     footer: 'Yorix er en rutinehjelp for foreldre. Appen stiller ingen medisinske diagnoser og gir ikke råd i akutte situasjoner.',
@@ -255,7 +255,6 @@ export const translation: SiteTranslation = {
       offer: 'det offentlige tilbudet',
       and: 'og',
       refundTerms: 'refusjonsvilkårene',
-      device: 'iPhone og iPad, iOS 18+.',
     },
     account: {
       signInApple: 'Logg på med Apple',
@@ -269,7 +268,7 @@ export const translation: SiteTranslation = {
       unavailable: "Kortbetaling på nettstedet åpner snart.",
       testOnly: "Kortbetaling er foreløpig bare åpen for testing.",
       error: "Kunne ikke opprette betalingen. Prøv igjen om et minutt.",
-      blocked: (email) => `Betaling er ikke tilgjengelig for denne kontoen. Skriv til oss: ${email}.`,
+      blocked: 'Betaling er ikke tilgjengelig for denne kontoen. Skriv til oss via skjemaet på kundestøttesiden.',
       rateLimited: 'For mange forsøk. Vent et minutt.',
     },
     terms: {
@@ -328,8 +327,6 @@ export const translation: SiteTranslation = {
       title: 'Trenger du mer hjelp?',
       body: 'Skriv til oss her – eller i appen: Settings → «Write to us» åpner en chat med oss.',
       reply: 'Vi svarer innen 3 arbeidsdager.',
-      include: 'Vi kan hjelpe raskere hvis du skriver hvilken iPhone-modell du har, hvilke versjoner av iOS og Yorix du bruker, og hva som skjedde.',
-      email: 'Send en e-mail',
     },
     form: {
       name: 'Navnet ditt',
@@ -339,7 +336,7 @@ export const translation: SiteTranslation = {
       send: 'Send',
       sending: 'Sender…',
       sent: 'Takk! Vi har fått meldingen din og svarer på e-post innen 3 arbeidsdager.',
-      error: 'Meldingen kunne ikke sendes. Prøv igjen om et minutt, eller skriv til',
+      error: 'Meldingen kunne ikke sendes. Prøv igjen om et minutt – eller skriv til oss i appen: Settings → «Write to us».',
       invalid: 'Skriv inn e-postadressen din og en melding på minst 10 tegn.',
       privacy: 'Vi bruker e-postadressen og meldingen din bare til å svare deg.',
     },

@@ -7,7 +7,7 @@ import { localeAlternates } from '../locales';
 const copy = siteCopy('en').support;
 
 export const metadata: Metadata = {
-  title: `${copy.nav} | Yorix`,
+  title: `${copy.nav}`,
   description: copy.body,
   alternates: {
     canonical: '/support',

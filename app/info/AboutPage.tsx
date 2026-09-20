@@ -44,11 +44,11 @@ export function AboutPage({ locale }: { locale: SiteLocale }) {
               </a>
             </Reveal>
           </div>
-          <div aria-hidden="true" className="relative mx-auto hidden h-[340px] w-full max-w-[380px] sm:block">
-            <div className="absolute inset-x-8 top-14 h-52 rounded-full bg-[#FDE68A]/15 blur-3xl" />
-            <Reveal animation="zoomIn" className="absolute inset-x-[10%] top-0" delay={160} load>
+          <div aria-hidden="true" className="relative mx-auto h-[260px] w-full max-w-[300px] sm:h-[380px] sm:max-w-[420px]">
+            <div className="absolute inset-x-8 top-14 h-52 rounded-full bg-[#FDE68A]/20 blur-3xl" />
+            <Reveal animation="zoomIn" className="absolute inset-x-[2%] top-0" delay={160} load>
               <div className="float-slow">
-                <Art className="h-auto w-full drop-shadow-[0_28px_50px_rgb(15_16_34/45%)] rtl:-scale-x-100" height={560} name="cta-baby-star" priority width={503} />
+                <Art className="h-auto w-full drop-shadow-[0_28px_50px_rgb(15_16_34/45%)]" height={820} name="about-watch" priority width={820} />
               </div>
             </Reveal>
             <Sparkle className="end-[8%] top-[10%] w-4" delay={0} />
@@ -57,17 +57,25 @@ export function AboutPage({ locale }: { locale: SiteLocale }) {
         </section>
 
         <section className="mx-auto grid max-w-7xl gap-5 px-5 pb-10 sm:px-8 md:grid-cols-3 lg:px-10">
-          {copy.sections.map((section, index) => (
-            <Reveal className="flex" delay={index * 110} key={section.title}>
-              <article className="flex w-full flex-col rounded-[1.75rem] border border-white/12 bg-white/[0.06] p-6 backdrop-blur-xl">
-                <span className="grid h-12 w-12 place-items-center rounded-full bg-white/[0.08] ring-1 ring-white/15">
-                  <Art className="h-8 w-8 object-contain" height={192} name={sectionIcons[index]} width={192} />
-                </span>
-                <h2 className="mt-4 text-xl font-semibold text-white">{section.title}</h2>
-                <p className="mt-2 text-[15px] leading-7 text-white/75">{section.body}</p>
-              </article>
-            </Reveal>
-          ))}
+          {copy.sections.map((section, index) => {
+            // The mission is one short sentence: it gets the bright card and a larger voice.
+            const mission = index === copy.sections.length - 1;
+            return (
+              <Reveal className="flex" delay={index * 110} key={section.title}>
+                <article
+                  className={`flex w-full flex-col rounded-[1.75rem] border p-6 backdrop-blur-xl ${
+                    mission ? 'border-white/20 bg-[linear-gradient(140deg,#7C3AED_0%,#9333EA_45%,#DB2777_100%)] shadow-[0_24px_70px_rgb(147_51_234/30%)]' : 'border-white/12 bg-white/[0.06]'
+                  }`}
+                >
+                  <span className={`grid h-12 w-12 place-items-center rounded-full ring-1 ${mission ? 'bg-white/20 ring-white/30' : 'bg-white/[0.08] ring-white/15'}`}>
+                    <Art className="h-8 w-8 object-contain" height={192} name={sectionIcons[index]} width={192} />
+                  </span>
+                  <h2 className="mt-4 text-xl font-semibold text-white">{section.title}</h2>
+                  <p className={mission ? 'mt-2 text-lg font-medium leading-8 text-white' : 'mt-2 text-[15px] leading-7 text-white/75'}>{section.body}</p>
+                </article>
+              </Reveal>
+            );
+          })}
         </section>
 
         <section className="mx-auto max-w-7xl px-5 pb-6 sm:px-8 lg:px-10">

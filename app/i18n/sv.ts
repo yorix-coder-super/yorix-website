@@ -80,7 +80,7 @@ export const translation: SiteTranslation = {
     cta: {
       badge: 'Gjord för verkligt familjeliv',
       title: 'Logga en tupplur i kväll. Morgondagens plan är redan klar.',
-      body: 'Dagboken är gratis för alltid. Sömn, matning, blöjor, tillväxt och omsorg med ett tryck – och en plan för i morgon, byggd på det du har loggat.',
+      body: 'Sömn, matning, blöjor, tillväxt och omsorg med ett tryck – och en plan för i morgon, byggd på det du har loggat.',
       action: 'Hämta Yorix',
     },
     footer: 'Yorix är en rutinhjälp för föräldrar. Appen ställer inga medicinska diagnoser och ger inga råd i akuta situationer.',
@@ -255,7 +255,6 @@ export const translation: SiteTranslation = {
       offer: 'det offentliga erbjudandet',
       and: 'och',
       refundTerms: 'återbetalningsvillkoren',
-      device: 'iPhone och iPad, iOS 18+.',
     },
     account: {
       signInApple: 'Logga in med Apple',
@@ -269,7 +268,7 @@ export const translation: SiteTranslation = {
       unavailable: "Kortbetalning på webbplatsen öppnar snart.",
       testOnly: "Kortbetalning är än så länge bara öppen för testning.",
       error: "Det gick inte att skapa betalningen. Försök igen om en minut.",
-      blocked: (email) => `Betalning är inte tillgänglig för det här kontot. Skriv till oss: ${email}.`,
+      blocked: 'Betalning är inte tillgänglig för det här kontot. Skriv till oss via formuläret på supportsidan.',
       rateLimited: 'För många försök. Vänta en minut.',
     },
     terms: {
@@ -328,8 +327,6 @@ export const translation: SiteTranslation = {
       title: 'Behöver du mer hjälp?',
       body: 'Skriv till oss här – eller i appen: Settings → ”Write to us” öppnar en chatt med oss.',
       reply: 'Vi svarar inom 3 arbetsdagar.',
-      include: 'Vi kan hjälpa dig snabbare om du berättar vilken iPhone-modell du har, vilka versioner av iOS och Yorix du använder och vad som hände.',
-      email: 'Skicka ett e-mail',
     },
     form: {
       name: 'Ditt namn',
@@ -339,7 +336,7 @@ export const translation: SiteTranslation = {
       send: 'Skicka',
       sending: 'Skickar…',
       sent: 'Tack! Vi har fått ditt meddelande och svarar via e-post inom 3 arbetsdagar.',
-      error: 'Meddelandet kunde inte skickas. Försök igen om en minut eller skriv till',
+      error: 'Meddelandet kunde inte skickas. Försök igen om en minut – eller skriv till oss i appen: Settings → ”Write to us”.',
       invalid: 'Ange din e-postadress och ett meddelande på minst 10 tecken.',
       privacy: 'Vi använder din e-postadress och ditt meddelande bara för att svara dig.',
     },

@@ -80,7 +80,7 @@ export const translation: SiteTranslation = {
     cta: {
       badge: 'Für den echten Familienalltag',
       title: 'Trag heute Abend ein Nickerchen ein. Der Plan für morgen ist schon da.',
-      body: 'Das Tagebuch ist für immer kostenlos. Schlaf, Mahlzeiten, Windeln, Wachstum und Pflege mit einem Fingertipp – und ein Plan für morgen aus dem, was du eingetragen hast.',
+      body: 'Schlaf, Mahlzeiten, Windeln, Wachstum und Pflege mit einem Fingertipp – und ein Plan für morgen aus dem, was du eingetragen hast.',
       action: 'Yorix herunterladen',
     },
     footer: 'Yorix ist eine Routinehilfe für Eltern. Die App stellt keine medizinischen Diagnosen und bietet keine Notfallberatung.',
@@ -255,7 +255,6 @@ export const translation: SiteTranslation = {
       offer: 'öffentliche Vertragsangebot',
       and: 'und die',
       refundTerms: 'Rückerstattungsbedingungen',
-      device: 'iPhone und iPad, iOS 18+.',
     },
     account: {
       signInApple: 'Mit Apple anmelden',
@@ -269,7 +268,7 @@ export const translation: SiteTranslation = {
       unavailable: "Die Kartenzahlung auf der Website startet bald.",
       testOnly: "Die Kartenzahlung ist vorerst nur für Tests freigeschaltet.",
       error: "Die Zahlung konnte nicht erstellt werden. Versuche es in einer Minute noch einmal.",
-      blocked: (email) => `Für dieses Konto ist keine Zahlung möglich. Schreib uns: ${email}.`,
+      blocked: 'Für dieses Konto ist keine Zahlung möglich. Schreib uns über das Formular auf der Support-Seite.',
       rateLimited: 'Zu viele Versuche. Warte bitte eine Minute.',
     },
     terms: {
@@ -328,8 +327,6 @@ export const translation: SiteTranslation = {
       title: 'Noch Fragen offen?',
       body: 'Schreib uns hier – oder direkt in der App: „Einstellungen“ → „Schreib uns“ öffnet einen Chat mit uns.',
       reply: 'Wir antworten innerhalb von 3 Werktagen.',
-      include: 'Damit wir schneller helfen können, nenn uns dein iPhone-Modell, die Versionen von iOS und Yorix und beschreib kurz, was passiert ist.',
-      email: 'E-Mail schreiben',
     },
     form: {
       name: 'Dein Name',
@@ -339,7 +336,7 @@ export const translation: SiteTranslation = {
       send: 'Senden',
       sending: 'Wird gesendet…',
       sent: 'Danke! Wir haben deine Nachricht erhalten und antworten innerhalb von 3 Werktagen per E-Mail.',
-      error: 'Die Nachricht konnte nicht gesendet werden. Versuch es in einer Minute noch einmal oder schreib an',
+      error: 'Die Nachricht konnte nicht gesendet werden. Versuch es in einer Minute noch einmal – oder schreib uns direkt in der App: „Einstellungen“ → „Schreib uns“.',
       invalid: 'Bitte gib deine E-Mail-Adresse und eine Nachricht mit mindestens 10 Zeichen ein.',
       privacy: 'Deine E-Mail-Adresse und Nachricht nutzen wir nur, um dir zu antworten.',
     },

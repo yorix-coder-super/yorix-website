@@ -14,6 +14,7 @@ import { Magnetic } from './Magnetic';
 import { Parallax } from './Parallax';
 import { Reveal } from './Reveal';
 import { SocialProof } from './SocialProof';
+import { ContactTeaser } from '../info/ContactTeaser';
 import { SubscriptionShell } from './SubscriptionShell';
 import { testimonials } from './testimonials';
 import { WordReveal } from './WordReveal';
@@ -120,7 +121,7 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
                 <a className="text-white/80 underline decoration-white/30 hover:text-white hover:decoration-white" href={subscriptionPath(lang, '/payment')}>
                   {copy.plans.refundTerms}
                 </a>
-                . {copy.plans.device}
+                .
               </p>
               <ChargeNote className="mt-2 text-sm leading-6 text-white/50" />
               <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-white/10 pt-5">
@@ -156,12 +157,7 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
               </Reveal>
             ))}
           </div>
-          <p className="mt-6 text-sm text-white/60">
-            <a className="inline-flex items-center gap-1 font-semibold text-white underline decoration-white/30 hover:decoration-white" href={`${lang === 'ru' ? '/ru' : ''}/support#contact`}>
-              {copy.faq.more}
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </a>
-          </p>
+          <ContactTeaser locale={lang} />
         </section>
       </AccountProvider>
     </SubscriptionShell>

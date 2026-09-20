@@ -1,4 +1,4 @@
-import { Gift, Mail } from 'lucide-react';
+import { Clock, Gift, Mail } from 'lucide-react';
 import { Art, Sparkle } from '../home/art';
 import { CtaBand, FaqItem, whitePill } from '../home/CtaBand';
 import { docsLang, isRtl, siteCopy, type SiteLocale } from '../i18n';
@@ -6,7 +6,6 @@ import { SellerFooter } from '../SellerFooter';
 import { ContactForm } from './ContactForm';
 import { SiteHeader } from '../SiteHeader';
 import { subscriptionPath } from '../subscription/i18n';
-import { merchant } from '../subscription/merchant';
 import { Reveal } from '../subscription/Reveal';
 import { sellsHere } from '../subscription/region';
 import { StarField } from '../subscription/StarField';
@@ -44,7 +43,7 @@ export async function SupportPage({ locale }: { locale: SiteLocale }) {
               <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-4">
                 <a className={whitePill} href="#contact">
                   <Mail className="h-5 w-5" aria-hidden="true" />
-                  {copy.contact.title}
+                  {site.footerLabels.write}
                 </a>
                 <a className="inline-flex items-center gap-2 text-base font-semibold text-white/85 underline decoration-white/30 underline-offset-4 hover:decoration-white" href={docs === 'ru' ? '/ru/gift' : '/gift'}>
                   <Gift className="h-5 w-5" aria-hidden="true" />
@@ -92,28 +91,32 @@ export async function SupportPage({ locale }: { locale: SiteLocale }) {
 
         <section className="mx-auto max-w-7xl scroll-mt-6 px-5 py-10 sm:px-8 lg:px-10" id="contact">
           <Reveal>
-            <div className="rounded-[2rem] border border-white/10 bg-white/[0.05] p-6 shadow-[0_30px_90px_rgb(0_0_0/18%)] backdrop-blur-xl sm:p-8">
-              <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
-                <span className="grid h-20 w-20 shrink-0 place-items-center rounded-3xl bg-[radial-gradient(circle_at_32%_28%,#5B55E8,#2E2A7A_70%)] shadow-[0_0_50px_rgb(99_102_241/40%)] ring-1 ring-white/15">
-                  <Art className="h-12 w-12 object-contain" height={170} name="icon-chat" width={192} />
-                </span>
-                <div className="min-w-0 flex-1">
-                  <h2 className="text-2xl font-semibold text-white sm:text-[1.7rem]">{copy.contact.title}</h2>
-                  <p className="mt-2 max-w-2xl text-[15px] leading-6 text-white/75">{copy.contact.body}</p>
-                  <p className="mt-2 max-w-2xl text-sm leading-6 text-white/55">
-                    {copy.contact.reply} {copy.contact.include}
+            <div className="relative isolate overflow-hidden rounded-[2rem] border border-white/15 bg-[radial-gradient(120%_150%_at_8%_0%,#DB2777_0%,#9333EA_36%,#5B21B6_62%,#2E1065_100%)] shadow-[0_40px_120px_rgb(147_51_234/35%)]">
+              <div aria-hidden="true" className="absolute -bottom-32 -start-20 -z-10 h-80 w-80 rounded-full bg-[#FDE68A]/20 blur-3xl" />
+              <div className="grid gap-8 p-6 sm:p-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-12">
+                <div className="text-center lg:text-start">
+                  <div aria-hidden="true" className="relative mx-auto w-[min(62%,15rem)] lg:mx-0 lg:w-[min(80%,19rem)]">
+                    <div className="float-slow">
+                      <Art className="h-auto w-full drop-shadow-[0_24px_44px_rgb(30_27_75/45%)]" height={765} name="contact-letter" width={760} />
+                    </div>
+                  </div>
+                  <p className="mt-6 text-sm font-semibold uppercase tracking-wide text-[#FDE68A]">{copy.contact.title}</p>
+                  <h2 className="mt-2 text-[2rem] font-semibold leading-[1.1] text-white sm:text-[2.4rem]">{site.footerLabels.write}</h2>
+                  <p className="mx-auto mt-4 max-w-md text-base leading-7 text-white/85 lg:mx-0">{copy.contact.body}</p>
+                  <p className="mt-5 inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm font-semibold text-white ring-1 ring-white/25 backdrop-blur">
+                    <Clock aria-hidden="true" className="h-4 w-4" />
+                    {copy.contact.reply}
                   </p>
                 </div>
-              </div>
-              <div className="mt-6">
-                <ContactForm
-                  copy={copy.form}
-                  email={merchant.email}
-                  lang={locale}
-                  page={locale === 'en' ? '/support' : `/${locale}/support`}
-                  privacyHref={subscriptionPath(docs, '/privacy')}
-                  privacyLabel={site.subscription.docs.privacy}
-                />
+                <div className="rounded-[1.75rem] bg-white/10 p-5 ring-1 ring-white/20 backdrop-blur-xl sm:p-7">
+                  <ContactForm
+                    copy={copy.form}
+                    lang={locale}
+                    page={locale === 'en' ? '/support' : `/${locale}/support`}
+                    privacyHref={subscriptionPath(docs, '/privacy')}
+                    privacyLabel={site.subscription.docs.privacy}
+                  />
+                </div>
               </div>
             </div>
           </Reveal>

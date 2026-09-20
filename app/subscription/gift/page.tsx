@@ -6,7 +6,7 @@ import { GiftPage } from '../gift/GiftPage';
 const text = subscriptionCopy['en'].gift;
 
 export const metadata: Metadata = {
-  title: `${text.title} | Yorix`,
+  title: `${text.title}`,
   description: text.body,
   alternates: { canonical: subscriptionPath('en', '/gift'), languages: subscriptionAlternates('/gift') },
   openGraph: { title: text.title, description: text.body, url: subscriptionPath('en', '/gift'), type: 'website', images: ['/art/gift-card.webp'] },

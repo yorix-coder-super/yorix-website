@@ -81,7 +81,7 @@ export const translation: SiteTranslation = {
     cta: {
       badge: 'リアルな家族の毎日のために',
       title: '今夜、お昼寝を1回記録。明日のプランは、もうできています。',
-      body: '日記はずっと無料。睡眠・授乳・おむつ・成長・お世話をワンタップで記録でき、記録した内容から明日のプランが組み立てられます。',
+      body: '睡眠・授乳・おむつ・成長・お世話をワンタップで記録でき、記録した内容から明日のプランが組み立てられます。',
       action: 'Yorixをダウンロード',
     },
     footer,
@@ -256,7 +256,6 @@ export const translation: SiteTranslation = {
       offer: '公開オファー',
       and: 'および',
       refundTerms: '返金条件',
-      device: 'iPhone・iPad（iOS 18以降）に対応。',
     },
     account: {
       signInApple: 'Appleでサインイン',
@@ -270,7 +269,7 @@ export const translation: SiteTranslation = {
       unavailable: "サイトでのカード決済はまもなく開始します。",
       testOnly: "現在、カード決済はテスト目的でのみご利用いただけます。",
       error: "お支払いを作成できませんでした。1分ほどしてからもう一度お試しください。",
-      blocked: (email) => `このアカウントではお支払いをご利用いただけません。${email}までご連絡ください。`,
+      blocked: 'このアカウントではお支払いをご利用いただけません。サポートページのフォームからご連絡ください。',
       rateLimited: '試行回数が多すぎます。1分ほどお待ちください。',
     },
     terms: {
@@ -329,8 +328,6 @@ export const translation: SiteTranslation = {
       title: 'まだ解決しませんか？',
       body: 'このフォームから、またはアプリの「設定」→「メッセージを送る」から、私たちと直接やり取りできます。',
       reply: '3営業日以内にご返信します。',
-      include: 'iPhoneの機種、iOSとYorixのバージョン、どんな状況かをお知らせいただくと、よりスムーズにご案内できます。',
-      email: 'e-mailを送る',
     },
     form: {
       name: 'お名前',
@@ -340,7 +337,7 @@ export const translation: SiteTranslation = {
       send: '送信',
       sending: '送信中…',
       sent: 'ありがとうございます。メッセージを受け付けました。3営業日以内にメールでご返信します。',
-      error: '送信できませんでした。1分ほどしてからもう一度お試しいただくか、こちらへご連絡ください：',
+      error: '送信できませんでした。1分ほどしてからもう一度お試しいただくか、アプリの「設定」→「メッセージを送る」からご連絡ください。',
       invalid: 'メールアドレスと10文字以上のメッセージを入力してください。',
       privacy: 'メールアドレスとメッセージは、ご返信のためだけに使用します。',
     },

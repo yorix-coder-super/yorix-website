@@ -80,7 +80,7 @@ export const translation: SiteTranslation = {
     cta: {
       badge: 'Voor het echte gezinsleven',
       title: 'Leg vanavond één dutje vast. Het plan voor morgen staat al klaar.',
-      body: 'Het dagboek is voor altijd gratis. Slaap, voedingen, luiers, groei en verzorging met één tik – en een plan voor morgen, opgebouwd uit wat je hebt vastgelegd.',
+      body: 'Slaap, voedingen, luiers, groei en verzorging met één tik – en een plan voor morgen, opgebouwd uit wat je hebt vastgelegd.',
       action: 'Download Yorix',
     },
     footer: 'Yorix is een routinehulp voor ouders. De app stelt geen medische diagnoses en geeft geen spoedadvies.',
@@ -255,7 +255,6 @@ export const translation: SiteTranslation = {
       offer: 'openbare aanbod',
       and: 'en de',
       refundTerms: 'terugbetalingsvoorwaarden',
-      device: 'iPhone en iPad, iOS 18+.',
     },
     account: {
       signInApple: 'Log in met Apple',
@@ -269,7 +268,7 @@ export const translation: SiteTranslation = {
       unavailable: "Binnenkort kun je op de site met je kaart betalen.",
       testOnly: "Betalen met je kaart kan voorlopig alleen om te testen.",
       error: "De betaling kon niet worden aangemaakt. Probeer het over een minuut opnieuw.",
-      blocked: (email) => `Betalen is niet mogelijk voor dit account. Mail ons: ${email}.`,
+      blocked: 'Betalen is niet mogelijk voor dit account. Schrijf ons via het formulier op de supportpagina.',
       rateLimited: 'Te veel pogingen. Wacht even een minuut.',
     },
     terms: {
@@ -328,8 +327,6 @@ export const translation: SiteTranslation = {
       title: 'Nog hulp nodig?',
       body: 'Schrijf ons hier – of via de app: ‘Instellingen’ → ‘Schrijf ons’ opent een chat met ons.',
       reply: 'We reageren binnen 3 werkdagen.',
-      include: 'Zo kunnen we je sneller helpen: vermeld je iPhone-model, de versies van iOS en Yorix en wat er is gebeurd.',
-      email: 'Stuur een e-mail',
     },
     form: {
       name: 'Je naam',
@@ -339,7 +336,7 @@ export const translation: SiteTranslation = {
       send: 'Versturen',
       sending: 'Bezig met versturen…',
       sent: 'Dank je! We hebben je bericht ontvangen en antwoorden binnen 3 werkdagen per e-mail.',
-      error: 'Het bericht kon niet worden verstuurd. Probeer het over een minuut opnieuw of mail naar',
+      error: 'Het bericht kon niet worden verstuurd. Probeer het over een minuut opnieuw – of schrijf ons via de app: ‘Instellingen’ → ‘Schrijf ons’.',
       invalid: 'Vul je e-mailadres in en een bericht van minstens 10 tekens.',
       privacy: 'We gebruiken je e-mailadres en bericht alleen om je te antwoorden.',
     },

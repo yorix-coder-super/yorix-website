@@ -1,20 +1,19 @@
 import { DocumentPage } from '../DocumentPage';
 import { subscriptionPath, type Lang } from '../i18n';
-import { merchant } from '../merchant';
 import { LegalBody, type LegalSection } from './LegalBody';
 import { SellerBlock, sellerLine } from './SellerBlock';
 import { editionLabel } from './versions';
 
 export const offerTitle = { ru: 'Публичный договор (оферта)', en: 'Public offer agreement' } as const;
 
-type Ctx = { email: string; payment: string; privacy: string; seller: string };
+type Ctx = { payment: string; privacy: string; seller: string };
 
 // The binding Russian text. Drafted against the Civil Code of Belarus, the
 // consumer protection law (90-З) and the personal data law (99-З): protection
 // comes from describing the service precisely and from transparent
 // procedures — clauses the law voids for consumers (no refunds, liability
 // caps, venue clauses) are deliberately absent.
-function ru({ email, payment, privacy, seller }: Ctx): LegalSection[] {
+function ru({ payment, privacy, seller }: Ctx): LegalSection[] {
   return [
     {
       title: '1. Общие положения',
@@ -71,7 +70,7 @@ function ru({ email, payment, privacy, seller }: Ctx): LegalSection[] {
       title: '5. Предоставление доступа',
       blocks: [
         '5.1. Подписка активируется автоматически после получения Исполнителем от Платёжного сервиса подтверждения успешной оплаты и привязывается к Аккаунту, от имени которого совершена оплата. Период доступа исчисляется с момента активации. Для подарка действуют п. 5.7–5.10.',
-        `5.2. Если Подписка не активировалась в течение 3 дней после оплаты, Пользователь сообщает об этом на ${email}. Исполнитель в течение 3 рабочих дней активирует Подписку либо, по выбору Пользователя, возвращает оплату в полном объёме.`,
+        `5.2. Если Подписка не активировалась в течение 3 дней после оплаты, Пользователь сообщает об этом через форму «Написать нам» на Сайте либо на адрес электронной почты Исполнителя (раздел 17). Исполнитель в течение 3 рабочих дней активирует Подписку либо, по выбору Пользователя, возвращает оплату в полном объёме.`,
         '5.3. Если на момент оплаты у Пользователя есть действующая Подписка, новый Период доступа начинается после окончания текущего.',
         '5.4. Услуга считается оказанной надлежащим образом, если в течение Периода доступа платные функции доступны на Аккаунте Пользователя. Факт предоставления доступа подтверждается журналами Сервиса и Платёжного сервиса; это не лишает Пользователя права представлять иные доказательства.',
         '5.5. По окончании Периода доступа платные функции отключаются. Бесплатные функции и данные, внесённые Пользователем, сохраняются.',
@@ -92,7 +91,7 @@ function ru({ email, payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '7. Отказ от Договора и возврат денежных средств',
       blocks: [
-        `7.1. Пользователь вправе в любое время отказаться от Договора (п. 1 ст. 736 ГК, ст. 38-1 Закона Республики Беларусь «О защите прав потребителей»), направив заявление на ${email} с адреса электронной почты Аккаунта или с указанием этого адреса, а также номера заказа, даты и суммы оплаты. С момента получения заявления доступ к платным функциям прекращается.`,
+        `7.1. Пользователь вправе в любое время отказаться от Договора (п. 1 ст. 736 ГК, ст. 38-1 Закона Республики Беларусь «О защите прав потребителей»), направив заявление через форму «Написать нам» на Сайте либо на адрес электронной почты Исполнителя (раздел 17) — с адреса электронной почты Аккаунта или с указанием этого адреса, а также номера заказа, даты и суммы оплаты. С момента получения заявления доступ к платным функциям прекращается.`,
         '7.2. При отказе Пользователю возвращается часть уплаченной суммы, приходящаяся на неиспользованные полные сутки Периода доступа, за вычетом документально подтверждённых фактически понесённых Исполнителем расходов, связанных с исполнением Договора с этим Пользователем. Формула: **возврат = цена × (оставшиеся полные сутки ÷ сутки Периода) − подтверждённые расходы**.',
         '7.3. Уплаченная сумма возвращается **полностью**, если: (а) Подписка не была активирована; (б) списание повторное или ошибочное — в размере лишнего платежа; (в) услуга оказана с существенными недостатками или Договор расторгается по вине Исполнителя; (г) в иных случаях, предусмотренных законодательством.',
         '7.4. Возврат производится не позднее 10 дней со дня получения заявления (при недостатках услуги — не позднее 7 дней) на банковскую платёжную карту, с которой производилась оплата, в белорусских рублях. Срок зачисления определяет банк, выпустивший карту. Возврат наличными, на иную карту или бонусами не производится; документ, удостоверяющий личность, для возврата не требуется.',
@@ -180,7 +179,7 @@ function ru({ email, payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '14. Сообщения, доказательства и язык',
       blocks: [
-        `14.1. Стороны обмениваются сообщениями в электронной форме; такие сообщения признаются совершёнными в письменной форме. Сообщения Исполнителя направляются на адрес электронной почты Аккаунта (в том числе адрес-ретранслятор Apple «Скрыть e-mail») и (или) через Приложение; сообщения Пользователя — на ${email}. Сообщение считается доставленным и в случае, если оно не получено по обстоятельствам, зависящим от адресата (ст. 166-1 ГК). Пользователь отвечает за актуальность адреса электронной почты.`,
+        `14.1. Стороны обмениваются сообщениями в электронной форме; такие сообщения признаются совершёнными в письменной форме. Сообщения Исполнителя направляются на адрес электронной почты Аккаунта (в том числе адрес-ретранслятор Apple «Скрыть e-mail») и (или) через Приложение; сообщения Пользователя — через форму «Написать нам» на Сайте либо на адрес электронной почты Исполнителя (раздел 17). Сообщение считается доставленным и в случае, если оно не получено по обстоятельствам, зависящим от адресата (ст. 166-1 ГК). Пользователь отвечает за актуальность адреса электронной почты.`,
         '14.2. Стороны признают, что данные журналов Сервиса и Платёжного сервиса об оплатах, предоставлении и прекращении доступа, а также переписка по электронной почте могут использоваться в качестве доказательств. Это не ограничивает право Пользователя представлять иные доказательства.',
         '14.3. Оферта составлена на русском языке. Переводы на другие языки предоставляются для удобства; при расхождении применяется текст на русском языке.',
       ],
@@ -189,7 +188,7 @@ function ru({ email, payment, privacy, seller }: Ctx): LegalSection[] {
       title: '15. Применимое право, претензии и споры',
       blocks: [
         '15.1. К Договору применяется право Республики Беларусь (ст. 1124 ГК). Если Пользователь — потребитель, постоянно проживающий в другой стране, этот выбор не лишает его защиты, предоставляемой императивными нормами права страны его проживания, если такие нормы подлежат применению.',
-        `15.2. Претензии направляются на ${email} или по почтовому адресу Исполнителя (раздел 17). Исполнитель рассматривает претензию в сроки, установленные законодательством о защите прав потребителей. Претензионный порядок не является обязательным условием обращения потребителя в суд.`,
+        `15.2. Претензии направляются через форму «Написать нам» на Сайте, на адрес электронной почты или по почтовому адресу Исполнителя (раздел 17). Исполнитель рассматривает претензию в сроки, установленные законодательством о защите прав потребителей. Претензионный порядок не является обязательным условием обращения потребителя в суд.`,
         '15.3. Споры рассматриваются судами в соответствии с законодательством о гражданском судопроизводстве. Потребитель вправе предъявить иск по своему месту жительства или по месту исполнения Договора (ч. 16 ст. 48 Кодекса гражданского судопроизводства Республики Беларусь), а также по месту жительства Исполнителя.',
       ],
     },
@@ -206,7 +205,7 @@ function ru({ email, payment, privacy, seller }: Ctx): LegalSection[] {
   ];
 }
 
-function en({ email, payment, privacy, seller }: Ctx): LegalSection[] {
+function en({ payment, privacy, seller }: Ctx): LegalSection[] {
   return [
     {
       title: '1. General',
@@ -263,7 +262,7 @@ function en({ email, payment, privacy, seller }: Ctx): LegalSection[] {
       title: '5. Provision of access',
       blocks: [
         '5.1. The Subscription is activated automatically once the Payment Service confirms a successful payment, and is tied to the Account used to pay. The Access Period runs from activation. Gifts follow clauses 5.7–5.10.',
-        `5.2. If the Subscription is not activated within 3 days of payment, the User writes to ${email}. Within 3 working days the Provider activates it or, at the User’s choice, refunds the payment in full.`,
+        `5.2. If the Subscription is not activated within 3 days of payment, the User writes through the “Write to us” form on the Website or to the Provider’s e-mail address (section 17). Within 3 working days the Provider activates it or, at the User’s choice, refunds the payment in full.`,
         '5.3. If the User already has an active Subscription, the new Access Period starts when the current one ends.',
         '5.4. The service is duly provided when the paid features are available on the User’s Account during the Access Period. This is evidenced by the logs of the Service and the Payment Service; the User may present other evidence.',
         '5.5. When the Access Period ends, the paid features switch off. Free features and the User’s data are kept.',
@@ -284,7 +283,7 @@ function en({ email, payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '7. Withdrawal and refunds',
       blocks: [
-        `7.1. The User may withdraw from the Agreement at any time (Article 736(1) of the Civil Code; Article 38-1 of the Belarusian Consumer Protection Law) by writing to ${email} from the Account e-mail or stating it, together with the order number, date and amount. Access to the paid features ends when the notice is received.`,
+        `7.1. The User may withdraw from the Agreement at any time (Article 736(1) of the Civil Code; Article 38-1 of the Belarusian Consumer Protection Law) by writing through the “Write to us” form on the Website or to the Provider’s e-mail address (section 17) — from the Account e-mail or stating it, together with the order number, date and amount. Access to the paid features ends when the notice is received.`,
         '7.2. On withdrawal the User receives the part of the price for the unused full days of the Access Period, less the Provider’s documented actual costs of performing the Agreement with this User. Formula: **refund = price × (full days remaining ÷ days in the Period) − documented costs**.',
         '7.3. The payment is refunded **in full** if: (a) the Subscription was never activated; (b) a charge is duplicate or mistaken — the excess amount; (c) the service had material defects or the Agreement ends through the Provider’s fault; (d) in other cases provided by law.',
         '7.4. Refunds are made within 10 days of receiving the notice (7 days where the service had defects) to the bank card used for payment, in Belarusian rubles. The time for the money to arrive depends on the card-issuing bank. Refunds are not made in cash, to another card or in bonuses; no identity document is required.',
@@ -372,7 +371,7 @@ function en({ email, payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '14. Notices, evidence and language',
       blocks: [
-        `14.1. The parties communicate electronically, and such messages count as written. The Provider writes to the Account e-mail (including Apple’s “Hide My Email” relay) and/or in the App; the User writes to ${email}. A message is also deemed delivered if it was not received for reasons on the addressee’s side (Article 166-1 of the Civil Code). The User keeps their e-mail address current.`,
+        `14.1. The parties communicate electronically, and such messages count as written. The Provider writes to the Account e-mail (including Apple’s “Hide My Email” relay) and/or in the App; the User writes through the “Write to us” form on the Website or to the Provider’s e-mail address (section 17). A message is also deemed delivered if it was not received for reasons on the addressee’s side (Article 166-1 of the Civil Code). The User keeps their e-mail address current.`,
         '14.2. The parties accept that the logs of the Service and the Payment Service on payments, granting and ending access, and e-mail correspondence may be used as evidence. This does not limit the User’s right to present other evidence.',
         '14.3. The offer is written in Russian. Translations are provided for convenience; in case of discrepancy the Russian text prevails.',
       ],
@@ -381,7 +380,7 @@ function en({ email, payment, privacy, seller }: Ctx): LegalSection[] {
       title: '15. Governing law, claims and disputes',
       blocks: [
         '15.1. The Agreement is governed by the law of the Republic of Belarus (Article 1124 of the Civil Code). If the User is a consumer habitually resident in another country, this choice does not deprive them of the protection of the mandatory rules of that country where they apply.',
-        `15.2. Claims are sent to ${email} or to the Provider’s postal address (section 17). The Provider considers a claim within the time set by consumer protection law. The claims procedure is not a precondition for a consumer to go to court.`,
+        `15.2. Claims are sent through the “Write to us” form on the Website, to the Provider’s e-mail address or to its postal address (section 17). The Provider considers a claim within the time set by consumer protection law. The claims procedure is not a precondition for a consumer to go to court.`,
         '15.3. Disputes are heard by the courts under the law on civil proceedings. A consumer may sue at their place of residence or where the Agreement is performed (Article 48, part 16, of the Belarusian Code of Civil Proceedings), as well as at the Provider’s place of residence.',
       ],
     },
@@ -400,7 +399,6 @@ function en({ email, payment, privacy, seller }: Ctx): LegalSection[] {
 
 export function Offer({ lang }: { lang: Lang }) {
   const ctx: Ctx = {
-    email: merchant.email,
     payment: subscriptionPath(lang, '/payment'),
     privacy: subscriptionPath(lang, '/privacy'),
     seller: sellerLine(lang),

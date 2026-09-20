@@ -137,11 +137,7 @@ export function AppStorePanel({ locale }: { locale: SiteLocale }) {
         />
         <div className="relative grid lg:grid-cols-[1.02fr_0.98fr]">
           <div className="p-7 pt-[14rem] sm:p-10 sm:pt-[18rem] lg:py-14 lg:pe-0 lg:ps-12 lg:pt-14">
-            <p className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-sm font-semibold text-white backdrop-blur" dir="ltr">
-              <AppleGlyph className="h-4 w-4" />
-              iPhone · iPad
-            </p>
-            <h2 className="mt-5 max-w-xl text-[2rem] font-semibold leading-[1.1] tracking-[-0.01em] text-white sm:text-[2.6rem]">{home.appStore.title}</h2>
+            <h2 className="max-w-xl text-[2rem] font-semibold leading-[1.1] tracking-[-0.01em] text-white sm:text-[2.6rem]">{home.appStore.title}</h2>
             <p className="mt-4 max-w-xl text-base leading-7 text-white/85 sm:text-[17px]">{home.appStore.body}</p>
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
               {home.features.map((feature, index) => (

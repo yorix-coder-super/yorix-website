@@ -80,7 +80,7 @@ export const translation: SiteTranslation = {
     cta: {
       badge: 'Gerçek aile hayatı için tasarlandı',
       title: 'Bu akşam tek bir uyku kaydedin. Yarının planı zaten hazır.',
-      body: 'Günlük her zaman ücretsiz. Uyku, beslenme, bez, büyüme ve bakım tek dokunuşla — ve kaydettiklerinizden oluşturulan bir yarın planı.',
+      body: 'Uyku, beslenme, bez, büyüme ve bakım tek dokunuşla — ve kaydettiklerinizden oluşturulan bir yarın planı.',
       action: 'Yorix’i indir',
     },
     footer: 'Yorix ebeveynler için bir rutin yardımcısıdır. Tıbbi tanı koymaz ve acil durumlarda tavsiye vermez.',
@@ -255,7 +255,6 @@ export const translation: SiteTranslation = {
       offer: 'kamuya açık teklif',
       and: 've',
       refundTerms: 'iade koşulları',
-      device: 'iPhone ve iPad, iOS 18+.',
     },
     account: {
       signInApple: 'Apple ile Giriş Yap',
@@ -269,7 +268,7 @@ export const translation: SiteTranslation = {
       unavailable: "Sitede kartla ödeme yakında açılacak.",
       testOnly: "Kartla ödeme şimdilik yalnızca test amaçlı açık.",
       error: "Ödeme oluşturulamadı. Lütfen bir dakika sonra tekrar deneyin.",
-      blocked: (email) => `Bu hesap için ödeme kullanılamıyor. Bize yazın: ${email}.`,
+      blocked: 'Bu hesap için ödeme kullanılamıyor. Destek sayfasındaki form üzerinden bize yazın.',
       rateLimited: 'Çok fazla deneme yapıldı. Bir dakika bekleyin.',
     },
     terms: {
@@ -328,8 +327,6 @@ export const translation: SiteTranslation = {
       title: 'Hâlâ yardıma mı ihtiyacınız var?',
       body: 'Bize buradan yazın — ya da uygulamadan: Ayarlar → “Bize yaz” seçeneği bizimle bir sohbet açar.',
       reply: '3 iş günü içinde yanıt veriyoruz.',
-      include: 'Size daha hızlı yardımcı olabilmemiz için iPhone modelinizi, iOS ve Yorix sürümlerinizi ve ne olduğunu yazın.',
-      email: 'E-mail gönder',
     },
     form: {
       name: 'Adınız',
@@ -339,7 +336,7 @@ export const translation: SiteTranslation = {
       send: 'Gönder',
       sending: 'Gönderiliyor…',
       sent: 'Teşekkürler! Mesajınızı aldık, 3 iş günü içinde e-postayla yanıt vereceğiz.',
-      error: 'Mesaj gönderilemedi. Bir dakika sonra tekrar deneyin ya da şu adrese yazın:',
+      error: 'Mesaj gönderilemedi. Bir dakika sonra tekrar deneyin — ya da bize uygulamadan yazın: Ayarlar → “Bize yaz”.',
       invalid: 'E-posta adresinizi ve en az 10 karakterlik bir mesaj girin.',
       privacy: 'E-posta adresinizi ve mesajınızı yalnızca size yanıt vermek için kullanırız.',
     },

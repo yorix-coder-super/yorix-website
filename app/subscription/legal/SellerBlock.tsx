@@ -7,7 +7,9 @@ export function sellerLine(lang: Lang) {
     : `${merchant.fullName} (${merchant.latinName}), ${merchant.status.en.toLowerCase()}${merchant.unp ? `, taxpayer number ${merchant.unp}` : ''}`;
 }
 
-export function SellerBlock({ lang }: { lang: Lang }) {
+// The e-mail appears only where a seller's requisites must carry it (the
+// offer); everywhere else people write through the site's form.
+export function SellerBlock({ lang, email = true }: { lang: Lang; email?: boolean }) {
   const address = [merchant.country[lang], merchant.postalAddress].filter(Boolean).join(', ');
   return (
     <p>
@@ -22,8 +24,12 @@ export function SellerBlock({ lang }: { lang: Lang }) {
       ) : null}
       <br />
       {address}
-      <br />
-      E-mail: <a href={`mailto:${merchant.email}`}>{merchant.email}</a>
+      {email ? (
+        <>
+          <br />
+          E-mail: {merchant.email}
+        </>
+      ) : null}
       {merchant.phone ? (
         <>
           <br />

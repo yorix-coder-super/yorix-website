@@ -1,18 +1,17 @@
 import { DocumentPage } from '../DocumentPage';
 import { subscriptionPath, type Lang } from '../i18n';
-import { merchant } from '../merchant';
 import { LegalBody, type LegalSection } from './LegalBody';
 import { SellerBlock, sellerLine } from './SellerBlock';
 import { editionLabel } from './versions';
 
 export const privacyTitle = { ru: 'Политика обработки персональных данных', en: 'Personal data policy' } as const;
 
-type Ctx = { email: string; operator: string; offer: string };
+type Ctx = { operator: string; offer: string };
 
 // One policy for the site, the app and support. Every processor, data field
 // and retention period below was checked against the app, the Worker and the
 // site code on 18.09.2026 — change the text together with the code.
-function ru({ email, operator, offer }: Ctx): LegalSection[] {
+function ru({ operator, offer }: Ctx): LegalSection[] {
   return [
     {
       title: '1. Общие положения',
@@ -205,7 +204,7 @@ function ru({ email, operator, offer }: Ctx): LegalSection[] {
             ],
           },
         },
-        `10.1. Заявление подаётся в письменной форме или в виде электронного документа и содержит фамилию, имя, отчество, адрес места жительства (места пребывания), дату рождения, идентификационный номер (если он указывался при даче согласия), изложение сути требований и подпись (ст. 14 Закона № 99-З). Для удобства мы также рассматриваем в те же сроки запросы, отправленные на ${email} с адреса электронной почты вашего аккаунта, и можем попросить подтвердить, что запрос исходит от вас.`,
+        `10.1. Заявление подаётся в письменной форме или в виде электронного документа и содержит фамилию, имя, отчество, адрес места жительства (места пребывания), дату рождения, идентификационный номер (если он указывался при даче согласия), изложение сути требований и подпись (ст. 14 Закона № 99-З). Для удобства мы также рассматриваем в те же сроки запросы, отправленные через форму «Написать нам» на сайте с указанием адреса электронной почты вашего аккаунта, и можем попросить подтвердить, что запрос исходит от вас.`,
       ],
     },
     {
@@ -232,7 +231,7 @@ function ru({ email, operator, offer }: Ctx): LegalSection[] {
   ];
 }
 
-function en({ email, operator, offer }: Ctx): LegalSection[] {
+function en({ operator, offer }: Ctx): LegalSection[] {
   return [
     {
       title: '1. General',
@@ -425,7 +424,7 @@ function en({ email, operator, offer }: Ctx): LegalSection[] {
             ],
           },
         },
-        `10.1. Under Law 99-З a request is made in writing or as an electronic document and states your full name, address of residence (stay), date of birth, identification number (if given with the consent), the substance of the request and your signature (Article 14). For convenience we also handle, within the same times, requests sent to ${email} from your account’s e-mail address, and we may ask you to confirm that the request comes from you.`,
+        `10.1. Under Law 99-З a request is made in writing or as an electronic document and states your full name, address of residence (stay), date of birth, identification number (if given with the consent), the substance of the request and your signature (Article 14). For convenience we also handle, within the same times, requests sent through the “Write to us” form on the website that state your account’s e-mail address, and we may ask you to confirm that the request comes from you.`,
       ],
     },
     {
@@ -453,13 +452,13 @@ function en({ email, operator, offer }: Ctx): LegalSection[] {
 }
 
 export function Privacy({ lang }: { lang: Lang }) {
-  const ctx: Ctx = { email: merchant.email, operator: sellerLine(lang), offer: subscriptionPath(lang, '/offer') };
+  const ctx: Ctx = { operator: sellerLine(lang), offer: subscriptionPath(lang, '/offer') };
   return (
     <DocumentPage lang={lang} page="/privacy" title={privacyTitle[lang]} updated={editionLabel('privacy', lang)}>
       <LegalBody sections={lang === 'ru' ? ru(ctx) : en(ctx)} />
       <h2>{lang === 'ru' ? '14. Оператор' : '14. Operator'}</h2>
-      <SellerBlock lang={lang} />
-      <p>{lang === 'ru' ? `По вопросам персональных данных: ${merchant.email}.` : `Personal data questions: ${merchant.email}.`}</p>
+      <SellerBlock email={false} lang={lang} />
+      <p>{lang === 'ru' ? 'По вопросам персональных данных напишите нам через форму «Написать нам» на странице поддержки.' : 'For personal data questions use the “Write to us” form on the support page.'}</p>
     </DocumentPage>
   );
 }

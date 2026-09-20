@@ -80,7 +80,7 @@ export const translation: SiteTranslation = {
     cta: {
       badge: 'Dibuat untuk kehidupan keluarga yang nyata',
       title: 'Catat satu tidur siang hari ini. Rencana besok sudah siap.',
-      body: 'Catatan harian gratis selamanya. Tidur, menyusui, popok, pertumbuhan, dan perawatan dengan satu ketukan — serta rencana untuk besok yang disusun dari apa yang Anda catat.',
+      body: 'Tidur, menyusui, popok, pertumbuhan, dan perawatan dengan satu ketukan — serta rencana untuk besok yang disusun dari apa yang Anda catat.',
       action: 'Unduh Yorix',
     },
     footer: 'Yorix adalah asisten rutinitas untuk orang tua. Yorix tidak memberikan diagnosis medis atau saran darurat.',
@@ -255,7 +255,6 @@ export const translation: SiteTranslation = {
       offer: 'penawaran publik',
       and: 'serta',
       refundTerms: 'ketentuan pengembalian dana',
-      device: 'iPhone dan iPad, iOS 18+.',
     },
     account: {
       signInApple: 'Masuk dengan Apple',
@@ -269,7 +268,7 @@ export const translation: SiteTranslation = {
       unavailable: "Pembayaran kartu di situs ini akan segera dibuka.",
       testOnly: "Saat ini pembayaran kartu hanya dibuka untuk pengujian.",
       error: "Pembayaran gagal dibuat. Silakan coba lagi setelah satu menit.",
-      blocked: (email) => `Pembayaran tidak tersedia untuk akun ini. Kirim email ke kami: ${email}.`,
+      blocked: 'Pembayaran tidak tersedia untuk akun ini. Tulis ke kami melalui formulir di halaman dukungan.',
       rateLimited: 'Terlalu banyak percobaan. Tunggu satu menit.',
     },
     terms: {
@@ -337,8 +336,6 @@ export const translation: SiteTranslation = {
       title: 'Masih butuh bantuan?',
       body: 'Tulis ke kami di sini — atau di aplikasi: Pengaturan → “Tulis ke kami” membuka obrolan dengan kami.',
       reply: 'Kami membalas dalam 3 hari kerja.',
-      include: 'Agar kami bisa membantu lebih cepat, sebutkan model iPhone, versi iOS dan Yorix, serta apa yang terjadi.',
-      email: 'Kirim e-mail',
     },
     form: {
       name: 'Nama Anda',
@@ -348,7 +345,7 @@ export const translation: SiteTranslation = {
       send: 'Kirim',
       sending: 'Mengirim…',
       sent: 'Terima kasih! Pesan Anda sudah kami terima dan akan kami balas lewat email dalam 3 hari kerja.',
-      error: 'Pesan tidak dapat dikirim. Coba lagi dalam satu menit atau kirim email ke',
+      error: 'Pesan tidak dapat dikirim. Coba lagi dalam satu menit — atau tulis ke kami di aplikasi: Pengaturan → “Tulis ke kami”.',
       invalid: 'Masukkan email dan pesan minimal 10 karakter.',
       privacy: 'Email dan pesan Anda hanya kami gunakan untuk membalas Anda.',
     },
@@ -474,7 +471,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Produk', features: 'Fitur', guides: 'Panduan', support: 'Dukungan', write: 'Kirim email ke kami', redeem: 'Tukarkan hadiah', badgeTop: 'Download di' },
+  footerLabels: { product: 'Produk', features: 'Fitur', guides: 'Panduan', support: 'Dukungan', write: 'Tulis ke kami', redeem: 'Tukarkan hadiah', badgeTop: 'Download di' },
   docsNote: 'Dokumen tersedia dalam bahasa Inggris dan Rusia.',
   topics: {
     'baby-nap-schedule-by-age': 'Jadwal tidur siang bayi berdasarkan usia',

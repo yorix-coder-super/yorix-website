@@ -80,7 +80,7 @@ export const translation: SiteTranslation = {
     cta: {
       badge: 'Pro skutečný rodinný život',
       title: 'Zapiš dnes večer jeden spánek. Plán na zítřek už je připravený.',
-      body: 'Deník je navždy zdarma. Spánek, krmení, plenky, růst a péče jedním klepnutím — a plán na zítřek sestavený z tvých záznamů.',
+      body: 'Spánek, krmení, plenky, růst a péče jedním klepnutím — a plán na zítřek sestavený z tvých záznamů.',
       action: 'Stáhnout Yorix',
     },
     footer: 'Yorix pomáhá rodičům s denním režimem. Neposkytuje lékařskou diagnózu ani rady v naléhavých případech.',
@@ -255,7 +255,6 @@ export const translation: SiteTranslation = {
       offer: 'veřejnou nabídku',
       and: 'a',
       refundTerms: 'podmínky vrácení peněz',
-      device: 'iPhone a iPad, iOS 18+.',
     },
     account: {
       signInApple: 'Přihlásit se přes Apple',
@@ -269,7 +268,7 @@ export const translation: SiteTranslation = {
       unavailable: "Platbu kartou na webu brzy spustíme.",
       testOnly: "Platba kartou je zatím otevřená jen pro testování.",
       error: "Platbu se nepodařilo vytvořit. Zkus to znovu za minutu.",
-      blocked: (email) => `Pro tento účet není platba dostupná. Napiš nám: ${email}.`,
+      blocked: 'Pro tento účet není platba dostupná. Napiš nám přes formulář na stránce podpory.',
       rateLimited: 'Příliš mnoho pokusů. Počkej minutu.',
     },
     terms: {
@@ -328,8 +327,6 @@ export const translation: SiteTranslation = {
       title: 'Potřebuješ ještě pomoct?',
       body: 'Napiš nám tady — nebo přímo v aplikaci: Settings → „Write to us“ otevře chat s námi.',
       reply: 'Odpovídáme do 3 pracovních dnů.',
-      include: 'Abychom ti pomohli rychleji, uveď model iPhonu, verze iOS a Yorix a popiš, co se stalo.',
-      email: 'Poslat e-mail',
     },
     form: {
       name: 'Tvoje jméno',
@@ -339,7 +336,7 @@ export const translation: SiteTranslation = {
       send: 'Odeslat',
       sending: 'Odesíláme…',
       sent: 'Děkujeme! Zprávu jsme dostali a odpovíme e-mailem do 3 pracovních dnů.',
-      error: 'Zprávu se nepodařilo odeslat. Zkus to znovu za minutu nebo napiš na',
+      error: 'Zprávu se nepodařilo odeslat. Zkus to znovu za minutu — nebo nám napiš přímo v aplikaci: Settings → „Write to us“.',
       invalid: 'Zadej e-mail a zprávu – aspoň 10 znaků.',
       privacy: 'Tvůj e-mail a zprávu použijeme jen k odpovědi.',
     },

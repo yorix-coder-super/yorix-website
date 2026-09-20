@@ -7,7 +7,7 @@ import { subscriptionCopy } from '../copy';
 import { formatMoney } from '../currency';
 import { subscriptionPath } from '../i18n';
 import { legalVersion } from '../legal/versions';
-import { charges, merchant, planCopy, prices } from '../merchant';
+import { charges, planCopy, prices } from '../merchant';
 import { Money } from '../Money';
 import { Button, Spinner } from '../ui';
 import { cardHasContact } from './cardText';
@@ -76,7 +76,7 @@ export function GiftCheckout() {
     : shownError === 'popupBlocked' || shownError === 'signInError'
       ? copy.account[shownError]
       : shownError === 'blocked'
-        ? copy.checkout.blocked(merchant.email)
+        ? copy.checkout.blocked
         : shownError
           ? copy.checkout[shownError]
           : null;

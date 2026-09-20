@@ -10,7 +10,7 @@ const text = subscriptionCopy['ru'].gift;
 export const metadata: Metadata = {
   // A number or address in a card's text must not become a tap-to-call link.
   formatDetection: { telephone: false, email: false, address: false },
-  title: `${text.redeemTitle} | Yorix`,
+  title: `${text.redeemTitle}`,
   description: text.redeemBody,
   robots: { index: false, follow: false },
   openGraph: { title: text.redeemTitle, description: text.redeemBody, images: ['/art/gift-card.webp'] },

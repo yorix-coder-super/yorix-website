@@ -1,9 +1,9 @@
 import { ArrowRight } from 'lucide-react';
 import { Art, Sparkle } from '../home/art';
 import { whitePill } from '../home/CtaBand';
+import { siteCopy } from '../i18n';
 import { subscriptionCopy } from './copy';
 import { subscriptionPath, type Lang } from './i18n';
-import { merchant } from './merchant';
 import { Reveal } from './Reveal';
 import { SubscriptionShell } from './SubscriptionShell';
 
@@ -29,8 +29,8 @@ export function CancelPage({ lang }: { lang: Lang }) {
             {copy.cancel.back}
             <ArrowRight className="h-5 w-5" aria-hidden="true" />
           </a>
-          <a className="text-sm font-medium text-white/65 underline decoration-white/30 underline-offset-4 hover:text-white" href={`mailto:${merchant.email}`}>
-            {merchant.email}
+          <a className="text-sm font-medium text-white/65 underline decoration-white/30 underline-offset-4 hover:text-white" href={`${lang === 'ru' ? '/ru' : ''}/support#contact`}>
+            {siteCopy(lang).footerLabels.write}
           </a>
         </div>
         </Reveal>

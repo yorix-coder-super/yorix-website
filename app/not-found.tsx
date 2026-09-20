@@ -1,10 +1,13 @@
 import { ArrowRight } from 'lucide-react';
+import type { Metadata } from 'next';
 import { Art, Sparkle } from './home/art';
 import { homeCopy } from './home/copy';
 import { whitePill } from './home/CtaBand';
 import { SellerFooter } from './SellerFooter';
 import { SiteHeader } from './SiteHeader';
 import { StarField } from './subscription/StarField';
+
+export const metadata: Metadata = { title: '404', robots: { index: false, follow: false } };
 
 // One 404 for every path. The site has no locale here, so it speaks Russian
 // (the paying audience) with an English line underneath.

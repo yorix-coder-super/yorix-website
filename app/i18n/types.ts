@@ -66,7 +66,7 @@ export type SupportCopy = {
   eyebrow: string;
   title: string;
   body: string;
-  contact: { title: string; body: string; reply: string; include: string; email: string };
+  contact: { title: string; body: string; reply: string };
   // The «Write to us» form (mailed to support through the worker).
   form: { name: string; email: string; message: string; messagePlaceholder: string; send: string; sending: string; sent: string; error: string; invalid: string; privacy: string };
   topics: { title: string; items: { question: string; answer: string }[] }[];

@@ -80,7 +80,7 @@ export const translation: SiteTranslation = {
     cta: {
       badge: 'Stworzony dla prawdziwego życia rodzinnego',
       title: 'Zapisz dziś wieczorem jedną drzemkę. Plan na jutro już czeka.',
-      body: 'Dziennik jest darmowy na zawsze. Sen, karmienia, pieluchy, wzrost i pielęgnacja jednym dotknięciem — i plan na jutro zbudowany z Twoich wpisów.',
+      body: 'Sen, karmienia, pieluchy, wzrost i pielęgnacja jednym dotknięciem — i plan na jutro zbudowany z Twoich wpisów.',
       action: 'Pobierz Yorix',
     },
     footer: 'Yorix pomaga rodzicom w codziennej rutynie. Nie stawia diagnoz medycznych i nie udziela porad w nagłych przypadkach.',
@@ -255,7 +255,6 @@ export const translation: SiteTranslation = {
       offer: 'ofertę publiczną',
       and: 'oraz',
       refundTerms: 'warunki zwrotu',
-      device: 'iPhone i iPad, iOS 18+.',
     },
     account: {
       signInApple: 'Zaloguj się, używając konta Apple',
@@ -269,7 +268,7 @@ export const translation: SiteTranslation = {
       unavailable: "Płatność kartą na stronie będzie wkrótce dostępna.",
       testOnly: "Na razie płatność kartą jest dostępna tylko do testów.",
       error: "Nie udało się utworzyć płatności. Spróbuj ponownie za minutę.",
-      blocked: (email) => `Płatność dla tego konta jest niedostępna. Napisz do nas: ${email}.`,
+      blocked: 'Płatność dla tego konta jest niedostępna. Napisz do nas przez formularz na podstronie wsparcia.',
       rateLimited: 'Zbyt wiele prób. Odczekaj minutę.',
     },
     terms: {
@@ -328,8 +327,6 @@ export const translation: SiteTranslation = {
       title: 'Nadal potrzebujesz pomocy?',
       body: 'Napisz do nas tutaj — albo w aplikacji: „Ustawienia” → „Napisz do nas” otwiera czat z nami.',
       reply: 'Odpowiadamy w ciągu 3 dni roboczych.',
-      include: 'Żebyśmy mogli szybciej pomóc, podaj model iPhone’a, wersje iOS i Yorix oraz opisz, co się stało.',
-      email: 'Wyślij e-mail',
     },
     form: {
       name: 'Twoje imię',
@@ -339,7 +336,7 @@ export const translation: SiteTranslation = {
       send: 'Wyślij',
       sending: 'Wysyłanie…',
       sent: 'Dziękujemy! Otrzymaliśmy Twoją wiadomość i odpowiemy e-mailem w ciągu 3 dni roboczych.',
-      error: 'Nie udało się wysłać wiadomości. Spróbuj ponownie za minutę albo napisz na adres',
+      error: 'Nie udało się wysłać wiadomości. Spróbuj ponownie za minutę — albo napisz do nas w aplikacji: „Ustawienia” → „Napisz do nas”.',
       invalid: 'Podaj e-mail i wiadomość – co najmniej 10 znaków.',
       privacy: 'Twojego e-maila i wiadomości używamy tylko po to, by Ci odpowiedzieć.',
     },

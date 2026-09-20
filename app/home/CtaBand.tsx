@@ -16,7 +16,7 @@ export function CtaBand({ title, body, action, note }: { title: string; body: st
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden rounded-[2rem]">
             <Art className="drift absolute bottom-[-38%] start-[-5%] w-[110%] max-w-none opacity-45 rtl:-scale-x-100" height={511} name="cloud-bank" width={1536} />
             <Sparkle className="start-[34%] top-[16%] w-3" delay={300} tone="lavender" />
-            <Sparkle className="end-[30%] top-[62%] w-2.5" delay={1200} />
+            <Sparkle className="end-[23%] top-[12%] w-2.5" delay={1200} />
             <Sparkle className="bottom-[18%] end-[7%] w-4" delay={700} />
           </div>
           <div className="relative grid items-center gap-6 px-6 pb-8 pt-2 sm:px-10 md:grid-cols-[230px_1fr_auto] md:py-10 lg:grid-cols-[260px_1fr_auto]">

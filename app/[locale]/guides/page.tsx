@@ -26,7 +26,7 @@ export function generateMetadata({ params }: LocalizedGuidesRouteProps): Metadat
   const translatedPages = getLocalizedTopicPages(locale);
 
   return {
-    title: `${copy.guides.title} | Yorix`,
+    title: `${copy.guides.title}`,
     description: copy.guides.body,
     alternates: {
       canonical: `/${locale}/guides`,

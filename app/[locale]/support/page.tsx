@@ -15,7 +15,7 @@ export function generateMetadata({ params }: Props): Metadata {
   if (!isLocale(params.locale)) return {};
   const copy = siteCopy(params.locale).support;
   return {
-    title: `${copy.nav} | Yorix`,
+    title: `${copy.nav}`,
     description: copy.body,
     alternates: {
       canonical: `/${params.locale}/support`,

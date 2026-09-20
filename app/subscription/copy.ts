@@ -19,7 +19,6 @@ export type SubscriptionCopy = {
     offer: string;
     and: string;
     refundTerms: string;
-    device: string;
   };
   account: { signInApple: string; popupBlocked: string; signInError: string };
   checkout: {
@@ -29,7 +28,7 @@ export type SubscriptionCopy = {
     unavailable: string;
     testOnly: string;
     error: string;
-    blocked: (email: string) => string;
+    blocked: string;
     rateLimited: string;
   };
   faq: { title: string; items: { q: string; a: string }[]; more: string };
@@ -159,7 +158,6 @@ const ru: SubscriptionCopy = {
     offer: 'публичный договор',
     and: 'и',
     refundTerms: 'условия возврата',
-    device: 'Для iPhone и iPad, iOS 18+.',
   },
   account: {
     signInApple: 'Войти через Apple',
@@ -173,7 +171,7 @@ const ru: SubscriptionCopy = {
     unavailable: 'Оплата картой на сайте скоро откроется.',
     testOnly: 'Оплата картой пока открыта только для тестирования.',
     error: 'Не получилось создать оплату. Попробуйте ещё раз через минуту.',
-    blocked: (email) => `Для этого аккаунта оплата недоступна. Напишите нам: ${email}.`,
+    blocked: 'Для этого аккаунта оплата недоступна. Напишите нам через форму на странице поддержки.',
     rateLimited: 'Слишком много попыток. Подождите минуту.',
   },
   faq: {
@@ -249,7 +247,7 @@ const ru: SubscriptionCopy = {
     // A Russian card dedication is in the dative, without «для»: «Маше и Саше».
     cardFor: (name) => name,
     cardPlan: (period) => `Подписка Yorix ${period}`,
-    note: 'Yorix работает на iPhone и iPad. Аккаунт для покупки не нужен: сразу после оплаты вы получите ссылку, код и открытку с QR — они останутся здесь, в «Ваших подарках», на этом устройстве. Код действует 12 месяцев.',
+    note: 'Аккаунт не нужен: сразу после оплаты получите ссылку, код и открытку с QR. Получателю понадобится iPhone или iPad.',
     pay: (price) => `Оплатить подарок · ${price}`,
     paidTitle: 'Подарок оплачен!',
     paidBody: 'Отправьте ссылку получателю или подарите открытку с кодом. Подписка включится, когда получатель откроет ссылку или введёт код и войдёт через Apple.',
@@ -368,7 +366,6 @@ const en: SubscriptionCopy = {
     offer: 'public offer',
     and: 'and the',
     refundTerms: 'refund terms',
-    device: 'iPhone and iPad, iOS 18+.',
   },
   account: {
     signInApple: 'Sign in with Apple',
@@ -382,7 +379,7 @@ const en: SubscriptionCopy = {
     unavailable: 'Card payment on the site opens soon.',
     testOnly: 'Card payment is open for testing only for now.',
     error: 'Couldn’t create the payment. Please try again in a minute.',
-    blocked: (email) => `Payment isn't available for this account. Write to us: ${email}.`,
+    blocked: 'Payment isn’t available for this account. Write to us through the form on the support page.',
     rateLimited: 'Too many attempts. Wait a minute.',
   },
   faq: {
@@ -461,7 +458,7 @@ const en: SubscriptionCopy = {
     messagePlaceholder: 'Calm nights and sweet dreams!',
     cardFor: (name) => `For ${name}`,
     cardPlan: (period) => `Yorix subscription ${period}`,
-    note: 'Yorix runs on iPhone and iPad. No account is needed to buy: right after payment you get the link, the code and a card with a QR code — they stay here, under “Your gifts”, on this device. The code is valid for 12 months.',
+    note: 'No account needed: right after payment you get the link, the code and a card with a QR code. The recipient needs an iPhone or iPad.',
     pay: (price) => `Pay for the gift · ${price}`,
     paidTitle: 'Your gift is paid!',
     paidBody: 'Send the link to the recipient or give them the card with the code. The subscription turns on once they open the link or enter the code and sign in with Apple.',

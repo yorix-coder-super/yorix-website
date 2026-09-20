@@ -12,7 +12,7 @@ import { currencyForVisitor, formatMoney, sellsOnWeb, type WebCurrency } from '.
 import { formatDate, subscriptionPath, type Lang } from './i18n';
 import { legalVersion } from './legal/versions';
 import { rememberGift } from './gift/keys';
-import { charges, merchant, planCopy, plans, prices, type Plan } from './merchant';
+import { charges, planCopy, plans, prices, type Plan } from './merchant';
 import { Money } from './Money';
 import { Button, Spinner } from './ui';
 
@@ -411,7 +411,7 @@ export function CheckoutDialog() {
     : shownError === 'popupBlocked' || shownError === 'signInError'
       ? copy.account[shownError]
       : shownError === 'blocked'
-        ? copy.checkout.blocked(merchant.email)
+        ? copy.checkout.blocked
         : shownError
           ? copy.checkout[shownError]
           : null;
