@@ -326,7 +326,6 @@ export const translation: SiteTranslation = {
     contact: {
       title: 'עדיין צריכים עזרה?',
       body: 'כתבו לנו כאן — או באפליקציה: Settings ← ״Write to us״ פותח צ׳אט איתנו.',
-      reply: 'אנחנו עונים תוך 3 ימי עבודה.',
     },
     form: {
       name: 'השם שלכם',
@@ -335,7 +334,7 @@ export const translation: SiteTranslation = {
       messagePlaceholder: 'ספרו לנו מה קרה או מה תרצו לדעת',
       send: 'שליחה',
       sending: 'שולחים…',
-      sent: 'תודה! קיבלנו את ההודעה ונענה באימייל תוך 3 ימי עבודה.',
+      sent: 'תודה! קיבלנו את ההודעה ונענה באימייל.',
       error: 'לא הצלחנו לשלוח את ההודעה. נסו שוב בעוד דקה — או כתבו לנו באפליקציה: Settings ← ״Write to us״.',
       invalid: 'הזינו אימייל והודעה של 10 תווים לפחות.',
       privacy: 'אנחנו משתמשים באימייל ובהודעה שלכם רק כדי לענות לכם.',

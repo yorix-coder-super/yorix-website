@@ -326,7 +326,6 @@ export const translation: SiteTranslation = {
     contact: {
       title: 'Nog hulp nodig?',
       body: 'Schrijf ons hier – of via de app: ‘Instellingen’ → ‘Schrijf ons’ opent een chat met ons.',
-      reply: 'We reageren binnen 3 werkdagen.',
     },
     form: {
       name: 'Je naam',
@@ -335,7 +334,7 @@ export const translation: SiteTranslation = {
       messagePlaceholder: 'Vertel ons wat er gebeurde of wat je wilt weten',
       send: 'Versturen',
       sending: 'Bezig met versturen…',
-      sent: 'Dank je! We hebben je bericht ontvangen en antwoorden binnen 3 werkdagen per e-mail.',
+      sent: 'Dank je! We hebben je bericht ontvangen en antwoorden per e-mail.',
       error: 'Het bericht kon niet worden verstuurd. Probeer het over een minuut opnieuw – of schrijf ons via de app: ‘Instellingen’ → ‘Schrijf ons’.',
       invalid: 'Vul je e-mailadres in en een bericht van minstens 10 tekens.',
       privacy: 'We gebruiken je e-mailadres en bericht alleen om je te antwoorden.',

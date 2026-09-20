@@ -335,7 +335,6 @@ export const translation: SiteTranslation = {
     contact: {
       title: 'Vẫn cần hỗ trợ?',
       body: 'Viết cho chúng tôi tại đây — hoặc ngay trong ứng dụng: Cài đặt → “Viết cho chúng tôi” sẽ mở cuộc trò chuyện với chúng tôi.',
-      reply: 'Chúng tôi phản hồi trong vòng 3 ngày làm việc.',
     },
     form: {
       name: 'Tên của bạn',
@@ -344,7 +343,7 @@ export const translation: SiteTranslation = {
       messagePlaceholder: 'Hãy kể điều đã xảy ra hoặc điều bạn muốn biết',
       send: 'Gửi',
       sending: 'Đang gửi…',
-      sent: 'Cảm ơn bạn! Chúng tôi đã nhận được tin nhắn và sẽ trả lời qua email trong vòng 3 ngày làm việc.',
+      sent: 'Cảm ơn bạn! Chúng tôi đã nhận được tin nhắn và sẽ trả lời qua email.',
       error: 'Không gửi được tin nhắn. Hãy thử lại sau một phút — hoặc viết cho chúng tôi ngay trong ứng dụng: Cài đặt → “Viết cho chúng tôi”.',
       invalid: 'Hãy nhập email và tin nhắn ít nhất 10 ký tự.',
       privacy: 'Chúng tôi chỉ dùng email và tin nhắn của bạn để trả lời bạn.',

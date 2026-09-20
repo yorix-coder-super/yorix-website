@@ -335,7 +335,6 @@ export const translation: SiteTranslation = {
     contact: {
       title: 'Toujours besoin d’aide ?',
       body: 'Écrivez-nous ici — ou depuis l’app : « Réglages » → « Écrivez-nous » ouvre une discussion avec nous.',
-      reply: 'Nous répondons sous 3 jours ouvrés.',
     },
     form: {
       name: 'Votre nom',
@@ -344,7 +343,7 @@ export const translation: SiteTranslation = {
       messagePlaceholder: 'Dites-nous ce qui s’est passé ou ce que vous aimeriez savoir',
       send: 'Envoyer',
       sending: 'Envoi…',
-      sent: 'Merci ! Nous avons bien reçu votre message et vous répondrons par e-mail sous 3 jours ouvrés.',
+      sent: 'Merci ! Nous avons bien reçu votre message et vous répondrons par e-mail.',
       error: 'Le message n’a pas pu être envoyé. Réessayez dans une minute — ou écrivez-nous depuis l’app : « Réglages » → « Écrivez-nous ».',
       invalid: 'Indiquez votre e-mail et un message d’au moins 10 caractères.',
       privacy: 'Nous utilisons votre e-mail et votre message uniquement pour vous répondre.',

@@ -335,7 +335,6 @@ export const translation: SiteTranslation = {
     contact: {
       title: 'Masih perlukan bantuan?',
       body: 'Tulis kepada kami di sini — atau dalam aplikasi: Settings → “Write to us” membuka sembang dengan kami.',
-      reply: 'Kami membalas dalam tempoh 3 hari bekerja.',
     },
     form: {
       name: 'Nama anda',
@@ -344,7 +343,7 @@ export const translation: SiteTranslation = {
       messagePlaceholder: 'Beritahu kami apa yang berlaku atau apa yang ingin anda tahu',
       send: 'Hantar',
       sending: 'Menghantar…',
-      sent: 'Terima kasih! Kami telah menerima mesej anda dan akan membalas melalui e-mel dalam tempoh 3 hari bekerja.',
+      sent: 'Terima kasih! Kami telah menerima mesej anda dan akan membalas melalui e-mel.',
       error: 'Mesej tidak dapat dihantar. Cuba lagi dalam seminit — atau tulis kepada kami dalam aplikasi: Settings → “Write to us”.',
       invalid: 'Masukkan e-mel dan mesej sekurang-kurangnya 10 aksara.',
       privacy: 'Kami menggunakan e-mel dan mesej anda hanya untuk membalas anda.',

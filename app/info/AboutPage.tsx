@@ -64,7 +64,7 @@ export function AboutPage({ locale }: { locale: SiteLocale }) {
               <Reveal className="flex" delay={index * 110} key={section.title}>
                 <article
                   className={`flex w-full flex-col rounded-[1.75rem] border p-6 backdrop-blur-xl ${
-                    mission ? 'border-white/20 bg-[linear-gradient(140deg,#7C3AED_0%,#9333EA_45%,#DB2777_100%)] shadow-[0_24px_70px_rgb(147_51_234/30%)]' : 'border-white/12 bg-white/[0.06]'
+                    mission ? 'border-white/20 bg-[linear-gradient(140deg,#4338CA_0%,#4F46E5_45%,#818CF8_100%)] shadow-[0_24px_70px_rgb(79_70_229/30%)]' : 'border-white/12 bg-white/[0.06]'
                   }`}
                 >
                   <span className={`grid h-12 w-12 place-items-center rounded-full ring-1 ${mission ? 'bg-white/20 ring-white/30' : 'bg-white/[0.08] ring-white/15'}`}>

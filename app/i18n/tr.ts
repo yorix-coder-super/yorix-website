@@ -326,7 +326,6 @@ export const translation: SiteTranslation = {
     contact: {
       title: 'Hâlâ yardıma mı ihtiyacınız var?',
       body: 'Bize buradan yazın — ya da uygulamadan: Ayarlar → “Bize yaz” seçeneği bizimle bir sohbet açar.',
-      reply: '3 iş günü içinde yanıt veriyoruz.',
     },
     form: {
       name: 'Adınız',
@@ -335,7 +334,7 @@ export const translation: SiteTranslation = {
       messagePlaceholder: 'Ne olduğunu ya da neyi öğrenmek istediğinizi anlatın',
       send: 'Gönder',
       sending: 'Gönderiliyor…',
-      sent: 'Teşekkürler! Mesajınızı aldık, 3 iş günü içinde e-postayla yanıt vereceğiz.',
+      sent: 'Teşekkürler! Mesajınızı aldık, e-postayla yanıt vereceğiz.',
       error: 'Mesaj gönderilemedi. Bir dakika sonra tekrar deneyin — ya da bize uygulamadan yazın: Ayarlar → “Bize yaz”.',
       invalid: 'E-posta adresinizi ve en az 10 karakterlik bir mesaj girin.',
       privacy: 'E-posta adresinizi ve mesajınızı yalnızca size yanıt vermek için kullanırız.',

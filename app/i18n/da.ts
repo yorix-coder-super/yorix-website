@@ -326,7 +326,6 @@ export const translation: SiteTranslation = {
     contact: {
       title: 'Brug for mere hjælp?',
       body: 'Skriv til os her – eller i appen: Settings → »Write to us« åbner en chat med os.',
-      reply: 'Vi svarer inden for 3 arbejdsdage.',
     },
     form: {
       name: 'Dit navn',
@@ -335,7 +334,7 @@ export const translation: SiteTranslation = {
       messagePlaceholder: 'Fortæl os, hvad der skete, eller hvad du gerne vil vide',
       send: 'Send',
       sending: 'Sender…',
-      sent: 'Tak! Vi har fået din besked og svarer på e-mail inden for 3 arbejdsdage.',
+      sent: 'Tak! Vi har fået din besked og svarer på e-mail.',
       error: 'Beskeden kunne ikke sendes. Prøv igen om et minut – eller skriv til os i appen: Settings → »Write to us«.',
       invalid: 'Skriv din e-mail og en besked på mindst 10 tegn.',
       privacy: 'Vi bruger kun din e-mail og besked til at svare dig.',

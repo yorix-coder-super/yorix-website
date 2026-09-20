@@ -326,7 +326,6 @@ export const translation: SiteTranslation = {
     contact: {
       title: 'Potřebuješ ještě pomoct?',
       body: 'Napiš nám tady — nebo přímo v aplikaci: Settings → „Write to us“ otevře chat s námi.',
-      reply: 'Odpovídáme do 3 pracovních dnů.',
     },
     form: {
       name: 'Tvoje jméno',
@@ -335,7 +334,7 @@ export const translation: SiteTranslation = {
       messagePlaceholder: 'Napiš, co se stalo nebo co chceš vědět',
       send: 'Odeslat',
       sending: 'Odesíláme…',
-      sent: 'Děkujeme! Zprávu jsme dostali a odpovíme e-mailem do 3 pracovních dnů.',
+      sent: 'Děkujeme! Zprávu jsme dostali a odpovíme e-mailem.',
       error: 'Zprávu se nepodařilo odeslat. Zkus to znovu za minutu — nebo nám napiš přímo v aplikaci: Settings → „Write to us“.',
       invalid: 'Zadej e-mail a zprávu – aspoň 10 znaků.',
       privacy: 'Tvůj e-mail a zprávu použijeme jen k odpovědi.',

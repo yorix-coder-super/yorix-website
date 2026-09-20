@@ -326,7 +326,6 @@ export const translation: SiteTranslation = {
     contact: {
       title: 'Nadal potrzebujesz pomocy?',
       body: 'Napisz do nas tutaj — albo w aplikacji: „Ustawienia” → „Napisz do nas” otwiera czat z nami.',
-      reply: 'Odpowiadamy w ciągu 3 dni roboczych.',
     },
     form: {
       name: 'Twoje imię',
@@ -335,7 +334,7 @@ export const translation: SiteTranslation = {
       messagePlaceholder: 'Opisz, co się stało albo o co chcesz zapytać',
       send: 'Wyślij',
       sending: 'Wysyłanie…',
-      sent: 'Dziękujemy! Otrzymaliśmy Twoją wiadomość i odpowiemy e-mailem w ciągu 3 dni roboczych.',
+      sent: 'Dziękujemy! Otrzymaliśmy Twoją wiadomość i odpowiemy e-mailem.',
       error: 'Nie udało się wysłać wiadomości. Spróbuj ponownie za minutę — albo napisz do nas w aplikacji: „Ustawienia” → „Napisz do nas”.',
       invalid: 'Podaj e-mail i wiadomość – co najmniej 10 znaków.',
       privacy: 'Twojego e-maila i wiadomości używamy tylko po to, by Ci odpowiedzieć.',

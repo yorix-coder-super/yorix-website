@@ -125,7 +125,7 @@ export function AppStorePanel({ locale }: { locale: SiteLocale }) {
   const home = site.home;
   return (
     <Reveal>
-      <div className="relative isolate overflow-hidden rounded-[2rem] border border-white/15 bg-[radial-gradient(130%_130%_at_88%_15%,#9333EA_0%,#5B21B6_38%,#2E1065_66%,#1E1B4B_100%)] shadow-[0_40px_120px_rgb(109_40_217/35%)]">
+      <div className="relative isolate overflow-hidden rounded-[2rem] border border-white/15 bg-[linear-gradient(100deg,#12144F_0%,#1A1D66_52%,#3730A3_100%)] shadow-[0_40px_120px_rgb(79_70_229/28%)]">
         <img
           alt=""
           aria-hidden="true"

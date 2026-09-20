@@ -326,7 +326,6 @@ export const translation: SiteTranslation = {
     contact: {
       title: 'Ainda precisa de ajuda?',
       body: 'Escreva-nos aqui — ou na app: «Configurações» → «Fale com a gente» abre uma conversa connosco.',
-      reply: 'Respondemos no prazo de 3 dias úteis.',
     },
     form: {
       name: 'O seu nome',
@@ -335,7 +334,7 @@ export const translation: SiteTranslation = {
       messagePlaceholder: 'Conte-nos o que aconteceu ou o que gostaria de saber',
       send: 'Enviar',
       sending: 'A enviar…',
-      sent: 'Obrigado! Recebemos a sua mensagem e vamos responder por e-mail no prazo de 3 dias úteis.',
+      sent: 'Obrigado! Recebemos a sua mensagem e vamos responder por e-mail.',
       error: 'Não foi possível enviar a mensagem. Tente novamente dentro de um minuto — ou escreva-nos na app: «Configurações» → «Fale com a gente».',
       invalid: 'Indique o seu e-mail e uma mensagem com pelo menos 10 caracteres.',
       privacy: 'Usamos o seu e-mail e a sua mensagem apenas para lhe responder.',

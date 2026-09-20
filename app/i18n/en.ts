@@ -270,7 +270,6 @@ export const translation: SiteTranslation = {
     contact: {
       title: 'Still need help?',
       body: 'Write to us here — or in the app: Settings → “Write to us” opens a chat with us.',
-      reply: 'We reply within 3 working days.',
     },
     form: {
       name: 'Your name',
@@ -279,7 +278,7 @@ export const translation: SiteTranslation = {
       messagePlaceholder: 'Tell us what happened or what you would like to know',
       send: 'Send',
       sending: 'Sending…',
-      sent: 'Thank you! We’ve got your message and will reply to your e-mail within 3 working days.',
+      sent: 'Thank you! We’ve got your message and will reply to your e-mail.',
       error: 'The message could not be sent. Please try again in a minute — or write to us in the app: Settings → “Write to us”.',
       invalid: 'Please enter your e-mail and a message of at least 10 characters.',
       privacy: 'We use your e-mail and message only to reply to you.',

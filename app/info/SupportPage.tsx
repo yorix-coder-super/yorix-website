@@ -1,4 +1,4 @@
-import { Clock, Gift, Mail } from 'lucide-react';
+import { Gift, Mail } from 'lucide-react';
 import { Art, Sparkle } from '../home/art';
 import { CtaBand, FaqItem, whitePill } from '../home/CtaBand';
 import { docsLang, isRtl, siteCopy, type SiteLocale } from '../i18n';
@@ -11,6 +11,8 @@ import { sellsHere } from '../subscription/region';
 import { StarField } from '../subscription/StarField';
 
 const topicIcons = ['icon-sparkle', 'icon-card', 'icon-heart', 'icon-clock', 'icon-bolt'];
+// One scene of the «object on a cloud» set per topic, in the order of `support.topics`.
+const topicArt = ['scene-phone', 'scene-card', 'scene-lock', 'scene-clock', 'scene-help'];
 
 // The help page every app of this kind has (Napper's Support, Huckleberry's
 // Help): questions grouped by topic, answered with the app's own labels,
@@ -64,21 +66,47 @@ export async function SupportPage({ locale }: { locale: SiteLocale }) {
           </div>
         </section>
 
-        <section className="mx-auto grid max-w-7xl gap-10 px-5 pb-6 sm:px-8 lg:px-10">
+        <nav aria-label={copy.eyebrow} className="mx-auto max-w-7xl px-5 pb-6 sm:px-8 lg:px-10">
+          <ul className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 [&::-webkit-scrollbar]:hidden">
+            {copy.topics.map((topic, index) => (
+              <li className="shrink-0" key={topic.title}>
+                <a
+                  className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-white/12 bg-white/[0.06] py-1.5 pe-4 ps-1.5 text-sm font-medium text-white/85 backdrop-blur transition hover:border-white/30 hover:bg-white/[0.1] hover:text-white"
+                  href={`#topic-${index + 1}`}
+                >
+                  <span className="grid h-8 w-8 place-items-center rounded-full bg-white/[0.08]">
+                    <Art className="h-5 w-5 object-contain" height={192} name={topicIcons[index] ?? 'icon-question'} width={192} />
+                  </span>
+                  {topic.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <section className="mx-auto grid max-w-7xl gap-6 px-5 pb-6 sm:px-8 lg:px-10">
           {copy.topics.map((topic, index) => (
-            <Reveal key={topic.title}>
-              <div className="flex items-center gap-3">
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/[0.08] ring-1 ring-white/15">
-                  <Art className="h-7 w-7 object-contain" height={192} name={topicIcons[index] ?? 'icon-question'} width={192} />
-                </span>
-                <h2 className="text-xl font-semibold text-white sm:text-2xl">{topic.title}</h2>
-              </div>
-              <div className="mt-4 grid items-start gap-3 md:grid-cols-2">
-                {topic.items.map((item) => (
-                  <FaqItem answer={item.answer} key={item.question} question={item.question} />
-                ))}
-              </div>
+            // The anchor sits outside Reveal: a panel still sliding in would make the jump land short.
+            <div className="scroll-mt-6" id={`topic-${index + 1}`} key={topic.title}>
+            <Reveal>
+              <article className="relative isolate overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(160deg,rgb(255_255_255/0.08),rgb(255_255_255/0.03))] p-5 shadow-[0_30px_90px_rgb(0_0_0/18%)] backdrop-blur-xl sm:p-8 lg:grid lg:grid-cols-[14rem_1fr] lg:items-start lg:gap-10">
+                <div aria-hidden="true" className="absolute -start-16 -top-16 -z-10 h-64 w-64 rounded-full bg-[#6366F1]/25 blur-3xl" />
+                <header className="flex items-center gap-4 lg:sticky lg:top-6 lg:block lg:text-center">
+                  <div aria-hidden="true" className="w-20 shrink-0 sm:w-24 lg:mx-auto lg:w-44">
+                    <div className={index % 2 === 0 ? 'float-slow' : 'float-slower'}>
+                      <Art className="h-auto w-full drop-shadow-[0_18px_30px_rgb(15_16_34/40%)]" height={440} name={topicArt[index] ?? 'scene-phone'} width={440} />
+                    </div>
+                  </div>
+                  <h2 className="text-xl font-semibold leading-7 text-white sm:text-2xl lg:mt-3">{topic.title}</h2>
+                </header>
+                <div className="mt-3 divide-y divide-white/10 border-t border-white/10 lg:mt-0 lg:border-t-0">
+                  {topic.items.map((item) => (
+                    <FaqItem answer={item.answer} key={item.question} question={item.question} variant="row" />
+                  ))}
+                </div>
+              </article>
             </Reveal>
+            </div>
           ))}
           {web ? (
             <p className="text-sm leading-6 text-white/70">
@@ -91,8 +119,9 @@ export async function SupportPage({ locale }: { locale: SiteLocale }) {
 
         <section className="mx-auto max-w-7xl scroll-mt-6 px-5 py-10 sm:px-8 lg:px-10" id="contact">
           <Reveal>
-            <div className="relative isolate overflow-hidden rounded-[2rem] border border-white/15 bg-[radial-gradient(120%_150%_at_8%_0%,#DB2777_0%,#9333EA_36%,#5B21B6_62%,#2E1065_100%)] shadow-[0_40px_120px_rgb(147_51_234/35%)]">
-              <div aria-hidden="true" className="absolute -bottom-32 -start-20 -z-10 h-80 w-80 rounded-full bg-[#FDE68A]/20 blur-3xl" />
+            <div className="relative isolate overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(135deg,#312E81_0%,#3730A3_45%,#4F46E5_100%)] shadow-[0_30px_90px_rgb(79_70_229/30%)]">
+              <div aria-hidden="true" className="absolute -top-24 start-[4%] -z-10 h-72 w-72 rounded-full bg-[#FDE68A]/15 blur-3xl" />
+              <Art className="drift pointer-events-none absolute -bottom-[18%] start-[-5%] -z-10 w-[110%] max-w-none opacity-25 rtl:-scale-x-100" height={511} name="cloud-bank" width={1536} />
               <div className="grid gap-8 p-6 sm:p-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-12">
                 <div className="text-center lg:text-start">
                   <div aria-hidden="true" className="relative mx-auto w-[min(62%,15rem)] lg:mx-0 lg:w-[min(80%,19rem)]">
@@ -103,12 +132,8 @@ export async function SupportPage({ locale }: { locale: SiteLocale }) {
                   <p className="mt-6 text-sm font-semibold uppercase tracking-wide text-[#FDE68A]">{copy.contact.title}</p>
                   <h2 className="mt-2 text-[2rem] font-semibold leading-[1.1] text-white sm:text-[2.4rem]">{site.footerLabels.write}</h2>
                   <p className="mx-auto mt-4 max-w-md text-base leading-7 text-white/85 lg:mx-0">{copy.contact.body}</p>
-                  <p className="mt-5 inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm font-semibold text-white ring-1 ring-white/25 backdrop-blur">
-                    <Clock aria-hidden="true" className="h-4 w-4" />
-                    {copy.contact.reply}
-                  </p>
                 </div>
-                <div className="rounded-[1.75rem] bg-white/10 p-5 ring-1 ring-white/20 backdrop-blur-xl sm:p-7">
+                <div className="rounded-[1.75rem] border border-white/12 bg-[#1E1B4B]/45 p-5 backdrop-blur-xl sm:p-7">
                   <ContactForm
                     copy={copy.form}
                     lang={locale}

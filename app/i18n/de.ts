@@ -326,7 +326,6 @@ export const translation: SiteTranslation = {
     contact: {
       title: 'Noch Fragen offen?',
       body: 'Schreib uns hier – oder direkt in der App: „Einstellungen“ → „Schreib uns“ öffnet einen Chat mit uns.',
-      reply: 'Wir antworten innerhalb von 3 Werktagen.',
     },
     form: {
       name: 'Dein Name',
@@ -335,7 +334,7 @@ export const translation: SiteTranslation = {
       messagePlaceholder: 'Erzähl uns, was passiert ist oder was du wissen möchtest',
       send: 'Senden',
       sending: 'Wird gesendet…',
-      sent: 'Danke! Wir haben deine Nachricht erhalten und antworten innerhalb von 3 Werktagen per E-Mail.',
+      sent: 'Danke! Wir haben deine Nachricht erhalten und antworten per E-Mail.',
       error: 'Die Nachricht konnte nicht gesendet werden. Versuch es in einer Minute noch einmal – oder schreib uns direkt in der App: „Einstellungen“ → „Schreib uns“.',
       invalid: 'Bitte gib deine E-Mail-Adresse und eine Nachricht mit mindestens 10 Zeichen ein.',
       privacy: 'Deine E-Mail-Adresse und Nachricht nutzen wir nur, um dir zu antworten.',

@@ -335,7 +335,6 @@ export const translation: SiteTranslation = {
     contact: {
       title: '¿Todavía necesitas ayuda?',
       body: 'Escríbenos aquí o desde la app (en «Ajustes» → «Escríbenos» se abre un chat con nosotros).',
-      reply: 'Respondemos en un plazo de 3 días laborables.',
     },
     form: {
       name: 'Tu nombre',
@@ -344,7 +343,7 @@ export const translation: SiteTranslation = {
       messagePlaceholder: 'Cuéntanos qué pasó o qué te gustaría saber',
       send: 'Enviar',
       sending: 'Enviando…',
-      sent: '¡Gracias! Recibimos tu mensaje y te responderemos por e-mail en un plazo de 3 días laborables.',
+      sent: '¡Gracias! Recibimos tu mensaje y te responderemos por e-mail.',
       error: 'No se pudo enviar el mensaje. Vuelve a intentarlo en un minuto o escríbenos desde la app: «Ajustes» → «Escríbenos».',
       invalid: 'Escribe tu e-mail y un mensaje de al menos 10 caracteres.',
       privacy: 'Usamos tu e-mail y tu mensaje solo para responderte.',
