@@ -127,7 +127,10 @@ function shortGiftRedirect(request: NextRequest): NextResponse | null {
       ? 'ru'
       : preferredLanguage(request.headers.get('accept-language'), request.headers.get('cf-ipcountry'));
   const target = request.nextUrl.clone();
-  target.pathname = `${lang === 'ru' ? '/ru' : ''}/gift/${formatGiftCode(codeFromInput(match[1]))}`;
+  // The recipient is wherever the buyer sent the link, so the short link opens
+  // in their own language — not in the language of the seller's contract.
+  const prefix = lang === 'en' ? '' : lang === 'ru' ? '/ru' : `/${lang}`;
+  target.pathname = `${prefix}/gift/${formatGiftCode(codeFromInput(match[1]))}`;
   target.search = '';
   const response = NextResponse.redirect(target, 302);
   response.headers.set('Vary', 'Accept-Language, Cookie');

@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { SellerFooter } from '../SellerFooter';
 import { SiteHeader } from '../SiteHeader';
+import { siteCopy, type SiteLocale } from '../i18n';
 import { subscriptionCopy } from './copy';
 import { subscriptionPath, type Lang, type SubscriptionPage } from './i18n';
 import { StarField } from './StarField';
@@ -20,25 +21,31 @@ export function documentLinks(lang: Lang, web = true) {
 
 export async function SubscriptionShell({
   lang,
+  // The documents are Russian and English, but the redeem flow is read by
+  // whoever the buyer sent the link to. `locale` is the language of the
+  // chrome; `lang` stays the language of the contract it links to.
+  locale = lang,
   page = '',
   giftPaths,
   children,
 }: {
   lang: Lang;
+  locale?: SiteLocale;
   page?: SubscriptionPage;
   giftPaths?: { en: string; ru: string };
   children: ReactNode;
 }) {
   const copy = subscriptionCopy[lang];
+  const note = locale === lang ? copy.footer.medical : siteCopy(locale).articleUi.footer;
 
   return (
-    <main className="home-page relative min-h-screen overflow-hidden text-white" lang={lang}>
+    <main className="home-page relative min-h-screen overflow-hidden text-white" lang={locale}>
       <StarField />
-      <SiteHeader current="subscription" giftPaths={giftPaths} locale={lang} page={page} />
+      <SiteHeader current="subscription" giftPaths={giftPaths} locale={locale} page={page} />
 
       <div className="relative z-10">{children}</div>
 
-      <SellerFooter locale={lang} note={copy.footer.medical} />
+      <SellerFooter locale={locale} note={note} />
     </main>
   );
 }

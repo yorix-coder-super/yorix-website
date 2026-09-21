@@ -2,6 +2,7 @@ import { ArrowRight } from 'lucide-react';
 import { appDownloadUrl } from '../content';
 import { AppleGlyph, AppQr, Art, DoodleHeart, featureIcons, Hand, PhoneFrame, Sparkle } from '../home/art';
 import type { SubscriptionCopy } from './copy';
+import type { RedeemText } from './gift/redeemCopy';
 import { formatDate, type Lang } from './i18n';
 import { Magnetic } from './Magnetic';
 import { Reveal } from './Reveal';
@@ -22,8 +23,17 @@ export function PaidScreen({
   // A gift recipient paid nothing, so «Оплачено» would be a small lie on the
   // one screen that is supposed to feel like a welcome.
   from = 'purchase',
-}: { until: string; lang: Lang; copy: SubscriptionCopy; from?: 'purchase' | 'gift' }) {
-  const t = copy.ret;
+  // A gift recipient reads this screen in their own language, which the
+  // documents do not speak; the buyer reads it in the document language.
+  done,
+}: {
+  until: string;
+  lang: Lang;
+  copy: SubscriptionCopy;
+  from?: 'purchase' | 'gift';
+  done?: RedeemText['done'];
+}) {
+  const t = done ? { ...copy.ret, ...done, badgeGift: done.badge } : copy.ret;
   const support = `${lang === 'ru' ? '/ru' : ''}/support#contact`;
 
   return (

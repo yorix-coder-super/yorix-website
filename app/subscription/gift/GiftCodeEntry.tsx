@@ -1,9 +1,11 @@
 'use client';
 
 import { useState, useSyncExternalStore, type SubmitEvent } from 'react';
+import type { SiteLocale } from '../../i18n';
 import { subscriptionCopy } from '../copy';
 import type { Lang } from '../i18n';
 import { Button } from '../ui';
+import { redeemText } from './redeemCopy';
 import { codeFromInput, formatGiftCode, giftCodeChecks } from './code';
 
 const noSubscription = () => () => {};
@@ -19,8 +21,8 @@ function storedCode(): string {
 
 // For a gift that came as a printed card or a dictated code: the code is
 // checked here, then the redeem page takes over exactly as from a link.
-export function GiftCodeEntry({ lang }: { lang: Lang }) {
-  const text = subscriptionCopy[lang].gift;
+export function GiftCodeEntry({ lang, locale = lang }: { lang: Lang; locale?: SiteLocale }) {
+  const text = redeemText(locale, lang);
   const stored = useSyncExternalStore(noSubscription, storedCode, () => '');
   const [typed, setTyped] = useState<string | null>(null);
   const code = typed ?? stored;

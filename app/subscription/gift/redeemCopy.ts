@@ -56,6 +56,9 @@ export type RedeemText = {
   entryLabel: string;
   entryHint: string;
   enterCode: string;
+  /** Added after the 21 files were written, so they may not carry it yet. */
+  entryGo?: string;
+  entryShort?: string;
 
   alreadySubscribed: { summary: string; web: string; store: (date: string) => string };
   scamNote: string;
@@ -120,6 +123,8 @@ export function baseRedeemText(docs: Lang): RedeemText {
     entryLabel: g.entryLabel,
     entryHint: g.entryHint,
     enterCode: g.enterCode,
+    entryGo: g.entryGo,
+    entryShort: g.entryShort,
     alreadySubscribed: g.alreadySubscribed,
     scamNote: g.scamNote,
     popupHint: g.popupHint,
@@ -158,6 +163,10 @@ const PLAN_PERIODS: Record<Lang, { week: string; month: string; year: string }> 
 export const redeemCopy: Partial<Record<SiteLang, RedeemText>> = { ar, cs, da, de, es, fr, he, hi, id, it, ja, ms, nl, no, pl, pt, sv, th, tr, uk, vi };
 
 /** What the recipient reads: their own language when we have it, else the document language. */
-export function redeemText(locale: SiteLang, docs: Lang): RedeemText {
-  return redeemCopy[locale] ?? baseRedeemText(docs);
+export function redeemText(locale: SiteLang, docs: Lang): Required<Pick<RedeemText, 'entryGo' | 'entryShort'>> & RedeemText {
+  const base = baseRedeemText(docs);
+  const text = redeemCopy[locale] ?? base;
+  // A field added after a translation was written falls back to the document
+  // language rather than rendering `undefined` at someone.
+  return { ...text, entryGo: text.entryGo ?? base.entryGo!, entryShort: text.entryShort ?? base.entryShort! };
 }
