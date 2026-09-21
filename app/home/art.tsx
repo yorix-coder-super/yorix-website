@@ -44,6 +44,19 @@ export function Art({ name, className = '', width, height, priority = false }: {
   );
 }
 
+// The App Store code for a visitor at a desk. The tile is the code's quiet
+// zone; the app icon sits in the window the generator leaves empty
+// (scripts/make-app-qr.mjs). Never mirrored: a flipped code does not scan.
+export function AppQr({ label, className = '' }: { label: string; className?: string }) {
+  return (
+    <span className={`relative block aspect-square rounded-[20%] bg-[linear-gradient(145deg,#FFFFFF_0%,#EEF2FF_100%)] shadow-[0_18px_50px_rgb(99_102_241/35%)] ring-1 ring-white/70 ${className}`}>
+      {/* Inset, not padding: a percentage padding is measured from the parent's width, not the tile's. */}
+      <img alt={label} className="absolute inset-[6%] h-[88%] w-[88%]" height="41" loading="lazy" src="/art/app-qr.svg" width="41" />
+      <img alt="" aria-hidden="true" className="absolute left-1/2 top-1/2 h-[17%] w-[17%] -translate-x-1/2 -translate-y-1/2 rounded-[24%]" height="192" loading="lazy" src="/art/app-icon.webp" width="192" />
+    </span>
+  );
+}
+
 export function Sparkle({ className = '', tone = 'gold', delay = 0 }: { className?: string; tone?: 'gold' | 'lavender'; delay?: number }) {
   return (
     <span aria-hidden="true" className={`pointer-events-none absolute ${className}`}>

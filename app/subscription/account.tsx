@@ -425,7 +425,7 @@ export function CheckoutDialog() {
   const link = 'font-semibold text-white underline decoration-white/40 underline-offset-2 hover:decoration-white';
 
   return (
-    <div className="fixed inset-0 z-[100] overflow-y-auto">
+    <div className="fixed inset-0 z-[100] overflow-y-auto" data-lenis-prevent="">
       <button aria-label={copy.terms.cancel} className="fixed inset-0 bg-[#0B0B1E]/70 backdrop-blur-sm" onClick={close} type="button" />
       <div className={dialogFrame}>
         <dialog

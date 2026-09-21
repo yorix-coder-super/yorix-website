@@ -281,7 +281,6 @@ export const translation: SiteTranslation = {
       sent: 'Thank you! We’ve got your message and will reply to your e-mail.',
       error: 'The message could not be sent. Please try again in a minute — or write to us in the app: Settings → “Write to us”.',
       invalid: 'Please enter your e-mail and a message of at least 10 characters.',
-      privacy: 'We use your e-mail and message only to reply to you.',
     },
     topics: [
       {
@@ -357,12 +356,11 @@ export const translation: SiteTranslation = {
           },
           {
             question: 'The app doesn’t work as expected',
-            answer: 'Update Yorix to the latest version in the App Store and restart the app. If that doesn’t help, write to us — see below.',
+            answer: 'Update Yorix to the latest version in the App Store and restart the app. If that doesn’t help, [write to us](#contact).',
           },
         ],
       },
     ],
-    web: 'Paid for a subscription by card on the website? The answers are on the subscription page.',
   },
   about: {
     nav: 'About Yorix',
@@ -405,6 +403,6 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Product', features: 'Features', guides: 'Guides', support: 'Support', write: 'Write to us', redeem: 'Redeem a gift', badgeTop: 'Download on the' },
+  footerLabels: { product: 'Product', features: 'Features', guides: 'Guides', support: 'Support', write: 'Write to us', redeem: 'Redeem a gift', badgeTop: 'Download on the', social: 'Follow us', scan: 'Scan with your phone camera', scanHint: 'Yorix opens in the App Store' },
   docsNote: '',
 };

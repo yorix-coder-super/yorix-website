@@ -346,7 +346,6 @@ export const translation: SiteTranslation = {
       sent: 'Cảm ơn bạn! Chúng tôi đã nhận được tin nhắn và sẽ trả lời qua email.',
       error: 'Không gửi được tin nhắn. Hãy thử lại sau một phút — hoặc viết cho chúng tôi ngay trong ứng dụng: Cài đặt → “Viết cho chúng tôi”.',
       invalid: 'Hãy nhập email và tin nhắn ít nhất 10 ký tự.',
-      privacy: 'Chúng tôi chỉ dùng email và tin nhắn của bạn để trả lời bạn.',
     },
     topics: [
       {
@@ -422,12 +421,11 @@ export const translation: SiteTranslation = {
           },
           {
             question: 'Ứng dụng không hoạt động như mong đợi',
-            answer: 'Cập nhật Yorix lên phiên bản mới nhất trên App Store và khởi động lại ứng dụng. Nếu vẫn chưa được, hãy viết cho chúng tôi — thông tin liên hệ ở bên dưới.',
+            answer: 'Cập nhật Yorix lên phiên bản mới nhất trên App Store và khởi động lại ứng dụng. Nếu vẫn chưa được, hãy [viết cho chúng tôi](#contact).',
           },
         ],
       },
     ],
-    web: 'Đã thanh toán gói đăng ký bằng thẻ trên trang web? Câu trả lời có ở trang gói đăng ký.',
   },
   about: {
     nav: 'Về Yorix',
@@ -470,7 +468,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Sản phẩm', features: 'Tính năng', guides: 'Hướng dẫn', support: 'Hỗ trợ', write: 'Viết cho chúng tôi', redeem: 'Đổi quà tặng', badgeTop: 'Tải về trên' },
+  footerLabels: { product: 'Sản phẩm', features: 'Tính năng', guides: 'Hướng dẫn', support: 'Hỗ trợ', write: 'Viết cho chúng tôi', redeem: 'Đổi quà tặng', badgeTop: 'Tải về trên', social: 'Theo dõi chúng tôi', scan: 'Quét bằng camera điện thoại', scanHint: 'Yorix sẽ mở trong App Store' },
   docsNote: 'Các tài liệu hiện có bằng tiếng Anh và tiếng Nga.',
   topics: {
     'baby-nap-schedule-by-age': 'Lịch ngủ ngày của bé theo độ tuổi',

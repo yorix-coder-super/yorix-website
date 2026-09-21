@@ -68,10 +68,9 @@ export type SupportCopy = {
   body: string;
   contact: { title: string; body: string };
   // The «Write to us» form (mailed to support through the worker).
-  form: { name: string; email: string; message: string; messagePlaceholder: string; send: string; sending: string; sent: string; error: string; invalid: string; privacy: string };
+  form: { name: string; email: string; message: string; messagePlaceholder: string; send: string; sending: string; sent: string; error: string; invalid: string };
   topics: { title: string; items: { question: string; answer: string }[] }[];
   // Only for visitors who can pay by card on the site.
-  web: string;
 };
 
 // /about: why Yorix exists, how it works and what it stands for.
@@ -98,7 +97,7 @@ export type SiteTranslation = {
   testimonials: [string, string, string];
   support: SupportCopy;
   about: AboutCopy;
-  footerLabels: { product: string; features: string; guides: string; support: string; write: string; redeem: string; badgeTop: string };
+  footerLabels: { product: string; features: string; guides: string; support: string; write: string; redeem: string; badgeTop: string; social: string; scan: string; scanHint: string };
   // Under the acceptance box when the documents are not in this language.
   docsNote: string;
   // Short article titles in this language (the Russian ones are the model).

@@ -10,11 +10,11 @@ export function BrandLogo({ size = 'md', tone = 'light' }: BrandLogoProps) {
   return (
     <span className="flex items-center gap-3">
       <img
-        src="/app-icon.png"
+        src="/art/app-icon.webp"
         alt="Yorix app icon"
         className={`${imageSize} rounded-2xl shadow-sm`}
-        width="1024"
-        height="1024"
+        width="192"
+        height="192"
       />
       <span className={`text-lg font-semibold ${textColor}`}>Yorix</span>
     </span>

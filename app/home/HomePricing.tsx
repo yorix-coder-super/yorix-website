@@ -11,7 +11,7 @@ import { Magnetic } from '../subscription/Magnetic';
 import { plans } from '../subscription/merchant';
 import { Parallax } from '../subscription/Parallax';
 import { Reveal } from '../subscription/Reveal';
-import { AppleGlyph, Art, featureIcons, Sparkle } from './art';
+import { AppleGlyph, AppQr, Art, featureIcons, Sparkle } from './art';
 
 // The home page's storefront: the same plan buttons as /subscription
 // (sign in with Apple → the acquirer's page), laid out as the concept's glass
@@ -159,8 +159,8 @@ export function AppStorePanel({ locale }: { locale: SiteLocale }) {
                 </li>
               ))}
             </ul>
-            <Reveal delay={460}>
-              <Magnetic className="mt-8 inline-flex">
+            <Reveal className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-5" delay={460}>
+              <Magnetic className="inline-flex">
                 <a
                   className="inline-flex items-center gap-3 rounded-2xl border border-white/30 bg-black px-5 py-2.5 text-white shadow-[0_18px_40px_rgb(0_0_0/35%)] transition hover:-translate-y-0.5 hover:border-white/60 active:translate-y-0 active:scale-[0.98]"
                   href={appDownloadUrl}
@@ -176,6 +176,14 @@ export function AppStorePanel({ locale }: { locale: SiteLocale }) {
                   </span>
                 </a>
               </Magnetic>
+              <div className="hidden items-center gap-3.5 sm:flex">
+                <AppQr className="w-[7.5rem] shrink-0" label={`${site.footerLabels.scan} — ${site.footerLabels.scanHint}`} />
+                <p className="max-w-[10rem] text-sm leading-5 text-white/75">
+                  <span className="font-semibold text-white">{site.footerLabels.scan}</span>
+                  <br />
+                  {site.footerLabels.scanHint}
+                </p>
+              </div>
             </Reveal>
           </div>
         </div>

@@ -337,7 +337,6 @@ export const translation: SiteTranslation = {
       sent: 'Dank je! We hebben je bericht ontvangen en antwoorden per e-mail.',
       error: 'Het bericht kon niet worden verstuurd. Probeer het over een minuut opnieuw – of schrijf ons via de app: ‘Instellingen’ → ‘Schrijf ons’.',
       invalid: 'Vul je e-mailadres in en een bericht van minstens 10 tekens.',
-      privacy: 'We gebruiken je e-mailadres en bericht alleen om je te antwoorden.',
     },
     topics: [
       {
@@ -413,12 +412,11 @@ export const translation: SiteTranslation = {
           },
           {
             question: 'De app werkt niet zoals verwacht',
-            answer: 'Werk Yorix bij naar de nieuwste versie in de App Store en start de app opnieuw. Helpt dat niet, schrijf ons dan – hieronder lees je hoe.',
+            answer: 'Werk Yorix bij naar de nieuwste versie in de App Store en start de app opnieuw. Helpt dat niet, [schrijf ons](#contact) dan.',
           },
         ],
       },
     ],
-    web: 'Heb je je abonnement op de website met je kaart betaald? De antwoorden staan op de abonnementspagina.',
   },
   about: {
     nav: 'Over Yorix',
@@ -461,7 +459,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Product', features: 'Functies', guides: 'Gidsen', support: 'Support', write: 'Neem contact op', redeem: 'Cadeau inwisselen', badgeTop: 'Download in de' },
+  footerLabels: { product: 'Product', features: 'Functies', guides: 'Gidsen', support: 'Support', write: 'Neem contact op', redeem: 'Cadeau inwisselen', badgeTop: 'Download in de', social: 'Volg ons', scan: 'Scan met de camera van je telefoon', scanHint: 'Yorix opent in de App Store' },
   docsNote: 'De documenten zijn beschikbaar in het Engels en het Russisch.',
   topics: {
     'baby-nap-schedule-by-age': 'Dutjesschema per leeftijd',

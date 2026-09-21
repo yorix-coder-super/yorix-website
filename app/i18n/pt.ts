@@ -337,7 +337,6 @@ export const translation: SiteTranslation = {
       sent: 'Obrigado! Recebemos a sua mensagem e vamos responder por e-mail.',
       error: 'Não foi possível enviar a mensagem. Tente novamente dentro de um minuto — ou escreva-nos na app: «Configurações» → «Fale com a gente».',
       invalid: 'Indique o seu e-mail e uma mensagem com pelo menos 10 caracteres.',
-      privacy: 'Usamos o seu e-mail e a sua mensagem apenas para lhe responder.',
     },
     topics: [
       {
@@ -413,12 +412,11 @@ export const translation: SiteTranslation = {
           },
           {
             question: 'A app não funciona como esperado',
-            answer: 'Atualize o Yorix para a versão mais recente na App Store e reinicie a app. Se não resolver, escreva-nos — veja os contactos abaixo.',
+            answer: 'Atualize o Yorix para a versão mais recente na App Store e reinicie a app. Se não resolver, [escreva-nos](#contact).',
           },
         ],
       },
     ],
-    web: 'Pagou a subscrição com cartão no site? As respostas estão na página da subscrição.',
   },
   about: {
     nav: 'Sobre o Yorix',
@@ -461,7 +459,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Produto', features: 'Funcionalidades', guides: 'Guias', support: 'Apoio', write: 'Escreva-nos', redeem: 'Resgatar um presente', badgeTop: 'Descarregar na' },
+  footerLabels: { product: 'Produto', features: 'Funcionalidades', guides: 'Guias', support: 'Apoio', write: 'Escreva-nos', redeem: 'Resgatar um presente', badgeTop: 'Descarregar na', social: 'Siga-nos', scan: 'Aponte a câmara do telemóvel', scanHint: 'O Yorix abre na App Store' },
   docsNote: 'Os documentos estão disponíveis em inglês e russo.',
   topics: {
     'baby-nap-schedule-by-age': 'Rotina de sestas do bebé por idade',

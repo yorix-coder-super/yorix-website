@@ -89,6 +89,7 @@ function ru({ payment, privacy, seller }: Ctx): LegalSection[] {
       ],
     },
     {
+      id: 'refunds',
       title: '7. Отказ от Договора и возврат денежных средств',
       blocks: [
         `7.1. Пользователь вправе в любое время отказаться от Договора (п. 1 ст. 736 ГК, ст. 38-1 Закона Республики Беларусь «О защите прав потребителей»), направив заявление через форму «Написать нам» на Сайте либо на адрес электронной почты Исполнителя (раздел 17) — с адреса электронной почты Аккаунта или с указанием этого адреса, а также номера заказа, даты и суммы оплаты. С момента получения заявления доступ к платным функциям прекращается.`,
@@ -281,6 +282,7 @@ function en({ payment, privacy, seller }: Ctx): LegalSection[] {
       ],
     },
     {
+      id: 'refunds',
       title: '7. Withdrawal and refunds',
       blocks: [
         `7.1. The User may withdraw from the Agreement at any time (Article 736(1) of the Civil Code; Article 38-1 of the Belarusian Consumer Protection Law) by writing through the “Write to us” form on the Website or to the Provider’s e-mail address (section 17) — from the Account e-mail or stating it, together with the order number, date and amount. Access to the paid features ends when the notice is received.`,

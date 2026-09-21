@@ -337,7 +337,6 @@ export const translation: SiteTranslation = {
       sent: 'Tack! Vi har fått ditt meddelande och svarar via e-post.',
       error: 'Meddelandet kunde inte skickas. Försök igen om en minut – eller skriv till oss i appen: Settings → ”Write to us”.',
       invalid: 'Ange din e-postadress och ett meddelande på minst 10 tecken.',
-      privacy: 'Vi använder din e-postadress och ditt meddelande bara för att svara dig.',
     },
     topics: [
       {
@@ -413,12 +412,11 @@ export const translation: SiteTranslation = {
           },
           {
             question: 'Appen fungerar inte som den ska',
-            answer: 'Uppdatera Yorix till den senaste versionen i App Store och starta om appen. Hjälper inte det kan du skriva till oss – se nedan.',
+            answer: 'Uppdatera Yorix till den senaste versionen i App Store och starta om appen. Hjälper inte det kan du [skriva till oss](#contact).',
           },
         ],
       },
     ],
-    web: 'Har du betalat prenumerationen med kort på webbplatsen? Svaren finns på prenumerationssidan.',
   },
   about: {
     nav: 'Om Yorix',
@@ -461,7 +459,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Produkt', features: 'Funktioner', guides: 'Guider', support: 'Support', write: 'Skriv till oss', redeem: 'Lös in en present', badgeTop: 'Hämta i' },
+  footerLabels: { product: 'Produkt', features: 'Funktioner', guides: 'Guider', support: 'Support', write: 'Skriv till oss', redeem: 'Lös in en present', badgeTop: 'Hämta i', social: 'Följ oss', scan: 'Skanna med mobilkameran', scanHint: 'Yorix öppnas i App Store' },
   docsNote: 'Dokumenten finns på engelska och ryska.',
   topics: {
     'baby-nap-schedule-by-age': 'Tupplursschema efter ålder',

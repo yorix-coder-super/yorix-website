@@ -1,5 +1,5 @@
 import { ArrowRight, BookOpen } from 'lucide-react';
-import { isRtl, shotLocale } from '../i18n';
+import { isRtl, shotLocale, siteCopy } from '../i18n';
 import { SellerFooter } from '../SellerFooter';
 import { SiteHeader } from '../SiteHeader';
 import { appDownloadUrl } from '../content';
@@ -8,7 +8,7 @@ import { Reveal } from '../subscription/Reveal';
 import { SocialProof } from '../subscription/SocialProof';
 import { StarField } from '../subscription/StarField';
 import { WordReveal } from '../subscription/WordReveal';
-import { AppleGlyph, Art, DoodleArrow, DoodleHeart, featureIcons, Hand, PhoneFrame, Sparkle } from './art';
+import { AppleGlyph, AppQr, Art, DoodleArrow, DoodleHeart, featureIcons, Hand, PhoneFrame, Sparkle } from './art';
 import { headlineParts, homeCopy, type HomeLocale } from './copy';
 import { CtaBand, FaqItem, whitePill } from './CtaBand';
 import { ContactTeaser } from '../info/ContactTeaser';
@@ -21,6 +21,7 @@ const showcase = ['progress', 'bedtime', 'coach'] as const;
 
 export async function HomeLanding({ locale }: { locale: HomeLocale }) {
   const copy = homeCopy(locale);
+  const labels = siteCopy(locale).footerLabels;
   const home = locale === 'en' ? '/' : `/${locale}`;
   const guides = locale === 'en' ? '/guides' : `/${locale}/guides`;
   const shots = shotLocale(locale);
@@ -68,18 +69,25 @@ export async function HomeLanding({ locale }: { locale: HomeLocale }) {
               </Reveal>
               <Reveal delay={500} load>
                 <div className="mt-8 flex items-center gap-4">
-                  <div className="flex shrink-0">
+                  {/* At a desk the code leads the row — point a phone and the App Store opens; on a phone the three icons do. */}
+                  <AppQr className="hidden w-[6.5rem] shrink-0 lg:block" label={`${labels.scan} — ${labels.scanHint}`} />
+                  <div className="flex shrink-0 lg:hidden">
                     {['icon-moon-crescent', 'icon-chat', 'icon-heart'].map((icon, index) => (
                       <span className={`grid h-11 w-11 place-items-center rounded-full bg-[#2E2A6E] ring-2 ring-[#1E1B4B] ${index ? '-ms-3' : ''}`} key={icon}>
                         <Art className="h-7 w-7 object-contain" height={192} name={icon} width={192} />
                       </span>
                     ))}
                   </div>
-                  <p className="text-sm leading-5 text-white/70">
-                    <strong className="font-semibold text-white">20</strong> {copy.stats[0]} · <strong className="font-semibold text-white">0</strong> {copy.stats[1]}
-                    <br />
-                    <strong className="font-semibold text-white">24/7</strong> {copy.stats[2]}
-                  </p>
+                  <div>
+                    <p className="mb-2 hidden text-[15px] leading-6 text-white/70 lg:block">
+                      <strong className="font-semibold text-white">{labels.scan}</strong> — {labels.scanHint}
+                    </p>
+                    <p className="text-sm leading-5 text-white/70">
+                      <strong className="font-semibold text-white">20</strong> {copy.stats[0]} · <strong className="font-semibold text-white">0</strong> {copy.stats[1]}
+                      <br />
+                      <strong className="font-semibold text-white">24/7</strong> {copy.stats[2]}
+                    </p>
+                  </div>
                 </div>
               </Reveal>
             </div>
@@ -109,38 +117,36 @@ export async function HomeLanding({ locale }: { locale: HomeLocale }) {
           ))}
         </section>
 
-        {/* As on the first site: the dark block in the page's own palette — eyebrow,
-            headline beside the text, three numbered steps. The app's screens follow it. */}
-        <section className="mx-auto max-w-7xl scroll-mt-6 px-5 py-14 sm:px-8 lg:px-10" id="plan">
+        <section className="mx-auto max-w-7xl px-5 py-6 sm:px-8 lg:px-10" id="plan">
           <Reveal>
-            <div className="grid gap-6 lg:grid-cols-[0.82fr_1.18fr] lg:items-end lg:gap-9">
-              <div>
-                <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-[#A78BFA]">{copy.plan.eyebrow}</p>
-                <h2 className="max-w-2xl text-[2.1rem] font-semibold leading-[1.1] tracking-[-0.01em] text-white sm:text-5xl sm:leading-[1.08]">{copy.plan.title}</h2>
+            <article className="spotlight spotlight-dark relative grid overflow-hidden rounded-[2rem] bg-[linear-gradient(135deg,#F8F7FF_0%,#EEF2FF_48%,#E0E7FF_100%)] text-[#1E1B4B] shadow-[0_30px_90px_rgb(0_0_0/25%)] lg:grid-cols-[0.78fr_1.22fr]">
+              <div className="relative z-10 p-7 sm:p-10 lg:py-12 lg:ps-12 lg:pe-4">
+                <h2 className="max-w-md text-[1.9rem] font-semibold leading-[1.12] tracking-[-0.01em] sm:text-[2.25rem]">{copy.plan.title}</h2>
+                <p className="mt-4 max-w-md text-base leading-7 text-[#475569]">{copy.plan.body}</p>
+                <ul className="mt-6 grid gap-3">
+                  {copy.plan.steps.map((step) => (
+                    <li className="flex items-center gap-3 text-[15px] font-medium leading-6 text-[#1E1B4B]" key={step}>
+                      <Art className="h-6 w-6 shrink-0 object-contain" height={192} name="icon-check" width={190} />
+                      {step}
+                    </li>
+                  ))}
+                </ul>
+                <a className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-full bg-[#1E1B4B] px-6 text-base font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#312E81] active:translate-y-0 active:scale-[0.98]" href="#subscription">
+                  {copy.more}
+                  <ArrowRight className="h-5 w-5 rtl:-scale-x-100" aria-hidden="true" />
+                </a>
               </div>
-              <p className="max-w-2xl text-lg leading-8 text-white/65">{copy.plan.body}</p>
-            </div>
+              <div className="relative h-[330px] overflow-hidden sm:h-[430px] lg:h-auto lg:min-h-[420px] lg:overflow-visible">
+                <div className="absolute inset-x-4 top-8 flex justify-center gap-3 sm:gap-5 lg:inset-x-6 lg:top-20">
+                  {showcase.map((shot, index) => (
+                    <Reveal className="w-[32%] max-w-[270px] lg:w-[35%]" delay={140 + index * 120} key={shot}>
+                      <PhoneFrame alt={copy.showcaseAlt[shot]} className="transition duration-500 hover:-translate-y-2" src={`/shots/${shots}-${shot}.webp`} />
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </article>
           </Reveal>
-          <div className="mt-10 grid gap-5 lg:grid-cols-3">
-            {copy.plan.steps.map((step, index) => (
-              <Reveal className="flex" delay={index * 110} key={step}>
-                <article className="spotlight group w-full rounded-2xl border border-white/10 bg-white/10 p-6 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-white/25">
-                  <span className="grid h-10 w-10 place-items-center rounded-full bg-[#6366F1] text-sm font-bold text-white shadow-[0_0_28px_rgb(99_102_241/55%)] transition duration-300 group-hover:scale-110">
-                    {index + 1}
-                  </span>
-                  <h3 className="mt-5 text-xl font-semibold leading-7 text-white">{step}</h3>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-          <div className="relative isolate mx-auto mt-12 flex max-w-4xl justify-center gap-3 sm:gap-6">
-            <div aria-hidden="true" className="absolute inset-x-[8%] top-[14%] -z-10 h-2/3 rounded-full bg-[#6366F1]/25 blur-3xl" />
-            {showcase.map((shot, index) => (
-              <Reveal className="w-[31%] max-w-[250px]" delay={140 + index * 120} key={shot}>
-                <PhoneFrame alt={copy.showcaseAlt[shot]} className="transition duration-500 hover:-translate-y-2" src={`/shots/${shots}-${shot}.webp`} />
-              </Reveal>
-            ))}
-          </div>
         </section>
 
         <SocialProof body={copy.reviews.body} locale={locale} title={copy.reviews.title} />

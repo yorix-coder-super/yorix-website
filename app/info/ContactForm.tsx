@@ -17,19 +17,7 @@ const text = (value: FormDataEntryValue | null) => (typeof value === 'string' ? 
 // worker mails the message to support with the writer as Reply-To. The hidden
 // field and the time on the page are what the worker uses to drop bots
 // without telling them.
-export function ContactForm({
-  copy,
-  privacyHref,
-  privacyLabel,
-  lang,
-  page,
-}: {
-  copy: SupportCopy['form'];
-  privacyHref: string;
-  privacyLabel: string;
-  lang: string;
-  page: string;
-}) {
+export function ContactForm({ copy, lang, page }: { copy: SupportCopy['form']; lang: string; page: string }) {
   const opened = useRef(0);
   const [state, setState] = useState<State>('idle');
   useEffect(() => {
@@ -132,12 +120,6 @@ export function ContactForm({
         {state === 'sending' ? <Spinner className="h-5 w-5" /> : <Send aria-hidden="true" className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" />}
         {state === 'sending' ? copy.sending : copy.send}
       </button>
-      <p className="text-center text-xs leading-5 text-white/60">
-        {copy.privacy}{' '}
-        <a className="font-semibold text-white underline decoration-white/40 underline-offset-2 hover:decoration-white" href={privacyHref}>
-          {privacyLabel}
-        </a>
-      </p>
     </form>
   );
 }

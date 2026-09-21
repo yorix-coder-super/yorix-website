@@ -346,7 +346,6 @@ export const translation: SiteTranslation = {
       sent: 'Merci ! Nous avons bien reçu votre message et vous répondrons par e-mail.',
       error: 'Le message n’a pas pu être envoyé. Réessayez dans une minute — ou écrivez-nous depuis l’app : « Réglages » → « Écrivez-nous ».',
       invalid: 'Indiquez votre e-mail et un message d’au moins 10 caractères.',
-      privacy: 'Nous utilisons votre e-mail et votre message uniquement pour vous répondre.',
     },
     topics: [
       {
@@ -422,12 +421,11 @@ export const translation: SiteTranslation = {
           },
           {
             question: 'L’app ne fonctionne pas comme prévu',
-            answer: 'Mettez Yorix à jour vers la dernière version sur l’App Store, puis relancez l’app. Si cela ne suffit pas, écrivez-nous — nos coordonnées sont juste en dessous.',
+            answer: 'Mettez Yorix à jour vers la dernière version sur l’App Store, puis relancez l’app. Si cela ne suffit pas, [écrivez-nous](#contact).',
           },
         ],
       },
     ],
-    web: 'Vous avez payé votre abonnement par carte sur le site ? Les réponses se trouvent sur la page Abonnement.',
   },
   about: {
     nav: 'À propos de Yorix',
@@ -470,7 +468,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Produit', features: 'Fonctionnalités', guides: 'Guides', support: 'Assistance', write: 'Écrivez-nous', redeem: 'Activer un cadeau', badgeTop: 'Télécharger sur' },
+  footerLabels: { product: 'Produit', features: 'Fonctionnalités', guides: 'Guides', support: 'Assistance', write: 'Écrivez-nous', redeem: 'Activer un cadeau', badgeTop: 'Télécharger sur', social: 'Suivez-nous', scan: 'Scannez avec votre téléphone', scanHint: 'Yorix s’ouvre dans l’App Store' },
   docsNote: 'Les documents sont disponibles en anglais et en russe.',
   topics: {
     'baby-nap-schedule-by-age': 'Rythme des siestes de bébé selon l’âge',

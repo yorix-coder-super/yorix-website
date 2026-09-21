@@ -337,7 +337,6 @@ export const translation: SiteTranslation = {
       sent: 'Takk! Vi har fått meldingen din og svarer på e-post.',
       error: 'Meldingen kunne ikke sendes. Prøv igjen om et minutt – eller skriv til oss i appen: Settings → «Write to us».',
       invalid: 'Skriv inn e-postadressen din og en melding på minst 10 tegn.',
-      privacy: 'Vi bruker e-postadressen og meldingen din bare til å svare deg.',
     },
     topics: [
       {
@@ -413,12 +412,11 @@ export const translation: SiteTranslation = {
           },
           {
             question: 'Appen fungerer ikke som den skal',
-            answer: 'Oppdater Yorix til nyeste versjon i App Store, og start appen på nytt. Hjelper ikke det, så skriv til oss – se nedenfor.',
+            answer: 'Oppdater Yorix til nyeste versjon i App Store, og start appen på nytt. Hjelper ikke det, så [skriv til oss](#contact).',
           },
         ],
       },
     ],
-    web: 'Har du betalt for abonnementet med kort på nettstedet? Svarene finner du på abonnementssiden.',
   },
   about: {
     nav: 'Om Yorix',
@@ -461,7 +459,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Produkt', features: 'Funksjoner', guides: 'Guider', support: 'Kundestøtte', write: 'Skriv til oss', redeem: 'Løs inn en gave', badgeTop: 'Last ned i' },
+  footerLabels: { product: 'Produkt', features: 'Funksjoner', guides: 'Guider', support: 'Kundestøtte', write: 'Skriv til oss', redeem: 'Løs inn en gave', badgeTop: 'Last ned i', social: 'Følg oss', scan: 'Skann med mobilkameraet', scanHint: 'Yorix åpnes i App Store' },
   docsNote: 'Dokumentene finnes på engelsk og russisk.',
   topics: {
     'baby-nap-schedule-by-age': 'Lurplan for baby etter alder',

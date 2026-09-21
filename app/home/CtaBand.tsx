@@ -1,4 +1,5 @@
 import { ArrowRight, Plus } from 'lucide-react';
+import type { ReactNode } from 'react';
 import { appDownloadUrl } from '../content';
 import { Reveal } from '../subscription/Reveal';
 import { AppleGlyph, Art, DoodleHeart, Hand, Sparkle } from './art';
@@ -53,6 +54,27 @@ export function CtaBand({ title, body, action, note }: { title: string; body: st
 // word joiner keeps number ranges on one line.
 const keepRanges = (text: string) => text.replace(/(\d[–-])(?=\d)/g, '$1\u2060');
 
+// An answer points at a page of the site with [label](/path) or [label](#anchor):
+// a link the reader can press beats a description of where to look. Only the
+// site's own paths become links.
+const INLINE_LINK = /\[([^\]]+)\]\(((?:\/|#)[^)\s]*)\)/g;
+
+function rich(text: string): ReactNode[] {
+  const parts: ReactNode[] = [];
+  let last = 0;
+  for (const match of text.matchAll(INLINE_LINK)) {
+    parts.push(keepRanges(text.slice(last, match.index)));
+    parts.push(
+      <a className="font-semibold text-white underline decoration-[#FDE68A]/60 decoration-2 underline-offset-4 transition hover:decoration-[#FDE68A]" href={match[2]} key={match.index}>
+        {match[1]}
+      </a>,
+    );
+    last = match.index + match[0].length;
+  }
+  parts.push(keepRanges(text.slice(last)));
+  return parts;
+}
+
 // `card` is a box of its own (home, subscription); `row` is a line inside a
 // topic panel (support), separated from its neighbours by the panel's rules.
 export function FaqItem({ question, answer, variant = 'card' }: { question: string; answer: string; variant?: 'card' | 'row' }) {
@@ -65,7 +87,7 @@ export function FaqItem({ question, answer, variant = 'card' }: { question: stri
             <Plus className="h-4 w-4 text-white transition group-open:text-[#FDE68A]" aria-hidden="true" />
           </span>
         </summary>
-        <p className="faq-answer max-w-3xl pb-5 pe-12 text-base leading-7 text-white/80">{keepRanges(answer)}</p>
+        <p className="faq-answer max-w-3xl pb-5 pe-12 text-base leading-7 text-white/80">{rich(answer)}</p>
       </details>
     );
   }
@@ -75,7 +97,7 @@ export function FaqItem({ question, answer, variant = 'card' }: { question: stri
         {question}
         <Plus className="h-5 w-5 shrink-0 text-white/70 transition duration-300 group-hover:text-white group-open:rotate-45 group-open:text-[#FDE68A]" aria-hidden="true" />
       </summary>
-      <p className="faq-answer px-5 pb-5 text-[15px] leading-7 text-white/80">{keepRanges(answer)}</p>
+      <p className="faq-answer px-5 pb-5 text-[15px] leading-7 text-white/80">{rich(answer)}</p>
     </details>
   );
 }

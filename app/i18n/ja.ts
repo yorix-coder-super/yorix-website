@@ -338,7 +338,6 @@ export const translation: SiteTranslation = {
       sent: 'ありがとうございます。メッセージを受け付けました。メールでご返信します。',
       error: '送信できませんでした。1分ほどしてからもう一度お試しいただくか、アプリの「設定」→「メッセージを送る」からご連絡ください。',
       invalid: 'メールアドレスと10文字以上のメッセージを入力してください。',
-      privacy: 'メールアドレスとメッセージは、ご返信のためだけに使用します。',
     },
     topics: [
       {
@@ -414,12 +413,11 @@ export const translation: SiteTranslation = {
           },
           {
             question: 'アプリが思うように動かない',
-            answer: 'App StoreでYorixを最新バージョンにアップデートし、アプリを再起動してください。それでも解決しない場合は、下記からご連絡ください。',
+            answer: 'App StoreでYorixを最新バージョンにアップデートし、アプリを再起動してください。それでも解決しない場合は、[こちらからご連絡ください](#contact)。',
           },
         ],
       },
     ],
-    web: 'サイトでカード払いのサブスクリプションをお申し込みの方へ。答えはサブスクリプションのページにあります。',
   },
   about: {
     nav: 'Yorixについて',
@@ -462,7 +460,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'サービス', features: '機能', guides: 'ガイド', support: 'サポート', write: 'お問い合わせ', redeem: 'ギフトを使う', badgeTop: 'ダウンロード' },
+  footerLabels: { product: 'サービス', features: '機能', guides: 'ガイド', support: 'サポート', write: 'お問い合わせ', redeem: 'ギフトを使う', badgeTop: 'ダウンロード', social: '公式SNS', scan: 'スマホのカメラで読み取る', scanHint: 'App StoreでYorixが開きます' },
   docsNote: '規約・ポリシーは英語とロシア語でご覧いただけます。',
   topics: {
     'baby-nap-schedule-by-age': '月齢別のお昼寝スケジュール',

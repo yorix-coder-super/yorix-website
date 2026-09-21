@@ -337,7 +337,6 @@ export const translation: SiteTranslation = {
       sent: 'Dziękujemy! Otrzymaliśmy Twoją wiadomość i odpowiemy e-mailem.',
       error: 'Nie udało się wysłać wiadomości. Spróbuj ponownie za minutę — albo napisz do nas w aplikacji: „Ustawienia” → „Napisz do nas”.',
       invalid: 'Podaj e-mail i wiadomość – co najmniej 10 znaków.',
-      privacy: 'Twojego e-maila i wiadomości używamy tylko po to, by Ci odpowiedzieć.',
     },
     topics: [
       {
@@ -413,12 +412,11 @@ export const translation: SiteTranslation = {
           },
           {
             question: 'Aplikacja nie działa tak, jak powinna',
-            answer: 'Zaktualizuj Yorix do najnowszej wersji w App Store i uruchom aplikację ponownie. Jeśli to nie pomoże, napisz do nas — kontakt znajdziesz poniżej.',
+            answer: 'Zaktualizuj Yorix do najnowszej wersji w App Store i uruchom aplikację ponownie. Jeśli to nie pomoże, [napisz do nas](#contact).',
           },
         ],
       },
     ],
-    web: 'Subskrypcja opłacona kartą na stronie? Odpowiedzi znajdziesz na podstronie subskrypcji.',
   },
   about: {
     nav: 'O Yorix',
@@ -461,7 +459,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Produkt', features: 'Funkcje', guides: 'Poradniki', support: 'Wsparcie', write: 'Napisz do nas', redeem: 'Zrealizuj prezent', badgeTop: 'Pobierz w' },
+  footerLabels: { product: 'Produkt', features: 'Funkcje', guides: 'Poradniki', support: 'Wsparcie', write: 'Napisz do nas', redeem: 'Zrealizuj prezent', badgeTop: 'Pobierz w', social: 'Obserwuj nas', scan: 'Zeskanuj aparatem telefonu', scanHint: 'Yorix otworzy się w App Store' },
   docsNote: 'Dokumenty są dostępne po angielsku i rosyjsku.',
   topics: {
     'baby-nap-schedule-by-age': 'Plan drzemek dziecka według wieku',

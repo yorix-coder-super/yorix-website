@@ -346,7 +346,6 @@ export const translation: SiteTranslation = {
       sent: 'Terima kasih! Kami telah menerima mesej anda dan akan membalas melalui e-mel.',
       error: 'Mesej tidak dapat dihantar. Cuba lagi dalam seminit — atau tulis kepada kami dalam aplikasi: Settings → “Write to us”.',
       invalid: 'Masukkan e-mel dan mesej sekurang-kurangnya 10 aksara.',
-      privacy: 'Kami menggunakan e-mel dan mesej anda hanya untuk membalas anda.',
     },
     topics: [
       {
@@ -422,12 +421,11 @@ export const translation: SiteTranslation = {
           },
           {
             question: 'Aplikasi tidak berfungsi seperti yang dijangka',
-            answer: 'Kemas kini Yorix kepada versi terkini di App Store dan mulakan semula aplikasi. Jika masih tidak berjaya, tulis kepada kami — maklumat hubungan ada di bawah.',
+            answer: 'Kemas kini Yorix kepada versi terkini di App Store dan mulakan semula aplikasi. Jika masih tidak berjaya, [tulis kepada kami](#contact).',
           },
         ],
       },
     ],
-    web: 'Membayar langganan dengan kad di laman web? Jawapannya ada di halaman langganan.',
   },
   about: {
     nav: 'Tentang Yorix',
@@ -470,7 +468,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Produk', features: 'Ciri', guides: 'Panduan', support: 'Sokongan', write: 'Tulis kepada kami', redeem: 'Tebus hadiah', badgeTop: 'Muat turun pada' },
+  footerLabels: { product: 'Produk', features: 'Ciri', guides: 'Panduan', support: 'Sokongan', write: 'Tulis kepada kami', redeem: 'Tebus hadiah', badgeTop: 'Muat turun pada', social: 'Ikuti kami', scan: 'Imbas dengan kamera telefon', scanHint: 'Yorix dibuka di App Store' },
   docsNote: 'Dokumen tersedia dalam bahasa Inggeris dan Rusia.',
   topics: {
     'baby-nap-schedule-by-age': 'Jadual tidur siang bayi mengikut umur',

@@ -3,6 +3,18 @@ import { researchGuides } from './research-guides';
 export const siteUrl = 'https://yorix.website';
 
 export const appDownloadUrl = 'https://apps.apple.com/app/apple-store/id6788705252?pt=129050076&ct=SEO&mt=8';
+// The same page under its own campaign tag, kept short: fewer characters mean a
+// coarser QR code that a phone reads from a laptop screen at a glance.
+// After changing it run `pnpm qr` to redraw public/art/app-qr.svg.
+export const appQrUrl = 'https://apps.apple.com/app/id6788705252?pt=129050076&ct=qr';
+
+// Placeholders until the accounts exist (owner, 2026-09-21): each opens the
+// network's front page. Put the profile links here and nothing else changes.
+export const socialLinks = [
+  { name: 'Instagram', icon: 'icon-instagram', href: 'https://www.instagram.com/' },
+  { name: 'Facebook', icon: 'icon-facebook', href: 'https://www.facebook.com/' },
+  { name: 'TikTok', icon: 'icon-tiktok', href: 'https://www.tiktok.com/' },
+] as const;
 
 export const appFeatures = [
   {

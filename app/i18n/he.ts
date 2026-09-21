@@ -337,7 +337,6 @@ export const translation: SiteTranslation = {
       sent: 'תודה! קיבלנו את ההודעה ונענה באימייל.',
       error: 'לא הצלחנו לשלוח את ההודעה. נסו שוב בעוד דקה — או כתבו לנו באפליקציה: Settings ← ״Write to us״.',
       invalid: 'הזינו אימייל והודעה של 10 תווים לפחות.',
-      privacy: 'אנחנו משתמשים באימייל ובהודעה שלכם רק כדי לענות לכם.',
     },
     topics: [
       {
@@ -413,12 +412,11 @@ export const translation: SiteTranslation = {
           },
           {
             question: 'האפליקציה לא עובדת כמו שצריך',
-            answer: 'מעדכנים את Yorix לגרסה האחרונה ב-App Store ומפעילים מחדש את האפליקציה. אם זה לא עוזר — כתבו לנו, הפרטים למטה.',
+            answer: 'מעדכנים את Yorix לגרסה האחרונה ב-App Store ומפעילים מחדש את האפליקציה. אם זה לא עוזר — [כתבו לנו](#contact).',
           },
         ],
       },
     ],
-    web: 'שילמתם על המינוי בכרטיס באתר? התשובות נמצאות בדף המינוי.',
   },
   about: {
     nav: 'על Yorix',
@@ -461,7 +459,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'מוצר', features: 'יכולות', guides: 'מדריכים', support: 'תמיכה', write: 'כתבו לנו', redeem: 'מימוש מתנה', badgeTop: 'להורדה ב-' },
+  footerLabels: { product: 'מוצר', features: 'יכולות', guides: 'מדריכים', support: 'תמיכה', write: 'כתבו לנו', redeem: 'מימוש מתנה', badgeTop: 'להורדה ב-', social: 'עקבו אחרינו', scan: 'סרקו עם מצלמת הטלפון', scanHint: 'Yorix ייפתח ב-App Store' },
   docsNote: 'המסמכים זמינים באנגלית וברוסית.',
   topics: {
     'baby-nap-schedule-by-age': 'לוח תנומות לתינוק לפי גיל',

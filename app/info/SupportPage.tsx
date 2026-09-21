@@ -5,10 +5,8 @@ import { docsLang, isRtl, siteCopy, type SiteLocale } from '../i18n';
 import { SellerFooter } from '../SellerFooter';
 import { ContactForm } from './ContactForm';
 import { SiteHeader } from '../SiteHeader';
-import { subscriptionPath } from '../subscription/i18n';
 import { Magnetic } from '../subscription/Magnetic';
 import { Reveal } from '../subscription/Reveal';
-import { sellsHere } from '../subscription/region';
 import { StarField } from '../subscription/StarField';
 
 const topicIcons = ['icon-sparkle', 'icon-card', 'icon-heart', 'icon-clock', 'icon-bolt'];
@@ -18,11 +16,10 @@ const topicArt = ['scene-phone', 'scene-card', 'scene-lock', 'scene-clock', 'sce
 // The help page every app of this kind has (Napper's Support, Huckleberry's
 // Help): questions grouped by topic, answered with the app's own labels,
 // then the two ways to reach a person.
-export async function SupportPage({ locale }: { locale: SiteLocale }) {
+export function SupportPage({ locale }: { locale: SiteLocale }) {
   const site = siteCopy(locale);
   const copy = site.support;
   const home = locale === 'en' ? '/' : `/${locale}`;
-  const web = await sellsHere();
   const docs = docsLang(locale);
 
   return (
@@ -124,13 +121,6 @@ export async function SupportPage({ locale }: { locale: SiteLocale }) {
               </Reveal>
             </div>
           ))}
-          {web ? (
-            <p className="text-sm leading-6 text-white/70">
-              <a className="font-semibold text-white underline decoration-white/30 underline-offset-2 hover:decoration-white" href={`${subscriptionPath(docs)}#faq`}>
-                {copy.web}
-              </a>
-            </p>
-          ) : null}
         </section>
 
         <section className="mx-auto max-w-7xl scroll-mt-6 px-5 py-10 sm:px-8 lg:px-10" id="contact">
@@ -157,13 +147,7 @@ export async function SupportPage({ locale }: { locale: SiteLocale }) {
                 </div>
                 <Reveal delay={320}>
                   <div className="rounded-[1.75rem] border border-white/12 bg-[#1E1B4B]/45 p-5 backdrop-blur-xl sm:p-7">
-                    <ContactForm
-                      copy={copy.form}
-                      lang={locale}
-                      page={locale === 'en' ? '/support' : `/${locale}/support`}
-                      privacyHref={subscriptionPath(docs, '/privacy')}
-                      privacyLabel={site.subscription.docs.privacy}
-                    />
+                    <ContactForm copy={copy.form} lang={locale} page={locale === 'en' ? '/support' : `/${locale}/support`} />
                   </div>
                 </Reveal>
               </div>

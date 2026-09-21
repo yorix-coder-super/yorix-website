@@ -166,7 +166,7 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
 
 function StorefrontArt({ lang }: { lang: Lang }) {
   return (
-    <div className="relative mx-auto h-[360px] w-full max-w-[560px] sm:h-[500px] lg:h-[560px]">
+    <div className="relative mx-auto h-[360px] w-full max-w-[560px] sm:h-[500px] lg:aspect-square lg:h-auto lg:max-w-[640px]">
       <div aria-hidden="true" className="absolute left-[8%] top-[20%] h-[60%] w-[70%] rounded-full bg-[#6366F1]/25 blur-3xl" />
       <Reveal animation="driftInRight" className="absolute right-[6%] top-[2%] z-20 w-[44%] sm:w-[40%]" delay={200} load>
         <div className="rotate-[6deg]">
@@ -175,7 +175,7 @@ function StorefrontArt({ lang }: { lang: Lang }) {
           </div>
         </div>
       </Reveal>
-      <Reveal animation="zoomIn" className="absolute bottom-[2%] left-[0%] z-30 w-[50%] sm:w-[46%]" delay={320} load>
+      <Reveal animation="zoomIn" className="absolute bottom-[2%] left-[0%] z-30 w-[50%]" delay={320} load>
         <div className="float-slow">
           <Art className="h-auto w-full drop-shadow-[0_24px_40px_rgb(15_16_34/40%)]" height={560} name="cta-baby-star" priority width={503} />
         </div>

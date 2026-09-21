@@ -209,7 +209,6 @@ export const translation: SiteTranslation = {
       sent: 'Спасибо! Сообщение получили — ответим на ваш e-mail.',
       error: 'Не получилось отправить. Попробуйте ещё раз через минуту — или напишите нам в приложении: Настройки → «Написать нам».',
       invalid: 'Укажите e-mail и сообщение — хотя бы 10 символов.',
-      privacy: 'Ваш e-mail и сообщение используем только для ответа.',
     },
     topics: [
       {
@@ -285,12 +284,11 @@ export const translation: SiteTranslation = {
           },
           {
             question: 'Приложение работает не так, как ожидалось',
-            answer: 'Обновите Yorix до последней версии в App Store и перезапустите приложение. Если не помогло — напишите нам, контакты ниже.',
+            answer: 'Обновите Yorix до последней версии в App Store и перезапустите приложение. Если не помогло — [напишите нам](#contact).',
           },
         ],
       },
     ],
-    web: 'Оплачивали подписку картой на сайте? Ответы — на странице подписки.',
   },
   about: {
     nav: 'О Yorix',
@@ -333,7 +331,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Продукт', features: 'Возможности', guides: 'Гайды', support: 'Поддержка', write: 'Написать нам', redeem: 'Активировать подарок', badgeTop: 'Загрузите в' },
+  footerLabels: { product: 'Продукт', features: 'Возможности', guides: 'Гайды', support: 'Поддержка', write: 'Написать нам', redeem: 'Активировать подарок', badgeTop: 'Загрузите в', social: 'Мы в соцсетях', scan: 'Наведите камеру телефона', scanHint: 'Yorix откроется в App Store' },
   docsNote: '',
   topics: {
     'baby-nap-schedule-by-age': 'Режим дневного сна ребенка по возрасту',

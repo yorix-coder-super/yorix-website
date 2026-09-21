@@ -337,7 +337,6 @@ export const translation: SiteTranslation = {
       sent: 'Teşekkürler! Mesajınızı aldık, e-postayla yanıt vereceğiz.',
       error: 'Mesaj gönderilemedi. Bir dakika sonra tekrar deneyin — ya da bize uygulamadan yazın: Ayarlar → “Bize yaz”.',
       invalid: 'E-posta adresinizi ve en az 10 karakterlik bir mesaj girin.',
-      privacy: 'E-posta adresinizi ve mesajınızı yalnızca size yanıt vermek için kullanırız.',
     },
     topics: [
       {
@@ -413,12 +412,11 @@ export const translation: SiteTranslation = {
           },
           {
             question: 'Uygulama beklendiği gibi çalışmıyor',
-            answer: 'Yorix’i App Store’dan en son sürüme güncelleyin ve uygulamayı yeniden başlatın. Bu işe yaramazsa bize yazın — iletişim bilgileri aşağıda.',
+            answer: 'Yorix’i App Store’dan en son sürüme güncelleyin ve uygulamayı yeniden başlatın. Bu işe yaramazsa [bize yazın](#contact).',
           },
         ],
       },
     ],
-    web: 'Sitede kartla abonelik mi satın aldınız? Yanıtlar abonelik sayfasında.',
   },
   about: {
     nav: 'Yorix hakkında',
@@ -461,7 +459,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Ürün', features: 'Özellikler', guides: 'Rehberler', support: 'Destek', write: 'Bize yazın', redeem: 'Hediye kodunu kullan', badgeTop: 'Şuradan indirin' },
+  footerLabels: { product: 'Ürün', features: 'Özellikler', guides: 'Rehberler', support: 'Destek', write: 'Bize yazın', redeem: 'Hediye kodunu kullan', badgeTop: 'Şuradan indirin', social: 'Bizi takip edin', scan: 'Telefonunuzun kamerasıyla tarayın', scanHint: 'Yorix, App Store’da açılır' },
   docsNote: 'Belgeler İngilizce ve Rusça olarak mevcuttur.',
   topics: {
     'baby-nap-schedule-by-age': 'Yaşa göre gündüz uykusu programı',

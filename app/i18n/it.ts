@@ -346,7 +346,6 @@ export const translation: SiteTranslation = {
       sent: 'Grazie! Abbiamo ricevuto il tuo messaggio e ti risponderemo via e-mail.',
       error: 'Non è stato possibile inviare il messaggio. Riprova tra un minuto oppure scrivici dall’app: «Impostazioni» → «Scrivici».',
       invalid: 'Inserisci la tua e-mail e un messaggio di almeno 10 caratteri.',
-      privacy: 'Usiamo la tua e-mail e il tuo messaggio solo per risponderti.',
     },
     topics: [
       {
@@ -422,12 +421,11 @@ export const translation: SiteTranslation = {
           },
           {
             question: 'L’app non funziona come dovrebbe',
-            answer: 'Aggiorna Yorix all’ultima versione dall’App Store e riavvia l’app. Se non basta, scrivici — trovi i contatti qui sotto.',
+            answer: 'Aggiorna Yorix all’ultima versione dall’App Store e riavvia l’app. Se non basta, [scrivici](#contact).',
           },
         ],
       },
     ],
-    web: 'Hai pagato l’abbonamento con carta sul sito? Trovi le risposte nella pagina dell’abbonamento.',
   },
   about: {
     nav: 'Chi siamo',
@@ -470,7 +468,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Prodotto', features: 'Funzioni', guides: 'Guide', support: 'Assistenza', write: 'Scrivici', redeem: 'Riscatta un regalo', badgeTop: 'Scarica su' },
+  footerLabels: { product: 'Prodotto', features: 'Funzioni', guides: 'Guide', support: 'Assistenza', write: 'Scrivici', redeem: 'Riscatta un regalo', badgeTop: 'Scarica su', social: 'Seguici', scan: 'Inquadra con la fotocamera del telefono', scanHint: 'Yorix si apre nell’App Store' },
   docsNote: 'I documenti sono disponibili in inglese e in russo.',
   topics: {
     'baby-nap-schedule-by-age': 'Programma delle nanne per età',

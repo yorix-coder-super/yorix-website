@@ -1,6 +1,6 @@
 import { BrandLogo } from './BrandLogo';
-import { appDownloadUrl } from './content';
-import { AppleGlyph } from './home/art';
+import { appDownloadUrl, socialLinks } from './content';
+import { AppleGlyph, AppQr, Art } from './home/art';
 import { docsLang, siteCopy, type SiteLocale } from './i18n';
 import { PaymentLogos } from './subscription/PaymentLogos';
 import { subscriptionPath } from './subscription/i18n';
@@ -72,6 +72,28 @@ export async function SellerFooter({ note, locale = 'en', home }: { note: string
         <div>
           <BrandLogo size="sm" tone="dark" />
           <p className="mt-4 max-w-xs leading-6">{copy.footer.tagline}</p>
+          <p className={`mt-7 ${heading}`}>{text.social}</p>
+          <ul className="mt-3 flex gap-3">
+            {socialLinks.map((social) => (
+              <li key={social.name}>
+                <a
+                  aria-label={social.name}
+                  className="group block rounded-2xl transition duration-300 hover:-translate-y-1 focus:outline-none focus-visible:ring-4 focus-visible:ring-white/25 active:translate-y-0 active:scale-95"
+                  href={social.href}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  title={social.name}
+                >
+                  <Art
+                    className="h-12 w-12 object-contain drop-shadow-[0_10px_18px_rgb(79_70_229/45%)] transition duration-300 group-hover:rotate-[-6deg] group-hover:scale-110"
+                    height={192}
+                    name={social.icon}
+                    width={192}
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
         {columns.map((column) => (
           <div key={column.title}>
@@ -100,6 +122,15 @@ export async function SellerFooter({ note, locale = 'en', home }: { note: string
               <span className="block text-lg font-semibold">App Store</span>
             </span>
           </a>
+          {/* A phone has the badge above; the code is for a visitor at a desk. */}
+          <div className="mt-5 hidden items-center gap-3 sm:flex lg:block">
+            <AppQr className="w-28 shrink-0" label={`${text.scan} — ${text.scanHint}`} />
+            <p className="max-w-[9rem] text-xs leading-5 text-white/60 lg:mt-3">
+              <span className="font-semibold text-white/85">{text.scan}</span>
+              <br />
+              {text.scanHint}
+            </p>
+          </div>
         </div>
       </div>
       <div className="border-t border-white/10">

@@ -337,7 +337,6 @@ export const translation: SiteTranslation = {
       sent: 'Děkujeme! Zprávu jsme dostali a odpovíme e-mailem.',
       error: 'Zprávu se nepodařilo odeslat. Zkus to znovu za minutu — nebo nám napiš přímo v aplikaci: Settings → „Write to us“.',
       invalid: 'Zadej e-mail a zprávu – aspoň 10 znaků.',
-      privacy: 'Tvůj e-mail a zprávu použijeme jen k odpovědi.',
     },
     topics: [
       {
@@ -413,12 +412,11 @@ export const translation: SiteTranslation = {
           },
           {
             question: 'Aplikace nefunguje, jak by měla',
-            answer: 'Aktualizuj Yorix v App Store na nejnovější verzi a restartuj aplikaci. Pokud to nepomůže, napiš nám — kontakt najdeš níže.',
+            answer: 'Aktualizuj Yorix v App Store na nejnovější verzi a restartuj aplikaci. Pokud to nepomůže, [napiš nám](#contact).',
           },
         ],
       },
     ],
-    web: 'Máš předplatné zaplacené kartou na webu? Odpovědi najdeš na stránce předplatného.',
   },
   about: {
     nav: 'O aplikaci Yorix',
@@ -461,7 +459,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Produkt', features: 'Funkce', guides: 'Články', support: 'Podpora', write: 'Napiš nám', redeem: 'Uplatnit dárek', badgeTop: 'Stáhnout v' },
+  footerLabels: { product: 'Produkt', features: 'Funkce', guides: 'Články', support: 'Podpora', write: 'Napiš nám', redeem: 'Uplatnit dárek', badgeTop: 'Stáhnout v', social: 'Sledujte nás', scan: 'Naskenujte fotoaparátem telefonu', scanHint: 'Yorix se otevře v App Storu' },
   docsNote: 'Dokumenty jsou k dispozici v angličtině a ruštině.',
   topics: {
     'baby-nap-schedule-by-age': 'Režim denního spánku podle věku',

@@ -337,7 +337,6 @@ export const translation: SiteTranslation = {
       sent: 'شكرًا! وصلتنا رسالتك وسنرد عليك بالبريد الإلكتروني.',
       error: 'تعذّر إرسال الرسالة. حاول مرة أخرى بعد دقيقة، أو راسلنا من التطبيق: «الإعدادات» ← «راسلنا».',
       invalid: 'أدخل بريدك الإلكتروني ورسالة لا تقل عن 10 أحرف.',
-      privacy: 'نستخدم بريدك الإلكتروني ورسالتك للرد عليك فقط.',
     },
     topics: [
       {
@@ -413,12 +412,11 @@ export const translation: SiteTranslation = {
           },
           {
             question: 'التطبيق لا يعمل كما ينبغي',
-            answer: 'حدّث Yorix إلى أحدث إصدار من App Store، ثم أعد تشغيل التطبيق. وإن لم يُجدِ ذلك، فراسلنا — طرق التواصل أدناه.',
+            answer: 'حدّث Yorix إلى أحدث إصدار من App Store، ثم أعد تشغيل التطبيق. وإن لم يُجدِ ذلك، [فراسلنا](#contact).',
           },
         ],
       },
     ],
-    web: 'هل دفعت ثمن الاشتراك بالبطاقة على الموقع؟ ستجد الإجابات في صفحة الاشتراك.',
   },
   about: {
     nav: 'عن Yorix',
@@ -461,7 +459,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'المنتج', features: 'المزايا', guides: 'الأدلة', support: 'الدعم', write: 'راسلنا', redeem: 'استرداد هدية', badgeTop: 'تنزيل من' },
+  footerLabels: { product: 'المنتج', features: 'المزايا', guides: 'الأدلة', support: 'الدعم', write: 'راسلنا', redeem: 'استرداد هدية', badgeTop: 'تنزيل من', social: 'تابعونا', scan: 'امسح الرمز بكاميرا هاتفك', scanHint: 'يفتح Yorix في App Store' },
   docsNote: 'المستندات متاحة باللغتين الإنجليزية والروسية.',
   topics: {
     'baby-nap-schedule-by-age': 'جدول قيلولات الطفل حسب العمر',

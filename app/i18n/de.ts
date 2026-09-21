@@ -337,7 +337,6 @@ export const translation: SiteTranslation = {
       sent: 'Danke! Wir haben deine Nachricht erhalten und antworten per E-Mail.',
       error: 'Die Nachricht konnte nicht gesendet werden. Versuch es in einer Minute noch einmal – oder schreib uns direkt in der App: „Einstellungen“ → „Schreib uns“.',
       invalid: 'Bitte gib deine E-Mail-Adresse und eine Nachricht mit mindestens 10 Zeichen ein.',
-      privacy: 'Deine E-Mail-Adresse und Nachricht nutzen wir nur, um dir zu antworten.',
     },
     topics: [
       {
@@ -413,12 +412,11 @@ export const translation: SiteTranslation = {
           },
           {
             question: 'Die App funktioniert nicht wie erwartet',
-            answer: 'Aktualisiere Yorix im App Store auf die neueste Version und starte die App neu. Hilft das nicht, schreib uns – die Kontaktmöglichkeiten findest du unten.',
+            answer: 'Aktualisiere Yorix im App Store auf die neueste Version und starte die App neu. Hilft das nicht, [schreib uns](#contact).',
           },
         ],
       },
     ],
-    web: 'Du hast dein Abo per Karte auf der Website bezahlt? Die Antworten findest du auf der Abo-Seite.',
   },
   about: {
     nav: 'Über Yorix',
@@ -461,7 +459,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
-  footerLabels: { product: 'Produkt', features: 'Funktionen', guides: 'Ratgeber', support: 'Support', write: 'Schreib uns', redeem: 'Geschenk einlösen', badgeTop: 'Laden im' },
+  footerLabels: { product: 'Produkt', features: 'Funktionen', guides: 'Ratgeber', support: 'Support', write: 'Schreib uns', redeem: 'Geschenk einlösen', badgeTop: 'Laden im', social: 'Folge uns', scan: 'Mit der Handykamera scannen', scanHint: 'Yorix öffnet sich im App Store' },
   docsNote: 'Die Dokumente gibt es auf Englisch und Russisch.',
   topics: {
     'baby-nap-schedule-by-age': 'Nickerchen nach Alter',
