@@ -111,7 +111,7 @@ export async function HomeLanding({ locale }: { locale: HomeLocale }) {
           ))}
         </section>
 
-        <section className="mx-auto max-w-7xl px-5 py-6 sm:px-8 lg:px-10" id="plan">
+        <section className="mx-auto w-full max-w-7xl px-5 py-6 sm:px-8 lg:px-10" id="plan">
           <Reveal>
             <article className="spotlight spotlight-dark relative grid overflow-hidden rounded-[2rem] bg-[linear-gradient(135deg,#F8F7FF_0%,#EEF2FF_48%,#E0E7FF_100%)] text-[#1E1B4B] shadow-[0_30px_90px_rgb(0_0_0/25%)] lg:grid-cols-[0.78fr_1.22fr]">
               <div className="relative z-10 p-7 sm:p-10 lg:py-12 lg:ps-12 lg:pe-4">
