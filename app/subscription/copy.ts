@@ -35,7 +35,7 @@ export type SubscriptionCopy = {
   ret: {
     checking: string; paid: (date: string) => string; paidLead: string; openApp: string;
     pending: string; failed: string; signIn: string; back: string; badgeTop: string; scan: string;
-    badge: string; thanks: string; qrTitle: string; qrHint: string;
+    badge: string; badgeGift: string; thanks: string; qrTitle: string; qrHint: string;
     features: { title: string; sub: string }[];
     helpTitle: string; helpBody: string; helpCta: string;
     noteTop: string; noteThanks: string;
@@ -227,6 +227,7 @@ const ru: SubscriptionCopy = {
     badgeTop: 'Загрузите в',
     scan: 'Наведите камеру телефона на код, чтобы открыть Yorix в App Store',
     badge: 'Оплачено',
+    badgeGift: 'Подарок активирован',
     thanks: 'Спасибо, что выбрали Yorix',
     paidLead: 'Подписка действует до',
     qrTitle: 'Открыть по QR-коду',
@@ -465,6 +466,7 @@ const en: SubscriptionCopy = {
     badgeTop: 'Download on the',
     scan: 'Point your phone camera at the code to open Yorix in the App Store',
     badge: 'Paid',
+    badgeGift: 'Gift redeemed',
     thanks: 'Thank you for choosing Yorix',
     paidLead: 'Your subscription runs until',
     qrTitle: 'Open with the QR code',

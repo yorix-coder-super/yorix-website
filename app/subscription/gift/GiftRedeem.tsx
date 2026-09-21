@@ -141,7 +141,7 @@ function GiftRedeem({ code: rawCode, appUrl }: { code: string; appUrl: string })
   if (until) {
     return (
       <section className="mx-auto max-w-6xl px-5 pb-20 pt-4 sm:px-8 lg:px-10">
-        <PaidScreen copy={subscriptionCopy[lang]} lang={lang} until={until} />
+        <PaidScreen copy={subscriptionCopy[lang]} from="gift" lang={lang} until={until} />
       </section>
     );
   }

@@ -15,7 +15,14 @@ import { Button } from './ui';
  * than a status line — the art is the same baby and the same app screen the
  * storefront promised, now with the subscription on.
  */
-export function PaidScreen({ until, lang, copy }: { until: string; lang: Lang; copy: SubscriptionCopy }) {
+export function PaidScreen({
+  until,
+  lang,
+  copy,
+  // A gift recipient paid nothing, so «Оплачено» would be a small lie on the
+  // one screen that is supposed to feel like a welcome.
+  from = 'purchase',
+}: { until: string; lang: Lang; copy: SubscriptionCopy; from?: 'purchase' | 'gift' }) {
   const t = copy.ret;
   const support = `${lang === 'ru' ? '/ru' : ''}/support#contact`;
 
@@ -26,7 +33,7 @@ export function PaidScreen({ until, lang, copy }: { until: string; lang: Lang; c
           <Reveal load>
             <p className="inline-flex items-center gap-2 rounded-full bg-white/10 py-1.5 pe-4 ps-2 text-sm font-semibold text-white ring-1 ring-white/15">
               <Art className="h-6 w-6" height={96} name="star" width={96} />
-              {t.badge}
+              {from === 'gift' ? t.badgeGift : t.badge}
             </p>
           </Reveal>
           {/* Thanks leads, the receipt follows: the first is why anyone feels
