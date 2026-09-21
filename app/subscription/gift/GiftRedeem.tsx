@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { AlertTriangle, ShieldCheck } from 'lucide-react';
+import type { SiteLocale } from '../../i18n';
 import { AppleGlyph } from '../../home/art';
 import { AccountProvider, useAccount } from '../account';
 import { API_BASE } from '../config';
@@ -9,6 +10,7 @@ import { subscriptionCopy } from '../copy';
 import { formatDate, subscriptionPath, type Lang } from '../i18n';
 import { planCopy, type PlanId } from '../merchant';
 import { PaidScreen } from '../PaidScreen';
+import { redeemText } from './redeemCopy';
 import { Reveal } from '../Reveal';
 import { Button, Spinner } from '../ui';
 import { codeFromInput, formatGiftCode, giftCodeChecks } from './code';
@@ -39,9 +41,9 @@ function problemOf(status: number, error: string | undefined): Problem {
   return problemFor[error ?? ''] ?? (status === 429 ? 'rateLimited' : 'error');
 }
 
-function GiftRedeem({ code: rawCode, appUrl }: { code: string; appUrl: string }) {
+function GiftRedeem({ code: rawCode, appUrl, locale }: { code: string; appUrl: string; locale: SiteLocale }) {
   const { lang, configured, signedIn, signIn, getToken, error: accountError, copy } = useAccount();
-  const text = subscriptionCopy[lang].gift;
+  const text = redeemText(locale, lang);
   const code = codeFromInput(rawCode);
   // A typo in a hand-typed link is known without asking the worker.
   const typo = !giftCodeChecks(code);
@@ -244,13 +246,14 @@ function GiftRedeem({ code: rawCode, appUrl }: { code: string; appUrl: string })
             className="enter-pop spotlight w-full max-w-md rounded-[2rem] border border-white/12 bg-[#1E1B4B]/95 p-6 text-start backdrop-blur-xl sm:p-8"
             onClick={(event) => event.stopPropagation()}
           >
-            <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#FDE68A]/15 text-[#FDE68A]">
-              <AlertTriangle aria-hidden="true" className="h-6 w-6" />
-            </span>
+            {/* Gold on indigo at 15 % turned the chip olive; the bare glyph
+                and a rule under the headline carry the caution better. */}
+            <AlertTriangle aria-hidden="true" className="h-9 w-9 text-[#FDE68A]" />
             <h2 className="mt-5 text-2xl font-semibold leading-tight text-white" id="own-gift-title">
               {text.ownGiftTitle}
             </h2>
-            <p className="mt-3 leading-7 text-white/75">{text.ownGiftConfirm}</p>
+            <div aria-hidden="true" className="mt-4 h-0.5 w-full rounded-full bg-[#FDE68A]/70" />
+            <p className="mt-4 leading-7 text-white/75">{text.ownGiftConfirm}</p>
             {/* Stacked, and the safe answer first: side by side, the longer
                 label outgrew its pill — every button here spells out what it
                 does, so none of them is short. */}
@@ -278,10 +281,10 @@ function GiftRedeem({ code: rawCode, appUrl }: { code: string; appUrl: string })
 
 // The App Store link comes from the server page, so the article catalogue
 // it lives next to never ships to the browser.
-export function GiftRedeemPanel({ lang, code, appUrl }: { lang: Lang; code: string; appUrl: string }) {
+export function GiftRedeemPanel({ lang, locale = lang, code, appUrl }: { lang: Lang; locale?: SiteLocale; code: string; appUrl: string }) {
   return (
-    <AccountProvider lang={lang}>
-      <GiftRedeem appUrl={appUrl} code={code} />
+    <AccountProvider lang={lang} locale={locale}>
+      <GiftRedeem appUrl={appUrl} code={code} locale={locale} />
     </AccountProvider>
   );
 }

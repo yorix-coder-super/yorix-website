@@ -56,7 +56,7 @@ export async function SiteHeader({
   ].filter((link) => (link.href !== subscription && link.href !== gift) || web);
 
   return (
-    <header className="relative z-50 mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-5 py-5 sm:px-8 lg:px-10">
+    <header className="relative z-50 mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-5 pb-9 pt-5 sm:px-8 lg:px-10">
       <a className="flex items-center gap-3" href={home} aria-label="Yorix home">
         <BrandLogo size="sm" tone="dark" />
       </a>

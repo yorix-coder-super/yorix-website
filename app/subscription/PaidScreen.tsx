@@ -98,7 +98,7 @@ export function PaidScreen({
             </div>
             <Sparkle className="top-[4%] start-[10%] w-4" delay={200} />
             <Sparkle className="bottom-[22%] start-0 w-3" delay={1100} tone="lavender" />
-            <Hand className="absolute -top-6 end-[-2%] hidden w-40 rotate-[7deg] rtl:-rotate-[7deg] text-[1.35rem] text-[#E0E7FF] xl:block">
+            <Hand className="absolute top-0 end-[-2%] hidden w-40 rotate-[7deg] rtl:-rotate-[7deg] text-[1.35rem] text-[#E0E7FF] xl:block">
               {t.noteTop} <DoodleHeart className="h-5 w-5 text-[#FDE68A]" />
             </Hand>
           </div>
