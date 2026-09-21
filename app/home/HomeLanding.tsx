@@ -153,7 +153,9 @@ export async function HomeLanding({ locale }: { locale: HomeLocale }) {
           </Reveal>
           <div className="mt-5 grid items-start gap-3 md:grid-cols-2 xl:grid-cols-3">
             {copy.faq.items.map((item, index) => (
-              <Reveal animation="fadeIn" delay={index * 90} key={item.question}>
+              {/* The stagger stops counting after the fifth card: with twelve of them the tail
+                  kept a reader waiting more than a second for the last answer. */}
+              <Reveal animation="fadeIn" delay={Math.min(index, 4) * 90} key={item.question}>
                 <FaqItem answer={item.answer} question={item.question} />
               </Reveal>
             ))}
