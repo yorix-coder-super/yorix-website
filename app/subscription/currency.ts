@@ -25,16 +25,22 @@ function acceptedLanguages(header: string | null | undefined): string[] {
     .filter(Boolean);
 }
 
+// The tier a Belarusian visitor — and a Russian-speaking browser anywhere —
+// is priced on. Roubles for now (owner, 2026-09-21), because ЮKassa settles
+// in roubles; the BYN price list stays for the day a Belarusian acquirer
+// returns. Mirrors BELARUS_TIER in the worker.
+const BELARUS_TIER: Currency = 'RUB';
+
 // The country decides, as Cloudflare sees it. When the connection comes from
 // elsewhere (VPN exits are common among Belarusian and Russian parents), a
-// Russian- or Belarusian-language browser may still buy — at the Belarusian
-// price: a header the visitor controls never picks the cheaper Russian tier.
+// Russian- or Belarusian-language browser may still buy. A header the visitor
+// controls never picks a cheaper tier than the Belarusian one.
 // Mirrored by webRegion in the worker (CloudflareWorker/src/web/plans.ts).
 export function currencyForVisitor(country: string | null | undefined, acceptLanguage?: string | null): Currency {
   const cc = (country ?? '').toUpperCase();
-  if (cc === 'BY') return 'BYN';
+  if (cc === 'BY') return BELARUS_TIER;
   if (cc === 'RU') return 'RUB';
-  if (acceptedLanguages(acceptLanguage).some((tag) => /^(ru|be)(-|$)/.test(tag))) return 'BYN';
+  if (acceptedLanguages(acceptLanguage).some((tag) => /^(ru|be)(-|$)/.test(tag))) return BELARUS_TIER;
   if (EURO_COUNTRIES.has(cc)) return 'EUR';
   return 'USD';
 }
