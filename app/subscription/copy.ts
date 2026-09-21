@@ -224,7 +224,7 @@ const ru: SubscriptionCopy = {
   ret: {
     checking: 'Проверяем оплату…',
     paid: (date) => `Подписка включена до ${date}`,
-    openApp: 'Откройте Yorix на iPhone тем же аккаунтом Apple — подписка уже там.',
+    openApp: 'Откройте Yorix на iPhone в том же аккаунте Apple — подписка уже там.',
     pending: 'Банк подтверждает оплату — обычно меньше минуты. Страница обновится сама.',
     failed: 'Оплаченный заказ не найден. Если деньги списаны, напишите нам — дату и сумму.',
     signIn: 'Войдите через Apple, чтобы увидеть статус заказа.',
@@ -308,7 +308,7 @@ const ru: SubscriptionCopy = {
     redeem: 'Активировать через Apple',
     redeemAccept: ['Активируя подарок, вы принимаете ', 'условия использования', '.'],
     redeemed: (date) => `Готово! Подписка действует до ${date}`,
-    openApp: 'Откройте Yorix на iPhone тем же аккаунтом Apple — функции подписки уже доступны.',
+    openApp: 'Откройте Yorix на iPhone в том же аккаунте Apple — функции подписки уже доступны.',
     download: 'Скачать Yorix',
     loading: 'Открываем подарок…',
     errors: {
@@ -324,9 +324,9 @@ const ru: SubscriptionCopy = {
     },
     alreadySubscribed: {
       summary: 'У меня уже есть подписка',
-      web: 'Оплачена на сайте — срок подарка просто добавится к ней.',
+      web: 'Если подписка оплачена на сайте, дни подарка просто добавятся к ней.',
       store: (date) =>
-        `Оформлена в App Store — подарок пойдёт параллельно, и вы заплатите дважды за одни и те же дни. Выгоднее отключить автопродление и активировать подарок, когда она закончится: код действует до ${date}.`,
+        `Если подписка оформлена в App Store, подарок пойдёт параллельно и вы заплатите дважды за одни и те же дни. Выгоднее отключить автопродление и активировать подарок, когда она закончится: код действует до ${date}`,
     },
     popupHint: 'Окно входа не открылось? Откройте эту страницу в Safari или другом браузере — ссылка та же.',
     enterCode: 'Ввести код вручную',
@@ -572,9 +572,9 @@ const en: SubscriptionCopy = {
     },
     alreadySubscribed: {
       summary: 'I already have a subscription',
-      web: 'Paid on the website — the gift simply adds to that period.',
+      web: 'If the subscription was paid for on this website, the gift simply adds its days to it.',
       store: (date) =>
-        `Bought in the App Store — the gift would run alongside it, and you would pay twice for the same days. Better turn its renewal off and redeem the gift when it ends: the code is valid until ${date}.`,
+        `If it was bought in the App Store, the gift would run alongside it and you would pay twice for the same days. Better to turn its renewal off and redeem the gift when it ends: the code is valid until ${date}.`,
     },
     popupHint: 'The sign-in window did not open? Open this page in Safari or another browser — the link stays the same.',
     enterCode: 'Enter the code by hand',
