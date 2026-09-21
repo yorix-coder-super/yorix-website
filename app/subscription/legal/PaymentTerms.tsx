@@ -19,6 +19,8 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
   // Support is reached through the site's form; the address itself stays in the offer's requisites.
   const form = <a href={`${lang === 'ru' ? '/ru' : ''}/support#contact`}>{lang === 'ru' ? 'форму «Написать нам»' : 'the “Write to us” form'}</a>;
   const cards = listJoin(acquirer.cards[lang], lang);
+  const wallets = acquirer.wallets[lang].length ? listJoin(acquirer.wallets[lang], lang) : null;
+  const methodNote = acquirer.note?.[lang] ?? null;
   // Every mention of a bank on this page comes from here (merchant.ts ACQUIRER).
   const bank = acquirer.name[lang];
   const offer = subscriptionPath(lang, '/offer');
@@ -80,11 +82,12 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
 
         <h2>Payment methods</h2>
         <p>
-          Online payment by bank card through the{' '}
+          Online payment through the{' '}
           <a href={acquirer.site} rel="noopener noreferrer" target="_blank">
             {bank}
           </a>{' '}
-          system. Accepted cards: {cards}. There are no other payment methods.
+          system. Accepted cards: {cards}.{wallets ? ` Also accepted: ${wallets}.` : ''}
+          {methodNote ? ` ${methodNote}` : ''} There are no other payment methods.
         </p>
         {logos}
 
@@ -186,11 +189,12 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
 
       <h2>Способы оплаты</h2>
       <p>
-        Оплата банковской платёжной картой онлайн через систему{' '}
+        Оплата онлайн через систему{' '}
         <a href={acquirer.site} rel="noopener noreferrer" target="_blank">
           {bank}
         </a>
-        . Принимаются карты {cards}. Других способов оплаты нет.
+        . Принимаются карты {cards}.{wallets ? ` Также принимаются: ${wallets}.` : ''}
+        {methodNote ? ` ${methodNote}` : ''} Других способов оплаты нет.
       </p>
       {logos}
 

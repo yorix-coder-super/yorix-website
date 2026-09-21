@@ -25,7 +25,7 @@ const MARKS: Record<string, { src: string; width: number; height: number; classN
  */
 export function PaymentLogos({ lang }: { lang: Lang }) {
   const cards = acquirer.cards[lang];
-  const label = `${acquirer.name[lang]}: ${cards.join(', ')}`;
+  const label = `${acquirer.name[lang]}: ${[...cards, ...acquirer.wallets[lang]].join(', ')}`;
 
   if (acquirer.strip?.withMirMark) {
     return (

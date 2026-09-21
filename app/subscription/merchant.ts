@@ -12,7 +12,7 @@ export const merchant = {
     ru: 'Физическое лицо — плательщик налога на профессиональный доход',
     en: 'Individual registered as a professional income tax payer',
   },
-  unp: '',
+  unp: 'HE5964401',
   country: { ru: 'Республика Беларусь', en: 'Republic of Belarus' },
   postalAddress: '',
   phone: '',
@@ -32,6 +32,10 @@ type AcquirerProfile = {
   name: { ru: string; en: string };
   /** The cards it takes, as the documents list them. */
   cards: { ru: string[]; en: string[] };
+  /** Everything it takes that is not a card: wallets and pay buttons. */
+  wallets: { ru: string[]; en: string[] };
+  /** One sentence the payment terms print after the method list, if any. */
+  note: { ru: string; en: string } | null;
   /**
    * Its own logo, or null to list the card brands instead. `withMirMark`
    * appends NSPK's «Мир» mark: WebPay ships a strip of card logos with «Мир»
@@ -50,6 +54,8 @@ const ACQUIRERS: Record<Acquirer, AcquirerProfile> = {
     id: 'webpay',
     name: { ru: 'WEBPAY', en: 'WEBPAY' },
     cards: { ru: ['Visa', 'Mastercard', 'Белкарт', 'Мир'], en: ['Visa', 'Mastercard', 'Belkart', 'Mir'] },
+    wallets: { ru: [], en: [] },
+    note: null,
     strip: { src: '/payments/webpay-banks-white.svg', width: 7944, height: 550, withMirMark: true },
     emailsReceipt: true,
     site: 'https://www.webpay.by',
@@ -58,7 +64,15 @@ const ACQUIRERS: Record<Acquirer, AcquirerProfile> = {
     id: 'yookassa',
     name: { ru: 'ЮKassa', en: 'YooKassa' },
     // Белкарт is a Belarusian scheme; a Russian acquirer does not take it.
-    cards: { ru: ['Visa', 'Mastercard', 'Мир'], en: ['Visa', 'Mastercard', 'Mir'] },
+    // «Мир» is not ours to offer either: the scheme itself refuses the
+    // connection, and it reaches us only inside T-Pay and SberPay (ЮKassa,
+    // 2026-09-21).
+    cards: { ru: ['Visa', 'Mastercard'], en: ['Visa', 'Mastercard'] },
+    wallets: { ru: ['кошелёк ЮMoney', 'T-Pay', 'SberPay'], en: ['the YooMoney wallet', 'T-Pay', 'SberPay'] },
+    note: {
+      ru: 'Картой «Мир» можно заплатить через T-Pay или SberPay.',
+      en: 'A Mir card can pay through T-Pay or SberPay.',
+    },
     // The white wordmark from ЮKassa's own guide (yookassa.ru/guide-instruction/#logos):
     // white on dark, blue-black on light — this site is dark everywhere.
     strip: { src: '/payments/yookassa-white.svg', width: 266, height: 64, withMirMark: false },
