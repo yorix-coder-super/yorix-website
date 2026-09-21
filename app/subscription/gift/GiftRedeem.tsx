@@ -127,7 +127,16 @@ function GiftRedeem({ code: rawCode, appUrl, locale }: { code: string; appUrl: s
         headers: token ? { 'X-Firebase-Token': token } : {},
       });
       const body = (await res.json().catch(() => ({}))) as { premiumUntil?: string | null; error?: string };
-      if (res.ok) setUntil(body.premiumUntil ?? null);
+      if (res.ok) {
+        setUntil(body.premiumUntil ?? null);
+        // Spent. Leaving it behind would prefill the entry form with a code
+        // that can only ever answer «уже активирован».
+        try {
+          sessionStorage.removeItem('yorix-gift-code');
+        } catch {
+          // Private mode never stored it in the first place.
+        }
+      }
       else {
         const next = problemOf(res.status, body.error);
         setProblem(next);
