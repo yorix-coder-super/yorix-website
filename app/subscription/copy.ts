@@ -216,7 +216,7 @@ const ru: SubscriptionCopy = {
   ret: {
     checking: 'Проверяем оплату…',
     paid: (date) => `Подписка включена до ${date}`,
-    openApp: 'Откройте Yorix на iPhone тем же аккаунтом Apple — функции подписки уже доступны.',
+    openApp: 'Всё готово — открывайте Yorix на iPhone. Войдите через Apple тем же способом, что и здесь: подписка подхватится сама, вводить ничего не нужно.',
     pending: 'Банк подтверждает оплату — обычно меньше минуты. Страница обновится сама.',
     failed: 'Оплаченный заказ не найден. Если деньги списаны, напишите нам — дату и сумму.',
     signIn: 'Войдите через Apple, чтобы увидеть статус заказа.',
@@ -446,7 +446,7 @@ const en: SubscriptionCopy = {
   ret: {
     checking: 'Checking the payment…',
     paid: (date) => `Subscription on until ${date}`,
-    openApp: 'Open Yorix on your iPhone with the same Apple account — the subscription features are already there.',
+    openApp: 'All set — open Yorix on your iPhone. Sign in with Apple the same way you did here: the subscription is picked up on its own, with nothing to type in.',
     pending: 'The bank is confirming the payment — usually under a minute. This page refreshes itself.',
     failed: 'No paid order found. If money was charged, write to us with the date and amount.',
     signIn: 'Sign in with Apple to see the order status.',

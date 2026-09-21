@@ -3,7 +3,9 @@ import { appDownloadUrl } from '../content';
 import { AppleGlyph, AppQr, Art, DoodleHeart, featureIcons, Hand, PhoneFrame, Sparkle } from '../home/art';
 import type { SubscriptionCopy } from './copy';
 import { formatDate, type Lang } from './i18n';
+import { Magnetic } from './Magnetic';
 import { Reveal } from './Reveal';
+import { Tilt } from './Tilt';
 import { Button } from './ui';
 
 /**
@@ -37,18 +39,20 @@ export function PaidScreen({ until, lang, copy }: { until: string; lang: Lang; c
           </Reveal>
           <Reveal delay={280} load>
             <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-5">
-              <a
-                className="inline-flex items-center gap-3 rounded-xl border border-white/25 bg-black px-4 py-2 text-white transition hover:-translate-y-0.5 hover:border-white/50 active:translate-y-0"
-                href={appDownloadUrl}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <AppleGlyph className="h-7 w-7" />
-                <span className="leading-tight">
-                  <span className="block text-[11px] text-white/80">{t.badgeTop}</span>
-                  <span className="block text-lg font-semibold">App Store</span>
-                </span>
-              </a>
+              <Magnetic>
+                <a
+                  className="inline-flex items-center gap-3 rounded-xl border border-white/25 bg-black px-4 py-2 text-white transition hover:-translate-y-0.5 hover:border-white/50 active:translate-y-0"
+                  href={appDownloadUrl}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <AppleGlyph className="h-7 w-7" />
+                  <span className="leading-tight">
+                    <span className="block text-[11px] text-white/80">{t.badgeTop}</span>
+                    <span className="block text-lg font-semibold">App Store</span>
+                  </span>
+                </a>
+              </Magnetic>
               {/* The phone in hand taps the badge; the code is for whoever paid at a desk. */}
               <div className="hidden items-center gap-3 sm:flex">
                 <AppQr className="w-[4.5rem] shrink-0" label={t.scan} />
@@ -69,12 +73,17 @@ export function PaidScreen({ until, lang, copy }: { until: string; lang: Lang; c
             <div className="float-slow absolute bottom-0 start-0 w-[72%]">
               <Art className="h-auto w-full drop-shadow-[0_24px_40px_rgb(15_16_34/45%)]" height={560} name="cta-baby-star" priority width={503} />
             </div>
-            {/* The app, already unlocked, leaning out from behind the mascot. */}
-            <PhoneFrame
-              alt={lang === 'ru' ? 'Экран «Сегодня» в Yorix' : 'The Today screen in Yorix'}
-              className="absolute end-0 top-[2%] w-[40%] rotate-[4deg] rtl:-rotate-[4deg]"
-              src={`/shots/${lang}-today.webp`}
-            />
+            {/* The app, already unlocked, leaning out from behind the mascot —
+                and the one object on this page that follows the cursor. */}
+            <div className="absolute end-0 top-[2%] w-[40%] rotate-[4deg] rtl:-rotate-[4deg]">
+              <Tilt>
+                <PhoneFrame
+                  alt={lang === 'ru' ? 'Экран «Сегодня» в Yorix' : 'The Today screen in Yorix'}
+                  bezel="p-[1.4%]"
+                  src={`/shots/${lang}-today.webp`}
+                />
+              </Tilt>
+            </div>
             <Sparkle className="top-[4%] start-[10%] w-4" delay={200} />
             <Sparkle className="bottom-[22%] start-0 w-3" delay={1100} tone="lavender" />
             <Hand className="absolute -top-6 end-[-2%] hidden w-40 rotate-[7deg] rtl:-rotate-[7deg] text-[1.35rem] text-[#E0E7FF] xl:block">
@@ -99,15 +108,26 @@ export function PaidScreen({ until, lang, copy }: { until: string; lang: Lang; c
       </div>
 
       <Reveal delay={640} load="visible">
-        <div className="spotlight mt-8 flex flex-col gap-5 rounded-[2rem] border border-white/12 bg-white/[0.06] p-6 backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between sm:p-8">
-          <div>
+        <div className="spotlight relative mt-8 flex flex-col items-center gap-5 overflow-hidden rounded-[2rem] border border-white/12 bg-white/[0.06] p-6 backdrop-blur-xl sm:flex-row sm:justify-between sm:p-8">
+          {/* Support wears its own face everywhere else on the site; a bare
+              card here looked like a different product's. */}
+          <div aria-hidden="true" className="pointer-events-none absolute -bottom-6 start-6 hidden w-28 sm:block lg:w-32">
+            <div className="absolute inset-x-2 bottom-4 h-20 rounded-full bg-[#6366F1]/30 blur-2xl" />
+            <div className="float-slower relative">
+              <Art className="h-auto w-full drop-shadow-[0_18px_34px_rgb(15_16_34/45%)]" height={440} name="support-mascot" width={420} />
+            </div>
+          </div>
+          <div className="text-center sm:ms-36 sm:text-start lg:ms-40">
             <p className="text-xl font-semibold text-white">{t.helpTitle}</p>
             <p className="mt-1 leading-7 text-white/70">{t.helpBody}</p>
           </div>
-          <Button className="shrink-0" href={support} variant="light">
-            {t.helpCta}
-            <ArrowRight aria-hidden="true" className="h-5 w-5 rtl:-scale-x-100" />
-          </Button>
+          <Magnetic className="shrink-0">
+            <Button href={support} variant="light">
+              {t.helpCta}
+              <ArrowRight aria-hidden="true" className="h-5 w-5 rtl:-scale-x-100" />
+            </Button>
+          </Magnetic>
+          <Sparkle className="start-[7.5rem] top-5 hidden w-3 sm:block" delay={600} tone="lavender" />
         </div>
       </Reveal>
 

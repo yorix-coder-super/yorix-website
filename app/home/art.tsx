@@ -13,9 +13,17 @@ export function AppleGlyph({ className = 'h-5 w-5' }: { className?: string }) {
 // The four feature icons, in the order of `home.features`.
 export const featureIcons = ['icon-bolt', 'icon-chart', 'icon-chat', 'icon-heart'];
 
-export function PhoneFrame({ src, alt, className = '', priority = false }: { src: string; alt: string; className?: string; priority?: boolean }) {
+export function PhoneFrame({
+  src,
+  alt,
+  className = '',
+  priority = false,
+  // The bezel, as a share of the phone's width. Thinner suits a phone shown
+  // small beside other objects, where 3% reads as a chunky border.
+  bezel = 'p-[3%]',
+}: { src: string; alt: string; className?: string; priority?: boolean; bezel?: string }) {
   return (
-    <div className={`rounded-[16%/7.4%] bg-[#0B0A1F] p-[3%] shadow-[0_30px_80px_rgb(0_0_0/45%)] ring-1 ring-white/20 ${className}`}>
+    <div className={`rounded-[16%/7.4%] bg-[#0B0A1F] ${bezel} shadow-[0_30px_80px_rgb(0_0_0/45%)] ring-1 ring-white/20 ${className}`}>
       <img
         alt={alt}
         className="block h-auto w-full rounded-[13.5%/6.2%]"
