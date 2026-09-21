@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yorix.website/sitemap.xml
-Sitemap: https://yorix.website/sitemap-pages.xml
+Sitemap: https://yorix-app.com/sitemap.xml
+Sitemap: https://yorix-app.com/sitemap-pages.xml

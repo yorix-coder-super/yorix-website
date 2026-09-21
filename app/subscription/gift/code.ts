@@ -37,7 +37,7 @@ export function formatGiftCode(code: string): string {
   return code.replace(/(.{4})(?=.)/g, '$1-');
 }
 
-/** The short link that is shared: yorix.website/g/<code>; the site opens it in the visitor's language. */
+/** The short link that is shared: yorix-app.com/g/<code>; the site opens it in the visitor's language. */
 export function giftUrl(origin: string, code: string): string {
   return `${origin}/g/${codeFromInput(code)}`;
 }

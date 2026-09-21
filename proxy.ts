@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
+import { legacyHosts, siteUrl } from './app/content';
 import { isSiteLang, LANG_COOKIE, localizedPath, preferredLanguage, type SiteLang } from './app/language';
 import { currencyForVisitor, sellsOnWeb } from './app/subscription/currency';
 import { codeFromInput, formatGiftCode } from './app/subscription/gift/code';
@@ -105,7 +106,7 @@ function salesRedirect(request: NextRequest): NextResponse | null {
   return response;
 }
 
-// Short gift links (yorix.website/g/<code>) open the redeem page in the
+// Short gift links (yorix-app.com/g/<code>) open the redeem page in the
 // visitor's language. Link-preview bots get Russian: gifts are bought in
 // Belarus and Russia. Only the code's own characters reach the new path.
 const SHORT_GIFT = /^\/g\/([A-Za-z0-9-]{12,20})\/?$/;
@@ -129,15 +130,24 @@ function shortGiftRedirect(request: NextRequest): NextResponse | null {
   return response;
 }
 
+const CANONICAL_HOST = new URL(siteUrl).hostname;
+const OLD_HOSTS = new Set<string>([`www.${CANONICAL_HOST}`, ...legacyHosts]);
+
 export function proxy(request: NextRequest) {
   const hostname = request.nextUrl.hostname.toLowerCase();
   const pathname = request.nextUrl.pathname;
   const isYandexVerification = pathname.startsWith('/yandex_') && pathname.endsWith('.html');
 
-  if (hostname === 'www.yorix.website' && !isYandexVerification) {
+  // One canonical host. `www` and any host the site used to live on answer with
+  // a permanent redirect to the same path, so links keep working and a search
+  // engine moves the page's standing to the new address instead of indexing two
+  // copies of it. Yandex's verification file must stay reachable on the host the
+  // verification was started from, so it is the one exception.
+  if (hostname !== CANONICAL_HOST && !isYandexVerification && OLD_HOSTS.has(hostname)) {
     const url = request.nextUrl.clone();
-    url.hostname = 'yorix.website';
-
+    url.hostname = CANONICAL_HOST;
+    url.protocol = 'https:';
+    url.port = '';
     return withSecurityHeaders(NextResponse.redirect(url, 308));
   }
 

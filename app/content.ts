@@ -1,6 +1,14 @@
 import { researchGuides } from './research-guides';
 
-export const siteUrl = 'https://yorix.website';
+// The canonical host. Everything public derives from it: canonical URLs, Open
+// Graph, the sitemaps and robots.txt. Changing it here is the whole change.
+export const siteUrl = 'https://yorix-app.com';
+
+// Hosts that used to serve this site. The proxy answers them with a permanent
+// redirect to the same path on `siteUrl`, so a link that is already out in the
+// world — or indexed by a search engine — keeps working and passes its weight
+// on. They only take effect once such a host actually points at this worker.
+export const legacyHosts = ['yorix.website', 'www.yorix.website'] as const;
 
 export const appDownloadUrl = 'https://apps.apple.com/app/apple-store/id6788705252?pt=129050076&ct=SEO&mt=8';
 // The same page under its own campaign tag, kept short: fewer characters mean a

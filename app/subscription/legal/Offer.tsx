@@ -30,7 +30,7 @@ function ru({ payment, privacy, seller }: Ctx): LegalSection[] {
       blocks: [
         {
           ul: [
-            '**Сервис** — мобильное приложение «Yorix» для iPhone и iPad (далее — Приложение) и связанные с ним онлайн-сервисы, включая сайт yorix.website (далее — Сайт).',
+            '**Сервис** — мобильное приложение «Yorix» для iPhone и iPad (далее — Приложение) и связанные с ним онлайн-сервисы, включая сайт yorix-app.com (далее — Сайт).',
             '**Аккаунт** — учётная запись Пользователя в Сервисе, созданная входом через Apple («Вход с Apple»).',
             '**Подписка** — предоставляемый за плату на Период доступа доступ к платным функциям Сервиса: ИИ-коучу, персональному прогнозу следующего сна, аналитике дневника и ежедневным рекомендациям (далее — Основные функции) в объёме, описанном на странице тарифов Сайта на дату оплаты. Программы из раздела «Программы» в Подписку не входят.',
             '**Период доступа** — 7, 30 или 365 календарных суток, исчисляемых с момента активации Подписки; сутки — 24 часа.',
@@ -223,7 +223,7 @@ function en({ payment, privacy, seller }: Ctx): LegalSection[] {
       blocks: [
         {
           ul: [
-            '**Service** — the Yorix mobile app for iPhone and iPad (the “App”) and related online services, including the yorix.website site (the “Website”).',
+            '**Service** — the Yorix mobile app for iPhone and iPad (the “App”) and related online services, including the yorix-app.com site (the “Website”).',
             '**Account** — the User’s account in the Service, created with Sign in with Apple.',
             '**Subscription** — paid access, for an Access Period, to the Service’s paid features: the AI coach, the personal next-sleep forecast, diary analytics and daily recommendations (the “Core Features”), as described on the Website’s plans page on the date of payment. Programs from the “Programs” section are not included.',
             '**Access Period** — 7, 30 or 365 calendar days counted from activation of the Subscription; a day is 24 hours.',

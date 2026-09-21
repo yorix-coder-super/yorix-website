@@ -20,7 +20,7 @@ function ru({ seller, privacy, offer, web }: Ctx): LegalSection[] {
     {
       title: '1. Общие положения',
       blocks: [
-        `1.1. Эти условия определяют порядок использования мобильного приложения «Yorix» и сайта yorix.website (вместе — Сервис), которые предоставляет ${seller} (далее — «мы»). Устанавливая или используя Сервис, вы принимаете эти условия.`,
+        `1.1. Эти условия определяют порядок использования мобильного приложения «Yorix» и сайта yorix-app.com (вместе — Сервис), которые предоставляет ${seller} (далее — «мы»). Устанавливая или используя Сервис, вы принимаете эти условия.`,
         `1.2. Покупки в App Store совершаются по правилам Apple, включая [стандартное лицензионное соглашение Apple](${appleEula}).${web ? ` Покупка подписки картой на сайте регулируется [публичным договором](${offer}).` : ''}`,
         `1.3. Как мы обрабатываем персональные данные, описано в [Политике обработки персональных данных](${privacy}).`,
       ],
@@ -64,7 +64,7 @@ function ru({ seller, privacy, offer, web }: Ctx): LegalSection[] {
       title: '7. Применимое право и контакты',
       blocks: [
         '7.1. К условиям применяется право Республики Беларусь. Если вы потребитель из другой страны, это не лишает вас защиты, которую дают императивные нормы права страны вашего проживания.',
-        '7.2. Вопросы об условиях направляйте через форму «Написать нам» на сайте yorix.website.',
+        '7.2. Вопросы об условиях направляйте через форму «Написать нам» на сайте yorix-app.com.',
       ],
     },
   ];
@@ -75,7 +75,7 @@ function en({ seller, privacy, offer, web }: Ctx): LegalSection[] {
     {
       title: '1. General',
       blocks: [
-        `1.1. These terms govern the use of the Yorix mobile app and the yorix.website site (together, the “Service”) provided by ${seller} (“we”). By installing or using the Service you accept these terms.`,
+        `1.1. These terms govern the use of the Yorix mobile app and the yorix-app.com site (together, the “Service”) provided by ${seller} (“we”). By installing or using the Service you accept these terms.`,
         `1.2. App Store purchases follow Apple’s rules, including [Apple’s standard licence agreement](${appleEula}).${web ? ` Buying a subscription by card on the website is governed by the [public offer](${offer}).` : ''}`,
         `1.3. How we process personal data is described in the [Personal data policy](${privacy}).`,
       ],
@@ -119,7 +119,7 @@ function en({ seller, privacy, offer, web }: Ctx): LegalSection[] {
       title: '7. Governing law and contact',
       blocks: [
         '7.1. These terms are governed by the law of the Republic of Belarus. If you are a consumer from another country, this does not deprive you of the protection of the mandatory rules of your country of residence.',
-        '7.2. Questions about these terms: use the “Write to us” form on yorix.website.',
+        '7.2. Questions about these terms: use the “Write to us” form on yorix-app.com.',
       ],
     },
   ];

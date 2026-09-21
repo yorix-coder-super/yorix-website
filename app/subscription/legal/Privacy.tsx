@@ -21,7 +21,7 @@ function ru({ operator, offer }: Ctx): LegalSection[] {
     {
       title: '1. Общие положения',
       blocks: [
-        `1.1. Политика определяет, как ${operator} (далее — Оператор, «мы») обрабатывает персональные данные пользователей сайта yorix.website (далее — Сайт), мобильного приложения «Yorix» для iPhone и iPad (далее — Приложение), службы поддержки и связанных онлайн-сервисов (вместе — Сервис). Политика разработана в соответствии с Законом Республики Беларусь от 7 мая 2021 г. № 99-З «О защите персональных данных» (далее — Закон № 99-З).`,
+        `1.1. Политика определяет, как ${operator} (далее — Оператор, «мы») обрабатывает персональные данные пользователей сайта yorix-app.com (далее — Сайт), мобильного приложения «Yorix» для iPhone и iPad (далее — Приложение), службы поддержки и связанных онлайн-сервисов (вместе — Сервис). Политика разработана в соответствии с Законом Республики Беларусь от 7 мая 2021 г. № 99-З «О защите персональных данных» (далее — Закон № 99-З).`,
         '1.2. Политика объясняет, какие данные мы обрабатываем, зачем и на каком основании, кому их передаём, как долго храним и как вы можете реализовать свои права. Политика не является согласием и не требует «принятия». Если обработка основана на согласии, мы просим его отдельно, в момент, когда оно нужно, и вы можете его отозвать.',
         '1.3. Сервис предназначен для взрослых — родителей и других лиц, которые заботятся о ребёнке. Сведения о ребёнке вносит взрослый; дети Сервисом не пользуются, и мы не собираем данные непосредственно у детей.',
         '1.4. Термины «персональные данные», «специальные персональные данные» (в том числе сведения о здоровье), «обработка», «уполномоченное лицо» и «трансграничная передача» используются в значении Закона № 99-З.',
@@ -241,7 +241,7 @@ function en({ operator, offer }: Ctx): LegalSection[] {
     {
       title: '1. General',
       blocks: [
-        `1.1. This policy sets out how ${operator} (the “Operator”, “we”) processes the personal data of users of the yorix.website site (the “Website”), the Yorix mobile app for iPhone and iPad (the “App”), support and related online services (together, the “Service”). It follows the Law of the Republic of Belarus of 7 May 2021 No. 99-З “On personal data protection” (“Law 99-З”).`,
+        `1.1. This policy sets out how ${operator} (the “Operator”, “we”) processes the personal data of users of the yorix-app.com site (the “Website”), the Yorix mobile app for iPhone and iPad (the “App”), support and related online services (together, the “Service”). It follows the Law of the Republic of Belarus of 7 May 2021 No. 99-З “On personal data protection” (“Law 99-З”).`,
         '1.2. It explains what data we process, why and on what basis, who we share it with, how long we keep it and how you can exercise your rights. The policy is not consent and does not need to be “accepted”. Where processing relies on consent, we ask for it separately, when it is needed, and you can withdraw it.',
         '1.3. The Service is for adults — parents and others caring for a child. Information about the child is entered by an adult; children do not use the Service and we do not collect data directly from children.',
         '1.4. The terms “personal data”, “special personal data” (including health information), “processing”, “authorised person” and “cross-border transfer” have the meaning given in Law 99-З.',

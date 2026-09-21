@@ -5,7 +5,7 @@ import { SubscriptionShell } from '../SubscriptionShell';
 import { GiftCardView } from './GiftCardView';
 import { GiftCodeEntry } from './GiftCodeEntry';
 
-// yorix.website/gift — where a code from a card is typed, like the
+// yorix-app.com/gift — where a code from a card is typed, like the
 // «redeem» pages of Calm or Headspace. Open from every country: the
 // recipient may live anywhere.
 export function GiftEntryPage({ lang }: { lang: Lang }) {
