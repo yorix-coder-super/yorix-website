@@ -4,9 +4,17 @@
 // slip of the finger never counts toward the worker's lockout.
 const CROCKFORD = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
 
-/** What the person typed or pasted — a whole link included — as up to 12 code characters. */
+/**
+ * What the person typed or pasted — a whole link included — as up to 12 code
+ * characters.
+ *
+ * Both link shapes, because both exist: the short `/g/<code>` is the one the
+ * buyer actually shares, and `/gift/<code>` is the page it opens. Reading only
+ * the long one turned a pasted short link into `HTTPSY0R1XAP` — the domain
+ * itself, stripped of punctuation — and the page called it a typo.
+ */
 export function codeFromInput(input: string): string {
-  const fromLink = /\/gift\/([^/?#\s]+)/i.exec(input)?.[1];
+  const fromLink = /\/(?:g|gift)\/([^/?#\s]+)/i.exec(input)?.[1];
   return (fromLink ? decodeURIComponent(fromLink) : input)
     .toUpperCase()
     .replace(/[^0-9A-Z]/g, '')
