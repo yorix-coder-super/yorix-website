@@ -17,7 +17,6 @@ export const ar: RedeemText = {
   entryLabel: 'رمز الهدية',
   entryGo: 'متابعة',
   entryShort: 'يتكوّن الرمز من 12 خانة — تأكّد من إدخالها كاملة.',
-  entryHint: 'لا بأس بالخلط بين O و0 أو بين I و1 — نقرؤها بالشكل الصحيح. ويمكنك أيضًا لصق رابط الهدية كاملًا هنا.',
   enterCode: 'إدخال الرمز يدويًا',
 
   alreadySubscribed: {

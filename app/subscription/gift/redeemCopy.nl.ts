@@ -19,8 +19,6 @@ export const nl: RedeemText = {
   entryLabel: 'Cadeaucode',
   entryGo: 'Doorgaan',
   entryShort: 'De code bestaat uit 12 tekens – kijk of hij compleet is.',
-  entryHint:
-    'O en 0, I en 1 door elkaar halen geeft niets: we lezen het goed. Je kunt hier ook de hele cadeaulink plakken.',
   enterCode: 'Code handmatig invoeren',
 
   alreadySubscribed: {

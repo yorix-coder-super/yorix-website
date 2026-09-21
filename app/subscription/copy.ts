@@ -100,7 +100,6 @@ export type SubscriptionCopy = {
     entryLabel: string;
     entryGo: string;
     entryShort: string;
-    entryHint: string;
     status: { active: (date: string) => string; redeemed: (date: string) => string; cancelled: string; expired: string; replaced: string };
     safety: [string, string, string];
     replace: string;
@@ -335,7 +334,6 @@ const ru: SubscriptionCopy = {
     entryLabel: 'Код подарка',
     entryGo: 'Продолжить',
     entryShort: 'В коде 12 символов — проверьте, всё ли введено.',
-    entryHint: 'Путать O и 0, I и 1 не страшно — прочитаем правильно. Можно вставить и ссылку на подарок целиком.',
     status: {
       active: (date) => `Ждёт активации · до ${date}`,
       redeemed: (date) => `Активирован ${date}`,
@@ -583,7 +581,6 @@ const en: SubscriptionCopy = {
     entryLabel: 'Gift code',
     entryGo: 'Continue',
     entryShort: 'The code has 12 characters — check that it is all there.',
-    entryHint: 'O and 0, I and 1 are read the same way. You can also paste the whole gift link here.',
     status: {
       active: (date) => `Waiting to be redeemed · until ${date}`,
       redeemed: (date) => `Redeemed on ${date}`,

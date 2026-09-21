@@ -17,7 +17,6 @@ export const pl: RedeemText = {
   entryLabel: 'Kod prezentu',
   entryGo: 'Dalej',
   entryShort: 'Kod ma 12 znaków — sprawdź, czy jest cały.',
-  entryHint: 'O i 0, I oraz 1 czytamy tak samo. Możesz też wkleić tutaj cały link do prezentu.',
   enterCode: 'Wpisz kod ręcznie',
 
   alreadySubscribed: {

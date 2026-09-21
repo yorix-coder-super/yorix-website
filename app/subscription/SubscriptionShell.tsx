@@ -39,7 +39,7 @@ export async function SubscriptionShell({
   const note = locale === lang ? copy.footer.medical : siteCopy(locale).articleUi.footer;
 
   return (
-    <main className="home-page relative min-h-screen overflow-hidden text-white" lang={locale}>
+    <main className="home-page relative flex min-h-screen flex-col overflow-hidden text-white" lang={locale}>
       <StarField />
       <SiteHeader current="subscription" giftPaths={giftPaths} locale={locale} page={page} />
 

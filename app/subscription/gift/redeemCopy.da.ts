@@ -17,7 +17,6 @@ export const da: RedeemText = {
   entryLabel: 'Gavekode',
   entryGo: 'Fortsæt',
   entryShort: 'Koden er på 12 tegn – tjek, om du har fået det hele med.',
-  entryHint: 'O og 0, I og 1 læser vi ens. Du kan også indsætte hele gavelinket her.',
   enterCode: 'Indtast koden manuelt',
 
   alreadySubscribed: {

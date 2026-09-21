@@ -17,7 +17,6 @@ export const he: RedeemText = {
   entryLabel: 'קוד המתנה',
   entryGo: 'המשך',
   entryShort: 'בקוד יש 12 תווים — בדקו שהזנתם את כולם.',
-  entryHint: 'בלבול בין O ל-0 או בין I ל-1 אינו בעיה — נקרא אותו נכון. אפשר גם להדביק כאן את קישור המתנה כולו.',
   enterCode: 'הזנת הקוד ידנית',
 
   alreadySubscribed: {

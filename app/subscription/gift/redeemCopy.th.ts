@@ -17,7 +17,6 @@ export const th: RedeemText = {
   entryLabel: 'รหัสของขวัญ',
   entryGo: 'ดำเนินการต่อ',
   entryShort: 'รหัสมี 12 ตัวอักษร ลองตรวจดูว่าครบทุกตัวหรือยัง',
-  entryHint: 'O กับ 0 และ I กับ 1 อ่านเหมือนกัน คุณจะวางลิงก์ของขวัญทั้งลิงก์ตรงนี้ก็ได้',
   enterCode: 'กรอกรหัสเอง',
 
   alreadySubscribed: {

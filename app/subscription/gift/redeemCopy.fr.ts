@@ -17,7 +17,6 @@ export const fr: RedeemText = {
   entryLabel: 'Code cadeau',
   entryGo: 'Continuer',
   entryShort: 'Le code compte 12 caractères — vérifiez qu’il est complet.',
-  entryHint: 'O et 0, I et 1 sont lus de la même façon. Vous pouvez aussi coller ici le lien du cadeau en entier.',
   enterCode: 'Saisir le code à la main',
 
   alreadySubscribed: {

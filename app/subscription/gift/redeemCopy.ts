@@ -54,7 +54,6 @@ export type RedeemText = {
   entryTitle: string;
   entryBody: string;
   entryLabel: string;
-  entryHint: string;
   enterCode: string;
   entryGo: string;
   entryShort: string;
@@ -120,7 +119,6 @@ export function baseRedeemText(docs: Lang): RedeemText {
     entryTitle: g.entryTitle,
     entryBody: g.entryBody,
     entryLabel: g.entryLabel,
-    entryHint: g.entryHint,
     enterCode: g.enterCode,
     entryGo: g.entryGo,
     entryShort: g.entryShort,

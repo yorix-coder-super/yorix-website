@@ -17,7 +17,6 @@ export const uk: RedeemText = {
   entryLabel: 'Код подарунка',
   entryGo: 'Продовжити',
   entryShort: 'У коді 12 символів — перевірте, чи все введено.',
-  entryHint: 'O і 0, I та 1 читаємо однаково. Сюди можна вставити й повне посилання на подарунок.',
   enterCode: 'Ввести код вручну',
 
   alreadySubscribed: {

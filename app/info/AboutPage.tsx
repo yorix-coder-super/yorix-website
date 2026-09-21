@@ -20,9 +20,9 @@ export function AboutPage({ locale }: { locale: SiteLocale }) {
   const home = locale === 'en' ? '/' : `/${locale}`;
 
   return (
-    <main className="home-page relative min-h-screen overflow-hidden text-white" dir={isRtl(locale) ? 'rtl' : undefined} lang={locale}>
+    <main className="home-page relative flex min-h-screen flex-col overflow-hidden text-white" dir={isRtl(locale) ? 'rtl' : undefined} lang={locale}>
       <StarField />
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-1 flex-col">
         <SiteHeader current="about" locale={locale} />
 
         <section className="relative mx-auto grid max-w-7xl items-center gap-6 px-5 pb-10 pt-4 sm:px-8 lg:grid-cols-[1.2fr_0.8fr] lg:px-10">

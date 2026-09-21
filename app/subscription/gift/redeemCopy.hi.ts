@@ -19,8 +19,6 @@ export const hi: RedeemText = {
   entryLabel: 'उपहार कोड',
   entryGo: 'जारी रखें',
   entryShort: 'कोड में 12 अक्षर होते हैं — देख लें कि पूरा भरा है या नहीं।',
-  entryHint:
-    'O और 0, I और 1 में गड़बड़ हो जाए तो चिंता नहीं — हम सही पढ़ लेंगे। यहाँ पूरा उपहार लिंक भी चिपकाया जा सकता है।',
   enterCode: 'कोड ख़ुद टाइप करें',
 
   alreadySubscribed: {

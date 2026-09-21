@@ -70,7 +70,7 @@ export async function SellerFooter({ note, locale = 'en', home }: { note: string
   ];
 
   return (
-    <footer className="relative border-t border-white/10 bg-[#0F1022]/70 text-sm text-white/60">
+    <footer className="relative mt-auto border-t border-white/10 bg-[#0F1022]/70 text-sm text-white/60">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-12 sm:grid-cols-2 sm:px-8 lg:grid-cols-[1.4fr_0.8fr_0.9fr_1.1fr_auto] lg:px-10">
         <div>
           <BrandLogo size="sm" tone="dark" />

@@ -17,7 +17,6 @@ export const pt: RedeemText = {
   entryLabel: 'Código do presente',
   entryGo: 'Continuar',
   entryShort: 'O código tem 12 caracteres — verifique se está completo.',
-  entryHint: 'O e 0, I e 1 são lidos da mesma forma. Também pode colar aqui o link completo do presente.',
   enterCode: 'Introduzir o código à mão',
 
   alreadySubscribed: {

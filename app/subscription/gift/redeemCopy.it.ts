@@ -19,8 +19,6 @@ export const it: RedeemText = {
   entryLabel: 'Codice regalo',
   entryGo: 'Continua',
   entryShort: 'Il codice è di 12 caratteri: controlla che ci siano tutti.',
-  entryHint:
-    'Confondere O e 0, I e 1 non è un problema: li leggiamo nel modo giusto. Puoi anche incollare qui il link del regalo per intero.',
   enterCode: 'Inserisci il codice a mano',
 
   alreadySubscribed: {

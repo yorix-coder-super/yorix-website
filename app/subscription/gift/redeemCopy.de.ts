@@ -17,7 +17,6 @@ export const de: RedeemText = {
   entryLabel: 'Geschenkcode',
   entryGo: 'Weiter',
   entryShort: 'Der Code hat 12 Zeichen – prüfe, ob er vollständig ist.',
-  entryHint: 'O und 0, I und 1 lesen wir gleich. Du kannst hier auch den ganzen Geschenklink einfügen.',
   enterCode: 'Code von Hand eingeben',
 
   alreadySubscribed: {

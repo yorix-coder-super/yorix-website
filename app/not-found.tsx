@@ -13,7 +13,7 @@ export const metadata: Metadata = { title: '404', robots: { index: false, follow
 // (the paying audience) with an English line underneath.
 export default function NotFound() {
   return (
-    <main className="home-page relative min-h-screen overflow-hidden text-white">
+    <main className="home-page relative flex min-h-screen flex-col overflow-hidden text-white">
       <StarField />
       <SiteHeader locale="ru" />
       <section className="relative mx-auto max-w-2xl px-5 pb-24 pt-6 text-center sm:px-8">

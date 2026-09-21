@@ -97,7 +97,7 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
   );
 
   return (
-    <main className="home-page relative min-h-screen overflow-x-clip text-white" dir={isRtl(locale ?? 'en') ? 'rtl' : undefined} lang={locale ?? 'en'}>
+    <main className="home-page relative flex min-h-screen flex-col overflow-x-clip text-white" dir={isRtl(locale ?? 'en') ? 'rtl' : undefined} lang={locale ?? 'en'}>
       <ScrollProgress />
       <StarField />
       <SiteHeader locale={locale ?? 'en'} />

@@ -17,7 +17,6 @@ export const cs: RedeemText = {
   entryLabel: 'Kód dárku',
   entryGo: 'Pokračovat',
   entryShort: 'Kód má 12 znaků — zkontroluj, jestli je celý.',
-  entryHint: 'O a 0, I a 1 čteme stejně. Vložit sem můžeš i celý odkaz na dárek.',
   enterCode: 'Zadat kód ručně',
 
   alreadySubscribed: {

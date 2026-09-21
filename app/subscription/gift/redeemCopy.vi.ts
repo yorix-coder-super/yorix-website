@@ -17,7 +17,6 @@ export const vi: RedeemText = {
   entryLabel: 'Mã quà tặng',
   entryGo: 'Tiếp tục',
   entryShort: 'Mã gồm 12 ký tự — hãy kiểm tra xem đã nhập đủ chưa.',
-  entryHint: 'O và 0, I và 1 đều được đọc như nhau. Bạn cũng có thể dán cả liên kết quà tặng vào đây.',
   enterCode: 'Nhập mã thủ công',
 
   alreadySubscribed: {

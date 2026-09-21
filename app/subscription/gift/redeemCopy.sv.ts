@@ -17,7 +17,6 @@ export const sv: RedeemText = {
   entryLabel: 'Presentkod',
   entryGo: 'Fortsätt',
   entryShort: 'Koden består av 12 tecken – kolla att allt är med.',
-  entryHint: 'O och 0, I och 1 läses likadant. Du kan även klistra in hela presentlänken här.',
   enterCode: 'Skriv in koden för hand',
 
   alreadySubscribed: {
