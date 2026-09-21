@@ -32,11 +32,12 @@ type AcquirerProfile = {
   /** The cards it takes, as the documents list them. */
   cards: { ru: string[]; en: string[] };
   /**
-   * Its own logo strip, or null to list the card brands as text. WebPay ships
-   * a separate strip for МТБанк; its packs have no «Мир», so the NSPK mark
-   * (public/payments/mir-white.svg) is appended next to whatever is here.
+   * Its own logo, or null to list the card brands instead. `withMirMark`
+   * appends NSPK's «Мир» mark: WebPay ships a strip of card logos with «Мир»
+   * missing from its packs, while ЮKassa's is a plain wordmark that stands
+   * on its own.
    */
-  strip: { src: string; width: number } | null;
+  strip: { src: string; width: number; height: number; withMirMark: boolean } | null;
   /** Does the acquirer e-mail the buyer a card receipt? Only if it is given an address. */
   emailsReceipt: boolean;
   /** Its own site, linked from the payment terms. */
@@ -48,7 +49,7 @@ const ACQUIRERS: Record<Acquirer, AcquirerProfile> = {
     id: 'webpay',
     name: { ru: 'WEBPAY', en: 'WEBPAY' },
     cards: { ru: ['Visa', 'Mastercard', 'Белкарт', 'Мир'], en: ['Visa', 'Mastercard', 'Belkart', 'Mir'] },
-    strip: { src: '/payments/webpay-banks-white.svg', width: 7944 },
+    strip: { src: '/payments/webpay-banks-white.svg', width: 7944, height: 550, withMirMark: true },
     emailsReceipt: true,
     site: 'https://www.webpay.by',
   },
@@ -57,9 +58,9 @@ const ACQUIRERS: Record<Acquirer, AcquirerProfile> = {
     name: { ru: 'ЮKassa', en: 'YooKassa' },
     // Белкарт is a Belarusian scheme; a Russian acquirer does not take it.
     cards: { ru: ['Visa', 'Mastercard', 'Мир'], en: ['Visa', 'Mastercard', 'Mir'] },
-    // No ЮKassa logo asset in the repo; the card brands are named in text
-    // instead. Drop an SVG in public/payments and set it here to show one.
-    strip: null,
+    // The white wordmark from ЮKassa's own guide (yookassa.ru/guide-instruction/#logos):
+    // white on dark, blue-black on light — this site is dark everywhere.
+    strip: { src: '/payments/yookassa-white.svg', width: 266, height: 64, withMirMark: false },
     // It e-mails a receipt only when given an address, and the checkout sends none.
     emailsReceipt: false,
     site: 'https://yookassa.ru',

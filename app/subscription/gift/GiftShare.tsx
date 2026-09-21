@@ -2,7 +2,6 @@
 
 import { useEffect, useEffectEvent, useRef, useState, useSyncExternalStore } from 'react';
 import { useAccount } from '../account';
-import { API_BASE } from '../config';
 import { subscriptionCopy } from '../copy';
 import { formatDate, type Lang } from '../i18n';
 import { planCopy, type PlanId } from '../merchant';
@@ -11,7 +10,6 @@ import { Button, Spinner } from '../ui';
 import { giftCardImage, saveBlob, type CardImageText } from './cardImage';
 import { giftUrl, redeemPageUrl } from './code';
 import { GiftCardView } from './GiftCardView';
-import { rememberCode } from './keys';
 
 // A gift as its buyer sees it (the worker's publicGift with the code).
 export type BuyerGift = {
@@ -24,7 +22,7 @@ export type BuyerGift = {
   redeemedAt: string | null;
 };
 
-type Notice = 'replaced' | 'redeemed' | 'rateLimited' | 'error' | 'cardError';
+type Notice = 'cardError';
 
 export function GiftStatus({ gift, lang }: { gift: BuyerGift; lang: Lang }) {
   const status = subscriptionCopy[lang].gift.status;
@@ -52,21 +50,11 @@ function canShareFiles(): boolean {
 // What the buyer passes on while the gift waits: the card (a picture with the
 // QR code, sent straight into a messenger), the link, the code, and the way
 // out when the link went astray. `giftKey` is the order's key on this device.
-export function GiftShare({
-  gift,
-  giftKey,
-  order,
-  onReplaced,
-}: {
-  gift: BuyerGift;
-  giftKey?: string | null;
-  order?: string;
-  onReplaced: (next: BuyerGift) => void;
-}) {
-  const { lang, getToken } = useAccount();
+export function GiftShare({ gift }: { gift: BuyerGift }) {
+  const { lang } = useAccount();
   const text = subscriptionCopy[lang].gift;
   const [copied, setCopied] = useState(false);
-  const [busy, setBusy] = useState<'replace' | 'card' | null>(null);
+  const [busy, setBusy] = useState<'card' | null>(null);
   const [notice, setNotice] = useState<Notice | null>(null);
   // Known in the browser only; the server renders the copy-first layout.
   const shareFiles = useSyncExternalStore(noSubscription, canShareFiles, () => false);
@@ -98,32 +86,6 @@ export function GiftShare({
     if (gift.status === 'active') cardBlob().catch(() => {});
   });
   useEffect(() => warmCard(), [code, gift.status]);
-
-  const replace = async () => {
-    if (busy || !window.confirm(text.replaceConfirm)) return;
-    setBusy('replace');
-    setNotice(null);
-    try {
-      const token = giftKey ? null : await getToken();
-      const res = await fetch(`${API_BASE}/v1/web/gifts/${encodeURIComponent(code)}/replace`, {
-        method: 'POST',
-        headers: giftKey ? { 'X-Gift-Key': giftKey } : token ? { 'X-Firebase-Token': token } : {},
-      });
-      if (res.ok) {
-        const next = (await res.json()) as BuyerGift;
-        if (order) rememberCode(order, next.code);
-        onReplaced(next);
-        setCopied(false);
-        setNotice('replaced');
-      } else {
-        const body = (await res.json().catch(() => ({}))) as { error?: string };
-        setNotice(body.error === 'gift_redeemed' ? 'redeemed' : res.status === 429 ? 'rateLimited' : 'error');
-      }
-    } catch {
-      setNotice('error');
-    }
-    setBusy(null);
-  };
 
   const sendCard = async () => {
     if (busy) return;
@@ -212,40 +174,22 @@ export function GiftShare({
           </div>
 
           {notice ? (
-            <p
-              className={`enter-rise mt-4 rounded-2xl px-4 py-3 text-sm ${notice === 'replaced' ? 'bg-[#A7F3D0]/10 text-[#D1FAE5]' : 'bg-[#FDE68A]/15 text-[#FDE68A]'}`}
-              role={notice === 'replaced' ? 'status' : 'alert'}
-            >
-              {notice === 'replaced' ? text.replaceDone
-                : notice === 'redeemed' ? text.errors.redeemed
-                : notice === 'rateLimited' ? text.errors.rateLimited
-                : notice === 'cardError' ? text.cardError
-                : text.errors.error}
+            <p className="enter-rise mt-4 rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm text-[#FDE68A]" role="alert">
+              {text.cardError}
             </p>
           ) : null}
         </div>
       </Reveal>
 
-      {/* The quiet half: the warning, and the way out when a link went astray. */}
+      {/* The quiet half: what the link and the code are worth. */}
       <Reveal delay={320} load="visible" className="lg:col-span-2">
-        <div className="flex flex-col gap-3 border-t border-white/10 pt-5 sm:flex-row sm:items-start sm:justify-between sm:gap-8">
-          <p className="max-w-2xl text-xs leading-5 text-white/55">
-            {text.safety[0]}
-            <a className={link} href={support}>
-              {text.safety[1]}
-            </a>
-            {text.safety[2]}
-          </p>
-          <button
-            className="inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-white/15 px-4 py-2 text-sm font-semibold text-white/80 transition hover:-translate-y-0.5 hover:border-white/40 hover:text-white active:translate-y-0 disabled:opacity-60"
-            disabled={busy === 'replace'}
-            onClick={() => void replace()}
-            type="button"
-          >
-            {busy === 'replace' ? <Spinner className="h-4 w-4" /> : null}
-            {text.replace}
-          </button>
-        </div>
+        <p className="max-w-3xl border-t border-white/10 pt-5 text-xs leading-5 text-white/55">
+          {text.safety[0]}
+          <a className={link} href={support}>
+            {text.safety[1]}
+          </a>
+          {text.safety[2]}
+        </p>
       </Reveal>
     </div>
   );

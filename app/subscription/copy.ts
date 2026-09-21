@@ -302,7 +302,7 @@ const ru: SubscriptionCopy = {
       replaced: 'Код заменён',
     },
     safety: [
-      'Активировать подарок может любой, у кого есть ссылка или код, — отправляйте их только получателю. Если ссылка ушла не туда, замените код: старая ссылка сразу перестанет работать. До активации подарок можно отменить с полным возвратом — ',
+      'Активировать подарок может любой, у кого есть ссылка или код, — отправляйте их только получателю. Если ссылка ушла не туда или подарок больше не нужен, до активации его можно отменить с полным возвратом — ',
       'напишите нам',
       '.',
     ],
@@ -520,7 +520,7 @@ const en: SubscriptionCopy = {
       replaced: 'Code replaced',
     },
     safety: [
-      'Anyone who has the link or the code can redeem the gift — send them to the recipient only. If the link went to the wrong place, replace the code: the old link stops working at once. Until it is redeemed, the gift can be cancelled with a full refund — ',
+      'Anyone who has the link or the code can redeem the gift — send them to the recipient only. If the link went to the wrong place, or the gift is no longer needed, it can be cancelled with a full refund until it is redeemed — ',
       'write to us',
       '.',
     ],

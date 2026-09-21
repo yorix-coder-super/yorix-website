@@ -149,7 +149,7 @@ function ReturnStatus() {
       )}
       {gift ? (
         <div className="mt-8">
-          <GiftShare gift={gift} giftKey={giftKey} onReplaced={setGift} order={orderInUrl()} />
+          <GiftShare gift={gift} />
         </div>
       ) : null}
       {/* Nothing follows a paid gift: the panel above is the whole job, and

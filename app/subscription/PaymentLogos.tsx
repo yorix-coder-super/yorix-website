@@ -27,7 +27,7 @@ export function PaymentLogos({ lang }: { lang: Lang }) {
   const cards = acquirer.cards[lang];
   const label = `${acquirer.name[lang]}: ${cards.join(', ')}`;
 
-  if (acquirer.strip) {
+  if (acquirer.strip?.withMirMark) {
     return (
       <div
         role="img"
@@ -36,8 +36,24 @@ export function PaymentLogos({ lang }: { lang: Lang }) {
         className="grid w-full max-w-[420px] items-center"
         style={{ gridTemplateColumns: `${acquirer.strip.width}fr 1313fr` }}
       >
-        <img src={acquirer.strip.src} alt="" className="h-auto w-full" width={acquirer.strip.width} height="550" loading="lazy" />
+        <img src={acquirer.strip.src} alt="" className="h-auto w-full" width={acquirer.strip.width} height={acquirer.strip.height} loading="lazy" />
         <img src="/payments/mir-white.svg" alt="" className="ms-auto h-auto w-[92.37%]" width="200" height="56" loading="lazy" />
+      </div>
+    );
+  }
+
+  if (acquirer.strip) {
+    // A wordmark stands alone: the cards it takes are named in the documents.
+    return (
+      <div className="w-full max-w-[420px]" dir="ltr">
+        <img
+          alt={label}
+          className="h-8 w-auto"
+          height={acquirer.strip.height}
+          loading="lazy"
+          src={acquirer.strip.src}
+          width={acquirer.strip.width}
+        />
       </div>
     );
   }

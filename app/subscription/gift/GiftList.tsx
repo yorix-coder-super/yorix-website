@@ -62,12 +62,7 @@ export function GiftList() {
                 {item.gift.to ? <span className="font-normal text-white/70"> · {text.cardFor(item.gift.to)}</span> : null}
               </p>
               <div className="mt-3">
-                <GiftShare
-                  gift={item.gift}
-                  giftKey={item.key}
-                  onReplaced={(next) => setGifts((list) => list.map((other) => (other.order === item.order ? { ...other, gift: next } : other)))}
-                  order={item.order}
-                />
+                <GiftShare gift={item.gift} />
               </div>
             </article>
           </Reveal>
