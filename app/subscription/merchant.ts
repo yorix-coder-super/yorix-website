@@ -63,6 +63,24 @@ export const charges: Record<PlanId, Record<WebCurrency, number>> = {
   year: { BYN: 119.9, RUB: 104.9 },
 };
 
+// The same, in roubles, for ЮKassa. A Russian buyer is charged the rouble
+// price they were shown; a Belarusian one pays the Belarusian price converted
+// at the same rate, so roubles never undercut it. Mirrors `amountsRub`.
+export const chargesRub: Record<PlanId, Record<WebCurrency, number>> = {
+  week: { BYN: 339, RUB: 299 },
+  month: { BYN: 681, RUB: 599 },
+  year: { BYN: 3414, RUB: 2990 },
+};
+
+export type Acquirer = 'webpay' | 'yookassa';
+
+/** What the card is actually charged, and in which currency. */
+export function chargeFor(planId: PlanId, currency: WebCurrency, acquirer: Acquirer): { amount: number; currency: WebCurrency } {
+  return acquirer === 'yookassa'
+    ? { amount: chargesRub[planId][currency], currency: 'RUB' }
+    : { amount: charges[planId][currency], currency: 'BYN' };
+}
+
 export const planCopy: Record<Lang, Record<PlanId, { title: string; forPeriod: string; days: string; purpose: string }>> = {
   ru: {
     week: { title: 'Неделя', forPeriod: 'на неделю', days: '7 дней', purpose: 'Проверить прогноз на своём малыше' },

@@ -12,12 +12,14 @@ import { currencyForVisitor, formatMoney, sellsOnWeb, type WebCurrency } from '.
 import { formatDate, subscriptionPath, type Lang } from './i18n';
 import { legalVersion } from './legal/versions';
 import { rememberGift } from './gift/keys';
-import { charges, planCopy, plans, prices, type Plan } from './merchant';
+import { chargeFor, planCopy, plans, prices, type Acquirer, type Plan } from './merchant';
 import { Money } from './Money';
 import { Button, Spinner } from './ui';
 
 type CheckoutMode = 'off' | 'test' | 'prod';
-type WebConfig = { checkoutMode: CheckoutMode };
+// `provider` is missing while the config is loading and on older workers; the
+// checkout then behaves exactly as it did before ЮKassa existed.
+type WebConfig = { checkoutMode: CheckoutMode; provider?: Acquirer };
 type Me = { premiumUntil: string | null; blocked: boolean };
 // The document editions the buyer accepted — sent with the order so the
 // acceptance can be proven later.
@@ -88,10 +90,19 @@ function signInErrorFor(code: string): ErrorKey | null {
 }
 
 // The acquirer's hosted payment page — the only place an order may send the
-// buyer — for the mode checkout runs in (the sandbox never in production).
-const PAYMENT_PAGES: Record<'test' | 'prod', RegExp> = {
-  test: /^https:\/\/securesandbox\.webpay\.by\//,
-  prod: /^https:\/\/payment\.webpay\.by\//,
+// buyer — for the mode checkout runs in (WebPay's sandbox never in
+// production). The trailing slash matters: without it yoomoney.ru.evil.example
+// and yoomoney.ru@evil.example would both pass.
+const PAYMENT_PAGES: Record<Acquirer, Record<'test' | 'prod', RegExp>> = {
+  webpay: {
+    test: /^https:\/\/securesandbox\.webpay\.by\//,
+    prod: /^https:\/\/payment\.webpay\.by\//,
+  },
+  // ЮKassa hosts both shops' pages on its own yoomoney.ru.
+  yookassa: {
+    test: /^https:\/\/yoomoney\.ru\//,
+    prod: /^https:\/\/yoomoney\.ru\//,
+  },
 };
 
 export function AccountProvider({
@@ -201,6 +212,7 @@ export function AccountProvider({
   }, [lang, loadMe]);
 
   const checkoutMode = state.config?.checkoutMode;
+  const acquirer: Acquirer = state.config?.provider ?? 'webpay';
   const createOrder = useCallback(
     async (planId: string, terms: Terms, gift?: GiftCard) => {
       const token = await getToken();
@@ -215,7 +227,7 @@ export function AccountProvider({
           body: JSON.stringify({ planId, lang, terms, ...(gift ? { gift } : {}) }),
         });
         const body = (await res.json().catch(() => ({}))) as { redirectUrl?: string; error?: string; orderId?: string; giftKey?: string };
-        const paymentPage = checkoutMode === 'test' || checkoutMode === 'prod' ? PAYMENT_PAGES[checkoutMode] : null;
+        const paymentPage = checkoutMode === 'test' || checkoutMode === 'prod' ? PAYMENT_PAGES[acquirer][checkoutMode] : null;
         if (res.ok && body.redirectUrl && paymentPage?.test(body.redirectUrl)) {
           // Kept before leaving for the bank: the only way back to this gift.
           if (gift && body.orderId && body.giftKey) rememberGift(body.orderId, body.giftKey);
@@ -230,7 +242,7 @@ export function AccountProvider({
       setState((s) => ({ ...s, busy: null, error }));
       return false;
     },
-    [getToken, lang, checkoutMode],
+    [getToken, lang, checkoutMode, acquirer],
   );
 
   const clearError = useCallback(() => setState((s) => ({ ...s, error: null })), []);
@@ -312,16 +324,21 @@ export function HeroCta() {
   return <Money text={subscriptionCopy[lang].hero.primary(formatMoney(prices.week[currency], currency, lang))} />;
 }
 
-// The acquirer charges in BYN, so a buyer from Russia sees those amounts once,
-// under the plans, before they leave for the bank's page — the screen must
-// never disagree with the receipt.
+// When the acquirer settles in another currency than the buyer's own, they
+// see those amounts once, under the plans, before they leave for the bank's
+// page — the screen must never disagree with the receipt. ЮKassa charges a
+// Russian buyer in their own roubles, so there is nothing to warn about.
 export function ChargeNote({ className = '' }: { className?: string }) {
-  const { currency, copy, lang } = useAccount();
-  if (currency === 'BYN') return null;
-  const amounts = plans.map((plan) => formatMoney(charges[plan.id][currency], 'BYN', lang)).join(' · ');
+  const { currency, copy, lang, config } = useAccount();
+  const acquirer: Acquirer = config?.provider ?? 'webpay';
+  const charged = chargeFor(plans[0].id, currency, acquirer).currency;
+  if (charged === currency) return null;
+  const amounts = plans.map((plan) => formatMoney(chargeFor(plan.id, currency, acquirer).amount, charged, lang)).join(' · ');
   return (
     <p className={className}>
-      <Money text={copy.currency.note(amounts)} />
+      {/* The Belarusian-ruble sentence names that currency; any other one is
+          stated by the amounts themselves. */}
+      <Money text={charged === 'BYN' ? copy.currency.note(amounts) : copy.terms.charge(amounts)} />
     </p>
   );
 }
@@ -370,7 +387,8 @@ export function CheckoutDialog() {
   // checkout is closed anyway.
   const live = configured && config !== null && config.checkoutMode !== 'off';
   const price = formatMoney(prices[plan.id][currency], currency, lang);
-  const charge = currency === 'BYN' ? null : formatMoney(charges[plan.id][currency], 'BYN', lang);
+  const charged = chargeFor(plan.id, currency, config?.provider ?? 'webpay');
+  const charge = charged.currency === currency ? null : formatMoney(charged.amount, charged.currency, lang);
   const active = Boolean(me?.premiumUntil && new Date(me.premiumUntil) > new Date());
   const terms: Terms = { offer: legalVersion.offer, payment: legalVersion.payment, privacy: legalVersion.privacy };
 

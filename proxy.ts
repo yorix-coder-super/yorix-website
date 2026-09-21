@@ -20,7 +20,7 @@ function contentPolicy(nonce: string) {
     "font-src 'self' data:",
     `connect-src 'self' ${apiHost} https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.googleapis.com https://apis.google.com`,
     `frame-src https://yorix-app.firebaseapp.com https://accounts.google.com https://appleid.apple.com${turnstile}`,
-    "form-action 'self' https://payment.webpay.by https://securesandbox.webpay.by",
+    "form-action 'self' https://payment.webpay.by https://securesandbox.webpay.by https://yoomoney.ru https://yookassa.ru",
     "frame-ancestors 'self'",
     "base-uri 'none'",
     "object-src 'none'",
