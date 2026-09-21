@@ -21,14 +21,59 @@ export const merchant = {
     en: 'Daily, 10:00–20:00 Minsk time',
   },
   tradeRegister: '',
-  // WebPay ships a separate logo strip for МТБанк; every other acquirer uses the generic one.
-  acquirer: 'other' as 'mtbank' | 'other',
-  // WebPay's logo packs have no «Мир»; its mark is NSPK's own white logo (public/payments/mir-white.svg).
-  cards: {
-    ru: ['Visa', 'Mastercard', 'Белкарт', 'Мир'],
-    en: ['Visa', 'Mastercard', 'Belkart', 'Mir'],
+};
+
+export type Acquirer = 'webpay' | 'yookassa';
+
+type AcquirerProfile = {
+  id: Acquirer;
+  /** The name every document and page prints. Nothing else names a bank. */
+  name: { ru: string; en: string };
+  /** The cards it takes, as the documents list them. */
+  cards: { ru: string[]; en: string[] };
+  /**
+   * Its own logo strip, or null to list the card brands as text. WebPay ships
+   * a separate strip for МТБанк; its packs have no «Мир», so the NSPK mark
+   * (public/payments/mir-white.svg) is appended next to whatever is here.
+   */
+  strip: { src: string; width: number } | null;
+  /** Does the acquirer e-mail the buyer a card receipt? Only if it is given an address. */
+  emailsReceipt: boolean;
+  /** Its own site, linked from the payment terms. */
+  site: string;
+};
+
+const ACQUIRERS: Record<Acquirer, AcquirerProfile> = {
+  webpay: {
+    id: 'webpay',
+    name: { ru: 'WEBPAY', en: 'WEBPAY' },
+    cards: { ru: ['Visa', 'Mastercard', 'Белкарт', 'Мир'], en: ['Visa', 'Mastercard', 'Belkart', 'Mir'] },
+    strip: { src: '/payments/webpay-banks-white.svg', width: 7944 },
+    emailsReceipt: true,
+    site: 'https://www.webpay.by',
+  },
+  yookassa: {
+    id: 'yookassa',
+    name: { ru: 'ЮKassa', en: 'YooKassa' },
+    // Белкарт is a Belarusian scheme; a Russian acquirer does not take it.
+    cards: { ru: ['Visa', 'Mastercard', 'Мир'], en: ['Visa', 'Mastercard', 'Mir'] },
+    // No ЮKassa logo asset in the repo; the card brands are named in text
+    // instead. Drop an SVG in public/payments and set it here to show one.
+    strip: null,
+    // It e-mails a receipt only when given an address, and the checkout sends none.
+    emailsReceipt: false,
+    site: 'https://yookassa.ru',
   },
 };
+
+/**
+ * THE SWITCH. One line changes every document, page and logo on the site.
+ * Keep it in step with the worker's WEB_PAYMENT_PROVIDER — the site only
+ * describes what the worker actually charges through.
+ */
+export const ACQUIRER: Acquirer = 'yookassa';
+
+export const acquirer = ACQUIRERS[ACQUIRER];
 
 export type PlanId = 'week' | 'month' | 'year';
 
@@ -71,8 +116,6 @@ export const chargesRub: Record<PlanId, Record<WebCurrency, number>> = {
   month: { BYN: 681, RUB: 599 },
   year: { BYN: 3414, RUB: 2990 },
 };
-
-export type Acquirer = 'webpay' | 'yookassa';
 
 /** What the card is actually charged, and in which currency. */
 export function chargeFor(planId: PlanId, currency: WebCurrency, acquirer: Acquirer): { amount: number; currency: WebCurrency } {

@@ -1,3 +1,4 @@
+import { acquirer } from '../merchant';
 import { DocumentPage } from '../DocumentPage';
 import { subscriptionPath, type Lang } from '../i18n';
 import { LegalBody, type LegalSection } from './LegalBody';
@@ -7,6 +8,10 @@ import { editionLabel } from './versions';
 export const privacyTitle = { ru: 'Политика обработки персональных данных', en: 'Personal data policy' } as const;
 
 type Ctx = { operator: string; offer: string };
+
+// The acquirer is named from merchant.ts, so switching banks never edits the policy.
+const bankRu = acquirer.name.ru;
+const bankEn = acquirer.name.en;
 
 // One policy for the site, the app and support. Every processor, data field
 // and retention period below was checked against the app, the Worker and the
@@ -45,13 +50,13 @@ function ru({ operator, offer }: Ctx): LegalSection[] {
               ],
               [
                 'Покупка подписки на Сайте, её активация и возвраты',
-                'Код аккаунта, e-mail, тариф, цена и валюта, номер заказа, номер и статус операции WEBPAY, даты оплаты и срока доступа, язык',
+                `Код аккаунта, e-mail, тариф, цена и валюта, номер заказа, номер и статус операции ${bankRu}, даты оплаты и срока доступа, язык`,
                 'Договор; обязанности по законодательству — учёт дохода и чеки (абз. 20 ст. 6)',
                 '3 года после окончания срока доступа; документы учёта дохода — в сроки налогового законодательства',
               ],
               [
                 'Подписка в подарок',
-                'Без аккаунта: тариф, цена, номер заказа, данные операции WEBPAY, текст открытки (кому и пожелание — вводит покупатель), код подарка и его статус, хэш ключа браузера покупателя; при активации — аккаунт получателя',
+                `Без аккаунта: тариф, цена, номер заказа, данные операции ${bankRu}, текст открытки (кому и пожелание — вводит покупатель), код подарка и его статус, хэш ключа браузера покупателя; при активации — аккаунт получателя`,
                 'Договор; обязанности по законодательству — учёт дохода и чеки (абз. 20 ст. 6)',
                 '3 года после активации или окончания срока кода; документы учёта дохода — в сроки налогового законодательства',
               ],
@@ -118,7 +123,7 @@ function ru({ operator, offer }: Ctx): LegalSection[] {
             ],
           },
         },
-        '3.1. Данные банковской карты вводятся только на платёжной странице WEBPAY. Мы их не получаем и не храним.',
+        `3.1. Данные банковской карты вводятся только на платёжной странице ${bankRu}. Мы их не получаем и не храним.`,
         '3.2. **Мы не продаём персональные данные.** Сведения о здоровье ребёнка не используются для рекламы и не передаются рекламным сетям.',
         `3.3. Если вы не дадите согласие там, где оно нужно, будет недоступна только соответствующая функция: дневник, прогнозы и покупка подписки работают без ИИ-коуча, аналитики и атрибуции рекламы. Условия покупки описаны в [публичном договоре](${offer}).`,
       ],
@@ -265,13 +270,13 @@ function en({ operator, offer }: Ctx): LegalSection[] {
               ],
               [
                 'Buying a subscription on the Website, activating it and refunds',
-                'Account code, e-mail, plan, price and currency, order number, WEBPAY transaction number and status, payment and access dates, language',
+                `Account code, e-mail, plan, price and currency, order number, ${bankEn} transaction number and status, payment and access dates, language`,
                 'Contract; legal obligations — income accounting and receipts (Article 6, paragraph 20)',
                 '3 years after the access period ends; income accounting documents — as required by tax law',
               ],
               [
                 'Gift subscriptions',
-                'No account: plan, price, order number, WEBPAY transaction details, the card text (recipient and message, typed by the buyer), the gift code and its status, a hash of the buyer’s browser key; on redemption — the recipient’s account',
+                `No account: plan, price, order number, ${bankEn} transaction details, the card text (recipient and message, typed by the buyer), the gift code and its status, a hash of the buyer’s browser key; on redemption — the recipient’s account`,
                 'Contract; legal obligations — income accounting and receipts (Article 6, paragraph 20)',
                 '3 years after redemption or the end of the code’s validity; income accounting documents — as required by tax law',
               ],
@@ -338,7 +343,7 @@ function en({ operator, offer }: Ctx): LegalSection[] {
             ],
           },
         },
-        '3.1. Bank card details are entered only on the WEBPAY payment page. We never receive or store them.',
+        `3.1. Bank card details are entered only on the ${bankEn} payment page. We never receive or store them.`,
         '3.2. **We do not sell personal data.** The child’s health information is not used for advertising and is not shared with ad networks.',
         `3.3. If you do not give consent where it is needed, only the feature concerned becomes unavailable: the diary, forecasts and buying a subscription work without the AI coach, analytics and ad attribution. The purchase terms are in the [public offer](${offer}).`,
       ],

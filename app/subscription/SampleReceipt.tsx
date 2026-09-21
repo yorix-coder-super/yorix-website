@@ -5,7 +5,7 @@ type Row = { label: string; value: string };
 
 const labels = {
   ru: {
-    card: { title: 'Карт-чек', subtitle: 'подтверждение оплаты WEBPAY, приходит на e-mail' },
+    card: { title: 'Карт-чек', subtitle: 'подтверждение оплаты картой' },
     tax: { title: 'Чек', subtitle: 'приложение «Налог на профессиональный доход»' },
     caption: 'Образцы документов, подтверждающих оплату. Номера и данные карты условные. Сохраняйте карт-чеки для сверки с выпиской из карт-счёта.',
     cardRows: ['Номер чека', 'Номер операции', 'Код авторизации', 'Дата платежа', 'Номер карты', 'RRN', 'Получатель платежа', 'Услуга', 'Сумма'],
@@ -16,7 +16,7 @@ const labels = {
     sample: 'ОБРАЗЕЦ',
   },
   en: {
-    card: { title: 'Card receipt', subtitle: 'WEBPAY payment confirmation, sent by e-mail' },
+    card: { title: 'Card receipt', subtitle: 'card payment confirmation' },
     tax: { title: 'Receipt', subtitle: '“Professional income tax” app' },
     caption: 'Sample payment documents. Numbers and card data are illustrative. Keep card receipts to reconcile with your card statement.',
     cardRows: ['Receipt number', 'Operation number', 'Authorization code', 'Payment date', 'Card number', 'RRN', 'Payee', 'Service', 'Amount'],

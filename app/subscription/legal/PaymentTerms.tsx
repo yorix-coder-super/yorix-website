@@ -2,7 +2,7 @@ import { headers } from 'next/headers';
 import { DocumentPage } from '../DocumentPage';
 import { currencyForVisitor, formatMoney } from '../currency';
 import { subscriptionPath, type Lang } from '../i18n';
-import { charges, formatByn, listJoin, merchant, planCopy, plans, prices } from '../merchant';
+import { ACQUIRER, acquirer, chargeToSpellOut, formatByn, listJoin, merchant, planCopy, plans, prices } from '../merchant';
 import { PaymentLogos } from '../PaymentLogos';
 import { SampleReceipt } from '../SampleReceipt';
 import { editionLabel } from './versions';
@@ -18,11 +18,17 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
   const russia = currencyForVisitor(requestHeaders.get('cf-ipcountry'), requestHeaders.get('accept-language')) === 'RUB';
   // Support is reached through the site's form; the address itself stays in the offer's requisites.
   const form = <a href={`${lang === 'ru' ? '/ru' : ''}/support#contact`}>{lang === 'ru' ? 'форму «Написать нам»' : 'the “Write to us” form'}</a>;
-  const cards = listJoin(merchant.cards[lang], lang);
+  const cards = listJoin(acquirer.cards[lang], lang);
+  // Every mention of a bank on this page comes from here (merchant.ts ACQUIRER).
+  const bank = acquirer.name[lang];
   const offer = subscriptionPath(lang, '/offer');
   const priceOf = (planId: (typeof plans)[number]['id']) =>
     russia
-      ? `${formatMoney(prices[planId].RUB, 'RUB', lang)} (${lang === 'ru' ? 'к списанию' : 'charged as'} ${formatByn(charges[planId].RUB, lang, 'code')})`
+      ? (() => {
+          const spelled = chargeToSpellOut(planId, 'RUB', ACQUIRER);
+          const price = formatMoney(prices[planId].RUB, 'RUB', lang);
+          return spelled === null ? price : `${price} (${lang === 'ru' ? 'к списанию' : 'charged as'} ${formatByn(spelled, lang, 'code')})`;
+        })()
       : formatByn(prices[planId].BYN, lang, 'code');
   const planList = (
     <ul>
@@ -61,7 +67,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
             Tick that you accept the <a href={offer}>public offer</a> and these terms, and press “Continue with Apple”: sign in with the Apple
             account you use in the Yorix app.
           </li>
-          <li>The secure WEBPAY payment page opens: enter your card details and confirm the payment.</li>
+          <li>The secure {bank} payment page opens: enter your card details and confirm the payment.</li>
           <li>Right after payment the subscription turns on automatically in the Yorix app on your account — no codes, no manual activation.</li>
         </ol>
         <p>
@@ -75,8 +81,8 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         <h2>Payment methods</h2>
         <p>
           Online payment by bank card through the{' '}
-          <a href="https://www.webpay.by" rel="noopener noreferrer" target="_blank">
-            WEBPAY
+          <a href={acquirer.site} rel="noopener noreferrer" target="_blank">
+            {bank}
           </a>{' '}
           system. Accepted cards: {cards}. There are no other payment methods.
         </p>
@@ -85,7 +91,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         <h2>Payment rules and security</h2>
         <blockquote>
           <p>
-            The secure WEBPAY server establishes an encrypted connection over the TLS protocol and confidentially receives the client’s card data
+            The secure {bank} server establishes an encrypted connection over the TLS protocol and confidentially receives the client’s card data
             (card number, cardholder name, expiry date and the CVC/CVC2 security code).
           </p>
           <p>
@@ -115,7 +121,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
 
         <h2>Cancellation and refunds</h2>
         <blockquote>
-          <p>When paying by bank card through the WEBPAY system, refunds are made to the same card that was used for the payment.</p>
+          <p>When paying by bank card through the {bank} system, refunds are made to the same card that was used for the payment.</p>
         </blockquote>
         <p>There is no auto-renewal: the card is not saved, nothing is charged after the payment and there is nothing to cancel.</p>
         <ul>
@@ -140,7 +146,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
 
         <h2>Payment confirmation document</h2>
         <p>
-          Two documents confirm the payment: the WEBPAY card receipt confirming the card payment, and a receipt from the “Professional income
+          Two documents confirm the payment: the {bank} card receipt confirming the card payment, and a receipt from the “Professional income
           tax” app confirming that the seller received the payment, which we send within the time set by tax law. Personal data in the samples is illustrative.
         </p>
         <SampleReceipt lang={lang} />
@@ -167,7 +173,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
           Отметьте, что принимаете <a href={offer}>публичный договор</a> и эти условия, и нажмите «Продолжить с Apple»: войдите тем же аккаунтом
           Apple, что и в приложении Yorix.
         </li>
-        <li>Откроется защищённая платёжная страница WEBPAY: введите данные карты и подтвердите оплату.</li>
+        <li>Откроется защищённая платёжная страница {bank}: введите данные карты и подтвердите оплату.</li>
         <li>Сразу после оплаты подписка автоматически включится в приложении Yorix на вашем аккаунте — без кодов и ручной активации.</li>
       </ol>
       <p>
@@ -181,8 +187,8 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
       <h2>Способы оплаты</h2>
       <p>
         Оплата банковской платёжной картой онлайн через систему{' '}
-        <a href="https://www.webpay.by" rel="noopener noreferrer" target="_blank">
-          WEBPAY
+        <a href={acquirer.site} rel="noopener noreferrer" target="_blank">
+          {bank}
         </a>
         . Принимаются карты {cards}. Других способов оплаты нет.
       </p>
@@ -191,7 +197,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
       <h2>Правила оплаты и безопасность платежей</h2>
       <blockquote>
         <p>
-          Безопасный сервер WEBPAY устанавливает шифрованное соединение по защищённому протоколу TLS и конфиденциально принимает от клиента данные
+          Безопасный сервер {bank} устанавливает шифрованное соединение по защищённому протоколу TLS и конфиденциально принимает от клиента данные
           его платёжной карты (номер карты, имя держателя, дату окончания действия и контрольный номер банковской карточки CVC/CVC2).
         </p>
         <p>
@@ -223,7 +229,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
       <h2>Отмена заказа и возврат денежных средств</h2>
       <blockquote>
         <p>
-          При оплате банковской платёжной картой через систему WEBPAY возврат денежных средств осуществляется на ту же карточку, с которой была
+          При оплате банковской платёжной картой через систему {bank} возврат денежных средств осуществляется на ту же карточку, с которой была
           произведена оплата.
         </p>
       </blockquote>
@@ -247,7 +253,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
 
       <h2>Документ, подтверждающий оплату</h2>
       <p>
-        Оплату подтверждают два документа: карт-чек WEBPAY — подтверждение оплаты картой, и чек из приложения «Налог на профессиональный
+        Оплату подтверждают два документа: карт-чек {bank} — подтверждение оплаты картой, и чек из приложения «Налог на профессиональный
         доход» — документ, подтверждающий получение оплаты продавцом; его направляем в срок, установленный налоговым законодательством. Персональные данные в образцах условные.
       </p>
       <SampleReceipt lang={lang} />
