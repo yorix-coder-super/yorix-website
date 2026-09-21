@@ -1,7 +1,7 @@
 import type { Lang } from './i18n';
 
 // Regional pricing, like the App Store: the visitor's country decides which
-// price list they see (merchant.ts), and WebPay charges the BYN equivalent
+// price list they see (merchant.ts), and the acquirer charges the equivalent
 // of exactly that price. The visitor cannot switch the currency by hand —
 // that would be a price-shopping tool.
 export type Currency = 'BYN' | 'RUB' | 'EUR' | 'USD';

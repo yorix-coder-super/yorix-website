@@ -32,7 +32,7 @@ export type SubscriptionCopy = {
     rateLimited: string;
   };
   faq: { title: string; items: { q: string; a: string }[]; more: string };
-  ret: { checking: string; paid: (date: string) => string; openApp: string; pending: string; failed: string; signIn: string; back: string };
+  ret: { checking: string; paid: (date: string) => string; openApp: string; pending: string; failed: string; signIn: string; back: string; badgeTop: string; scan: string };
   cancel: { title: string; body: string; back: string };
   footer: {
     seller: string;
@@ -126,7 +126,7 @@ export type SubscriptionCopy = {
 const ru: SubscriptionCopy = {
   meta: {
     title: 'Подписка Yorix — оплата картой, без App Store',
-    description: 'Прогноз сна, коуч 24/7 и аналитика на неделю, месяц или год. Одна оплата картой через WebPay, без автопродления.',
+    description: 'Прогноз сна, коуч 24/7 и аналитика на неделю, месяц или год. Одна оплата картой, без автопродления.',
     ogLocale: 'ru_RU',
   },
   nav: { plans: 'Тарифы', reviews: 'Отзывы', faq: 'Вопросы', documents: 'Документы', choosePlan: 'Выбрать тариф', language: 'Язык' },
@@ -167,7 +167,7 @@ const ru: SubscriptionCopy = {
   checkout: {
     signingIn: 'Открываем вход через Apple…',
     creating: 'Создаём оплату…',
-    redirecting: 'Переходим в WebPay…',
+    redirecting: 'Переходим к оплате…',
     unavailable: 'Оплата картой на сайте скоро откроется.',
     testOnly: 'Оплата картой пока открыта только для тестирования.',
     error: 'Не получилось создать оплату. Попробуйте ещё раз через минуту.',
@@ -207,11 +207,13 @@ const ru: SubscriptionCopy = {
   ret: {
     checking: 'Проверяем оплату…',
     paid: (date) => `Подписка включена до ${date}`,
-    openApp: 'Откройте Yorix на iPhone — всё уже работает. Чек об оплате пришлёт платёжная система.',
+    openApp: 'Откройте Yorix на iPhone тем же аккаунтом Apple — функции подписки уже доступны.',
     pending: 'Банк подтверждает оплату — обычно меньше минуты. Страница обновится сама.',
     failed: 'Оплаченный заказ не найден. Если деньги списаны, напишите нам — дату и сумму.',
     signIn: 'Войдите через Apple, чтобы увидеть статус заказа.',
     back: 'К тарифам',
+    badgeTop: 'Загрузите в',
+    scan: 'Наведите камеру телефона на код, чтобы открыть Yorix в App Store',
   },
   cancel: { title: 'Оплата отменена', body: 'Деньги не списаны. Вернуться можно в любой момент.', back: 'К тарифам' },
   footer: {
@@ -310,7 +312,7 @@ const ru: SubscriptionCopy = {
     cardContact: 'Открытка — без контактов: уберите ссылки, адреса сайтов, e-mail, @ники и номера телефонов.',
     scamNote: 'Yorix никогда не просит звонить, платить или пересылать код, чтобы активировать подарок.',
     ownGiftConfirm: 'Этот подарок куплен в этом браузере. Если активировать его на ваш аккаунт, у получателя ссылка перестанет работать. Активировать на себя?',
-    lostKey: 'Если вы оплачивали подарок, откройте эту страницу в том же браузере, где платили, — или напишите нам и укажите номер заказа из чека WEBPAY.',
+    lostKey: 'Если вы оплачивали подарок, откройте эту страницу в том же браузере, где платили, — или напишите нам и укажите номер заказа из чека.',
   },
   terms: {
     title: (period) => `Подписка ${period}`,
@@ -322,7 +324,7 @@ const ru: SubscriptionCopy = {
     signInNote: 'Подписка включится в приложении Yorix на вашем аккаунте Apple сразу после оплаты — ничего вводить не нужно.',
     active: (date) => `Подписка уже действует до ${date} — новый срок добавится к ней.`,
     accept: ['Я принимаю условия ', 'публичного договора', ' и ', 'оплаты и возврата', '. Мне есть 18 лет.'],
-    privacy: ['Данные аккаунта и заказа обрабатываем для исполнения договора — ', 'Политика обработки персональных данных', '. Данные карты вводятся только на странице WEBPAY.'],
+    privacy: ['Данные аккаунта и заказа обрабатываем для исполнения договора — ', 'Политика обработки персональных данных', '. Данные карты вводятся только на странице платёжного сервиса.'],
     required: 'Отметьте, что принимаете условия: без этого оплата недоступна.',
     withApple: 'Продолжить с Apple',
     pay: (price) => `Перейти к оплате · ${price}`,
@@ -334,7 +336,7 @@ const ru: SubscriptionCopy = {
 const en: SubscriptionCopy = {
   meta: {
     title: 'Yorix subscription — pay by card, no App Store needed',
-    description: 'Sleep forecast, 24/7 coach and analytics for a week, a month or a year. One card payment via WebPay, no auto-renewal.',
+    description: 'Sleep forecast, 24/7 coach and analytics for a week, a month or a year. One card payment, no auto-renewal.',
     ogLocale: 'en_US',
   },
   nav: { plans: 'Plans', reviews: 'Reviews', faq: 'FAQ', documents: 'Documents', choosePlan: 'Choose a plan', language: 'Language' },
@@ -375,7 +377,7 @@ const en: SubscriptionCopy = {
   checkout: {
     signingIn: 'Opening Apple sign-in…',
     creating: 'Creating your payment…',
-    redirecting: 'Taking you to WebPay…',
+    redirecting: 'Taking you to the payment page…',
     unavailable: 'Card payment on the site opens soon.',
     testOnly: 'Card payment is open for testing only for now.',
     error: 'Couldn’t create the payment. Please try again in a minute.',
@@ -415,11 +417,13 @@ const en: SubscriptionCopy = {
   ret: {
     checking: 'Checking the payment…',
     paid: (date) => `Subscription on until ${date}`,
-    openApp: 'Open Yorix on your iPhone — it’s already working. The payment system sends the receipt.',
+    openApp: 'Open Yorix on your iPhone with the same Apple account — the subscription features are already there.',
     pending: 'The bank is confirming the payment — usually under a minute. This page refreshes itself.',
     failed: 'No paid order found. If money was charged, write to us with the date and amount.',
     signIn: 'Sign in with Apple to see the order status.',
     back: 'Back to plans',
+    badgeTop: 'Download on the',
+    scan: 'Point your phone camera at the code to open Yorix in the App Store',
   },
   cancel: { title: 'Payment cancelled', body: 'Nothing was charged. Come back any time.', back: 'Back to plans' },
   footer: {
@@ -521,7 +525,7 @@ const en: SubscriptionCopy = {
     cardContact: 'No contacts on the card: remove links, website addresses, e-mails, @handles and phone numbers.',
     scamNote: 'Yorix never asks you to call, pay or pass on a code to redeem a gift.',
     ownGiftConfirm: 'This gift was bought in this browser. If you redeem it on your account, the link stops working for the recipient. Redeem it for yourself?',
-    lostKey: 'If you paid for a gift, open this page in the browser you paid in — or write to us with the order number from the WEBPAY receipt.',
+    lostKey: 'If you paid for a gift, open this page in the browser you paid in — or write to us with the order number from your receipt.',
   },
   terms: {
     title: (period) => `Subscription ${period}`,
@@ -533,7 +537,7 @@ const en: SubscriptionCopy = {
     signInNote: 'It turns on in the Yorix app on your Apple account right after payment — nothing to type in.',
     active: (date) => `You already have a subscription until ${date} — the new period is added on.`,
     accept: ['I accept the ', 'public offer', ' and the ', 'payment and refund terms', '. I am 18 or older.'],
-    privacy: ['We process account and order data to perform the contract — see the ', 'personal data policy', '. Card details are entered only on the WEBPAY page.'],
+    privacy: ['We process account and order data to perform the contract — see the ', 'personal data policy', '. Card details are entered only on the payment service’s page.'],
     required: 'Tick the box to accept the terms — payment is not available without it.',
     withApple: 'Continue with Apple',
     pay: (price) => `Continue to payment · ${price}`,

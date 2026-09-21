@@ -7,7 +7,7 @@ import { subscriptionCopy } from '../copy';
 import { formatMoney } from '../currency';
 import { subscriptionPath } from '../i18n';
 import { legalVersion } from '../legal/versions';
-import { chargeFor, planCopy, prices } from '../merchant';
+import { chargeToSpellOut, planCopy, prices } from '../merchant';
 import { Money } from '../Money';
 import { Reveal } from '../Reveal';
 import { Button, Spinner } from '../ui';
@@ -35,8 +35,8 @@ export function GiftCheckout() {
   const acceptRef = useRef<HTMLInputElement>(null);
 
   const price = formatMoney(prices[planId][currency], currency, lang);
-  const charged = chargeFor(planId, currency, config?.provider ?? 'webpay');
-  const charge = charged.currency === currency ? null : formatMoney(charged.amount, charged.currency, lang);
+  const spelled = chargeToSpellOut(planId, currency, config?.provider ?? 'webpay');
+  const charge = spelled === null ? null : formatMoney(spelled, 'BYN', lang);
   const live = configured && config !== null && config.checkoutMode !== 'off';
   const testing = config?.checkoutMode === 'test';
   const terms: Terms = { offer: legalVersion.offer, payment: legalVersion.payment, privacy: legalVersion.privacy };

@@ -12,7 +12,7 @@ import { currencyForVisitor, formatMoney, sellsOnWeb, type WebCurrency } from '.
 import { formatDate, subscriptionPath, type Lang } from './i18n';
 import { legalVersion } from './legal/versions';
 import { rememberGift } from './gift/keys';
-import { chargeFor, planCopy, plans, prices, type Acquirer, type Plan } from './merchant';
+import { chargeToSpellOut, planCopy, plans, prices, type Acquirer, type Plan } from './merchant';
 import { Money } from './Money';
 import { Button, Spinner } from './ui';
 
@@ -331,14 +331,12 @@ export function HeroCta() {
 export function ChargeNote({ className = '' }: { className?: string }) {
   const { currency, copy, lang, config } = useAccount();
   const acquirer: Acquirer = config?.provider ?? 'webpay';
-  const charged = chargeFor(plans[0].id, currency, acquirer).currency;
-  if (charged === currency) return null;
-  const amounts = plans.map((plan) => formatMoney(chargeFor(plan.id, currency, acquirer).amount, charged, lang)).join(' · ');
+  const spelled = plans.map((plan) => chargeToSpellOut(plan.id, currency, acquirer));
+  if (spelled.some((amount) => amount === null)) return null;
+  const amounts = spelled.map((amount) => formatMoney(amount!, 'BYN', lang)).join(' · ');
   return (
     <p className={className}>
-      {/* The Belarusian-ruble sentence names that currency; any other one is
-          stated by the amounts themselves. */}
-      <Money text={charged === 'BYN' ? copy.currency.note(amounts) : copy.terms.charge(amounts)} />
+      <Money text={copy.currency.note(amounts)} />
     </p>
   );
 }
@@ -387,8 +385,8 @@ export function CheckoutDialog() {
   // checkout is closed anyway.
   const live = configured && config !== null && config.checkoutMode !== 'off';
   const price = formatMoney(prices[plan.id][currency], currency, lang);
-  const charged = chargeFor(plan.id, currency, config?.provider ?? 'webpay');
-  const charge = charged.currency === currency ? null : formatMoney(charged.amount, charged.currency, lang);
+  const spelled = chargeToSpellOut(plan.id, currency, config?.provider ?? 'webpay');
+  const charge = spelled === null ? null : formatMoney(spelled, 'BYN', lang);
   const active = Boolean(me?.premiumUntil && new Date(me.premiumUntil) > new Date());
   const terms: Terms = { offer: legalVersion.offer, payment: legalVersion.payment, privacy: legalVersion.privacy };
 

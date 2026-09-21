@@ -98,7 +98,7 @@ export const translation: SiteTranslation = {
     notes: { hero: 'Calm babies, happy parents', coach: 'Support at any hour', cta: 'The best is ahead' },
     more: 'Learn more',
     reviews: { title: 'Real parents. Real stories.', body: 'Unedited words from parents — nothing polished, nothing invented.' },
-    pricing: { secure: 'Secure card payment via WebPay', activates: 'The subscription turns on in the app right after payment', questions: 'Questions? Write to us' },
+    pricing: { secure: 'Secure card payment', activates: 'The subscription turns on in the app right after payment', questions: 'Questions? Write to us' },
     highlight: { soft: 'before', warm: 'fussing starts.' },
     screenAlt: 'Yorix today screen with the night sleep window',
     showcaseAlt: { progress: 'Yorix progress: sleep and feeding statistics', bedtime: 'Yorix bedtime sounds', coach: 'Yorix AI coach chat' },

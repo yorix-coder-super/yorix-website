@@ -54,7 +54,7 @@ export const prices: Record<PlanId, Record<WebCurrency, number>> = {
   year: { BYN: 119.9, RUB: 2990 },
 };
 
-// What WebPay actually charges for that price, in BYN — the receipt says
+// What a Belarusian-ruble acquirer charges for that price — the receipt says
 // this number, so the page says it too before the buyer leaves. Mirrors
 // `amounts` in the worker's src/web/plans.ts; the worker is the authority.
 export const charges: Record<PlanId, Record<WebCurrency, number>> = {
@@ -79,6 +79,17 @@ export function chargeFor(planId: PlanId, currency: WebCurrency, acquirer: Acqui
   return acquirer === 'yookassa'
     ? { amount: chargesRub[planId][currency], currency: 'RUB' }
     : { amount: charges[planId][currency], currency: 'BYN' };
+}
+
+/**
+ * The amount to spell out beside the price, or null when there is nothing to
+ * say. Only a charge in Belarusian rubles is spelled out (owner, 2026-09-21):
+ * its sentence names that currency, while a rouble amount would only repeat
+ * the rouble price the buyer is already reading.
+ */
+export function chargeToSpellOut(planId: PlanId, currency: WebCurrency, acquirer: Acquirer): number | null {
+  const charge = chargeFor(planId, currency, acquirer);
+  return charge.currency === 'BYN' && charge.currency !== currency ? charge.amount : null;
 }
 
 export const planCopy: Record<Lang, Record<PlanId, { title: string; forPeriod: string; days: string; purpose: string }>> = {

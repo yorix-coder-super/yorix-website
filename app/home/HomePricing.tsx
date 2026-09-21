@@ -71,7 +71,7 @@ export async function HomePricing({ locale }: { locale: SiteLocale }) {
 }
 
 // Three plan cards (the year first on phones) and the four promises beside
-// them: one payment, WebPay, instant activation, a human to write to. Must sit
+// them: one payment, no auto-renewal, instant activation, a human to write to. Must sit
 // inside an AccountProvider.
 export function PlanGrid({ locale }: { locale: SiteLocale }) {
   const site = siteCopy(locale);
