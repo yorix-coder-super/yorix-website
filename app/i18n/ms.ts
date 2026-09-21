@@ -79,8 +79,8 @@ export const translation: SiteTranslation = {
     },
     cta: {
       badge: 'Dibina untuk kehidupan keluarga sebenar',
-      title: 'Catat satu tidur siang hari ini. Pelan esok sudah tersedia.',
-      body: 'Tidur, penyusuan, lampin, tumbesaran dan penjagaan dengan sekali ketik — serta pelan untuk esok yang dibina daripada apa yang anda catat.',
+      title: 'Catat satu tidur hari ini, dan pelan esok tersusun sendiri.',
+      body: 'Tidur, penyusuan, lampin, tumbesaran — dengan sekali ketik. Lebih banyak anda catat, lebih tepat Yorix mengira waktu tidur siang seterusnya.',
       action: 'Muat turun Yorix',
     },
     footer: 'Yorix membantu rutin harian bayi anda dan tidak memberikan penjagaan perubatan.',

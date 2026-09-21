@@ -79,8 +79,8 @@ export const translation: SiteTranslation = {
     },
     cta: {
       badge: 'Pro skutečný rodinný život',
-      title: 'Zapiš dnes večer jeden spánek. Plán na zítřek už je připravený.',
-      body: 'Spánek, krmení, plenky, růst a péče jedním klepnutím — a plán na zítřek sestavený z tvých záznamů.',
+      title: 'Zapiš dnes jeden spánek – plán na zítřek se sestaví sám.',
+      body: 'Spánek, krmení, plenky, růst – jedním klepnutím. Čím víc zapíšeš, tím přesněji Yorix trefí okno dalšího denního spánku.',
       action: 'Stáhnout Yorix',
     },
     footer: 'Yorix pomáhá s rutinou tvého miminka a neposkytuje lékařskou péči.',

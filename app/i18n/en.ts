@@ -84,8 +84,8 @@ export const translation: SiteTranslation = {
     },
     cta: {
       badge: 'Built for real family life',
-      title: 'Log one nap tonight. Tomorrow’s plan is already there.',
-      body: 'Sleep, feeds, diapers, growth and care in one tap — and a plan for tomorrow built from what you logged.',
+      title: 'Log one nap today, and tomorrow’s plan builds itself.',
+      body: 'Sleep, feeds, diapers, growth — one tap each. The more you log, the more precisely Yorix finds the next nap window.',
       action: 'Download Yorix',
     },
     footer: 'Yorix helps with your baby’s routine and does not provide medical care.',

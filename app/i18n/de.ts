@@ -79,8 +79,8 @@ export const translation: SiteTranslation = {
     },
     cta: {
       badge: 'Für den echten Familienalltag',
-      title: 'Trag heute Abend ein Nickerchen ein. Der Plan für morgen ist schon da.',
-      body: 'Schlaf, Mahlzeiten, Windeln, Wachstum und Pflege mit einem Fingertipp – und ein Plan für morgen aus dem, was du eingetragen hast.',
+      title: 'Trag heute einen Schlaf ein – der Plan für morgen entsteht von selbst.',
+      body: 'Schlaf, Mahlzeiten, Windeln, Wachstum – mit einem Fingertipp. Je mehr du einträgst, desto genauer trifft Yorix das nächste Schlaffenster.',
       action: 'Yorix herunterladen',
     },
     footer: 'Yorix hilft bei der Routine deines Babys und leistet keine medizinische Versorgung.',

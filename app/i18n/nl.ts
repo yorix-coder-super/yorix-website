@@ -79,8 +79,8 @@ export const translation: SiteTranslation = {
     },
     cta: {
       badge: 'Voor het echte gezinsleven',
-      title: 'Leg vanavond één dutje vast. Het plan voor morgen staat al klaar.',
-      body: 'Slaap, voedingen, luiers, groei en verzorging met één tik – en een plan voor morgen, opgebouwd uit wat je hebt vastgelegd.',
+      title: 'Leg vandaag één dutje vast – het plan voor morgen maakt zichzelf.',
+      body: 'Slaap, voedingen, luiers, groei – met één tik. Hoe meer je vastlegt, hoe preciezer Yorix het volgende slaapvenster bepaalt.',
       action: 'Download Yorix',
     },
     footer: 'Yorix helpt met de routine van je baby en verleent geen medische zorg.',

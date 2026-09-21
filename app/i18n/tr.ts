@@ -79,8 +79,8 @@ export const translation: SiteTranslation = {
     },
     cta: {
       badge: 'Gerçek aile hayatı için tasarlandı',
-      title: 'Bu akşam tek bir uyku kaydedin. Yarının planı zaten hazır.',
-      body: 'Uyku, beslenme, bez, büyüme ve bakım tek dokunuşla — ve kaydettiklerinizden oluşturulan bir yarın planı.',
+      title: 'Bugün tek bir uyku kaydedin, yarının planı kendiliğinden oluşsun.',
+      body: 'Uyku, beslenme, bez, büyüme — tek dokunuşla. Ne kadar çok kaydederseniz, Yorix bir sonraki gündüz uykusu penceresini o kadar isabetli bulur.',
       action: 'Yorix’i indir',
     },
     footer: 'Yorix bebeğinizin rutinine yardımcı olur ve tıbbi bakım sağlamaz.',

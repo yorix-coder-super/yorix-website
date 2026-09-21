@@ -79,8 +79,8 @@ export const translation: SiteTranslation = {
     },
     cta: {
       badge: 'Laget for ekte familieliv',
-      title: 'Logg én lur i kveld. Morgendagens plan er allerede klar.',
-      body: 'Søvn, mating, bleier, vekst og stell med ett trykk – og en plan for i morgen, bygd på det du har logget.',
+      title: 'Logg én lur i dag – så lager morgendagens plan seg selv.',
+      body: 'Søvn, mating, bleier, vekst – med ett trykk. Jo mer du logger, jo mer presist treffer Yorix vinduet for neste lur.',
       action: 'Last ned Yorix',
     },
     footer: 'Yorix hjelper med babyens rutiner og gir ikke medisinsk hjelp.',

@@ -79,8 +79,8 @@ export const translation: SiteTranslation = {
     },
     cta: {
       badge: 'Gjord för verkligt familjeliv',
-      title: 'Logga en tupplur i kväll. Morgondagens plan är redan klar.',
-      body: 'Sömn, matning, blöjor, tillväxt och omsorg med ett tryck – och en plan för i morgon, byggd på det du har loggat.',
+      title: 'Logga en tupplur i dag – så bygger morgondagens plan sig själv.',
+      body: 'Sömn, matning, blöjor, tillväxt – med ett tryck. Ju mer du loggar, desto mer exakt träffar Yorix fönstret för nästa tupplur.',
       action: 'Hämta Yorix',
     },
     footer: 'Yorix hjälper till med bebisens rutiner och ger ingen medicinsk vård.',

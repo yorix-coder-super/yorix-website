@@ -79,8 +79,8 @@ export const translation: SiteTranslation = {
     },
     cta: {
       badge: 'Pensado para la vida familiar real',
-      title: 'Registra una siesta esta noche. El plan de mañana ya está listo.',
-      body: 'Sueño, tomas, pañales, crecimiento y cuidados con un toque, y un plan para mañana hecho con lo que registraste.',
+      title: 'Registra hoy una siesta y el plan de mañana se arma solo.',
+      body: 'Sueño, tomas, pañales, crecimiento: con un toque. Cuanto más registres, con más precisión calcula Yorix la próxima ventana de siesta.',
       action: 'Descargar Yorix',
     },
     footer: 'Yorix te ayuda con la rutina de tu bebé y no ofrece atención médica.',

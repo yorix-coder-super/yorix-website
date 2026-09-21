@@ -79,8 +79,8 @@ export const translation: SiteTranslation = {
     },
     cta: {
       badge: 'Dành cho cuộc sống gia đình thực tế',
-      title: 'Hôm nay ghi lại một giấc ngủ ngày. Kế hoạch ngày mai đã có sẵn.',
-      body: 'Giấc ngủ, cữ ăn, tã, tăng trưởng và chăm sóc chỉ với một chạm — cùng kế hoạch cho ngày mai được lập từ chính những gì bạn đã ghi.',
+      title: 'Hôm nay ghi lại một giấc ngủ, kế hoạch ngày mai sẽ tự hình thành.',
+      body: 'Giấc ngủ, cữ ăn, tã, tăng trưởng — chỉ với một chạm. Bạn ghi càng nhiều, Yorix càng tính chính xác khung giờ ngủ ngày tiếp theo.',
       action: 'Tải Yorix',
     },
     footer: 'Yorix hỗ trợ nếp sinh hoạt của bé và không cung cấp dịch vụ y tế.',

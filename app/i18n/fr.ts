@@ -79,8 +79,8 @@ export const translation: SiteTranslation = {
     },
     cta: {
       badge: 'Pensé pour la vraie vie de famille',
-      title: 'Enregistrez une sieste ce soir. Le plan de demain est déjà prêt.',
-      body: 'Sommeil, repas, couches, croissance et soins en un geste — et un plan pour demain construit à partir de ce que vous avez noté.',
+      title: 'Notez une sieste aujourd’hui : le plan de demain se construit tout seul.',
+      body: 'Sommeil, repas, couches, croissance — en un geste. Plus vous notez, plus Yorix calcule précisément la prochaine fenêtre de sieste.',
       action: 'Télécharger Yorix',
     },
     footer: 'Yorix vous aide avec la routine de votre bébé et ne fournit pas de soins médicaux.',

@@ -79,8 +79,8 @@ export const translation: SiteTranslation = {
     },
     cta: {
       badge: 'Stworzony dla prawdziwego życia rodzinnego',
-      title: 'Zapisz dziś wieczorem jedną drzemkę. Plan na jutro już czeka.',
-      body: 'Sen, karmienia, pieluchy, wzrost i pielęgnacja jednym dotknięciem — i plan na jutro zbudowany z Twoich wpisów.',
+      title: 'Zapisz dziś jedną drzemkę – plan na jutro ułoży się sam.',
+      body: 'Sen, karmienia, pieluchy, wzrost – jednym dotknięciem. Im więcej zapiszesz, tym dokładniej Yorix trafia w okno kolejnej drzemki.',
       action: 'Pobierz Yorix',
     },
     footer: 'Yorix pomaga w rutynie Twojego dziecka i nie świadczy opieki medycznej.',

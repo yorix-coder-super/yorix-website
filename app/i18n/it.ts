@@ -79,8 +79,8 @@ export const translation: SiteTranslation = {
     },
     cta: {
       badge: 'Pensato per la vera vita in famiglia',
-      title: 'Registra una nanna stasera. Il piano di domani è già pronto.',
-      body: 'Sonno, pappe, pannolini, crescita e cure con un tocco — e un piano per domani costruito su ciò che hai registrato.',
+      title: 'Registra oggi una nanna: il piano di domani si costruisce da sé.',
+      body: 'Sonno, pappe, pannolini, crescita — con un tocco. Più registri, più Yorix azzecca la finestra della prossima nanna.',
       action: 'Scarica Yorix',
     },
     footer: 'Yorix aiuta con la routine del tuo bambino e non fornisce assistenza medica.',

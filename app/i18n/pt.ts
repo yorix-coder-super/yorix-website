@@ -79,8 +79,8 @@ export const translation: SiteTranslation = {
     },
     cta: {
       badge: 'Feito para a vida real em família',
-      title: 'Registe uma sesta esta noite. O plano de amanhã já lá está.',
-      body: 'Sono, mamadas, fraldas, crescimento e cuidados com um só toque — e um plano para amanhã feito a partir dos seus registos.',
+      title: 'Registe hoje uma sesta e o plano de amanhã monta-se sozinho.',
+      body: 'Sono, mamadas, fraldas, crescimento — com um só toque. Quanto mais registar, mais precisa fica a janela da próxima sesta.',
       action: 'Transferir o Yorix',
     },
     footer: 'O Yorix ajuda com a rotina do seu bebé e não presta cuidados médicos.',

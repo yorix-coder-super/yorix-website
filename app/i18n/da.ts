@@ -79,8 +79,8 @@ export const translation: SiteTranslation = {
     },
     cta: {
       badge: 'Til det virkelige familieliv',
-      title: 'Registrer én lur i aften. Planen for i morgen er allerede klar.',
-      body: 'Søvn, måltider, bleer, vækst og pleje med ét tryk – og en plan for i morgen, bygget på det, du har registreret.',
+      title: 'Registrer én lur i dag – så laver planen for i morgen sig selv.',
+      body: 'Søvn, måltider, bleer, vækst – med ét tryk. Jo mere du registrerer, jo mere præcist rammer Yorix næste søvnvindue.',
       action: 'Hent Yorix',
     },
     footer: 'Yorix hjælper med din babys rutiner og yder ikke lægehjælp.',
