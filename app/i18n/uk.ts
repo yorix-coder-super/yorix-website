@@ -459,6 +459,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
+  giftNav: 'Подарунок',
   footerLabels: { product: 'Продукт', features: 'Можливості', guides: 'Гайди', support: 'Підтримка', write: 'Написати нам', redeem: 'Активувати подарунок', badgeTop: 'Завантажте в', social: 'Ми в соцмережах', scan: 'Наведіть камеру телефона', scanHint: 'Yorix відкриється в App Store' },
   docsNote: 'Документи доступні англійською та російською мовами.',
   topics: {

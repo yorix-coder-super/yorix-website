@@ -460,6 +460,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
+  giftNav: 'ギフト',
   footerLabels: { product: 'サービス', features: '機能', guides: 'ガイド', support: 'サポート', write: 'お問い合わせ', redeem: 'ギフトを使う', badgeTop: 'ダウンロード', social: '公式SNS', scan: 'スマホのカメラで読み取る', scanHint: 'App StoreでYorixが開きます' },
   docsNote: '規約・ポリシーは英語とロシア語でご覧いただけます。',
   topics: {

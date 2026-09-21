@@ -97,6 +97,9 @@ export type SiteTranslation = {
   testimonials: [string, string, string];
   support: SupportCopy;
   about: AboutCopy;
+  // Header link to the gift page. The gift pages themselves are Russian and
+  // English only, but the link a visitor reads is in their own language.
+  giftNav: string;
   footerLabels: { product: string; features: string; guides: string; support: string; write: string; redeem: string; badgeTop: string; social: string; scan: string; scanHint: string };
   // Under the acceptance box when the documents are not in this language.
   docsNote: string;

@@ -331,6 +331,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
+  giftNav: 'Подарок',
   footerLabels: { product: 'Продукт', features: 'Возможности', guides: 'Гайды', support: 'Поддержка', write: 'Написать нам', redeem: 'Активировать подарок', badgeTop: 'Загрузите в', social: 'Мы в соцсетях', scan: 'Наведите камеру телефона', scanHint: 'Yorix откроется в App Store' },
   docsNote: '',
   topics: {

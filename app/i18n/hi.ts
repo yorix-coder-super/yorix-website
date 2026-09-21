@@ -460,6 +460,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
+  giftNav: 'उपहार',
   footerLabels: { product: 'प्रोडक्ट', features: 'फ़ीचर्स', guides: 'गाइड', support: 'सहायता', write: 'हमें लिखें', redeem: 'उपहार रिडीम करें', badgeTop: 'डाउनलोड करें', social: 'हमें फ़ॉलो करें', scan: 'फ़ोन के कैमरे से स्कैन करें', scanHint: 'Yorix App Store में खुलेगा' },
   docsNote: 'दस्तावेज़ अंग्रेज़ी और रूसी में उपलब्ध हैं।',
   topics: {

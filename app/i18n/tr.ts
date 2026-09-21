@@ -459,6 +459,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
+  giftNav: 'Hediye',
   footerLabels: { product: 'Ürün', features: 'Özellikler', guides: 'Rehberler', support: 'Destek', write: 'Bize yazın', redeem: 'Hediye kodunu kullan', badgeTop: 'Şuradan indirin', social: 'Bizi takip edin', scan: 'Telefonunuzun kamerasıyla tarayın', scanHint: 'Yorix, App Store’da açılır' },
   docsNote: 'Belgeler İngilizce ve Rusça olarak mevcuttur.',
   topics: {

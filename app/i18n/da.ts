@@ -459,6 +459,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
+  giftNav: 'Gave',
   footerLabels: { product: 'Produkt', features: 'Funktioner', guides: 'Guider', support: 'Support', write: 'Skriv til os', redeem: 'Indløs en gave', badgeTop: 'Hent i', social: 'Følg os', scan: 'Scan med telefonens kamera', scanHint: 'Yorix åbner i App Store' },
   docsNote: 'Dokumenterne findes på engelsk og russisk.',
   topics: {

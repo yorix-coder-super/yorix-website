@@ -468,6 +468,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
+  giftNav: 'Regalo',
   footerLabels: { product: 'Prodotto', features: 'Funzioni', guides: 'Guide', support: 'Assistenza', write: 'Scrivici', redeem: 'Riscatta un regalo', badgeTop: 'Scarica su', social: 'Seguici', scan: 'Inquadra con la fotocamera del telefono', scanHint: 'Yorix si apre nell’App Store' },
   docsNote: 'I documenti sono disponibili in inglese e in russo.',
   topics: {

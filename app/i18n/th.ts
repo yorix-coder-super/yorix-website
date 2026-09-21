@@ -460,6 +460,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
+  giftNav: 'ของขวัญ',
   footerLabels: { product: 'ผลิตภัณฑ์', features: 'ฟีเจอร์', guides: 'คู่มือ', support: 'ช่วยเหลือ', write: 'เขียนถึงเรา', redeem: 'แลกรับของขวัญ', badgeTop: 'ดาวน์โหลดบน', social: 'ติดตามเรา', scan: 'สแกนด้วยกล้องโทรศัพท์', scanHint: 'Yorix จะเปิดใน App Store' },
   docsNote: 'เอกสารมีให้อ่านเป็นภาษาอังกฤษและภาษารัสเซีย',
   topics: {

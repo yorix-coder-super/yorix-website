@@ -459,6 +459,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
+  giftNav: 'מתנה',
   footerLabels: { product: 'מוצר', features: 'יכולות', guides: 'מדריכים', support: 'תמיכה', write: 'כתבו לנו', redeem: 'מימוש מתנה', badgeTop: 'להורדה ב-', social: 'עקבו אחרינו', scan: 'סרקו עם מצלמת הטלפון', scanHint: 'Yorix ייפתח ב-App Store' },
   docsNote: 'המסמכים זמינים באנגלית וברוסית.',
   topics: {

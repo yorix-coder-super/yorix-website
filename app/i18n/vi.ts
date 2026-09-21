@@ -468,6 +468,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
+  giftNav: 'Quà tặng',
   footerLabels: { product: 'Sản phẩm', features: 'Tính năng', guides: 'Hướng dẫn', support: 'Hỗ trợ', write: 'Viết cho chúng tôi', redeem: 'Đổi quà tặng', badgeTop: 'Tải về trên', social: 'Theo dõi chúng tôi', scan: 'Quét bằng camera điện thoại', scanHint: 'Yorix sẽ mở trong App Store' },
   docsNote: 'Các tài liệu hiện có bằng tiếng Anh và tiếng Nga.',
   topics: {

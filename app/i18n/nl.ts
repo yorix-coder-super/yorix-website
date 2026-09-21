@@ -459,6 +459,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
+  giftNav: 'Cadeau',
   footerLabels: { product: 'Product', features: 'Functies', guides: 'Gidsen', support: 'Support', write: 'Neem contact op', redeem: 'Cadeau inwisselen', badgeTop: 'Download in de', social: 'Volg ons', scan: 'Scan met de camera van je telefoon', scanHint: 'Yorix opent in de App Store' },
   docsNote: 'De documenten zijn beschikbaar in het Engels en het Russisch.',
   topics: {

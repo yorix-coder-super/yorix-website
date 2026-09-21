@@ -468,6 +468,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
+  giftNav: 'Hadiah',
   footerLabels: { product: 'Produk', features: 'Ciri', guides: 'Panduan', support: 'Sokongan', write: 'Tulis kepada kami', redeem: 'Tebus hadiah', badgeTop: 'Muat turun pada', social: 'Ikuti kami', scan: 'Imbas dengan kamera telefon', scanHint: 'Yorix dibuka di App Store' },
   docsNote: 'Dokumen tersedia dalam bahasa Inggeris dan Rusia.',
   topics: {

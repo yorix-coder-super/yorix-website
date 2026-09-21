@@ -403,6 +403,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
+  giftNav: 'Gift',
   footerLabels: { product: 'Product', features: 'Features', guides: 'Guides', support: 'Support', write: 'Write to us', redeem: 'Redeem a gift', badgeTop: 'Download on the', social: 'Follow us', scan: 'Scan with your phone camera', scanHint: 'Yorix opens in the App Store' },
   docsNote: '',
 };

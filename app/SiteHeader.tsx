@@ -6,7 +6,6 @@ import { docsLang, siteCopy, type SiteLocale } from './i18n';
 import { localeCopy, locales } from './locales';
 import { HeaderMenus, type LanguageItem } from './subscription/HeaderMenus';
 import { subscriptionPath, type SubscriptionPage } from './subscription/i18n';
-import { subscriptionCopy } from './subscription/copy';
 import { sellsHere } from './subscription/region';
 
 const item = 'rounded-full px-3.5 py-2 transition hover:text-white';
@@ -50,7 +49,7 @@ export async function SiteHeader({
     { href: `${home}#features`, label: nav.features },
     { href: isRoot ? '/guides' : `/${locale}/guides`, label: nav.guides },
     { href: subscription, label: site.subscription.home.nav, current: current === 'subscription' && !onGift },
-    { href: gift, label: subscriptionCopy[docsLang(locale)].gift.nav, current: onGift, wide: true },
+    { href: gift, label: site.giftNav, current: onGift, wide: true },
     { href: isRoot ? '/about' : `/${locale}/about`, label: site.about.nav, current: current === 'about', wide: true },
     { href: isRoot ? '/support' : `/${locale}/support`, label: site.support.nav, current: current === 'support' },
   ].filter((link) => (link.href !== subscription && link.href !== gift) || web);

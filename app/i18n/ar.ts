@@ -459,6 +459,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
+  giftNav: 'هدية',
   footerLabels: { product: 'المنتج', features: 'المزايا', guides: 'الأدلة', support: 'الدعم', write: 'راسلنا', redeem: 'استرداد هدية', badgeTop: 'تنزيل من', social: 'تابعونا', scan: 'امسح الرمز بكاميرا هاتفك', scanHint: 'يفتح Yorix في App Store' },
   docsNote: 'المستندات متاحة باللغتين الإنجليزية والروسية.',
   topics: {

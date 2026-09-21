@@ -459,6 +459,7 @@ export const translation: SiteTranslation = {
       ],
     },
   },
+  giftNav: 'Dárek',
   footerLabels: { product: 'Produkt', features: 'Funkce', guides: 'Články', support: 'Podpora', write: 'Napiš nám', redeem: 'Uplatnit dárek', badgeTop: 'Stáhnout v', social: 'Sledujte nás', scan: 'Naskenujte fotoaparátem telefonu', scanHint: 'Yorix se otevře v App Storu' },
   docsNote: 'Dokumenty jsou k dispozici v angličtině a ruštině.',
   topics: {
