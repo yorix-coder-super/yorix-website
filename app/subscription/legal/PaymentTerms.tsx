@@ -150,7 +150,8 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         <h2>Payment confirmation document</h2>
         <p>
           Two documents confirm the payment: the {bank} card receipt confirming the card payment, and a receipt from the “Professional income
-          tax” app confirming that the seller received the payment, which we send within the time set by tax law. Personal data in the samples is illustrative.
+          tax” app confirming that the seller received the payment, which we issue within the time set by tax law and send on your request. Personal data in the
+          samples is illustrative.
         </p>
         <SampleReceipt lang={lang} />
       </DocumentPage>
@@ -258,7 +259,8 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
       <h2>Документ, подтверждающий оплату</h2>
       <p>
         Оплату подтверждают два документа: карт-чек {bank} — подтверждение оплаты картой, и чек из приложения «Налог на профессиональный
-        доход» — документ, подтверждающий получение оплаты продавцом; его направляем в срок, установленный налоговым законодательством. Персональные данные в образцах условные.
+        доход» — документ, подтверждающий получение оплаты продавцом; его формируем в срок, установленный налоговым законодательством, и присылаем по вашему
+        запросу. Персональные данные в образцах условные.
       </p>
       <SampleReceipt lang={lang} />
     </DocumentPage>
