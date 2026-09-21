@@ -1,35 +1,59 @@
 import type { Lang } from './i18n';
-import { acquirer, listJoin } from './merchant';
+import { acquirer } from './merchant';
 
-// The acquirer's own strip when it has one in the repo, then the «Мир» mark
-// from NSPK's own pack. The columns use the strip's units — WebPay's is 7944
-// wide (МТБанк 7455), then a 100 gap and Mir 1213 wide at 340 tall, next to
-// Visa's 300 — so both images scale together; at 420 px Mir stays above
-// NSPK's 15 px minimum. An acquirer with no strip names its cards in text
-// rather than borrowing another bank's logos.
+/**
+ * The marks we actually hold, keyed by the card name in either language. Only
+ * a scheme's own artwork goes here — never a redrawn one, and never another
+ * acquirer's pack. A card with no mark is named in text instead, so the page
+ * still says what it takes.
+ *
+ * Adding one is a file in public/payments and a line here; it then renders as
+ * a logo everywhere the strip appears.
+ */
+const MARKS: Record<string, { src: string; width: number; height: number; className: string }> = {
+  // NSPK's own white logo (nspk.ru/advertising, variant 05). At this size it
+  // stays above NSPK's 15 px minimum.
+  Мир: { src: '/payments/mir-white.svg', width: 200, height: 56, className: 'h-[18px] w-auto' },
+  Mir: { src: '/payments/mir-white.svg', width: 200, height: 56, className: 'h-[18px] w-auto' },
+};
+
+/**
+ * The acquirer's own strip when the repo holds one, otherwise each accepted
+ * card as its own mark, falling back to its name. WebPay ships a strip per
+ * bank (7944 units wide, МТБанк 7455) with «Мир» missing from its packs, so
+ * the Mir mark is appended to it; ЮKassa has no strip here yet.
+ */
 export function PaymentLogos({ lang }: { lang: Lang }) {
-  const cards = listJoin(acquirer.cards[lang], lang);
-  const label = `${acquirer.name[lang]}: ${cards}`;
+  const cards = acquirer.cards[lang];
+  const label = `${acquirer.name[lang]}: ${cards.join(', ')}`;
 
-  if (!acquirer.strip) {
+  if (acquirer.strip) {
     return (
-      <div className="flex w-full max-w-[420px] items-center gap-3" dir="ltr">
-        <span className="text-xs leading-5 text-white/60">{label}</span>
-        <img src="/payments/mir-white.svg" alt="" className="ms-auto h-auto w-[72px]" width="200" height="56" loading="lazy" />
+      <div
+        role="img"
+        aria-label={label}
+        dir="ltr"
+        className="grid w-full max-w-[420px] items-center"
+        style={{ gridTemplateColumns: `${acquirer.strip.width}fr 1313fr` }}
+      >
+        <img src={acquirer.strip.src} alt="" className="h-auto w-full" width={acquirer.strip.width} height="550" loading="lazy" />
+        <img src="/payments/mir-white.svg" alt="" className="ms-auto h-auto w-[92.37%]" width="200" height="56" loading="lazy" />
       </div>
     );
   }
 
   return (
-    <div
-      role="img"
-      aria-label={label}
-      dir="ltr"
-      className="grid w-full max-w-[420px] items-center"
-      style={{ gridTemplateColumns: `${acquirer.strip.width}fr 1313fr` }}
-    >
-      <img src={acquirer.strip.src} alt="" className="h-auto w-full" width={acquirer.strip.width} height="550" loading="lazy" />
-      <img src="/payments/mir-white.svg" alt="" className="ms-auto h-auto w-[92.37%]" width="200" height="56" loading="lazy" />
+    <div role="img" aria-label={label} dir="ltr" className="flex w-full max-w-[420px] flex-wrap items-center gap-x-4 gap-y-2">
+      {cards.map((card) => {
+        const mark = MARKS[card];
+        return mark ? (
+          <img alt="" className={mark.className} height={mark.height} key={card} loading="lazy" src={mark.src} width={mark.width} />
+        ) : (
+          <span className="text-[13px] font-medium tracking-wide text-white/70" key={card}>
+            {card}
+          </span>
+        );
+      })}
     </div>
   );
 }

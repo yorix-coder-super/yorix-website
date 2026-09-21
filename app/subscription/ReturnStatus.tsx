@@ -92,7 +92,9 @@ function ReturnStatus() {
   }, [ready, configured, signedIn, getToken, giftKey]);
 
   return (
-    <section className="relative mx-auto max-w-2xl px-5 pb-24 pt-6 text-center sm:px-8">
+    // A paid gift needs room for the card beside its instructions; every other
+    // state is a short column.
+    <section className={`relative mx-auto px-5 pb-24 pt-6 text-center sm:px-8 ${gift ? 'max-w-5xl' : 'max-w-2xl'}`}>
       <Reveal animation="zoomIn" load>
         <div className="relative mx-auto w-40 sm:w-48">
           {status === 'paid' ? (
@@ -116,6 +118,9 @@ function ReturnStatus() {
           {gift ? copy.gift.paidTitle : status === 'paid' && until ? copy.ret.paid(formatDate(until, lang)) : copy.ret.checking}
         </h1>
       </Reveal>
+      {/* A paid gift replaces this panel with its own; the panel is for the
+          states that are still one short message. */}
+      {gift ? null : (
       <Reveal delay={260} load>
         <div className="mt-8 rounded-[2rem] border border-white/12 bg-white/[0.06] p-8 backdrop-blur-xl">
           {!needsSignIn && !lostGift && (status === 'checking' || status === 'pending') ? (
@@ -127,12 +132,6 @@ function ReturnStatus() {
             </p>
           ) : null}
           {status === 'paid' && until ? <p className="enter-rise text-lg leading-8 text-white/85">{copy.ret.openApp}</p> : null}
-          {gift ? (
-            <div className="enter-rise text-start">
-              <p className="mb-5 text-base leading-7 text-white/85">{copy.gift.paidBody}</p>
-              <GiftShare gift={gift} giftKey={giftKey} onReplaced={setGift} order={orderInUrl()} />
-            </div>
-          ) : null}
           {!needsSignIn && !lostGift && status === 'failed' ? <p className="text-base leading-7 text-white/80">{copy.ret.failed}</p> : null}
           {lostGift ? <p className="text-base leading-7 text-white/80">{copy.gift.lostKey}</p> : null}
           {needsSignIn ? (
@@ -147,8 +146,17 @@ function ReturnStatus() {
           ) : null}
         </div>
       </Reveal>
+      )}
+      {gift ? (
+        <div className="mt-8">
+          <GiftShare gift={gift} giftKey={giftKey} onReplaced={setGift} order={orderInUrl()} />
+        </div>
+      ) : null}
+      {/* Nothing follows a paid gift: the panel above is the whole job, and
+          «back to plans» after buying reads as if the purchase did not count. */}
+      {gift ? null : (
       <Reveal delay={380} load>
-        {status === 'paid' && until && !gift ? (
+        {status === 'paid' && until ? (
           // Just bought: the next step is the app, not the price list. A gift
           // buyer is not sent there — they may well have no iPhone at all.
           <div className="mt-8 flex flex-col items-center gap-5">
@@ -173,6 +181,7 @@ function ReturnStatus() {
           </Button>
         )}
       </Reveal>
+      )}
     </section>
   );
 }

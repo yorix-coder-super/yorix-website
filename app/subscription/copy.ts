@@ -64,6 +64,8 @@ export type SubscriptionCopy = {
     pay: (price: string) => string;
     paidTitle: string;
     paidBody: string;
+    shareTitle: string;
+    shareSteps: [string, string];
     link: string;
     code: string;
     copyLink: string;
@@ -252,6 +254,11 @@ const ru: SubscriptionCopy = {
     note: 'Аккаунт не нужен: сразу после оплаты получите ссылку, код и открытку с QR. Получателю понадобится iPhone или iPad.',
     pay: (price) => `Оплатить подарок · ${price}`,
     paidTitle: 'Подарок оплачен!',
+    shareTitle: 'Как подарить',
+    shareSteps: [
+      'Отправьте открытку или ссылку получателю — в мессенджер, почтой или распечатайте.',
+      'Он откроет ссылку или введёт код и войдёт через Apple — подписка включится сама.',
+    ],
     paidBody: 'Отправьте ссылку получателю или подарите открытку с кодом. Подписка включится, когда получатель откроет ссылку или введёт код и войдёт через Apple.',
     link: 'Ссылка на подарок',
     code: 'Код подарка',
@@ -465,6 +472,11 @@ const en: SubscriptionCopy = {
     note: 'No account needed: right after payment you get the link, the code and a card with a QR code. The recipient needs an iPhone or iPad.',
     pay: (price) => `Pay for the gift · ${price}`,
     paidTitle: 'Your gift is paid!',
+    shareTitle: 'How to give it',
+    shareSteps: [
+      'Send the card or the link to whoever it is for — by message, by mail, or printed.',
+      'They open the link or type the code and sign in with Apple — the subscription turns itself on.',
+    ],
     paidBody: 'Send the link to the recipient or give them the card with the code. The subscription turns on once they open the link or enter the code and sign in with Apple.',
     link: 'Gift link',
     code: 'Gift code',
