@@ -87,7 +87,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
             {bank}
           </a>{' '}
           system. Accepted cards: {cards}.{wallets ? ` Also accepted: ${wallets}.` : ''}
-          {methodNote ? ` ${methodNote}` : ''} There are no other payment methods.
+          {methodNote ? ` ${methodNote}` : ''}
         </p>
         {logos}
 
@@ -194,7 +194,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
           {bank}
         </a>
         . Принимаются карты {cards}.{wallets ? ` Также принимаются: ${wallets}.` : ''}
-        {methodNote ? ` ${methodNote}` : ''} Других способов оплаты нет.
+        {methodNote ? ` ${methodNote}` : ''}
       </p>
       {logos}
 
