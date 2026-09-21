@@ -76,5 +76,7 @@ anywhere. The bare `/gift` entry form is not one of them.
 
 ## Deploy
 
-`pnpm deploy` = `vinext build && wrangler deploy --config dist/server/wrangler.json --name yorix-website`.
-Only on an explicit request. Say afterwards what is committed but not yet live.
+`pnpm run deploy` = `vinext build && wrangler deploy --config
+dist/server/wrangler.json --name yorix-website`. Write `run`: bare
+`pnpm deploy` is pnpm's own command and fails with
+`ERR_PNPM_INVALID_DEPLOY_TARGET`. Only on an explicit request. Say afterwards what is committed but not yet live.
