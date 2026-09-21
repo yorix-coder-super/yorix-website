@@ -73,19 +73,21 @@ export async function SellerFooter({ note, locale = 'en', home }: { note: string
           <BrandLogo size="sm" tone="dark" />
           <p className="mt-4 max-w-xs leading-6">{copy.footer.tagline}</p>
           <p className={`mt-7 ${heading}`}>{text.social}</p>
-          <ul className="mt-3 flex gap-3">
+          <ul className="mt-3 flex gap-2.5">
             {socialLinks.map((social) => (
               <li key={social.name}>
+                {/* Quiet in the footer, awake under the mouse: at rest they are dimmed and desaturated
+                    so they sit with the grey links instead of shouting over them. */}
                 <a
                   aria-label={social.name}
-                  className="group block rounded-2xl transition duration-300 hover:-translate-y-1 focus:outline-none focus-visible:ring-4 focus-visible:ring-white/25 active:translate-y-0 active:scale-95"
+                  className="group block rounded-2xl transition duration-300 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-4 focus-visible:ring-white/25 active:translate-y-0 active:scale-95"
                   href={social.href}
                   rel="noopener noreferrer"
                   target="_blank"
                   title={social.name}
                 >
                   <Art
-                    className="h-12 w-12 object-contain drop-shadow-[0_10px_18px_rgb(79_70_229/45%)] transition duration-300 group-hover:rotate-[-6deg] group-hover:scale-110"
+                    className="h-10 w-10 object-contain opacity-55 saturate-[0.55] transition duration-300 group-hover:scale-105 group-hover:opacity-100 group-hover:saturate-100"
                     height={192}
                     name={social.icon}
                     width={192}
@@ -110,20 +112,23 @@ export async function SellerFooter({ note, locale = 'en', home }: { note: string
           </div>
         ))}
         <div>
-          <a
-            className="inline-flex items-center gap-3 rounded-xl border border-white/25 bg-black px-4 py-2 text-white transition hover:border-white/50"
-            href={appDownloadUrl}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <AppleGlyph className="h-7 w-7" />
-            <span className="leading-tight">
-              <span className="block text-[11px] text-white/80">{text.badgeTop}</span>
-              <span className="block text-lg font-semibold">App Store</span>
-            </span>
-          </a>
-          {/* A phone has the badge above; the code is for a visitor at a desk. */}
-          <AppQr className="mt-5 hidden w-28 sm:block" label={`${text.scan} — ${text.scanHint}`} />
+          {/* The badge and the code share one vertical axis: the code is narrower, so left-aligning them made it look adrift. */}
+          <div className="inline-flex flex-col items-center gap-5">
+            <a
+              className="inline-flex items-center gap-3 rounded-xl border border-white/25 bg-black px-4 py-2 text-white transition hover:border-white/50"
+              href={appDownloadUrl}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <AppleGlyph className="h-7 w-7" />
+              <span className="leading-tight">
+                <span className="block text-[11px] text-white/80">{text.badgeTop}</span>
+                <span className="block text-lg font-semibold">App Store</span>
+              </span>
+            </a>
+            {/* A phone has the badge above; the code is for a visitor at a desk. */}
+            <AppQr className="hidden w-28 sm:block" label={`${text.scan} — ${text.scanHint}`} />
+          </div>
         </div>
       </div>
       <div className="border-t border-white/10">
