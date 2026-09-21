@@ -66,6 +66,10 @@ def call(url: str, *, token: str, method: str = 'GET', body: dict | None = None,
     data = json.dumps(body).encode() if body is not None else None
     request = urllib.request.Request(url, data=data, method=method)
     request.add_header('Content-Type', 'application/json')
+    # Spaceship's API sits behind a bot filter that answers Python's default
+    # user agent with «error code: 1010». Say who we are instead.
+    request.add_header('User-Agent', 'yorix-domain-setup/1.0 (+https://yorix-app.com)')
+    request.add_header('Accept', 'application/json')
     if token:
         request.add_header('Authorization', f'Bearer {token}')
     for key, value in (headers or {}).items():
