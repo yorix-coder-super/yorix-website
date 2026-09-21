@@ -44,7 +44,6 @@ export function GiftCodeEntry({ lang, locale = lang }: { lang: Lang; locale?: Si
         {text.entryLabel}
       </label>
       <input
-        aria-describedby="gift-code-hint"
         aria-invalid={problem ? true : undefined}
         autoCapitalize="characters"
         autoComplete="off"
@@ -61,9 +60,6 @@ export function GiftCodeEntry({ lang, locale = lang }: { lang: Lang; locale?: Si
         spellCheck={false}
         value={formatGiftCode(code)}
       />
-      <p className="text-xs leading-5 text-white/55" id="gift-code-hint">
-        {text.entryHint}
-      </p>
       {problem ? (
         <p className="enter-rise rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm text-[#FDE68A]" role="alert">
           {problem}
