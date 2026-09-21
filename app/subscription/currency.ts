@@ -1,9 +1,10 @@
 import type { Lang } from './i18n';
 
 // Regional pricing, like the App Store: the visitor's country decides which
-// price list they see (merchant.ts), and the acquirer charges the equivalent
-// of exactly that price. The visitor cannot switch the currency by hand —
-// that would be a price-shopping tool.
+// price list they are anchored to (merchant.ts), and they are shown — and
+// charged — the equivalent of that price in the currency the acquirer settles
+// in. The visitor cannot switch the currency by hand: that would be a
+// price-shopping tool.
 export type Currency = 'BYN' | 'RUB' | 'EUR' | 'USD';
 export type WebCurrency = 'BYN' | 'RUB';
 
@@ -25,22 +26,24 @@ function acceptedLanguages(header: string | null | undefined): string[] {
     .filter(Boolean);
 }
 
-// The tier a Belarusian visitor — and a Russian-speaking browser anywhere —
-// is priced on. Roubles for now (owner, 2026-09-21), because ЮKassa settles
-// in roubles; the BYN price list stays for the day a Belarusian acquirer
-// returns. Mirrors BELARUS_TIER in the worker.
-const BELARUS_TIER: Currency = 'RUB';
+// The price list a Belarusian visitor is anchored to — not the currency they
+// read, which is whatever the acquirer settles in. Belarus is a cheaper App
+// Store tier than Russia, so pricing it off the rouble list would charge a
+// Belarusian parent about half again what their own store asks.
+// Mirrors BELARUS_TIER in the worker.
+const BELARUS_TIER: Currency = 'BYN';
 
 // The country decides, as Cloudflare sees it. When the connection comes from
 // elsewhere (VPN exits are common among Belarusian and Russian parents), a
-// Russian- or Belarusian-language browser may still buy. A header the visitor
-// controls never picks a cheaper tier than the Belarusian one.
+// Russian- or Belarusian-language browser may still buy — at the dearer of
+// the two sellable tiers, because Accept-Language is the visitor's to set and
+// only Cloudflare's country opens the cheaper Belarusian list.
 // Mirrored by webRegion in the worker (CloudflareWorker/src/web/plans.ts).
 export function currencyForVisitor(country: string | null | undefined, acceptLanguage?: string | null): Currency {
   const cc = (country ?? '').toUpperCase();
   if (cc === 'BY') return BELARUS_TIER;
   if (cc === 'RU') return 'RUB';
-  if (acceptedLanguages(acceptLanguage).some((tag) => /^(ru|be)(-|$)/.test(tag))) return BELARUS_TIER;
+  if (acceptedLanguages(acceptLanguage).some((tag) => /^(ru|be)(-|$)/.test(tag))) return 'RUB';
   if (EURO_COUNTRIES.has(cc)) return 'EUR';
   return 'USD';
 }
@@ -56,10 +59,10 @@ const symbol: Record<Currency, string> = { BYN: 'BYN', RUB: '₽', EUR: '€', U
 
 export function formatMoney(amount: number, currency: Currency, lang: Lang): string {
   const locale = lang === 'ru' ? 'ru-RU' : 'en-US';
-  if (currency === 'RUB') return `${Math.round(amount).toLocaleString(locale)}\u00A0₽`;
+  if (currency === 'RUB') return `${Math.round(amount).toLocaleString(locale)} ₽`;
   if (currency === 'BYN') {
     const hasKopecks = Math.round(amount * 100) % 100 !== 0;
-    return `${amount.toLocaleString(locale, { minimumFractionDigits: hasKopecks ? 2 : 0, maximumFractionDigits: 2 })}\u00A0Br`;
+    return `${amount.toLocaleString(locale, { minimumFractionDigits: hasKopecks ? 2 : 0, maximumFractionDigits: 2 })} Br`;
   }
   const rounded = Math.round(amount * 100) / 100;
   const hasCents = Math.round(rounded * 100) % 100 !== 0;

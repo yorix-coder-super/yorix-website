@@ -1,5 +1,6 @@
+import { formatMoney, type WebCurrency } from './currency';
 import type { Lang } from './i18n';
-import { merchant } from './merchant';
+import { ACQUIRER, chargeFor, charges, formatByn, merchant } from './merchant';
 
 type Row = { label: string; value: string };
 
@@ -58,11 +59,18 @@ function Receipt({ title, subtitle, rows, qr, sample }: { title: string; subtitl
   );
 }
 
-export function SampleReceipt({ lang }: { lang: Lang }) {
+export function SampleReceipt({ lang, region }: { lang: Lang; region: WebCurrency }) {
   const t = labels[lang];
   const name = lang === 'ru' ? merchant.fullName : merchant.latinName;
-  const cardValues = ['4815162342', '123456789', '0A1B2C', '17.09.2026 14:32', '4111 11** **** 1111', '526012345678', name, t.service, '22,90 BYN'];
-  const taxValues = ['1A2B3C4D5E', '17.09.2026 14:35', '17.09.2026', name, merchant.unp || 'AB1234567', t.taxName, t.activity, '22,90 BYN'];
+  // The card receipt carries the amount this visitor's card would be charged,
+  // in the acquirer's currency. The «Профдоход» receipt carries the seller's
+  // income, which is declared in Belarusian rubles whatever the card paid in —
+  // the same conversion the income book makes.
+  const paid = chargeFor('month', region, ACQUIRER);
+  const cardAmount = paid.currency === 'BYN' ? formatByn(paid.amount, lang, 'code') : formatMoney(paid.amount, 'RUB', lang);
+  const taxAmount = formatByn(charges.month[region], lang, 'code');
+  const cardValues = ['4815162342', '123456789', '0A1B2C', '17.09.2026 14:32', '4111 11** **** 1111', '526012345678', name, t.service, cardAmount];
+  const taxValues = ['1A2B3C4D5E', '17.09.2026 14:35', '17.09.2026', name, merchant.unp || 'AB1234567', t.taxName, t.activity, taxAmount];
   const zip = (keys: readonly string[], values: string[]) => keys.map((label, index) => ({ label, value: values[index] }));
 
   return (

@@ -7,7 +7,7 @@ import { subscriptionCopy } from '../copy';
 import { formatMoney } from '../currency';
 import { subscriptionPath } from '../i18n';
 import { legalVersion } from '../legal/versions';
-import { ACQUIRER, chargeToSpellOut, planCopy, prices } from '../merchant';
+import { ACQUIRER, chargeFor, chargeToSpellOut, planCopy } from '../merchant';
 import { Money } from '../Money';
 import { Reveal } from '../Reveal';
 import { Button, Spinner } from '../ui';
@@ -39,8 +39,13 @@ export function GiftCheckout() {
     void warmAuth();
   }, [warmAuth]);
 
-  const price = formatMoney(prices[planId][currency], currency, lang);
-  const spelled = chargeToSpellOut(planId, currency, config?.provider ?? ACQUIRER);
+  // What the buyer reads is what their card is charged: `currency` is the
+  // price list their region is anchored to, the acquirer the currency it is
+  // expressed in.
+  const acquirer = config?.provider ?? ACQUIRER;
+  const money = chargeFor(planId, currency, acquirer);
+  const price = formatMoney(money.amount, money.currency, lang);
+  const spelled = chargeToSpellOut(planId, currency, acquirer);
   const charge = spelled === null ? null : formatMoney(spelled, 'BYN', lang);
   // The worker is the authority; this only spares a sign-in when the checkout
   // is KNOWN to be closed. A config we could not load — a blocked origin, a
@@ -141,7 +146,7 @@ export function GiftCheckout() {
                     <input checked={selected} className="sr-only" name="plan" onChange={() => setPlanId(id)} type="radio" value={id} />
                     <span className="text-base font-semibold text-white">{planCopy[lang][id].title}</span>
                     <span className="mt-1 text-lg font-semibold text-white">
-                      <Money text={formatMoney(prices[id][currency], currency, lang)} />
+                      <Money text={formatMoney(chargeFor(id, currency, acquirer).amount, money.currency, lang)} />
                     </span>
                   </label>
                 );

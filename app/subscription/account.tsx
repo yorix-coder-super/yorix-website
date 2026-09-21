@@ -12,7 +12,7 @@ import { currencyForVisitor, formatMoney, sellsOnWeb, type WebCurrency } from '.
 import { formatDate, subscriptionPath, type Lang } from './i18n';
 import { legalVersion } from './legal/versions';
 import { rememberGift } from './gift/keys';
-import { ACQUIRER, chargeToSpellOut, planCopy, plans, prices, type Acquirer, type Plan } from './merchant';
+import { ACQUIRER, chargeFor, chargeToSpellOut, planCopy, plans, type Acquirer, type Plan } from './merchant';
 import { Money } from './Money';
 import { Button, Spinner } from './ui';
 
@@ -307,12 +307,16 @@ const planIcon = { week: 'icon-moon-crescent', month: 'icon-moon-full', year: 'i
 const dialogFrame = 'pointer-events-none relative grid min-h-full grid-cols-[minmax(0,1fr)] place-items-center p-4';
 
 export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) {
-  const { me, copy, lang, plans: planTexts, currency, openTerms } = useAccount();
+  const { me, copy, lang, plans: planTexts, currency, config, openTerms } = useAccount();
   const text = planTexts[plan.id];
-  const amount = prices[plan.id][currency];
-  const price = formatMoney(amount, currency, lang);
-  const perWeek = formatMoney((amount / plan.days) * 7, currency, lang);
-  const base = formatMoney(prices.week[currency], currency, lang);
+  // The price on the card is the amount the card is charged. `currency` is the
+  // price list this visitor's App Store tier anchors them to; the acquirer
+  // decides which currency that list is read in.
+  const acquirer: Acquirer = config?.provider ?? ACQUIRER;
+  const { amount, currency: money } = chargeFor(plan.id, currency, acquirer);
+  const price = formatMoney(amount, money, lang);
+  const perWeek = formatMoney((amount / plan.days) * 7, money, lang);
+  const base = formatMoney(chargeFor('week', currency, acquirer).amount, money, lang);
   const active = Boolean(me?.premiumUntil && new Date(me.premiumUntil) > new Date());
 
   const variant = featured ? 'dark' : 'light';
@@ -357,8 +361,9 @@ export function PlanCard({ plan, featured }: { plan: Plan; featured: boolean }) 
 // The hero's price anchor, in the visitor's own currency. It renders the
 // whole label: a render prop cannot cross the server-component boundary.
 export function HeroCta() {
-  const { currency, lang } = useAccount();
-  return <Money text={subscriptionCopy[lang].hero.primary(formatMoney(prices.week[currency], currency, lang))} />;
+  const { currency, lang, config } = useAccount();
+  const { amount, currency: money } = chargeFor('week', currency, config?.provider ?? ACQUIRER);
+  return <Money text={subscriptionCopy[lang].hero.primary(formatMoney(amount, money, lang))} />;
 }
 
 // When the acquirer settles in another currency than the buyer's own, they
@@ -425,7 +430,8 @@ export function CheckoutDialog() {
   // network blink — is not a closed shop, and saying «coming soon» to a buyer
   // who could have paid is the worse of the two mistakes.
   const live = configured && config?.checkoutMode !== 'off';
-  const price = formatMoney(prices[plan.id][currency], currency, lang);
+  const money = chargeFor(plan.id, currency, config?.provider ?? ACQUIRER);
+  const price = formatMoney(money.amount, money.currency, lang);
   const spelled = chargeToSpellOut(plan.id, currency, config?.provider ?? ACQUIRER);
   const charge = spelled === null ? null : formatMoney(spelled, 'BYN', lang);
   const active = Boolean(me?.premiumUntil && new Date(me.premiumUntil) > new Date());

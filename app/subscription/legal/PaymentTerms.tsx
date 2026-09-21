@@ -1,21 +1,22 @@
 import { headers } from 'next/headers';
 import { DocumentPage } from '../DocumentPage';
-import { currencyForVisitor, formatMoney } from '../currency';
+import { currencyForVisitor, formatMoney, sellsOnWeb, type WebCurrency } from '../currency';
 import { subscriptionPath, type Lang } from '../i18n';
-import { ACQUIRER, acquirer, chargeToSpellOut, formatByn, listJoin, merchant, planCopy, plans, prices } from '../merchant';
+import { ACQUIRER, acquirer, chargeFor, formatByn, listJoin, merchant, planCopy, plans } from '../merchant';
 import { PaymentLogos } from '../PaymentLogos';
 import { SampleReceipt } from '../SampleReceipt';
 import { editionLabel } from './versions';
 
 export const paymentTermsTitle = { ru: 'Оплата, доставка и возврат', en: 'Payment, delivery and refunds' } as const;
 
-// The page lists the prices in the visitor's own currency only — roubles for
-// Russia (with the amount the card is charged), Belarusian rubles for
-// everyone else; the site sells by card to Belarus and Russia, other
-// countries buy in the App Store.
+// The page lists one price per plan: the amount this visitor's card would
+// actually be charged, in the currency their receipt will name. The site
+// sells by card to Belarus and Russia; other countries buy in the App Store
+// and are shown the seller's own Belarusian list.
 export async function PaymentTerms({ lang }: { lang: Lang }) {
   const requestHeaders = await headers();
-  const russia = currencyForVisitor(requestHeaders.get('cf-ipcountry'), requestHeaders.get('accept-language')) === 'RUB';
+  const visitor = currencyForVisitor(requestHeaders.get('cf-ipcountry'), requestHeaders.get('accept-language'));
+  const region: WebCurrency = sellsOnWeb(visitor) ? visitor : 'BYN';
   // Support is reached through the site's form; the address itself stays in the offer's requisites.
   const form = <a href={`${lang === 'ru' ? '/ru' : ''}/support#contact`}>{lang === 'ru' ? 'форму «Написать нам»' : 'the “Write to us” form'}</a>;
   const cards = listJoin(acquirer.cards[lang], lang);
@@ -24,14 +25,10 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
   // Every mention of a bank on this page comes from here (merchant.ts ACQUIRER).
   const bank = acquirer.name[lang];
   const offer = subscriptionPath(lang, '/offer');
-  const priceOf = (planId: (typeof plans)[number]['id']) =>
-    russia
-      ? (() => {
-          const spelled = chargeToSpellOut(planId, 'RUB', ACQUIRER);
-          const price = formatMoney(prices[planId].RUB, 'RUB', lang);
-          return spelled === null ? price : `${price} (${lang === 'ru' ? 'к списанию' : 'charged as'} ${formatByn(spelled, lang, 'code')})`;
-        })()
-      : formatByn(prices[planId].BYN, lang, 'code');
+  const priceOf = (planId: (typeof plans)[number]['id']) => {
+    const money = chargeFor(planId, region, ACQUIRER);
+    return money.currency === 'BYN' ? formatByn(money.amount, lang, 'code') : formatMoney(money.amount, 'RUB', lang);
+  };
   const planList = (
     <ul>
       {plans.map((plan) => (
@@ -153,7 +150,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
           tax” app confirming that the seller received the payment, which we issue within the time set by tax law and send on your request. Personal data in the
           samples is illustrative.
         </p>
-        <SampleReceipt lang={lang} />
+        <SampleReceipt lang={lang} region={region} />
       </DocumentPage>
     );
   }
@@ -262,7 +259,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         доход» — документ, подтверждающий получение оплаты продавцом; его формируем в срок, установленный налоговым законодательством, и присылаем по вашему
         запросу. Персональные данные в образцах условные.
       </p>
-      <SampleReceipt lang={lang} />
+      <SampleReceipt lang={lang} region={region} />
     </DocumentPage>
   );
 }

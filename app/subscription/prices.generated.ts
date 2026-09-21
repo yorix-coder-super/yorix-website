@@ -20,27 +20,30 @@ export const plans: Plan[] = [
   { id: 'year', days: 365, priceByn: 119.9 },
 ];
 
-// What the buyer sees, in their own region's currency — the App Store price,
-// so the web never looks dearer than the store they could have used instead.
+// The App Store price of each region, in that region's own currency: the
+// ceiling the tables below are kept under, so the web never looks dearer than
+// the store the same parent could have bought from. Not a price to print —
+// use chargeFor() in merchant.ts, which returns the money the buyer actually
+// pays, in the currency their receipt will name.
 export const prices: Record<PlanId, Record<WebCurrency, number>> = {
   week: { BYN: 11.9, RUB: 499 },
   month: { BYN: 23.9, RUB: 999 },
   year: { BYN: 119.9, RUB: 3990 },
 };
 
-// What a Belarusian-ruble acquirer charges for that price. The receipt says
-// this number, so the page says it too before the buyer leaves.
+// What each region pays when the acquirer settles in Belarusian rubles.
 export const charges: Record<PlanId, Record<WebCurrency, number>> = {
-  week: { BYN: 11.9, RUB: 17.5 },
-  month: { BYN: 23.9, RUB: 35.1 },
-  year: { BYN: 119.9, RUB: 140.1 },
+  week: { BYN: 11.9, RUB: 17.94 },
+  month: { BYN: 23.9, RUB: 35.92 },
+  year: { BYN: 119.9, RUB: 143.47 },
 };
 
-// The same, in roubles, for ЮKassa. A Russian buyer is charged the rouble
-// price they were shown; a Belarusian one pays the Belarusian price converted
-// at the same rate, so roubles never undercut it.
+// The same, in roubles, for ЮKassa. Belarus keeps its own row: its App Store
+// tier is the cheaper one ($3.99 a week against Russia's 499 ₽), so pricing a
+// Belarusian parent off the rouble list would charge them about half again
+// what the store asks.
 export const chargesRub: Record<PlanId, Record<WebCurrency, number>> = {
-  week: { BYN: 339, RUB: 499 },
-  month: { BYN: 681, RUB: 999 },
-  year: { BYN: 3414, RUB: 3990 },
+  week: { BYN: 329, RUB: 499 },
+  month: { BYN: 659, RUB: 999 },
+  year: { BYN: 3290, RUB: 3990 },
 };
