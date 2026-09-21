@@ -176,14 +176,7 @@ export function AppStorePanel({ locale }: { locale: SiteLocale }) {
                   </span>
                 </a>
               </Magnetic>
-              <div className="hidden items-center gap-3.5 sm:flex">
-                <AppQr className="w-[7.5rem] shrink-0" label={`${site.footerLabels.scan} — ${site.footerLabels.scanHint}`} />
-                <p className="max-w-[10rem] text-sm leading-5 text-white/75">
-                  <span className="font-semibold text-white">{site.footerLabels.scan}</span>
-                  <br />
-                  {site.footerLabels.scanHint}
-                </p>
-              </div>
+              <AppQr className="hidden w-[7.5rem] shrink-0 rotate-[-6deg] transition duration-300 hover:rotate-0 hover:scale-105 sm:block rtl:rotate-[6deg] rtl:hover:rotate-0" label={`${site.footerLabels.scan} — ${site.footerLabels.scanHint}`} />
             </Reveal>
           </div>
         </div>

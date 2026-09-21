@@ -123,14 +123,7 @@ export async function SellerFooter({ note, locale = 'en', home }: { note: string
             </span>
           </a>
           {/* A phone has the badge above; the code is for a visitor at a desk. */}
-          <div className="mt-5 hidden items-center gap-3 sm:flex lg:block">
-            <AppQr className="w-28 shrink-0" label={`${text.scan} — ${text.scanHint}`} />
-            <p className="max-w-[9rem] text-xs leading-5 text-white/60 lg:mt-3">
-              <span className="font-semibold text-white/85">{text.scan}</span>
-              <br />
-              {text.scanHint}
-            </p>
-          </div>
+          <AppQr className="mt-5 hidden w-28 sm:block" label={`${text.scan} — ${text.scanHint}`} />
         </div>
       </div>
       <div className="border-t border-white/10">

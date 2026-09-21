@@ -69,25 +69,18 @@ export async function HomeLanding({ locale }: { locale: HomeLocale }) {
               </Reveal>
               <Reveal delay={500} load>
                 <div className="mt-8 flex items-center gap-4">
-                  {/* At a desk the code leads the row — point a phone and the App Store opens; on a phone the three icons do. */}
-                  <AppQr className="hidden w-[6.5rem] shrink-0 lg:block" label={`${labels.scan} — ${labels.scanHint}`} />
-                  <div className="flex shrink-0 lg:hidden">
+                  <div className="flex shrink-0">
                     {['icon-moon-crescent', 'icon-chat', 'icon-heart'].map((icon, index) => (
                       <span className={`grid h-11 w-11 place-items-center rounded-full bg-[#2E2A6E] ring-2 ring-[#1E1B4B] ${index ? '-ms-3' : ''}`} key={icon}>
                         <Art className="h-7 w-7 object-contain" height={192} name={icon} width={192} />
                       </span>
                     ))}
                   </div>
-                  <div>
-                    <p className="mb-2 hidden text-[15px] leading-6 text-white/70 lg:block">
-                      <strong className="font-semibold text-white">{labels.scan}</strong> — {labels.scanHint}
-                    </p>
-                    <p className="text-sm leading-5 text-white/70">
-                      <strong className="font-semibold text-white">20</strong> {copy.stats[0]} · <strong className="font-semibold text-white">0</strong> {copy.stats[1]}
-                      <br />
-                      <strong className="font-semibold text-white">24/7</strong> {copy.stats[2]}
-                    </p>
-                  </div>
+                  <p className="text-sm leading-5 text-white/70">
+                    <strong className="font-semibold text-white">20</strong> {copy.stats[0]} · <strong className="font-semibold text-white">0</strong> {copy.stats[1]}
+                    <br />
+                    <strong className="font-semibold text-white">24/7</strong> {copy.stats[2]}
+                  </p>
                 </div>
               </Reveal>
             </div>
@@ -95,6 +88,7 @@ export async function HomeLanding({ locale }: { locale: HomeLocale }) {
             <HeroArt
               coachLabel={copy.features[2].title}
               notes={copy.notes}
+              qrLabel={`${labels.scan} — ${labels.scanHint}`}
               screen={`/shots/${shots}-today.webp`}
               screenAlt={copy.screenAlt}
             />
@@ -175,7 +169,7 @@ export async function HomeLanding({ locale }: { locale: HomeLocale }) {
   );
 }
 
-function HeroArt({ coachLabel, notes, screen, screenAlt }: { coachLabel: string; notes: { hero: string; coach: string }; screen: string; screenAlt: string }) {
+function HeroArt({ coachLabel, notes, qrLabel, screen, screenAlt }: { coachLabel: string; notes: { hero: string; coach: string }; qrLabel: string; screen: string; screenAlt: string }) {
   return (
     <div className="relative mx-auto h-[400px] w-full max-w-[640px] sm:h-[520px] lg:h-[590px]">
       <div aria-hidden="true" className="absolute start-[4%] top-[18%] h-[62%] w-[58%] rounded-full bg-[#FDE68A]/20 blur-3xl" />
@@ -221,6 +215,14 @@ function HeroArt({ coachLabel, notes, screen, screenAlt }: { coachLabel: string;
         <div className="relative -rotate-6 rtl:rotate-6">
           <DoodleArrow className="absolute -top-12 end-[46%] h-12 w-9 text-[#E0E7FF]/80 rtl:-scale-x-100" />
           <Hand className="relative text-[1.5rem] text-[#E0E7FF] lg:text-[1.65rem]">{notes.coach}</Hand>
+        </div>
+      </Reveal>
+
+      {/* For a visitor at a desk: point a phone at it and Yorix opens in the App Store. No caption — it
+          sits by the phone, under the coach note. It straightens under the mouse. */}
+      <Reveal animation="zoomIn" className="absolute end-[-3%] top-[47%] z-40 hidden w-[17%] lg:block" delay={1000} load>
+        <div className="float-slower">
+          <AppQr className="rotate-[8deg] transition duration-300 hover:rotate-0 hover:scale-110 rtl:-rotate-[8deg] rtl:hover:rotate-0" label={qrLabel} />
         </div>
       </Reveal>
 
