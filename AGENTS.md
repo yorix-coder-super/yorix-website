@@ -11,9 +11,9 @@ worker actually does — when the two disagree, the worker is right.
 
 ## Working agreement
 
-- **The working branch is `premium-web-payments`.** `main` is ~100 commits
-  behind and is not where the site lives; do not "land the work on main" here
-  without being told to.
+- **The working branch is `premium-web-payments`.** `main` follows it by
+  fast-forward — the two were levelled and pushed on 2026-09-21. Move `main`
+  up when a batch is done; never force-push and never let them diverge.
 - Commit every verified change. No Claude/Anthropic attribution in commit
   messages or anywhere else that leaves the machine.
 - **Do not deploy per change.** Accumulate, then deploy when asked.
@@ -25,9 +25,27 @@ worker actually does — when the two disagree, the worker is right.
 | --- | --- | --- |
 | Seller requisites and the acquirer | `app/subscription/merchant.ts` | `ACQUIRER` is one switch that changes every page, document and logo. Cards, wallets, method notes and the bank's name are read from the acquirer profile — never name a bank or a card brand anywhere else. |
 | Prices and charges | `app/subscription/prices.generated.ts` | Generated from the worker's `src/web/plans.ts`. Change a price there, then run `npm run sync:site-prices` in `CloudflareWorker`; its `npm test` fails while this copy is stale. Never hand-edit the generated file. |
-| Who may buy | `proxy.ts` (`salesRedirect`) | Cards sell to Belarus and Russia only. The storefront, offer, payment terms and gift page send everyone else home; the privacy policy and the acquirer's return pages stay reachable. `yorix-app.com` is canonical, older hosts 308 to it. |
+| Who may buy | `proxy.ts` (`salesRedirect`) and `sellsHere()` | Cards sell to Belarus and Russia only. `yorix-app.com` is canonical, older hosts 308 to it. |
 | Legal text | `app/subscription/legal/` | Every document carries an edition date in `versions.ts`, shown on the page and sent with each order so the seller can prove which text the buyer accepted. **Change a document's wording → bump its edition date.** Superseded editions move to `legal-archive/`; never delete one. |
 | Site copy | `app/i18n/<lang>.ts` | 22 locales plus ru/en. A new key goes into **every** file — a partially translated key is the bug that keeps coming back. `wire.ts` is how server-side copy reaches client components (functions cannot cross that boundary). |
+
+## Outside Belarus and Russia the site is a showcase
+
+One way on: the App Store button. No price, plan, gift, activation, acquirer
+logo or seller requisite may appear, and the subscription documents — the
+offer and the payment terms — stay out of the footer too.
+
+`sellsHere()` (`app/subscription/region.ts`) is the one predicate; `proxy.ts`
+uses `sellsOnWeb` directly because middleware has no `headers()`. It already
+gates the header, the footer, home pricing, the storefront and the document
+navigation. **Any new surface that names a price, a payment, a gift or the
+acquirer goes behind it too** — that is how the last leak got in.
+
+Three things stay open on purpose: the terms of use and the privacy policy,
+which the App Store requires of the app itself; the acquirer's return and
+cancel pages; and a redeem link that already carries its code (`/gift/<code>`,
+`/g/<code>`), because a gift bought here can be opened by a grandparent
+anywhere. The bare `/gift` entry form is not one of them.
 
 ## Design and copy rules
 

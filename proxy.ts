@@ -87,10 +87,14 @@ function languageRedirect(request: NextRequest): NextResponse | null {
 }
 
 // The site sells by card only to Belarus and Russia; for everyone else it is
-// the app's showcase. The storefront, the offer and the payment terms send
-// those visitors home. The privacy policy (the app's too) and the acquirer's
-// return pages stay reachable.
-const SALES_PAGE = /^\/(ru\/)?subscription(?:\/(?:offer|payment|gift))?\/?$/;
+// the app's showcase with one way on — the App Store button. The storefront,
+// the offer, the payment terms, the gift page and the redeem entry send those
+// visitors home. Three things stay reachable on purpose: the terms of use and
+// the privacy policy, which the App Store requires of the app itself; the
+// acquirer's return pages; and a redeem link that already carries its code
+// (/gift/<code>, /g/<code>), because a gift bought here can be opened by a
+// grandparent anywhere.
+const SALES_PAGE = /^\/(ru\/)?(?:subscription(?:\/(?:offer|payment|gift))?|gift)\/?$/;
 
 function salesRedirect(request: NextRequest): NextResponse | null {
   if (request.method !== 'GET' && request.method !== 'HEAD') return null;

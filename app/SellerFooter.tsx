@@ -46,9 +46,12 @@ export async function SellerFooter({ note, locale = 'en', home }: { note: string
       links: [
         { href: supportPage, label: copy.nav.faq },
         { href: `${supportPage}#contact`, label: text.write },
-        // A recipient can live anywhere, so this one is shown to everyone.
-        { href: docs === 'ru' ? '/ru/gift' : '/gift', label: text.redeem },
-        ...(web ? [{ href: subscriptionPath(docs, '/offer'), label: copy.footer.requisites }] : []),
+        ...(web
+          ? [
+              { href: docs === 'ru' ? '/ru/gift' : '/gift', label: text.redeem },
+              { href: subscriptionPath(docs, '/offer'), label: copy.footer.requisites },
+            ]
+          : []),
       ],
     },
     {
