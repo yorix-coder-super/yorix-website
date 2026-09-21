@@ -219,10 +219,11 @@ function HeroArt({ coachLabel, notes, qrLabel, screen, screenAlt }: { coachLabel
       </Reveal>
 
       {/* For a visitor at a desk: point a phone at it and Yorix opens in the App Store. No caption — it
-          sits by the phone, under the coach note. It straightens under the mouse. */}
-      <Reveal animation="zoomIn" className="absolute end-[-3%] top-[47%] z-40 hidden w-[17%] lg:block" delay={1000} load>
+          sits by the phone, under the coach note, and straightens under the mouse. Only where the art is
+          at its full width: smaller, the code would be too fine to scan. */}
+      <Reveal animation="zoomIn" className="absolute end-[-4%] top-[49%] z-40 hidden w-[18%] xl:block" delay={1000} load>
         <div className="float-slower">
-          <AppQr className="rotate-[8deg] transition duration-300 hover:rotate-0 hover:scale-110 rtl:-rotate-[8deg] rtl:hover:rotate-0" label={qrLabel} />
+          <AppQr className="rotate-[6deg] transition duration-300 hover:rotate-0 hover:scale-110 rtl:-rotate-[6deg] rtl:hover:rotate-0" label={qrLabel} />
         </div>
       </Reveal>
 
