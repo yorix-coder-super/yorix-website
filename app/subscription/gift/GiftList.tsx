@@ -54,9 +54,13 @@ export function GiftList() {
           {text.listTitle}
         </h2>
       </Reveal>
-      <div className="mt-5 grid items-start gap-4 lg:grid-cols-2">
+      {/* Columns, not a grid: one unredeemed gift carries buttons and a code
+          and is three times the height of a redeemed one, and in a grid that
+          tall card sets the whole row, leaving a hole under its short
+          neighbour. Columns pack each card against the one above it. */}
+      <div className="mt-5 gap-4 lg:columns-2">
         {gifts.map((item, index) => (
-          <Reveal delay={(index % 2) * 110} key={item.order}>
+          <Reveal className="mb-4 break-inside-avoid" delay={(index % 2) * 110} key={item.order}>
             <article className="spotlight flex w-full flex-col gap-4 rounded-[2rem] border border-white/12 bg-white/[0.06] p-6 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-white/25">
               {/* min-w-0 and wrapping, because a recipient's name is whatever
                   they typed — one long unbroken word would otherwise push the
