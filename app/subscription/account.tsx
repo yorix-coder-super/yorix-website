@@ -12,7 +12,7 @@ import { currencyForVisitor, formatMoney, sellsOnWeb, type WebCurrency } from '.
 import { formatDate, subscriptionPath, type Lang } from './i18n';
 import { legalVersion } from './legal/versions';
 import { rememberGift } from './gift/keys';
-import { chargeToSpellOut, planCopy, plans, prices, type Acquirer, type Plan } from './merchant';
+import { ACQUIRER, chargeToSpellOut, planCopy, plans, prices, type Acquirer, type Plan } from './merchant';
 import { Money } from './Money';
 import { Button, Spinner } from './ui';
 
@@ -243,7 +243,7 @@ export function AccountProvider({
   }, [lang, loadMe, warmAuth]);
 
   const checkoutMode = state.config?.checkoutMode;
-  const acquirer: Acquirer = state.config?.provider ?? 'webpay';
+  const acquirer: Acquirer = state.config?.provider ?? ACQUIRER;
   const createOrder = useCallback(
     async (planId: string, terms: Terms, gift?: GiftCard) => {
       const token = await getToken();
@@ -367,7 +367,7 @@ export function HeroCta() {
 // Russian buyer in their own roubles, so there is nothing to warn about.
 export function ChargeNote({ className = '' }: { className?: string }) {
   const { currency, copy, lang, config } = useAccount();
-  const acquirer: Acquirer = config?.provider ?? 'webpay';
+  const acquirer: Acquirer = config?.provider ?? ACQUIRER;
   const spelled = plans.map((plan) => chargeToSpellOut(plan.id, currency, acquirer));
   if (spelled.some((amount) => amount === null)) return null;
   const amounts = spelled.map((amount) => formatMoney(amount!, 'BYN', lang)).join(' · ');
@@ -426,7 +426,7 @@ export function CheckoutDialog() {
   // who could have paid is the worse of the two mistakes.
   const live = configured && config?.checkoutMode !== 'off';
   const price = formatMoney(prices[plan.id][currency], currency, lang);
-  const spelled = chargeToSpellOut(plan.id, currency, config?.provider ?? 'webpay');
+  const spelled = chargeToSpellOut(plan.id, currency, config?.provider ?? ACQUIRER);
   const charge = spelled === null ? null : formatMoney(spelled, 'BYN', lang);
   const active = Boolean(me?.premiumUntil && new Date(me.premiumUntil) > new Date());
   const terms: Terms = { offer: legalVersion.offer, payment: legalVersion.payment, privacy: legalVersion.privacy };

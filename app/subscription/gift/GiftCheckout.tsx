@@ -7,7 +7,7 @@ import { subscriptionCopy } from '../copy';
 import { formatMoney } from '../currency';
 import { subscriptionPath } from '../i18n';
 import { legalVersion } from '../legal/versions';
-import { chargeToSpellOut, planCopy, prices } from '../merchant';
+import { ACQUIRER, chargeToSpellOut, planCopy, prices } from '../merchant';
 import { Money } from '../Money';
 import { Reveal } from '../Reveal';
 import { Button, Spinner } from '../ui';
@@ -40,7 +40,7 @@ export function GiftCheckout() {
   }, [warmAuth]);
 
   const price = formatMoney(prices[planId][currency], currency, lang);
-  const spelled = chargeToSpellOut(planId, currency, config?.provider ?? 'webpay');
+  const spelled = chargeToSpellOut(planId, currency, config?.provider ?? ACQUIRER);
   const charge = spelled === null ? null : formatMoney(spelled, 'BYN', lang);
   // The worker is the authority; this only spares a sign-in when the checkout
   // is KNOWN to be closed. A config we could not load — a blocked origin, a
