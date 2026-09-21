@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AppleGlyph } from '../../home/art';
 import { useAccount, type Terms } from '../account';
 import { subscriptionCopy } from '../copy';
@@ -22,7 +22,7 @@ type GiftPlan = (typeof GIFT_PLANS)[number];
 // No account: the buyer may have no iPhone at all. After payment the return
 // page shows the link, the code and the card — nothing is sent by e-mail.
 export function GiftCheckout() {
-  const { lang, currency, configured, config, signedIn, error, signIn, createOrder, copy } = useAccount();
+  const { lang, currency, configured, config, signedIn, error, signIn, createOrder, copy, warmAuth } = useAccount();
   const text = subscriptionCopy[lang].gift;
   const [planId, setPlanId] = useState<GiftPlan>('year');
   const [to, setTo] = useState('');
@@ -33,6 +33,11 @@ export function GiftCheckout() {
   const [closed, setClosed] = useState(false);
   const [stage, setStage] = useState<'idle' | 'signin' | 'order' | 'redirect'>('idle');
   const acceptRef = useRef<HTMLInputElement>(null);
+  // No terms dialog here to warm from, and paying needs a signed-in tester
+  // while checkout is in test mode — so this page asks for Firebase itself.
+  useEffect(() => {
+    void warmAuth();
+  }, [warmAuth]);
 
   const price = formatMoney(prices[planId][currency], currency, lang);
   const spelled = chargeToSpellOut(planId, currency, config?.provider ?? 'webpay');

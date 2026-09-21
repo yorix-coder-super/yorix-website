@@ -191,7 +191,8 @@ function ReturnStatus() {
 // language they know) never ship to the browser.
 export function ReturnStatusPanel({ lang }: { lang: Lang }) {
   return (
-    <AccountProvider lang={lang}>
+    // This page reads the order through the account, so it needs Firebase at once.
+    <AccountProvider eagerAuth lang={lang}>
       <ReturnStatus />
     </AccountProvider>
   );

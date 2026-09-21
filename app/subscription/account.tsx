@@ -57,6 +57,8 @@ type Api = State & {
   getToken: () => Promise<string | null>;
   clearError: () => void;
   openTerms: (plan: Plan | null) => void;
+  /** Start loading Firebase now; safe to call repeatedly. */
+  warmAuth: () => Promise<void>;
 };
 
 const Ctx = createContext<Api | null>(null);
@@ -113,6 +115,7 @@ export function AccountProvider({
   docsNote = '',
   country,
   acceptLanguage,
+  eagerAuth = false,
   children,
 }: {
   lang: Lang;
@@ -122,6 +125,8 @@ export function AccountProvider({
   docsNote?: string;
   country?: string | null;
   acceptLanguage?: string | null;
+  /** Load Firebase on mount instead of when the checkout is opened. */
+  eagerAuth?: boolean;
   children: ReactNode;
 }) {
   const copy = useMemo<ClientCopy>(() => (wire ? fromWire<ClientCopy>(wire) : subscriptionCopy[lang]), [wire, lang]);
@@ -129,6 +134,9 @@ export function AccountProvider({
   // Kept from initialisation so sign-in opens its popup synchronously inside
   // the click — Safari blocks a window opened after an awaited import.
   const authModRef = useRef<typeof import('firebase/auth') | null>(null);
+  // Set once, on the first warm; every later caller awaits the same promise.
+  const authWarm = useRef<Promise<void> | null>(null);
+  const unsubscribeRef = useRef<(() => void) | null>(null);
   const [state, setState] = useState<State>({
     ready: !isFirebaseConfigured,
     configured: isFirebaseConfigured,
@@ -169,29 +177,52 @@ export function AccountProvider({
         if (!cancelled && config) setState((s) => ({ ...s, config }));
       })
       .catch(() => {});
-    if (!isFirebaseConfigured) return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
-    let unsubscribe = () => {};
-    (async () => {
+  /**
+   * Firebase and its sign-in iframe are ~220 KB, and a visitor who never opens
+   * the checkout never needs them — so they load when signing in becomes
+   * plausible, not when the page mounts. Called once; later calls wait on the
+   * same promise.
+   *
+   * Timing matters: Safari blocks a popup opened after an await, so the
+   * «Continue with Apple» button stays disabled until `ready`. Warming when
+   * the terms dialog opens buys the download the seconds it takes to read the
+   * box and tick it.
+   */
+  const warmAuth = useCallback(() => {
+    if (!isFirebaseConfigured) return Promise.resolve();
+    authWarm.current ??= (async () => {
       const auth = await getAuthInstance();
-      if (cancelled) return;
       authRef.current = auth;
       const mod = await import('firebase/auth');
       authModRef.current = mod;
-      unsubscribe = mod.onAuthStateChanged(auth, (user) => {
+      unsubscribeRef.current = mod.onAuthStateChanged(auth, (user) => {
         setState((s) => ({ ...s, ready: true, signedIn: Boolean(user), me: user ? s.me : null }));
         if (user) void loadMe();
       });
-    })().catch(() => setState((s) => ({ ...s, ready: true })));
-    return () => {
-      cancelled = true;
-      unsubscribe();
-    };
+    })().catch(() => {
+      // Nothing to sign in with: let the dialog say so rather than spin.
+      setState((s) => ({ ...s, ready: true }));
+    });
+    return authWarm.current;
   }, [loadMe]);
+
+  // The return page reads the order through the account, so it needs the auth
+  // state before anyone touches anything.
+  useEffect(() => {
+    if (eagerAuth) void warmAuth();
+    return () => unsubscribeRef.current?.();
+  }, [eagerAuth, warmAuth]);
 
   // Sign in with Apple only: the subscription is credited to the Apple
   // account the parent uses in the app. Nothing about the account is shown.
   const signIn = useCallback(async () => {
+    // Normally already warm (the dialog warmed it); a very fast click waits here.
+    await warmAuth();
     const auth = authRef.current;
     if (!auth) return false;
     setState((s) => ({ ...s, busy: 'signin', error: null }));
@@ -209,7 +240,7 @@ export function AccountProvider({
       setState((s) => ({ ...s, busy: null, error }));
       return false;
     }
-  }, [lang, loadMe]);
+  }, [lang, loadMe, warmAuth]);
 
   const checkoutMode = state.config?.checkoutMode;
   const acquirer: Acquirer = state.config?.provider ?? 'webpay';
@@ -246,10 +277,16 @@ export function AccountProvider({
   );
 
   const clearError = useCallback(() => setState((s) => ({ ...s, error: null })), []);
-  const openTerms = useCallback((plan: Plan | null) => setState((s) => ({ ...s, termsPlan: plan, error: null })), []);
+  const openTerms = useCallback(
+    (plan: Plan | null) => {
+      if (plan) void warmAuth();
+      setState((s) => ({ ...s, termsPlan: plan, error: null }));
+    },
+    [warmAuth],
+  );
 
   const api = useMemo<Api>(
-    () => ({ ...state, lang, locale, copy, plans: planTexts, docsNote, currency, signIn, createOrder, getToken, clearError, openTerms }),
+    () => ({ ...state, lang, locale, copy, plans: planTexts, docsNote, currency, signIn, createOrder, getToken, clearError, openTerms, warmAuth }),
     [state, lang, locale, copy, planTexts, docsNote, currency, signIn, createOrder, getToken, clearError, openTerms],
   );
 
