@@ -17,6 +17,8 @@ export const ja: RedeemText = {
   entryBody:
     'カードやメッセージに書かれたコードを入力し、Yorixアプリと同じアカウントでAppleサインインしてください。サブスクリプションはすぐに有効になります。',
   entryLabel: 'ギフトコード',
+  entryGo: '続ける',
+  entryShort: 'コードは12文字です。すべて入力されているかご確認ください。',
   entryHint:
     'Oと0、Iと1は同じものとして読み取ります。贈り物のリンクをそのまま貼り付けることもできます。',
   enterCode: 'コードを手入力する',

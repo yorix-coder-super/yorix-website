@@ -15,6 +15,8 @@ export const pt: RedeemText = {
   entryTitle: 'Resgatar um presente',
   entryBody: 'Introduza o código do cartão ou da mensagem e inicie sessão com a Apple na mesma conta que usa na app Yorix — a subscrição fica ativa de imediato.',
   entryLabel: 'Código do presente',
+  entryGo: 'Continuar',
+  entryShort: 'O código tem 12 caracteres — verifique se está completo.',
   entryHint: 'O e 0, I e 1 são lidos da mesma forma. Também pode colar aqui o link completo do presente.',
   enterCode: 'Introduzir o código à mão',
 

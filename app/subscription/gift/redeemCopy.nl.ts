@@ -17,6 +17,8 @@ export const nl: RedeemText = {
   entryBody:
     'Vul de code van de kaart of uit het bericht in en log daarna in met Apple met hetzelfde account als in de Yorix-app – het abonnement staat meteen aan.',
   entryLabel: 'Cadeaucode',
+  entryGo: 'Doorgaan',
+  entryShort: 'De code bestaat uit 12 tekens – kijk of hij compleet is.',
   entryHint:
     'O en 0, I en 1 door elkaar halen geeft niets: we lezen het goed. Je kunt hier ook de hele cadeaulink plakken.',
   enterCode: 'Code handmatig invoeren',

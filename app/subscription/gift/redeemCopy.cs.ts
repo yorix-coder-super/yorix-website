@@ -15,6 +15,8 @@ export const cs: RedeemText = {
   entryTitle: 'Uplatnit dárek',
   entryBody: 'Zadej kód z kartičky nebo ze zprávy a pak se přihlas přes Apple stejným účtem jako v aplikaci Yorix — předplatné se hned zapne.',
   entryLabel: 'Kód dárku',
+  entryGo: 'Pokračovat',
+  entryShort: 'Kód má 12 znaků — zkontroluj, jestli je celý.',
   entryHint: 'O a 0, I a 1 čteme stejně. Vložit sem můžeš i celý odkaz na dárek.',
   enterCode: 'Zadat kód ručně',
 

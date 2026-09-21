@@ -15,6 +15,8 @@ export const es: RedeemText = {
   entryTitle: 'Canjear un regalo',
   entryBody: 'Introduce el código de la tarjeta o del mensaje y después inicia sesión con Apple con la misma cuenta que usas en la app Yorix; la suscripción se activa al momento.',
   entryLabel: 'Código del regalo',
+  entryGo: 'Continuar',
+  entryShort: 'El código tiene 12 caracteres; comprueba que no falte ninguno.',
   entryHint: 'Confundir O y 0, I y 1 no es problema: los leemos bien. También puedes pegar aquí el enlace del regalo entero.',
   enterCode: 'Introducir el código a mano',
 

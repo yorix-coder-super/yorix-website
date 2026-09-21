@@ -15,6 +15,8 @@ export const da: RedeemText = {
   entryTitle: 'Indløs en gave',
   entryBody: 'Indtast koden fra kortet eller beskeden, og log så ind med Apple med den samme konto som i Yorix-appen – abonnementet slås til med det samme.',
   entryLabel: 'Gavekode',
+  entryGo: 'Fortsæt',
+  entryShort: 'Koden er på 12 tegn – tjek, om du har fået det hele med.',
   entryHint: 'O og 0, I og 1 læser vi ens. Du kan også indsætte hele gavelinket her.',
   enterCode: 'Indtast koden manuelt',
 

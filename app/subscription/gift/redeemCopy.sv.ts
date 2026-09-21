@@ -15,6 +15,8 @@ export const sv: RedeemText = {
   entryTitle: 'Lös in en present',
   entryBody: 'Skriv in koden från kortet eller meddelandet och logga in med Apple med samma konto som i Yorix-appen – prenumerationen aktiveras direkt.',
   entryLabel: 'Presentkod',
+  entryGo: 'Fortsätt',
+  entryShort: 'Koden består av 12 tecken – kolla att allt är med.',
   entryHint: 'O och 0, I och 1 läses likadant. Du kan även klistra in hela presentlänken här.',
   enterCode: 'Skriv in koden för hand',
 

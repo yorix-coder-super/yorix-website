@@ -15,6 +15,8 @@ export const vi: RedeemText = {
   entryTitle: 'Đổi quà tặng',
   entryBody: 'Nhập mã trên thiệp hoặc trong tin nhắn, rồi đăng nhập bằng Apple với đúng tài khoản bạn dùng trong ứng dụng Yorix — gói đăng ký sẽ bật ngay.',
   entryLabel: 'Mã quà tặng',
+  entryGo: 'Tiếp tục',
+  entryShort: 'Mã gồm 12 ký tự — hãy kiểm tra xem đã nhập đủ chưa.',
   entryHint: 'O và 0, I và 1 đều được đọc như nhau. Bạn cũng có thể dán cả liên kết quà tặng vào đây.',
   enterCode: 'Nhập mã thủ công',
 

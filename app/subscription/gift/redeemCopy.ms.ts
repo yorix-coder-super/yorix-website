@@ -17,6 +17,8 @@ export const ms: RedeemText = {
   entryBody:
     'Masukkan kod daripada kad atau mesej, kemudian log masuk dengan Apple menggunakan akaun yang sama seperti dalam aplikasi Yorix — langganan akan aktif serta-merta.',
   entryLabel: 'Kod hadiah',
+  entryGo: 'Teruskan',
+  entryShort: 'Kod ini terdiri daripada 12 aksara — semak sama ada semuanya lengkap.',
   entryHint:
     'Keliru antara O dan 0, I dan 1 bukan masalah: kami membacanya dengan betul. Anda juga boleh menampal keseluruhan pautan hadiah di sini.',
   enterCode: 'Masukkan kod secara manual',

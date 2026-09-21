@@ -17,6 +17,8 @@ export const it: RedeemText = {
   entryBody:
     'Inserisci il codice che trovi sul biglietto o nel messaggio, poi accedi con Apple usando lo stesso account dell’app Yorix: l’abbonamento si attiva subito.',
   entryLabel: 'Codice regalo',
+  entryGo: 'Continua',
+  entryShort: 'Il codice è di 12 caratteri: controlla che ci siano tutti.',
   entryHint:
     'Confondere O e 0, I e 1 non è un problema: li leggiamo nel modo giusto. Puoi anche incollare qui il link del regalo per intero.',
   enterCode: 'Inserisci il codice a mano',

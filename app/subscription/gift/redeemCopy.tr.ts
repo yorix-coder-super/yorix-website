@@ -15,6 +15,8 @@ export const tr: RedeemText = {
   entryTitle: 'Hediye kodunu kullan',
   entryBody: 'Karttaki ya da mesajdaki kodu girin, ardından Yorix uygulamasında kullandığınız Apple hesabıyla giriş yapın — abonelik hemen açılır.',
   entryLabel: 'Hediye kodu',
+  entryGo: 'Devam et',
+  entryShort: 'Kod 12 karakterden oluşur — hepsini girdiğinizden emin olun.',
   entryHint: 'O ile 0, I ile 1 aynı şekilde okunur. Hediye bağlantısının tamamını da buraya yapıştırabilirsiniz.',
   enterCode: 'Kodu elle gir',
 
