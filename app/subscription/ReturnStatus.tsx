@@ -125,6 +125,13 @@ function ReturnStatus() {
         </h1>
       </Reveal>
       )}
+      {/* The buyer just spent money on someone else; say thank you before the
+          instructions start. */}
+      {gift ? (
+      <Reveal delay={200} load>
+        <p className="mx-auto mt-4 max-w-2xl text-lg leading-7 text-white/75">{copy.gift.paidLead}</p>
+      </Reveal>
+      ) : null}
       {/* A paid gift replaces this panel with its own; the panel is for the
           states that are still one short message. */}
       {gift || paidPlan ? null : (

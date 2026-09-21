@@ -70,13 +70,16 @@ export type SubscriptionCopy = {
     note: string;
     pay: (price: string) => string;
     paidTitle: string;
+    paidLead: string;
     paidBody: string;
     shareTitle: string;
-    shareSteps: [string, string];
+    shareSteps: [string, string, string];
     link: string;
     code: string;
     copyLink: string;
+    copyCode: string;
     copied: string;
+    redeemOnSite: [string, string];
     validUntil: (date: string) => string;
     redeemTitle: string;
     redeemBody: string;
@@ -280,17 +283,21 @@ const ru: SubscriptionCopy = {
     cardPlan: (period) => `Подписка Yorix ${period}`,
     note: 'Аккаунт не нужен: сразу после оплаты получите ссылку, код и открытку с QR. Получателю понадобится iPhone или iPad.',
     pay: (price) => `Оплатить подарок · ${price}`,
-    paidTitle: 'Подарок оплачен!',
+    paidTitle: 'Спасибо! Подарок готов',
+    paidLead: 'Вы дарите спокойные ночи — это дорогого стоит. Осталось передать открытку, дальше всё сделаем мы.',
     shareTitle: 'Как подарить',
     shareSteps: [
       'Отправьте открытку или ссылку получателю — в мессенджер, почтой или распечатайте.',
-      'Он откроет ссылку или введёт код и войдёт через Apple — подписка включится сама.',
+      'Он перейдёт по ссылке или введёт код на сайте.',
+      'Вход через Apple — и подписка включится сама.',
     ],
     paidBody: 'Отправьте ссылку получателю или подарите открытку с кодом. Подписка включится, когда получатель откроет ссылку или введёт код и войдёт через Apple.',
     link: 'Ссылка на подарок',
     code: 'Код подарка',
     copyLink: 'Скопировать ссылку',
+    copyCode: 'Скопировать код',
     copied: 'Скопировано',
+    redeemOnSite: ['Код можно ввести на ', ' — там же, что и на открытке.'],
     validUntil: (date) => `Код действует до ${date}`,
     redeemTitle: 'Вам подарили подписку Yorix',
     redeemBody: 'Подписка уже ваша — остался один шаг. Войдите через Apple тем же аккаунтом, что и в приложении: на него она и встанет.',
@@ -351,7 +358,7 @@ const ru: SubscriptionCopy = {
     scamNote: 'Мы никогда не просим звонить, платить или пересылать код — ни до активации, ни после.',
     ownGiftTitle: 'Это подарок, который вы купили',
     ownGiftKeep: 'Не активировать',
-    ownGiftGoOn: 'Всё равно активировать',
+    ownGiftGoOn: 'Активировать на себя',
     ownGiftConfirm: 'Этот подарок куплен в этом браузере. Если активировать его на ваш аккаунт, у получателя ссылка перестанет работать. Активировать на себя?',
     lostKey: 'Если вы оплачивали подарок, откройте эту страницу в том же браузере, где платили, — или напишите нам и укажите номер заказа из чека.',
   },
@@ -522,17 +529,21 @@ const en: SubscriptionCopy = {
     cardPlan: (period) => `Yorix subscription ${period}`,
     note: 'No account needed: right after payment you get the link, the code and a card with a QR code. The recipient needs an iPhone or iPad.',
     pay: (price) => `Pay for the gift · ${price}`,
-    paidTitle: 'Your gift is paid!',
+    paidTitle: 'Thank you! The gift is ready',
+    paidLead: 'You are giving someone calm nights — that counts for a lot. Pass the card on; the rest is on us.',
     shareTitle: 'How to give it',
     shareSteps: [
       'Send the card or the link to whoever it is for — by message, by mail, or printed.',
-      'They open the link or type the code and sign in with Apple — the subscription turns itself on.',
+      'They follow the link, or type the code on the site.',
+      'They sign in with Apple — the subscription turns itself on.',
     ],
     paidBody: 'Send the link to the recipient or give them the card with the code. The subscription turns on once they open the link or enter the code and sign in with Apple.',
     link: 'Gift link',
     code: 'Gift code',
     copyLink: 'Copy link',
+    copyCode: 'Copy code',
     copied: 'Copied',
+    redeemOnSite: ['The code can be entered at ', ' — the address the card carries.'],
     validUntil: (date) => `The code is valid until ${date}.`,
     redeemTitle: 'Someone gave you a Yorix subscription',
     redeemBody: 'The subscription is yours — one step left. Sign in with Apple using the same account as in the app: that is where it lands.',

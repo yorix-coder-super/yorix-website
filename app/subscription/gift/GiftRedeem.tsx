@@ -59,6 +59,15 @@ function GiftRedeem({ code: rawCode, appUrl }: { code: string; appUrl: string })
   // sign-in popup (which reports the page URL to Firebase), the history and
   // any error report never see it. A reload lands on /gift with it prefilled.
   useEffect(() => {
+    if (!ownGiftAsk) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setOwnGiftAsk(false);
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [ownGiftAsk]);
+
+  useEffect(() => {
     if (typo || !window.location.pathname.includes('/gift/')) return;
     try {
       sessionStorage.setItem('yorix-gift-code', code);
@@ -224,23 +233,28 @@ function GiftRedeem({ code: rawCode, appUrl }: { code: string; appUrl: string })
         <div
           aria-labelledby="own-gift-title"
           aria-modal="true"
-          className="fixed inset-0 z-[100] grid place-items-center overflow-y-auto bg-[#0B0A1F]/80 p-5 backdrop-blur-sm"
+          className="fixed inset-0 z-[100] grid place-items-center overflow-y-auto bg-[#0B0A1F]/85 p-5 backdrop-blur-md"
           data-lenis-prevent=""
           onClick={() => setOwnGiftAsk(false)}
           role="dialog"
         >
+          {/* The page's own panel language — a bordered pane, not a shadowed
+              slab: the dim behind it already does the lifting. */}
           <div
-            className="enter-pop w-full max-w-md rounded-[2rem] border border-[#FDE68A]/40 bg-[#1E1B4B] p-6 text-start shadow-[0_40px_120px_rgb(0_0_0/55%)] sm:p-8"
+            className="enter-pop spotlight w-full max-w-md rounded-[2rem] border border-white/12 bg-[#1E1B4B]/95 p-6 text-start backdrop-blur-xl sm:p-8"
             onClick={(event) => event.stopPropagation()}
           >
             <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#FDE68A]/15 text-[#FDE68A]">
               <AlertTriangle aria-hidden="true" className="h-6 w-6" />
             </span>
-            <h2 className="mt-4 text-2xl font-semibold leading-tight text-white" id="own-gift-title">
+            <h2 className="mt-5 text-2xl font-semibold leading-tight text-white" id="own-gift-title">
               {text.ownGiftTitle}
             </h2>
-            <p className="mt-3 leading-7 text-white/80">{text.ownGiftConfirm}</p>
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            <p className="mt-3 leading-7 text-white/75">{text.ownGiftConfirm}</p>
+            {/* Stacked, and the safe answer first: side by side, the longer
+                label outgrew its pill — every button here spells out what it
+                does, so none of them is short. */}
+            <div className="mt-7 grid gap-3">
               <Button onClick={() => setOwnGiftAsk(false)} variant="light">
                 {text.ownGiftKeep}
               </Button>

@@ -41,11 +41,12 @@ gates the header, the footer, home pricing, the storefront and the document
 navigation. **Any new surface that names a price, a payment, a gift or the
 acquirer goes behind it too** — that is how the last leak got in.
 
-Three things stay open on purpose: the terms of use and the privacy policy,
+What stays open is not a sales page: the terms of use and the privacy policy,
 which the App Store requires of the app itself; the acquirer's return and
-cancel pages; and a redeem link that already carries its code (`/gift/<code>`,
-`/g/<code>`), because a gift bought here can be opened by a grandparent
-anywhere. The bare `/gift` entry form is not one of them.
+cancel pages; and the **whole redeem path** — `/gift`, `/gift/<code>`,
+`/g/<code>`. A gift is bought in Belarus or Russia and opened wherever the
+family is, and every printed card carries that address, so gating it would
+kill a gift already paid for. Hide the links to it, never the page.
 
 ## Design and copy rules
 

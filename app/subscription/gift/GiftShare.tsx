@@ -1,5 +1,6 @@
 'use client';
 
+import { Check, Copy } from 'lucide-react';
 import { useEffect, useEffectEvent, useRef, useState, useSyncExternalStore } from 'react';
 import { useAccount } from '../account';
 import { subscriptionCopy } from '../copy';
@@ -53,7 +54,7 @@ function canShareFiles(): boolean {
 export function GiftShare({ gift, compact = false }: { gift: BuyerGift; compact?: boolean }) {
   const { lang } = useAccount();
   const text = subscriptionCopy[lang].gift;
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState<'link' | 'code' | null>(null);
   const [busy, setBusy] = useState<'card' | null>(null);
   const [notice, setNotice] = useState<Notice | null>(null);
   // Known in the browser only; the server renders the copy-first layout.
@@ -66,6 +67,7 @@ export function GiftShare({ gift, compact = false }: { gift: BuyerGift; compact?
   const support = `${lang === 'ru' ? '/ru' : ''}/support#contact`;
   const link = 'font-semibold text-white underline decoration-white/40 underline-offset-2 hover:decoration-white';
   const fileName = `yorix-gift-${code}.png`;
+  const redeemPage = redeemPageUrl(origin, lang);
 
   const cardText: CardImageText = {
     eyebrow: text.eyebrow,
@@ -131,11 +133,12 @@ export function GiftShare({ gift, compact = false }: { gift: BuyerGift; compact?
       <div className="grid gap-3 sm:grid-cols-2">
         <Button
           onClick={() => {
-            void navigator.clipboard?.writeText(url).then(() => setCopied(true));
+            void navigator.clipboard?.writeText(url).then(() => setCopied('link'));
           }}
           variant={shareFiles ? 'ghost' : 'light'}
         >
-          {copied ? text.copied : text.copyLink}
+          {copied === 'link' ? <Check aria-hidden className="h-4 w-4" /> : <Copy aria-hidden className="h-4 w-4" />}
+          {copied === 'link' ? text.copied : text.copyLink}
         </Button>
         <Button disabled={busy === 'card'} onClick={() => void downloadCard()} variant="ghost">
           {!shareFiles && busy === 'card' ? <Spinner className="h-5 w-5" /> : null}
@@ -150,8 +153,32 @@ export function GiftShare({ gift, compact = false }: { gift: BuyerGift; compact?
   // wall of characters nobody reads or types.
   const ticket = (
     <div className="rounded-2xl border border-dashed border-white/20 bg-white/[0.04] p-4">
-      <p className="text-[11px] font-semibold uppercase tracking-wide text-white/45">{text.code}</p>
-      <p className="mt-1 break-all font-mono text-xl font-semibold tracking-[0.18em] text-white sm:text-2xl">{code}</p>
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-white/45">{text.code}</p>
+          <p className="mt-1 break-all font-mono text-xl font-semibold tracking-[0.18em] text-white sm:text-2xl">{code}</p>
+        </div>
+        <button
+          aria-label={copied === 'code' ? text.copied : text.copyCode}
+          className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-white/15 bg-white/[0.06] text-white/70 transition hover:border-white/35 hover:text-white focus:outline-none focus-visible:ring-4 focus-visible:ring-white/25 active:scale-95"
+          onClick={() => {
+            void navigator.clipboard?.writeText(code).then(() => setCopied('code'));
+          }}
+          title={copied === 'code' ? text.copied : text.copyCode}
+          type="button"
+        >
+          {copied === 'code' ? <Check aria-hidden className="h-5 w-5" /> : <Copy aria-hidden className="h-5 w-5" />}
+        </button>
+      </div>
+      {/* Where to type it when the link never arrived — the same address the
+          printed card carries. */}
+      <p className="mt-3 text-xs leading-5 text-white/55">
+        {text.redeemOnSite[0]}
+        <a className={link} href={redeemPage}>
+          {redeemPage.replace(/^https?:\/\//, '')}
+        </a>
+        {text.redeemOnSite[1]}
+      </p>
     </div>
   );
 
