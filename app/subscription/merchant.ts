@@ -1,5 +1,6 @@
 import type { WebCurrency } from './currency';
 import type { Lang } from './i18n';
+import { charges, chargesRub, plans, prices, type Plan, type PlanId } from './prices.generated';
 
 // Single source for everything the acquiring bank checks on the site:
 // seller requisites, plan prices and the support promise. Empty fields are
@@ -76,47 +77,12 @@ export const ACQUIRER: Acquirer = 'yookassa';
 
 export const acquirer = ACQUIRERS[ACQUIRER];
 
-export type PlanId = 'week' | 'month' | 'year';
-
-export type Plan = {
-  id: PlanId;
-  days: number;
-  priceByn: number;
-};
-
-export const plans: Plan[] = [
-  { id: 'week', days: 7, priceByn: 11.9 },
-  { id: 'month', days: 30, priceByn: 23.9 },
-  { id: 'year', days: 365, priceByn: 119.9 },
-];
-
-// Prices mirror the App Store in the two countries the site sells to
-// (verified 2026-09-18): Belarus $3.99 / $7.99 / $39.99, Russia 299 / 599 /
-// 2 990 ₽. The web never looks dearer than the store the buyer could have
-// used. Other countries buy in the App Store, so no other price is kept here.
-export const prices: Record<PlanId, Record<WebCurrency, number>> = {
-  week: { BYN: 11.9, RUB: 299 },
-  month: { BYN: 23.9, RUB: 599 },
-  year: { BYN: 119.9, RUB: 2990 },
-};
-
-// What a Belarusian-ruble acquirer charges for that price — the receipt says
-// this number, so the page says it too before the buyer leaves. Mirrors
-// `amounts` in the worker's src/web/plans.ts; the worker is the authority.
-export const charges: Record<PlanId, Record<WebCurrency, number>> = {
-  week: { BYN: 11.9, RUB: 10.5 },
-  month: { BYN: 23.9, RUB: 21 },
-  year: { BYN: 119.9, RUB: 104.9 },
-};
-
-// The same, in roubles, for ЮKassa. A Russian buyer is charged the rouble
-// price they were shown; a Belarusian one pays the Belarusian price converted
-// at the same rate, so roubles never undercut it. Mirrors `amountsRub`.
-export const chargesRub: Record<PlanId, Record<WebCurrency, number>> = {
-  week: { BYN: 339, RUB: 299 },
-  month: { BYN: 681, RUB: 599 },
-  year: { BYN: 3414, RUB: 2990 },
-};
+// Plans, prices and both charge tables are generated from the worker's
+// src/web/plans.ts, which is the authority on what the acquirer is asked to
+// charge. Edit a price there and run `npm run sync:site-prices` in
+// CloudflareWorker; its `npm test` fails while this site's copy is stale.
+export { charges, chargesRub, plans, prices };
+export type { Plan, PlanId };
 
 /** What the card is actually charged, and in which currency. */
 export function chargeFor(planId: PlanId, currency: WebCurrency, acquirer: Acquirer): { amount: number; currency: WebCurrency } {
