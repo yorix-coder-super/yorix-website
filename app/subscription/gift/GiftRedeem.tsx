@@ -7,6 +7,7 @@ import { API_BASE } from '../config';
 import { subscriptionCopy } from '../copy';
 import { formatDate, subscriptionPath, type Lang } from '../i18n';
 import { planCopy, type PlanId } from '../merchant';
+import { PaidScreen } from '../PaidScreen';
 import { Reveal } from '../Reveal';
 import { Button, Spinner } from '../ui';
 import { codeFromInput, formatGiftCode, giftCodeChecks } from './code';
@@ -126,6 +127,17 @@ function GiftRedeem({ code: rawCode, appUrl }: { code: string; appUrl: string })
   const retype = problem === 'notFound' || problem === 'typo';
   const home = lang === 'ru' ? '/ru' : '';
 
+  // A redeemed gift lands a parent in exactly the place a purchase does — the
+  // subscription is on, and the next step is the app — so it gets the same
+  // screen rather than a smaller echo of it.
+  if (until) {
+    return (
+      <section className="mx-auto max-w-6xl px-5 pb-20 pt-4 sm:px-8 lg:px-10">
+        <PaidScreen copy={subscriptionCopy[lang]} lang={lang} until={until} />
+      </section>
+    );
+  }
+
   return (
     <section className="mx-auto grid max-w-6xl gap-8 px-5 pb-20 pt-4 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-10">
       <Reveal animation="zoomIn" load>
@@ -138,16 +150,7 @@ function GiftRedeem({ code: rawCode, appUrl }: { code: string; appUrl: string })
       </Reveal>
       <Reveal delay={180} load>
         <div className="rounded-[2rem] border border-white/12 bg-white/[0.06] p-6 backdrop-blur-xl sm:p-8">
-          {until ? (
-            <div className="enter-rise">
-              <h1 className="text-3xl font-semibold leading-tight text-white">{text.redeemed(formatDate(until, lang))}</h1>
-              <p className="mt-3 text-base leading-7 text-white/80">{text.openApp}</p>
-              <Button className="mt-6" href={appUrl} rel="noopener noreferrer" target="_blank" variant="light">
-                <AppleGlyph className="h-5 w-5" />
-                {text.download}
-              </Button>
-            </div>
-          ) : (
+          {(
             <>
               <h1 className="text-3xl font-semibold leading-tight text-white">{text.redeemTitle}</h1>
               <p className="mt-3 text-base leading-7 text-white/80">{text.redeemBody}</p>

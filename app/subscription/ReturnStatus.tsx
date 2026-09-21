@@ -164,9 +164,11 @@ function ReturnStatus() {
           <PaidScreen copy={copy} lang={lang} until={until!} />
         </div>
       ) : null}
-      {/* Nothing follows a paid gift: the panel above is the whole job, and
-          «back to plans» after buying reads as if the purchase did not count. */}
-      {gift || (status === 'paid' && until) ? null : (
+      {/* «Back to plans» belongs to one state only: the order that did not
+          work out. After a purchase it reads as if the purchase did not count,
+          and while the payment is still being checked it invites the buyer to
+          walk away from it. */}
+      {status !== 'failed' ? null : (
         <Reveal delay={380} load>
           <Button className="mt-8" href={`${subscriptionPath(lang)}#plans`} variant="ghost">
             {copy.ret.back}
