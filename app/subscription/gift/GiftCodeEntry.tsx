@@ -63,7 +63,7 @@ export function GiftCodeEntry({ lang }: { lang: Lang }) {
         {text.entryHint}
       </p>
       {problem ? (
-        <p className="rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm text-[#FDE68A]" role="alert">
+        <p className="enter-rise rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm text-[#FDE68A]" role="alert">
           {problem}
         </p>
       ) : null}

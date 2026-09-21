@@ -7,6 +7,7 @@ import { API_BASE } from '../config';
 import { subscriptionCopy } from '../copy';
 import { formatDate, subscriptionPath, type Lang } from '../i18n';
 import { planCopy, type PlanId } from '../merchant';
+import { Reveal } from '../Reveal';
 import { Button, Spinner } from '../ui';
 import { codeFromInput, formatGiftCode, giftCodeChecks } from './code';
 import { boughtHere } from './keys';
@@ -127,67 +128,72 @@ function GiftRedeem({ code: rawCode, appUrl }: { code: string; appUrl: string })
 
   return (
     <section className="mx-auto grid max-w-6xl gap-8 px-5 pb-20 pt-4 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-10">
-      <GiftCardView
-        eyebrow={text.eyebrow}
-        message={gift?.message ?? ''}
-        period={period || text.eyebrow}
-        title={gift?.to ? text.cardFor(gift.to) : text.redeemTitle}
-      />
-      <div className="rounded-[2rem] border border-white/12 bg-white/[0.06] p-6 backdrop-blur-xl sm:p-8">
-        {until ? (
-          <>
-            <h1 className="text-3xl font-semibold leading-tight text-white">{text.redeemed(formatDate(until, lang))}</h1>
-            <p className="mt-3 text-base leading-7 text-white/80">{text.openApp}</p>
-            <Button className="mt-6" href={appUrl} rel="noopener noreferrer" target="_blank" variant="light">
-              <AppleGlyph className="h-5 w-5" />
-              {text.download}
-            </Button>
-          </>
-        ) : (
-          <>
-            <h1 className="text-3xl font-semibold leading-tight text-white">{text.redeemTitle}</h1>
-            <p className="mt-3 text-base leading-7 text-white/80">{text.redeemBody}</p>
-            {loading ? (
-              <p className="mt-6 inline-flex items-center gap-3 text-white/80">
-                <Spinner className="h-5 w-5" />
-                {text.loading}
-              </p>
-            ) : null}
-            {problem ? (
-              <p className="mt-6 rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm text-[#FDE68A]" role="alert">
-                {text.errors[problem]}
-              </p>
-            ) : null}
-            {retype ? (
-              <a className={`mt-4 inline-flex text-sm ${link}`} href={`${home}/gift`}>
-                {text.enterCode}
-              </a>
-            ) : null}
-            {signInProblem && !busy ? (
-              <p className="mt-6 rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm text-[#FDE68A]" role="alert">
-                {copy.account[signInProblem]} {text.popupHint}
-              </p>
-            ) : null}
-            {!loading && gift?.status === 'active' && configured ? (
-              <>
-                <Button className="mt-6 w-full whitespace-normal! text-center sm:w-auto" disabled={busy} onClick={() => void redeem()} variant="light">
-                  {busy ? <Spinner className="h-5 w-5" /> : <AppleGlyph className="h-5 w-5" />}
-                  {text.redeem}
-                </Button>
-                <p className="mt-4 text-xs leading-5 text-white/55">
-                  {text.redeemAccept[0]}
-                  <a className={link} href={subscriptionPath(lang, '/terms')} rel="noopener" target="_blank">
-                    {text.redeemAccept[1]}
-                  </a>
-                  {text.redeemAccept[2]}
+      <Reveal animation="zoomIn" load>
+        <GiftCardView
+          eyebrow={text.eyebrow}
+          message={gift?.message ?? ''}
+          period={period || text.eyebrow}
+          title={gift?.to ? text.cardFor(gift.to) : text.redeemTitle}
+        />
+      </Reveal>
+      <Reveal delay={180} load>
+        <div className="rounded-[2rem] border border-white/12 bg-white/[0.06] p-6 backdrop-blur-xl sm:p-8">
+          {until ? (
+            <div className="enter-rise">
+              <h1 className="text-3xl font-semibold leading-tight text-white">{text.redeemed(formatDate(until, lang))}</h1>
+              <p className="mt-3 text-base leading-7 text-white/80">{text.openApp}</p>
+              <Button className="mt-6" href={appUrl} rel="noopener noreferrer" target="_blank" variant="light">
+                <AppleGlyph className="h-5 w-5" />
+                {text.download}
+              </Button>
+            </div>
+          ) : (
+            <>
+              <h1 className="text-3xl font-semibold leading-tight text-white">{text.redeemTitle}</h1>
+              <p className="mt-3 text-base leading-7 text-white/80">{text.redeemBody}</p>
+              {loading ? (
+                <p className="mt-6 inline-flex items-center gap-3 text-white/80">
+                  <Spinner className="h-5 w-5" />
+                  {text.loading}
                 </p>
-                <p className="mt-4 text-sm leading-6 text-white/70">{text.alreadySubscribed(formatDate(gift.expiresAt, lang))}</p>
-                <p className="mt-3 text-xs leading-5 text-white/55">{text.scamNote}</p>
-              </>
-            ) : null}
-          </>
-        )}
-      </div>
+              ) : null}
+              {problem ? (
+                // A mistyped link is known on the server: that line is part of the page, not an arrival.
+                <p className={`${problem === 'typo' ? '' : 'enter-rise '}mt-6 rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm text-[#FDE68A]`} role="alert">
+                  {text.errors[problem]}
+                </p>
+              ) : null}
+              {retype ? (
+                <a className={`mt-4 inline-flex text-sm ${link}`} href={`${home}/gift`}>
+                  {text.enterCode}
+                </a>
+              ) : null}
+              {signInProblem && !busy ? (
+                <p className="enter-rise mt-6 rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm text-[#FDE68A]" role="alert">
+                  {copy.account[signInProblem]} {text.popupHint}
+                </p>
+              ) : null}
+              {!loading && gift?.status === 'active' && configured ? (
+                <div className="enter-rise">
+                  <Button className="mt-6 w-full whitespace-normal! text-center sm:w-auto" disabled={busy} onClick={() => void redeem()} variant="light">
+                    {busy ? <Spinner className="h-5 w-5" /> : <AppleGlyph className="h-5 w-5" />}
+                    {text.redeem}
+                  </Button>
+                  <p className="mt-4 text-xs leading-5 text-white/55">
+                    {text.redeemAccept[0]}
+                    <a className={link} href={subscriptionPath(lang, '/terms')} rel="noopener" target="_blank">
+                      {text.redeemAccept[1]}
+                    </a>
+                    {text.redeemAccept[2]}
+                  </p>
+                  <p className="mt-4 text-sm leading-6 text-white/70">{text.alreadySubscribed(formatDate(gift.expiresAt, lang))}</p>
+                  <p className="mt-3 text-xs leading-5 text-white/55">{text.scamNote}</p>
+                </div>
+              ) : null}
+            </>
+          )}
+        </div>
+      </Reveal>
     </section>
   );
 }

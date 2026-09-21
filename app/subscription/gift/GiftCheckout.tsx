@@ -9,6 +9,7 @@ import { subscriptionPath } from '../i18n';
 import { legalVersion } from '../legal/versions';
 import { charges, planCopy, prices } from '../merchant';
 import { Money } from '../Money';
+import { Reveal } from '../Reveal';
 import { Button, Spinner } from '../ui';
 import { cardHasContact } from './cardText';
 import { GiftCardView } from './GiftCardView';
@@ -91,7 +92,8 @@ export function GiftCheckout() {
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-      <div className="lg:sticky lg:top-6">
+      {/* Sticky on the Reveal itself: a wrapper as tall as the card would leave it no room to stick. */}
+      <Reveal animation="zoomIn" className="lg:sticky lg:top-6" delay={340} load="visible">
         <GiftCardView
           eyebrow={text.eyebrow}
           message={message.trim()}
@@ -106,121 +108,123 @@ export function GiftCheckout() {
             </li>
           ))}
         </ol>
-      </div>
+      </Reveal>
 
-      <form
-        className="grid gap-5 rounded-[2rem] border border-white/12 bg-white/[0.06] p-5 backdrop-blur-xl sm:p-7"
-        onSubmit={(event) => {
-          event.preventDefault();
-          void proceed();
-        }}
-      >
-        <fieldset>
-          <legend className="text-sm font-semibold text-white/80">{text.plan}</legend>
-          <div className="mt-2 grid grid-cols-2 gap-3">
-            {GIFT_PLANS.map((id) => {
-              const selected = id === planId;
-              return (
-                <label
-                  className={`flex cursor-pointer flex-col rounded-2xl border p-4 transition ${selected ? 'border-[#FDE68A] bg-white/[0.12]' : 'border-white/15 bg-white/[0.04] hover:border-white/30'}`}
-                  key={id}
-                >
-                  <input checked={selected} className="sr-only" name="plan" onChange={() => setPlanId(id)} type="radio" value={id} />
-                  <span className="text-base font-semibold text-white">{planCopy[lang][id].title}</span>
-                  <span className="mt-1 text-lg font-semibold text-white">
-                    <Money text={formatMoney(prices[id][currency], currency, lang)} />
-                  </span>
-                </label>
-              );
-            })}
-          </div>
-          {charge ? (
-            <p className="mt-2 text-xs text-white/55">
-              <Money text={copy.terms.charge(charge)} />
+      <Reveal delay={460} load="visible">
+        <form
+          className="grid gap-5 rounded-[2rem] border border-white/12 bg-white/[0.06] p-5 backdrop-blur-xl sm:p-7"
+          onSubmit={(event) => {
+            event.preventDefault();
+            void proceed();
+          }}
+        >
+          <fieldset>
+            <legend className="text-sm font-semibold text-white/80">{text.plan}</legend>
+            <div className="mt-2 grid grid-cols-2 gap-3">
+              {GIFT_PLANS.map((id) => {
+                const selected = id === planId;
+                return (
+                  <label
+                    className={`flex cursor-pointer flex-col rounded-2xl border p-4 transition duration-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] ${selected ? 'border-[#FDE68A] bg-white/[0.12]' : 'border-white/15 bg-white/[0.04] hover:border-white/30'}`}
+                    key={id}
+                  >
+                    <input checked={selected} className="sr-only" name="plan" onChange={() => setPlanId(id)} type="radio" value={id} />
+                    <span className="text-base font-semibold text-white">{planCopy[lang][id].title}</span>
+                    <span className="mt-1 text-lg font-semibold text-white">
+                      <Money text={formatMoney(prices[id][currency], currency, lang)} />
+                    </span>
+                  </label>
+                );
+              })}
+            </div>
+            {charge ? (
+              <p className="mt-2 text-xs text-white/55">
+                <Money text={copy.terms.charge(charge)} />
+              </p>
+            ) : null}
+          </fieldset>
+
+          <label className="block text-sm font-semibold text-white/80">
+            {text.to}
+            <input
+              className={field}
+              maxLength={40}
+              onChange={(event) => {
+                setTo(event.target.value);
+                setContact(false);
+              }}
+              placeholder={text.toPlaceholder}
+              value={to}
+            />
+          </label>
+          <label className="block text-sm font-semibold text-white/80">
+            {text.message}
+            <textarea
+              className={`${field} min-h-24 resize-y`}
+              maxLength={200}
+              onChange={(event) => {
+                setMessage(event.target.value);
+                setContact(false);
+              }}
+              placeholder={text.messagePlaceholder}
+              value={message}
+            />
+          </label>
+
+          <label className="flex items-start gap-3 text-sm leading-6 text-white/80">
+            <input
+              checked={accepted}
+              className="mt-0.5 h-5 w-5 shrink-0 cursor-pointer rounded accent-[#A78BFA]"
+              onChange={(event) => {
+                setAccepted(event.target.checked);
+                if (event.target.checked) setMissing(false);
+              }}
+              ref={acceptRef}
+              type="checkbox"
+            />
+            <span>
+              {copy.terms.accept[0]}
+              <a className={link} href={subscriptionPath(lang, '/offer')} rel="noopener" target="_blank">
+                {copy.terms.accept[1]}
+              </a>
+              {copy.terms.accept[2]}
+              <a className={link} href={subscriptionPath(lang, '/payment')} rel="noopener" target="_blank">
+                {copy.terms.accept[3]}
+              </a>
+              {copy.terms.accept[4]}
+            </span>
+          </label>
+          <p className="text-xs leading-5 text-white/55">
+            {copy.terms.privacy[0]}
+            <a className={link} href={subscriptionPath(lang, '/privacy')} rel="noopener" target="_blank">
+              {copy.terms.privacy[1]}
+            </a>
+            {copy.terms.privacy[2]}
+          </p>
+
+          {contact ? (
+            <p className="enter-rise rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm text-[#FDE68A]" role="alert">
+              {text.cardContact}
             </p>
           ) : null}
-        </fieldset>
+          {missing ? (
+            <p className="enter-rise rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm text-[#FDE68A]" role="alert">
+              {copy.terms.required}
+            </p>
+          ) : null}
+          {alert ? (
+            <p className="enter-rise rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm text-[#FDE68A]" role="alert">
+              {alert}
+            </p>
+          ) : null}
 
-        <label className="block text-sm font-semibold text-white/80">
-          {text.to}
-          <input
-            className={field}
-            maxLength={40}
-            onChange={(event) => {
-              setTo(event.target.value);
-              setContact(false);
-            }}
-            placeholder={text.toPlaceholder}
-            value={to}
-          />
-        </label>
-        <label className="block text-sm font-semibold text-white/80">
-          {text.message}
-          <textarea
-            className={`${field} min-h-24 resize-y`}
-            maxLength={200}
-            onChange={(event) => {
-              setMessage(event.target.value);
-              setContact(false);
-            }}
-            placeholder={text.messagePlaceholder}
-            value={message}
-          />
-        </label>
-
-        <label className="flex items-start gap-3 text-sm leading-6 text-white/80">
-          <input
-            checked={accepted}
-            className="mt-0.5 h-5 w-5 shrink-0 cursor-pointer rounded accent-[#A78BFA]"
-            onChange={(event) => {
-              setAccepted(event.target.checked);
-              if (event.target.checked) setMissing(false);
-            }}
-            ref={acceptRef}
-            type="checkbox"
-          />
-          <span>
-            {copy.terms.accept[0]}
-            <a className={link} href={subscriptionPath(lang, '/offer')} rel="noopener" target="_blank">
-              {copy.terms.accept[1]}
-            </a>
-            {copy.terms.accept[2]}
-            <a className={link} href={subscriptionPath(lang, '/payment')} rel="noopener" target="_blank">
-              {copy.terms.accept[3]}
-            </a>
-            {copy.terms.accept[4]}
-          </span>
-        </label>
-        <p className="text-xs leading-5 text-white/55">
-          {copy.terms.privacy[0]}
-          <a className={link} href={subscriptionPath(lang, '/privacy')} rel="noopener" target="_blank">
-            {copy.terms.privacy[1]}
-          </a>
-          {copy.terms.privacy[2]}
-        </p>
-
-        {contact ? (
-          <p className="rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm text-[#FDE68A]" role="alert">
-            {text.cardContact}
-          </p>
-        ) : null}
-        {missing ? (
-          <p className="rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm text-[#FDE68A]" role="alert">
-            {copy.terms.required}
-          </p>
-        ) : null}
-        {alert ? (
-          <p className="rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm text-[#FDE68A]" role="alert">
-            {alert}
-          </p>
-        ) : null}
-
-        <Button className="w-full whitespace-normal! text-center" disabled={stage !== 'idle'} type="submit" variant="light">
-          {stage !== 'idle' ? <Spinner className="h-5 w-5" /> : testing && !signedIn ? <AppleGlyph className="h-5 w-5" /> : null}
-          <Money text={label} />
-        </Button>
-        <p className="text-xs leading-5 text-white/55">{text.note}</p>
-      </form>
+          <Button className="w-full whitespace-normal! text-center" disabled={stage !== 'idle'} type="submit" variant="light">
+            {stage !== 'idle' ? <Spinner className="h-5 w-5" /> : testing && !signedIn ? <AppleGlyph className="h-5 w-5" /> : null}
+            <Money text={label} />
+          </Button>
+          <p className="text-xs leading-5 text-white/55">{text.note}</p>
+        </form>
+      </Reveal>
     </div>
   );
 }

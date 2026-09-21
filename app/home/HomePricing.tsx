@@ -7,9 +7,11 @@ import { AccountProvider, ChargeNote, CheckoutDialog, PlanCard } from '../subscr
 import { currencyForVisitor, sellsOnWeb } from '../subscription/currency';
 import { subscriptionCopy } from '../subscription/copy';
 import { subscriptionPath } from '../subscription/i18n';
+import { Magnetic } from '../subscription/Magnetic';
 import { plans } from '../subscription/merchant';
+import { Parallax } from '../subscription/Parallax';
 import { Reveal } from '../subscription/Reveal';
-import { AppleGlyph, Art, featureIcons } from './art';
+import { AppleGlyph, Art, featureIcons, Sparkle } from './art';
 
 // The home page's storefront: the same plan buttons as /subscription
 // (sign in with Apple → the acquirer's page), laid out as the concept's glass
@@ -125,44 +127,56 @@ export function AppStorePanel({ locale }: { locale: SiteLocale }) {
   const home = site.home;
   return (
     <Reveal>
-      <div className="relative isolate overflow-hidden rounded-[2rem] border border-white/15 bg-[linear-gradient(100deg,#12144F_0%,#1A1D66_52%,#3730A3_100%)] shadow-[0_40px_120px_rgb(79_70_229/28%)]">
-        <img
-          alt=""
+      <div className="relative isolate overflow-hidden rounded-[2rem] border border-white/15 bg-[linear-gradient(100deg,#12144F_0%,#1A1D66_52%,#3730A3_100%)] shadow-[0_40px_120px_rgb(79_70_229/28%)] rtl:bg-[linear-gradient(260deg,#12144F_0%,#1A1D66_52%,#3730A3_100%)]">
+        {/* The mask stays put while the scene drifts under it; the zoom keeps its edges out of sight.
+            Right-to-left pages mirror the whole panel: the scene, its fade and the gradient. */}
+        <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 -z-10 h-[15rem] w-full object-cover object-[72%_32%] [mask-image:linear-gradient(to_bottom,black_70%,transparent)] sm:h-[19rem] lg:inset-y-0 lg:end-0 lg:start-auto lg:h-full lg:w-[62%] lg:object-[46%_50%] lg:[mask-image:linear-gradient(to_right,transparent,black_22%)]"
-          height={1024}
-          loading="lazy"
-          src="/art/showcase-night.webp"
-          width={1536}
-        />
+          className="absolute inset-x-0 top-0 -z-10 h-[15rem] w-full overflow-hidden [mask-image:linear-gradient(to_bottom,black_70%,transparent)] sm:h-[19rem] lg:inset-y-0 lg:end-0 lg:start-auto lg:h-full lg:w-[62%] lg:[mask-image:linear-gradient(to_right,transparent,black_22%)] rtl:lg:[mask-image:linear-gradient(to_left,transparent,black_22%)]"
+        >
+          <Parallax className="h-full w-full" scale={[1.16, 1.1]} y={[-12, 12]}>
+            <img alt="" className="h-full w-full object-cover object-[72%_32%] lg:object-[46%_50%] rtl:-scale-x-100" height={1024} loading="lazy" src="/art/showcase-night.webp" width={1536} />
+          </Parallax>
+          <Sparkle className="end-[30%] top-[12%] w-3.5" delay={0} />
+          <Sparkle className="end-[8%] top-[34%] w-3" delay={1000} tone="lavender" />
+          <Sparkle className="bottom-[22%] end-[44%] hidden w-2.5 lg:block" delay={1900} />
+        </div>
         <div className="relative grid lg:grid-cols-[1.02fr_0.98fr]">
           <div className="p-7 pt-[14rem] sm:p-10 sm:pt-[18rem] lg:py-14 lg:pe-0 lg:ps-12 lg:pt-14">
-            <h2 className="max-w-xl text-[2rem] font-semibold leading-[1.1] tracking-[-0.01em] text-white sm:text-[2.6rem]">{home.appStore.title}</h2>
-            <p className="mt-4 max-w-xl text-base leading-7 text-white/85 sm:text-[17px]">{home.appStore.body}</p>
+            <Reveal delay={100}>
+              <h2 className="max-w-xl text-[2rem] font-semibold leading-[1.1] tracking-[-0.01em] text-white sm:text-[2.6rem]">{home.appStore.title}</h2>
+              <p className="mt-4 max-w-xl text-base leading-7 text-white/85 sm:text-[17px]">{home.appStore.body}</p>
+            </Reveal>
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
               {home.features.map((feature, index) => (
-                <li className="flex items-center gap-3 text-[15px] font-medium leading-5 text-white" key={feature.title}>
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white/12 ring-1 ring-white/20">
-                    <Art className="h-6 w-6 object-contain" height={192} name={featureIcons[index] ?? 'icon-sparkle'} width={192} />
-                  </span>
-                  {feature.title}
+                <li key={feature.title}>
+                  <Reveal animation="fadeIn" className="group flex items-center gap-3 text-[15px] font-medium leading-5 text-white" delay={220 + index * 80}>
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white/12 ring-1 ring-white/20 transition duration-300 group-hover:scale-110 group-hover:bg-white/20">
+                      <Art className="h-6 w-6 object-contain" height={192} name={featureIcons[index] ?? 'icon-sparkle'} width={192} />
+                    </span>
+                    {feature.title}
+                  </Reveal>
                 </li>
               ))}
             </ul>
-            <a
-              className="mt-8 inline-flex items-center gap-3 rounded-2xl border border-white/30 bg-black px-5 py-2.5 text-white shadow-[0_18px_40px_rgb(0_0_0/35%)] transition hover:-translate-y-0.5 hover:border-white/60"
-              href={appDownloadUrl}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <AppleGlyph className="h-8 w-8" />
-              <span className="leading-tight">
-                <span className="block text-xs text-white/80">{site.footerLabels.badgeTop}</span>
-                <span className="block text-xl font-semibold" dir="ltr">
-                  App Store
-                </span>
-              </span>
-            </a>
+            <Reveal delay={460}>
+              <Magnetic className="mt-8 inline-flex">
+                <a
+                  className="inline-flex items-center gap-3 rounded-2xl border border-white/30 bg-black px-5 py-2.5 text-white shadow-[0_18px_40px_rgb(0_0_0/35%)] transition hover:-translate-y-0.5 hover:border-white/60 active:translate-y-0 active:scale-[0.98]"
+                  href={appDownloadUrl}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <AppleGlyph className="h-8 w-8" />
+                  <span className="leading-tight">
+                    <span className="block text-xs text-white/80">{site.footerLabels.badgeTop}</span>
+                    <span className="block text-xl font-semibold" dir="ltr">
+                      App Store
+                    </span>
+                  </span>
+                </a>
+              </Magnetic>
+            </Reveal>
           </div>
         </div>
       </div>

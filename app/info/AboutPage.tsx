@@ -61,13 +61,15 @@ export function AboutPage({ locale }: { locale: SiteLocale }) {
             // The mission is one short sentence: it gets the bright card and a larger voice.
             const mission = index === copy.sections.length - 1;
             return (
-              <Reveal className="flex" delay={index * 110} key={section.title}>
+              <Reveal className="flex" delay={460 + index * 110} key={section.title} load="visible">
                 <article
-                  className={`flex w-full flex-col rounded-[1.75rem] border p-6 backdrop-blur-xl ${
-                    mission ? 'border-white/20 bg-[linear-gradient(140deg,#4338CA_0%,#4F46E5_45%,#818CF8_100%)] shadow-[0_24px_70px_rgb(79_70_229/30%)]' : 'border-white/12 bg-white/[0.06]'
+                  className={`spotlight group flex w-full flex-col rounded-[1.75rem] border p-6 backdrop-blur-xl transition duration-300 hover:-translate-y-1 ${
+                    mission
+                      ? 'border-white/20 bg-[linear-gradient(140deg,#4338CA_0%,#4F46E5_45%,#818CF8_100%)] shadow-[0_24px_70px_rgb(79_70_229/30%)] hover:border-white/40'
+                      : 'border-white/12 bg-white/[0.06] hover:border-white/25'
                   }`}
                 >
-                  <span className={`grid h-12 w-12 place-items-center rounded-full ring-1 ${mission ? 'bg-white/20 ring-white/30' : 'bg-white/[0.08] ring-white/15'}`}>
+                  <span className={`grid h-12 w-12 place-items-center rounded-full ring-1 transition duration-300 group-hover:scale-110 ${mission ? 'bg-white/20 ring-white/30' : 'bg-white/[0.08] ring-white/15'}`}>
                     <Art className="h-8 w-8 object-contain" height={192} name={sectionIcons[index]} width={192} />
                   </span>
                   <h2 className="mt-4 text-xl font-semibold text-white">{section.title}</h2>
@@ -85,8 +87,8 @@ export function AboutPage({ locale }: { locale: SiteLocale }) {
           <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {copy.values.items.map((value, index) => (
               <Reveal className="flex" delay={index * 90} key={value.title}>
-                <div className="flex w-full items-start gap-4 rounded-2xl border border-white/12 bg-white/[0.05] p-5">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/[0.08] ring-1 ring-white/15">
+                <div className="spotlight group flex w-full items-start gap-4 rounded-2xl border border-white/12 bg-white/[0.05] p-5 transition duration-300 hover:-translate-y-1 hover:border-white/25">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/[0.08] ring-1 ring-white/15 transition duration-300 group-hover:scale-110">
                     <Art className="h-7 w-7 object-contain" height={192} name={valueIcons[index]} width={192} />
                   </span>
                   <div className="min-w-0">

@@ -20,7 +20,9 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 // fold is parked (instantly, off-screen) and plays its entrance the moment
 // it scrolls into view. `load` plays the hero's opening sequence at once —
 // only when hydration was quick, so a slow load never re-animates visible
-// text. Reduced motion: no hiding, no movement.
+// text. `load="visible"` is for the first blocks under a short hero: on screen
+// when the page opens they join that sequence, below the fold they wait for
+// the scroll like any other block. Reduced motion: no hiding, no movement.
 export function Reveal({
   children,
   animation = 'riseIn',
@@ -32,7 +34,7 @@ export function Reveal({
   animation?: Animation;
   delay?: number;
   className?: string;
-  load?: boolean;
+  load?: boolean | 'visible';
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
@@ -46,7 +48,8 @@ export function Reveal({
     // state change is not synchronous with the effect body.
     let play = 0;
     const frame = requestAnimationFrame(() => {
-      if (load) {
+      const below = node.getBoundingClientRect().top >= window.innerHeight * 0.9;
+      if (load === true || (load === 'visible' && !below)) {
         // Park the block for one frame so the entrance has a pose to start from.
         if (performance.now() < 2500) {
           setMode('armed');
@@ -54,7 +57,7 @@ export function Reveal({
         }
         return;
       }
-      if (node.getBoundingClientRect().top >= window.innerHeight * 0.9) setMode('pending');
+      if (below) setMode('pending');
     });
     return () => {
       cancelAnimationFrame(frame);

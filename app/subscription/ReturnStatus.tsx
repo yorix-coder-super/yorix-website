@@ -93,53 +93,62 @@ function ReturnStatus() {
   return (
     <section className="relative mx-auto max-w-2xl px-5 pb-24 pt-6 text-center sm:px-8">
       <Reveal animation="zoomIn" load>
-      <div className="relative mx-auto w-40 sm:w-48">
-        {status === 'paid' ? (
-          <div className="float-slow">
-            <Art className="h-auto w-full drop-shadow-[0_24px_40px_rgb(15_16_34/40%)]" height={560} name="cta-baby-star" priority width={503} />
-          </div>
-        ) : (
-          <div className="bob">
-            <Art className="h-auto w-full drop-shadow-[0_24px_40px_rgb(15_16_34/40%)]" height={420} name="star-mascot" priority width={410} />
-          </div>
-        )}
-        <Sparkle className="-left-6 top-4 w-3" delay={300} tone="lavender" />
-        <Sparkle className="-right-4 top-10 w-4" delay={1100} />
-      </div>
+        <div className="relative mx-auto w-40 sm:w-48">
+          {status === 'paid' ? (
+            <div className="enter-pop">
+              <div className="float-slow">
+                <Art className="h-auto w-full drop-shadow-[0_24px_40px_rgb(15_16_34/40%)]" height={560} name="cta-baby-star" priority width={503} />
+              </div>
+            </div>
+          ) : (
+            <div className="bob">
+              <Art className="h-auto w-full drop-shadow-[0_24px_40px_rgb(15_16_34/40%)]" height={420} name="star-mascot" priority width={410} />
+            </div>
+          )}
+          <Sparkle className="-left-6 top-4 w-3" delay={300} tone="lavender" />
+          <Sparkle className="-right-4 top-10 w-4" delay={1100} />
+        </div>
       </Reveal>
-      <h1 className="mt-6 text-4xl font-semibold leading-tight text-white sm:text-5xl">
-        {gift ? copy.gift.paidTitle : status === 'paid' && until ? copy.ret.paid(formatDate(until, lang)) : copy.ret.checking}
-      </h1>
-      <div className="mt-8 rounded-[2rem] border border-white/12 bg-white/[0.06] p-8 backdrop-blur-xl">
-        {!needsSignIn && !lostGift && (status === 'checking' || status === 'pending') ? (
-          <p className="inline-flex items-center gap-3 text-lg text-white/80">
-            <Spinner className="h-5 w-5" />
-            {status === 'pending' ? copy.ret.pending : copy.ret.checking}
-          </p>
-        ) : null}
-        {status === 'paid' && until ? <p className="text-lg leading-8 text-white/85">{copy.ret.openApp}</p> : null}
-        {gift ? (
-          <div className="text-start">
-            <p className="mb-5 text-base leading-7 text-white/85">{copy.gift.paidBody}</p>
-            <GiftShare gift={gift} giftKey={giftKey} onReplaced={setGift} order={orderInUrl()} />
-          </div>
-        ) : null}
-        {!needsSignIn && !lostGift && status === 'failed' ? <p className="text-base leading-7 text-white/80">{copy.ret.failed}</p> : null}
-        {lostGift ? <p className="text-base leading-7 text-white/80">{copy.gift.lostKey}</p> : null}
-        {needsSignIn ? (
-          <>
-            <p className="text-base leading-7 text-white/80">{copy.ret.signIn}</p>
-            {configured ? (
-              <Button className="mt-5" onClick={() => void signIn()} variant="light">
-                {copy.account.signInApple}
-              </Button>
-            ) : null}
-          </>
-        ) : null}
-      </div>
-      <Button className="mt-8" href={`${subscriptionPath(lang)}#plans`} variant="ghost">
-        {copy.ret.back}
-      </Button>
+      <Reveal delay={140} load>
+        {/* Keyed by what it says: «checking» → «paid» eases in instead of swapping. */}
+        <h1 className={`${status === 'paid' ? 'enter-rise ' : ''}mt-6 text-4xl font-semibold leading-tight text-white sm:text-5xl`} key={gift ? 'gift' : status === 'paid' && until ? 'paid' : 'checking'}>
+          {gift ? copy.gift.paidTitle : status === 'paid' && until ? copy.ret.paid(formatDate(until, lang)) : copy.ret.checking}
+        </h1>
+      </Reveal>
+      <Reveal delay={260} load>
+        <div className="mt-8 rounded-[2rem] border border-white/12 bg-white/[0.06] p-8 backdrop-blur-xl">
+          {!needsSignIn && !lostGift && (status === 'checking' || status === 'pending') ? (
+            <p className="inline-flex items-center gap-3 text-lg text-white/80">
+              <Spinner className="h-5 w-5" />
+              {status === 'pending' ? copy.ret.pending : copy.ret.checking}
+            </p>
+          ) : null}
+          {status === 'paid' && until ? <p className="enter-rise text-lg leading-8 text-white/85">{copy.ret.openApp}</p> : null}
+          {gift ? (
+            <div className="enter-rise text-start">
+              <p className="mb-5 text-base leading-7 text-white/85">{copy.gift.paidBody}</p>
+              <GiftShare gift={gift} giftKey={giftKey} onReplaced={setGift} order={orderInUrl()} />
+            </div>
+          ) : null}
+          {!needsSignIn && !lostGift && status === 'failed' ? <p className="text-base leading-7 text-white/80">{copy.ret.failed}</p> : null}
+          {lostGift ? <p className="text-base leading-7 text-white/80">{copy.gift.lostKey}</p> : null}
+          {needsSignIn ? (
+            <>
+              <p className="text-base leading-7 text-white/80">{copy.ret.signIn}</p>
+              {configured ? (
+                <Button className="mt-5" onClick={() => void signIn()} variant="light">
+                  {copy.account.signInApple}
+                </Button>
+              ) : null}
+            </>
+          ) : null}
+        </div>
+      </Reveal>
+      <Reveal delay={380} load>
+        <Button className="mt-8" href={`${subscriptionPath(lang)}#plans`} variant="ghost">
+          {copy.ret.back}
+        </Button>
+      </Reveal>
     </section>
   );
 }

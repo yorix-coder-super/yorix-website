@@ -124,8 +124,10 @@ export async function HomeLanding({ locale }: { locale: HomeLocale }) {
           <div className="mt-10 grid gap-5 lg:grid-cols-3">
             {copy.plan.steps.map((step, index) => (
               <Reveal className="flex" delay={index * 110} key={step}>
-                <article className="w-full rounded-2xl border border-white/10 bg-white/10 p-6 backdrop-blur-xl">
-                  <span className="grid h-10 w-10 place-items-center rounded-full bg-[#6366F1] text-sm font-bold text-white">{index + 1}</span>
+                <article className="spotlight group w-full rounded-2xl border border-white/10 bg-white/10 p-6 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-white/25">
+                  <span className="grid h-10 w-10 place-items-center rounded-full bg-[#6366F1] text-sm font-bold text-white shadow-[0_0_28px_rgb(99_102_241/55%)] transition duration-300 group-hover:scale-110">
+                    {index + 1}
+                  </span>
                   <h3 className="mt-5 text-xl font-semibold leading-7 text-white">{step}</h3>
                 </article>
               </Reveal>

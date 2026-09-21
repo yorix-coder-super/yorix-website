@@ -456,12 +456,53 @@ html.lenis body {
   animation: drift-x 22s ease-in-out infinite alternate;
 }
 
+/* What appears after an action — an opened answer, an error line, the
+   «sent» state — eases in instead of popping. It exists only after the
+   action, so nothing is ever hidden while the page loads. */
+@keyframes enter-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes enter-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.enter-rise,
+details[open] > .faq-answer {
+  animation: enter-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.enter-pop {
+  animation: enter-pop 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .float-slow,
   .float-slower,
   .bob,
   .twinkle,
-  .drift {
+  .drift,
+  .enter-rise,
+  .enter-pop,
+  details[open] > .faq-answer {
     animation: none;
   }
 }

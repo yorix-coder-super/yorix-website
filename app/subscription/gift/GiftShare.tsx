@@ -206,7 +206,7 @@ export function GiftShare({
         </button>
       </div>
       {notice ? (
-        <p className={`rounded-2xl px-4 py-3 text-sm ${notice === 'replaced' ? 'bg-[#A7F3D0]/10 text-[#D1FAE5]' : 'bg-[#FDE68A]/15 text-[#FDE68A]'}`} role={notice === 'replaced' ? 'status' : 'alert'}>
+        <p className={`enter-rise rounded-2xl px-4 py-3 text-sm ${notice === 'replaced' ? 'bg-[#A7F3D0]/10 text-[#D1FAE5]' : 'bg-[#FDE68A]/15 text-[#FDE68A]'}`} role={notice === 'replaced' ? 'status' : 'alert'}>
           {notice === 'replaced' ? text.replaceDone
             : notice === 'redeemed' ? text.errors.redeemed
             : notice === 'rateLimited' ? text.errors.rateLimited

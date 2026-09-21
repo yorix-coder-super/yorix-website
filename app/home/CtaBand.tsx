@@ -4,7 +4,7 @@ import { Reveal } from '../subscription/Reveal';
 import { AppleGlyph, Art, DoodleHeart, Hand, Sparkle } from './art';
 
 export const whitePill =
-  'inline-flex min-h-[3.25rem] items-center justify-center gap-2.5 whitespace-nowrap rounded-full bg-white px-6 text-base font-semibold text-[#1E1B4B] shadow-[0_18px_50px_rgb(255_255_255/14%)] transition hover:bg-[#EEF2FF] focus:outline-none focus-visible:ring-4 focus-visible:ring-white/30';
+  'inline-flex min-h-[3.25rem] items-center justify-center gap-2.5 whitespace-nowrap rounded-full bg-white px-6 text-base font-semibold text-[#1E1B4B] shadow-[0_18px_50px_rgb(255_255_255/14%)] transition hover:-translate-y-0.5 hover:bg-[#EEF2FF] focus:outline-none focus-visible:ring-4 focus-visible:ring-white/30 active:translate-y-0 active:scale-[0.98]';
 
 // The closing band shared by the home page, guides and articles: the baby
 // hugging a star breaks out of the top edge, clouds drift along the bottom.
@@ -59,23 +59,23 @@ export function FaqItem({ question, answer, variant = 'card' }: { question: stri
   if (variant === 'row') {
     return (
       <details className="group">
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-[17px] font-medium leading-7 text-white/90 transition hover:text-white focus:outline-none focus-visible:underline [&::-webkit-details-marker]:hidden">
-          {question}
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/15 bg-white/[0.06] transition duration-300 group-open:rotate-45 group-open:border-[#FDE68A]/60 group-open:bg-[#FDE68A]/15">
+        <summary className="group/q flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-[17px] font-medium leading-7 text-white/90 transition hover:text-white focus:outline-none focus-visible:underline [&::-webkit-details-marker]:hidden">
+          <span className="transition-transform duration-300 group-hover/q:translate-x-1 rtl:group-hover/q:-translate-x-1">{question}</span>
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/15 bg-white/[0.06] transition duration-300 group-hover/q:scale-110 group-hover/q:border-white/35 group-open:rotate-45 group-open:border-[#FDE68A]/60 group-open:bg-[#FDE68A]/15">
             <Plus className="h-4 w-4 text-white transition group-open:text-[#FDE68A]" aria-hidden="true" />
           </span>
         </summary>
-        <p className="max-w-3xl pb-5 pe-12 text-base leading-7 text-white/80">{keepRanges(answer)}</p>
+        <p className="faq-answer max-w-3xl pb-5 pe-12 text-base leading-7 text-white/80">{keepRanges(answer)}</p>
       </details>
     );
   }
   return (
-    <details className="group rounded-2xl border border-white/12 bg-white/[0.06] backdrop-blur-xl transition open:bg-white/[0.09] hover:border-white/25">
+    <details className="spotlight group rounded-2xl border border-white/12 bg-white/[0.06] backdrop-blur-xl transition duration-300 open:border-white/25 open:bg-white/[0.09] hover:-translate-y-0.5 hover:border-white/25">
       <summary className="flex min-h-20 cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-[15px] font-medium leading-6 text-white focus:outline-none focus-visible:underline [&::-webkit-details-marker]:hidden">
         {question}
-        <Plus className="h-5 w-5 shrink-0 text-white/70 transition duration-300 group-open:rotate-45" aria-hidden="true" />
+        <Plus className="h-5 w-5 shrink-0 text-white/70 transition duration-300 group-hover:text-white group-open:rotate-45 group-open:text-[#FDE68A]" aria-hidden="true" />
       </summary>
-      <p className="px-5 pb-5 text-[15px] leading-7 text-white/80">{keepRanges(answer)}</p>
+      <p className="faq-answer px-5 pb-5 text-[15px] leading-7 text-white/80">{keepRanges(answer)}</p>
     </details>
   );
 }

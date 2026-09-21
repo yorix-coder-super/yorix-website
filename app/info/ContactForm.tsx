@@ -85,8 +85,8 @@ export function ContactForm({
   if (state === 'sent') {
     return (
       <output className="flex min-h-[16rem] flex-col items-center justify-center gap-4 text-center">
-        <CircleCheck aria-hidden="true" className="h-14 w-14 text-[#A7F3D0]" />
-        <span className="max-w-sm text-lg font-semibold leading-7 text-white">{copy.sent}</span>
+        <CircleCheck aria-hidden="true" className="enter-pop h-14 w-14 text-[#A7F3D0]" />
+        <span className="enter-rise max-w-sm text-lg font-semibold leading-7 text-white [animation-delay:180ms]">{copy.sent}</span>
       </output>
     );
   }
@@ -94,7 +94,7 @@ export function ContactForm({
   const label = 'block text-sm font-semibold text-white';
   const field =
     'mt-2 w-full rounded-2xl border border-white/20 bg-white/[0.08] px-4 py-3 text-base text-white placeholder:text-white/40 transition focus:border-[#FDE68A]/80 focus:bg-white/[0.12] focus:outline-none';
-  const alert = 'rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm font-medium text-[#FDE68A]';
+  const alert = 'enter-rise rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm font-medium text-[#FDE68A]';
   return (
     <form className="grid gap-4" noValidate onSubmit={(event) => void submit(event)}>
       <div className="grid gap-4 sm:grid-cols-2">
@@ -125,11 +125,11 @@ export function ContactForm({
         </p>
       ) : null}
       <button
-        className="inline-flex min-h-14 w-full items-center justify-center gap-2.5 rounded-full bg-white px-7 text-base font-semibold text-[#1E1B4B] shadow-[0_18px_50px_rgb(255_255_255/14%)] transition hover:-translate-y-0.5 hover:bg-[#EEF2FF] focus:outline-none focus-visible:ring-4 focus-visible:ring-white/30 disabled:translate-y-0 disabled:opacity-70"
+        className="group inline-flex min-h-14 w-full items-center justify-center gap-2.5 rounded-full bg-white px-7 text-base font-semibold text-[#1E1B4B] shadow-[0_18px_50px_rgb(255_255_255/14%)] transition hover:-translate-y-0.5 hover:bg-[#EEF2FF] focus:outline-none focus-visible:ring-4 focus-visible:ring-white/30 active:translate-y-0 active:scale-[0.98] disabled:translate-y-0 disabled:scale-100 disabled:opacity-70"
         disabled={state === 'sending'}
         type="submit"
       >
-        {state === 'sending' ? <Spinner className="h-5 w-5" /> : <Send aria-hidden="true" className="h-5 w-5 rtl:-scale-x-100" />}
+        {state === 'sending' ? <Spinner className="h-5 w-5" /> : <Send aria-hidden="true" className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" />}
         {state === 'sending' ? copy.sending : copy.send}
       </button>
       <p className="text-center text-xs leading-5 text-white/60">

@@ -5,6 +5,7 @@ import { useAccount } from '../account';
 import { API_BASE } from '../config';
 import { subscriptionCopy } from '../copy';
 import { planCopy } from '../merchant';
+import { Reveal } from '../Reveal';
 import { GiftShare, type BuyerGift } from './GiftShare';
 import { rememberCode, storedGifts } from './keys';
 
@@ -47,25 +48,29 @@ export function GiftList() {
 
   return (
     <section aria-labelledby="your-gifts" className="mt-12">
-      <h2 className="text-2xl font-semibold text-white sm:text-[1.7rem]" id="your-gifts">
-        {text.listTitle}
-      </h2>
+      <Reveal>
+        <h2 className="text-2xl font-semibold text-white sm:text-[1.7rem]" id="your-gifts">
+          {text.listTitle}
+        </h2>
+      </Reveal>
       <div className="mt-5 grid gap-4 lg:grid-cols-2">
-        {gifts.map((item) => (
-          <article className="rounded-[2rem] border border-white/12 bg-white/[0.06] p-6 backdrop-blur-xl" key={item.order}>
-            <p className="text-lg font-semibold text-white">
-              {text.cardPlan(planCopy[lang][item.gift.planId]?.forPeriod ?? '')}
-              {item.gift.to ? <span className="font-normal text-white/70"> · {text.cardFor(item.gift.to)}</span> : null}
-            </p>
-            <div className="mt-3">
-              <GiftShare
-                gift={item.gift}
-                giftKey={item.key}
-                onReplaced={(next) => setGifts((list) => list.map((other) => (other.order === item.order ? { ...other, gift: next } : other)))}
-                order={item.order}
-              />
-            </div>
-          </article>
+        {gifts.map((item, index) => (
+          <Reveal className="flex" delay={(index % 2) * 110} key={item.order}>
+            <article className="spotlight w-full rounded-[2rem] border border-white/12 bg-white/[0.06] p-6 backdrop-blur-xl transition-colors duration-500 hover:border-white/25">
+              <p className="text-lg font-semibold text-white">
+                {text.cardPlan(planCopy[lang][item.gift.planId]?.forPeriod ?? '')}
+                {item.gift.to ? <span className="font-normal text-white/70"> · {text.cardFor(item.gift.to)}</span> : null}
+              </p>
+              <div className="mt-3">
+                <GiftShare
+                  gift={item.gift}
+                  giftKey={item.key}
+                  onReplaced={(next) => setGifts((list) => list.map((other) => (other.order === item.order ? { ...other, gift: next } : other)))}
+                  order={item.order}
+                />
+              </div>
+            </article>
+          </Reveal>
         ))}
       </div>
     </section>
