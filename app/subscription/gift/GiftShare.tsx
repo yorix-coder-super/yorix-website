@@ -165,12 +165,12 @@ export function GiftShare({ gift }: { gift: BuyerGift }) {
             </div>
           </div>
 
-          {/* The ticket: what to dictate down a phone, and how long it lasts. */}
+          {/* The ticket: what to dictate down a phone when sending the link is
+              not an option. The link itself is behind the copy button — spelled
+              out it is a wall of characters nobody reads or types. */}
           <div className="mt-6 rounded-2xl border border-dashed border-white/20 bg-white/[0.04] p-4">
             <p className="text-[11px] font-semibold uppercase tracking-wide text-white/45">{text.code}</p>
             <p className="mt-1 break-all font-mono text-xl font-semibold tracking-[0.18em] text-white sm:text-2xl">{code}</p>
-            <p className="mt-3 text-[11px] font-semibold uppercase tracking-wide text-white/45">{text.link}</p>
-            <p className="mt-1 break-all font-mono text-xs leading-5 text-white/70">{url}</p>
           </div>
 
           {notice ? (
