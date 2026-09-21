@@ -35,7 +35,7 @@ export type SubscriptionCopy = {
   ret: {
     checking: string; paid: (date: string) => string; paidLead: string; openApp: string;
     pending: string; failed: string; signIn: string; back: string; badgeTop: string; scan: string;
-    badge: string; qrTitle: string; qrHint: string;
+    badge: string; thanks: string; qrTitle: string; qrHint: string;
     features: { title: string; sub: string }[];
     helpTitle: string; helpBody: string; helpCta: string;
     noteTop: string; noteThanks: string;
@@ -87,7 +87,7 @@ export type SubscriptionCopy = {
     download: string;
     loading: string;
     errors: { notFound: string; redeemed: string; expired: string; cancelled: string; replaced: string; typo: string; locked: string; rateLimited: string; error: string };
-    alreadySubscribed: (date: string) => string;
+    alreadySubscribed: { summary: string; web: string; store: (date: string) => string };
     popupHint: string;
     enterCode: string;
     entryTitle: string;
@@ -111,6 +111,9 @@ export type SubscriptionCopy = {
     cardContact: string;
     scamNote: string;
     ownGiftConfirm: string;
+    ownGiftTitle: string;
+    ownGiftKeep: string;
+    ownGiftGoOn: string;
     lostKey: string;
   };
   terms: {
@@ -223,8 +226,9 @@ const ru: SubscriptionCopy = {
     back: 'К тарифам',
     badgeTop: 'Загрузите в',
     scan: 'Наведите камеру телефона на код, чтобы открыть Yorix в App Store',
-    badge: 'Готово!',
-    paidLead: 'Подписка включена до',
+    badge: 'Оплачено',
+    thanks: 'Спасибо, что выбрали Yorix',
+    paidLead: 'Подписка действует до',
     qrTitle: 'Открыть по QR-коду',
     qrHint: 'Наведите камеру iPhone',
     features: [
@@ -237,7 +241,7 @@ const ru: SubscriptionCopy = {
     helpBody: 'Мы всегда на связи и поможем, если что-то не работает.',
     helpCta: 'Перейти в поддержку',
     noteTop: 'Спокойные ночи — счастливые дни',
-    noteThanks: 'Спасибо, что вы с нами!',
+    noteThanks: 'Хороших вам ночей!',
   },
   cancel: { title: 'Оплата отменена', body: 'Деньги не списаны. Вернуться можно в любой момент.', back: 'К тарифам' },
   footer: {
@@ -288,8 +292,8 @@ const ru: SubscriptionCopy = {
     copied: 'Скопировано',
     validUntil: (date) => `Код действует до ${date}`,
     redeemTitle: 'Вам подарили подписку Yorix',
-    redeemBody: 'Войдите через Apple тем же аккаунтом, что и в приложении Yorix, — подписка включится сразу.',
-    redeem: 'Активировать с Apple',
+    redeemBody: 'Подписка уже ваша — остался один шаг. Войдите через Apple тем же аккаунтом, что и в приложении: на него она и встанет.',
+    redeem: 'Активировать через Apple',
     redeemAccept: ['Активируя подарок, вы принимаете ', 'условия использования', '.'],
     redeemed: (date) => `Готово! Подписка действует до ${date}`,
     openApp: 'Откройте Yorix на iPhone тем же аккаунтом Apple — функции подписки уже доступны.',
@@ -306,8 +310,12 @@ const ru: SubscriptionCopy = {
       rateLimited: 'Слишком много попыток подряд. Подождите минуту и попробуйте снова.',
       error: 'Не получилось активировать подарок. Попробуйте ещё раз через минуту.',
     },
-    alreadySubscribed: (date) =>
-      `Уже есть подписка? Если она оплачена на сайте, срок подарка добавится к ней. Если оформлена в App Store, подарок пойдёт параллельно — лучше отключить её продление и активировать подарок, когда она закончится: код действует до ${date}`,
+    alreadySubscribed: {
+      summary: 'У меня уже есть подписка',
+      web: 'Оплачена на сайте — срок подарка просто добавится к ней.',
+      store: (date) =>
+        `Оформлена в App Store — подарок пойдёт параллельно, и вы заплатите дважды за одни и те же дни. Выгоднее отключить автопродление и активировать подарок, когда она закончится: код действует до ${date}.`,
+    },
     popupHint: 'Окно входа не открылось? Откройте эту страницу в Safari или другом браузере — ссылка та же.',
     enterCode: 'Ввести код вручную',
     entryTitle: 'Активировать подарок',
@@ -324,7 +332,7 @@ const ru: SubscriptionCopy = {
       replaced: 'Код заменён',
     },
     safety: [
-      'Активировать подарок может любой, у кого есть ссылка или код, — отправляйте их только получателю. Если ссылка ушла не туда или подарок больше не нужен, до активации его можно отменить с полным возвратом — ',
+      'Активировать подарок может любой, у кого есть ссылка или код, — отправляйте их только получателю. Если ссылка ушла не туда или подарок больше не нужен, в первые 6 месяцев после оплаты и до активации его можно отменить с полным возвратом — ',
       'напишите нам',
       '.',
     ],
@@ -339,7 +347,10 @@ const ru: SubscriptionCopy = {
     listTitle: 'Ваши подарки',
     shareCard: 'Отправить открытку',
     cardContact: 'Открытка — без контактов: уберите ссылки, адреса сайтов, e-mail, @ники и номера телефонов.',
-    scamNote: 'Yorix никогда не просит звонить, платить или пересылать код, чтобы активировать подарок.',
+    scamNote: 'Мы никогда не просим звонить, платить или пересылать код — ни до активации, ни после.',
+    ownGiftTitle: 'Это подарок, который вы купили',
+    ownGiftKeep: 'Не активировать',
+    ownGiftGoOn: 'Всё равно активировать',
     ownGiftConfirm: 'Этот подарок куплен в этом браузере. Если активировать его на ваш аккаунт, у получателя ссылка перестанет работать. Активировать на себя?',
     lostKey: 'Если вы оплачивали подарок, откройте эту страницу в том же браузере, где платили, — или напишите нам и укажите номер заказа из чека.',
   },
@@ -453,8 +464,9 @@ const en: SubscriptionCopy = {
     back: 'Back to plans',
     badgeTop: 'Download on the',
     scan: 'Point your phone camera at the code to open Yorix in the App Store',
-    badge: 'All set!',
-    paidLead: 'Subscription on until',
+    badge: 'Paid',
+    thanks: 'Thank you for choosing Yorix',
+    paidLead: 'Your subscription runs until',
     qrTitle: 'Open with the QR code',
     qrHint: 'Point your iPhone camera at it',
     features: [
@@ -467,7 +479,7 @@ const en: SubscriptionCopy = {
     helpBody: 'We are here, and we will help if something does not work.',
     helpCta: 'Go to support',
     noteTop: 'Calm nights — happy days',
-    noteThanks: 'Thank you for being with us!',
+    noteThanks: 'Sleep well!',
   },
   cancel: { title: 'Payment cancelled', body: 'Nothing was charged. Come back any time.', back: 'Back to plans' },
   footer: {
@@ -521,7 +533,7 @@ const en: SubscriptionCopy = {
     copied: 'Copied',
     validUntil: (date) => `The code is valid until ${date}.`,
     redeemTitle: 'Someone gave you a Yorix subscription',
-    redeemBody: 'Sign in with Apple using the same account as in the Yorix app — the subscription turns on right away.',
+    redeemBody: 'The subscription is yours — one step left. Sign in with Apple using the same account as in the app: that is where it lands.',
     redeem: 'Redeem with Apple',
     redeemAccept: ['By redeeming the gift you accept the ', 'terms of use', '.'],
     redeemed: (date) => `Done! Your subscription runs until ${date}`,
@@ -539,8 +551,12 @@ const en: SubscriptionCopy = {
       rateLimited: 'Too many attempts in a row. Wait a minute and try again.',
       error: 'The gift could not be redeemed. Please try again in a minute.',
     },
-    alreadySubscribed: (date) =>
-      `Already subscribed? If you paid on the website, the gift adds to that period. If you subscribed in the App Store, the gift runs alongside it — better turn off its renewal and redeem the gift when it ends: the code is valid until ${date}.`,
+    alreadySubscribed: {
+      summary: 'I already have a subscription',
+      web: 'Paid on the website — the gift simply adds to that period.',
+      store: (date) =>
+        `Bought in the App Store — the gift would run alongside it, and you would pay twice for the same days. Better turn its renewal off and redeem the gift when it ends: the code is valid until ${date}.`,
+    },
     popupHint: 'The sign-in window did not open? Open this page in Safari or another browser — the link stays the same.',
     enterCode: 'Enter the code by hand',
     entryTitle: 'Redeem a gift',
@@ -557,7 +573,7 @@ const en: SubscriptionCopy = {
       replaced: 'Code replaced',
     },
     safety: [
-      'Anyone who has the link or the code can redeem the gift — send them to the recipient only. If the link went to the wrong place, or the gift is no longer needed, it can be cancelled with a full refund until it is redeemed — ',
+      'Anyone who has the link or the code can redeem the gift — send them to the recipient only. If the link went to the wrong place, or the gift is no longer needed, it can be cancelled with a full refund within 6 months of payment, as long as it is unredeemed — ',
       'write to us',
       '.',
     ],
@@ -572,7 +588,10 @@ const en: SubscriptionCopy = {
     listTitle: 'Your gifts',
     shareCard: 'Send the card',
     cardContact: 'No contacts on the card: remove links, website addresses, e-mails, @handles and phone numbers.',
-    scamNote: 'Yorix never asks you to call, pay or pass on a code to redeem a gift.',
+    scamNote: 'We never ask you to call, pay or pass a code on — not before redeeming, not after.',
+    ownGiftTitle: 'This is the gift you bought',
+    ownGiftKeep: 'Leave it for them',
+    ownGiftGoOn: 'Redeem it anyway',
     ownGiftConfirm: 'This gift was bought in this browser. If you redeem it on your account, the link stops working for the recipient. Redeem it for yourself?',
     lostKey: 'If you paid for a gift, open this page in the browser you paid in — or write to us with the order number from your receipt.',
   },

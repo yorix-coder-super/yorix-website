@@ -29,13 +29,18 @@ export function PaidScreen({ until, lang, copy }: { until: string; lang: Lang; c
               {t.badge}
             </p>
           </Reveal>
+          {/* Thanks leads, the receipt follows: the first is why anyone feels
+              good about this screen, the second is what they came to check. */}
           <Reveal delay={120} load>
-            <h1 className="mt-5 text-[2.1rem] font-semibold leading-[1.1] text-white sm:text-5xl">
-              {t.paidLead} <span className="text-[#FDE68A]">{formatDate(until, lang)}</span>
-            </h1>
+            <h1 className="mt-5 text-[2.1rem] font-semibold leading-[1.1] text-white sm:text-5xl">{t.thanks}</h1>
           </Reveal>
-          <Reveal delay={200} load>
-            <p className="mt-4 max-w-xl text-lg leading-8 text-white/80">{t.openApp}</p>
+          <Reveal delay={180} load>
+            <p className="mt-4 text-xl font-semibold leading-8 text-white/90 sm:text-2xl">
+              {t.paidLead} <span className="text-[#FDE68A]">{formatDate(until, lang)}</span>
+            </p>
+          </Reveal>
+          <Reveal delay={240} load>
+            <p className="mt-3 max-w-xl text-lg leading-8 text-white/70">{t.openApp}</p>
           </Reveal>
           <Reveal delay={280} load>
             <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-5">

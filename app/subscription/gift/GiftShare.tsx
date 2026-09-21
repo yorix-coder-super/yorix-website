@@ -50,7 +50,7 @@ function canShareFiles(): boolean {
 // What the buyer passes on while the gift waits: the card (a picture with the
 // QR code, sent straight into a messenger), the link, the code, and the way
 // out when the link went astray. `giftKey` is the order's key on this device.
-export function GiftShare({ gift }: { gift: BuyerGift }) {
+export function GiftShare({ gift, compact = false }: { gift: BuyerGift; compact?: boolean }) {
   const { lang } = useAccount();
   const text = subscriptionCopy[lang].gift;
   const [copied, setCopied] = useState(false);
@@ -120,6 +120,64 @@ export function GiftShare({ gift }: { gift: BuyerGift }) {
 
   if (gift.status !== 'active') return <GiftStatus gift={gift} lang={lang} />;
 
+  const actions = (
+    <div className="grid gap-3">
+      {shareFiles ? (
+        <Button disabled={busy === 'card'} onClick={() => void sendCard()} variant="light">
+          {busy === 'card' ? <Spinner className="h-5 w-5" /> : null}
+          {text.shareCard}
+        </Button>
+      ) : null}
+      <div className="grid gap-3 sm:grid-cols-2">
+        <Button
+          onClick={() => {
+            void navigator.clipboard?.writeText(url).then(() => setCopied(true));
+          }}
+          variant={shareFiles ? 'ghost' : 'light'}
+        >
+          {copied ? text.copied : text.copyLink}
+        </Button>
+        <Button disabled={busy === 'card'} onClick={() => void downloadCard()} variant="ghost">
+          {!shareFiles && busy === 'card' ? <Spinner className="h-5 w-5" /> : null}
+          {text.cardDownload}
+        </Button>
+      </div>
+    </div>
+  );
+
+  // The ticket: what to dictate down a phone when sending the link is not an
+  // option. The link itself is behind the copy button — spelled out it is a
+  // wall of characters nobody reads or types.
+  const ticket = (
+    <div className="rounded-2xl border border-dashed border-white/20 bg-white/[0.04] p-4">
+      <p className="text-[11px] font-semibold uppercase tracking-wide text-white/45">{text.code}</p>
+      <p className="mt-1 break-all font-mono text-xl font-semibold tracking-[0.18em] text-white sm:text-2xl">{code}</p>
+    </div>
+  );
+
+  const alert = notice ? (
+    <p className="enter-rise rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm text-[#FDE68A]" role="alert">
+      {text.cardError}
+    </p>
+  ) : null;
+
+  /**
+   * In a list every gift is one card among several, and the card's own header
+   * already names the plan and who it is for — so the picture, the numbered
+   * steps and the warning (printed once for the whole page) would only repeat
+   * themselves and push the buttons off the card.
+   */
+  if (compact) {
+    return (
+      <div className="grid gap-4 text-start">
+        <GiftStatus gift={gift} lang={lang} />
+        {actions}
+        {ticket}
+        {alert}
+      </div>
+    );
+  }
+
   return (
     <div className="grid gap-6 text-start lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-10">
       {/* What they made, exactly as the recipient will see it. */}
@@ -142,42 +200,9 @@ export function GiftShare({ gift }: { gift: BuyerGift }) {
             ))}
           </ol>
 
-          <div className="mt-6 grid gap-3">
-            {shareFiles ? (
-              <Button disabled={busy === 'card'} onClick={() => void sendCard()} variant="light">
-                {busy === 'card' ? <Spinner className="h-5 w-5" /> : null}
-                {text.shareCard}
-              </Button>
-            ) : null}
-            <div className="grid gap-3 sm:grid-cols-2">
-              <Button
-                onClick={() => {
-                  void navigator.clipboard?.writeText(url).then(() => setCopied(true));
-                }}
-                variant={shareFiles ? 'ghost' : 'light'}
-              >
-                {copied ? text.copied : text.copyLink}
-              </Button>
-              <Button disabled={busy === 'card'} onClick={() => void downloadCard()} variant="ghost">
-                {!shareFiles && busy === 'card' ? <Spinner className="h-5 w-5" /> : null}
-                {text.cardDownload}
-              </Button>
-            </div>
-          </div>
-
-          {/* The ticket: what to dictate down a phone when sending the link is
-              not an option. The link itself is behind the copy button — spelled
-              out it is a wall of characters nobody reads or types. */}
-          <div className="mt-6 rounded-2xl border border-dashed border-white/20 bg-white/[0.04] p-4">
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-white/45">{text.code}</p>
-            <p className="mt-1 break-all font-mono text-xl font-semibold tracking-[0.18em] text-white sm:text-2xl">{code}</p>
-          </div>
-
-          {notice ? (
-            <p className="enter-rise mt-4 rounded-2xl bg-[#FDE68A]/15 px-4 py-3 text-sm text-[#FDE68A]" role="alert">
-              {text.cardError}
-            </p>
-          ) : null}
+          <div className="mt-6">{actions}</div>
+          <div className="mt-6">{ticket}</div>
+          {alert ? <div className="mt-4">{alert}</div> : null}
         </div>
       </Reveal>
 

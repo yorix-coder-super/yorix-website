@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { AlertTriangle, ShieldCheck } from 'lucide-react';
 import { AppleGlyph } from '../../home/art';
 import { AccountProvider, useAccount } from '../account';
 import { API_BASE } from '../config';
@@ -47,6 +48,10 @@ function GiftRedeem({ code: rawCode, appUrl }: { code: string; appUrl: string })
   const [gift, setGift] = useState<PublicGift | null>(null);
   const [loading, setLoading] = useState(!typo);
   const [busy, setBusy] = useState(false);
+  // Redeeming a gift this browser bought is almost always a mistake, and the
+  // browser's own confirm() is a grey box with no way to say why it matters.
+  const [ownGiftAsk, setOwnGiftAsk] = useState(false);
+  const [ownGiftOk, setOwnGiftOk] = useState(false);
   const [problem, setProblem] = useState<Problem | null>(typo ? 'typo' : null);
   const [until, setUntil] = useState<string | null>(null);
 
@@ -93,7 +98,10 @@ function GiftRedeem({ code: rawCode, appUrl }: { code: string; appUrl: string })
   const redeem = async () => {
     if (busy) return;
     // The buyer opening their own link to check it must not use it up by accident.
-    if (boughtHere(code) && !window.confirm(text.ownGiftConfirm)) return;
+    if (boughtHere(code) && !ownGiftOk) {
+      setOwnGiftAsk(true);
+      return;
+    }
     // Sign-in first, inside the click: Safari only opens the popup from it.
     if (!signedIn) {
       const ok = await signIn();
@@ -189,14 +197,67 @@ function GiftRedeem({ code: rawCode, appUrl }: { code: string; appUrl: string })
                     </a>
                     {text.redeemAccept[2]}
                   </p>
-                  <p className="mt-4 text-sm leading-6 text-white/70">{text.alreadySubscribed(formatDate(gift.expiresAt, lang))}</p>
-                  <p className="mt-3 text-xs leading-5 text-white/55">{text.scamNote}</p>
+                  {/* An edge case for a minority, so it folds away: as a
+                      paragraph it was a wall of conditionals at the exact
+                      moment someone just wants their gift. */}
+                  <details className="spotlight group mt-5 rounded-2xl border border-white/12 bg-white/[0.04] px-4 py-3">
+                    <summary className="cursor-pointer list-none text-sm font-semibold text-white/85 transition hover:text-white">
+                      {text.alreadySubscribed.summary}
+                      <span aria-hidden="true" className="ms-2 inline-block transition group-open:rotate-90">›</span>
+                    </summary>
+                    <ul className="faq-answer mt-3 grid gap-2 text-sm leading-6 text-white/70">
+                      <li>{text.alreadySubscribed.web}</li>
+                      <li>{text.alreadySubscribed.store(formatDate(gift.expiresAt, lang))}</li>
+                    </ul>
+                  </details>
+                  <p className="mt-4 flex items-start gap-2 text-xs leading-5 text-white/55">
+                    <ShieldCheck aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-[#A7F3D0]" />
+                    {text.scamNote}
+                  </p>
                 </div>
               ) : null}
             </>
           )}
         </div>
       </Reveal>
+      {ownGiftAsk ? (
+        <div
+          aria-labelledby="own-gift-title"
+          aria-modal="true"
+          className="fixed inset-0 z-[100] grid place-items-center overflow-y-auto bg-[#0B0A1F]/80 p-5 backdrop-blur-sm"
+          data-lenis-prevent=""
+          onClick={() => setOwnGiftAsk(false)}
+          role="dialog"
+        >
+          <div
+            className="enter-pop w-full max-w-md rounded-[2rem] border border-[#FDE68A]/40 bg-[#1E1B4B] p-6 text-start shadow-[0_40px_120px_rgb(0_0_0/55%)] sm:p-8"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#FDE68A]/15 text-[#FDE68A]">
+              <AlertTriangle aria-hidden="true" className="h-6 w-6" />
+            </span>
+            <h2 className="mt-4 text-2xl font-semibold leading-tight text-white" id="own-gift-title">
+              {text.ownGiftTitle}
+            </h2>
+            <p className="mt-3 leading-7 text-white/80">{text.ownGiftConfirm}</p>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <Button onClick={() => setOwnGiftAsk(false)} variant="light">
+                {text.ownGiftKeep}
+              </Button>
+              <Button
+                onClick={() => {
+                  setOwnGiftOk(true);
+                  setOwnGiftAsk(false);
+                  void redeem();
+                }}
+                variant="ghost"
+              >
+                {text.ownGiftGoOn}
+              </Button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 }

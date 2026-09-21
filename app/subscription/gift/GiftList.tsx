@@ -5,6 +5,7 @@ import { useAccount } from '../account';
 import { API_BASE } from '../config';
 import { subscriptionCopy } from '../copy';
 import { planCopy } from '../merchant';
+import { Art } from '../../home/art';
 import { Reveal } from '../Reveal';
 import { GiftShare, type BuyerGift } from './GiftShare';
 import { rememberCode, storedGifts } from './keys';
@@ -53,17 +54,23 @@ export function GiftList() {
           {text.listTitle}
         </h2>
       </Reveal>
-      <div className="mt-5 grid gap-4 lg:grid-cols-2">
+      <div className="mt-5 grid items-start gap-4 lg:grid-cols-2">
         {gifts.map((item, index) => (
-          <Reveal className="flex" delay={(index % 2) * 110} key={item.order}>
-            <article className="spotlight w-full rounded-[2rem] border border-white/12 bg-white/[0.06] p-6 backdrop-blur-xl transition-colors duration-500 hover:border-white/25">
-              <p className="text-lg font-semibold text-white">
-                {text.cardPlan(planCopy[lang][item.gift.planId]?.forPeriod ?? '')}
-                {item.gift.to ? <span className="font-normal text-white/70"> · {text.cardFor(item.gift.to)}</span> : null}
-              </p>
-              <div className="mt-3">
-                <GiftShare gift={item.gift} />
+          <Reveal delay={(index % 2) * 110} key={item.order}>
+            <article className="spotlight flex w-full flex-col gap-4 rounded-[2rem] border border-white/12 bg-white/[0.06] p-6 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-white/25">
+              {/* min-w-0 and wrapping, because a recipient's name is whatever
+                  they typed — one long unbroken word would otherwise push the
+                  card's own edge out from the inside. */}
+              <div className="flex items-start gap-3">
+                <Art className="h-11 w-11 shrink-0" height={192} name="icon-gift" width={192} />
+                <div className="min-w-0">
+                  <p className="break-words text-lg font-semibold leading-snug text-white">
+                    {text.cardPlan(planCopy[lang][item.gift.planId]?.forPeriod ?? '')}
+                  </p>
+                  {item.gift.to ? <p className="mt-0.5 line-clamp-2 break-words text-sm leading-6 text-white/65">{text.cardFor(item.gift.to)}</p> : null}
+                </div>
               </div>
+              <GiftShare compact gift={item.gift} />
             </article>
           </Reveal>
         ))}
