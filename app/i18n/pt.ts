@@ -83,7 +83,7 @@ export const translation: SiteTranslation = {
       body: 'Sono, mamadas, fraldas, crescimento e cuidados com um só toque — e um plano para amanhã feito a partir dos seus registos.',
       action: 'Transferir o Yorix',
     },
-    footer: 'O Yorix é um apoio à rotina para pais. Não fornece diagnóstico médico nem aconselhamento de emergência.',
+    footer: 'O Yorix ajuda com a rotina do seu bebé e não presta cuidados médicos.',
     features: [
       { title: 'Previsões de sono precisas', body: 'Com base nos dados reais do seu bebé' },
       { title: 'Crescimento e desenvolvimento', body: 'Sono, mamadas e cuidados num só lugar' },
@@ -122,7 +122,7 @@ export const translation: SiteTranslation = {
     ctaBody: 'Registe sestas, janelas de vigília, despertares noturnos, mamadas, fraldas e rotinas numa só app e tenha próximos passos mais claros para o dia que se segue.',
     download: 'Transferir o Yorix',
     relatedGuides: 'Guias relacionados',
-    footer: 'O Yorix é um apoio à rotina para pais. Não fornece diagnóstico médico nem aconselhamento de emergência.',
+    footer: 'O Yorix ajuda com a rotina do seu bebé e não presta cuidados médicos.',
   },
   articleExtras: {
     keyTakeaways: 'Pontos-chave',

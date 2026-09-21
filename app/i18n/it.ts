@@ -83,7 +83,7 @@ export const translation: SiteTranslation = {
       body: 'Sonno, pappe, pannolini, crescita e cure con un tocco — e un piano per domani costruito su ciò che hai registrato.',
       action: 'Scarica Yorix',
     },
-    footer: 'Yorix è un aiuto per la routine dei genitori. Non fornisce diagnosi mediche né consigli per le emergenze.',
+    footer: 'Yorix aiuta con la routine del tuo bambino e non fornisce assistenza medica.',
     features: [
       { title: 'Previsioni del sonno accurate', body: 'Basate sui dati reali del tuo bambino' },
       { title: 'Crescita e sviluppo', body: 'Sonno, pappe e cure in un unico posto' },
@@ -122,7 +122,7 @@ export const translation: SiteTranslation = {
     ctaBody: 'Segui nanne, finestre di veglia, risvegli notturni, pappe, pannolini e routine in un’unica app, e ottieni passi successivi più chiari per la giornata.',
     download: 'Scarica Yorix',
     relatedGuides: 'Guide correlate',
-    footer: 'Yorix è un aiuto per la routine dei genitori. Non fornisce diagnosi mediche né consigli per le emergenze.',
+    footer: 'Yorix aiuta con la routine del tuo bambino e non fornisce assistenza medica.',
   },
   articleExtras: {
     keyTakeaways: 'Punti chiave',

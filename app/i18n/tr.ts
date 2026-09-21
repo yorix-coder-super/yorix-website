@@ -83,7 +83,7 @@ export const translation: SiteTranslation = {
       body: 'Uyku, beslenme, bez, büyüme ve bakım tek dokunuşla — ve kaydettiklerinizden oluşturulan bir yarın planı.',
       action: 'Yorix’i indir',
     },
-    footer: 'Yorix ebeveynler için bir rutin yardımcısıdır. Tıbbi tanı koymaz ve acil durumlarda tavsiye vermez.',
+    footer: 'Yorix bebeğinizin rutinine yardımcı olur ve tıbbi bakım sağlamaz.',
     features: [
       { title: 'İsabetli uyku tahminleri', body: 'Bebeğinizin gerçek verilerine dayanır' },
       { title: 'Büyüme ve gelişim', body: 'Uyku, beslenme ve bakım tek yerde' },
@@ -122,7 +122,7 @@ export const translation: SiteTranslation = {
     ctaBody: 'Gündüz uykularını, uyanıklık pencerelerini, gece uyanmalarını, beslenmeleri, bez değişimlerini ve rutinleri tek bir uygulamada takip edin; önünüzdeki gün için daha net sonraki adımlar alın.',
     download: 'Yorix’i indir',
     relatedGuides: 'İlgili rehberler',
-    footer: 'Yorix ebeveynler için bir rutin yardımcısıdır. Tıbbi tanı koymaz ve acil durumlarda tavsiye vermez.',
+    footer: 'Yorix bebeğinizin rutinine yardımcı olur ve tıbbi bakım sağlamaz.',
   },
   articleExtras: {
     keyTakeaways: 'Öne çıkanlar',

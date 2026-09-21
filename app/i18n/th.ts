@@ -1,7 +1,7 @@
 import type { SiteTranslation } from './types';
 
 const sentence = 'คู่มือนี้ช่วยให้คุณเข้าใจจังหวะที่แท้จริงของลูก และวางแผนแต่ละวันได้โดยไม่ต้องเดามาก';
-const footer = 'Yorix เป็นผู้ช่วยด้านกิจวัตรสำหรับพ่อแม่ ไม่ได้ให้การวินิจฉัยทางการแพทย์หรือคำแนะนำในกรณีฉุกเฉิน';
+const footer = 'Yorix ช่วยเรื่องกิจวัตรของลูก และไม่ได้ให้บริการทางการแพทย์';
 
 export const translation: SiteTranslation = {
   home: {

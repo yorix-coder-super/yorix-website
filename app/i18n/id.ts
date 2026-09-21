@@ -83,7 +83,7 @@ export const translation: SiteTranslation = {
       body: 'Tidur, menyusui, popok, pertumbuhan, dan perawatan dengan satu ketukan — serta rencana untuk besok yang disusun dari apa yang Anda catat.',
       action: 'Unduh Yorix',
     },
-    footer: 'Yorix adalah asisten rutinitas untuk orang tua. Yorix tidak memberikan diagnosis medis atau saran darurat.',
+    footer: 'Yorix membantu rutinitas bayi Anda dan tidak memberikan perawatan medis.',
     features: [
       { title: 'Prakiraan tidur yang akurat', body: 'Berdasarkan data nyata bayi Anda' },
       { title: 'Tumbuh kembang', body: 'Tidur, menyusui, dan perawatan di satu tempat' },
@@ -122,7 +122,7 @@ export const translation: SiteTranslation = {
     ctaBody: 'Catat tidur siang, jendela bangun, terbangun malam, menyusui, popok, dan rutinitas dalam satu aplikasi, lalu dapatkan langkah berikutnya yang lebih jelas untuk hari ke depan.',
     download: 'Unduh Yorix',
     relatedGuides: 'Panduan terkait',
-    footer: 'Yorix adalah asisten rutinitas untuk orang tua. Yorix tidak memberikan diagnosis medis atau saran darurat.',
+    footer: 'Yorix membantu rutinitas bayi Anda dan tidak memberikan perawatan medis.',
   },
   articleExtras: {
     keyTakeaways: 'Poin penting',

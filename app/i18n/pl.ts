@@ -83,7 +83,7 @@ export const translation: SiteTranslation = {
       body: 'Sen, karmienia, pieluchy, wzrost i pielęgnacja jednym dotknięciem — i plan na jutro zbudowany z Twoich wpisów.',
       action: 'Pobierz Yorix',
     },
-    footer: 'Yorix pomaga rodzicom w codziennej rutynie. Nie stawia diagnoz medycznych i nie udziela porad w nagłych przypadkach.',
+    footer: 'Yorix pomaga w rutynie Twojego dziecka i nie świadczy opieki medycznej.',
     features: [
       { title: 'Trafne prognozy snu', body: 'Oparte na prawdziwych danych Twojego dziecka' },
       { title: 'Wzrost i rozwój', body: 'Sen, karmienia i pielęgnacja w jednym miejscu' },
@@ -122,7 +122,7 @@ export const translation: SiteTranslation = {
     ctaBody: 'Zapisuj drzemki, okna czuwania, nocne pobudki, karmienia, pieluchy i rutyny w jednej aplikacji, a potem otrzymuj jaśniejsze kolejne kroki na nadchodzący dzień.',
     download: 'Pobierz Yorix',
     relatedGuides: 'Powiązane poradniki',
-    footer: 'Yorix pomaga rodzicom w codziennej rutynie. Nie stawia diagnoz medycznych i nie udziela porad w nagłych przypadkach.',
+    footer: 'Yorix pomaga w rutynie Twojego dziecka i nie świadczy opieki medycznej.',
   },
   articleExtras: {
     keyTakeaways: 'Najważniejsze wnioski',

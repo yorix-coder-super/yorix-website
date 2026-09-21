@@ -88,7 +88,7 @@ export const translation: SiteTranslation = {
       body: 'Sleep, feeds, diapers, growth and care in one tap — and a plan for tomorrow built from what you logged.',
       action: 'Download Yorix',
     },
-    footer: 'Yorix is a routine helper for parents. It does not provide medical diagnosis or emergency advice.',
+    footer: 'Yorix helps with your baby’s routine and does not provide medical care.',
     features: [
       { title: 'Accurate sleep forecasts', body: 'Built on your baby’s real data' },
       { title: 'Growth and development', body: 'Sleep, feeds and care in one place' },
@@ -130,7 +130,7 @@ export const translation: SiteTranslation = {
     ctaBody: 'Track naps, wake windows, night wakings, feeds, diapers, and routines in one app, then get clearer next steps for the day ahead.',
     download: 'Download Yorix',
     relatedGuides: 'Related guides',
-    footer: 'Yorix is a routine helper for parents. It does not provide medical diagnosis or emergency advice.',
+    footer: 'Yorix helps with your baby’s routine and does not provide medical care.',
   },
   articleExtras: {
     keyTakeaways: 'Key takeaways',

@@ -83,7 +83,7 @@ export const translation: SiteTranslation = {
       body: 'Sommeil, repas, couches, croissance et soins en un geste — et un plan pour demain construit à partir de ce que vous avez noté.',
       action: 'Télécharger Yorix',
     },
-    footer: 'Yorix est une aide à la routine pour les parents. Il ne fournit ni diagnostic médical ni conseil en cas d’urgence.',
+    footer: 'Yorix vous aide avec la routine de votre bébé et ne fournit pas de soins médicaux.',
     features: [
       { title: 'Des prévisions de sommeil précises', body: 'Basées sur les vraies données de votre bébé' },
       { title: 'Croissance et développement', body: 'Sommeil, repas et soins au même endroit' },
@@ -122,7 +122,7 @@ export const translation: SiteTranslation = {
     ctaBody: 'Suivez siestes, fenêtres d’éveil, réveils nocturnes, repas, couches et routines dans une seule app, puis obtenez des prochaines étapes plus claires pour la journée à venir.',
     download: 'Télécharger Yorix',
     relatedGuides: 'Guides associés',
-    footer: 'Yorix est une aide à la routine pour les parents. Il ne fournit ni diagnostic médical ni conseil en cas d’urgence.',
+    footer: 'Yorix vous aide avec la routine de votre bébé et ne fournit pas de soins médicaux.',
   },
   articleExtras: {
     keyTakeaways: 'À retenir',

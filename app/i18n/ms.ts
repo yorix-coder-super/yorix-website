@@ -83,7 +83,7 @@ export const translation: SiteTranslation = {
       body: 'Tidur, penyusuan, lampin, tumbesaran dan penjagaan dengan sekali ketik — serta pelan untuk esok yang dibina daripada apa yang anda catat.',
       action: 'Muat turun Yorix',
     },
-    footer: 'Yorix ialah pembantu rutin untuk ibu bapa. Ia tidak memberikan diagnosis perubatan atau nasihat kecemasan.',
+    footer: 'Yorix membantu rutin harian bayi anda dan tidak memberikan penjagaan perubatan.',
     features: [
       { title: 'Ramalan tidur yang tepat', body: 'Berdasarkan data sebenar bayi anda' },
       { title: 'Tumbesaran dan perkembangan', body: 'Tidur, penyusuan dan penjagaan di satu tempat' },
@@ -122,7 +122,7 @@ export const translation: SiteTranslation = {
     ctaBody: 'Jejak tidur siang, waktu berjaga, terjaga malam, penyusuan, lampin dan rutin dalam satu aplikasi, kemudian dapatkan langkah seterusnya yang lebih jelas untuk hari yang mendatang.',
     download: 'Muat turun Yorix',
     relatedGuides: 'Panduan berkaitan',
-    footer: 'Yorix ialah pembantu rutin untuk ibu bapa. Ia tidak memberikan diagnosis perubatan atau nasihat kecemasan.',
+    footer: 'Yorix membantu rutin harian bayi anda dan tidak memberikan penjagaan perubatan.',
   },
   articleExtras: {
     keyTakeaways: 'Perkara utama',

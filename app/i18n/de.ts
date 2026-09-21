@@ -83,7 +83,7 @@ export const translation: SiteTranslation = {
       body: 'Schlaf, Mahlzeiten, Windeln, Wachstum und Pflege mit einem Fingertipp – und ein Plan für morgen aus dem, was du eingetragen hast.',
       action: 'Yorix herunterladen',
     },
-    footer: 'Yorix ist eine Routinehilfe für Eltern. Die App stellt keine medizinischen Diagnosen und bietet keine Notfallberatung.',
+    footer: 'Yorix hilft bei der Routine deines Babys und leistet keine medizinische Versorgung.',
     features: [
       { title: 'Genaue Schlafprognosen', body: 'Basierend auf den echten Daten deines Babys' },
       { title: 'Wachstum und Entwicklung', body: 'Schlaf, Mahlzeiten und Pflege an einem Ort' },
@@ -122,7 +122,7 @@ export const translation: SiteTranslation = {
     ctaBody: 'Halte Nickerchen, Wachfenster, nächtliches Aufwachen, Mahlzeiten, Windeln und Routinen in einer App fest und erhalte klarere nächste Schritte für den Tag, der vor dir liegt.',
     download: 'Yorix herunterladen',
     relatedGuides: 'Ähnliche Ratgeber',
-    footer: 'Yorix ist eine Routinehilfe für Eltern. Die App stellt keine medizinischen Diagnosen und bietet keine Notfallberatung.',
+    footer: 'Yorix hilft bei der Routine deines Babys und leistet keine medizinische Versorgung.',
   },
   articleExtras: {
     keyTakeaways: 'Das Wichtigste in Kürze',

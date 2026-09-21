@@ -83,7 +83,7 @@ export const translation: SiteTranslation = {
       body: 'Søvn, måltider, bleer, vækst og pleje med ét tryk – og en plan for i morgen, bygget på det, du har registreret.',
       action: 'Hent Yorix',
     },
-    footer: 'Yorix er en rutinehjælp til forældre. Appen stiller ikke medicinske diagnoser og giver ikke akut rådgivning.',
+    footer: 'Yorix hjælper med din babys rutiner og yder ikke lægehjælp.',
     features: [
       { title: 'Præcise søvnprognoser', body: 'Bygget på din babys egne data' },
       { title: 'Vækst og udvikling', body: 'Søvn, måltider og pleje ét sted' },
@@ -122,7 +122,7 @@ export const translation: SiteTranslation = {
     ctaBody: 'Følg lure, vågenvinduer, natlige opvågninger, måltider, bleer og rutiner i én app, og få klarere næste skridt for dagen, der kommer.',
     download: 'Hent Yorix',
     relatedGuides: 'Relaterede guider',
-    footer: 'Yorix er en rutinehjælp til forældre. Appen stiller ikke medicinske diagnoser og giver ikke akut rådgivning.',
+    footer: 'Yorix hjælper med din babys rutiner og yder ikke lægehjælp.',
   },
   articleExtras: {
     keyTakeaways: 'Det vigtigste kort fortalt',

@@ -1,7 +1,7 @@
 import type { SiteTranslation } from './types';
 
 const sentence = 'यह गाइड आपके शिशु की असली लय समझने और कम अंदाज़ों के साथ दिन की योजना बनाने में मदद करती है।';
-const footer = 'Yorix माता-पिता के लिए दिनचर्या में मदद करने वाला ऐप है। यह चिकित्सा निदान या आपातकालीन सलाह नहीं देता।';
+const footer = 'Yorix आपके शिशु की दिनचर्या में मदद करता है और चिकित्सा देखभाल नहीं देता।';
 
 export const translation: SiteTranslation = {
   home: {

@@ -83,7 +83,7 @@ export const translation: SiteTranslation = {
       body: 'Søvn, mating, bleier, vekst og stell med ett trykk – og en plan for i morgen, bygd på det du har logget.',
       action: 'Last ned Yorix',
     },
-    footer: 'Yorix er en rutinehjelp for foreldre. Appen stiller ingen medisinske diagnoser og gir ikke råd i akutte situasjoner.',
+    footer: 'Yorix hjelper med babyens rutiner og gir ikke medisinsk hjelp.',
     features: [
       { title: 'Treffsikre søvnprognoser', body: 'Bygget på babyens egne data' },
       { title: 'Vekst og utvikling', body: 'Søvn, mating og stell på ett sted' },
@@ -122,7 +122,7 @@ export const translation: SiteTranslation = {
     ctaBody: 'Følg med på lurer, våkenvinduer, nattlige oppvåkninger, matinger, bleier og rutiner i én app, og få tydeligere neste steg for dagen som kommer.',
     download: 'Last ned Yorix',
     relatedGuides: 'Relaterte guider',
-    footer: 'Yorix er en rutinehjelp for foreldre. Appen stiller ingen medisinske diagnoser og gir ikke råd i akutte situasjoner.',
+    footer: 'Yorix hjelper med babyens rutiner og gir ikke medisinsk hjelp.',
   },
   articleExtras: {
     keyTakeaways: 'Det viktigste',

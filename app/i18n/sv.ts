@@ -83,7 +83,7 @@ export const translation: SiteTranslation = {
       body: 'Sömn, matning, blöjor, tillväxt och omsorg med ett tryck – och en plan för i morgon, byggd på det du har loggat.',
       action: 'Hämta Yorix',
     },
-    footer: 'Yorix är en rutinhjälp för föräldrar. Appen ställer inga medicinska diagnoser och ger inga råd i akuta situationer.',
+    footer: 'Yorix hjälper till med bebisens rutiner och ger ingen medicinsk vård.',
     features: [
       { title: 'Träffsäkra sömnprognoser', body: 'Byggda på bebisens egna data' },
       { title: 'Tillväxt och utveckling', body: 'Sömn, matning och omsorg på ett ställe' },
@@ -122,7 +122,7 @@ export const translation: SiteTranslation = {
     ctaBody: 'Följ tupplurar, vakentider, nattliga uppvaknanden, matningar, blöjor och rutiner i en app och få tydligare nästa steg för dagen som kommer.',
     download: 'Hämta Yorix',
     relatedGuides: 'Relaterade guider',
-    footer: 'Yorix är en rutinhjälp för föräldrar. Appen ställer inga medicinska diagnoser och ger inga råd i akuta situationer.',
+    footer: 'Yorix hjälper till med bebisens rutiner och ger ingen medicinsk vård.',
   },
   articleExtras: {
     keyTakeaways: 'Det viktigaste',

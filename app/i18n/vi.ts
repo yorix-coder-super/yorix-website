@@ -83,7 +83,7 @@ export const translation: SiteTranslation = {
       body: 'Giấc ngủ, cữ ăn, tã, tăng trưởng và chăm sóc chỉ với một chạm — cùng kế hoạch cho ngày mai được lập từ chính những gì bạn đã ghi.',
       action: 'Tải Yorix',
     },
-    footer: 'Yorix là công cụ hỗ trợ nếp sinh hoạt dành cho cha mẹ. Yorix không đưa ra chẩn đoán y tế hay tư vấn cấp cứu.',
+    footer: 'Yorix hỗ trợ nếp sinh hoạt của bé và không cung cấp dịch vụ y tế.',
     features: [
       { title: 'Dự báo giấc ngủ chính xác', body: 'Dựa trên dữ liệu thực của bé' },
       { title: 'Tăng trưởng và phát triển', body: 'Giấc ngủ, cữ ăn và chăm sóc ở cùng một nơi' },
@@ -122,7 +122,7 @@ export const translation: SiteTranslation = {
     ctaBody: 'Theo dõi giấc ngủ ngày, khoảng thức, thức giấc đêm, cữ ăn, tã và nếp sinh hoạt trong một ứng dụng, rồi nhận các bước tiếp theo rõ ràng hơn cho ngày sắp tới.',
     download: 'Tải Yorix',
     relatedGuides: 'Hướng dẫn liên quan',
-    footer: 'Yorix là công cụ hỗ trợ nếp sinh hoạt dành cho cha mẹ. Yorix không đưa ra chẩn đoán y tế hay tư vấn cấp cứu.',
+    footer: 'Yorix hỗ trợ nếp sinh hoạt của bé và không cung cấp dịch vụ y tế.',
   },
   articleExtras: {
     keyTakeaways: 'Điểm chính',

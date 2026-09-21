@@ -1,7 +1,7 @@
 import type { SiteTranslation } from './types';
 
 const sentence = 'このガイドは、赤ちゃんの本当のリズムを理解し、迷いを減らして一日を計画するためのものです。';
-const footer = 'Yorixは保護者のための、毎日のルーティンを手助けするアプリです。医療的な診断や緊急時の助言は提供しません。';
+const footer = 'Yorixは赤ちゃんのルーティンを手助けするアプリで、医療行為は行いません。';
 
 export const translation: SiteTranslation = {
   home: {

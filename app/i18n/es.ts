@@ -83,7 +83,7 @@ export const translation: SiteTranslation = {
       body: 'Sueño, tomas, pañales, crecimiento y cuidados con un toque, y un plan para mañana hecho con lo que registraste.',
       action: 'Descargar Yorix',
     },
-    footer: 'Yorix es una ayuda para la rutina de madres y padres. No ofrece diagnósticos médicos ni consejos de emergencia.',
+    footer: 'Yorix te ayuda con la rutina de tu bebé y no ofrece atención médica.',
     features: [
       { title: 'Pronósticos de sueño precisos', body: 'Basados en los datos reales de tu bebé' },
       { title: 'Crecimiento y desarrollo', body: 'Sueño, tomas y cuidados en un solo lugar' },
@@ -122,7 +122,7 @@ export const translation: SiteTranslation = {
     ctaBody: 'Registra siestas, ventanas de vigilia, despertares nocturnos, tomas, pañales y rutinas en una sola app, y obtén pasos más claros para el día que tienes por delante.',
     download: 'Descargar Yorix',
     relatedGuides: 'Guías relacionadas',
-    footer: 'Yorix es una ayuda para la rutina de madres y padres. No ofrece diagnósticos médicos ni consejos de emergencia.',
+    footer: 'Yorix te ayuda con la rutina de tu bebé y no ofrece atención médica.',
   },
   articleExtras: {
     keyTakeaways: 'Ideas clave',

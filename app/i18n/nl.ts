@@ -83,7 +83,7 @@ export const translation: SiteTranslation = {
       body: 'Slaap, voedingen, luiers, groei en verzorging met één tik – en een plan voor morgen, opgebouwd uit wat je hebt vastgelegd.',
       action: 'Download Yorix',
     },
-    footer: 'Yorix is een routinehulp voor ouders. De app stelt geen medische diagnoses en geeft geen spoedadvies.',
+    footer: 'Yorix helpt met de routine van je baby en verleent geen medische zorg.',
     features: [
       { title: 'Nauwkeurige slaapvoorspellingen', body: 'Gebaseerd op de echte gegevens van je baby' },
       { title: 'Groei en ontwikkeling', body: 'Slaap, voedingen en verzorging op één plek' },
@@ -122,7 +122,7 @@ export const translation: SiteTranslation = {
     ctaBody: 'Houd dutjes, wakevensters, nachtelijk wakker worden, voedingen, luiers en routines bij in één app en krijg duidelijkere volgende stappen voor de dag die komt.',
     download: 'Download Yorix',
     relatedGuides: 'Gerelateerde gidsen',
-    footer: 'Yorix is een routinehulp voor ouders. De app stelt geen medische diagnoses en geeft geen spoedadvies.',
+    footer: 'Yorix helpt met de routine van je baby en verleent geen medische zorg.',
   },
   articleExtras: {
     keyTakeaways: 'Belangrijkste punten',

@@ -83,7 +83,7 @@ export const translation: SiteTranslation = {
       body: 'Spánek, krmení, plenky, růst a péče jedním klepnutím — a plán na zítřek sestavený z tvých záznamů.',
       action: 'Stáhnout Yorix',
     },
-    footer: 'Yorix pomáhá rodičům s denním režimem. Neposkytuje lékařskou diagnózu ani rady v naléhavých případech.',
+    footer: 'Yorix pomáhá s rutinou tvého miminka a neposkytuje lékařskou péči.',
     features: [
       { title: 'Přesné předpovědi spánku', body: 'Na základě skutečných dat tvého miminka' },
       { title: 'Růst a vývoj', body: 'Spánek, krmení a péče na jednom místě' },
@@ -122,7 +122,7 @@ export const translation: SiteTranslation = {
     ctaBody: 'Zapisuj denní spánky, okna bdění, noční buzení, krmení, plenky a rutiny v jedné aplikaci a získej jasnější další kroky na nadcházející den.',
     download: 'Stáhnout Yorix',
     relatedGuides: 'Související články',
-    footer: 'Yorix pomáhá rodičům s denním režimem. Neposkytuje lékařskou diagnózu ani rady v naléhavých případech.',
+    footer: 'Yorix pomáhá s rutinou tvého miminka a neposkytuje lékařskou péči.',
   },
   articleExtras: {
     keyTakeaways: 'Hlavní body',
