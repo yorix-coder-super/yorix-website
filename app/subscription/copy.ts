@@ -80,6 +80,7 @@ export type SubscriptionCopy = {
     copyCode: string;
     copied: string;
     redeemOnSite: [string, string];
+    redeemOnSiteLink: string;
     validUntil: (date: string) => string;
     redeemTitle: string;
     redeemBody: string;
@@ -222,7 +223,7 @@ const ru: SubscriptionCopy = {
   ret: {
     checking: 'Проверяем оплату…',
     paid: (date) => `Подписка включена до ${date}`,
-    openApp: 'Мир снов уже ждёт — продолжайте на iPhone.',
+    openApp: 'Откройте Yorix на iPhone тем же аккаунтом Apple — подписка уже там.',
     pending: 'Банк подтверждает оплату — обычно меньше минуты. Страница обновится сама.',
     failed: 'Оплаченный заказ не найден. Если деньги списаны, напишите нам — дату и сумму.',
     signIn: 'Войдите через Apple, чтобы увидеть статус заказа.',
@@ -298,6 +299,7 @@ const ru: SubscriptionCopy = {
     copyCode: 'Скопировать код',
     copied: 'Скопировано',
     redeemOnSite: ['Код можно ввести на ', ' — там же, что и на открытке.'],
+    redeemOnSiteLink: 'странице активации подарка',
     validUntil: (date) => `Код действует до ${date}`,
     redeemTitle: 'Вам подарили подписку Yorix',
     redeemBody: 'Подписка уже ваша — остался один шаг. Войдите через Apple тем же аккаунтом, что и в приложении: на него она и встанет.',
@@ -465,7 +467,7 @@ const en: SubscriptionCopy = {
   ret: {
     checking: 'Checking the payment…',
     paid: (date) => `Subscription on until ${date}`,
-    openApp: 'A world of calm sleep is waiting — carry on from your iPhone.',
+    openApp: 'Open Yorix on your iPhone with the same Apple account — the subscription is already there.',
     pending: 'The bank is confirming the payment — usually under a minute. This page refreshes itself.',
     failed: 'No paid order found. If money was charged, write to us with the date and amount.',
     signIn: 'Sign in with Apple to see the order status.',
@@ -543,7 +545,8 @@ const en: SubscriptionCopy = {
     copyLink: 'Copy link',
     copyCode: 'Copy code',
     copied: 'Copied',
-    redeemOnSite: ['The code can be entered at ', ' — the address the card carries.'],
+    redeemOnSite: ['The code can be entered on the ', ' — the address the card carries.'],
+    redeemOnSiteLink: 'gift activation page',
     validUntil: (date) => `The code is valid until ${date}.`,
     redeemTitle: 'Someone gave you a Yorix subscription',
     redeemBody: 'The subscription is yours — one step left. Sign in with Apple using the same account as in the app: that is where it lands.',

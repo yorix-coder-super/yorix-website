@@ -88,10 +88,17 @@ export function PaidScreen({
         </div>
 
         <Reveal animation="zoomIn" delay={180} load>
-          {/* A fixed ratio, with both objects placed inside it: the phone is
-              taller than the mascot, and without a reserved box it hangs out
-              of the column and lands on the row below. */}
-          <div className="relative mx-auto aspect-[1/0.9] w-full max-w-sm lg:max-w-md">
+          {/* The hand-written line gets a strip of its own above the art, and
+              only where it is shown: inside the box it landed on the phone's
+              screen, above the box it reached into the header. */}
+          <div className="relative mx-auto w-full max-w-sm lg:max-w-md xl:pt-14">
+            <Hand className="absolute top-0 end-[-2%] hidden w-40 rotate-[7deg] rtl:-rotate-[7deg] text-[1.35rem] text-[#E0E7FF] xl:block">
+              {t.noteTop} <DoodleHeart className="h-5 w-5 text-[#FDE68A]" />
+            </Hand>
+            {/* A fixed ratio, with both objects placed inside it: the phone is
+                taller than the mascot, and without a reserved box it hangs out
+                of the column and lands on the row below. */}
+            <div className="relative aspect-[1/0.9] w-full">
             <div className="float-slow absolute bottom-0 start-0 w-[72%]">
               <Art className="h-auto w-full drop-shadow-[0_24px_40px_rgb(15_16_34/45%)]" height={560} name="cta-baby-star" priority width={503} />
             </div>
@@ -108,9 +115,7 @@ export function PaidScreen({
             </div>
             <Sparkle className="top-[4%] start-[10%] w-4" delay={200} />
             <Sparkle className="bottom-[22%] start-0 w-3" delay={1100} tone="lavender" />
-            <Hand className="absolute top-0 end-[-2%] hidden w-40 rotate-[7deg] rtl:-rotate-[7deg] text-[1.35rem] text-[#E0E7FF] xl:block">
-              {t.noteTop} <DoodleHeart className="h-5 w-5 text-[#FDE68A]" />
-            </Hand>
+            </div>
           </div>
         </Reveal>
       </div>

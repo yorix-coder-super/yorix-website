@@ -175,7 +175,7 @@ export function GiftShare({ gift, compact = false }: { gift: BuyerGift; compact?
       <p className="mt-3 text-xs leading-5 text-white/55">
         {text.redeemOnSite[0]}
         <a className={link} href={redeemPage}>
-          {redeemPage.replace(/^https?:\/\//, '')}
+          {text.redeemOnSiteLink}
         </a>
         {text.redeemOnSite[1]}
       </p>
