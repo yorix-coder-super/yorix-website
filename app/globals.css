@@ -1,4 +1,8 @@
 @import 'tailwindcss';
+/* shadcn's 60 components are installed but nothing in app/ renders one, and
+   Tailwind generates a utility for every class it finds. Scanning them cost
+   more CSS than the whole site uses. Delete this line the day one is used. */
+@source not '../components/ui';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 
@@ -59,12 +63,14 @@ body {
     sans-serif;
 }
 
-/* Scripts beyond Latin and Cyrillic. Caveat has no glyphs for them, so a
-   hand-written note falls back to the page font — a little smaller, it
-   still reads as an aside. Arabic letters join, so no letter-spacing there;
-   Devanagari and Thai stack marks above and below the line, so headings get
-   more line height. */
-:is(:lang(ar), :lang(he), :lang(hi), :lang(th), :lang(ja)) .font-hand {
+/* Scripts Caveat has no glyphs for, so a hand-written note falls back to the
+   page font — a little smaller, it still reads as an aside. Arabic letters
+   join, so no letter-spacing there; Devanagari and Thai stack marks above and
+   below the line, so headings get more line height. Vietnamese is here for a
+   narrower reason: Caveat covers its letters but none of its stacked
+   diacritics (Google ships no vietnamese subset for it), and half a word in
+   the handwriting with the other half in the page font looks like a bug. */
+:is(:lang(ar), :lang(he), :lang(hi), :lang(th), :lang(ja), :lang(vi)) .font-hand {
   font-family: inherit;
   font-weight: 600;
   scale: 0.78;
@@ -364,7 +370,10 @@ html.lenis body {
   mask-composite: exclude;
 }
 
-/* Caveat 600 (OFL), self-hosted: the CSP allows fonts from 'self' only. */
+/* Caveat 600 (OFL), self-hosted: the CSP allows fonts from 'self' only.
+   Subset to the characters the hand-written notes actually use across the 21
+   languages that get them — 113 KB of full subsets down to 63 KB. Regenerate
+   with pyftsubset when a note gains a character these do not have. */
 @font-face {
   font-family: 'Caveat';
   font-style: normal;
