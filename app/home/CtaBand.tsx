@@ -13,9 +13,12 @@ export function CtaBand({ title, body, action, note }: { title: string; body: st
   return (
     <section className="mx-auto max-w-7xl px-5 pb-16 pt-24 sm:px-8 lg:px-10">
       <Reveal animation="zoomIn">
-        <div className="relative rounded-[2rem] bg-[linear-gradient(100deg,#4F46E5_0%,#6D6AF0_48%,#A5B4FC_100%)] shadow-[0_30px_90px_rgb(79_70_229/35%)]">
+        {/* The same sky as the contact band: the old gradient ran out into
+            #A5B4FC, so the white copy sat on a near-white corner and the
+            clouds at 45 % finished the job. */}
+        <div className="relative rounded-[2rem] border border-white/12 bg-[linear-gradient(135deg,#312E81_0%,#3730A3_45%,#4F46E5_100%)] shadow-[0_30px_90px_rgb(79_70_229/30%)]">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden rounded-[2rem]">
-            <Art className="drift absolute bottom-[-38%] start-[-5%] w-[110%] max-w-none opacity-45 rtl:-scale-x-100" height={511} name="cloud-bank" width={1536} />
+            <Art className="drift absolute bottom-[-38%] start-[-5%] w-[110%] max-w-none opacity-25 rtl:-scale-x-100" height={511} name="cloud-bank" width={1536} />
             <Sparkle className="start-[34%] top-[16%] w-3" delay={300} tone="lavender" />
             <Sparkle className="end-[23%] top-[12%] w-2.5" delay={1200} />
             <Sparkle className="bottom-[18%] end-[7%] w-4" delay={700} />
