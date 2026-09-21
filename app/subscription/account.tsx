@@ -420,7 +420,11 @@ export function CheckoutDialog() {
   const text = planTexts[plan.id];
   // The worker is the authority; this only spares a sign-in when the site's
   // checkout is closed anyway.
-  const live = configured && config !== null && config.checkoutMode !== 'off';
+  // The worker is the authority; this only spares a sign-in when the checkout
+  // is KNOWN to be closed. A config we could not load — a blocked origin, a
+  // network blink — is not a closed shop, and saying «coming soon» to a buyer
+  // who could have paid is the worse of the two mistakes.
+  const live = configured && config?.checkoutMode !== 'off';
   const price = formatMoney(prices[plan.id][currency], currency, lang);
   const spelled = chargeToSpellOut(plan.id, currency, config?.provider ?? 'webpay');
   const charge = spelled === null ? null : formatMoney(spelled, 'BYN', lang);

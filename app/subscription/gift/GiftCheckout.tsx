@@ -42,7 +42,11 @@ export function GiftCheckout() {
   const price = formatMoney(prices[planId][currency], currency, lang);
   const spelled = chargeToSpellOut(planId, currency, config?.provider ?? 'webpay');
   const charge = spelled === null ? null : formatMoney(spelled, 'BYN', lang);
-  const live = configured && config !== null && config.checkoutMode !== 'off';
+  // The worker is the authority; this only spares a sign-in when the checkout
+  // is KNOWN to be closed. A config we could not load — a blocked origin, a
+  // network blink — is not a closed shop, and saying «coming soon» to a buyer
+  // who could have paid is the worse of the two mistakes.
+  const live = configured && config?.checkoutMode !== 'off';
   const testing = config?.checkoutMode === 'test';
   const terms: Terms = { offer: legalVersion.offer, payment: legalVersion.payment, privacy: legalVersion.privacy };
 
