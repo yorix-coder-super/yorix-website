@@ -32,7 +32,14 @@ export type SubscriptionCopy = {
     rateLimited: string;
   };
   faq: { title: string; items: { q: string; a: string }[]; more: string };
-  ret: { checking: string; paid: (date: string) => string; openApp: string; pending: string; failed: string; signIn: string; back: string; badgeTop: string; scan: string };
+  ret: {
+    checking: string; paid: (date: string) => string; paidLead: string; openApp: string;
+    pending: string; failed: string; signIn: string; back: string; badgeTop: string; scan: string;
+    badge: string; qrTitle: string; qrHint: string;
+    features: { title: string; sub: string }[];
+    helpTitle: string; helpBody: string; helpCta: string;
+    noteTop: string; noteThanks: string;
+  };
   cancel: { title: string; body: string; back: string };
   footer: {
     seller: string;
@@ -216,6 +223,21 @@ const ru: SubscriptionCopy = {
     back: 'К тарифам',
     badgeTop: 'Загрузите в',
     scan: 'Наведите камеру телефона на код, чтобы открыть Yorix в App Store',
+    badge: 'Готово!',
+    paidLead: 'Подписка включена до',
+    qrTitle: 'Открыть по QR-коду',
+    qrHint: 'Наведите камеру iPhone',
+    features: [
+      { title: 'Прогнозы сна', sub: 'уже доступны' },
+      { title: 'Вся аналитика', sub: 'без ограничений' },
+      { title: 'ИИ-коуч 24/7', sub: 'рядом с вами' },
+      { title: 'Экспертные гайды', sub: 'и рекомендации' },
+    ],
+    helpTitle: 'Нужна помощь?',
+    helpBody: 'Мы всегда на связи и поможем, если что-то не работает.',
+    helpCta: 'Перейти в поддержку',
+    noteTop: 'Спокойные ночи — счастливые дни',
+    noteThanks: 'Спасибо, что вы с нами!',
   },
   cancel: { title: 'Оплата отменена', body: 'Деньги не списаны. Вернуться можно в любой момент.', back: 'К тарифам' },
   footer: {
@@ -431,6 +453,21 @@ const en: SubscriptionCopy = {
     back: 'Back to plans',
     badgeTop: 'Download on the',
     scan: 'Point your phone camera at the code to open Yorix in the App Store',
+    badge: 'All set!',
+    paidLead: 'Subscription on until',
+    qrTitle: 'Open with the QR code',
+    qrHint: 'Point your iPhone camera at it',
+    features: [
+      { title: 'Sleep forecasts', sub: 'already on' },
+      { title: 'All the analytics', sub: 'nothing held back' },
+      { title: 'AI coach 24/7', sub: 'whenever you need it' },
+      { title: 'Expert guides', sub: 'and recommendations' },
+    ],
+    helpTitle: 'Need a hand?',
+    helpBody: 'We are here, and we will help if something does not work.',
+    helpCta: 'Go to support',
+    noteTop: 'Calm nights — happy days',
+    noteThanks: 'Thank you for being with us!',
   },
   cancel: { title: 'Payment cancelled', body: 'Nothing was charged. Come back any time.', back: 'Back to plans' },
   footer: {

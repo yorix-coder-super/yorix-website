@@ -8,6 +8,7 @@ import { Reveal } from './Reveal';
 import { API_BASE } from './config';
 import { subscriptionCopy } from './copy';
 import { GiftShare, type BuyerGift } from './gift/GiftShare';
+import { PaidScreen } from './PaidScreen';
 import { giftKeyFor, rememberCode } from './gift/keys';
 import { formatDate, subscriptionPath, type Lang } from './i18n';
 import { Button, Spinner } from './ui';
@@ -30,6 +31,8 @@ function ReturnStatus() {
   const giftOrder = useSyncExternalStore(noSubscription, giftInUrl, () => false);
   const lostGift = giftOrder && !giftKey;
   const needsSignIn = !giftKey && !lostGift && ready && (!configured || !signedIn);
+  // A paid subscription (not a gift) gets its own welcome screen below.
+  const paidPlan = status === 'paid' && until !== null && !gift;
 
   useEffect(() => {
     if (!giftKey && (!ready || !configured || !signedIn)) return;
@@ -94,7 +97,8 @@ function ReturnStatus() {
   return (
     // A paid gift needs room for the card beside its instructions; every other
     // state is a short column.
-    <section className={`relative mx-auto px-5 pb-24 pt-6 text-center sm:px-8 ${gift ? 'max-w-5xl' : 'max-w-2xl'}`}>
+    <section className={`relative mx-auto px-5 pb-24 pt-6 text-center sm:px-8 ${gift || paidPlan ? 'max-w-6xl' : 'max-w-2xl'}`}>
+      {paidPlan ? null : (
       <Reveal animation="zoomIn" load>
         <div className="relative mx-auto w-40 sm:w-48">
           {status === 'paid' ? (
@@ -112,15 +116,18 @@ function ReturnStatus() {
           <Sparkle className="-right-4 top-10 w-4" delay={1100} />
         </div>
       </Reveal>
+      )}
+      {paidPlan ? null : (
       <Reveal delay={140} load>
         {/* Keyed by what it says: «checking» → «paid» eases in instead of swapping. */}
         <h1 className={`${status === 'paid' ? 'enter-rise ' : ''}mt-6 text-4xl font-semibold leading-tight text-white sm:text-5xl`} key={gift ? 'gift' : status === 'paid' && until ? 'paid' : 'checking'}>
           {gift ? copy.gift.paidTitle : status === 'paid' && until ? copy.ret.paid(formatDate(until, lang)) : copy.ret.checking}
         </h1>
       </Reveal>
+      )}
       {/* A paid gift replaces this panel with its own; the panel is for the
           states that are still one short message. */}
-      {gift ? null : (
+      {gift || paidPlan ? null : (
       <Reveal delay={260} load>
         <div className="mt-8 rounded-[2rem] border border-white/12 bg-white/[0.06] p-8 backdrop-blur-xl">
           {!needsSignIn && !lostGift && (status === 'checking' || status === 'pending') ? (
@@ -152,35 +159,19 @@ function ReturnStatus() {
           <GiftShare gift={gift} />
         </div>
       ) : null}
+      {paidPlan ? (
+        <div className="mt-2">
+          <PaidScreen copy={copy} lang={lang} until={until!} />
+        </div>
+      ) : null}
       {/* Nothing follows a paid gift: the panel above is the whole job, and
           «back to plans» after buying reads as if the purchase did not count. */}
-      {gift ? null : (
-      <Reveal delay={380} load>
-        {status === 'paid' && until ? (
-          // Just bought: the next step is the app, not the price list. A gift
-          // buyer is not sent there — they may well have no iPhone at all.
-          <div className="mt-8 flex flex-col items-center gap-5">
-            <a
-              className="inline-flex items-center gap-3 rounded-xl border border-white/25 bg-black px-4 py-2 text-white transition hover:border-white/50"
-              href={appDownloadUrl}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <AppleGlyph className="h-7 w-7" />
-              <span className="text-start leading-tight">
-                <span className="block text-[11px] text-white/80">{copy.ret.badgeTop}</span>
-                <span className="block text-lg font-semibold">App Store</span>
-              </span>
-            </a>
-            {/* A phone taps the badge; the code is for a buyer who paid at a desk. */}
-            <AppQr className="hidden w-28 sm:block" label={copy.ret.scan} />
-          </div>
-        ) : (
+      {gift || (status === 'paid' && until) ? null : (
+        <Reveal delay={380} load>
           <Button className="mt-8" href={`${subscriptionPath(lang)}#plans`} variant="ghost">
             {copy.ret.back}
           </Button>
-        )}
-      </Reveal>
+        </Reveal>
       )}
     </section>
   );
