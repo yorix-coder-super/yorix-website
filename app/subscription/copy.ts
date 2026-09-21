@@ -81,6 +81,7 @@ export type SubscriptionCopy = {
     copied: string;
     redeemOnSite: [string, string];
     redeemOnSiteLink: string;
+    haveCode: string;
     validUntil: (date: string) => string;
     redeemTitle: string;
     redeemBody: string;
@@ -300,6 +301,7 @@ const ru: SubscriptionCopy = {
     copied: 'Скопировано',
     redeemOnSite: ['Код можно ввести на ', ' — там же, что и на открытке.'],
     redeemOnSiteLink: 'странице активации подарка',
+    haveCode: 'У меня есть код',
     validUntil: (date) => `Код действует до ${date}`,
     redeemTitle: 'Вам подарили подписку Yorix',
     redeemBody: 'Подписка уже ваша — остался один шаг. Войдите через Apple тем же аккаунтом, что и в приложении: на него она и встанет.',
@@ -547,6 +549,7 @@ const en: SubscriptionCopy = {
     copied: 'Copied',
     redeemOnSite: ['The code can be entered on the ', ' — the address the card carries.'],
     redeemOnSiteLink: 'gift activation page',
+    haveCode: 'I have a code',
     validUntil: (date) => `The code is valid until ${date}.`,
     redeemTitle: 'Someone gave you a Yorix subscription',
     redeemBody: 'The subscription is yours — one step left. Sign in with Apple using the same account as in the app: that is where it lands.',

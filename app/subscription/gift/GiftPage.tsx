@@ -1,9 +1,11 @@
+import { ArrowRight } from 'lucide-react';
 import { headers } from 'next/headers';
 import { AccountProvider } from '../account';
 import { subscriptionCopy } from '../copy';
 import type { Lang } from '../i18n';
 import { Reveal } from '../Reveal';
 import { SubscriptionShell } from '../SubscriptionShell';
+import { Button } from '../ui';
 import { GiftCheckout } from './GiftCheckout';
 import { GiftList } from './GiftList';
 
@@ -20,7 +22,15 @@ export async function GiftPage({ lang }: { lang: Lang }) {
           <p className="mb-5 inline-flex rounded-full border border-white/15 bg-white/[0.08] px-4 py-1.5 text-sm font-medium text-white/85 backdrop-blur-xl">{text.eyebrow}</p>
         </Reveal>
         <Reveal delay={120} load>
-          <h1 className="max-w-3xl text-[2.45rem] font-semibold leading-[1.07] tracking-[-0.02em] text-white sm:text-[3rem]">{text.title}</h1>
+          {/* Not everyone who lands here came to buy: some arrived holding a
+              code and had no way on but the footer. */}
+          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-4">
+            <h1 className="max-w-3xl text-[2.45rem] font-semibold leading-[1.07] tracking-[-0.02em] text-white sm:text-[3rem]">{text.title}</h1>
+            <Button href={lang === 'ru' ? '/ru/gift' : '/gift'} variant="ghost">
+              {text.haveCode}
+              <ArrowRight aria-hidden="true" className="h-5 w-5 rtl:-scale-x-100" />
+            </Button>
+          </div>
         </Reveal>
         <Reveal delay={240} load>
           <p className="mt-4 max-w-2xl text-base leading-7 text-white/75 sm:text-[17px]">{text.body}</p>
