@@ -23,24 +23,24 @@ export const plans: Plan[] = [
 // What the buyer sees, in their own region's currency — the App Store price,
 // so the web never looks dearer than the store they could have used instead.
 export const prices: Record<PlanId, Record<WebCurrency, number>> = {
-  week: { BYN: 11.9, RUB: 299 },
-  month: { BYN: 23.9, RUB: 599 },
-  year: { BYN: 119.9, RUB: 2990 },
+  week: { BYN: 11.9, RUB: 499 },
+  month: { BYN: 23.9, RUB: 999 },
+  year: { BYN: 119.9, RUB: 3990 },
 };
 
 // What a Belarusian-ruble acquirer charges for that price. The receipt says
 // this number, so the page says it too before the buyer leaves.
 export const charges: Record<PlanId, Record<WebCurrency, number>> = {
-  week: { BYN: 11.9, RUB: 10.5 },
-  month: { BYN: 23.9, RUB: 21 },
-  year: { BYN: 119.9, RUB: 104.9 },
+  week: { BYN: 11.9, RUB: 17.5 },
+  month: { BYN: 23.9, RUB: 35.1 },
+  year: { BYN: 119.9, RUB: 140.1 },
 };
 
 // The same, in roubles, for ЮKassa. A Russian buyer is charged the rouble
 // price they were shown; a Belarusian one pays the Belarusian price converted
 // at the same rate, so roubles never undercut it.
 export const chargesRub: Record<PlanId, Record<WebCurrency, number>> = {
-  week: { BYN: 339, RUB: 299 },
-  month: { BYN: 681, RUB: 599 },
-  year: { BYN: 3414, RUB: 2990 },
+  week: { BYN: 339, RUB: 499 },
+  month: { BYN: 681, RUB: 999 },
+  year: { BYN: 3414, RUB: 3990 },
 };

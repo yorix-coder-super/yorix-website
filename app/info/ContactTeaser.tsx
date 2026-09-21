@@ -12,7 +12,16 @@ export function ContactTeaser({ locale }: { locale: SiteLocale }) {
   const support = locale === 'en' ? '/support' : `/${locale}/support`;
   return (
     <Reveal>
-      <div className="spotlight relative isolate mt-8 flex flex-col items-center gap-5 overflow-hidden rounded-[1.75rem] border border-white/12 bg-[linear-gradient(100deg,rgb(99_102_241/0.22)_0%,rgb(255_255_255/0.05)_60%)] p-5 text-center backdrop-blur-xl transition-colors duration-500 hover:border-white/25 sm:flex-row sm:justify-between sm:p-6 sm:text-start">
+      <div className="spotlight relative isolate mt-8 flex flex-col items-center gap-5 overflow-hidden rounded-[1.75rem] border border-white/12 bg-[linear-gradient(135deg,#312E81_0%,#3730A3_45%,#4F46E5_100%)] p-5 text-center transition-colors duration-500 hover:border-white/25 sm:flex-row sm:justify-between sm:p-6 sm:text-start">
+        {/* The same sky as the contact card this band leads to: a gold glow
+            off the top corner, the cloud bank drifting along the bottom. */}
+        <div aria-hidden="true" className="absolute -top-20 start-[4%] -z-10 h-44 w-44 rounded-full bg-[#FDE68A]/15 blur-3xl" />
+        <Art
+          className="drift pointer-events-none absolute -bottom-[42%] start-[-5%] -z-10 w-[110%] max-w-none opacity-25 rtl:-scale-x-100"
+          height={511}
+          name="cloud-bank"
+          width={1536}
+        />
         <div className="flex flex-col items-center gap-4 sm:flex-row">
           <div aria-hidden="true" className="relative shrink-0">
             <div className="bob">
