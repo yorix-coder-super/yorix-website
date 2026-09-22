@@ -151,20 +151,32 @@ export function GiftShare({ gift, compact = false }: { gift: BuyerGift; compact?
   // The ticket: what to dictate down a phone when sending the link is not an
   // option. The link itself is behind the copy button — spelled out it is a
   // wall of characters nobody reads or types.
+  const copyCode = () => {
+    void navigator.clipboard?.writeText(code).then(() => setCopied('code'));
+  };
+  const codeHint = copied === 'code' ? text.copied : text.copyCode;
   const ticket = (
     <div className="rounded-2xl border border-dashed border-white/20 bg-white/[0.04] p-4">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-white/45">{text.code}</p>
-          <p className="mt-1 break-all font-mono text-xl font-semibold tracking-[0.18em] text-white sm:text-2xl">{code}</p>
+          {/* The code is the target people reach for, so it copies on click
+              itself; the icon beside it stays as the visible affordance. */}
+          <button
+            aria-label={codeHint}
+            className="mt-1 block w-full cursor-pointer break-all rounded-lg text-start font-mono text-xl font-semibold tracking-[0.18em] text-white transition hover:text-white/80 focus:outline-none focus-visible:ring-4 focus-visible:ring-white/25 active:scale-[0.99] sm:text-2xl"
+            onClick={copyCode}
+            title={codeHint}
+            type="button"
+          >
+            {code}
+          </button>
         </div>
         <button
-          aria-label={copied === 'code' ? text.copied : text.copyCode}
+          aria-label={codeHint}
           className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-white/15 bg-white/[0.06] text-white/70 transition hover:border-white/35 hover:text-white focus:outline-none focus-visible:ring-4 focus-visible:ring-white/25 active:scale-95"
-          onClick={() => {
-            void navigator.clipboard?.writeText(code).then(() => setCopied('code'));
-          }}
-          title={copied === 'code' ? text.copied : text.copyCode}
+          onClick={copyCode}
+          title={codeHint}
           type="button"
         >
           {copied === 'code' ? <Check aria-hidden className="h-5 w-5" /> : <Copy aria-hidden className="h-5 w-5" />}
