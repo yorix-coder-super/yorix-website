@@ -131,7 +131,7 @@ export async function HomeLanding({ locale }: { locale: HomeLocale }) {
                 </a>
               </div>
               <div className="relative h-[330px] overflow-hidden sm:h-[430px] lg:h-auto lg:min-h-[420px] lg:overflow-visible">
-                <div className="absolute inset-x-4 top-8 flex justify-center gap-3 sm:gap-5 lg:inset-x-6 lg:top-20">
+                <div className="absolute inset-x-4 top-8 flex justify-center gap-3 sm:gap-5 lg:static lg:mb-12 lg:mt-20 lg:px-6">
                   {showcase.map((shot, index) => (
                     <Reveal className="w-[32%] max-w-[270px] lg:w-[35%]" delay={140 + index * 120} key={shot}>
                       <PhoneFrame alt={copy.showcaseAlt[shot]} className="transition duration-500 hover:-translate-y-2" src={`/shots/${shots}-${shot}.webp`} />
