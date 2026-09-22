@@ -30,9 +30,12 @@ export function GiftCheckout() {
   const [accepted, setAccepted] = useState(false);
   const [missing, setMissing] = useState(false);
   const [contact, setContact] = useState(false);
+  const [email, setEmail] = useState('');
+  const [badEmail, setBadEmail] = useState(false);
   const [closed, setClosed] = useState(false);
   const [stage, setStage] = useState<'idle' | 'signin' | 'order' | 'redirect'>('idle');
   const acceptRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
   // No terms dialog here to warm from, and paying needs a signed-in tester
   // while checkout is in test mode — so this page asks for Firebase itself.
   useEffect(() => {
@@ -61,6 +64,12 @@ export function GiftCheckout() {
       setContact(true);
       return;
     }
+    if (!usableEmail(email)) {
+      setBadEmail(true);
+      emailRef.current?.focus();
+      return;
+    }
+    setBadEmail(false);
     if (!accepted) {
       setMissing(true);
       acceptRef.current?.focus();
@@ -82,7 +91,7 @@ export function GiftCheckout() {
       }
     }
     setStage('order');
-    const redirecting = await createOrder(planId, terms, { to: to.trim(), message: message.trim() });
+    const redirecting = await createOrder(planId, terms, { to: to.trim(), message: message.trim() }, email.trim());
     setStage(redirecting ? 'redirect' : 'idle');
   };
 
@@ -128,6 +137,10 @@ export function GiftCheckout() {
       <Reveal delay={460} load="visible">
         <form
           className="grid gap-5 rounded-[2rem] border border-white/12 bg-white/[0.06] p-5 backdrop-blur-xl sm:p-7"
+          // Every field is checked here, in words this form chose. The browser's
+          // own bubble for type="email" fires first and silently swallows the
+          // submit, so the buyer sees no message at all.
+          noValidate
           onSubmit={(event) => {
             event.preventDefault();
             void proceed();
@@ -159,6 +172,26 @@ export function GiftCheckout() {
             ) : null}
           </fieldset>
 
+          <label className="block text-sm font-semibold text-white/80">
+            {text.email}
+            <input
+              autoComplete="email"
+              className={field}
+              inputMode="email"
+              maxLength={254}
+              onChange={(event) => {
+                setEmail(event.target.value);
+                setBadEmail(false);
+              }}
+              placeholder={text.emailPlaceholder}
+              ref={emailRef}
+              type="email"
+              value={email}
+            />
+            <span className={`mt-2 block text-xs font-normal leading-5 ${badEmail ? 'text-[#FCA5A5]' : 'text-white/55'}`}>
+              {badEmail ? text.emailInvalid : text.emailNote}
+            </span>
+          </label>
           <label className="block text-sm font-semibold text-white/80">
             {text.to}
             <input
@@ -242,4 +275,17 @@ export function GiftCheckout() {
       </Reveal>
     </div>
   );
+}
+
+/**
+ * Permissive on purpose, and the same shape the worker insists on: catching a
+ * missing «@» is worth it, guessing at what a valid address looks like is not.
+ */
+function usableEmail(value: string): boolean {
+  const clean = value.trim();
+  if (clean.length < 6 || clean.length > 254 || /[\s,;<>"\\]/.test(clean)) return false;
+  const at = clean.indexOf('@');
+  if (at < 1 || at !== clean.lastIndexOf('@')) return false;
+  const domain = clean.slice(at + 1);
+  return domain.includes('.') && !domain.startsWith('.') && !domain.endsWith('.');
 }

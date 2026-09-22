@@ -53,7 +53,7 @@ type Api = State & {
   docsNote: string;
   currency: WebCurrency;
   signIn: () => Promise<boolean>;
-  createOrder: (planId: string, terms: Terms, gift?: GiftCard) => Promise<boolean>;
+  createOrder: (planId: string, terms: Terms, gift?: GiftCard, email?: string) => Promise<boolean>;
   getToken: () => Promise<string | null>;
   clearError: () => void;
   openTerms: (plan: Plan | null) => void;
@@ -245,7 +245,7 @@ export function AccountProvider({
   const checkoutMode = state.config?.checkoutMode;
   const acquirer: Acquirer = state.config?.provider ?? ACQUIRER;
   const createOrder = useCallback(
-    async (planId: string, terms: Terms, gift?: GiftCard) => {
+    async (planId: string, terms: Terms, gift?: GiftCard, email?: string) => {
       const token = await getToken();
       // A gift needs no account; a plan is credited to the signed-in one.
       if (!token && !gift) return false;
@@ -255,7 +255,9 @@ export function AccountProvider({
         const res = await fetch(`${API_BASE}/v1/web/orders`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', ...(token ? { 'X-Firebase-Token': token } : {}) },
-          body: JSON.stringify({ planId, lang, terms, ...(gift ? { gift } : {}) }),
+          // A subscription's address comes from the verified token; a gift has
+          // no account, so the buyer types the only one there is.
+          body: JSON.stringify({ planId, lang, terms, ...(gift ? { gift } : {}), ...(email ? { email } : {}) }),
         });
         const body = (await res.json().catch(() => ({}))) as { redirectUrl?: string; error?: string; orderId?: string; giftKey?: string };
         const paymentPage = checkoutMode === 'test' || checkoutMode === 'prod' ? PAYMENT_PAGES[acquirer][checkoutMode] : null;
