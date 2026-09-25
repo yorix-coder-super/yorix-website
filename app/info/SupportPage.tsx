@@ -28,7 +28,7 @@ export function SupportPage({ locale }: { locale: SiteLocale }) {
       <div className="relative z-10 flex flex-1 flex-col">
         <SiteHeader current="support" locale={locale} />
 
-        <section className="relative mx-auto grid max-w-7xl items-center gap-6 px-5 pb-8 pt-4 sm:px-8 lg:grid-cols-[1.2fr_0.8fr] lg:px-10">
+        <section className="relative mx-auto grid w-full max-w-7xl items-center gap-6 px-5 pb-8 pt-4 sm:px-8 lg:grid-cols-[1.2fr_0.8fr] lg:px-10">
           <div>
             <Reveal animation="fadeIn" load>
               <p className="mb-6 inline-flex rounded-full border border-white/15 bg-white/[0.08] px-4 py-1.5 text-sm font-medium text-white/85 backdrop-blur-xl">{copy.eyebrow}</p>
@@ -66,7 +66,7 @@ export function SupportPage({ locale }: { locale: SiteLocale }) {
           </div>
         </section>
 
-        <nav aria-label={copy.eyebrow} className="mx-auto max-w-7xl px-5 pb-6 sm:px-8 lg:px-10">
+        <nav aria-label={copy.eyebrow} className="mx-auto w-full max-w-7xl px-5 pb-6 sm:px-8 lg:px-10">
           <ul className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 [&::-webkit-scrollbar]:hidden">
             {copy.topics.map((topic, index) => (
               <li className="shrink-0" key={topic.title}>
@@ -87,7 +87,7 @@ export function SupportPage({ locale }: { locale: SiteLocale }) {
           </ul>
         </nav>
 
-        <section className="mx-auto grid max-w-7xl gap-6 px-5 pb-6 sm:px-8 lg:px-10">
+        <section className="mx-auto grid w-full max-w-7xl gap-6 px-5 pb-6 sm:px-8 lg:px-10">
           {copy.topics.map((topic, index) => (
             // The anchor sits outside Reveal: a panel still sliding in would make the jump land short.
             <div className="scroll-mt-6" id={`topic-${index + 1}`} key={topic.title}>
@@ -123,7 +123,7 @@ export function SupportPage({ locale }: { locale: SiteLocale }) {
           ))}
         </section>
 
-        <section className="mx-auto max-w-7xl scroll-mt-6 px-5 py-10 sm:px-8 lg:px-10" id="contact">
+        <section className="mx-auto w-full max-w-7xl scroll-mt-6 px-5 py-10 sm:px-8 lg:px-10" id="contact">
           <Reveal>
             <div className="relative isolate overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(135deg,#312E81_0%,#3730A3_45%,#4F46E5_100%)] shadow-[0_30px_90px_rgb(79_70_229/30%)]">
               <div aria-hidden="true" className="absolute -top-24 start-[4%] -z-10 h-72 w-72 rounded-full bg-[#FDE68A]/15 blur-3xl" />
