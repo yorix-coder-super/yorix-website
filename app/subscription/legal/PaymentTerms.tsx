@@ -6,6 +6,7 @@ import { ACQUIRER, acquirer, chargeFor, formatByn, listJoin, merchant, planCopy,
 import { PaymentLogos } from '../PaymentLogos';
 import { SampleReceipt } from '../SampleReceipt';
 import { editionLabel } from './versions';
+import { visitorCountry } from '../../visitor';
 
 export const paymentTermsTitle = { ru: 'Оплата, доставка и возврат', en: 'Payment, delivery and refunds' } as const;
 
@@ -15,7 +16,7 @@ export const paymentTermsTitle = { ru: 'Оплата, доставка и воз
 // and are shown the seller's own Belarusian list.
 export async function PaymentTerms({ lang }: { lang: Lang }) {
   const requestHeaders = await headers();
-  const visitor = currencyForVisitor(requestHeaders.get('cf-ipcountry'), requestHeaders.get('accept-language'));
+  const visitor = currencyForVisitor(visitorCountry(requestHeaders), requestHeaders.get('accept-language'));
   const region: WebCurrency = sellsOnWeb(visitor) ? visitor : 'BYN';
   // Support is reached through the site's form; the address itself stays in the offer's requisites.
   const form = <a href={`${lang === 'ru' ? '/ru' : ''}/support#contact`}>{lang === 'ru' ? 'форму «Написать нам»' : 'the “Write to us” form'}</a>;

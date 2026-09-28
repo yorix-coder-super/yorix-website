@@ -8,6 +8,7 @@ import { SubscriptionShell } from '../SubscriptionShell';
 import { Button } from '../ui';
 import { GiftCheckout } from './GiftCheckout';
 import { GiftList } from './GiftList';
+import { visitorCountry } from '../../visitor';
 
 // The gift page of the card-sales countries (the proxy sends everyone else
 // home): headline, the live card and the checkout, then the buyer's gifts.
@@ -37,7 +38,7 @@ export async function GiftPage({ lang }: { lang: Lang }) {
         </Reveal>
       </section>
       <section className="mx-auto max-w-7xl px-5 pb-20 pt-4 sm:px-8 lg:px-10">
-        <AccountProvider acceptLanguage={requestHeaders.get('accept-language')} country={requestHeaders.get('cf-ipcountry')} lang={lang}>
+        <AccountProvider acceptLanguage={requestHeaders.get('accept-language')} country={visitorCountry(requestHeaders)} lang={lang}>
           <GiftCheckout />
           <GiftList />
         </AccountProvider>

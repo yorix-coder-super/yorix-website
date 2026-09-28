@@ -18,6 +18,7 @@ import { ContactTeaser } from '../info/ContactTeaser';
 import { SubscriptionShell } from './SubscriptionShell';
 import { testimonials } from './testimonials';
 import { WordReveal } from './WordReveal';
+import { visitorCountry } from '../visitor';
 
 const outcomeIcons = ['icon-moon-crescent', 'icon-bolt', 'icon-chat'];
 
@@ -27,7 +28,7 @@ const outcomeIcons = ['icon-moon-crescent', 'icon-bolt', 'icon-chat'];
 export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
   const copy = subscriptionCopy[lang];
   const requestHeaders = await headers();
-  const country = requestHeaders.get('cf-ipcountry');
+  const country = visitorCountry(requestHeaders);
   const acceptLanguage = requestHeaders.get('accept-language');
   // Outside Belarus and Russia the subscription is sold in the App Store.
   const web = sellsOnWeb(currencyForVisitor(country, acceptLanguage));

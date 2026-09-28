@@ -3,6 +3,7 @@ import { legacyHosts, siteUrl } from './app/content';
 import { isSiteLang, LANG_COOKIE, localizedPath, preferredLanguage, type SiteLang } from './app/language';
 import { currencyForVisitor, sellsOnWeb } from './app/subscription/currency';
 import { codeFromInput, formatGiftCode } from './app/subscription/gift/code';
+import { visitorCountry } from './app/visitor';
 
 const apiHost = process.env.NEXT_PUBLIC_YORIX_API ?? 'https://babysleepcoach-ai-proxy.babysleepcoach.workers.dev';
 // Cloudflare Turnstile on the contact form: allowed only while it is configured.
@@ -73,7 +74,7 @@ function languageRedirect(request: NextRequest): NextResponse | null {
   let lang: SiteLang;
   if (isSiteLang(saved)) lang = saved;
   else if (CRAWLER.test(request.headers.get('user-agent') ?? '')) return null;
-  else lang = preferredLanguage(request.headers.get('accept-language'), request.headers.get('cf-ipcountry'));
+  else lang = preferredLanguage(request.headers.get('accept-language'), visitorCountry(request.headers));
   if (lang === 'en') return null;
 
   const target = localizedPath(url.pathname, lang);
@@ -101,7 +102,7 @@ function salesRedirect(request: NextRequest): NextResponse | null {
   if (request.method !== 'GET' && request.method !== 'HEAD') return null;
   const match = SALES_PAGE.exec(request.nextUrl.pathname);
   if (!match) return null;
-  if (sellsOnWeb(currencyForVisitor(request.headers.get('cf-ipcountry'), request.headers.get('accept-language')))) return null;
+  if (sellsOnWeb(currencyForVisitor(visitorCountry(request.headers), request.headers.get('accept-language')))) return null;
   const home = request.nextUrl.clone();
   home.pathname = match[1] ? '/ru' : '/';
   home.search = '';
@@ -125,7 +126,7 @@ function shortGiftRedirect(request: NextRequest): NextResponse | null {
     ? saved
     : CRAWLER.test(request.headers.get('user-agent') ?? '')
       ? 'ru'
-      : preferredLanguage(request.headers.get('accept-language'), request.headers.get('cf-ipcountry'));
+      : preferredLanguage(request.headers.get('accept-language'), visitorCountry(request.headers));
   const target = request.nextUrl.clone();
   // The recipient is wherever the buyer sent the link, so the short link opens
   // in their own language — not in the language of the seller's contract.

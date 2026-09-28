@@ -12,6 +12,7 @@ import { plans } from '../subscription/merchant';
 import { Parallax } from '../subscription/Parallax';
 import { Reveal } from '../subscription/Reveal';
 import { AppleGlyph, AppQr, Art, featureIcons, Sparkle } from './art';
+import { visitorCountry } from '../visitor';
 
 // The home page's storefront: the same plan buttons as /subscription
 // (sign in with Apple → the acquirer's page), laid out as the concept's glass
@@ -22,7 +23,7 @@ export async function HomePricing({ locale }: { locale: SiteLocale }) {
   const copy = site.subscription;
   const lang = docsLang(locale);
   const requestHeaders = await headers();
-  const country = requestHeaders.get('cf-ipcountry');
+  const country = visitorCountry(requestHeaders);
   const acceptLanguage = requestHeaders.get('accept-language');
 
   if (!sellsOnWeb(currencyForVisitor(country, acceptLanguage))) {

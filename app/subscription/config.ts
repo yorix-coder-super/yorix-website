@@ -3,7 +3,7 @@
 // meant to ship in the bundle, and the worker decides who may buy.
 // NEXT_PUBLIC_* at build time overrides the defaults for previews.
 export const API_BASE =
-  process.env.NEXT_PUBLIC_YORIX_API ?? 'https://babysleepcoach-ai-proxy.babysleepcoach.workers.dev';
+  process.env.NEXT_PUBLIC_YORIX_API ?? 'https://api.yorix-app.com';
 
 export const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY ?? 'AIzaSyAOqDC4AbndHSGlUc5-EmMVCcTf-zIYbvo',
