@@ -1,5 +1,8 @@
 import type { Lang } from './i18n';
 
+/** Why the bank turned a payment down, as the worker names it. */
+export type PaymentFailure = 'insufficient_funds' | 'declined' | 'card' | '3ds' | 'expired';
+
 export type SubscriptionCopy = {
   meta: { title: string; description: string; ogLocale: string };
   nav: { plans: string; reviews: string; faq: string; documents: string; choosePlan: string; language: string };
@@ -35,6 +38,10 @@ export type SubscriptionCopy = {
   ret: {
     checking: string; paid: (date: string) => string; paidLead: string; openApp: string;
     pending: string; failed: string; signIn: string; back: string; badgeTop: string; scan: string;
+    slowTitle: string; slow: string; lateTitle: string; late: string;
+    declinedTitle: string; declined: Record<PaymentFailure, string>; notCharged: string;
+    expiredTitle: string; expired: string; missingTitle: string; refundedTitle: string; refunded: string;
+    retry: string; write: string;
     badge: string; badgeGift: string; thanks: string; qrTitle: string; qrHint: string;
     features: { title: string; sub: string }[];
     helpTitle: string; helpBody: string; helpCta: string;
@@ -229,7 +236,27 @@ const ru: SubscriptionCopy = {
     paid: (date) => `Подписка включена до ${date}`,
     openApp: 'Откройте Yorix на iPhone в том же аккаунте Apple — подписка уже там.',
     pending: 'Банк подтверждает оплату — обычно меньше минуты. Страница обновится сама.',
-    failed: 'Оплаченный заказ не найден. Если деньги списаны, напишите нам — дату и сумму.',
+    failed: 'Откройте ссылку в том же браузере, где оплачивали. Если деньги списались, напишите нам — укажите дату и сумму.',
+    slowTitle: 'Ждём подтверждения банка',
+    slow: 'Иногда банку нужно несколько минут. Страница обновится сама, как только он ответит.',
+    lateTitle: 'Банк ещё не ответил',
+    late: 'Если деньги списались, всё включится само, как только банк подтвердит платёж, и мы пришлём письмо. Если не списались — попробуйте оплатить ещё раз.',
+    declinedTitle: 'Оплата не прошла',
+    declined: {
+      insufficient_funds: 'На карте не хватило денег.',
+      declined: 'Банк отклонил платёж. Попробуйте другую карту или уточните причину в банке.',
+      card: 'Данные карты не подошли — проверьте номер, срок действия и CVC.',
+      '3ds': 'Платёж не подтверждён кодом из СМС или приложения банка.',
+      expired: 'Страница оплаты была открыта слишком долго, и банк её закрыл.',
+    },
+    notCharged: 'Деньги не списаны.',
+    expiredTitle: 'Время на оплату вышло',
+    expired: 'Заказ ждал оплаты больше часа и закрылся. Оформите новый — это займёт минуту.',
+    missingTitle: 'Заказ не найден',
+    refundedTitle: 'Оплата возвращена',
+    refunded: 'Деньги по этому заказу вернулись на карту. Если это ошибка, напишите нам.',
+    retry: 'Попробовать ещё раз',
+    write: 'Написать нам',
     signIn: 'Войдите через Apple, чтобы увидеть статус заказа.',
     back: 'К тарифам',
     badgeTop: 'Загрузите в',
@@ -477,7 +504,27 @@ const en: SubscriptionCopy = {
     paid: (date) => `Subscription on until ${date}`,
     openApp: 'Open Yorix on your iPhone with the same Apple account — the subscription is already there.',
     pending: 'The bank is confirming the payment — usually under a minute. This page refreshes itself.',
-    failed: 'No paid order found. If money was charged, write to us with the date and amount.',
+    failed: 'Open the link in the browser you paid in. If money was charged, write to us with the date and amount.',
+    slowTitle: 'Waiting for the bank',
+    slow: 'Sometimes the bank needs a few minutes. This page refreshes itself as soon as it answers.',
+    lateTitle: 'The bank has not answered yet',
+    late: 'If the money was charged, everything switches on by itself once the bank confirms, and we will email you. If it was not, try paying again.',
+    declinedTitle: 'The payment did not go through',
+    declined: {
+      insufficient_funds: 'There was not enough money on the card.',
+      declined: 'The bank declined the payment. Try another card or ask your bank why.',
+      card: 'The card details did not match — check the number, the expiry date and the CVC.',
+      '3ds': 'The payment was not confirmed with the code from your bank.',
+      expired: 'The payment page stayed open too long, and the bank closed it.',
+    },
+    notCharged: 'Nothing was charged.',
+    expiredTitle: 'The time to pay ran out',
+    expired: 'The order waited for payment for over an hour and closed. Start a new one — it takes a minute.',
+    missingTitle: 'Order not found',
+    refundedTitle: 'Payment refunded',
+    refunded: 'The money for this order went back to the card. If that is a mistake, write to us.',
+    retry: 'Try again',
+    write: 'Write to us',
     signIn: 'Sign in with Apple to see the order status.',
     back: 'Back to plans',
     badgeTop: 'Download on the',

@@ -1,19 +1,28 @@
 'use client';
 
+import { ArrowRight } from 'lucide-react';
 import { useEffect, useState, useSyncExternalStore } from 'react';
-import { AppleGlyph, AppQr, Art, Sparkle } from '../home/art';
-import { appDownloadUrl } from '../content';
+import { Art, Sparkle } from '../home/art';
 import { AccountProvider, reviewKey, useAccount, useReviewing } from './account';
 import { Reveal } from './Reveal';
 import { API_BASE } from './config';
-import { subscriptionCopy } from './copy';
+import { whitePill } from '../home/CtaBand';
+import { subscriptionCopy, type PaymentFailure } from './copy';
 import { GiftShare, type BuyerGift } from './gift/GiftShare';
 import { PaidScreen } from './PaidScreen';
 import { giftKeyFor, rememberCode } from './gift/keys';
 import { formatDate, subscriptionPath, type Lang } from './i18n';
 import { Button, Spinner } from './ui';
 
-type Status = 'checking' | 'paid' | 'pending' | 'failed';
+type Status = 'checking' | 'pending' | 'slow' | 'late' | 'paid' | 'declined' | 'expired' | 'refunded' | 'missing';
+
+// Every 2 s for the first half-minute, then every 5 s: a bank that takes
+// minutes is normal, and the page keeps waiting for ten of them.
+const FAST_POLLS = 15;
+const WAIT_MS = 10 * 60 * 1000;
+const FAILURES: readonly PaymentFailure[] = ['insufficient_funds', 'declined', 'card', '3ds', 'expired'];
+const failureOf = (value: unknown): PaymentFailure =>
+  FAILURES.includes(value as PaymentFailure) ? (value as PaymentFailure) : 'declined';
 
 const noSubscription = () => () => {};
 const orderInUrl = () => new URLSearchParams(window.location.search).get('order') ?? '';
@@ -26,6 +35,7 @@ function ReturnStatus() {
   const [status, setStatus] = useState<Status>('checking');
   const [until, setUntil] = useState<string | null>(null);
   const [gift, setGift] = useState<BuyerGift | null>(null);
+  const [failure, setFailure] = useState<PaymentFailure>('declined');
   // A gift is read with the key this browser kept when it paid; a plan with the account.
   const giftKey = useSyncExternalStore(noSubscription, () => giftKeyFor(orderInUrl()), () => null);
   const giftOrder = useSyncExternalStore(noSubscription, giftInUrl, () => false);
@@ -40,6 +50,7 @@ function ReturnStatus() {
     if (!giftKey && !reviewing && (!ready || !configured || !signedIn)) return;
     let cancelled = false;
     let attempts = 0;
+    const started = Date.now();
     // Everything below runs after an await, so state updates never cascade
     // out of the effect body itself.
     const poll = async () => {
@@ -49,7 +60,7 @@ function ReturnStatus() {
       if ((!giftKey && !token && !review) || cancelled) return;
       const orderId = orderInUrl();
       if (!/^Y-[0-9A-Z]{10,32}$/.test(orderId)) {
-        setStatus('failed');
+        setStatus('missing');
         return;
       }
       try {
@@ -58,7 +69,7 @@ function ReturnStatus() {
         });
         if (cancelled) return;
         if (res.ok) {
-          const body = (await res.json()) as { status: string; premiumUntil?: string | null; gift?: BuyerGift | null };
+          const body = (await res.json()) as { status: string; premiumUntil?: string | null; gift?: BuyerGift | null; failure?: string };
           // A gift order is done once its code exists; the buyer gets no pass of their own.
           if (body.status === 'paid' && body.gift) {
             rememberCode(orderId, body.gift.code);
@@ -71,32 +82,52 @@ function ReturnStatus() {
             setStatus('paid');
             return;
           }
+          if (body.status === 'failed') {
+            setFailure(failureOf(body.failure));
+            setStatus('declined');
+            return;
+          }
           if (body.status === 'expired' || body.status === 'refunded') {
-            setStatus('failed');
+            setStatus(body.status);
             return;
           }
         } else if (res.status === 404 || res.status === 403) {
-          setStatus('failed');
+          setStatus('missing');
           return;
         }
       } catch {
         // Network hiccup: keep polling.
       }
       attempts += 1;
-      if (attempts >= 45) {
-        setStatus('failed');
+      if (Date.now() - started >= WAIT_MS) {
+        setStatus('late');
         return;
       }
-      setStatus('pending');
+      setStatus(attempts < FAST_POLLS ? 'pending' : 'slow');
       window.setTimeout(() => {
         if (!cancelled) void poll();
-      }, 2000);
+      }, attempts < FAST_POLLS ? 2000 : 5000);
     };
     void poll();
     return () => {
       cancelled = true;
     };
   }, [ready, configured, signedIn, getToken, giftKey, reviewing]);
+
+  const titles: Partial<Record<Status, string>> = {
+    slow: copy.ret.slowTitle,
+    late: copy.ret.lateTitle,
+    declined: copy.ret.declinedTitle,
+    expired: copy.ret.expiredTitle,
+    refunded: copy.ret.refundedTitle,
+    missing: copy.ret.missingTitle,
+  };
+  const heading = gift ? copy.gift.paidTitle : status === 'paid' && until ? copy.ret.paid(formatDate(until, lang)) : titles[status] ?? copy.ret.checking;
+  const waiting = status === 'checking' || status === 'pending' || status === 'slow';
+  // A payment that did not happen is tried again from where it started.
+  const retryHref = giftOrder ? `${lang === 'ru' ? '/ru' : ''}/gift` : `${subscriptionPath(lang)}#plans`;
+  const canRetry = status === 'declined' || status === 'expired' || status === 'late';
+  const closed = canRetry || status === 'missing' || status === 'refunded';
 
   return (
     // A paid gift needs room for the card beside its instructions; every other
@@ -124,8 +155,8 @@ function ReturnStatus() {
       {paidPlan ? null : (
       <Reveal delay={140} load>
         {/* Keyed by what it says: «checking» → «paid» eases in instead of swapping. */}
-        <h1 className={`${status === 'paid' ? 'enter-rise ' : ''}mt-6 text-4xl font-semibold leading-tight text-white sm:text-5xl`} key={gift ? 'gift' : status === 'paid' && until ? 'paid' : 'checking'}>
-          {gift ? copy.gift.paidTitle : status === 'paid' && until ? copy.ret.paid(formatDate(until, lang)) : copy.ret.checking}
+        <h1 className={`${waiting ? '' : 'enter-rise '}mt-6 text-4xl font-semibold leading-tight text-white sm:text-5xl`} key={heading}>
+          {heading}
         </h1>
       </Reveal>
       )}
@@ -141,16 +172,26 @@ function ReturnStatus() {
       {gift || paidPlan ? null : (
       <Reveal delay={260} load>
         <div className="mt-8 rounded-[2rem] border border-white/12 bg-white/[0.06] p-8 backdrop-blur-xl">
-          {!needsSignIn && !lostGift && (status === 'checking' || status === 'pending') ? (
-            <p className="inline-flex items-center gap-3 text-lg text-white/80">
-              <Spinner className="h-5 w-5" />
+          {!needsSignIn && !lostGift && waiting ? (
+            <p className="flex flex-col items-center justify-center gap-3 text-lg text-white/80 sm:flex-row">
+              <Spinner className="h-5 w-5 shrink-0" />
               {/* The heading already says we are checking; this line only adds
                   what the heading does not, so it stays empty until it can. */}
-              {status === 'pending' ? copy.ret.pending : null}
+              {status === 'pending' ? copy.ret.pending : status === 'slow' ? copy.ret.slow : null}
             </p>
           ) : null}
           {status === 'paid' && until ? <p className="enter-rise text-lg leading-8 text-white/85">{copy.ret.openApp}</p> : null}
-          {!needsSignIn && !lostGift && status === 'failed' ? <p className="text-base leading-7 text-white/80">{copy.ret.failed}</p> : null}
+          {status === 'declined' ? (
+            <div className="enter-rise">
+              <p className="text-lg leading-8 text-white/85">{copy.ret.declined[failure]}</p>
+              <p className="mt-2 text-base font-semibold text-[#FDE68A]">{copy.ret.notCharged}</p>
+            </div>
+          ) : null}
+          {status === 'expired' || status === 'late' || status === 'refunded' || status === 'missing' ? (
+            <p className="enter-rise text-base leading-7 text-white/80">
+              {{ expired: copy.ret.expired, late: copy.ret.late, refunded: copy.ret.refunded, missing: copy.ret.failed }[status]}
+            </p>
+          ) : null}
           {lostGift ? <p className="text-base leading-7 text-white/80">{copy.gift.lostKey}</p> : null}
           {needsSignIn ? (
             <>
@@ -175,16 +216,26 @@ function ReturnStatus() {
           <PaidScreen copy={copy} lang={lang} until={until!} />
         </div>
       ) : null}
-      {/* «Back to plans» belongs to one state only: the order that did not
+      {/* «Try again» and «Back to plans» belong to one state only: the order that did not
           work out. After a purchase it reads as if the purchase did not count,
           and while the payment is still being checked it invites the buyer to
           walk away from it. */}
-      {status !== 'failed' ? null : (
-        <Reveal delay={380} load>
-          <Button className="mt-8" href={`${subscriptionPath(lang)}#plans`} variant="ghost">
-            {copy.ret.back}
-          </Button>
-        </Reveal>
+      {!closed ? null : (
+        <div className="enter-rise mt-8 flex flex-col items-center gap-4">
+          {canRetry ? (
+            <a className={whitePill} href={retryHref}>
+              {copy.ret.retry}
+              <ArrowRight className="h-5 w-5" aria-hidden="true" />
+            </a>
+          ) : (
+            <Button href={`${subscriptionPath(lang)}#plans`} variant="ghost">
+              {copy.ret.back}
+            </Button>
+          )}
+          <a className="text-sm font-medium text-white/65 underline decoration-white/30 underline-offset-4 hover:text-white" href={`${lang === 'ru' ? '/ru' : ''}/support#contact`}>
+            {copy.ret.write}
+          </a>
+        </div>
       )}
     </section>
   );
