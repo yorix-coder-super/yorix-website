@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { AppleGlyph } from '../../home/art';
-import { reviewKey, useAccount, type Terms } from '../account';
+import { useAccount, useReviewing, type Terms } from '../account';
 import { subscriptionCopy } from '../copy';
 import { formatMoney } from '../currency';
 import { subscriptionPath } from '../i18n';
@@ -34,10 +34,8 @@ export function GiftCheckout() {
   const [badEmail, setBadEmail] = useState(false);
   const [closed, setClosed] = useState(false);
   const [stage, setStage] = useState<'idle' | 'signin' | 'order' | 'redirect'>('idle');
-  // A reviewer's link (`?review=`) pays without a tester's sign-in. Read after
-  // mount: the server renders the page without the link's query.
-  const [reviewing, setReviewing] = useState(false);
-  useEffect(() => setReviewing(!!reviewKey()), []);
+  // A reviewer's link (`?review=`) pays without a tester's sign-in.
+  const reviewing = useReviewing();
   const acceptRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   // No terms dialog here to warm from, and paying needs a signed-in tester

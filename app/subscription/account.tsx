@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, useSyncExternalStore, type ReactNode } from 'react';
 import type { Auth } from 'firebase/auth';
 import { AppleGlyph } from '../home/art';
 import type { SiteLocale } from '../i18n';
@@ -35,6 +35,13 @@ export function reviewKey(): string | null {
   } catch {
     return null;
   }
+}
+
+const noSubscription = () => () => {};
+
+/** Whether this tab came in on a reviewer's link. False on the server, which renders without the query. */
+export function useReviewing(): boolean {
+  return useSyncExternalStore(noSubscription, () => !!reviewKey(), () => false);
 }
 
 type CheckoutMode = 'off' | 'test' | 'prod';
@@ -268,10 +275,11 @@ export function AccountProvider({
   const createOrder = useCallback(
     async (planId: string, terms: Terms, gift?: GiftCard, email?: string) => {
       const token = await getToken();
-      // A gift needs no account; a plan is credited to the signed-in one.
-      if (!token && !gift) return false;
+      const review = token ? null : reviewKey();
+      // A gift needs no account; a plan is credited to the signed-in one — or,
+      // on a reviewer's link, to the account the worker keeps for the review.
+      if (!token && !gift && !review) return false;
       setState((s) => ({ ...s, busy: 'order', error: null }));
-      const review = gift ? reviewKey() : null;
       let error: ErrorKey = 'error';
       try {
         const res = await fetch(`${API_BASE}/v1/web/orders`, {
@@ -423,6 +431,9 @@ export function CheckoutDialog() {
   const [missing, setMissing] = useState(false);
   const [closed, setClosed] = useState(false);
   const [stage, setStage] = useState<'idle' | 'signin' | 'order' | 'redirect'>('idle');
+  // A reviewer's link pays without an Apple ID.
+  const reviewing = useReviewing();
+  const paysDirectly = signedIn || reviewing;
   const acceptRef = useRef<HTMLInputElement>(null);
   const open = termsPlan !== null;
   const openedFor = termsPlan?.id ?? null;
@@ -483,7 +494,7 @@ export function CheckoutDialog() {
       setClosed(true);
       return;
     }
-    if (!signedIn) {
+    if (!paysDirectly) {
       setStage('signin');
       const ok = await signIn();
       if (!ok) {
@@ -510,7 +521,7 @@ export function CheckoutDialog() {
     stage === 'signin' ? copy.checkout.signingIn
     : stage === 'order' ? copy.checkout.creating
     : stage === 'redirect' ? copy.checkout.redirecting
-    : signedIn ? copy.terms.pay(price)
+    : paysDirectly ? copy.terms.pay(price)
     : copy.terms.withApple;
   const box = 'mt-0.5 h-5 w-5 shrink-0 cursor-pointer rounded accent-[#A78BFA]';
   const link = 'font-semibold text-white underline decoration-white/40 underline-offset-2 hover:decoration-white';
@@ -599,7 +610,7 @@ export function CheckoutDialog() {
               onClick={() => void proceed()}
               variant="light"
             >
-              {stage !== 'idle' ? <Spinner /> : signedIn ? null : <AppleGlyph className="h-4 w-4 shrink-0" />}
+              {stage !== 'idle' ? <Spinner /> : paysDirectly ? null : <AppleGlyph className="h-4 w-4 shrink-0" />}
               {label}
             </Button>
             <Button disabled={!closable} onClick={close} variant="ghost">

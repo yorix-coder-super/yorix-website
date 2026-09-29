@@ -3,7 +3,7 @@
 import { useEffect, useState, useSyncExternalStore } from 'react';
 import { AppleGlyph, AppQr, Art, Sparkle } from '../home/art';
 import { appDownloadUrl } from '../content';
-import { AccountProvider, useAccount } from './account';
+import { AccountProvider, reviewKey, useAccount, useReviewing } from './account';
 import { Reveal } from './Reveal';
 import { API_BASE } from './config';
 import { subscriptionCopy } from './copy';
@@ -30,19 +30,23 @@ function ReturnStatus() {
   const giftKey = useSyncExternalStore(noSubscription, () => giftKeyFor(orderInUrl()), () => null);
   const giftOrder = useSyncExternalStore(noSubscription, giftInUrl, () => false);
   const lostGift = giftOrder && !giftKey;
-  const needsSignIn = !giftKey && !lostGift && ready && (!configured || !signedIn);
+  // A reviewer's link reads the account it bought for, with no sign-in.
+  const reviewing = useReviewing();
+  const needsSignIn = !giftKey && !lostGift && !reviewing && ready && (!configured || !signedIn);
   // A paid subscription (not a gift) gets its own welcome screen below.
   const paidPlan = status === 'paid' && until !== null && !gift;
 
   useEffect(() => {
-    if (!giftKey && (!ready || !configured || !signedIn)) return;
+    if (!giftKey && !reviewing && (!ready || !configured || !signedIn)) return;
     let cancelled = false;
     let attempts = 0;
     // Everything below runs after an await, so state updates never cascade
     // out of the effect body itself.
     const poll = async () => {
       const token = giftKey ? null : await getToken();
-      if ((!giftKey && !token) || cancelled) return;
+      // A reviewer's link reads the orders of the account it bought for.
+      const review = giftKey || token ? null : reviewKey();
+      if ((!giftKey && !token && !review) || cancelled) return;
       const orderId = orderInUrl();
       if (!/^Y-[0-9A-Z]{10,32}$/.test(orderId)) {
         setStatus('failed');
@@ -50,7 +54,7 @@ function ReturnStatus() {
       }
       try {
         const res = await fetch(`${API_BASE}/v1/web/orders/${orderId}`, {
-          headers: giftKey ? { 'X-Gift-Key': giftKey } : { 'X-Firebase-Token': token ?? '' },
+          headers: giftKey ? { 'X-Gift-Key': giftKey } : review ? { 'X-Review-Key': review } : { 'X-Firebase-Token': token ?? '' },
         });
         if (cancelled) return;
         if (res.ok) {
@@ -92,7 +96,7 @@ function ReturnStatus() {
     return () => {
       cancelled = true;
     };
-  }, [ready, configured, signedIn, getToken, giftKey]);
+  }, [ready, configured, signedIn, getToken, giftKey, reviewing]);
 
   return (
     // A paid gift needs room for the card beside its instructions; every other
