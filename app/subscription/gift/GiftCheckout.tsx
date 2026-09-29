@@ -34,6 +34,10 @@ export function GiftCheckout() {
   const [badEmail, setBadEmail] = useState(false);
   const [closed, setClosed] = useState(false);
   const [stage, setStage] = useState<'idle' | 'signin' | 'order' | 'redirect'>('idle');
+  // A reviewer's link (`?review=`) pays without a tester's sign-in. Read after
+  // mount: the server renders the page without the link's query.
+  const [reviewing, setReviewing] = useState(false);
+  useEffect(() => setReviewing(!!reviewKey()), []);
   const acceptRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   // No terms dialog here to warm from, and paying needs a signed-in tester
@@ -56,6 +60,7 @@ export function GiftCheckout() {
   // who could have paid is the worse of the two mistakes.
   const live = configured && config?.checkoutMode !== 'off';
   const testing = config?.checkoutMode === 'test';
+  const needsTester = testing && !signedIn && !reviewing;
   const terms: Terms = { offer: legalVersion.offer, payment: legalVersion.payment, privacy: legalVersion.privacy };
 
   const proceed = async () => {
@@ -82,7 +87,7 @@ export function GiftCheckout() {
     }
     // A gift needs no account. Only while checkout runs on test cards does a
     // tester sign in first (the worker refuses anyone else).
-    if (testing && !signedIn && !reviewKey()) {
+    if (needsTester) {
       setStage('signin');
       const ok = await signIn();
       if (!ok) {
@@ -109,7 +114,7 @@ export function GiftCheckout() {
     stage === 'signin' ? copy.checkout.signingIn
     : stage === 'order' ? copy.checkout.creating
     : stage === 'redirect' ? copy.checkout.redirecting
-    : testing && !signedIn ? copy.terms.withApple
+    : needsTester ? copy.terms.withApple
     : text.pay(price);
   const field = 'mt-2 w-full rounded-2xl border border-white/15 bg-white/[0.06] px-4 py-3 text-base text-white placeholder:text-white/35 focus:border-white/40 focus:outline-none';
   const link = 'font-semibold text-white underline decoration-white/40 underline-offset-2 hover:decoration-white';
@@ -267,7 +272,7 @@ export function GiftCheckout() {
           ) : null}
 
           <Button className="w-full whitespace-normal! text-center" disabled={stage !== 'idle'} type="submit" variant="light">
-            {stage !== 'idle' ? <Spinner className="h-5 w-5" /> : testing && !signedIn ? <AppleGlyph className="h-5 w-5" /> : null}
+            {stage !== 'idle' ? <Spinner className="h-5 w-5" /> : needsTester ? <AppleGlyph className="h-5 w-5" /> : null}
             <Money text={label} />
           </Button>
           <p className="text-xs leading-5 text-white/55">{text.note}</p>
