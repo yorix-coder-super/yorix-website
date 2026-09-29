@@ -16,6 +16,27 @@ import { ACQUIRER, chargeFor, chargeToSpellOut, planCopy, plans, type Acquirer, 
 import { Money } from './Money';
 import { Button, Spinner } from './ui';
 
+const REVIEW_KEY = 'yorix-review-key';
+
+/**
+ * The acquirer's reviewers arrive on a link carrying `?review=`: while checkout
+ * runs on test cards it lets them buy a gift without an Apple ID (the worker
+ * checks the key). Kept for the tab only.
+ */
+export function reviewKey(): string | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const fromLink = new URLSearchParams(window.location.search).get('review');
+    if (fromLink) {
+      sessionStorage.setItem(REVIEW_KEY, fromLink);
+      return fromLink;
+    }
+    return sessionStorage.getItem(REVIEW_KEY);
+  } catch {
+    return null;
+  }
+}
+
 type CheckoutMode = 'off' | 'test' | 'prod';
 // `provider` is missing while the config is loading and on older workers; the
 // checkout then behaves exactly as it did before ЮKassa existed.
@@ -250,11 +271,16 @@ export function AccountProvider({
       // A gift needs no account; a plan is credited to the signed-in one.
       if (!token && !gift) return false;
       setState((s) => ({ ...s, busy: 'order', error: null }));
+      const review = gift ? reviewKey() : null;
       let error: ErrorKey = 'error';
       try {
         const res = await fetch(`${API_BASE}/v1/web/orders`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', ...(token ? { 'X-Firebase-Token': token } : {}) },
+          headers: {
+            'Content-Type': 'application/json',
+            ...(token ? { 'X-Firebase-Token': token } : {}),
+            ...(review ? { 'X-Review-Key': review } : {}),
+          },
           // A subscription's address comes from the verified token; a gift has
           // no account, so the buyer types the only one there is.
           body: JSON.stringify({ planId, lang, terms, ...(gift ? { gift } : {}), ...(email ? { email } : {}) }),

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { AppleGlyph } from '../../home/art';
-import { useAccount, type Terms } from '../account';
+import { reviewKey, useAccount, type Terms } from '../account';
 import { subscriptionCopy } from '../copy';
 import { formatMoney } from '../currency';
 import { subscriptionPath } from '../i18n';
@@ -82,7 +82,7 @@ export function GiftCheckout() {
     }
     // A gift needs no account. Only while checkout runs on test cards does a
     // tester sign in first (the worker refuses anyone else).
-    if (testing && !signedIn) {
+    if (testing && !signedIn && !reviewKey()) {
       setStage('signin');
       const ok = await signIn();
       if (!ok) {
