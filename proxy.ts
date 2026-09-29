@@ -3,9 +3,11 @@ import { legacyHosts, siteUrl } from './app/content';
 import { isSiteLang, LANG_COOKIE, localizedPath, preferredLanguage, type SiteLang } from './app/language';
 import { currencyForVisitor, sellsOnWeb } from './app/subscription/currency';
 import { codeFromInput, formatGiftCode } from './app/subscription/gift/code';
+import { API_BASE } from './app/subscription/config';
 import { visitorCountry } from './app/visitor';
 
-const apiHost = process.env.NEXT_PUBLIC_YORIX_API ?? 'https://babysleepcoach-ai-proxy.babysleepcoach.workers.dev';
+// The storefront's own API address, so the policy can never drift from the calls it allows.
+const apiHost = API_BASE;
 // Cloudflare Turnstile on the contact form: allowed only while it is configured.
 const turnstile = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ? ' https://challenges.cloudflare.com' : '';
 
