@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { AlertTriangle, ShieldCheck } from 'lucide-react';
 import type { SiteLocale } from '../../i18n';
 import { AppleGlyph } from '../../home/art';
-import { AccountProvider, useAccount } from '../account';
+import { AccountProvider, reviewKey, useAccount, useReviewing } from '../account';
 import { API_BASE } from '../config';
 import { subscriptionCopy } from '../copy';
 import { formatDate, subscriptionPath, type Lang } from '../i18n';
@@ -43,6 +43,7 @@ function problemOf(status: number, error: string | undefined): Problem {
 
 function GiftRedeem({ code: rawCode, appUrl, locale }: { code: string; appUrl: string; locale: SiteLocale }) {
   const { lang, configured, signedIn, signIn, getToken, error: accountError, copy } = useAccount();
+  const reviewing = useReviewing();
   const text = redeemText(locale, lang);
   const code = codeFromInput(rawCode);
   // A typo in a hand-typed link is known without asking the worker.
@@ -114,7 +115,8 @@ function GiftRedeem({ code: rawCode, appUrl, locale }: { code: string; appUrl: s
       return;
     }
     // Sign-in first, inside the click: Safari only opens the popup from it.
-    if (!signedIn) {
+    // While the review is open the code redeems on the owner's account instead.
+    if (!signedIn && !reviewing) {
       const ok = await signIn();
       if (!ok) return;
     }
@@ -122,9 +124,10 @@ function GiftRedeem({ code: rawCode, appUrl, locale }: { code: string; appUrl: s
     setProblem(null);
     try {
       const token = await getToken();
+      const review = token ? null : reviewKey();
       const res = await fetch(`${API_BASE}/v1/web/gifts/${formatGiftCode(code)}/redeem`, {
         method: 'POST',
-        headers: token ? { 'X-Firebase-Token': token } : {},
+        headers: token ? { 'X-Firebase-Token': token } : review ? { 'X-Review-Key': review } : {},
       });
       const body = (await res.json().catch(() => ({}))) as { premiumUntil?: string | null; error?: string };
       if (res.ok) {

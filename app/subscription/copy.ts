@@ -1,4 +1,5 @@
 import type { Lang } from './i18n';
+import { REVIEW_OPEN, withoutAppleSignIn } from './review';
 
 /** Why the bank turned a payment down, as the worker names it. */
 export type PaymentFailure = 'insufficient_funds' | 'declined' | 'card' | '3ds' | 'expired';
@@ -689,4 +690,6 @@ const en: SubscriptionCopy = {
   },
 };
 
-export const subscriptionCopy: Record<Lang, SubscriptionCopy> = { ru, en };
+export const subscriptionCopy: Record<Lang, SubscriptionCopy> = REVIEW_OPEN
+  ? { ru: withoutAppleSignIn(ru, 'ru'), en: withoutAppleSignIn(en, 'en') }
+  : { ru, en };

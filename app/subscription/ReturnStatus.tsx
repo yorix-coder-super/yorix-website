@@ -57,7 +57,7 @@ function ReturnStatus() {
       const token = giftKey ? null : await getToken();
       // A reviewer's link reads the orders of the account it bought for.
       const review = giftKey || token ? null : reviewKey();
-      if ((!giftKey && !token && !review) || cancelled) return;
+      if ((!giftKey && !token && !review && !reviewing) || cancelled) return;
       const orderId = orderInUrl();
       if (!/^Y-[0-9A-Z]{10,32}$/.test(orderId)) {
         setStatus('missing');
@@ -65,7 +65,7 @@ function ReturnStatus() {
       }
       try {
         const res = await fetch(`${API_BASE}/v1/web/orders/${orderId}`, {
-          headers: giftKey ? { 'X-Gift-Key': giftKey } : review ? { 'X-Review-Key': review } : { 'X-Firebase-Token': token ?? '' },
+          headers: giftKey ? { 'X-Gift-Key': giftKey } : review ? { 'X-Review-Key': review } : token ? { 'X-Firebase-Token': token } : {},
         });
         if (cancelled) return;
         if (res.ok) {

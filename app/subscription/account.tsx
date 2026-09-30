@@ -15,6 +15,7 @@ import { rememberGift } from './gift/keys';
 import { ACQUIRER, chargeFor, chargeToSpellOut, planCopy, plans, type Acquirer, type Plan } from './merchant';
 import { Money } from './Money';
 import { Button, Spinner } from './ui';
+import { REVIEW_OPEN } from './review';
 
 const REVIEW_KEY = 'yorix-review-key';
 
@@ -39,15 +40,20 @@ export function reviewKey(): string | null {
 
 const noSubscription = () => () => {};
 
-/** Whether this tab came in on a reviewer's link. False on the server, which renders without the query. */
+/**
+ * Whether this tab pays without an Apple ID: it came in on a reviewer's link,
+ * or the worker says every visitor pays on the owner's account (REVIEW_OPEN).
+ * False on the server, which renders without the query or the config.
+ */
 export function useReviewing(): boolean {
-  return useSyncExternalStore(noSubscription, () => !!reviewKey(), () => false);
+  const open = useContext(Ctx)?.config?.reviewOpen === true && REVIEW_OPEN;
+  return useSyncExternalStore(noSubscription, () => !!reviewKey(), () => false) || open;
 }
 
 type CheckoutMode = 'off' | 'test' | 'prod';
 // `provider` is missing while the config is loading and on older workers; the
 // checkout then behaves exactly as it did before ЮKassa existed.
-type WebConfig = { checkoutMode: CheckoutMode; provider?: Acquirer };
+type WebConfig = { checkoutMode: CheckoutMode; provider?: Acquirer; reviewOpen?: boolean };
 type Me = { premiumUntil: string | null; blocked: boolean };
 // The document editions the buyer accepted — sent with the order so the
 // acceptance can be proven later.
@@ -271,14 +277,16 @@ export function AccountProvider({
   }, [lang, loadMe, warmAuth]);
 
   const checkoutMode = state.config?.checkoutMode;
+  const reviewOpen = REVIEW_OPEN && state.config?.reviewOpen === true;
   const acquirer: Acquirer = state.config?.provider ?? ACQUIRER;
   const createOrder = useCallback(
     async (planId: string, terms: Terms, gift?: GiftCard, email?: string) => {
       const token = await getToken();
       const review = token ? null : reviewKey();
       // A gift needs no account; a plan is credited to the signed-in one — or,
-      // on a reviewer's link, to the account the worker keeps for the review.
-      if (!token && !gift && !review) return false;
+      // on a reviewer's link or while the review is open, to the account the
+      // worker keeps for the review.
+      if (!token && !gift && !review && !reviewOpen) return false;
       setState((s) => ({ ...s, busy: 'order', error: null }));
       let error: ErrorKey = 'error';
       try {
@@ -309,7 +317,7 @@ export function AccountProvider({
       setState((s) => ({ ...s, busy: null, error }));
       return false;
     },
-    [getToken, lang, checkoutMode, acquirer],
+    [getToken, lang, checkoutMode, acquirer, reviewOpen],
   );
 
   const clearError = useCallback(() => setState((s) => ({ ...s, error: null })), []);
