@@ -15,8 +15,7 @@ const bankEn = acquirer.name.en;
 
 // One policy for the site, the app and support. Every processor, data field
 // and retention period below was checked against the app, the Worker and the
-// site code on 18.09.2026; the support diary, the edge relay, the desk notices
-// and the acquirer row again on 01.10.2026 — change the text together with the code.
+// site code on 18.09.2026 — change the text together with the code.
 function ru({ operator, offer }: Ctx): LegalSection[] {
   return [
     {
@@ -75,7 +74,7 @@ function ru({ operator, offer }: Ctx): LegalSection[] {
               ],
               [
                 'Поддержка и обратная связь',
-                'E-mail, текст обращения и вложения, модель устройства, версии iOS и Приложения. К обращению в поддержку из Приложения прикладываются записи дневника не более чем за 30 последних дней и план дня, к отзыву — за 7 дней; Приложение сообщает об этом до отправки',
+                'E-mail, текст обращения и вложения, модель устройства, версии iOS и Приложения. К обращению из Приложения прикладываются записи дневника за последние 7 дней и план дня',
                 'Договор; для сведений о ребёнке — согласие',
                 'На сервере — 90 дней; переписка — 3 года после закрытия обращения',
               ],
@@ -93,7 +92,7 @@ function ru({ operator, offer }: Ctx): LegalSection[] {
               ],
               [
                 'Атрибуция рекламы',
-                'События установки и запуска Приложения, регистрации, начала пробного периода и покупок; рекламный идентификатор устройства — только если вы разрешили отслеживание в системном запросе Apple; обезличенные сводные данные Apple SKAdNetwork',
+                'События установки и запуска Приложения, регистрации, начала пробного периода и покупок; рекламный идентификатор устройства — только если вы разрешили отслеживание в системном запросе Apple',
                 'Согласие',
                 'До 2 лет',
               ],
@@ -140,7 +139,6 @@ function ru({ operator, offer }: Ctx): LegalSection[] {
               ['Apple Inc.', 'США', 'Вход через Apple; ваша частная база iCloud (у Оператора нет к ней доступа); покупки в App Store; координаты для прогноза погоды; проверка подлинности Приложения', 'Вход, хранение и синхронизация дневника, покупки, погода, защита'],
               ['Google LLC (Firebase)', 'США', 'Идентификатор аккаунта, e-mail, способ входа; события запуска, регистрации и покупок', 'Вход, аналитика'],
               ['Cloudflare, Inc.', 'США; серверы по всему миру', 'Данные, которые проходят через наш сервер: заказы, диалоги с Коучем, обращения, отчёты о сбоях', 'Размещение Сайта и сервера'],
-              ['UpCloud Ltd', 'Нидерланды', 'IP-адрес и данные, которые проходят через наш сервер', 'Ретрансляция соединений с Сайтом и сервером для сетей, где Cloudflare недоступен'],
               ['OpenAI', 'США', 'Сообщения Коучу и сводка из дневника', 'Ответы, проверка безопасности, подсказки'],
               ['DeepInfra', 'США', 'Сообщения Коучу и сводка из дневника', 'Ответы Коуча (модель DeepSeek, размещённая у DeepInfra)'],
               ['Mixpanel, Amplitude', 'США', 'События аналитики', 'Аналитика использования'],
@@ -148,14 +146,12 @@ function ru({ operator, offer }: Ctx): LegalSection[] {
               ['Meta Platforms', 'США, Ирландия', 'События установки, регистрации и покупок; рекламный идентификатор — с вашего разрешения', 'Атрибуция рекламы'],
               ['Resend', 'США', 'E-mail и текст писем', 'Отправка служебных писем'],
               ['Microsoft (Outlook.com)', 'США', 'Переписка с поддержкой', 'Почтовый ящик поддержки'],
-              ['Telegram', 'ОАЭ; серверы в разных странах', 'Уведомление о новом обращении: кто пишет (родитель, имя и возраст ребёнка), тема, начало текста, e-mail для ответа — если вы его указали', 'Уведомления команды поддержки'],
-              [acquirer.recipient.ru, acquirer.recipient.country.ru, 'Данные заказа и платежа', 'Приём платежей и возвраты'],
+              ['ООО «Вебпэй» и банк-эквайер', 'Беларусь', 'Данные заказа и платежа', 'Приём платежей и возвраты'],
             ],
           },
         },
         '4.2. Поставщики ИИ получают сообщения и сводку из дневника без вашего e-mail, платёжных данных и идентификатора аккаунта. По их условиям данные, переданные через API, не используются для обучения моделей: DeepInfra не сохраняет запросы, OpenAI хранит их не дольше 30 дней для контроля злоупотреблений.',
         '4.3. Сведения о расчётах (сумма, дата, наименование услуги) передаются в Министерство по налогам и сборам через приложение «Налог на профессиональный доход». Иным государственным органам данные предоставляются только в случаях, предусмотренных законодательством.',
-        '4.4. Если Сервис перейдёт к другому лицу (продажа или реорганизация), данные перейдут к нему вместе с Сервисом и только для тех же целей. Мы заранее сообщим об этом на этой странице или в Приложении.',
       ],
     },
     {
@@ -219,7 +215,7 @@ function ru({ operator, offer }: Ctx): LegalSection[] {
     {
       title: '11. Защита данных',
       blocks: [
-        '11.1. Мы шифруем данные при передаче (TLS), Приложение проверяет сертификат нашего сервера (закрепление сертификата), мы ограничиваем доступ к данным, используем проверку подлинности Приложения и храним данные минимально необходимое время.',
+        '11.1. Мы шифруем данные при передаче (TLS), ограничиваем доступ к ним, используем проверку подлинности Приложения, храним данные минимально необходимое время.',
         '11.2. О нарушении систем защиты мы уведомляем Национальный центр защиты персональных данных незамедлительно, но не позднее трёх рабочих дней, а вас — без неоправданной задержки, если нарушение может затронуть ваши права.',
       ],
     },
@@ -298,7 +294,7 @@ function en({ operator, offer }: Ctx): LegalSection[] {
               ],
               [
                 'Support and feedback',
-                'E-mail, the text of the request and attachments, device model, iOS and App versions. A support request sent from the App includes the diary records of up to the last 30 days and the day plan, feedback — of the last 7 days; the App says so before sending',
+                'E-mail, the text of the request and attachments, device model, iOS and App versions. Requests sent from the App include the diary records of the last 7 days and the day plan',
                 'Contract; for information about the child — consent',
                 'On the server — 90 days; correspondence — 3 years after the request is closed',
               ],
@@ -316,7 +312,7 @@ function en({ operator, offer }: Ctx): LegalSection[] {
               ],
               [
                 'Advertising attribution',
-                'App install and launch, sign-up, trial start and purchase events; the device advertising identifier — only if you allowed tracking in Apple’s system prompt; anonymous aggregate Apple SKAdNetwork data',
+                'App install and launch, sign-up, trial start and purchase events; the device advertising identifier — only if you allowed tracking in Apple’s system prompt',
                 'Consent',
                 'Up to 2 years',
               ],
@@ -363,7 +359,6 @@ function en({ operator, offer }: Ctx): LegalSection[] {
               ['Apple Inc.', 'USA', 'Sign in with Apple; your private iCloud database (the Operator has no access); App Store purchases; coordinates for the weather forecast; App attestation', 'Sign-in, storing and syncing the diary, purchases, weather, security'],
               ['Google LLC (Firebase)', 'USA', 'Account identifier, e-mail, sign-in method; launch, sign-up and purchase events', 'Sign-in, analytics'],
               ['Cloudflare, Inc.', 'USA; servers worldwide', 'Data passing through our server: orders, Coach conversations, requests, crash reports', 'Hosting the Website and the server'],
-              ['UpCloud Ltd', 'Netherlands', 'IP address and data passing through our server', 'Relaying connections to the Website and the server for networks that cannot reach Cloudflare'],
               ['OpenAI', 'USA', 'Messages to the Coach and the diary summary', 'Answers, safety checks, tips'],
               ['DeepInfra', 'USA', 'Messages to the Coach and the diary summary', 'Coach answers (the DeepSeek model hosted by DeepInfra)'],
               ['Mixpanel, Amplitude', 'USA', 'Analytics events', 'Usage analytics'],
@@ -371,14 +366,12 @@ function en({ operator, offer }: Ctx): LegalSection[] {
               ['Meta Platforms', 'USA, Ireland', 'Install, sign-up and purchase events; the advertising identifier — with your permission', 'Advertising attribution'],
               ['Resend', 'USA', 'E-mail address and message text', 'Sending service e-mails'],
               ['Microsoft (Outlook.com)', 'USA', 'Support correspondence', 'Support mailbox'],
-              ['Telegram', 'UAE; servers in several countries', 'A new-request notice: who is writing (parent, child’s name and age), topic, the start of the text, the reply e-mail if you gave one', 'Notifying the support team'],
-              [acquirer.recipient.en, acquirer.recipient.country.en, 'Order and payment details', 'Taking payments and refunds'],
+              ['Webpay LLC and the acquiring bank', 'Belarus', 'Order and payment details', 'Taking payments and refunds'],
             ],
           },
         },
         '4.2. AI providers receive messages and the diary summary without your e-mail, payment details or account identifier. Under their terms, data sent through the API is not used to train models: DeepInfra does not store requests, and OpenAI keeps them for up to 30 days for abuse monitoring.',
         '4.3. Payment details (amount, date, name of the service) go to the Ministry of Taxes and Duties through the “Professional income tax” app. Other authorities receive data only where the law requires it.',
-        '4.4. If the Service passes to another person (a sale or reorganisation), the data passes with it and only for the same purposes. We will announce this in advance on this page or in the App.',
       ],
     },
     {
@@ -442,7 +435,7 @@ function en({ operator, offer }: Ctx): LegalSection[] {
     {
       title: '11. Security',
       blocks: [
-        '11.1. We encrypt data in transit (TLS), the App checks our server’s certificate (certificate pinning), we restrict access to data, use App attestation, and keep data no longer than necessary.',
+        '11.1. We encrypt data in transit (TLS), restrict access to it, use App attestation, and keep data no longer than necessary.',
         '11.2. We notify the National Personal Data Protection Center of a security breach without delay and within three working days, and you — without undue delay if the breach may affect your rights.',
       ],
     },

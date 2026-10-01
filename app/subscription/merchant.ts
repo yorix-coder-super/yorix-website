@@ -47,6 +47,8 @@ type AcquirerProfile = {
   emailsReceipt: boolean;
   /** Its own site, linked from the payment terms. */
   site: string;
+  /** Who receives order and payment data, as the privacy policy's recipients table names them. */
+  recipient: { ru: string; en: string; country: { ru: string; en: string } };
 };
 
 const ACQUIRERS: Record<Acquirer, AcquirerProfile> = {
@@ -59,6 +61,7 @@ const ACQUIRERS: Record<Acquirer, AcquirerProfile> = {
     strip: { src: '/payments/webpay-banks-white.svg', width: 7944, height: 550, withMirMark: true },
     emailsReceipt: true,
     site: 'https://www.webpay.by',
+    recipient: { ru: 'ООО «Вебпэй» и банк-эквайер', en: 'Webpay LLC and the acquiring bank', country: { ru: 'Беларусь', en: 'Belarus' } },
   },
   yookassa: {
     id: 'yookassa',
@@ -79,6 +82,7 @@ const ACQUIRERS: Record<Acquirer, AcquirerProfile> = {
     // It e-mails a receipt only when given an address, and the checkout sends none.
     emailsReceipt: false,
     site: 'https://yookassa.ru',
+    recipient: { ru: 'ООО НКО «ЮМани» (ЮKassa)', en: 'YooMoney NBCO LLC (YooKassa)', country: { ru: 'Россия', en: 'Russia' } },
   },
 };
 
