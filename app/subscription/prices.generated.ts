@@ -15,9 +15,9 @@ export type Plan = {
 };
 
 export const plans: Plan[] = [
-  { id: 'week', days: 7, priceByn: 11.9 },
-  { id: 'month', days: 30, priceByn: 23.9 },
-  { id: 'year', days: 365, priceByn: 119.9 },
+  { id: 'week', days: 7, priceByn: 14.9 },
+  { id: 'month', days: 30, priceByn: 35.9 },
+  { id: 'year', days: 365, priceByn: 134.9 },
 ];
 
 // The App Store price of each region, in that region's own currency: the
@@ -26,16 +26,16 @@ export const plans: Plan[] = [
 // use chargeFor() in merchant.ts, which returns the money the buyer actually
 // pays, in the currency their receipt will name.
 export const prices: Record<PlanId, Record<WebCurrency, number>> = {
-  week: { BYN: 11.9, RUB: 499 },
-  month: { BYN: 23.9, RUB: 999 },
-  year: { BYN: 119.9, RUB: 3990 },
+  week: { BYN: 14.9, RUB: 449 },
+  month: { BYN: 35.9, RUB: 999 },
+  year: { BYN: 134.9, RUB: 3990 },
 };
 
 // What each region pays when the acquirer settles in Belarusian rubles.
 export const charges: Record<PlanId, Record<WebCurrency, number>> = {
-  week: { BYN: 11.9, RUB: 17.94 },
-  month: { BYN: 23.9, RUB: 35.92 },
-  year: { BYN: 119.9, RUB: 143.47 },
+  week: { BYN: 14.9, RUB: 16.14 },
+  month: { BYN: 35.9, RUB: 35.92 },
+  year: { BYN: 134.9, RUB: 143.47 },
 };
 
 // The same, in roubles, for ЮKassa. Belarus keeps its own row: its App Store
@@ -43,7 +43,7 @@ export const charges: Record<PlanId, Record<WebCurrency, number>> = {
 // Belarusian parent off the rouble list would charge them about half again
 // what the store asks.
 export const chargesRub: Record<PlanId, Record<WebCurrency, number>> = {
-  week: { BYN: 329, RUB: 499 },
-  month: { BYN: 659, RUB: 999 },
-  year: { BYN: 3290, RUB: 3990 },
+  week: { BYN: 409, RUB: 449 },
+  month: { BYN: 989, RUB: 999 },
+  year: { BYN: 3690, RUB: 3990 },
 };
