@@ -72,8 +72,8 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         </ol>
         <p>
           A month or a year can be given as a gift: on the <a href={subscriptionPath(lang, '/gift')}>gift page</a> sign the card and pay the same way.
-          No account is needed: after payment you see a link, a code and a card with a QR code, and they stay on the gift page in the
-          browser you paid in. Pass them to the recipient only: anyone who has the link or the code can redeem the gift, and if the link went astray the code can be replaced. The
+          No account is needed, only your e-mail: after payment you see a link, a code and a card with a QR code, they stay on the gift page in the
+          browser you paid in, and the link and the code also arrive at your e-mail. Pass them to the recipient only: anyone who has the link or the code can redeem the gift, and if the link went astray the code can be replaced. The
           recipient opens the link or enters the code on the <a href="/gift">“Redeem a gift”</a> page and signs in with Apple. The code is valid
           for 12 months (clauses 5.7–5.10 of the offer).
         </p>
@@ -145,6 +145,14 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
           reaches the card depends on the issuing bank.
         </p>
 
+        <h2>Liability and force majeure</h2>
+        <p>
+          Liability follows section 11 of the <a href={offer}>offer</a>. If a bank, the payment system, sanctions or payment restrictions, an
+          outage of the App Store or of our providers, or other force majeure delay a payment, the activation or a refund, the deadlines move for as
+          long as the circumstances last; if they last more than 30 days, you may withdraw and get the price of the unused days back (section 12 of the
+          offer). Your consumer rights stay in full.
+        </p>
+
         <h2>Payment confirmation document</h2>
         <p>
           Two documents confirm the payment: the {bank} card receipt confirming the card payment, and a receipt from the “Professional income
@@ -180,8 +188,8 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
       </ol>
       <p>
         Подписку на месяц или год можно подарить: на странице <a href={subscriptionPath(lang, '/gift')}>подарка</a> подпишите открытку и оплатите так
-        же. Аккаунт не нужен: после оплаты вы увидите ссылку, код и открытку с QR — они останутся на странице подарка в браузере, где вы
-        платили. Передайте их только получателю: активировать подарок может любой, у кого есть ссылка или код, а если ссылка ушла не туда, код можно заменить.
+        же. Аккаунт не нужен, только ваша почта: после оплаты вы увидите ссылку, код и открытку с QR — они останутся на странице подарка в браузере, где вы
+        платили, а ссылка и код придут вам на почту. Передайте их только получателю: активировать подарок может любой, у кого есть ссылка или код, а если ссылка ушла не туда, код можно заменить.
         Получатель открывает ссылку или вводит код на странице <a href="/ru/gift">«Активировать подарок»</a> и входит через Apple. Код действует
         12 месяцев (п. 5.7–5.10 оферты).
       </p>
@@ -252,6 +260,14 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
       <p>
         Мы возвращаем деньги в течение 10 дней после получения заявления (при недостатках услуги — в течение 7 дней). Срок поступления денег на карту
         зависит от банка, выпустившего карту.
+      </p>
+
+      <h2>Ответственность и непреодолимая сила</h2>
+      <p>
+        Ответственность сторон — по разделу 11 <a href={offer}>оферты</a>. Если оплату, включение подписки или возврат задерживают обстоятельства
+        непреодолимой силы — сбой банка или платёжной системы, санкции и ограничения платежей, сбой App Store или наших поставщиков, — сроки
+        сдвигаются на время их действия; если они длятся больше 30 дней, вы вправе отказаться от договора и получить стоимость неиспользованных суток
+        (раздел 12 оферты). Ваши права потребителя сохраняются в полном объёме.
       </p>
 
       <h2>Документ, подтверждающий оплату</h2>
