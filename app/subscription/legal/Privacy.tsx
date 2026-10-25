@@ -71,13 +71,13 @@ function ru({ operator, offer, contact }: Ctx): LegalSection[] {
               ],
               [
                 'Покупки в App Store',
-                'Сведения Apple о покупке: продукт, даты, статус, страна магазина; уведомления Apple о продлении, отмене и возврате. Платёжные данные мы не получаем',
-                'Договор',
+                'Сведения Apple о покупке: продукт, даты, статус, страна магазина; уведомления Apple о продлении, отмене и возврате, в том числе причина, которую вы указали Apple в запросе о возврате. Платёжные данные мы не получаем. Если вы попросите Apple вернуть деньги, Apple может спросить нас, как использовалась покупка. С вашего согласия — оно даётся покупкой на экране подписки, где об этом сказано, и выключается в Настройках Приложения («Запросы на возврат») — мы отвечаем Apple: покупка доставлена, до неё был доступен бесплатный режим или пробный период, и наше пожелание по возврату. Пожелание мы выводим из количества записей в дневнике, числа дней с записями за 30 дней, трат ИИ-кредитов и времени последнего входа; содержимое дневника Apple не передаётся. Решение о возврате принимает Apple',
+                'Договор; согласие — для ответа Apple на запрос о возврате',
                 'Пока существует аккаунт и 3 года после окончания подписки',
               ],
               [
                 'Учёт подписки, ИИ-кредитов и совместного доступа к Premium',
-                'Идентификатор установки Приложения, случайный идентификатор устройства, идентификаторы покупок App Store, продукт, даты пробного периода и окончания подписки, баланс и история ИИ-кредитов, язык, часовой пояс, модель устройства, версия Приложения, время последней активности',
+                'Идентификатор установки Приложения, случайный идентификатор устройства, идентификаторы покупок App Store, продукт, даты пробного периода и окончания подписки, баланс и история ИИ-кредитов, язык, часовой пояс, модель устройства, версия Приложения, время первого запуска и последней активности, количество записей в дневнике и дней с записями за 30 дней (только числа), согласие на ответ Apple о возвратах',
                 'Договор',
                 'Пока используется установка Приложения или действует подписка, и 3 года после этого',
               ],
@@ -157,7 +157,7 @@ function ru({ operator, offer, contact }: Ctx): LegalSection[] {
           table: {
             head: ['Получатель', 'Страна', 'Какие данные', 'Зачем'],
             rows: [
-              ['Apple Inc.', 'США', 'Вход через Apple; ваша частная база iCloud и совместный доступ (у Оператора нет к ним доступа); покупки в App Store и уведомления о них; координаты для прогноза погоды; проверка подлинности Приложения', 'Вход, хранение и синхронизация дневника, покупки, погода, защита'],
+              ['Apple Inc.', 'США', 'Вход через Apple; ваша частная база iCloud и совместный доступ (у Оператора нет к ним доступа); покупки в App Store и уведомления о них; с вашего согласия — сведения об использовании покупки, если вы попросите Apple вернуть деньги (раздел 3); координаты для прогноза погоды; проверка подлинности Приложения', 'Вход, хранение и синхронизация дневника, покупки и возвраты, погода, защита'],
               ['Google LLC (Firebase)', 'США', 'Вход через Apple и Google: идентификатор аккаунта, e-mail, имя, способ входа. Аналитика: идентификатор аккаунта, события запуска, онбординга, регистрации, пробного периода, покупок, экрана подписки и просмотров экранов, возраст ребёнка в месяцах, статус подписки, язык; рекламный идентификатор и рекламные сигналы Google Ads — только с вашего разрешения отслеживания', 'Вход, аналитика, атрибуция рекламы'],
               ['Cloudflare, Inc.', 'США; серверы по всему миру', 'Данные, которые проходят через наш сервер: заказы, диалоги с Коучем, обращения, отчёты о сбоях, журналы запросов; текст вопроса Коучу — для поиска по статьям (Workers AI)', 'Размещение Сайта и сервера, поиск по статьям'],
               ['UpCloud Ltd', 'Нидерланды', 'IP-адрес и данные, которые проходят через наш сервер', 'Ретрансляция соединений с Сайтом и сервером для сетей, где Cloudflare недоступен'],
@@ -315,13 +315,13 @@ function en({ operator, offer, contact }: Ctx): LegalSection[] {
               ],
               [
                 'App Store purchases',
-                'Apple’s purchase details: product, dates, status, storefront country; Apple’s notices of renewal, cancellation and refund. We never receive payment details',
-                'Contract',
+                'Apple’s purchase details: product, dates, status, storefront country; Apple’s notices of renewal, cancellation and refund, including the reason you gave Apple in a refund request. We never receive payment details. If you ask Apple for a refund, Apple may ask us how the purchase was used. With your consent — given by purchasing on the subscription screen that says so, and turned off in the App’s Settings (“Refund requests”) — we tell Apple that the purchase was delivered, that the free tier or a free trial was available before it, and our refund preference. We derive the preference from the number of diary records, the days with records in the last 30, AI credit use and the time of last activity; no diary content goes to Apple. Apple decides the refund',
+                'Contract; consent — for answering Apple’s refund request',
                 'While the account exists and 3 years after the subscription ends',
               ],
               [
                 'Subscription, AI credit and shared Premium accounting',
-                'App installation identifier, a random device identifier, App Store transaction identifiers, product, trial and expiry dates, AI credit balance and history, language, time zone, device model, App version, time of last activity',
+                'App installation identifier, a random device identifier, App Store transaction identifiers, product, trial and expiry dates, AI credit balance and history, language, time zone, device model, App version, time of first launch and of last activity, the number of diary records and of days with records in the last 30 (numbers only), consent to answer Apple about refunds',
                 'Contract',
                 'While the App installation is in use or the subscription is active, and 3 years after that',
               ],
@@ -401,7 +401,7 @@ function en({ operator, offer, contact }: Ctx): LegalSection[] {
           table: {
             head: ['Recipient', 'Country', 'Data', 'Purpose'],
             rows: [
-              ['Apple Inc.', 'USA', 'Sign in with Apple; your private iCloud database and sharing (the Operator has no access); App Store purchases and notices about them; coordinates for the weather forecast; App attestation', 'Sign-in, storing and syncing the diary, purchases, weather, security'],
+              ['Apple Inc.', 'USA', 'Sign in with Apple; your private iCloud database and sharing (the Operator has no access); App Store purchases and notices about them; with your consent, how a purchase was used when you ask Apple for a refund (section 3); coordinates for the weather forecast; App attestation', 'Sign-in, storing and syncing the diary, purchases and refunds, weather, security'],
               ['Google LLC (Firebase)', 'USA', 'Sign-in with Apple and Google: account identifier, e-mail, name, sign-in method. Analytics: account identifier, launch, onboarding, sign-up, trial, purchase, subscription screen and screen view events, the child’s age in months, subscription status, language; the advertising identifier and Google Ads advertising signals — only if you allow tracking', 'Sign-in, analytics, advertising attribution'],
               ['Cloudflare, Inc.', 'USA; servers worldwide', 'Data passing through our server: orders, Coach conversations, requests, crash reports, request logs; the text of a question to the Coach — to search the articles (Workers AI)', 'Hosting the Website and the server, article search'],
               ['UpCloud Ltd', 'Netherlands', 'IP address and data passing through our server', 'Relaying connections to the Website and the server for networks that cannot reach Cloudflare'],
