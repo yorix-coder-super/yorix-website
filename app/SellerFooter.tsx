@@ -1,5 +1,5 @@
 import { BrandLogo } from './BrandLogo';
-import { appDownloadUrl, socialLinks } from './content';
+import { appStoreUrl, socialLinks } from './content';
 import { AppleGlyph, AppQr, Art } from './home/art';
 import { docsLang, siteCopy, type SiteLocale } from './i18n';
 import { PaymentLogos } from './subscription/PaymentLogos';
@@ -119,7 +119,7 @@ export async function SellerFooter({ note, locale = 'en', home }: { note: string
           <div className="inline-flex flex-col items-center gap-5">
             <a
               className="inline-flex items-center gap-3 rounded-xl border border-white/25 bg-black px-4 py-2 text-white transition hover:border-white/50"
-              href={appDownloadUrl}
+              href={appStoreUrl('web-footer')}
               rel="noopener noreferrer"
               target="_blank"
             >

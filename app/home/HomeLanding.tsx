@@ -2,7 +2,7 @@ import { ArrowRight, BookOpen } from 'lucide-react';
 import { isRtl, shotLocale, siteCopy } from '../i18n';
 import { SellerFooter } from '../SellerFooter';
 import { SiteHeader } from '../SiteHeader';
-import { appDownloadUrl } from '../content';
+import { appStoreUrl } from '../content';
 import { Parallax } from '../subscription/Parallax';
 import { Reveal } from '../subscription/Reveal';
 import { SocialProof } from '../subscription/SocialProof';
@@ -54,7 +54,7 @@ export async function HomeLanding({ locale }: { locale: HomeLocale }) {
               </Reveal>
               <Reveal delay={380} load>
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                  <a className={`${whitePill} whitespace-normal! text-center sm:whitespace-nowrap!`} href={appDownloadUrl} rel="noopener noreferrer" target="_blank">
+                  <a className={`${whitePill} whitespace-normal! text-center sm:whitespace-nowrap!`} href={appStoreUrl('web-home-hero')} rel="noopener noreferrer" target="_blank">
                     <AppleGlyph />
                     {copy.hero.primary}
                     <ArrowRight className="h-5 w-5 rtl:-scale-x-100" aria-hidden="true" />

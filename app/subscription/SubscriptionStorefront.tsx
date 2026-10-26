@@ -4,7 +4,7 @@ import { AppleGlyph, Art, PhoneFrame, Sparkle } from '../home/art';
 import { headlineTones } from '../home/copy';
 import { FaqItem, whitePill } from '../home/CtaBand';
 import { AppStorePanel, PlanGrid } from '../home/HomePricing';
-import { appDownloadUrl } from '../content';
+import { appStoreUrl } from '../content';
 import { siteCopy } from '../i18n';
 import { AccountProvider, ChargeNote, CheckoutDialog, HeroCta } from './account';
 import { currencyForVisitor, sellsOnWeb } from './currency';
@@ -68,7 +68,7 @@ export async function SubscriptionStorefront({ lang }: { lang: Lang }) {
                         <ArrowRight className="h-5 w-5 rtl:-scale-x-100" aria-hidden="true" />
                       </a>
                     ) : (
-                      <a className={`${whitePill} flex-1`} href={appDownloadUrl} rel="noopener noreferrer" target="_blank">
+                      <a className={`${whitePill} flex-1`} href={appStoreUrl('web-subscription')} rel="noopener noreferrer" target="_blank">
                         <AppleGlyph />
                         {siteCopy(lang).home.nav.download}
                       </a>

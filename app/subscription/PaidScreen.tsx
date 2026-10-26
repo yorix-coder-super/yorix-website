@@ -1,5 +1,5 @@
 import { ArrowRight } from 'lucide-react';
-import { appDownloadUrl } from '../content';
+import { appStoreUrl } from '../content';
 import { AppleGlyph, AppQr, Art, DoodleHeart, featureIcons, Hand, PhoneFrame, Sparkle } from '../home/art';
 import type { SubscriptionCopy } from './copy';
 import type { RedeemText } from './gift/redeemCopy';
@@ -64,7 +64,7 @@ export function PaidScreen({
               <Magnetic>
                 <a
                   className="inline-flex items-center gap-3 rounded-xl border border-white/25 bg-black px-4 py-2 text-white transition hover:-translate-y-0.5 hover:border-white/50 active:translate-y-0"
-                  href={appDownloadUrl}
+                  href={appStoreUrl('web-paid')}
                   rel="noopener noreferrer"
                   target="_blank"
                 >

@@ -1,6 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import { headers } from 'next/headers';
-import { appDownloadUrl } from '../content';
+import { appStoreUrl } from '../content';
 import { docsLang, siteCopy, type SiteLocale } from '../i18n';
 import { toWire } from '../i18n/wire';
 import { AccountProvider, ChargeNote, CheckoutDialog, PlanCard } from '../subscription/account';
@@ -164,7 +164,7 @@ export function AppStorePanel({ locale }: { locale: SiteLocale }) {
               <Magnetic className="inline-flex">
                 <a
                   className="inline-flex items-center gap-3 rounded-2xl border border-white/30 bg-black px-5 py-2.5 text-white shadow-[0_18px_40px_rgb(0_0_0/35%)] transition hover:-translate-y-0.5 hover:border-white/60 active:translate-y-0 active:scale-[0.98]"
-                  href={appDownloadUrl}
+                  href={appStoreUrl('web-home-pricing')}
                   rel="noopener noreferrer"
                   target="_blank"
                 >

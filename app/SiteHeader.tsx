@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 import { AppleGlyph } from './home/art';
-import { appDownloadUrl } from './content';
+import { appStoreUrl } from './content';
 import { docsLang, siteCopy, type SiteLocale } from './i18n';
 import { localeCopy, locales } from './locales';
 import { HeaderMenus, type LanguageItem } from './subscription/HeaderMenus';
@@ -75,7 +75,7 @@ export async function SiteHeader({
         <HeaderMenus current={locale.toUpperCase()} label={site.subscription.nav.language} languages={languages} />
         <a
           className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-[#1E1B4B] shadow-[0_18px_45px_rgb(255_255_255/18%)] transition hover:bg-[#EEF2FF] focus:outline-none focus:ring-4 focus:ring-white/25 sm:px-5"
-          href={appDownloadUrl}
+          href={appStoreUrl('web-header')}
           rel="noopener noreferrer"
           target="_blank"
         >

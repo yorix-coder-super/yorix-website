@@ -1,5 +1,5 @@
 import { ArrowRight } from 'lucide-react';
-import { appDownloadUrl } from '../content';
+import { appStoreUrl } from '../content';
 import { AppleGlyph, Art, Sparkle } from '../home/art';
 import { CtaBand, whitePill } from '../home/CtaBand';
 import { isRtl, siteCopy, type SiteLocale } from '../i18n';
@@ -37,7 +37,7 @@ export function AboutPage({ locale }: { locale: SiteLocale }) {
               <p className="mt-5 max-w-2xl text-base leading-7 text-white/75 sm:text-[17px]">{copy.body}</p>
             </Reveal>
             <Reveal delay={320} load>
-              <a className={`${whitePill} mt-7 whitespace-normal! text-center sm:whitespace-nowrap!`} href={appDownloadUrl} rel="noopener noreferrer" target="_blank">
+              <a className={`${whitePill} mt-7 whitespace-normal! text-center sm:whitespace-nowrap!`} href={appStoreUrl('web-about')} rel="noopener noreferrer" target="_blank">
                 <AppleGlyph />
                 {site.home.nav.download}
                 <ArrowRight className="h-5 w-5 rtl:-scale-x-100" aria-hidden="true" />

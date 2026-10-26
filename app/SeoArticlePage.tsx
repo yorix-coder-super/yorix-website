@@ -5,7 +5,7 @@ import { articleExtras, articleHero, formatArticleDate, itemIcon, sectionScenes,
 import { isRtl, shotLocale } from './i18n';
 import { ArticleToc, type TocItem } from './article/ArticleToc';
 import { Checklist } from './article/Checklist';
-import { appDownloadUrl, type TopicPage, topicPages } from './content';
+import { appStoreId, appStoreProviderToken, appStoreUrl, type TopicPage, topicPages } from './content';
 import { AppleGlyph, Art, DoodleHeart, guideIcon, Hand, PhoneFrame, Sparkle } from './home/art';
 import { CtaBand } from './home/CtaBand';
 import { type Locale } from './locales';
@@ -60,6 +60,11 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
   const sections = page.sections.map((section, index) => ({ ...section, id: anchorId(section.heading, `section-${index + 1}`) }));
   const scenes = sectionScenes(page.sections.map((section) => section.heading), locale, page.sceneHeadings);
   const hero = articleHero(page.slug);
+  // Each guide under its own campaign tag, in the button and in Safari's
+  // Smart App Banner: App Analytics then names the guides that bring installs.
+  const campaign = `guide-${locale ?? 'en'}-${page.slug}`;
+  const storeUrl = appStoreUrl(campaign);
+  const banner = `app-id=${appStoreId}, affiliate-data=pt=${appStoreProviderToken}&ct=${encodeURIComponent(`banner-${campaign}`.slice(0, 40))}`;
   const takeaways = (page.quickAnswer ?? [page.description, ...page.checklist.slice(0, 3)]).slice(0, 4).map(splitLead);
   // Generic fallback articles number their reference rows; those rows carry
   // no time-of-day meaning, so they never become an example day.
@@ -98,6 +103,7 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
 
   return (
     <main className="home-page relative flex min-h-screen flex-col overflow-x-clip text-white" dir={isRtl(locale ?? 'en') ? 'rtl' : undefined} lang={locale ?? 'en'}>
+      <meta content={banner} name="apple-itunes-app" />
       <ScrollProgress />
       <StarField />
       <SiteHeader locale={locale ?? 'en'} />
@@ -404,7 +410,7 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
           </div>
 
           <div className="mt-12 lg:hidden">
-            <PromoCard action={ui.download} body={promo.body} shot={`/shots/${shotLang}-today.webp`} tagline={promo.tagline} title={promo.title} />
+            <PromoCard action={ui.download} href={storeUrl} body={promo.body} shot={`/shots/${shotLang}-today.webp`} tagline={promo.tagline} title={promo.title} />
           </div>
 
           {relatedPages.length ? (
@@ -430,7 +436,7 @@ export function SeoArticlePage({ page, locale, ui = getArticleUiCopy(locale) }: 
         <aside className="hidden lg:block">
           <div className="sticky top-4 max-h-[calc(100vh-2rem)] overflow-y-auto overscroll-contain rounded-[1.75rem] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <ArticleToc bodyId="article-body" items={toc} progressLabel={extra.readingProgress} title={guideTitle}>
-              <PromoCard action={ui.download} body={promo.body} shot={`/shots/${shotLang}-today.webp`} tagline={promo.tagline} title={promo.title} />
+              <PromoCard action={ui.download} href={storeUrl} body={promo.body} shot={`/shots/${shotLang}-today.webp`} tagline={promo.tagline} title={promo.title} />
             </ArticleToc>
           </div>
         </aside>
@@ -458,7 +464,7 @@ function Callout({ tone, icon, title, children }: { tone: 'important' | 'tip'; i
   );
 }
 
-function PromoCard({ title, body, tagline, action, shot }: { title: string; body: string; tagline: string | null; action: string; shot: string }) {
+function PromoCard({ title, body, tagline, action, shot, href }: { title: string; body: string; tagline: string | null; action: string; shot: string; href: string }) {
   return (
     <div className="relative mt-5 overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(160deg,rgb(99_102_241/0.38),rgb(30_27_75/0.35))] p-4">
       <p className="flex items-start gap-2 pe-24 text-[15px] font-semibold leading-5 text-white">
@@ -471,7 +477,7 @@ function PromoCard({ title, body, tagline, action, shot }: { title: string; body
       </div>
       <a
         className="relative mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-[#1E1B4B] shadow-[0_18px_40px_rgb(0_0_0/25%)] transition hover:bg-[#EEF2FF]"
-        href={appDownloadUrl}
+        href={href}
         rel="noopener noreferrer"
         target="_blank"
       >

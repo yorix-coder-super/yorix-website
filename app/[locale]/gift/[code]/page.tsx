@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { appDownloadUrl } from '../../../content';
+import { appStoreUrl } from '../../../content';
 import { docsLang } from '../../../i18n';
 import { isLocale, locales } from '../../../locales';
 import { GiftRedeemPanel } from '../../../subscription/gift/GiftRedeem';
@@ -33,7 +33,7 @@ export default function Page({ params }: Props) {
   const lang = docsLang(params.locale);
   return (
     <SubscriptionShell giftPaths={{ en: `/gift/${code}`, ru: `/ru/gift/${code}` }} lang={lang} locale={params.locale}>
-      <GiftRedeemPanel appUrl={appDownloadUrl} code={code} lang={lang} locale={params.locale} />
+      <GiftRedeemPanel appUrl={appStoreUrl('web-gift-redeem')} code={code} lang={lang} locale={params.locale} />
     </SubscriptionShell>
   );
 }

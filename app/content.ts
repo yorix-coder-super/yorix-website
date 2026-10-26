@@ -10,7 +10,18 @@ export const siteUrl = 'https://yorix-app.com';
 // on. They only take effect once such a host actually points at this worker.
 export const legacyHosts = ['yorix.website', 'www.yorix.website'] as const;
 
-export const appDownloadUrl = 'https://apps.apple.com/app/apple-store/id6788705252?pt=129050076&ct=SEO&mt=8';
+export const appStoreId = '6788705252';
+export const appStoreProviderToken = '129050076';
+
+// One campaign tag per place on the site: App Store Connect → App Analytics →
+// Sources → Campaigns then says which page or guide brought the install,
+// instead of one «SEO» line for the whole site. Apple keeps 40 characters.
+export function appStoreUrl(campaign: string): string {
+  const ct = encodeURIComponent(campaign.slice(0, 40));
+  return `https://apps.apple.com/app/apple-store/id${appStoreId}?pt=${appStoreProviderToken}&ct=${ct}&mt=8`;
+}
+
+export const appDownloadUrl = appStoreUrl('SEO');
 // The same page under its own campaign tag, kept short: fewer characters mean a
 // coarser QR code that a phone reads from a laptop screen at a glance.
 // After changing it run `pnpm qr` to redraw public/art/app-qr.svg.

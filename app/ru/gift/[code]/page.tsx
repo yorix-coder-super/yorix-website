@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { appDownloadUrl } from '../../../content';
+import { appStoreUrl } from '../../../content';
 import { subscriptionCopy } from '../../../subscription/copy';
 import { GiftRedeemPanel } from '../../../subscription/gift/GiftRedeem';
 import { SubscriptionShell } from '../../../subscription/SubscriptionShell';
@@ -21,7 +21,7 @@ export default function Page({ params }: { params: { code: string } }) {
   const code = params.code.replace(/[^A-Za-z0-9-]/g, '').slice(0, 20);
   return (
     <SubscriptionShell giftPaths={{ en: `/gift/${code}`, ru: `/ru/gift/${code}` }} lang="ru">
-      <GiftRedeemPanel appUrl={appDownloadUrl} code={code} lang="ru" />
+      <GiftRedeemPanel appUrl={appStoreUrl('web-gift-redeem')} code={code} lang="ru" />
     </SubscriptionShell>
   );
 }

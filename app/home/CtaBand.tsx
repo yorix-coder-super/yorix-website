@@ -1,6 +1,6 @@
 import { ArrowRight, Plus } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { appDownloadUrl } from '../content';
+import { appStoreUrl } from '../content';
 import { Reveal } from '../subscription/Reveal';
 import { AppleGlyph, Art, DoodleHeart, Hand, Sparkle } from './art';
 
@@ -35,7 +35,7 @@ export function CtaBand({ title, body, action, note }: { title: string; body: st
               <p className="mt-2 max-w-xl text-[15px] leading-6 text-white/85">{body}</p>
             </div>
             <div className="flex justify-center md:justify-end">
-              <a className={whitePill} href={appDownloadUrl} rel="noopener noreferrer" target="_blank">
+              <a className={whitePill} href={appStoreUrl('web-home-cta')} rel="noopener noreferrer" target="_blank">
                 <AppleGlyph />
                 {action}
                 <ArrowRight className="h-5 w-5 rtl:-scale-x-100" aria-hidden="true" />
