@@ -75,7 +75,6 @@ export type SubscriptionCopy = {
     messagePlaceholder: string;
     email: string;
     emailPlaceholder: string;
-    emailNote: string;
     emailInvalid: string;
     cardFor: (name: string) => string;
     cardPlan: (period: string) => string;
@@ -313,7 +312,6 @@ const ru: SubscriptionCopy = {
     messagePlaceholder: 'Спокойных ночей и сладких снов!',
     email: 'Ваша почта',
     emailPlaceholder: 'name@example.com',
-    emailNote: 'Пришлём ссылку, код и подтверждение оплаты. Аккаунт для этого не нужен.',
     emailInvalid: 'Проверьте адрес — на него придёт код подарка.',
     // A Russian card dedication is in the dative, without «для»: «Маше и Саше».
     cardFor: (name) => name,
@@ -585,7 +583,6 @@ const en: SubscriptionCopy = {
     messagePlaceholder: 'Calm nights and sweet dreams!',
     email: 'Your email',
     emailPlaceholder: 'name@example.com',
-    emailNote: 'We send the link, the code and the payment confirmation there. No account needed.',
     emailInvalid: 'Check the address — the gift code goes there.',
     cardFor: (name) => `For ${name}`,
     cardPlan: (period) => `Yorix subscription ${period}`,

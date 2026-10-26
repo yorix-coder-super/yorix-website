@@ -191,9 +191,7 @@ export function GiftCheckout() {
               type="email"
               value={email}
             />
-            <span className={`mt-2 block text-xs font-normal leading-5 ${badEmail ? 'text-[#FCA5A5]' : 'text-white/55'}`}>
-              {badEmail ? text.emailInvalid : text.emailNote}
-            </span>
+            {badEmail ? <span className="mt-2 block text-xs font-normal leading-5 text-[#FCA5A5]">{text.emailInvalid}</span> : null}
           </label>
           <label className="block text-sm font-semibold text-white/80">
             {text.to}

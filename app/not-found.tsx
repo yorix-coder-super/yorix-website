@@ -9,8 +9,9 @@ import { StarField } from './subscription/StarField';
 
 export const metadata: Metadata = { title: '404', robots: { index: false, follow: false } };
 
-// One 404 for every path. The site has no locale here, so it speaks Russian
-// (the paying audience) with an English line underneath.
+// One 404 for every path, in Russian: the site sells to Belarus and Russia,
+// and a second language on this page read as a translation artefact rather
+// than a courtesy (owner, 2026-09-22).
 export default function NotFound() {
   return (
     <main className="home-page relative flex min-h-screen flex-col overflow-hidden text-white">
@@ -28,16 +29,10 @@ export default function NotFound() {
         <Sparkle className="right-[16%] top-[30%] w-3" delay={1100} tone="lavender" />
         <h1 className="mt-8 text-4xl font-semibold leading-tight text-white sm:text-5xl">Эта страница уснула</h1>
         <p className="mt-4 text-lg leading-8 text-white/75">Похоже, ссылка устарела или в адресе опечатка.</p>
-        <p className="mt-2 text-sm leading-6 text-white/55" lang="en">
-          This page is fast asleep — the link may be old or mistyped.
-        </p>
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <div className="mt-8 flex justify-center">
           <a className={whitePill} href="/ru">
             На главную
             <ArrowRight className="h-5 w-5" aria-hidden="true" />
-          </a>
-          <a className="inline-flex min-h-[3.25rem] items-center justify-center rounded-full border border-white/20 bg-white/[0.06] px-6 text-base font-semibold text-white transition hover:bg-white/[0.12]" href="/?lang=en" lang="en">
-            Home in English
           </a>
         </div>
       </section>
