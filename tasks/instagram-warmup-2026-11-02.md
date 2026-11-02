@@ -19,7 +19,7 @@ Initial Russian-only scrolling story: SUPERSEDED by the owner-provided five-lang
 The DOCX is reference material. Google Play is omitted because the product is iOS-only. The outcome-led final headline is replaced with an invitation to log one sleep; paid predictions are disclosed. Official Apple badges are used unmodified.
 
 ## Next action
-Source delivered in `708ee9c` to `origin/main` and `origin/premium-web-payments`; immutable source checkpoint `checkpoint/2026-11-02-instagram-funnel`. The owner subsequently approved implementing the premium direction; completion is tracked below. Production deployment remains pending an explicit request.
+Premium design, QR fixes and motion are verified and pushed in `dce638b` to both branches. Source checkpoint: `checkpoint/2026-11-02-instagram-premium`. Production deployment remains pending an explicit request. The earlier functional baseline is preserved in `708ee9c` and `checkpoint/2026-11-02-instagram-funnel`.
 
 ## Completion pass — 2026-11-02
 
@@ -40,10 +40,10 @@ Owner approved the generated premium reference and requested implementation. Thi
 - [x] Implement the approved night-sky composition with existing Yorix artwork, live localized text, gold emphasis and white primary actions.
 - [x] Adapt the shorter reference copy in all five campaign languages; preserve Premium disclosure and the illustrative forecast label.
 - [x] Verify production build, Chrome/WebKit, desktop/mobile/RTL, reduced motion, no-JS navigation and existing attribution/share behavior.
-- [ ] Commit and push verified source to both working branch and main.
+- [x] Commit and push verified source to both working branch and main.
 - [ ] Production publication remains separate; no explicit deployment request has been received.
 
-Next action: deliver the verified premium source to both branches. Production deployment remains separate.
+Verified premium source delivered in `dce638b` to `origin/main` and `origin/premium-web-payments`, with immutable source checkpoint `checkpoint/2026-11-02-instagram-premium`. Next action: production publication only when explicitly requested.
 
 ### Owner follow-up — QR and wide-screen artwork
 
