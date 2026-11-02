@@ -11,7 +11,7 @@ Build a five-language campaign at `/start` and `/{ru,tr,de,en,ar}/start` for Ins
 - [x] Write campaign strategy, copy sequence, campaign links and measurement limitations.
 - [x] Verify TypeScript, production build, Chrome/WebKit desktop/mobile, reduced motion, no-JS, link attribution and QR decoding.
 - [x] Commit and push verified source to the working branch and main without overwriting remote history.
-- [ ] Deploy only after explicit owner request, per repository AGENTS.md.
+- [x] Deploy after explicit owner request, per repository AGENTS.md (authorized and published on 2026-11-02).
 
 ## Scope
 Initial Russian-only scrolling story: SUPERSEDED by the owner-provided five-language DOCX on 2026-11-02. Implement four sequential screens, short CTAs, a bottom mobile action, progress dots and Arabic RTL. Copy lives under `app/i18n/campaigns/`, separate from the general site dictionary. All five campaign variants are complete; other languages do not expose a partial campaign.
@@ -19,7 +19,7 @@ Initial Russian-only scrolling story: SUPERSEDED by the owner-provided five-lang
 The DOCX is reference material. Google Play is omitted because the product is iOS-only. The outcome-led final headline is replaced with an invitation to log one sleep; paid predictions are disclosed. Official Apple badges are used unmodified.
 
 ## Next action
-Premium design, QR fixes and motion are verified and pushed in `dce638b` to both branches. Source checkpoint: `checkpoint/2026-11-02-instagram-premium`. Production deployment remains pending an explicit request. The earlier functional baseline is preserved in `708ee9c` and `checkpoint/2026-11-02-instagram-funnel`.
+Premium design, QR fixes and motion are verified and pushed in `dce638b` to both branches. Source checkpoint: `checkpoint/2026-11-02-instagram-premium`. Production is now published; see the deployment record below. The earlier functional baseline is preserved in `708ee9c` and `checkpoint/2026-11-02-instagram-funnel`.
 
 ## Completion pass — 2026-11-02
 
@@ -41,9 +41,9 @@ Owner approved the generated premium reference and requested implementation. Thi
 - [x] Adapt the shorter reference copy in all five campaign languages; preserve Premium disclosure and the illustrative forecast label.
 - [x] Verify production build, Chrome/WebKit, desktop/mobile/RTL, reduced motion, no-JS navigation and existing attribution/share behavior.
 - [x] Commit and push verified source to both working branch and main.
-- [ ] Production publication remains separate; no explicit deployment request has been received.
+- [x] Production published after the subsequent explicit owner request; see the publication record below.
 
-Verified premium source delivered in `dce638b` to `origin/main` and `origin/premium-web-payments`, with immutable source checkpoint `checkpoint/2026-11-02-instagram-premium`. Next action: production publication only when explicitly requested.
+Verified premium source delivered in `dce638b` to `origin/main` and `origin/premium-web-payments`, with immutable source checkpoint `checkpoint/2026-11-02-instagram-premium`. Production was subsequently authorized and published; see the deployment record below.
 
 ### Owner follow-up — QR and wide-screen artwork
 
@@ -76,6 +76,14 @@ Motion verification passed in Chrome and WebKit: live Reduced Motion, offscreen 
 Owner explicitly requested publishing all completed website changes. This supersedes the earlier pending-publication status.
 
 - [x] Confirm clean source, matching remote branches and the existing production Worker target.
-- [ ] Build and publish the complete verified website batch to `yorix-website`.
-- [ ] Verify the public campaign in all five languages, navigation, assets and App Store/QR destinations.
-- [ ] Record deployment version and source revision after production verification.
+- [x] Build and publish the complete verified website batch to `yorix-website`.
+- [x] Verify the public campaign in all five languages, navigation, assets and App Store/QR destinations.
+- [x] Record deployment version and source revision after production verification.
+
+Published source: `a6cedaf`. Worker: `yorix-website`; production version: `2657f69c-db92-4c89-a070-4c35e2fc3218` at 100% traffic. Public campaign: `https://yorix-app.com/ru/start`. Previous production version: `8d89db78-3e79-4238-b5c4-0616031647fd`.
+
+Production verification found an existing edge-cache defect: static asset cache keys ignored Accept-Encoding and could send a Chrome-warmed zstd response to WebKit. The direct Cloudflare origin negotiated Brotli correctly. Remediation is limited to the two website static-asset locations: include Accept-Encoding in a new cache-key namespace and emit Vary. Existing API and page proxy behavior is unchanged. The exact patch is stored in `scripts/edge-encoding-cache.patch`.
+
+Final public verification passed in Chrome (390 px) and WebKit (1920 px), all five languages and all four screens: no JavaScript errors, broken artwork or horizontal overflow; expected App Store and QR campaign links. Home, Russian home, support and privacy return 200; browser-language negotiation preserves the campaign query. Actual Russian mobile and wide rendered states were inspected.
+
+The edge patch passed `nginx -t` and was activated with a graceful reload. Backup: `/etc/nginx/conf.d/yorix-edge.conf.bak-20261102-encoding`. `node scripts/check-edge-encoding.mjs` verifies identical decoded JavaScript for zstd, Brotli, gzip and identity across repeated cache hits. [Nginx proxy cache key reference](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_key). No website runtime changes remain unpublished; the subsequent repository commit records deployment evidence and the applied infrastructure patch.
