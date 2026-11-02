@@ -26,7 +26,7 @@ Confirmed in the conversation:
 - [x] Align refunds across offer, payment terms, FAQ and new-edition immediate-access mail.
 - [x] Remove fixed support/activation-resolution promises and absolute claims about AI safety or complete absence of server-side diary data.
 - [x] Complete final source and rendered-page checks (record below).
-- [ ] Publish the new controller/seller identity after the readiness items below are resolved and publication is requested.
+- [x] Publish the prepared controller/seller identity on the owner’s subsequent request; unresolved arrangements remain tracked below.
 
 This is a prepared migration, not a claim that the business contracts or processing arrangements have already migrated. Public API verification on 2026-11-02 reported test checkout, review open and YooKassa as provider. This work does not enable live payments, change the acquirer, alter prices or widen sales geography.
 
@@ -91,8 +91,27 @@ After the prepared state and remaining legal/contract facts were reported, the o
 
 - [x] Confirm deployment scope: current API production is `d891992e-6098-4e09-b0ea-daaa29fe8d74`, source `afcf51439`; only seller identity/confirmation runtime changes differ in the Worker. Unrelated iOS working-tree changes are excluded.
 - [x] Confirm production checkout remains `test`, review open, provider YooKassa.
-- [ ] Publish the compatible Worker mail mapping, then website documents.
-- [ ] Verify current production versions, RU/EN documents, entry funnel and unchanged checkout mode.
-- [ ] Record final deployment provenance and source delivery.
+- [x] Publish the compatible Worker mail mapping, then website documents.
+- [x] Verify current production versions, RU/EN documents, entry funnel and unchanged checkout mode.
+- [x] Record final deployment provenance and source delivery.
 
 Previous website version: `2657f69c-db92-4c89-a070-4c35e2fc3218`. Prepared runtime source: website `ec08e7d`, API `a2aab2e54`.
+
+Published versions, both read back at 100% traffic:
+
+| Service | Deployed source | Production version |
+| --- | --- | --- |
+| Website `yorix-website` | `3361dda` (runtime `ec08e7d`) | `f4c82f34-bb83-4119-955f-392dfbcff627` |
+| API `babysleepcoach-ai-proxy` | `a2aab2e54` | `3dc6e56c-46a5-401b-afde-4a274c8e2aef` |
+
+Both dry-run bundles passed. The API's deployed plain-text variables matched the checked-in configuration before release; public config after release still reports test checkout, review open, YooKassa. No live purchase or customer email was generated for verification. No iOS build was released.
+
+Final production verification:
+
+- 16 rendered checks passed on `https://yorix-app.com`: Chrome at 390 px and WebKit at 1280 px, RU/EN offer/privacy/terms/payment. Edition 2 November 2026, Georgian identity, one registration-number disclosure, no former seller identity, no overflow, receipt and links all passed; no page or first-party resource errors. Rendered identity and receipt screenshots were inspected.
+- English sales-page checks used an English language cookie with a Russian-compatible browser-language list, respecting the existing sales gate. The English-only request from outside the sales region correctly redirected to the showcase; no gate was changed.
+- Chrome and WebKit passed `/ru/start`, `/ru/support` and neutral `/start` resolving to `/ru/start` with the saved Russian language (six checks). A bare Python-urllib probe received 403; the actual browser checks passed.
+- `scripts/check-edge-encoding.mjs` passed all eight cold/warm checks: zstd, Brotli, gzip and identity decoded to the same JavaScript.
+- Public API still reports `checkoutMode: test`, `reviewOpen: true`, `provider: yookassa`.
+
+Publication is complete. Subsequent commits only record evidence/preferences; all runtime changes in this batch are live. The open next actions are the transfer/consent and provider-contract verification described above, plus an executed Georgian acquiring arrangement before live payments. No such facts are inferred from the owner's publication authorization.
