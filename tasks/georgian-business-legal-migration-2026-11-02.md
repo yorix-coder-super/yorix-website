@@ -84,3 +84,15 @@ A Georgia-qualified review of these actual arrangements and the cross-border con
 Source delivery uses website `premium-web-payments` with `main` fast-forwarded, and BabySleepCoach `main`; only the owned Worker files and preference memory are included in the latter commit. Unrelated iOS/catalog/art changes are excluded.
 
 The production website remains on its earlier published edition; no legal migration deployment or app release has been performed. Next action: resolve the documented transfer/consent and account-contract facts, then select the effective date and coordinate the website/Worker release upon request.
+
+## Publication authorization and execution — 2 November 2026
+
+After the prepared state and remaining legal/contract facts were reported, the owner replied “okay, go ahead”. Proceed with publication of the prepared website documents and matching transactional-mail identity. This supersedes the publication deferral above; it does not establish that transfer permissions, qualifying consent or acquiring agreements exist. Those remain open operational/legal follow-ups, and live checkout stays disabled.
+
+- [x] Confirm deployment scope: current API production is `d891992e-6098-4e09-b0ea-daaa29fe8d74`, source `afcf51439`; only seller identity/confirmation runtime changes differ in the Worker. Unrelated iOS working-tree changes are excluded.
+- [x] Confirm production checkout remains `test`, review open, provider YooKassa.
+- [ ] Publish the compatible Worker mail mapping, then website documents.
+- [ ] Verify current production versions, RU/EN documents, entry funnel and unchanged checkout mode.
+- [ ] Record final deployment provenance and source delivery.
+
+Previous website version: `2657f69c-db92-4c89-a070-4c35e2fc3218`. Prepared runtime source: website `ec08e7d`, API `a2aab2e54`.
