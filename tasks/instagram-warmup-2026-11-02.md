@@ -70,3 +70,12 @@ Verified premium source delivered in `dce638b` to `origin/main` and `origin/prem
 Performance audit: trace → load/layout/interaction metrics → resource inspection → accessibility and motion states → targeted source changes.
 
 Motion verification passed in Chrome and WebKit: live Reduced Motion, offscreen pause/resume, next-scene image decoding, entrance sampling and preservation of home-page Lenis behavior. The production build passed after the final integer-sized QR change. See `design-specs/web/instagram/performance.md` for measured results and limits.
+
+## Production publication — 2026-11-02
+
+Owner explicitly requested publishing all completed website changes. This supersedes the earlier pending-publication status.
+
+- [x] Confirm clean source, matching remote branches and the existing production Worker target.
+- [ ] Build and publish the complete verified website batch to `yorix-website`.
+- [ ] Verify the public campaign in all five languages, navigation, assets and App Store/QR destinations.
+- [ ] Record deployment version and source revision after production verification.
