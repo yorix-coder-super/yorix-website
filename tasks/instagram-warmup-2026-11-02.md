@@ -10,7 +10,7 @@ Build a five-language campaign at `/start` and `/{ru,tr,de,en,ar}/start` for Ins
 - [x] Implement direct App Store links, campaign attribution, a genuine static QR and copy/share fallback.
 - [x] Write campaign strategy, copy sequence, campaign links and measurement limitations.
 - [x] Verify TypeScript, production build, Chrome/WebKit desktop/mobile, reduced motion, no-JS, link attribution and QR decoding.
-- [x] Prepare verified source for delivery to the working branch and main without overwriting remote history.
+- [x] Commit and push verified source to the working branch and main without overwriting remote history.
 - [ ] Deploy only after explicit owner request, per repository AGENTS.md.
 
 ## Scope
@@ -19,7 +19,7 @@ Initial Russian-only scrolling story: SUPERSEDED by the owner-provided five-lang
 The DOCX is reference material. Google Play is omitted because the product is iOS-only. The outcome-led final headline is replaced with an invitation to log one sleep; paid predictions are disclosed. Official Apple badges are used unmodified.
 
 ## Next action
-Deliver the verified source to both branches. The premium visual reference is a separate concept; implementation of that direction and production deployment remain pending an owner request.
+Source delivered in `708ee9c` to `origin/main` and `origin/premium-web-payments`; immutable source checkpoint `checkpoint/2026-11-02-instagram-funnel`. The premium visual reference is a separate concept; implementation of that direction and production deployment remain pending an owner request.
 
 ## Completion pass — 2026-11-02
 
