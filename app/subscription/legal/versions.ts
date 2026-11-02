@@ -1,13 +1,11 @@
 import type { Lang } from '../i18n';
 
-// One edition date per document. It is shown on the page and sent with every
-// order and request, so the seller can prove which text the buyer accepted
-// (99-З ст. 5 п. 7 puts that burden on the operator).
+// Edition dates are stored with each order as evidence of the accepted terms.
 export const legalVersion = {
-  offer: '2026-10-13',
-  payment: '2026-10-13',
-  terms: '2026-10-13',
-  privacy: '2026-10-26',
+  offer: '2026-11-02',
+  payment: '2026-11-02',
+  terms: '2026-11-02',
+  privacy: '2026-11-02',
 } as const;
 
 export type LegalDoc = keyof typeof legalVersion;

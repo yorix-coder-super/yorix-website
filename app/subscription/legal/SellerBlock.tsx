@@ -3,8 +3,8 @@ import { merchant } from '../merchant';
 
 export function sellerLine(lang: Lang) {
   return lang === 'ru'
-    ? `${merchant.fullName}, ${merchant.status.ru.toLowerCase()}${merchant.unp ? `, УНП ${merchant.unp}` : ''}`
-    : `${merchant.fullName} (${merchant.latinName}), ${merchant.status.en.toLowerCase()}${merchant.unp ? `, taxpayer number ${merchant.unp}` : ''}`;
+    ? `ИП ${merchant.fullName} (Грузия)`
+    : `Individual Entrepreneur ${merchant.latinName} (Georgia)`;
 }
 
 // The e-mail appears only where a seller's requisites must carry it (the
@@ -13,13 +13,13 @@ export function SellerBlock({ lang, email = true }: { lang: Lang; email?: boolea
   const address = [merchant.country[lang], merchant.postalAddress].filter(Boolean).join(', ');
   return (
     <p>
-      {lang === 'ru' ? merchant.fullName : `${merchant.fullName} (${merchant.latinName})`}
+      {sellerLine(lang)}
       <br />
       {merchant.status[lang]}
-      {merchant.unp ? (
+      {merchant.registrationNumber ? (
         <>
           <br />
-          {lang === 'ru' ? 'УНП' : 'Taxpayer number (УНП)'} {merchant.unp}
+          {lang === 'ru' ? 'Регистрационный / налоговый номер' : 'Registration / tax number'} {merchant.registrationNumber}
         </>
       ) : null}
       <br />

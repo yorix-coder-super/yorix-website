@@ -13,12 +13,6 @@ const appleEula = 'https://www.apple.com/legal/internet-services/itunes/dev/stde
 const appleSubscriptions = 'https://support.apple.com/118428';
 const appleRefunds = 'https://reportaproblem.apple.com';
 
-// The terms every app of this kind publishes (Napper's Terms of Service,
-// Huckleberry's Terms of Use): what the service is and is not, the rules of
-// use and the limits of liability. Every limit is subject to clause 1.4: a
-// consumer keeps whatever the law of their country does not let a contract
-// take away, so a clause the law voids falls alone and the rest stands.
-// Purchases stay with Apple's terms and, on the site, the offer.
 function ru({ seller, privacy, offer, payment, contact, web }: Ctx): LegalSection[] {
   return [
     {
@@ -44,8 +38,8 @@ function ru({ seller, privacy, offer, payment, contact, web }: Ctx): LegalSectio
     {
       title: '3. ИИ-коуч',
       blocks: [
-        '3.1. Ответы Коуча формируются автоматически моделями искусственного интеллекта, в том числе сторонних поставщиков, и не проверяются человеком. Они могут быть неточными, неполными или устаревшими, даже если звучат убедительно. Проверяйте важное у врача.',
-        '3.2. Коуч не обсуждает дозировки лекарств и не ставит диагнозы. Мы вправе отказать в ответе, ограничить его или ограничить число сообщений, чтобы защитить ребёнка, Сервис и других пользователей.',
+        "3.1. Ответы Коуча создаёт программа. Они могут содержать вымышленные факты, ссылки и объяснения, быть неточными, неполными или неподходящими для вашей ситуации, даже если звучат уверенно. Проверяйте существенную информацию независимо; не используйте ответ как единственное основание решения о здоровье или безопасности ребёнка. Ответ не проходит индивидуальную проверку врачом.",
+        "3.2. Коуч предназначен для общей информации, а не для диагностики, назначения лечения или расчёта дозировок. Ограничители безопасности снижают риск, но не гарантируют обнаружения каждого опасного запроса или ответа. Мы вправе отказать в ответе или ограничить использование для безопасности и предотвращения злоупотреблений.",
         '3.3. Не сообщайте Коучу и не вносите в дневник сведения о других людях — например, о втором родителе или няне — без их согласия или иного законного основания.',
         '3.4. **ИИ-кредиты** — внутренняя единица учёта сообщений Коучу. Они не являются деньгами, не имеют денежной стоимости, не обмениваются на деньги и не передаются на другой аккаунт. Кредиты, входящие в подписку, обновляются каждый расчётный период и не переносятся на следующий; купленные пакеты кредитов не сгорают, пока существуют ваш аккаунт и Коуч.',
       ],
@@ -65,7 +59,7 @@ function ru({ seller, privacy, offer, payment, contact, web }: Ctx): LegalSectio
         '5.1. Записи, заметки, фотографии и сообщения, которые вы вносите в Сервис (ваш контент), принадлежат вам.',
         '5.2. Вы предоставляете нам безвозмездную неисключительную лицензию хранить, обрабатывать и передавать ваш контент, в том числе нашим поставщикам из Политики обработки персональных данных, — только чтобы предоставлять вам Сервис, пока вы им пользуетесь, и в сроки хранения, указанные в Политике.',
         '5.3. Вы отвечаете за свой контент: он должен быть законным и не нарушать прав других людей. Фотографии других людей, кроме своего ребёнка, добавляйте только с их согласия.',
-        '5.4. Дневник хранится на вашем устройстве и в вашей частной базе iCloud. У нас нет его копии, поэтому восстановить удалённые записи мы не можем.',
+        "5.4. Основной дневник хранится на устройстве и в частной базе iCloud пользователя. У нас нет полной резервной копии для восстановления. Отдельные данные могут передаваться для ИИ и поддержки, как описано в Политике. Используйте доступный экспорт для собственной копии; мы не гарантируем восстановление удалённых записей.",
         '5.5. Отзывы и предложения, которые вы нам присылаете, мы можем использовать для улучшения Сервиса без вознаграждения.',
       ],
     },
@@ -87,15 +81,15 @@ function ru({ seller, privacy, offer, payment, contact, web }: Ctx): LegalSectio
     {
       title: '8. Сторонние сервисы',
       blocks: [
-        '8.1. Сервис работает с сервисами Apple (App Store, iCloud, вход через Apple), Google (вход через Google), платёжных провайдеров и поставщиков ИИ. Они действуют по своим условиям и политикам. Мы их не контролируем и не отвечаем за их работу (с учётом п. 1.4).',
+        "8.1. Сервис зависит от Apple, Google, платёжных и инфраструктурных поставщиков, а также поставщиков ИИ. Их функции регулируются их условиями. Мы не гарантируем доступность сторонних систем и не контролируем решения их операторов; это не исключает наших обязанностей, которые закон возлагает на нас за привлечённых исполнителей или обработчиков данных.",
         '8.2. Ссылки на сторонние сайты и материалы приводятся для удобства; за их содержание мы не отвечаем.',
       ],
     },
     {
       title: '9. Доступность и изменения Сервиса',
       blocks: [
-        '9.1. Мы стремимся, чтобы Сервис работал без перерывов, но возможны технические работы, сбои и обстоятельства раздела 12.',
-        '9.2. Мы можем изменять, добавлять и убирать функции, а также прекращать поддержку устаревших версий iOS.',
+        "9.1. Доступность Сервиса не гарантируется непрерывно: возможны обновления, технические работы, сбои, ограничения сети, устройства или стороннего поставщика. Если отдельно письменно не согласовано иное, мы не предоставляем SLA или гарантированного времени ответа поддержки. Обязательные сроки рассмотрения законных требований сохраняются.",
+        "9.2. Мы можем развивать и изменять функции, интерфейс, используемые модели ИИ, лимиты и поддерживаемые версии системы. Уже оплаченные права и обязательные средства защиты сохраняются; если существенная оплаченная функция прекращается, применяются правила возврата и закон.",
         '9.3. Мы можем прекратить работу Сервиса или отдельной функции. Когда это возможно, мы заранее сообщим об этом в Приложении или на сайте. Возврат за неиспользованный оплаченный период — по правилам Apple, публичного договора и закона.',
         '9.4. Функции, материалы и покупки могут быть доступны не во всех странах.',
       ],
@@ -103,7 +97,7 @@ function ru({ seller, privacy, offer, payment, contact, web }: Ctx): LegalSectio
     {
       title: '10. Отказ от гарантий',
       blocks: [
-        '10.1. Сервис предоставляется «как есть» и «по мере доступности». В пределах, допускаемых законом (п. 1.4), мы не даём гарантий, прямо не указанных в этих условиях, — в том числе что Сервис будет работать бесперебойно и без ошибок или что прогнозы, программы и ответы Коуча подойдут вашему ребёнку и приведут к определённому результату.',
+        "10.1. В пределах, допускаемых законом, Сервис предоставляется «как есть» и «по мере доступности», без дополнительных гарантий точности, полноты, своевременности, пригодности для конкретной цели, совместимости с любым устройством, бесперебойности или отсутствия ошибок. Мы не гарантируем улучшение сна, здоровья, развития или иной индивидуальный результат. Демонстрационные примеры и отзывы отражают отдельные ситуации и не обещают аналогичного результата. Это не отменяет явно согласованные характеристики покупки и обязательные гарантии закона.",
       ],
     },
     {
@@ -119,7 +113,7 @@ function ru({ seller, privacy, offer, payment, contact, web }: Ctx): LegalSectio
             'за последствия нарушения вами этих условий.',
           ],
         },
-        '11.2. В пределах, допускаемых законом (п. 1.4), наша совокупная ответственность по всем требованиям, связанным с Сервисом, не превышает суммы, которую вы заплатили нам за Сервис (в том числе через App Store) за 12 месяцев до возникновения требования, а если вы ничего не платили — суммы, эквивалентной 50 долларам США.',
+        "11.2. Только в пределах, допускаемых законом, совокупная ответственность по требованиям, связанным с Сервисом, ограничена большей из сумм: уплаченная вами за Сервис за 12 месяцев до события, вызвавшего требование, либо эквивалент 50 долларов США. Это ограничение не уменьшает обязательный возврат оплаты или иную сумму, которую закон не позволяет ограничить.",
         '11.3. Ограничения этого раздела не применяются к ответственности, которую закон не позволяет ограничить, — в том числе за вред жизни или здоровью, за умышленное нарушение и грубую неосторожность, — и не затрагивают прав потребителя (п. 1.4).',
       ],
     },
@@ -137,7 +131,7 @@ function ru({ seller, privacy, offer, payment, contact, web }: Ctx): LegalSectio
             'кибератаки, несмотря на принятые разумные меры защиты.',
           ],
         },
-        '12.2. Сроки исполнения обязательств сдвигаются на время действия таких обстоятельств. Когда это возможно, мы сообщаем о них в Приложении или на сайте.',
+        "12.2. В предусмотренных законом пределах срок исполнения затронутого обязательства может быть продлён на время препятствия. Мы принимаем разумные меры для уменьшения последствий. Это положение не отменяет обязательных прав на расторжение и возврат и не продлевает сроки, которые закон запрещает продлевать.",
         ...(web ? ['12.3. Для покупок на сайте действует раздел 12 публичного договора, включая право отказаться от договора, если обстоятельства длятся больше 30 дней.'] : []),
       ],
     },
@@ -152,7 +146,7 @@ function ru({ seller, privacy, offer, payment, contact, web }: Ctx): LegalSectio
     {
       title: '14. Возмещение',
       blocks: [
-        '14.1. Если третье лицо или государственный орган предъявит нам требование из-за того, что вы использовали Сервис незаконно или нарушили эти условия, вы возмещаете нам подтверждённые убытки и расходы, вызванные этим, — в пределах, допускаемых законом (п. 1.4).',
+        "14.1. Ответственность пользователя за незаконное использование и нарушение прав третьих лиц определяется применимым законом. Для потребителя этот раздел не создаёт безусловной обязанности возмещать наши расходы, штрафы, судебные издержки или последствия наших собственных нарушений.",
       ],
     },
     {
@@ -165,14 +159,14 @@ function ru({ seller, privacy, offer, payment, contact, web }: Ctx): LegalSectio
     {
       title: '16. Претензии и споры',
       blocks: [
-        `16.1. Прежде чем обращаться в суд, направьте нам претензию через форму [«Написать нам»](${contact}): опишите требование и укажите адрес электронной почты аккаунта. Мы ответим в течение 30 дней.`,
+        `16.1. Для урегулирования вопроса можно направить обращение через форму [«Написать нам»](${contact}), описав ситуацию и указав контакт для ответа. Мы рассматриваем требования в обязательные сроки, предусмотренные применимым законом. Обращение в поддержку не ограничивает право обратиться непосредственно в суд или надзорный орган.`,
         '16.2. Если спор не урегулирован, он рассматривается судом по правилам законодательства о гражданском судопроизводстве. Это не лишает потребителя права обратиться в суд напрямую и по месту своего жительства, если такое право дано ему законом.',
       ],
     },
     {
       title: '17. Применимое право',
       blocks: [
-        '17.1. К условиям применяется право Республики Беларусь. Если вы потребитель из другой страны, это не лишает вас защиты, которую дают императивные нормы права страны вашего проживания.',
+        "17.1. Эти условия регулируются правом Грузии. Выбор права не лишает потребителя защиты обязательных норм страны его обычного проживания, когда они применимы.",
       ],
     },
     {
@@ -214,8 +208,8 @@ function en({ seller, privacy, offer, payment, contact, web }: Ctx): LegalSectio
     {
       title: '3. AI coach',
       blocks: [
-        '3.1. Coach answers are generated automatically by artificial intelligence models, including third-party ones, and are not reviewed by a human. They may be inaccurate, incomplete or out of date even when they sound convincing. Check anything important with a doctor.',
-        '3.2. The Coach does not discuss medication doses or diagnose. We may decline to answer, limit an answer or limit the number of messages to protect the child, the Service and other users.',
+        "3.1. Coach responses are generated by software. They may include invented facts, references or explanations and may be inaccurate, incomplete or unsuitable, even when confident. Independently check important information; do not use a response as the sole basis for decisions about a child’s health or safety. Responses are not individually reviewed by a clinician.",
+        "3.2. The Coach is intended for general information, not diagnosis, treatment or medication dosing. Safety measures reduce risk but cannot guarantee detection of every unsafe request or response. We may refuse a response or limit use for safety and abuse prevention.",
         '3.3. Do not tell the Coach or enter in the diary information about other people — for example, the other parent or a nanny — without their consent or another lawful basis.',
         '3.4. **AI credits** are an internal unit for counting messages to the Coach. They are not money, have no cash value, cannot be exchanged for money and cannot be moved to another account. Credits included in a subscription refresh every billing period and do not carry over; purchased credit packs do not expire while your account and the Coach exist.',
       ],
@@ -235,7 +229,7 @@ function en({ seller, privacy, offer, payment, contact, web }: Ctx): LegalSectio
         '5.1. The records, notes, photos and messages you enter in the Service (your content) belong to you.',
         '5.2. You grant us a free, non-exclusive licence to store, process and transmit your content, including to our providers listed in the Personal data policy, solely to provide the Service to you, while you use it and for the retention periods in that policy.',
         '5.3. You are responsible for your content: it must be lawful and must not infringe other people’s rights. Add photos of people other than your child only with their consent.',
-        '5.4. The diary is kept on your device and in your private iCloud database. We have no copy of it, so we cannot restore deleted records.',
+        "5.4. The primary diary is stored on the user’s device and in their private iCloud database. We do not hold a complete backup for restoration. Selected data may be transmitted for AI and support as described in the Policy. Use the available export to keep your own copy; restoration of deleted entries is not guaranteed.",
         '5.5. We may use feedback and suggestions you send us to improve the Service without payment.',
       ],
     },
@@ -257,15 +251,15 @@ function en({ seller, privacy, offer, payment, contact, web }: Ctx): LegalSectio
     {
       title: '8. Third-party services',
       blocks: [
-        '8.1. The Service works with services of Apple (App Store, iCloud, Sign in with Apple), Google (Sign in with Google), payment providers and AI providers. They operate under their own terms and policies. We do not control them and are not liable for how they work (subject to clause 1.4).',
+        "8.1. The Service depends on Apple, Google, payment and infrastructure providers and AI suppliers. Their features are subject to their terms. We do not guarantee their availability or control their operators’ decisions; this does not exclude duties the law imposes on us for contractors or data processors.",
         '8.2. Links to third-party sites and materials are provided for convenience; we are not responsible for their content.',
       ],
     },
     {
       title: '9. Availability and changes to the Service',
       blocks: [
-        '9.1. We aim to keep the Service running without interruption, but maintenance, outages and the circumstances in section 12 may occur.',
-        '9.2. We may change, add and remove features and end support for outdated iOS versions.',
+        "9.1. Continuous availability is not guaranteed: updates, maintenance, failures and network, device or supplier restrictions may occur. Unless separately agreed in writing, we provide no uptime SLA or guaranteed support response time. Mandatory deadlines for legal requests remain applicable.",
+        "9.2. We may develop or change features, interfaces, AI models, limits and supported operating-system versions. Paid entitlements and mandatory remedies remain protected; refund rules and law apply if a material paid feature is discontinued.",
         '9.3. We may discontinue the Service or a feature. Where feasible, we will give notice in advance in the App or on the site. Refunds for an unused paid period follow Apple’s rules, the public offer and the law.',
         '9.4. Features, content and purchases may not be available in every country.',
       ],
@@ -273,7 +267,7 @@ function en({ seller, privacy, offer, payment, contact, web }: Ctx): LegalSectio
     {
       title: '10. No warranty',
       blocks: [
-        '10.1. The Service is provided “as is” and “as available”. To the extent the law allows (clause 1.4), we give no warranties not expressly stated in these terms — in particular, that the Service will run uninterrupted or error-free, or that forecasts, programs and Coach answers will suit your child or lead to a particular result.',
+        "10.1. To the extent permitted by law, the Service is provided as is and as available, without additional warranties of accuracy, completeness, timeliness, fitness for a particular purpose, compatibility with every device, uninterrupted operation or freedom from errors. We do not guarantee improved sleep, health, development or other individual outcomes. Examples and testimonials describe individual situations and do not promise similar results. Expressly agreed purchase features and mandatory statutory warranties remain unaffected.",
       ],
     },
     {
@@ -289,7 +283,7 @@ function en({ seller, privacy, offer, payment, contact, web }: Ctx): LegalSectio
             'the consequences of your breach of these terms.',
           ],
         },
-        '11.2. To the extent the law allows (clause 1.4), our total liability for all claims related to the Service is limited to the amount you paid us for the Service (including through the App Store) in the 12 months before the claim arose or, if you paid nothing, the equivalent of USD 50.',
+        "11.2. Only to the extent permitted by law, aggregate liability for claims connected with the Service is limited to the greater of the amount you paid for the Service in the 12 months before the event giving rise to the claim or the equivalent of USD 50. This limit does not reduce a mandatory refund or any other amount that cannot lawfully be limited.",
         '11.3. The limits in this section do not apply to liability that the law does not allow to be limited — including for harm to life or health, intentional breach and gross negligence — and do not affect consumer rights (clause 1.4).',
       ],
     },
@@ -307,7 +301,7 @@ function en({ seller, privacy, offer, payment, contact, web }: Ctx): LegalSectio
             'cyberattacks despite reasonable protective measures.',
           ],
         },
-        '12.2. Deadlines move for as long as such circumstances last. Where feasible, we announce them in the App or on the site.',
+        "12.2. Where law permits, the affected obligation may be delayed for the duration of the impediment. We take reasonable measures to mitigate its effects. This does not remove mandatory termination or refund rights or extend deadlines that cannot lawfully be extended.",
         ...(web ? ['12.3. Purchases on the website follow section 12 of the public offer, including the right to withdraw if the circumstances last more than 30 days.'] : []),
       ],
     },
@@ -322,7 +316,7 @@ function en({ seller, privacy, offer, payment, contact, web }: Ctx): LegalSectio
     {
       title: '14. Indemnity',
       blocks: [
-        '14.1. If a third party or an authority brings a claim against us because you used the Service unlawfully or breached these terms, you compensate our documented losses and costs caused by it, to the extent the law allows (clause 1.4).',
+        "14.1. A user’s liability for unlawful use or infringement of third-party rights is determined by applicable law. For a consumer, this section creates no unconditional duty to pay our costs, penalties, legal fees or losses caused by our own breach.",
       ],
     },
     {
@@ -335,14 +329,14 @@ function en({ seller, privacy, offer, payment, contact, web }: Ctx): LegalSectio
     {
       title: '16. Claims and disputes',
       blocks: [
-        `16.1. Before going to court, send us a claim through the [“Write to us”](${contact}) form, describing what you ask for and stating your account’s e-mail address. We will reply within 30 days.`,
+        `16.1. You may seek resolution through the [support form](${contact}), describing the issue and providing a reply contact. We handle legal requests within mandatory applicable deadlines. Contacting support does not limit direct access to a court or supervisory authority.`,
         '16.2. If the dispute is not settled, it is heard by a court under the law on civil proceedings. This does not deprive a consumer of the right to go to court directly and at their place of residence where the law gives them that right.',
       ],
     },
     {
       title: '17. Governing law',
       blocks: [
-        '17.1. These terms are governed by the law of the Republic of Belarus. If you are a consumer from another country, this does not deprive you of the protection of the mandatory rules of your country of residence.',
+        "17.1. Georgian law governs these terms. This choice does not deprive consumers of mandatory protections of their habitual residence where applicable.",
       ],
     },
     {

@@ -2,7 +2,7 @@ import { headers } from 'next/headers';
 import { DocumentPage } from '../DocumentPage';
 import { currencyForVisitor, formatMoney, sellsOnWeb, type WebCurrency } from '../currency';
 import { subscriptionPath, type Lang } from '../i18n';
-import { ACQUIRER, acquirer, chargeFor, formatByn, listJoin, merchant, planCopy, plans } from '../merchant';
+import { ACQUIRER, acquirer, chargeFor, formatByn, listJoin, planCopy, plans } from '../merchant';
 import { PaymentLogos } from '../PaymentLogos';
 import { SampleReceipt } from '../SampleReceipt';
 import { editionLabel } from './versions';
@@ -13,7 +13,7 @@ export const paymentTermsTitle = { ru: 'Оплата, доставка и воз
 // The page lists one price per plan: the amount this visitor's card would
 // actually be charged, in the currency their receipt will name. The site
 // sells by card to Belarus and Russia; other countries buy in the App Store
-// and are shown the seller's own Belarusian list.
+// and do not see this payment page.
 export async function PaymentTerms({ lang }: { lang: Lang }) {
   const requestHeaders = await headers();
   const visitor = currencyForVisitor(visitorCountry(requestHeaders), requestHeaders.get('accept-language'));
@@ -52,8 +52,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         <h2>What you buy</h2>
         <p>
           A Yorix subscription is access to the paid features of the Yorix app for iPhone and iPad for a chosen period: the personal sleep forecast,
-          the AI sleep coach, analytics and daily recommendations. The service is provided by {merchant.fullName} ({merchant.latinName}),{' '}
-          {merchant.status.en.toLowerCase()}, {merchant.country.en}.
+          the AI sleep coach, analytics and daily recommendations. The provider and its business details are identified in the <a href={`${offer}#seller`}>public offer</a>.
         </p>
         {planList}
         <p>The payment is one-off; there is no automatic renewal and the card is not saved.</p>
@@ -101,8 +100,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
           </p>
         </blockquote>
         <p>
-          If the subscription has not turned on after payment, contact support through {form}
-          {merchant.phone ? ` or by phone ${merchant.phone}` : ''}. State the date and amount of the payment — we will check it and help.
+          If the subscription has not turned on after payment, contact support through {form}. State the date and amount of the payment — we will check it and help.
         </p>
 
         <h2>Receiving the service (delivery)</h2>
@@ -117,7 +115,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         <h2>Service control</h2>
         <ul>
           <li>restart the Yorix app if the paid features have not appeared yet;</li>
-          <li>if the features have not opened within 3 days of payment, write to us through {form} — we will switch the subscription on or refund the payment.</li>
+          <li>if paid features remain unavailable, contact us through {form}; activation issues and refunds follow sections 5 and 7 of the offer.</li>
         </ul>
 
         <h2>Cancellation and refunds</h2>
@@ -128,8 +126,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         <ul>
           <li>before the subscription is switched on, an order can be cancelled at any time — we refund the full amount;</li>
           <li>
-            after it is switched on you may withdraw at any time: we refund the price of the unused full days of the period, less our documented actual
-            costs (clause 7.2 of the <a href={offer}>offer</a>);
+            statutory withdrawal rights, including the 14-day right where applicable, remain in full. Outside mandatory full-refund cases, early cancellation is refunded for unused full days (section 7 of the <a href={offer}>offer</a>);
           </li>
           <li>
             we refund in full if the subscription was not switched on, if a charge was mistaken or duplicated, or if the service did not work through our
@@ -141,23 +138,19 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
           confirmation showing the wrong charge. Cash refunds are not made for card payments.
         </p>
         <p>
-          We make the refund within 10 days of receiving the request (7 days where the service had defects). The time until the money
-          reaches the card depends on the issuing bank.
+          Refunds use the original payment method and currency within 14 calendar days of the request, or sooner where mandatory law requires. The issuing bank determines when the credit appears on the statement.
         </p>
 
         <h2>Liability and force majeure</h2>
         <p>
           Liability follows section 11 of the <a href={offer}>offer</a>. If a bank, the payment system, sanctions or payment restrictions, an
-          outage of the App Store or of our providers, or other force majeure delay a payment, the activation or a refund, the deadlines move for as
-          long as the circumstances last; if they last more than 30 days, you may withdraw and get the price of the unused days back (section 12 of the
+          outage of the App Store or our providers prevents performance, a deadline may move only where applicable law permits; if they last more than 30 days, you may withdraw and get the price of the unused days back (section 12 of the
           offer). Your consumer rights stay in full.
         </p>
 
         <h2>Payment confirmation document</h2>
         <p>
-          Two documents confirm the payment: the {bank} card receipt confirming the card payment, and a receipt from the “Professional income
-          tax” app confirming that the seller received the payment, which we issue within the time set by tax law and send on your request. Personal data in the
-          samples is illustrative.
+          Keep the {bank} transaction confirmation and your order details. Purchase documents are provided as required by applicable law and can be requested through support. The example below is illustrative and is not a fiscal receipt.
         </p>
         <SampleReceipt lang={lang} region={region} />
       </DocumentPage>
@@ -169,7 +162,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
       <h2>Что вы покупаете</h2>
       <p>
         Подписка Yorix — доступ к платным функциям приложения Yorix для iPhone и iPad на выбранный срок: персональный прогноз сна, ИИ-коуч по сну,
-        аналитика и ежедневные рекомендации. Услугу оказывает {merchant.fullName}, {merchant.status.ru.toLowerCase()}, {merchant.country.ru}.
+        аналитика и ежедневные рекомендации. Исполнитель и его реквизиты указаны в <a href={`${offer}#seller`}>публичном договоре</a>.
       </p>
       {planList}
       <p>Платёж разовый: автоматического продления нет, карта не сохраняется.</p>
@@ -217,8 +210,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         </p>
       </blockquote>
       <p>
-        Если после оплаты подписка не включилась, обратитесь в службу поддержки через {form}
-        {merchant.phone ? ` или по телефону ${merchant.phone}` : ''}. Укажите дату и сумму оплаты — мы проверим платёж и поможем.
+        Если после оплаты подписка не включилась, обратитесь в службу поддержки через {form}. Укажите дату и сумму оплаты — мы проверим платёж и поможем.
       </p>
 
       <h2>Получение услуги (доставка)</h2>
@@ -234,7 +226,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
       <h2>Контроль оказания услуги</h2>
       <ul>
         <li>если функции подписки ещё не появились, перезапустите приложение Yorix;</li>
-        <li>если функции подписки не открылись в течение 3 дней после оплаты, напишите нам через {form} — мы включим подписку или вернём деньги.</li>
+        <li>если платные функции остаются недоступны, напишите нам через {form}; устранение проблем активации и возврат регулируются разделами 5 и 7 оферты.</li>
       </ul>
 
       <h2>Отмена заказа и возврат денежных средств</h2>
@@ -248,8 +240,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
       <ul>
         <li>до включения подписки заказ можно отменить в любой момент — вернём всю сумму;</li>
         <li>
-          после включения от подписки можно отказаться в любой момент: вернём стоимость неиспользованных полных суток срока за вычетом подтверждённых
-          фактических расходов (п. 7.2 <a href={offer}>оферты</a>);
+          законное право на отказ, в том числе 14-дневное право в применимых случаях, сохраняется. Вне обязательных случаев полного возврата при досрочном отказе возвращается стоимость неиспользованных полных суток (раздел 7 <a href={offer}>оферты</a>);
         </li>
         <li>полностью возвращаем, если подписка не была включена, списание было ошибочным или повторным либо услуга не работала по нашей вине (п. 7.3 оферты).</li>
       </ul>
@@ -258,23 +249,19 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         показывающее ошибочное списание. Возврат наличными при оплате картой не производится.
       </p>
       <p>
-        Мы возвращаем деньги в течение 10 дней после получения заявления (при недостатках услуги — в течение 7 дней). Срок поступления денег на карту
-        зависит от банка, выпустившего карту.
+        Возврат производится на исходное средство оплаты в валюте списания в течение 14 календарных дней после заявления, если закон не требует более короткого срока. Срок отражения возврата в выписке зависит от банка.
       </p>
 
       <h2>Ответственность и непреодолимая сила</h2>
       <p>
         Ответственность сторон — по разделу 11 <a href={offer}>оферты</a>. Если оплату, включение подписки или возврат задерживают обстоятельства
-        непреодолимой силы — сбой банка или платёжной системы, санкции и ограничения платежей, сбой App Store или наших поставщиков, — сроки
-        сдвигаются на время их действия; если они длятся больше 30 дней, вы вправе отказаться от договора и получить стоимость неиспользованных суток
+        непреодолимой силы, продление сроков допускается только в предусмотренных законом пределах; если они длятся больше 30 дней, вы вправе отказаться от договора и получить стоимость неиспользованных суток
         (раздел 12 оферты). Ваши права потребителя сохраняются в полном объёме.
       </p>
 
       <h2>Документ, подтверждающий оплату</h2>
       <p>
-        Оплату подтверждают два документа: карт-чек {bank} — подтверждение оплаты картой, и чек из приложения «Налог на профессиональный
-        доход» — документ, подтверждающий получение оплаты продавцом; его формируем в срок, установленный налоговым законодательством, и присылаем по вашему
-        запросу. Персональные данные в образцах условные.
+        Сохраняйте подтверждение операции {bank} и сведения о заказе. Документы о покупке предоставляются в соответствии с применимым законодательством; их можно запросить через поддержку. Ниже приведён условный пример подтверждения операции, а не фискальный чек.
       </p>
       <SampleReceipt lang={lang} region={region} />
     </DocumentPage>

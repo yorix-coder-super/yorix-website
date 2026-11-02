@@ -6,20 +6,20 @@ import { charges, chargesRub, plans, prices, type Plan, type PlanId } from './pr
 // seller requisites, plan prices and the support promise. Empty fields are
 // not rendered, so the page never shows a placeholder to a buyer.
 export const merchant = {
-  fullName: 'Базык Егор Юрьевич',
+  fullName: 'Yahor Bazyk',
   latinName: 'Yahor Bazyk',
   status: {
-    ru: 'Физическое лицо — плательщик налога на профессиональный доход',
-    en: 'Individual registered as a professional income tax payer',
+    ru: 'Индивидуальный предприниматель, зарегистрированный в Грузии',
+    en: 'Individual Entrepreneur registered in Georgia',
   },
-  unp: 'HE5964401',
-  country: { ru: 'Республика Беларусь', en: 'Republic of Belarus' },
-  postalAddress: '',
+  registrationNumber: '304699431',
+  country: { ru: 'Грузия', en: 'Georgia' },
+  postalAddress: 'Tbilisi, Krtsanisi district, Fonichala settlement 3, building 5, auxiliary warehouse',
   phone: '',
   email: 'yorix2026@outlook.com',
   hours: {
-    ru: 'Ежедневно с 10:00 до 20:00 (время минское)',
-    en: 'Daily, 10:00–20:00 Minsk time',
+    ru: 'Обращения через форму поддержки; время ответа зависит от сложности вопроса',
+    en: 'Contact us through the support form; response time depends on the issue',
   },
   tradeRegister: '',
 };

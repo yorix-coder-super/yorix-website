@@ -25,10 +25,10 @@ function ru({ operator, offer, contact }: Ctx): LegalSection[] {
     {
       title: '1. Общие положения',
       blocks: [
-        `1.1. Политика определяет, как ${operator} (далее — Оператор, «мы») обрабатывает персональные данные пользователей сайта yorix-app.com (далее — Сайт), мобильного приложения «Yorix» для iPhone и iPad (далее — Приложение), службы поддержки и связанных онлайн-сервисов (вместе — Сервис). Политика разработана в соответствии с Законом Республики Беларусь от 7 мая 2021 г. № 99-З «О защите персональных данных» (далее — Закон № 99-З).`,
+        `1.1. Эта Политика описывает обработку персональных данных в Yorix: на сайте yorix-app.com (Сайт), в приложении для iPhone и iPad (Приложение), поддержке и связанных сервисах. Ответственный за обработку — ${operator} (Оператор, «мы»); реквизиты и контакт указаны в разделе 14. Применяется законодательство Грузии о защите персональных данных и иные обязательные нормы, применимые к конкретной обработке.`,
         '1.2. Политика объясняет, какие данные мы обрабатываем, зачем и на каком основании, кому их передаём, как долго храним и как вы можете реализовать свои права. Политика не является согласием и не требует «принятия». Если обработка основана на согласии, мы просим его отдельно, в момент, когда оно нужно, и вы можете его отозвать.',
         '1.3. Сервис предназначен для взрослых — родителей и других лиц, которые заботятся о ребёнке. Сведения о ребёнке вносит взрослый; дети Сервисом не пользуются, и мы не собираем данные непосредственно у детей.',
-        '1.4. Термины «персональные данные», «специальные персональные данные» (в том числе сведения о здоровье), «обработка», «уполномоченное лицо» и «трансграничная передача» используются в значении Закона № 99-З.',
+        "1.4. Термины используются в значении применимого законодательства о защите персональных данных. Сведения о здоровье относятся к специальным категориям данных. Принятие условий использования само по себе не является согласием на любую обработку или передачу данных.",
       ],
     },
     {
@@ -54,19 +54,19 @@ function ru({ operator, offer, contact }: Ctx): LegalSection[] {
               [
                 'Вход и учётная запись',
                 'Идентификатор аккаунта; адрес электронной почты, в том числе адрес-ретранслятор Apple «Скрыть e-mail»; имя, если его передали Apple или Google; способ входа',
-                'Договор (абз. 15 ст. 6 Закона № 99-З)',
+                'Исполнение договора',
                 'Пока существует аккаунт',
               ],
               [
                 'Покупка подписки на Сайте, её активация и возвраты',
                 `Код аккаунта, e-mail, тариф, цена и валюта, номер заказа, номер и статус операции ${bankRu}, даты оплаты и срока доступа, язык, редакции принятых документов`,
-                'Договор; обязанности по законодательству — учёт дохода и чеки (абз. 20 ст. 6)',
+                'Исполнение договора; юридические обязанности по учёту и документам о покупке',
                 '3 года после окончания срока доступа; документы учёта дохода — в сроки налогового законодательства',
               ],
               [
                 'Подписка в подарок',
                 `Без аккаунта: e-mail покупателя (на него приходят ссылка, код подарка и подтверждение оплаты), тариф, цена, номер заказа, данные операции ${bankRu}, текст открытки (кому и пожелание — вводит покупатель), код подарка и его статус, хэш ключа браузера покупателя; при активации — аккаунт получателя`,
-                'Договор; обязанности по законодательству — учёт дохода и чеки (абз. 20 ст. 6)',
+                'Исполнение договора; юридические обязанности по учёту и документам о покупке',
                 '3 года после активации или окончания срока кода; документы учёта дохода — в сроки налогового законодательства',
               ],
               [
@@ -84,7 +84,7 @@ function ru({ operator, offer, contact }: Ctx): LegalSection[] {
               [
                 'ИИ-коуч и персональные подсказки',
                 'Ваши сообщения и ответы Коуча; имя, возраст, пол ребёнка, недоношенность и особенности здоровья, вскармливания и сна из профиля; если включена «Персонализация ИИ» — записи дневника и программ, нужные для ответа, в том числе сведения о здоровье (раздел 7); язык, часовой пояс; идентификатор установки или аккаунта для сессии',
-                'Согласие (ст. 5 и 8 Закона № 99-З); передача в США — с согласия после информирования о рисках (абз. 2 п. 1 ст. 9)',
+                'Согласие; для специальных категорий — отдельное законное основание; международная передача — раздел 5',
                 'На сервере — 30 дней после последнего сообщения в диалоге. История диалогов в Приложении хранится в вашем iCloud, пока вы её не удалите',
               ],
               [
@@ -138,7 +138,7 @@ function ru({ operator, offer, contact }: Ctx): LegalSection[] {
               [
                 'Ответы на запросы государственных органов, защита прав в споре',
                 'Сведения, относящиеся к запросу или спору',
-                'Обязанности по законодательству (абз. 20 ст. 6)',
+                'Применимые юридические обязанности',
                 'На время рассмотрения и срок исковой давности',
               ],
             ],
@@ -152,7 +152,7 @@ function ru({ operator, offer, contact }: Ctx): LegalSection[] {
     {
       title: '4. Кому мы передаём данные',
       blocks: [
-        '4.1. Мы передаём данные уполномоченным лицам только в объёме, нужном для цели, по договорам или их стандартным условиям обработки данных, и отвечаем перед вами за их действия (п. 3 ст. 7 Закона № 99-З).',
+        "4.1. Данные передаются обработчикам в необходимом для заявленной цели объёме на основании договоров обработки данных; некоторые получатели, например платёжные организации, самостоятельно определяют обработку в рамках своих юридических обязанностей. Статус поставщика не отменяет обязанностей, возложенных законом на Yorix.",
         {
           table: {
             head: ['Получатель', 'Страна', 'Какие данные', 'Зачем'],
@@ -174,24 +174,24 @@ function ru({ operator, offer, contact }: Ctx): LegalSection[] {
           },
         },
         '4.2. Поставщики ИИ получают сообщения, сведения о ребёнке и сводку из дневника без вашего e-mail, платёжных данных и идентификатора аккаунта. По их условиям данные, переданные через API, не используются для обучения моделей: DeepInfra не сохраняет запросы, OpenAI хранит их не дольше 30 дней для контроля злоупотреблений.',
-        '4.3. Сведения о расчётах (сумма, дата, наименование услуги) передаются в Министерство по налогам и сборам через приложение «Налог на профессиональный доход». Иным государственным органам данные предоставляются только в случаях, предусмотренных законодательством.',
+        "4.3. Сведения, необходимые для налогового и бухгалтерского учёта, предоставляются компетентным органам Грузии и другим уполномоченным получателям, когда этого требует применимый закон. Исторические операции могут сохраняться для выполнения ранее возникших законных обязанностей; это не меняет текущие реквизиты оператора.",
         '4.4. Если Сервис перейдёт к другому лицу (продажа или реорганизация), данные перейдут к нему вместе с Сервисом и только для тех же целей. Мы заранее сообщим об этом на этой странице или в Приложении.',
       ],
     },
     {
       title: '5. Трансграничная передача',
       blocks: [
-        '5.1. Большинство получателей находятся в США. США не входят в перечень государств, обеспечивающих надлежащий уровень защиты прав субъектов персональных данных (приказ Национального центра защиты персональных данных от 15.11.2021 № 14). Российская Федерация, государства Европейского союза и Великобритания в этот перечень входят.',
+        "5.1. Оператор зарегистрирован в Грузии. Получатели и места обработки перечислены в разделе 4; часть поставщиков находится в США и других странах. Доступ из Грузии и размещение данных за рубежом могут составлять международную передачу данных.",
         '5.2. **Риски.** В государствах без надлежащего уровня защиты может не быть законодательства о персональных данных или уполномоченного органа по их защите, к персональным данным может относиться более узкий круг сведений, права субъектов могут быть ограничены, а органы власти могут получать доступ к данным.',
-        '5.3. **Основания.** Данные для входа, покупок и поддержки передаются, потому что это необходимо для исполнения договора с вами (абз. 3 п. 1 ст. 9 Закона № 99-З). Данные ИИ-коуча, аналитики и атрибуции, а также сведения о здоровье ребёнка передаются с вашего согласия после информирования о рисках (абз. 2 п. 1 ст. 9).',
-        '5.4. **Меры защиты.** Мы передаём минимум данных, шифруем их при передаче и выбираем поставщиков, принявших обязательства по защите данных (для данных из ЕС и Великобритании — стандартные договорные условия либо участие получателя в EU-U.S. Data Privacy Framework).',
+        "5.3. Для международной передачи требуется отдельное законное основание по применимому праву. По законодательству Грузии это может быть надлежащий уровень защиты либо предусмотренное законом исключение; для договорных гарантий в случаях статьи 37(2)(b) требуется разрешение надзорного органа. Если передача основана на согласии, оно должно отвечать требованиям закона и следовать после информации о рисках. Само наличие договора с пользователем или публикация Политики не заменяет необходимое основание, согласие или разрешение.",
+        "5.4. Мы ограничиваем объём передачи и используем технические и организационные меры защиты. Для данных, подпадающих под GDPR или UK GDPR, применяются соответствующие механизмы международной передачи. Информацию о механизме для конкретного получателя и доступных гарантиях можно запросить через поддержку.",
       ],
     },
     {
       title: '6. Сведения о ребёнке и о здоровье',
       blocks: [
-        '6.1. Вы вносите сведения о ребёнке как его законный представитель. Согласие на обработку данных ребёнка, в том числе сведений о здоровье, даёт один из законных представителей (ч. 2 п. 9 ст. 5 Закона № 99-З). Если вы не законный представитель, вносите такие сведения только с его согласия.',
-        '6.2. Сведения о здоровье — специальные персональные данные. Мы обрабатываем их только для функций, которыми вы пользуетесь, и принимаем комплекс мер для их защиты (п. 3 ст. 8): минимизация, шифрование при передаче, доступ только у Оператора и допущенных им сотрудников поддержки, обязанных сохранять конфиденциальность.',
+        "6.1. Yorix предназначен для взрослых. Данные ребёнка вносит его законный представитель либо уполномоченное им лицо при наличии законного основания. Для обработки, требующей согласия, его даёт надлежащее лицо в предусмотренной законом форме; интересы ребёнка имеют приоритет.",
+        "6.2. Обработка сведений о здоровье требует специального основания, в том числе явного согласия в предусмотренных законом случаях. Мы применяем минимизацию, шифрование при передаче и ограничение доступа лицами, которым он необходим для разрешённой цели и которые обязаны соблюдать конфиденциальность.",
         '6.3. Если вы узнали, что ребёнок сам передал нам свои данные, напишите нам — мы их удалим.',
       ],
     },
@@ -200,7 +200,7 @@ function ru({ operator, offer, contact }: Ctx): LegalSection[] {
       blocks: [
         '7.1. Когда вы задаёте вопрос, Приложение отправляет на наш сервер сообщение и сведения о ребёнке из профиля: имя, возраст, пол, недоношенность, особенности здоровья, вскармливания и сна. Если в Настройках → Конфиденциальность и ИИ включена «Персонализация ИИ», добавляется сводка из дневника, нужная для ответа: записи за сегодня и итоги за 7 дней, рост, вес и окружность головы, симптомы за 14 дней, температура, прививки, настроение, сцеживание и сведения о программах. Названия лекарств и заметки Коучу не передаются. Сервер передаёт данные поставщику модели ИИ (раздел 4), а текст вопроса использует для поиска по статьям Yorix.',
         '7.2. Ответы формируются автоматически. Решений, порождающих для вас юридические последствия, Коуч не принимает.',
-        '7.3. Пользоваться Коучем не обязательно: дневник и прогнозы работают без него. Задавая Коучу вопрос, вы даёте согласие на передачу данных, перечисленных в п. 7.1, нашему серверу и поставщикам ИИ (раздел 4) для ответа. Чтобы эти данные не передавались, не пользуйтесь Коучем; уже сохранённые диалоги удаляет «Очистить историю чата с ИИ» (п. 7.4). Выключив «Персонализацию ИИ», вы прекращаете передачу записей дневника и сведений профиля: с вопросом передаётся только возраст ребёнка (с поправкой на недоношенность).',
+        "7.3. Пользоваться Коучем не обязательно: дневник и прогнозы работают без него. Перед передачей данных из п. 7.1 нашему серверу и поставщикам ИИ необходимо отдельное согласие в случаях и форме, предусмотренных законом; отправка вопроса не заменяет такое согласие. Не пользуйтесь Коучем, если не хотите передавать эти данные. Уже сохранённые диалоги удаляет «Очистить историю чата с ИИ» (п. 7.4). Выключение «Персонализации ИИ» прекращает передачу записей дневника и сведений профиля: с вопросом передаётся только возраст ребёнка с поправкой на недоношенность.",
         '7.4. «Очистить историю чата с ИИ» (Настройки → Конфиденциальность и ИИ) удаляет диалоги на устройстве, в iCloud и на нашем сервере.',
       ],
     },
@@ -217,7 +217,7 @@ function ru({ operator, offer, contact }: Ctx): LegalSection[] {
       title: '9. Удаление данных',
       blocks: [
         '9.1. В Приложении вы можете удалить отдельные записи; удалить ребёнка вместе со всеми его записями и совместным доступом; очистить историю чата с ИИ (п. 7.4); удалить аккаунт (Настройки → Аккаунт) — это удаляет учётную запись входа, все данные на устройстве и в вашей частной базе iCloud и закрывает совместный доступ.',
-        `9.2. Данные на нашем сервере и у получателей из раздела 4 — обращения, заказы, учёт подписки и кредитов, аналитика — не связаны с вашей базой iCloud. Чтобы удалить и их, напишите нам через форму [«Написать нам»](${contact}), указав e-mail аккаунта. Мы удаляем данные в течение 15 дней после запроса или отзыва согласия, кроме сведений, хранение которых обязательно по законодательству (например, о платежах). Из резервных копий данные удаляются не позднее 30 дней.`,
+        `9.2. Данные на нашем сервере и у получателей из раздела 4 — обращения, заказы, учёт подписки и кредитов, аналитика — не связаны с вашей базой iCloud. Чтобы удалить и их, напишите нам через форму [«Написать нам»](${contact}), указав e-mail аккаунта. Мы удаляем данные в применимые обязательные сроки (как правило, не позднее 10 рабочих дней после запроса или отзыва согласия), кроме сведений, хранение которых обязательно по законодательству (например, о платежах). Из резервных копий данные удаляются не позднее 30 дней.`,
         '9.3. Данные в вашей частной базе iCloud удаляете вы — в Приложении или в настройках iCloud (Настройки iOS → ваше имя → iCloud → Управление хранилищем → Yorix).',
       ],
     },
@@ -228,30 +228,32 @@ function ru({ operator, offer, contact }: Ctx): LegalSection[] {
           table: {
             head: ['Право', 'Срок ответа'],
             rows: [
-              ['Отозвать согласие — в той же форме, в которой оно дано (в Приложении или через форму «Написать нам»)', '15 дней'],
-              ['Получить информацию об обработке своих данных', '5 рабочих дней, бесплатно'],
-              ['Потребовать изменить неточные или устаревшие данные', '15 дней'],
-              ['Получить информацию о предоставлении данных третьим лицам (раз в год бесплатно)', '15 дней'],
-              ['Потребовать прекратить обработку и удалить данные', '15 дней'],
-              ['Обжаловать действия Оператора в Национальный центр защиты персональных данных (cpd.by)', '—'],
+              ['Отозвать согласие — в той же форме, в которой оно дано (в Приложении или через форму «Написать нам»)', '10 рабочих дней'],
+              ['Получить информацию об обработке своих данных', '10 рабочих дней, бесплатно'],
+              ['Потребовать изменить неточные или устаревшие данные', '10 рабочих дней'],
+              ['Получить сведения о получателях и основаниях передачи данных', '10 рабочих дней'],
+              ['Потребовать прекратить обработку и удалить данные', '10 рабочих дней'],
+              ['Потребовать блокировать данные при наличии законных оснований', 'Решение — не позднее 3 рабочих дней'],
+              ['Получить данные в переносимом формате, когда это предусмотрено законом', 'В применимый законный срок'],
+              ['Обратиться в Государственную службу аудита Грузии (sao.ge) или компетентный суд', '—'],
             ],
           },
         },
-        `10.1. Заявление подаётся в письменной форме или в виде электронного документа и содержит фамилию, имя, отчество, адрес места жительства (места пребывания), дату рождения, идентификационный номер (если он указывался при даче согласия), изложение сути требований и подпись (ст. 14 Закона № 99-З). Для удобства мы также рассматриваем в те же сроки запросы, отправленные через форму [«Написать нам»](${contact}) на сайте с указанием адреса электронной почты вашего аккаунта, и можем попросить подтвердить, что запрос исходит от вас.`,
+        `10.1. Запрос можно направить через [форму поддержки](${contact}) или по контакту из раздела 14, указав суть требования и сведения для поиска ваших данных. Паспортные данные и копия паспорта по умолчанию не требуются. При обоснованном сомнении мы можем запросить соразмерное подтверждение личности. Отказ или допустимое продление срока объясняем в предусмотренном законом порядке; это не ограничивает право на жалобу.`,
       ],
     },
     {
       title: '11. Защита данных',
       blocks: [
-        '11.1. Мы шифруем данные при передаче (TLS); для запросов к Коучу и учёта ИИ-кредитов Приложение дополнительно проверяет сертификат нашего сервера (закрепление сертификата). Мы проверяем подлинность Приложения (Apple App Attest), ограничиваем доступ к данным кругом лиц, которым он нужен для работы, и храним данные минимально необходимое время.',
-        '11.2. О нарушении систем защиты мы уведомляем Национальный центр защиты персональных данных незамедлительно, но не позднее трёх рабочих дней, а вас — без неоправданной задержки, если нарушение может затронуть ваши права, — в Приложении, по электронной почте или на этой странице.',
+        "11.1. Мы применяем меры, соразмерные риску обработки: шифрование при передаче, проверку запросов, ограничение доступа и сроков хранения. Ни одна система или передача через Интернет не может гарантировать абсолютную безопасность. Это не исключает наших законных обязанностей по защите данных и реагированию на инциденты.",
+        "11.2. Инциденты оцениваются и документируются. В случаях, предусмотренных законом Грузии, Государственная служба аудита уведомляется не позднее 72 часов после выявления инцидента; затронутые лица уведомляются в предусмотренных законом случаях и сроки. Для иных применимых юрисдикций соблюдаются их обязательные правила.",
       ],
     },
     {
       title: '12. Пользователям из других стран',
       blocks: [
         '**ЕС, ЕЭЗ и Великобритания.** Оператор — лицо, указанное в разделе 14. Правовые основания по GDPR и UK GDPR: исполнение договора (ст. 6(1)(b)) — вход, покупки, поддержка, диагностика, погода; юридическая обязанность (ст. 6(1)(c)) — учёт дохода; законный интерес (ст. 6(1)(f)) — безопасность и защита прав в спорах; согласие (ст. 6(1)(a)) и явное согласие на данные о здоровье (ст. 9(2)(a)) — ИИ-коуч, сведения о ребёнке в обращениях, аналитика, атрибуция. Вы вправе получить доступ к данным, исправить, удалить их, ограничить обработку, получить их в переносимом формате (в том числе через экспорт дневника), возразить против обработки на основании законного интереса, отозвать согласие и подать жалобу в надзорный орган по месту жительства. Мы отвечаем в течение месяца, а о нарушении безопасности уведомляем надзорный орган в течение 72 часов, если этого требует GDPR.',
-        '**Российская Федерация.** Оператор находится в Республике Беларусь. Данные покупателей и пользователей из России обрабатываются для исполнения договора (п. 5 ч. 1 ст. 6 Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных»), сведения о здоровье ребёнка и данные ИИ-коуча — только с вашего согласия. Данные передаются Оператору в Республику Беларусь и получателям из раздела 4, в том числе в США, которые могут не обеспечивать адекватную защиту прав субъектов персональных данных; риски такой передачи описаны в п. 5.2. На запрос о ваших данных мы отвечаем в течение 10 рабочих дней.',
+        '**Российская Федерация.** Оператор зарегистрирован в Грузии. Данные покупателей и пользователей из России обрабатываются для исполнения договора (п. 5 ч. 1 ст. 6 Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных»), сведения о здоровье ребёнка и данные ИИ-коуча — только с вашего согласия. Данные передаются Оператору в Грузию и получателям из раздела 4, в том числе в США, которые могут не обеспечивать адекватную защиту прав субъектов персональных данных; риски такой передачи описаны в п. 5.2. На запрос о ваших данных мы отвечаем в течение 10 рабочих дней.',
         '**США.** Сведения о здоровье ребёнка, которые вы вносите, являются consumer health data по законам штатов Вашингтон, Невада и Коннектикут. Мы собираем их у вас для функций, описанных в разделе 3, передаём только получателям из раздела 4, не продаём и не используем для рекламы. Вы вправе узнать, какие данные мы получили и кому передали, удалить их и отозвать согласие; если мы отклоним запрос, напишите нам с темой «Appeal» — мы ответим в течение 45 дней. Сайт не отслеживает посетителей на сторонних сайтах, поэтому сигналы Do Not Track не меняют его работу.',
       ],
     },
@@ -269,10 +271,10 @@ function en({ operator, offer, contact }: Ctx): LegalSection[] {
     {
       title: '1. General',
       blocks: [
-        `1.1. This policy sets out how ${operator} (the “Operator”, “we”) processes the personal data of users of the yorix-app.com site (the “Website”), the Yorix mobile app for iPhone and iPad (the “App”), support and related online services (together, the “Service”). It follows the Law of the Republic of Belarus of 7 May 2021 No. 99-З “On personal data protection” (“Law 99-З”).`,
+        `1.1. This Policy describes personal-data processing in Yorix: the yorix-app.com website (Website), the iPhone and iPad app (App), support and related services. The controller is ${operator} (we); registration and contact details are in section 14. Georgian personal-data legislation and other mandatory rules applicable to the processing apply.`,
         '1.2. It explains what data we process, why and on what basis, who we share it with, how long we keep it and how you can exercise your rights. The policy is not consent and does not need to be “accepted”. Where processing relies on consent, we ask for it separately, when it is needed, and you can withdraw it.',
         '1.3. The Service is for adults — parents and others caring for a child. Information about the child is entered by an adult; children do not use the Service and we do not collect data directly from children.',
-        '1.4. The terms “personal data”, “special personal data” (including health information), “processing”, “authorised person” and “cross-border transfer” have the meaning given in Law 99-З.',
+        "1.4. Terms have the meanings given by applicable data-protection law. Health information is special-category data. Accepting the terms of use does not by itself consent to every form of processing or transfer.",
       ],
     },
     {
@@ -298,19 +300,19 @@ function en({ operator, offer, contact }: Ctx): LegalSection[] {
               [
                 'Sign-in and account',
                 'Account identifier; e-mail address, including Apple’s “Hide My Email” relay; name, if Apple or Google passed it; sign-in method',
-                'Contract (Article 6, paragraph 15, Law 99-З)',
+                'Performance of a contract',
                 'While the account exists',
               ],
               [
                 'Buying a subscription on the Website, activating it and refunds',
                 `Account code, e-mail, plan, price and currency, order number, ${bankEn} transaction number and status, payment and access dates, language, editions of the documents accepted`,
-                'Contract; legal obligations — income accounting and receipts (Article 6, paragraph 20)',
+                'Performance of a contract; legal accounting and purchase-document duties',
                 '3 years after the access period ends; income accounting documents — as required by tax law',
               ],
               [
                 'Gift subscriptions',
                 `No account: the buyer’s e-mail (the link, the gift code and the payment confirmation are sent there), plan, price, order number, ${bankEn} transaction details, the card text (recipient and message, typed by the buyer), the gift code and its status, a hash of the buyer’s browser key; on redemption — the recipient’s account`,
-                'Contract; legal obligations — income accounting and receipts (Article 6, paragraph 20)',
+                'Performance of a contract; legal accounting and purchase-document duties',
                 '3 years after redemption or the end of the code’s validity; income accounting documents — as required by tax law',
               ],
               [
@@ -328,7 +330,7 @@ function en({ operator, offer, contact }: Ctx): LegalSection[] {
               [
                 'AI coach and personal tips',
                 'Your messages and the Coach’s answers; the child’s name, age, sex, prematurity and health, feeding and sleep details from the profile; if “AI Personalization” is on — the diary and program records needed for the answer, including health information (section 7); language, time zone; installation or account identifier for the session',
-                'Consent (Articles 5 and 8, Law 99-З); transfer to the US — with consent after being informed of the risks (Article 9(1), paragraph 2)',
+                'Consent; separate lawful basis for special categories; international transfers under section 5',
                 'On the server — 30 days after the last message in the conversation. Conversation history in the App stays in your iCloud until you delete it',
               ],
               [
@@ -382,7 +384,7 @@ function en({ operator, offer, contact }: Ctx): LegalSection[] {
               [
                 'Answering government requests, defending rights in disputes',
                 'Information related to the request or dispute',
-                'Legal obligations (Article 6, paragraph 20)',
+                'Applicable legal obligations',
                 'For the time of the proceedings and the limitation period',
               ],
             ],
@@ -396,7 +398,7 @@ function en({ operator, offer, contact }: Ctx): LegalSection[] {
     {
       title: '4. Who we share data with',
       blocks: [
-        '4.1. We share data with authorised persons (processors) only to the extent needed for the purpose, under contracts or their standard data processing terms, and we are responsible to you for them (Article 7(3), Law 99-З).',
+        "4.1. Data is shared with processors only as needed for the stated purpose under data-processing agreements; some recipients, such as payment institutions, determine processing independently for their own legal duties. A supplier’s status does not remove duties imposed on Yorix by law.",
         {
           table: {
             head: ['Recipient', 'Country', 'Data', 'Purpose'],
@@ -418,24 +420,24 @@ function en({ operator, offer, contact }: Ctx): LegalSection[] {
           },
         },
         '4.2. AI providers receive messages, information about the child and the diary summary without your e-mail, payment details or account identifier. Under their terms, data sent through the API is not used to train models: DeepInfra does not store requests, and OpenAI keeps them for up to 30 days for abuse monitoring.',
-        '4.3. Payment details (amount, date, name of the service) go to the Ministry of Taxes and Duties through the “Professional income tax” app. Other authorities receive data only where the law requires it.',
+        "4.3. Information required for tax and accounting is provided to competent Georgian authorities and other authorised recipients when required by applicable law. Historical transactions may be retained to meet previously incurred legal duties; this does not change the current controller details.",
         '4.4. If the Service passes to another person (a sale or reorganisation), the data passes with it and only for the same purposes. We will announce this in advance on this page or in the App.',
       ],
     },
     {
       title: '5. Cross-border transfers',
       blocks: [
-        '5.1. Most recipients are in the USA. The USA is not on the list of countries that ensure an adequate level of protection of data subjects’ rights (Order of the National Personal Data Protection Center of 15.11.2021 No. 14). Russia, the EU member states and the UK are on that list.',
+        "5.1. The controller is registered in Georgia. Recipients and processing locations are listed in section 4; some providers are in the USA and other countries. Access from Georgia and hosting abroad may constitute international data transfers.",
         '5.2. **Risks.** In countries without adequate protection there may be no personal data legislation or data protection authority, a narrower range of information may count as personal data, data subjects’ rights may be limited, and authorities may access the data.',
-        '5.3. **Bases.** Sign-in, purchase and support data are transferred because this is necessary to perform the contract with you (Article 9(1), paragraph 3, Law 99-З). AI coach, analytics and attribution data, and the child’s health information, are transferred with your consent after you are informed of the risks (Article 9(1), paragraph 2).',
-        '5.4. **Safeguards.** We transfer the minimum data, encrypt it in transit and choose providers that have committed to protecting it (for data from the EU and UK — standard contractual clauses or the recipient’s participation in the EU-U.S. Data Privacy Framework).',
+        "5.3. International transfers require a valid basis under applicable law. Under Georgian law this may be an adequate level of protection or a statutory exception; contractual safeguards under Article 37(2)(b) require supervisory permission. Where consent is used, it must meet legal requirements and follow information about risks. A user contract or publication of this Policy does not replace a required basis, consent or permission.",
+        "5.4. We limit transferred data and use technical and organisational safeguards. Transfers subject to the GDPR or UK GDPR require the applicable international-transfer mechanism. You can request information about the mechanism and safeguards for a specific recipient through support.",
       ],
     },
     {
       title: '6. Information about the child and health',
       blocks: [
-        '6.1. You enter information about the child as their legal representative. Consent to processing the child’s data, including health information, is given by one of the legal representatives (Article 5(9), part 2, Law 99-З). If you are not a legal representative, enter such information only with their consent.',
-        '6.2. Health information is special personal data. We process it only for the features you use and protect it with a set of measures (Article 8(3)): minimisation, encryption in transit, access limited to the Operator and the support staff it admits, who are bound by confidentiality.',
+        "6.1. Yorix is intended for adults. A child’s data is supplied by their legal representative or an authorised person with a lawful basis. Where consent is required, the appropriate person must provide it in the form required by law; the child’s interests take priority.",
+        "6.2. Health-data processing requires a special-category legal basis, including explicit consent where required. We apply minimisation, encryption in transit and access restrictions to persons who need access for an authorised purpose and are bound by confidentiality.",
         '6.3. If you learn that a child has sent us their own data, write to us and we will delete it.',
       ],
     },
@@ -444,7 +446,7 @@ function en({ operator, offer, contact }: Ctx): LegalSection[] {
       blocks: [
         '7.1. When you ask a question, the App sends our server the message and the child’s profile details: name, age, sex, prematurity, health, feeding and sleep details. If “AI Personalization” is on in Settings → Privacy & AI, it adds the diary summary needed for the answer: today’s records and 7-day totals, height, weight and head circumference, symptoms of the last 14 days, temperatures, vaccinations, mood, pumping and program information. Medicine names and notes are not sent to the Coach. The server passes the data to the AI model provider (section 4) and uses the question text to search Yorix articles.',
         '7.2. Answers are generated automatically. The Coach makes no decisions with legal effects for you.',
-        '7.3. Using the Coach is optional: the diary and forecasts work without it. By asking the Coach a question you consent to the data listed in 7.1 being passed to our server and the AI providers (section 4) to answer it. To keep that data from being passed, do not use the Coach; “Clear AI Chat History” (7.4) deletes conversations already kept. Turning “AI Personalization” off stops sending diary records and profile details: only the child’s age (adjusted for prematurity) goes with a question.',
+        "7.3. Using the Coach is optional: the diary and forecasts work without it. Sending the data in 7.1 to our server and AI providers requires separate consent where and in the form required by law; sending a question does not replace that consent. Do not use the Coach if you do not want to transmit this data. “Clear AI Chat History” (7.4) deletes conversations already kept. Turning “AI Personalization” off stops sending diary records and profile details: only the child’s age adjusted for prematurity goes with a question.",
         '7.4. “Clear AI Chat History” (Settings → Privacy & AI) deletes conversations on the device, in iCloud and on our server.',
       ],
     },
@@ -461,7 +463,7 @@ function en({ operator, offer, contact }: Ctx): LegalSection[] {
       title: '9. Deleting data',
       blocks: [
         '9.1. In the App you can delete individual records; remove a child together with all their records and sharing; clear the AI chat history (clause 7.4); and delete the account (Settings → Account) — this deletes the sign-in account and all data on the device and in your private iCloud database, and ends sharing.',
-        `9.2. Data on our server and with the recipients in section 4 — requests, orders, subscription and credit accounting, analytics — is not tied to your iCloud database. To have it deleted too, write to us through the [“Write to us”](${contact}) form, stating your account’s e-mail. We delete data within 15 days of the request or the withdrawal of consent, except information we must keep by law (for example, payment records). Backups are cleared within 30 days.`,
+        `9.2. Data on our server and with the recipients in section 4 — requests, orders, subscription and credit accounting, analytics — is not tied to your iCloud database. To have it deleted too, write to us through the [“Write to us”](${contact}) form, stating your account’s e-mail. We delete data within applicable mandatory deadlines (generally no later than 10 working days after the request or withdrawal of consent), except information we must keep by law (for example, payment records). Backups are cleared within 30 days.`,
         '9.3. You delete the data in your private iCloud database yourself — in the App or in iCloud settings (iOS Settings → your name → iCloud → Manage Storage → Yorix).',
       ],
     },
@@ -472,30 +474,32 @@ function en({ operator, offer, contact }: Ctx): LegalSection[] {
           table: {
             head: ['Right', 'Response time'],
             rows: [
-              ['Withdraw consent — in the same form it was given (in the App or through the “Write to us” form)', '15 days'],
-              ['Get information about the processing of your data', '5 working days, free of charge'],
-              ['Have inaccurate or outdated data changed', '15 days'],
-              ['Get information about data provided to third parties (once a year free of charge)', '15 days'],
-              ['Have processing stopped and data deleted', '15 days'],
-              ['Appeal to the National Personal Data Protection Center of Belarus (cpd.by)', '—'],
+              ['Withdraw consent — in the same form it was given (in the App or through the “Write to us” form)', '10 working days'],
+              ['Get information about the processing of your data', '10 working days, free of charge'],
+              ['Have inaccurate or outdated data changed', '10 working days'],
+              ['Get information about recipients and transfer grounds', '10 working days'],
+              ['Have processing stopped and data deleted', '10 working days'],
+              ['Request blocking where legally justified', 'Decision within 3 working days'],
+              ['Receive portable data where provided by law', 'Within the applicable statutory period'],
+              ['Complain to the State Audit Office of Georgia (sao.ge) or a competent court', '—'],
             ],
           },
         },
-        `10.1. Under Law 99-З a request is made in writing or as an electronic document and states your full name, address of residence (stay), date of birth, identification number (if given with the consent), the substance of the request and your signature (Article 14). For convenience we also handle, within the same times, requests sent through the [“Write to us”](${contact}) form on the website that state your account’s e-mail address, and we may ask you to confirm that the request comes from you.`,
+        `10.1. Submit a request through the [support form](${contact}) or the contact in section 14, describing the request and information needed to locate your data. Passport details and passport copies are not required by default. If there is reasonable doubt, we may seek proportionate identity verification. Any refusal or permitted extension is explained as required by law; your right to complain remains.`,
       ],
     },
     {
       title: '11. Security',
       blocks: [
-        '11.1. We encrypt data in transit (TLS); for Coach and AI credit requests the App also checks our server’s certificate (certificate pinning). We verify the App’s authenticity (Apple App Attest), restrict access to data to the people who need it for their work, and keep data no longer than necessary.',
-        '11.2. We notify the National Personal Data Protection Center of a security breach without delay and within three working days, and you — without undue delay if the breach may affect your rights — in the App, by e-mail or on this page.',
+        "11.1. We use measures proportionate to processing risks, including encryption in transit, request verification, access limits and retention limits. No system or internet transmission can guarantee absolute security. This does not exclude our legal data-protection and incident-response duties.",
+        "11.2. Incidents are assessed and recorded. Where Georgian law requires, the State Audit Office is notified within 72 hours after identification; affected individuals are notified in the circumstances and times required by law. Other applicable jurisdictions’ mandatory rules are also observed.",
       ],
     },
     {
       title: '12. Users in other countries',
       blocks: [
         '**EU, EEA and UK.** The controller is the person named in section 14. Legal bases under the GDPR and UK GDPR: performance of a contract (Article 6(1)(b)) — sign-in, purchases, support, diagnostics, weather; legal obligation (Article 6(1)(c)) — income accounting; legitimate interests (Article 6(1)(f)) — security and defending legal claims; consent (Article 6(1)(a)) and explicit consent for health data (Article 9(2)(a)) — the AI coach, information about the child in requests, analytics, attribution. You have the right to access, rectify and erase your data, restrict processing, data portability (including through the diary export), object to processing based on legitimate interests, withdraw consent and complain to the supervisory authority where you live. We reply within one month, and notify the supervisory authority of a security breach within 72 hours where the GDPR requires it.',
-        '**Russian Federation.** The Operator is in the Republic of Belarus. Data of buyers and users from Russia is processed to perform the contract (Article 6(1)(5) of Federal Law No. 152-FZ of 27.07.2006 “On personal data”); the child’s health information and AI coach data only with your consent. The data is transferred to the Operator in Belarus and to the recipients in section 4, including in the USA, which may not ensure adequate protection of data subjects’ rights; the risks of such transfers are set out in clause 5.2. We answer requests about your data within 10 working days.',
+        '**Russian Federation.** The controller is registered in Georgia. Data of buyers and users from Russia is processed to perform the contract (Article 6(1)(5) of Federal Law No. 152-FZ of 27.07.2006 “On personal data”); the child’s health information and AI coach data only with your consent. The data is transferred to the controller in Georgia and to the recipients in section 4, including in the USA, which may not ensure adequate protection of data subjects’ rights; the risks of such transfers are set out in clause 5.2. We answer requests about your data within 10 working days.',
         '**United States.** The child’s health information you enter is consumer health data under the laws of Washington, Nevada and Connecticut. We collect it from you for the features in section 3, share it only with the recipients in section 4, never sell it and never use it for advertising. You may learn what data we have and who received it, delete it and withdraw consent; if we decline a request, write to us with the subject “Appeal” and we will reply within 45 days. The Website does not track visitors across third-party sites, so Do Not Track signals do not change how it works.',
       ],
     },

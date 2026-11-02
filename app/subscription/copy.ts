@@ -214,7 +214,7 @@ const ru: SubscriptionCopy = {
       },
       {
         q: 'Можно ли вернуть деньги?',
-        a: 'Да. Подписка не включилась, работала с перебоями по нашей вине или списалась по ошибке — вернём всю сумму; просто передумали — вернём неиспользованные дни за вычетом подтверждённых расходов. [Напишите нам](/ru/support#contact) и укажите номер заказа: деньги придут на ту же карту в течение 10 дней, а если причина в недостатке — 7 дней. Условия целиком — в [разделе 7 договора](/ru/subscription/offer#refunds).',
+        a: 'Да. [Напишите нам](/ru/support#contact) и укажите номер заказа. Основания, сумма и сроки возврата описаны в [разделе 7 договора](/ru/subscription/offer#refunds). Обязательные права потребителя сохраняются.',
       },
       {
         q: 'У меня уже есть подписка в App Store.',
@@ -481,7 +481,7 @@ const en: SubscriptionCopy = {
       },
       {
         q: 'Can I get a refund?',
-        a: 'Yes. If the subscription never switched on, worked badly through our fault or was charged by mistake, we refund everything; if you simply changed your mind, we refund the unused days less our documented costs. [Write to us](/support#contact) with the order number: the money returns to the same card within 10 days, or 7 when the reason is a defect. The full terms are in [section 7 of the offer](/subscription/offer#refunds).',
+        a: 'Yes. [Write to us](/support#contact) with the order number. Eligibility, amounts and deadlines are described in [section 7 of the offer](/subscription/offer#refunds). Mandatory consumer rights remain unaffected.',
       },
       {
         q: 'I already have an App Store subscription.',

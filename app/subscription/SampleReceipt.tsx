@@ -1,35 +1,27 @@
 import { formatMoney, type WebCurrency } from './currency';
 import type { Lang } from './i18n';
-import { ACQUIRER, chargeFor, charges, formatByn, merchant } from './merchant';
+import { ACQUIRER, chargeFor, formatByn } from './merchant';
 
 type Row = { label: string; value: string };
 
 const labels = {
   ru: {
     card: { title: 'Карт-чек', subtitle: 'подтверждение оплаты картой' },
-    tax: { title: 'Чек', subtitle: 'приложение «Налог на профессиональный доход»' },
-    caption: 'Образцы документов, подтверждающих оплату. Номера и данные карты условные. Сохраняйте карт-чеки для сверки с выпиской из карт-счёта.',
+    caption: 'Образцы документов, подтверждающих оплату. Все реквизиты в образце условные. Сохраняйте карт-чеки для сверки с выпиской из карт-счёта.',
     cardRows: ['Номер чека', 'Номер операции', 'Код авторизации', 'Дата платежа', 'Номер карты', 'RRN', 'Получатель платежа', 'Услуга', 'Сумма'],
-    taxRows: ['Уникальный номер чека', 'Дата и время формирования', 'Дата получения дохода', 'ФИО', 'УНП', 'Налог', 'Вид деятельности', 'Сумма'],
     service: 'Подписка Yorix на 30 дней',
-    taxName: 'Налог на профессиональный доход',
-    activity: 'Услуги, оказываемые через сеть Интернет',
     sample: 'ОБРАЗЕЦ',
   },
   en: {
     card: { title: 'Card receipt', subtitle: 'card payment confirmation' },
-    tax: { title: 'Receipt', subtitle: '“Professional income tax” app' },
-    caption: 'Sample payment documents. Numbers and card data are illustrative. Keep card receipts to reconcile with your card statement.',
+    caption: 'Sample payment documents. All details in the example are illustrative. Keep card receipts to reconcile with your card statement.',
     cardRows: ['Receipt number', 'Operation number', 'Authorization code', 'Payment date', 'Card number', 'RRN', 'Payee', 'Service', 'Amount'],
-    taxRows: ['Unique receipt number', 'Issued at', 'Income date', 'Full name', 'Taxpayer number', 'Tax', 'Activity', 'Amount'],
     service: 'Yorix subscription for 30 days',
-    taxName: 'Professional income tax',
-    activity: 'Services provided over the Internet',
     sample: 'SAMPLE',
   },
 } as const;
 
-function Receipt({ title, subtitle, rows, qr, sample }: { title: string; subtitle: string; rows: Row[]; qr?: boolean; sample: string }) {
+function Receipt({ title, subtitle, rows, sample }: { title: string; subtitle: string; rows: Row[]; sample: string }) {
   return (
     <div className="relative overflow-hidden rounded-2xl border border-dashed border-[#94A3B8] bg-white p-5 text-[13px] text-[#0F172A]">
       <span
@@ -48,36 +40,22 @@ function Receipt({ title, subtitle, rows, qr, sample }: { title: string; subtitl
           </div>
         ))}
       </dl>
-      {qr ? (
-        <div aria-hidden="true" className="mx-auto mt-4 grid h-16 w-16 grid-cols-5 gap-0.5">
-          {Array.from({ length: 25 }).map((_, index) => (
-            <span className={[0, 1, 4, 5, 7, 11, 12, 13, 15, 18, 20, 22, 23, 24].includes(index) ? 'bg-[#0F172A]' : ''} key={index} />
-          ))}
-        </div>
-      ) : null}
     </div>
   );
 }
 
 export function SampleReceipt({ lang, region }: { lang: Lang; region: WebCurrency }) {
   const t = labels[lang];
-  const name = lang === 'ru' ? merchant.fullName : merchant.latinName;
-  // The card receipt carries the amount this visitor's card would be charged,
-  // in the acquirer's currency. The «Профдоход» receipt carries the seller's
-  // income, which is declared in Belarusian rubles whatever the card paid in —
-  // the same conversion the income book makes.
+  const name = lang === 'ru' ? 'Продавец из оферты' : 'Seller named in the offer';
   const paid = chargeFor('month', region, ACQUIRER);
   const cardAmount = paid.currency === 'BYN' ? formatByn(paid.amount, lang, 'code') : formatMoney(paid.amount, 'RUB', lang);
-  const taxAmount = formatByn(charges.month[region], lang, 'code');
   const cardValues = ['4815162342', '123456789', '0A1B2C', '17.09.2026 14:32', '4111 11** **** 1111', '526012345678', name, t.service, cardAmount];
-  const taxValues = ['1A2B3C4D5E', '17.09.2026 14:35', '17.09.2026', name, merchant.unp || 'AB1234567', t.taxName, t.activity, taxAmount];
   const zip = (keys: readonly string[], values: string[]) => keys.map((label, index) => ({ label, value: values[index] }));
 
   return (
     <figure className="mt-5">
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="mx-auto max-w-lg">
         <Receipt rows={zip(t.cardRows, cardValues)} sample={t.sample} subtitle={t.card.subtitle} title={t.card.title} />
-        <Receipt qr rows={zip(t.taxRows, taxValues)} sample={t.sample} subtitle={t.tax.subtitle} title={t.tax.title} />
       </div>
       <figcaption className="mt-3 text-center text-sm text-[#64748B]">{t.caption}</figcaption>
     </figure>

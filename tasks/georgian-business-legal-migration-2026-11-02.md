@@ -1,45 +1,86 @@
 # Georgian business identity and legal-document migration
 
-## Owner request
+## Objective and owner decisions
 
-On 2026-11-02 the owner requested updating the privacy policy, public agreement and related documents, removing unnecessary repetition of personal identity/number, and using the Georgian individual entrepreneur Yahor Bazyk instead of Belarusian seller details. This supersedes the previous preference to keep Belarusian seller details, but does not establish the Georgian registration details or the payment-account holder.
+On 2026-11-02 the owner requested replacing Belarusian seller details with the Georgian individual entrepreneur, reducing unnecessary repetition of personal identity, and updating the offer, terms, privacy and payment documents. The owner then requested comparison with OpenAI and comparable policies, avoiding unsupported promises and adding lawful provider protections.
 
-## Status
+Confirmed in the conversation:
 
-- [x] Inspect current website identity, legal documents, footer and receipt examples.
-- [x] Locate the matching Worker identity used in transactional mail.
-- [x] Check the Georgian statutory disclosure requirement against an official source.
-- [ ] Obtain the registered business name, registration/tax identifier, legal/contact address, business contact and effective transition date.
-- [ ] Confirm whether the active payment account contracts with the Georgian business, and who remains responsible for existing orders/refunds.
-- [ ] Implement consistent business identity and reduce unnecessary personal-data repetition.
-- [ ] Update RU/EN offer, payment/refund terms, terms of use and privacy policy against the actual business and processing arrangements.
-- [ ] Archive superseded editions, bump document versions, and preserve the identity/terms applicable to historical purchases.
-- [ ] Verify rendered legal pages, checkout disclosures and transactional mail, then deliver the coordinated migration.
+- Registered name: Individual Entrepreneur YAHOR BAZYK; registration/tax number `304699431`. Verified against the owner's English NAPR extract dated 18 December 2023.
+- The owner confirmed the registered address remains Georgia, Tbilisi, Krtsanisi district, Fonichala settlement 3, building 5, auxiliary warehouse.
+- Future acquiring will be contracted with the Georgian IE. This confirms the intended merchant, not an already executed acquiring contract.
+- The owner said their passport changed and likely was unnecessary. No new passport search or publication is needed. Do not publish passport numbers, birth dates, personal identification documents or the registration extract.
+- Keep the Yorix support form and existing business mailbox. No personal telephone is added.
+- Superseded: the initial assumption that the business particulars and future payment-account holder were still unknown.
 
-No runtime identity or legal text has been replaced yet. Missing business and payment facts are required for the replacement; do not fabricate registration details or imply that a payment account has migrated.
+## Implementation status
 
-## Confirmed implementation map
+- [x] Inspect website identity, legal documents, footer and receipt examples.
+- [x] Identify matching Worker identity in payment and gift confirmation mail.
+- [x] Obtain and verify business particulars; confirm the address and intended acquiring entity with the owner.
+- [x] Compare relevant primary-source policies and Georgian legislation.
+- [x] Prepare consistent Georgian business identity in RU/EN documents and edition-aware mail.
+- [x] Reduce identity repetition: marketing/footer links to requisites; identifiers only in the business disclosure blocks and transactional seller identification; illustrative receipt has no real identifiers.
+- [x] Archive preceding document sources and associated seller/receipt configuration; set the prepared editions to 2026-11-02.
+- [x] Preserve the seller accepted with historical orders rather than relabelling them retrospectively.
+- [x] Align refunds across offer, payment terms, FAQ and new-edition immediate-access mail.
+- [x] Remove fixed support/activation-resolution promises and absolute claims about AI safety or complete absence of server-side diary data.
+- [x] Complete final source and rendered-page checks (record below).
+- [ ] Publish the new controller/seller identity after the readiness items below are resolved and publication is requested.
 
-| Surface | Source | Required change after facts are supplied |
+This is a prepared migration, not a claim that the business contracts or processing arrangements have already migrated. Public API verification on 2026-11-02 reported test checkout, review open and YooKassa as provider. This work does not enable live payments, change the acquirer, alter prices or widen sales geography.
+
+## Research and drafting decisions
+
+| Primary source | Relevant pattern | Yorix adaptation |
 | --- | --- | --- |
-| Website business identity | `app/subscription/merchant.ts` | Replace Belarusian NPD status and taxpayer identity with verified Georgian registration; use business contact details. The current phone and street-address fields are empty. |
-| Repeated identity in legal text | `app/subscription/legal/SellerBlock.tsx` | Use a consistent legal name and generic registration-number label; avoid redundant Cyrillic/Latin name repetition. |
-| Public agreement | `app/subscription/legal/Offer.tsx` | Review provider, governing law, statutory references, withdrawals, liability and dispute provisions; retain mandatory consumer protections. |
-| Payment and refunds | `app/subscription/legal/PaymentTerms.tsx` | Match the actual contracted seller, provider and refund process. Website acquirer selection currently names YooKassa; this does not prove its account holder. |
-| App/site terms | `app/subscription/legal/Terms.tsx` | Update provider and applicable legal provisions without changing product promises incidentally. |
-| Privacy policy | `app/subscription/legal/Privacy.tsx` | Establish the actual controller and location, legal bases, transfers, rights and supervisory authority; preserve the verified data-processing inventory. |
-| Sample receipts | `app/subscription/SampleReceipt.tsx` | Remove real personal identifiers from illustrative documents; replace the Belarusian NPD receipt representation if it no longer describes the actual seller. |
-| Document versions | `app/subscription/legal/versions.ts`, `legal-archive/` | Keep previous accepted editions; assign new editions only to completed replacement documents. |
-| General footer | `app/SellerFooter.tsx` | Already links to requisites instead of printing personal identity on every page. Preserve that approach. |
-| Transactional seller identity | BabySleepCoach `CloudflareWorker/src/web/seller.ts` | Coordinate the identity in payment/gift messages with website disclosure and historical-order responsibilities. |
-| Localized labels | `app/i18n/*.ts` | Replace Belarus-specific identifier labels where actually rendered; update all affected locale dictionaries consistently. |
+| [OpenAI ROW Terms, 1 January 2026](https://openai.com/policies/row-terms-of-use/) | Probabilistic output; no sole reliance; as-is availability; limited liability subject to law | No guaranteed sleep, health or development outcomes, no guaranteed error-free AI or uptime, no additional support SLA. Liability cap is the greater of 12 months of fees or USD 50 equivalent, subject to mandatory exceptions. This is a drafting choice, not a finding that every court will enforce it. |
+| [OpenAI Europe Terms, 16 January 2026](https://openai.com/policies/eu-terms-of-use/) | Consumer protections vary by jurisdiction | Preserve mandatory rights, remedies, refunds and access to competent courts. Do not import US arbitration or an unconditional consumer indemnity. |
+| [OpenAI Privacy Policy](https://openai.com/policies/privacy-policy/) and [Anthropic Privacy Policy](https://www.anthropic.com/legal/privacy) | Describe actual processing, legal bases, retention, transfers and reasonable security measures | Keep the Yorix processing inventory; no promise of absolute security, no imported AI-training permission, and no claim that Yorix processes no child data. Anthropic's consumer contract was not relied on because the retrieved page was not the intended English edition. |
+| [Huckleberry disclaimer](https://huckleberrycare.com/disclaimer) | Parenting information does not replace professional care or real-time supervision | State informational purpose, no emergency monitoring, possible AI mistakes and no individual clinical review. No claim that disclaimers themselves establish medical-device classification. |
+| [Georgian electronic commerce law, Article 4](https://www.matsne.gov.ge/ru/document/view/5825902?fullscreen=1&impose=parallelEnRu) | Accessible supplier identity, form, address, contact and registration details | Retain necessary Georgian business disclosures rather than hiding the contracting party. |
+| [Georgian consumer-protection law, consolidated](https://new.matsne.gov.ge/en/document/view/5420598) | Mandatory pre-contract information, withdrawal and remedies | Preserve statutory withdrawal where applicable; activation alone does not waive rights. No separate refund fee. Remove unsupported Belarus-specific references. |
+| [Georgian personal-data law, consolidated](https://www.matsne.gov.ge/en/document/view/5827307) | Rights deadlines, special-category data, transfer grounds and supervisory oversight | Update rights and regulator to the State Audit Office of Georgia; distinguish consent from accepting terms. Qualifying incidents have the statutory notification requirements. |
 
-## Legal research boundary
+These sources inform original Yorix wording; their contracts are not copied wholesale. Contract language cannot eliminate mandatory liability, cure a misleading product claim or replace compliance in operation. Existing paid entitlements and applicable consumer law remain protected.
 
-The [Georgian Law on Electronic Commerce, Article 4](https://www.matsne.gov.ge/ru/document/view/5825902?fullscreen=1&impose=parallelEnRu) requires easily accessible supplier name/legal form, address, contact details and registered identification number. A Georgian IE therefore does not by itself make all identifying details optional. Keep business disclosures accessible in the legal/contact surface rather than repeating them in marketing UI.
+## Changed surfaces
 
-The [official consumer-protection law](https://www.matsne.gov.ge/en/document/view/5420598?impose=original) and current Georgian personal-data law must be reviewed in their applicable consolidated editions before replacing jurisdiction-specific provisions. Research is preliminary; this ledger does not establish a final legal conclusion about the owner's business or payment eligibility.
+Website:
 
-## Next action
+- `app/subscription/merchant.ts`: confirmed Georgian entity and address, registration-number label, business contact only.
+- `app/subscription/legal/SellerBlock.tsx`: name once per disclosure block, no repeated number in introductory seller references.
+- `Offer.tsx`, `PaymentTerms.tsx`, `Terms.tsx`, `Privacy.tsx`: coordinated RU/EN prepared editions.
+- `app/subscription/copy.ts`: refund FAQ points to authoritative terms, removing stale deadlines and expense deductions.
+- `app/subscription/SampleReceipt.tsx`: illustrative card confirmation, no Belarusian NPD receipt or real identity.
+- `app/subscription/legal/versions.ts`: edition 2026-11-02.
+- `legal-archive/2026-11-02-pre-georgia/`: exact preceding source from `f96c491`, including merchant and receipt configuration. Historical documents retain their historical identities; these are not public routes.
 
-Use the owner's business particulars and payment-account clarification to complete the migration. If web payments still belong to the Belarusian seller, resolve whether to retain a separate, clearly identified seller for that channel or suspend/migrate it before publishing a universal Georgian-provider claim. Do not change checkout availability without an owner decision.
+BabySleepCoach Worker:
+
+- `CloudflareWorker/src/web/seller.ts`: select seller from the order's accepted offer edition; missing/old editions retain historical seller.
+- `CloudflareWorker/src/web/confirmation.ts`: use edition-aware identity in buyer/gift mail; new immediate-start language preserves statutory refunds.
+- `CloudflareWorker/test/webTerms.spec.ts`: RU/EN new and historical identity, gift identity and immediate-start regression checks.
+
+## Publication readiness — unresolved external facts
+
+1. **International-transfer basis.** Article 37 of Georgian data-protection law requires an applicable transfer basis. Contractual safeguards under Article 37(2)(b) require supervisory permission under Article 37(3); a user contract or policy publication is not sufficient by itself. The session has not established destination adequacy, applicable exceptions, regulator permission or qualifying informed consent for every actual transfer. Confirm a documented basis per relevant recipient/flow before publishing the new controller identity. The draft does not assert that permission exists.
+2. **Consent and operations.** Verify actual health-data/AI consent collection and evidence against the Georgian requirements, including transfers, rather than assuming an older consent meets them. Policy text cannot stand in for a missing interface or record. Confirm processor agreements, retention/deletion execution and incident handling under the new controller. This task did not perform a complete operational privacy audit or alter the iOS consent flows.
+3. **Acquiring and other account contracts.** The owner confirmed the future contracting party; obtain/verify the executed merchant contract and settlement/tax-document setup before live payments. Confirm applicable platform/provider account identity and the transition date. Existing historical orders retain their original disclosures and obligations.
+4. **Coordinated release.** The prepared website edition and Worker mail mapping must be released together once ready. If the actual release uses a later edition date, update the website edition, Worker migration threshold and tests consistently; preserve this prepared state in history. Verify live test mode remains in place until the merchant setup is approved.
+
+A Georgia-qualified review of these actual arrangements and the cross-border consumer clauses is appropriate before publication. This is a specific readiness gap, not a claim that the new text guarantees immunity or that every overseas transfer necessarily lacks a lawful basis.
+
+## Verification and delivery
+
+- Website TypeScript check and production build passed.
+- Chrome at 390 px and WebKit at 1280 px: RU/EN offer, privacy, terms and payment pages passed (16 combinations). Checked the prepared edition, one registration-number disclosure per relevant page, no former identity in live-page content, no horizontal overflow, a single illustrative receipt and no page/resource errors. Inspected rendered identity and receipt screenshots.
+- Local preview initially retained a stale asset manifest after the rebuild; restarting the owned preview fixed the CSS/chunk 404s. The final 16-case run passed with asset-error assertions enabled.
+- Focused website lint: two pre-existing internal-anchor findings in PaymentTerms, verified against the preceding source; no new findings. No unrelated lint cleanup.
+- Worker typecheck and full suite: 72 test files, 736 tests passed; generated website prices remain in sync. The added immediate-start text test normalises mail line wrapping.
+- Archived files match `f96c491` byte-for-byte. No duplicate static clause numbers per language were found; `git diff --check` passed for the owned changes.
+- Generated local registration-extract intermediates were deleted; original owner files remain untouched.
+
+Source delivery uses website `premium-web-payments` with `main` fast-forwarded, and BabySleepCoach `main`; only the owned Worker files and preference memory are included in the latter commit. Unrelated iOS/catalog/art changes are excluded.
+
+The production website remains on its earlier published edition; no legal migration deployment or app release has been performed. Next action: resolve the documented transfer/consent and account-contract facts, then select the effective date and coordinate the website/Worker release upon request.

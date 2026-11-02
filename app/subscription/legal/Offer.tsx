@@ -8,20 +8,15 @@ export const offerTitle = { ru: 'Публичный договор (оферта
 
 type Ctx = { payment: string; privacy: string; seller: string };
 
-// The binding Russian text. Drafted against the Civil Code of Belarus, the
-// consumer protection law (90-З) and the personal data law (99-З): protection
-// comes from describing the service precisely and from transparent
-// procedures — clauses the law voids for consumers (no refunds, liability
-// caps, venue clauses) are deliberately absent.
 function ru({ payment, privacy, seller }: Ctx): LegalSection[] {
   return [
     {
       title: '1. Общие положения',
       blocks: [
-        `1.1. Настоящий документ является публичной офертой (п. 2 ст. 407 Гражданского кодекса Республики Беларусь, далее — ГК) ${seller} (далее — Исполнитель) заключить договор на изложенных ниже условиях (далее — Договор) с любым дееспособным физическим лицом, достигшим 18 лет (далее — Пользователь).`,
-        '1.2. Акцептом оферты является оплата выбранного Периода доступа на Сайте после проставления отметки о принятии условий Договора (п. 3 ст. 408 ГК). Договор считается заключённым с момента получения Исполнителем от Платёжного сервиса подтверждения успешной оплаты. Письменная форма Договора считается соблюдённой (п. 3 ст. 404 ГК).',
-        '1.3. Договор является публичным (ст. 396 ГК) и договором присоединения (ст. 398 ГК): его условия одинаковы для всех Пользователей, за исключением льгот для отдельных категорий потребителей, установленных в порядке раздела 4.',
-        `1.4. Неотъемлемая часть Договора — страница [«Оплата, доставка и возврат»](${payment}). Персональные данные, необходимые для заключения и исполнения Договора, обрабатываются на основании Договора (абз. 15 ст. 6 Закона Республики Беларусь «О защите персональных данных») в порядке, описанном в [Политике обработки персональных данных](${privacy}). Сведения о здоровье ребёнка и данные для ИИ-функций обрабатываются только с отдельного согласия Пользователя; принятие Договора таким согласием не является.`,
+        `1.1. Настоящий документ — предложение ${seller} (далее — Исполнитель, Yorix) заключить дистанционный договор на изложенных ниже условиях (далее — Договор) с дееспособным физическим лицом не моложе 18 лет (далее — Пользователь). Регистрационные и контактные данные Исполнителя приведены в разделе 17.`,
+        "1.2. Пользователь принимает оферту, отмечая согласие с Договором перед оплатой. Договор заключается после подтверждения успешной реальной оплаты Платёжным сервисом. Тестовые операции не являются оплатой и не создают платной подписки.",
+        "1.3. Договор регулирует покупки на Сайте. Покупки в App Store оформляются через Apple и регулируются также её условиями. Доступные способы оплаты зависят от страны и фактически подключённого Платёжного сервиса.",
+        `1.4. Неотъемлемая часть Договора — страница [«Оплата, доставка и возврат»](${payment}). Персональные данные, необходимые для заключения и исполнения Договора, обрабатываются на основании Договора в порядке, описанном в [Политике обработки персональных данных](${privacy}). Сведения о здоровье ребёнка и данные для ИИ-функций обрабатываются только с отдельного согласия Пользователя; принятие Договора таким согласием не является.`,
         '1.5. К Договору применяется редакция оферты, действовавшая в момент оплаты. Дата редакции указана в начале документа.',
       ],
     },
@@ -50,7 +45,7 @@ function ru({ payment, privacy, seller }: Ctx): LegalSection[] {
         '3.4. Информация Сервиса — статьи, аналитика, Прогнозы, ответы Коуча — носит общий характер и не заменяет консультацию врача-педиатра, которому известны состояние и история здоровья ребёнка. Не откладывайте обращение к врачу и не изменяйте его назначения на основании сведений Сервиса. Показатели, которые Пользователь вносит в дневник (температура, рост, вес, симптомы и др.), отображаются для удобства и не получают медицинской оценки.',
         '3.5. **Сервис не предназначен для экстренных ситуаций.** Если жизни или здоровью ребёнка угрожает опасность, немедленно вызовите скорую помощь по номеру 103 или 112 либо по местному номеру экстренной службы. Ни Коуч, ни служба поддержки не работают как экстренная линия.',
         '3.6. **Безопасный сон.** Сервис не является радионяней или монитором дыхания, не наблюдает за ребёнком в реальном времени и не может обнаружить или предотвратить синдром внезапной детской смерти или иные опасные состояния. Рекомендации о режиме не заменяют правил безопасного сна и присмотра взрослого. Напоминания и уведомления могут не сработать из-за настроек устройства или сбоев связи — не полагайтесь на них в вопросах безопасности ребёнка.',
-        '3.7. **ИИ-коуч.** Пользователь общается с программой, а не с человеком. Ответы Коуча формируются автоматически, не проверяются человеком перед отправкой и могут быть неточными, неполными или устаревшими, даже если выглядят убедительно. Коуч не обсуждает дозировки лекарств, не ставит диагнозы и может отказаться отвечать или порекомендовать обратиться к врачу. Пользователь самостоятельно оценивает применимость ответа и принимает решения как законный представитель ребёнка.',
+        "3.7. ИИ-коуч предназначен для общей информации, а не для диагностики, лечения и дозировок лекарств. Ответы создаются автоматически и не проходят индивидуальную проверку врачом; они могут быть ошибочными, вымышленными, неполными или неподходящими, даже если звучат уверенно. Ограничители безопасности не гарантируют обнаружения каждого опасного ответа. Не используйте ответ как единственное основание решения о здоровье или безопасности ребёнка.",
         '3.8. **Прогнозы** — вероятностная оценка, а не предписание. Их точность зависит от полноты и своевременности записей, а фактическое поведение ребёнка может от них отличаться. Исполнитель не гарантирует конкретного результата, например продолжительности сна.',
         '3.9. Для стабильной работы и защиты от злоупотреблений Исполнитель вправе устанавливать разумные ограничения использования Коуча (например, число сообщений за период). Действующие ограничения отображаются в Приложении.',
       ],
@@ -58,11 +53,11 @@ function ru({ payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '4. Цена и порядок оплаты',
       blocks: [
-        '4.1. Цена Подписки указывается на странице тарифов Сайта в валюте страны покупателя — в белорусских или российских рублях. Перед оплатой Пользователю показывается сумма к списанию; если валюта списания отличается от валюты карты, сумму в валюте карты и комиссию определяет банк, выпустивший карту. Цены для отдельных категорий потребителей устанавливаются решением Исполнителя (п. 2 ст. 396 ГК).',
+        '4.1. Цена Подписки указывается на странице тарифов Сайта в валюте страны покупателя — в белорусских или российских рублях. Перед оплатой Пользователю показывается сумма к списанию; если валюта списания отличается от валюты карты, сумму в валюте карты и комиссию определяет банк, выпустивший карту. Цены для отдельных категорий потребителей устанавливаются решением Исполнителя.',
         '4.2. Цена фиксируется на момент оплаты. Её последующее изменение не влияет на оплаченные Подписки.',
         '4.3. Оплата производится банковской платёжной картой через Платёжный сервис на его защищённой странице. Данные карты вводятся только на стороне Платёжного сервиса; Исполнитель их не получает и не хранит.',
         '4.4. **Платёж разовый.** Автоматическое продление и повторные списания не производятся. Для продления Пользователь оформляет новый заказ.',
-        '4.5. Оплату подтверждает электронный чек Платёжного сервиса. Чек в приложении «Налог на профессиональный доход» Исполнитель формирует в срок, установленный налоговым законодательством. По требованию Пользователя Исполнитель предоставляет этот чек в электронном виде, а также выдаёт документ с указанием своих фамилии, имени, отчества, наименования и цены услуги.',
+        "4.5. Подтверждение операции выдаётся Платёжным сервисом. Документы о покупке и реквизиты продавца предоставляются в порядке, предусмотренном применимым законодательством; запрос можно направить через форму поддержки.",
         '4.6. Если цена указана с явной технической ошибкой, Исполнитель сообщает об этом Пользователю. Пользователь вправе подтвердить заказ по правильной цене или отказаться от него с полным возвратом оплаты.',
       ],
     },
@@ -70,14 +65,14 @@ function ru({ payment, privacy, seller }: Ctx): LegalSection[] {
       title: '5. Предоставление доступа',
       blocks: [
         '5.1. Подписка активируется автоматически после получения Исполнителем от Платёжного сервиса подтверждения успешной оплаты и привязывается к Аккаунту, от имени которого совершена оплата. Период доступа исчисляется с момента активации. Для подарка действуют п. 5.7–5.10.',
-        `5.2. Если Подписка не активировалась в течение 3 дней после оплаты, Пользователь сообщает об этом через форму «Написать нам» на Сайте либо на адрес электронной почты Исполнителя (раздел 17). Исполнитель в течение 3 рабочих дней активирует Подписку либо, по выбору Пользователя, возвращает оплату в полном объёме.`,
+        "5.2. Если Подписка не активировалась после оплаты, Пользователь сообщает об этом через форму «Написать нам» на Сайте либо по контакту Исполнителя (раздел 17). Исполнитель проверяет платёж и устраняет проблему в разумный срок с соблюдением обязательных требований закона. Если доступ не предоставлен, Пользователь вправе потребовать возврат по разделу 7.",
         '5.3. Если на момент оплаты у Пользователя есть действующая Подписка, новый Период доступа начинается после окончания текущего.',
         '5.4. Услуга считается оказанной надлежащим образом, если в течение Периода доступа платные функции доступны на Аккаунте Пользователя. Факт предоставления доступа подтверждается журналами Сервиса и Платёжного сервиса; это не лишает Пользователя права представлять иные доказательства.',
         '5.5. По окончании Периода доступа платные функции отключаются. Бесплатные функции и данные, внесённые Пользователем, сохраняются.',
         '5.6. Покупки в App Store совершаются по правилам Apple: списания, отмена автопродления и возвраты по ним осуществляются через Apple. Покупка на Сайте не отменяет автопродление подписки App Store.',
         '5.7. **Подписка в подарок.** Пользователь может оплатить Подписку на 30 или 365 суток для другого лица. Вход в Аккаунт для покупки подарка не требуется — Пользователь указывает только адрес электронной почты. После оплаты ссылка, код и открытка с кодом показываются Пользователю на странице результата оплаты и остаются доступны на странице подарка в браузере, в котором совершена оплата; ссылка, код и подтверждение оплаты, кроме того, направляются на указанный адрес. Передать подарок получателю — забота Пользователя: Исполнитель получателю ничего не направляет.',
         '5.8. Код действует 12 месяцев с даты оплаты и активируется один раз: получатель переходит по ссылке или вводит код на Сайте и входит через Apple, после чего Период доступа начинается на его Аккаунте, а если у получателя уже есть Подписка, оплаченная на Сайте, — добавляется к ней. Активировать код может любой, у кого есть ссылка или код, поэтому Пользователь передаёт их только получателю. До активации Пользователь может заменить код на странице подарка — прежние ссылка и код перестают действовать. Исполнитель не отвечает за активацию кода лицом, которому ссылку или код передал Пользователь или получатель. Код, не активированный в этот срок, прекращает действие; Пользователь вправе отказаться от Договора с возвратом в порядке раздела 7.',
-        '5.9. В течение 6 месяцев с даты оплаты и до активации кода Пользователь вправе отказаться от Договора с возвратом полной стоимости подарка, код при этом аннулируется. По истечении этого срока неактивированный код продолжает действовать до конца срока, указанного в п. 5.8, но возврат не производится. После активации отказ и возврат производятся в порядке раздела 7, доступ получателя при этом прекращается.',
+        '5.9. В течение 6 месяцев с даты оплаты и до активации кода Пользователь вправе отказаться от Договора с возвратом полной стоимости подарка, код при этом аннулируется. По истечении этого срока неактивированный код продолжает действовать до конца срока, указанного в п. 5.8, но добровольный возврат не производится; обязательные права на возврат сохраняются. После активации отказ и возврат производятся в порядке раздела 7, доступ получателя при этом прекращается.',
         '5.10. Стороной Договора остаётся Пользователь, оплативший подарок. Получатель пользуется Подпиской на условиях этой оферты и условий использования Сервиса.',
       ],
     },
@@ -92,10 +87,10 @@ function ru({ payment, privacy, seller }: Ctx): LegalSection[] {
       id: 'refunds',
       title: '7. Отказ от Договора и возврат денежных средств',
       blocks: [
-        `7.1. Пользователь вправе в любое время отказаться от Договора (п. 1 ст. 736 ГК, ст. 38-1 Закона Республики Беларусь «О защите прав потребителей»), направив заявление через форму «Написать нам» на Сайте либо на адрес электронной почты Исполнителя (раздел 17) — с адреса электронной почты Аккаунта или с указанием этого адреса, а также номера заказа, даты и суммы оплаты. С момента получения заявления доступ к платным функциям прекращается.`,
-        '7.2. При отказе Пользователю возвращается часть уплаченной суммы, приходящаяся на неиспользованные полные сутки Периода доступа, за вычетом документально подтверждённых фактически понесённых Исполнителем расходов, связанных с исполнением Договора с этим Пользователем. Формула: **возврат = цена × (оставшиеся полные сутки ÷ сутки Периода) − подтверждённые расходы**.',
+        "7.1. Пользователь вправе отказаться от Договора, направив однозначное заявление через форму поддержки или по контакту из раздела 17 с номером заказа и сведениями, необходимыми для поиска платежа. Причину отказа можно не указывать. Законное право на отказ от дистанционного договора в течение 14 календарных дней применяется в предусмотренных законом случаях; эти условия не устанавливают отказ от такого права.",
+        "7.2. Если применяется законное право на отказ, размер возврата и допустимость удержаний определяются обязательными нормами. Само включение доступа или принятие общей оферты не означает отказа от права на возврат. Вне обязательных случаев полного возврата при досрочном отказе возвращается стоимость неиспользованных полных суток: цена × оставшиеся полные сутки ÷ сутки оплаченного периода.",
         '7.3. Уплаченная сумма возвращается **полностью**, если: (а) Подписка не была активирована; (б) списание повторное или ошибочное — в размере лишнего платежа; (в) услуга оказана с существенными недостатками или Договор расторгается по вине Исполнителя; (г) в иных случаях, предусмотренных законодательством.',
-        '7.4. Возврат производится не позднее 10 дней со дня получения заявления (при недостатках услуги — не позднее 7 дней) на банковскую платёжную карту, с которой производилась оплата, в белорусских рублях. Срок зачисления определяет банк, выпустивший карту. Возврат наличными, на иную карту или бонусами не производится; документ, удостоверяющий личность, для возврата не требуется.',
+        "7.4. Возврат производится на исходное средство оплаты в валюте фактического списания не позднее 14 календарных дней с момента получения заявления, если закон не требует более короткого срока. Срок отражения возврата в выписке зависит от банка. Мы не взимаем отдельную комиссию за возврат и не заменяем обязательный денежный возврат бонусами.",
         '7.5. Права Пользователя при недостатках услуги (безвозмездное устранение, уменьшение цены, возврат) и сроки их удовлетворения определяются законодательством о защите прав потребителей.',
         '7.6. **Оспаривание платежа (chargeback).** Прежде чем оспаривать платёж в банке, обратитесь к Исполнителю: большинство вопросов решается быстрее напрямую. На время разбирательства Исполнитель вправе приостановить доступ, оплаченный оспариваемым платежом, и передать Платёжному сервису и банку сведения о заказе, активации и использовании Подписки в объёме, необходимом для разбирательства. Если платёж возвращён Пользователю, доступ за соответствующий период прекращается.',
       ],
@@ -127,7 +122,7 @@ function ru({ payment, privacy, seller }: Ctx): LegalSection[] {
           ],
         },
         '9.2. При нарушении п. 9.1 (мошенническая оплата, передача доступа, автоматизированный сбор данных, обход защиты, атаки на Сервис) Исполнитель вправе приостановить доступ до выяснения обстоятельств, сообщив Пользователю причину.',
-        '9.3. Если нарушение подтверждено и не устранено, Исполнитель вправе отказаться от Договора в одностороннем порядке (п. 3 ст. 420, ст. 420-1 ГК). Пользователю возвращается стоимость неиспользованной части Периода доступа за вычетом подтверждённых убытков Исполнителя, причинённых нарушением.',
+        "9.3. При подтверждённом существенном нарушении, которое не устранено после уведомления, Исполнитель вправе прекратить доступ в допускаемом законом порядке. При угрозе безопасности или мошенничестве допускается немедленное ограничение. Обязательные права на возврат сохраняются; убытки взыскиваются только при наличии законных оснований.",
       ],
     },
     {
@@ -142,30 +137,30 @@ function ru({ payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '11. Ответственность',
       blocks: [
-        '11.1. Стороны несут ответственность в соответствии с законодательством Республики Беларусь.',
+        "11.1. Ответственность определяется применимым законодательством. Ничто в Договоре не исключает ответственность за умысел, грубую неосторожность, причинение вреда жизни или здоровью либо иную ответственность, которую закон запрещает ограничивать.",
         '11.2. Исполнитель не несёт ответственности за неисполнение или ненадлежащее исполнение обязательств, если оно произошло: вследствие непреодолимой силы (раздел 12); по вине Пользователя, в том числе из-за внесения недостоверных сведений или нарушения правил использования, доведённых до его сведения; вследствие действий третьих лиц, не привлечённых Исполнителем к исполнению Договора.',
         '11.3. Исполнитель не отвечает за неработоспособность оборудования, программного обеспечения и каналов связи Пользователя, за сохранность данных на устройствах Пользователя и в его iCloud, к которым Исполнитель не имеет доступа, за последствия утраты Пользователем доступа к своему аккаунту Apple, а также за решения, принятые Пользователем вопреки разделу 3 без обращения к врачу.',
-        '11.4. Положения Договора об ответственности применяются в пределах, допускаемых законодательством, и не ограничивают права потребителя, предусмотренные законодательством о защите прав потребителей, в том числе право на возмещение вреда, причинённого жизни или здоровью, и ответственность за умышленное нарушение обязательств.',
+        "11.4. В допустимых законом пределах исключаются косвенные убытки и упущенная выгода; совокупная ответственность ограничена большей из сумм: оплата за Сервис за 12 месяцев до события либо эквивалент 50 долларов США. Ограничение не применяется к обязательным возвратам и случаям из п. 11.1. Дополнительные гарантии точности прогнозов, результата, непрерывной доступности и пригодности для конкретного ребёнка не предоставляются.",
       ],
     },
     {
       title: '12. Обстоятельства непреодолимой силы',
       blocks: [
-        '12.1. Стороны освобождаются от ответственности за полное или частичное неисполнение обязательств, если оно вызвано обстоятельствами непреодолимой силы — чрезвычайными и непредотвратимыми при данных условиях обстоятельствами (п. 3 ст. 372 ГК), возникшими после заключения Договора.',
+        '12.1. Стороны освобождаются от ответственности за полное или частичное неисполнение обязательств, если оно вызвано обстоятельствами непреодолимой силы — чрезвычайными и непредотвратимыми при данных условиях обстоятельствами, возникшими после заключения Договора.',
         '12.2. К таким обстоятельствам Стороны, в частности, относят, если они отвечают признакам п. 12.1:',
         {
           ul: [
             'стихийные бедствия, пожары, наводнения, эпидемии и связанные с ними ограничительные меры;',
             'военные действия, террористические акты, массовые беспорядки, забастовки;',
-            'акты органов власти Республики Беларусь, иностранных государств и международных организаций, делающие исполнение невозможным или незаконным, в том числе санкции и иные ограничительные меры, запреты и ограничения платежей, блокировку интернет-ресурсов;',
+            'акты органов власти Грузии, других государств и международных организаций, делающие исполнение невозможным или незаконным, в том числе санкции и иные ограничительные меры, запреты и ограничения платежей, блокировку интернет-ресурсов;',
             'прекращение, приостановление или существенное ограничение услуг банков, платёжных систем, магазинов приложений, служб авторизации, облачной инфраструктуры и поставщиков технологий искусственного интеллекта по причинам, не зависящим от Исполнителя (санкции, решения органов власти, массовый сбой у поставщика), если Исполнитель не мог в разумный срок обеспечить исполнение иными доступными способами;',
             'крупные аварии и массовые сбои сетей связи, Интернета, электроснабжения, центров обработки данных;',
             'кибератаки (DDoS-атаки, вредоносное программное обеспечение, неправомерный доступ), если Исполнитель принял разумные меры защиты.',
           ],
         },
-        '12.3. Сторона, для которой наступили такие обстоятельства, уведомляет другую Сторону в разумный срок. Срок исполнения обязательств отодвигается соразмерно времени действия обстоятельств.',
+        "12.3. Сторона уведомляет о препятствии в разумный срок и принимает разумные меры для уменьшения последствий. Продление затронутого срока допускается только в пределах закона и не отменяет обязательных прав на возврат.",
         '12.4. Если обстоятельства длятся более 30 дней, каждая Сторона вправе отказаться от Договора; Пользователю возвращается стоимость неиспользованной части Периода доступа.',
-        '12.5. Подтверждением обстоятельств могут служить заключение Белорусской торгово-промышленной палаты, официальные акты органов власти и общедоступные сообщения соответствующих поставщиков.',
+        "12.5. Обстоятельства подтверждаются относимыми доказательствами, включая официальные акты и сообщения поставщиков. Обычная техническая ошибка или отсутствие денег сами по себе не освобождают от обязательств. Обязательные права на возврат сохраняются.",
       ],
     },
     {
@@ -180,7 +175,7 @@ function ru({ payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '14. Сообщения, доказательства и язык',
       blocks: [
-        `14.1. Стороны обмениваются сообщениями в электронной форме; такие сообщения признаются совершёнными в письменной форме. Сообщения Исполнителя направляются на адрес электронной почты Аккаунта (в том числе адрес-ретранслятор Apple «Скрыть e-mail»), покупателю подарка — на адрес, указанный при оформлении, и (или) через Приложение; сообщения Пользователя — через форму «Написать нам» на Сайте либо на адрес электронной почты Исполнителя (раздел 17). Сообщение считается доставленным и в случае, если оно не получено по обстоятельствам, зависящим от адресата (ст. 166-1 ГК). Пользователь отвечает за актуальность адреса электронной почты.`,
+        "14.1. Стороны могут обмениваться сообщениями через Сайт, Приложение и указанные ими контакты. Юридическая сила и момент получения сообщения определяются применимым законом. Пользователь поддерживает актуальность контакта для сообщений о покупке.",
         '14.2. Стороны признают, что данные журналов Сервиса и Платёжного сервиса об оплатах, предоставлении и прекращении доступа, а также переписка по электронной почте могут использоваться в качестве доказательств. Это не ограничивает право Пользователя представлять иные доказательства.',
         '14.3. Оферта составлена на русском языке. Переводы на другие языки предоставляются для удобства; при расхождении применяется текст на русском языке.',
       ],
@@ -188,9 +183,9 @@ function ru({ payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '15. Применимое право, претензии и споры',
       blocks: [
-        '15.1. К Договору применяется право Республики Беларусь (ст. 1124 ГК). Если Пользователь — потребитель, постоянно проживающий в другой стране, этот выбор не лишает его защиты, предоставляемой императивными нормами права страны его проживания, если такие нормы подлежат применению.',
+        "15.1. К Договору применяется право Грузии. Этот выбор не лишает потребителя защиты обязательных норм страны его обычного проживания, когда они подлежат применению.",
         `15.2. Претензии направляются через форму «Написать нам» на Сайте, на адрес электронной почты или по почтовому адресу Исполнителя (раздел 17). Исполнитель рассматривает претензию в сроки, установленные законодательством о защите прав потребителей. Претензионный порядок не является обязательным условием обращения потребителя в суд.`,
-        '15.3. Споры рассматриваются судами в соответствии с законодательством о гражданском судопроизводстве. Потребитель вправе предъявить иск по своему месту жительства или по месту исполнения Договора (ч. 16 ст. 48 Кодекса гражданского судопроизводства Республики Беларусь), а также по месту жительства Исполнителя.',
+        "15.3. Спор рассматривается компетентным судом по применимым правилам подсудности. Обращение в поддержку не является обязательным условием обращения в суд или надзорный орган, если закон не предусматривает иное.",
       ],
     },
     {
@@ -198,7 +193,7 @@ function ru({ payment, privacy, seller }: Ctx): LegalSection[] {
       blocks: [
         '16.1. Если какое-либо положение Договора будет признано недействительным, остальные положения сохраняют силу.',
         '16.2. Оферта и страница «Оплата, доставка и возврат» составляют всё соглашение Сторон о Подписке.',
-        '16.3. Пользователь не вправе передавать права и обязанности по Договору третьим лицам. Исполнитель вправе передать их лицу, которое продолжит оказывать услуги на условиях не хуже действующих (например, при регистрации в качестве индивидуального предпринимателя или создании организации), уведомив Пользователя.',
+        '16.3. Пользователь не вправе передавать права и обязанности по Договору третьим лицам. Исполнитель вправе передать их лицу, которое продолжит оказывать услуги на условиях не хуже действующих, уведомив Пользователя.',
         '16.4. Положения об ответственности, возвратах, интеллектуальной собственности, персональных данных и порядке разрешения споров действуют и после прекращения Договора.',
         '16.5. Договор действует до полного исполнения Сторонами своих обязательств.',
       ],
@@ -211,10 +206,10 @@ function en({ payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '1. General',
       blocks: [
-        `1.1. This document is a public offer (Article 407(2) of the Civil Code of the Republic of Belarus, the “Civil Code”) by ${seller} (the “Provider”) to conclude an agreement on the terms below (the “Agreement”) with any legally capable individual aged 18 or over (the “User”).`,
-        '1.2. The offer is accepted by paying for the chosen Access Period on the Website after ticking the box that accepts the Agreement (Article 408(3) of the Civil Code). The Agreement is concluded when the Provider receives confirmation of a successful payment from the Payment Service. The written form of the Agreement is deemed observed (Article 404(3) of the Civil Code).',
-        '1.3. The Agreement is a public contract (Article 396) and a contract of adhesion (Article 398): its terms are the same for all Users, except for benefits for certain categories of consumers set in accordance with section 4.',
-        `1.4. The [“Payment, delivery and refunds”](${payment}) page forms part of the Agreement. Personal data needed to conclude and perform the Agreement is processed on the basis of the Agreement (Article 6, paragraph 15, of the Belarusian Law on Personal Data Protection) as described in the [Personal data policy](${privacy}). The child’s health information and data for AI features are processed only with the User’s separate consent; accepting the Agreement is not such consent.`,
+        `1.1. This document is an offer by ${seller} (the Provider, Yorix) to enter a distance contract on the following terms (the Agreement) with a legally capable individual aged at least 18 (the User). The Provider’s registration and contact details appear in section 17.`,
+        "1.2. The User accepts this offer by confirming agreement before payment. The Agreement is concluded when the Payment Service confirms a successful real payment. Test transactions do not constitute payment or create a paid subscription.",
+        "1.3. This Agreement covers purchases on the Website. App Store purchases are made through Apple and are also governed by its terms. Available payment methods depend on the country and the Payment Service actually enabled.",
+        `1.4. The [“Payment, delivery and refunds”](${payment}) page forms part of the Agreement. Personal data needed to conclude and perform the Agreement is processed on the basis of the Agreement as described in the [Personal data policy](${privacy}). The child’s health information and data for AI features are processed only with the User’s separate consent; accepting the Agreement is not such consent.`,
         '1.5. The version of the offer in force at the moment of payment applies. The edition date is shown at the top of this document.',
       ],
     },
@@ -243,7 +238,7 @@ function en({ payment, privacy, seller }: Ctx): LegalSection[] {
         '3.4. Information in the Service — articles, analytics, Forecasts, Coach answers — is general and does not replace a consultation with a paediatrician who knows the child. Do not delay seeing a doctor or change a doctor’s instructions because of the Service. Values entered in the diary (temperature, height, weight, symptoms, etc.) are shown for convenience and are not medically assessed.',
         '3.5. **Not for emergencies.** If a child’s life or health is at risk, call emergency services immediately on 103 or 112, or your local emergency number. Neither the Coach nor support is an emergency line.',
         '3.6. **Safe sleep.** The Service is not a baby monitor or breathing monitor, does not watch the child in real time and cannot detect or prevent sudden infant death syndrome or other dangerous conditions. Routine guidance does not replace safe-sleep rules and adult supervision. Reminders and notifications may fail because of device settings or connectivity — do not rely on them for the child’s safety.',
-        '3.7. **AI coach.** The User talks to software, not a person. Coach answers are generated automatically, are not reviewed by a human before sending, and may be inaccurate, incomplete or out of date even when they sound convincing. The Coach does not discuss medication doses or diagnose and may decline to answer or recommend seeing a doctor. The User evaluates whether an answer applies and makes decisions as the child’s legal representative.',
+        "3.7. The AI Coach provides general information, not diagnosis, treatment or medication dosing. Responses are generated automatically without individual clinical review and may be wrong, invented, incomplete or unsuitable even when confident. Safety measures cannot detect every unsafe response. Do not use a response as the sole basis for a child’s health or safety decisions.",
         '3.8. **Forecasts** are probabilistic estimates, not instructions; their accuracy depends on complete and timely records, and the child’s actual behaviour may differ. The Provider does not guarantee a specific result such as sleep duration.',
         '3.9. To keep the Service stable and prevent abuse, the Provider may set reasonable limits on Coach use (for example, messages per period), shown in the App.',
       ],
@@ -251,11 +246,11 @@ function en({ payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '4. Price and payment',
       blocks: [
-        '4.1. The Subscription price is shown on the Website’s plans page in the buyer’s currency — Belarusian or Russian rubles. Before paying, the User sees the amount to be charged; if it is in a currency other than the card’s, the amount in the card’s currency and any fee are set by the card-issuing bank. Prices for certain categories of consumers are set by the Provider’s decision (Article 396(2) of the Civil Code).',
+        '4.1. The Subscription price is shown on the Website’s plans page in the buyer’s currency — Belarusian or Russian rubles. Before paying, the User sees the amount to be charged; if it is in a currency other than the card’s, the amount in the card’s currency and any fee are set by the card-issuing bank. Prices for certain categories of consumers are set by the Provider’s decision.',
         '4.2. The price is fixed at the moment of payment; later changes do not affect paid Subscriptions.',
         '4.3. Payment is made by bank card through the Payment Service on its secure page. Card details are entered only with the Payment Service; the Provider neither receives nor stores them.',
         '4.4. **One-off payment.** There is no automatic renewal and no repeat charge. To extend, the User places a new order.',
-        '4.5. Payment is confirmed by the Payment Service’s electronic receipt. The Provider issues the receipt in the “Professional income tax” app within the time set by tax law. On the User’s request the Provider provides that receipt electronically and issues a document stating his full name and the name and price of the service.',
+        "4.5. The Payment Service provides transaction confirmation. Purchase documents and seller details are supplied as required by applicable law and may be requested through support.",
         '4.6. If a price is shown with an obvious technical error, the Provider informs the User, who may confirm the order at the correct price or cancel it with a full refund.',
       ],
     },
@@ -263,14 +258,14 @@ function en({ payment, privacy, seller }: Ctx): LegalSection[] {
       title: '5. Provision of access',
       blocks: [
         '5.1. The Subscription is activated automatically once the Payment Service confirms a successful payment, and is tied to the Account used to pay. The Access Period runs from activation. Gifts follow clauses 5.7–5.10.',
-        `5.2. If the Subscription is not activated within 3 days of payment, the User writes through the “Write to us” form on the Website or to the Provider’s e-mail address (section 17). Within 3 working days the Provider activates it or, at the User’s choice, refunds the payment in full.`,
+        "5.2. If the Subscription has not activated after payment, the User contacts support through the Website or the Provider’s contact in section 17. The Provider checks the payment and remedies the issue within a reasonable time, subject to mandatory legal requirements. If access is not provided, the User may request a refund under section 7.",
         '5.3. If the User already has an active Subscription, the new Access Period starts when the current one ends.',
         '5.4. The service is duly provided when the paid features are available on the User’s Account during the Access Period. This is evidenced by the logs of the Service and the Payment Service; the User may present other evidence.',
         '5.5. When the Access Period ends, the paid features switch off. Free features and the User’s data are kept.',
         '5.6. App Store purchases follow Apple’s rules: charges, cancelling auto-renewal and refunds are handled by Apple. A Website purchase does not cancel an App Store auto-renewal.',
         '5.7. **Gift subscriptions.** The User may pay for a 30- or 365-day Subscription for someone else. No Account is needed to buy a gift — the User only gives an e-mail address. After payment the gift link, the code and a card with the code are shown to the User on the payment result page and stay available on the gift page in the browser used to pay; the link, the code and the payment confirmation are also sent to that address. Passing the gift to the recipient is up to the User: the Provider sends the recipient nothing.',
         '5.8. The code is valid for 12 months from payment and can be redeemed once: the recipient opens the link or enters the code on the Website and signs in with Apple, and the Access Period starts on their Account or, if the recipient already has a Subscription paid on the Website, is added to it. Anyone who has the link or the code can redeem it, so the User passes them to the recipient only. Before redemption the User may replace the code on the gift page, and the previous link and code stop working. The Provider is not responsible for redemption by a person to whom the User or the recipient passed the link or the code. A code not redeemed within that time stops working; the User may withdraw with a refund under section 7.',
-        '5.9. Within 6 months of payment and before the code is redeemed the User may withdraw with a full refund of the gift, and the code is cancelled. After that period an unredeemed code stays valid to the end of the term in clause 5.8, but is not refunded. After redemption, withdrawal and refunds follow section 7, and the recipient’s access ends.',
+        '5.9. Within 6 months of payment and before the code is redeemed the User may withdraw with a full refund of the gift, and the code is cancelled. After that period an unredeemed code stays valid to the end of the term in clause 5.8, but no discretionary refund is offered; mandatory refund rights remain. After redemption, withdrawal and refunds follow section 7, and the recipient’s access ends.',
         '5.10. The User who paid for the gift remains the party to the Agreement. The recipient uses the Subscription under this offer and the terms of use of the Service.',
       ],
     },
@@ -285,10 +280,10 @@ function en({ payment, privacy, seller }: Ctx): LegalSection[] {
       id: 'refunds',
       title: '7. Withdrawal and refunds',
       blocks: [
-        `7.1. The User may withdraw from the Agreement at any time (Article 736(1) of the Civil Code; Article 38-1 of the Belarusian Consumer Protection Law) by writing through the “Write to us” form on the Website or to the Provider’s e-mail address (section 17) — from the Account e-mail or stating it, together with the order number, date and amount. Access to the paid features ends when the notice is received.`,
-        '7.2. On withdrawal the User receives the part of the price for the unused full days of the Access Period, less the Provider’s documented actual costs of performing the Agreement with this User. Formula: **refund = price × (full days remaining ÷ days in the Period) − documented costs**.',
+        "7.1. The User may withdraw by sending a clear statement through support or the contact in section 17, identifying the order and the payment. No reason is required. The statutory 14-calendar-day distance-contract withdrawal right applies where provided by law; these terms do not impose a waiver of that right.",
+        "7.2. Where a statutory withdrawal right applies, mandatory law determines the refund and any permitted deduction. Activating access or accepting general terms does not itself waive refund rights. Outside mandatory full-refund cases, early cancellation is refunded for unused full days: price × remaining full days ÷ days in the paid period.",
         '7.3. The payment is refunded **in full** if: (a) the Subscription was never activated; (b) a charge is duplicate or mistaken — the excess amount; (c) the service had material defects or the Agreement ends through the Provider’s fault; (d) in other cases provided by law.',
-        '7.4. Refunds are made within 10 days of receiving the notice (7 days where the service had defects) to the bank card used for payment, in Belarusian rubles. The time for the money to arrive depends on the card-issuing bank. Refunds are not made in cash, to another card or in bonuses; no identity document is required.',
+        "7.4. Refunds are made to the original payment method in the currency actually charged within 14 calendar days after receiving the request, or sooner where law requires. The bank determines when the credit appears on the statement. We charge no separate refund fee and do not replace a mandatory monetary refund with credits.",
         '7.5. The User’s rights for defects in the service (free remedy, price reduction, refund) and the time limits for them are set by consumer protection law.',
         '7.6. **Chargebacks.** Before disputing a payment with your bank, contact the Provider — most issues are solved faster directly. During a dispute the Provider may suspend the access paid for by the disputed payment and give the Payment Service and the bank the order, activation and usage details needed for the dispute. If the payment is returned to the User, access for the corresponding period ends.',
       ],
@@ -320,7 +315,7 @@ function en({ payment, privacy, seller }: Ctx): LegalSection[] {
           ],
         },
         '9.2. On a breach of clause 9.1 (fraudulent payment, sharing access, automated scraping, circumventing protection, attacks), the Provider may suspend access while it looks into the matter, telling the User the reason.',
-        '9.3. If the breach is confirmed and not remedied, the Provider may withdraw from the Agreement unilaterally (Articles 420(3) and 420-1 of the Civil Code). The User receives the price of the unused part of the Access Period, less the Provider’s documented losses caused by the breach.',
+        "9.3. For a confirmed material breach not remedied after notice, the Provider may terminate access as permitted by law. Immediate restrictions may apply to security threats or fraud. Mandatory refund rights remain; damages are recoverable only on a lawful basis.",
       ],
     },
     {
@@ -335,30 +330,30 @@ function en({ payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '11. Liability',
       blocks: [
-        '11.1. The parties are liable under the law of the Republic of Belarus.',
+        "11.1. Liability is governed by applicable law. Nothing in this Agreement excludes liability for intent, gross negligence, death or personal injury, or other liability that cannot lawfully be limited.",
         '11.2. The Provider is not liable for non-performance or improper performance caused by force majeure (section 12); by the User’s fault, including inaccurate information or breach of rules of use brought to their attention; or by acts of third parties not engaged by the Provider to perform the Agreement.',
         '11.3. The Provider is not liable for the User’s own equipment, software and connections not working, for keeping data on the User’s devices and in their iCloud, which the Provider cannot access, for the consequences of the User losing access to their Apple Account, or for decisions the User makes contrary to section 3 without seeing a doctor.',
-        '11.4. The liability provisions apply to the extent permitted by law and do not limit consumer rights under consumer protection law, including compensation for harm to life or health and liability for intentional breach.',
+        "11.4. To the extent permitted by law, indirect losses and lost profits are excluded; aggregate liability is limited to the greater of payments for the Service in the preceding 12 months or the equivalent of USD 50. Mandatory refunds and the cases in clause 11.1 are excluded from this limit. No additional guarantee of prediction accuracy, outcomes, continuous availability or suitability for a particular child is provided.",
       ],
     },
     {
       title: '12. Force majeure',
       blocks: [
-        '12.1. The parties are released from liability for full or partial non-performance caused by force majeure — extraordinary and unavoidable circumstances under the given conditions (Article 372(3) of the Civil Code) arising after the Agreement was concluded.',
+        '12.1. The parties are released from liability for full or partial non-performance caused by force majeure — extraordinary and unavoidable circumstances under the given conditions arising after the Agreement was concluded.',
         '12.2. The parties treat as such, in particular, where they meet clause 12.1:',
         {
           ul: [
             'natural disasters, fires, floods, epidemics and related restrictions;',
             'military action, terrorist acts, riots, strikes;',
-            'acts of the authorities of Belarus, foreign states and international organisations that make performance impossible or unlawful, including sanctions and other restrictive measures, payment bans and restrictions, blocking of internet resources;',
+            'acts of the authorities of Georgia, other states and international organisations that make performance impossible or unlawful, including sanctions and other restrictive measures, payment bans and restrictions, blocking of internet resources;',
             'termination, suspension or material restriction of services of banks, payment systems, app stores, sign-in services, cloud infrastructure and artificial-intelligence providers for reasons beyond the Provider’s control (sanctions, government decisions, a mass outage at the provider), where the Provider could not perform by other available means within a reasonable time;',
             'major accidents and mass outages of telecom networks, the Internet, power supply or data centres;',
             'cyberattacks (DDoS, malware, unauthorised access) where the Provider had taken reasonable protective measures.',
           ],
         },
-        '12.3. The affected party notifies the other within a reasonable time. Deadlines move in proportion to the duration of the circumstances.',
+        "12.3. The affected party gives notice within a reasonable time and takes reasonable measures to mitigate effects. An affected deadline may be extended only where law permits, without removing mandatory refund rights.",
         '12.4. If the circumstances last more than 30 days, either party may withdraw from the Agreement; the User receives the price of the unused part of the Access Period.',
-        '12.5. A certificate of the Belarusian Chamber of Commerce and Industry, official acts and public notices of the providers concerned may serve as evidence.',
+        "12.5. Relevant evidence may include official acts and provider notices. An ordinary technical error or lack of funds does not itself excuse performance. Mandatory refund rights remain unaffected.",
       ],
     },
     {
@@ -373,7 +368,7 @@ function en({ payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '14. Notices, evidence and language',
       blocks: [
-        `14.1. The parties communicate electronically, and such messages count as written. The Provider writes to the Account e-mail (including Apple’s “Hide My Email” relay), to a gift buyer at the address given in the order, and/or in the App; the User writes through the “Write to us” form on the Website or to the Provider’s e-mail address (section 17). A message is also deemed delivered if it was not received for reasons on the addressee’s side (Article 166-1 of the Civil Code). The User keeps their e-mail address current.`,
+        "14.1. The parties may communicate through the Website, App and the contacts they provide. Applicable law determines a notice’s legal effect and time of receipt. The User keeps purchase-related contact details current.",
         '14.2. The parties accept that the logs of the Service and the Payment Service on payments, granting and ending access, and e-mail correspondence may be used as evidence. This does not limit the User’s right to present other evidence.',
         '14.3. The offer is written in Russian. Translations are provided for convenience; in case of discrepancy the Russian text prevails.',
       ],
@@ -381,9 +376,9 @@ function en({ payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '15. Governing law, claims and disputes',
       blocks: [
-        '15.1. The Agreement is governed by the law of the Republic of Belarus (Article 1124 of the Civil Code). If the User is a consumer habitually resident in another country, this choice does not deprive them of the protection of the mandatory rules of that country where they apply.',
+        "15.1. Georgian law governs this Agreement. This choice does not deprive a consumer of mandatory protections of their habitual residence where those protections apply.",
         `15.2. Claims are sent through the “Write to us” form on the Website, to the Provider’s e-mail address or to its postal address (section 17). The Provider considers a claim within the time set by consumer protection law. The claims procedure is not a precondition for a consumer to go to court.`,
-        '15.3. Disputes are heard by the courts under the law on civil proceedings. A consumer may sue at their place of residence or where the Agreement is performed (Article 48, part 16, of the Belarusian Code of Civil Proceedings), as well as at the Provider’s place of residence.',
+        "15.3. Disputes are heard by the competent court under applicable jurisdiction rules. Contacting support is not a prerequisite to a court or regulatory complaint unless the law requires otherwise.",
       ],
     },
     {
@@ -391,7 +386,7 @@ function en({ payment, privacy, seller }: Ctx): LegalSection[] {
       blocks: [
         '16.1. If any provision is held invalid, the rest remain in force.',
         '16.2. The offer and the “Payment, delivery and refunds” page make up the entire agreement of the parties on the Subscription.',
-        '16.3. The User may not assign rights and obligations under the Agreement. The Provider may assign them to a person who will continue the service on terms no worse (for example, on registering as an individual entrepreneur or setting up a company), notifying the User.',
+        '16.3. The User may not assign rights and obligations under the Agreement. The Provider may assign them to a person who will continue the service on terms no worse, notifying the User.',
         '16.4. Provisions on liability, refunds, intellectual property, personal data and disputes survive termination.',
         '16.5. The Agreement remains in force until the parties have fully performed their obligations.',
       ],
@@ -408,7 +403,7 @@ export function Offer({ lang }: { lang: Lang }) {
   return (
     <DocumentPage lang={lang} page="/offer" title={offerTitle[lang]} updated={editionLabel('offer', lang)}>
       <LegalBody sections={lang === 'ru' ? ru(ctx) : en(ctx)} />
-      <h2>{lang === 'ru' ? '17. Исполнитель' : '17. Provider'}</h2>
+      <h2 id="seller">{lang === 'ru' ? '17. Исполнитель' : '17. Provider'}</h2>
       <SellerBlock lang={lang} />
     </DocumentPage>
   );
