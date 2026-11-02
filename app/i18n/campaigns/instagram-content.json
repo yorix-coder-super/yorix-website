@@ -1,0 +1,162 @@
+{
+  "ru": [
+    {
+      "title": "Хотите, чтобы малыш спал спокойнее ночью?",
+      "body": "Частые пробуждения, сон по 1–2 часа и долгие укладывания не всегда решаются новым ритуалом или дополнительным укачиванием.",
+      "note": "Иногда стоит начать с того, что происходит до укладывания.",
+      "cta": "Что стоит изменить?"
+    },
+    {
+      "title": "Начните с подходящего времени сна",
+      "body": "Если малыш слишком долго бодрствует, ему бывает сложнее успокоиться и заснуть. А если укладывать слишком рано, он может быть ещё не готов ко сну.",
+      "cta": "Как подобрать время?",
+      "bullets": [
+        "Не ждать сильного переутомления",
+        "Учитывать предыдущий сон",
+        "Корректировать время укладывания"
+      ]
+    },
+    {
+      "title": "А если бы вы заранее знали, когда малышу пора спать?",
+      "body": "Без постоянных расчётов и попыток угадать подходящий момент. Yorix помогает определить ориентир следующего сна с учётом возраста и реального режима малыша.",
+      "note": "Если один сон прошёл не по плану, следующий ориентир обновится.",
+      "cta": "Попробовать Yorix"
+    },
+    {
+      "title": "Начните с одного сна.",
+      "bullets": [
+        "Лучше понимать ритм малыша.",
+        "Выбирать подходящее время укладывания.",
+        "Постепенно выстраивать более предсказуемый режим."
+      ]
+    }
+  ],
+  "tr": [
+    {
+      "title": "Bebeğiniz geceleri daha huzurlu uyusun ister misiniz?",
+      "body": "Sık uyanmalar, 1–2 saatlik uyku araları ve uzun uyutma çabaları her zaman yeni bir rutinle ya da daha fazla sallamakla çözülmez.",
+      "note": "Bazen işe, uykuya geçmeden önce neler olduğuna bakarak başlamak gerekir.",
+      "cta": "Neyi değiştirmeli?"
+    },
+    {
+      "title": "İşe doğru uyku zamanıyla başlayın",
+      "body": "Bebeğiniz çok uzun süre uyanık kaldığında sakinleşip uykuya dalması zorlaşabilir. Çok erken yatırıldığında ise henüz uykusu gelmemiş olabilir.",
+      "cta": "Doğru zamanı nasıl bulurum?",
+      "bullets": [
+        "Aşırı yorulmasını beklemeyin",
+        "Önceki uykusunu dikkate alın",
+        "Uyku saatini gerektiğinde ayarlayın"
+      ]
+    },
+    {
+      "title": "Bebeğinizin ne zaman uyuması gerektiğini önceden bilseniz?",
+      "body": "Sürekli hesap yapmadan, doğru anı tahmin etmeye çalışmadan. Yorix, bebeğinizin yaşına ve gerçek uyku düzenine göre bir sonraki uyku için yol gösterir.",
+      "note": "Bir uyku planlandığı gibi gitmezse sonraki uyku önerisi güncellenir.",
+      "cta": "Yorix’i deneyin"
+    },
+    {
+      "title": "İlk uykuyla başlayın.",
+      "bullets": [
+        "Bebeğinizin uyku ritmini daha iyi anlayın.",
+        "Uykuya yatırmak için uygun zamanı seçin.",
+        "Zamanla daha öngörülebilir bir düzen oluşturun."
+      ]
+    }
+  ],
+  "de": [
+    {
+      "title": "Wünschen Sie sich ruhigere Nächte für Ihr Baby?",
+      "body": "Häufiges Aufwachen, Schlafphasen von nur 1–2 Stunden und langes Einschlafbegleiten lassen sich nicht immer mit einem neuen Ritual oder mehr Wiegen lösen.",
+      "note": "Manchmal lohnt es sich, zuerst auf die Zeit vor dem Einschlafen zu schauen.",
+      "cta": "Was kann ich ändern?"
+    },
+    {
+      "title": "Beginnen Sie mit dem passenden Schlafzeitpunkt",
+      "body": "Ist Ihr Baby zu lange wach, fällt es ihm möglicherweise schwerer, zur Ruhe zu kommen. Legen Sie es zu früh hin, ist es vielleicht noch nicht müde genug.",
+      "cta": "Wie finde ich den Zeitpunkt?",
+      "bullets": [
+        "Nicht erst bei starker Übermüdung reagieren",
+        "Den vorherigen Schlaf berücksichtigen",
+        "Die Schlafenszeit flexibel anpassen"
+      ]
+    },
+    {
+      "title": "Was wäre, wenn Sie früher wüssten, wann Ihr Baby müde wird?",
+      "body": "Ohne ständiges Rechnen oder Rätselraten. Yorix hilft, den nächsten Schlafzeitpunkt anhand des Alters und des tatsächlichen Schlafrhythmus Ihres Babys einzuschätzen.",
+      "note": "Läuft ein Schläfchen anders als geplant, wird die nächste Empfehlung angepasst.",
+      "cta": "Yorix ausprobieren"
+    },
+    {
+      "title": "Beginnen Sie mit einem Schläfchen.",
+      "bullets": [
+        "Den Schlafrhythmus besser verstehen.",
+        "Einen passenden Zeitpunkt zum Hinlegen finden.",
+        "Schritt für Schritt mehr Vorhersehbarkeit schaffen."
+      ]
+    }
+  ],
+  "en": [
+    {
+      "title": "Wish your baby slept more peacefully at night?",
+      "body": "Frequent wake-ups, 1–2-hour stretches, and drawn-out bedtimes aren’t always solved by another routine or more rocking.",
+      "note": "Sometimes the best place to start is what happens before bedtime.",
+      "cta": "What can I change?"
+    },
+    {
+      "title": "Start with better sleep timing",
+      "body": "When your baby stays awake too long, settling may become harder. Put them down too early, and they may not be ready for sleep yet.",
+      "cta": "How do I find the right time?",
+      "bullets": [
+        "Watch for overtiredness",
+        "Consider the previous nap",
+        "Adjust bedtime as the day changes"
+      ]
+    },
+    {
+      "title": "What if you knew when your baby might be ready for sleep?",
+      "body": "No constant calculations. No endless guessing. Yorix helps estimate the next sleep window using your baby’s age and actual sleep patterns.",
+      "note": "If a nap doesn’t go to plan, the next suggested time updates.",
+      "cta": "Try Yorix"
+    },
+    {
+      "title": "Start with one nap.",
+      "bullets": [
+        "Understand your baby’s sleep rhythm.",
+        "Find a better time to settle them.",
+        "Build a more predictable routine, step by step."
+      ]
+    }
+  ],
+  "ar": [
+    {
+      "title": "هل تتمنّين أن ينام طفلك بهدوء أكثر ليلًا؟",
+      "body": "الاستيقاظ المتكرر، والنوم لفترات لا تتجاوز ساعة أو ساعتين، وصعوبة التنويم لا تُحل دائمًا بروتين جديد أو بالمزيد من الهزّ.",
+      "note": "أحيانًا تكون البداية في الانتباه إلى ما يحدث قبل موعد النوم.",
+      "cta": "ما الذي يمكن تغييره؟"
+    },
+    {
+      "title": "ابدئي باختيار الوقت الأنسب للنوم",
+      "body": "عندما يبقى طفلك مستيقظًا لفترة طويلة، قد يصعب عليه الهدوء والنوم. وإذا حاولتِ تنويمه مبكرًا جدًا، فقد لا يكون مستعدًا بعد.",
+      "cta": "كيف أعرف الوقت المناسب؟",
+      "bullets": [
+        "لا تنتظري حتى يشتدّ إرهاقه",
+        "راعي مدة نومه السابق",
+        "عدّلي وقت التنويم حسب يومه"
+      ]
+    },
+    {
+      "title": "ماذا لو عرفتِ مسبقًا متى قد يحين وقت نوم طفلك؟",
+      "body": "من دون حسابات مستمرة أو تخمين كل مرة. يساعدك Yorix على تقدير موعد النوم التالي بناءً على عمر طفلك ونمط نومه الفعلي.",
+      "note": "وإذا لم تسر إحدى القيلولات كما خُطّط لها، يتحدّث الموعد المقترح التالي.",
+      "cta": "جرّبي Yorix"
+    },
+    {
+      "title": "ابدئي بقيلولة واحدة.",
+      "bullets": [
+        "افهمي إيقاع نوم طفلك بشكل أفضل.",
+        "اختاري وقتًا أنسب لتنويمه.",
+        "ابني روتينًا أكثر قابلية للتوقّع خطوة بخطوة."
+      ]
+    }
+  ]
+}
