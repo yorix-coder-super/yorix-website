@@ -13,7 +13,7 @@ The reference document is `Yorix_website_funnel_5_languages.docx`, supplied by t
 | Recognition | Why does settling feel difficult? | Acknowledge the experience without blaming the parent or diagnosing the baby. | What can I change? |
 | Understanding | What is worth noticing? | Explain that timing and the preceding nap can matter, while the baby's cues remain important. | How do I find the time? |
 | Product | What does Yorix do for me? | A clearly labelled sample sleep-window card and an explanation that the next suggestion updates after recorded sleep. Disclose Premium here. | Try Yorix |
-| Installation | How do I start? | Three concrete uses, free versus Premium disclosure, official localized App Store badge, desktop QR, share/copy. | Open the App Store |
+| Installation | How do I start? | A simple first action, free versus Premium disclosure, official localized App Store badge, adjacent QR on all screen sizes, share/copy. | Open the App Store |
 
 Do not block installation behind a quiz, email address, account creation, autoplay, countdown or mandatory completion. A download shortcut and progress links are always available. No automatic slide advance. Back, browser history, deep hashes and locale changes preserve orientation. Without JavaScript the four sections and ordinary anchor links remain available.
 
@@ -28,9 +28,9 @@ Public pages inspected on 2026-11-02. These are observable patterns, not competi
 
 ## Art direction
 
-Quiet periwinkle, indigo type, warm golden moonlight and the existing Yorix baby illustrations. No pink. Desktop: a bordered, spacious two-column story surface. Mobile: one compact story per viewport, an image below the explanation and a sticky action area with safe-area padding. The third panel is a generic illustrative product card, not a fabricated iPhone screenshot; it is labelled “Example” and “not a prediction for your baby” in every language.
+Approved premium direction (2026-11-02): deep midnight indigo, periwinkle clouds, warm gold headline accents, white pill actions and the existing Yorix baby/star illustrations. No pink. Desktop uses a spacious two-column scene; mobile stacks concise copy, a large scene, optional guidance and the action in normal flow so navigation cannot cover the product card. Implementation details: `premium-implementation.md`; approved visual: `assets/premium-funnel-reference.png`.
 
-Motion: a 450–600 ms opacity/9 px entrance after enhancement; the first baby illustration drifts by 8 px over 7 s. Button hover is a 2 px lift. Reduced-motion disables all motion. QR and store badges never animate. Arabic mirrors the composition and arrow direction; branded badges and QR remain unmirrored.
+Motion: a 450–600 ms opacity/10 px entrance after enhancement; decorative stars and the clock float by 7 px over 7–8 s. The primary pill uses the site's pointer-only Magnetic wrapper and 2 px hover lift. The LCP baby, QR and official store badge remain stationary; clouds drift subtly using compositor transforms. Ambient motion pauses offscreen and in background tabs. Reduced-motion disables all motion. Arabic mirrors the composition and arrow direction; branded badges and QR remain unmirrored.
 
 ## Traffic and copy sequence
 

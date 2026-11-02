@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import type { CSSProperties } from 'react';
 import { encode } from 'uqr';
 import { campaignCopy, type CampaignLocale } from '../i18n/campaigns/instagram';
 import { campaignLinks, type CampaignParams } from '../ru/start/campaign';
@@ -27,6 +28,6 @@ export function CampaignPage({ locale, params = {} }: { locale: CampaignLocale; 
     const value = params[key];
     if (typeof value === 'string' && /^[a-z0-9_-]{1,64}$/i.test(value)) query.set(key, value);
   }
-  const qr = <svg aria-hidden="true" viewBox={`0 0 ${size} ${size}`} width="160" height="160" shapeRendering="crispEdges"><rect width={size} height={size} fill="white" /><path d={path} fill="#242046" /></svg>;
+  const qr = <svg aria-hidden="true" viewBox={`0 0 ${size} ${size}`} width={size * 3} height={size * 3} style={{ '--qr-size': size } as CSSProperties} shapeRendering="crispEdges"><rect width={size} height={size} fill="white" /><path d={path} fill="#242046" /></svg>;
   return <Funnel locale={locale} copy={copy} links={links} qr={qr} languageQuery={query.size ? `?${query}` : ''} />;
 }

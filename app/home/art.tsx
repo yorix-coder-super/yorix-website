@@ -37,13 +37,13 @@ export function PhoneFrame({
   );
 }
 
-export function Art({ name, className = '', width, height, priority = false }: { name: string; className?: string; width: number; height: number; priority?: boolean }) {
+export function Art({ name, className = '', width, height, priority = false, fetchPriority }: { name: string; className?: string; width: number; height: number; priority?: boolean; fetchPriority?: 'high' | 'low' | 'auto' }) {
   return (
     <img
       alt=""
       aria-hidden="true"
       className={className}
-      fetchPriority={priority ? 'high' : undefined}
+      fetchPriority={fetchPriority ?? (priority ? 'high' : undefined)}
       height={height}
       loading={priority ? undefined : 'lazy'}
       src={`/art/${name}.webp`}
