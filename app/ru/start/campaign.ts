@@ -1,4 +1,6 @@
-import { appStoreUrl, siteUrl } from '../../content';
+import { siteUrl } from '../../content';
+
+const funnelAppStoreUrl = 'https://apps.apple.com/app/apple-store/id6788705252?pt=129050076&ct=Website_Voronka&mt=8';
 
 export type CampaignParams = Record<string, string | string[] | undefined>;
 
@@ -19,8 +21,8 @@ export function campaignLinks(params: CampaignParams = {}, locale = 'ru') {
   share.searchParams.set('utm_content', creative);
   return {
     tag,
-    download: appStoreUrl(`${tag}-cta`),
-    qr: appStoreUrl(`${tag}-qr`),
+    download: funnelAppStoreUrl,
+    qr: funnelAppStoreUrl,
     share: share.toString(),
   };
 }
