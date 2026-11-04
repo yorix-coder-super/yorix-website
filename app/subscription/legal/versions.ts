@@ -2,10 +2,10 @@ import type { Lang } from '../i18n';
 
 // Edition dates are stored with each order as evidence of the accepted terms.
 export const legalVersion = {
-  offer: '2026-11-02',
-  payment: '2026-11-02',
-  terms: '2026-11-02',
-  privacy: '2026-11-02',
+  offer: '2026-11-04',
+  payment: '2026-11-04',
+  terms: '2026-11-04',
+  privacy: '2026-11-04',
 } as const;
 
 export type LegalDoc = keyof typeof legalVersion;

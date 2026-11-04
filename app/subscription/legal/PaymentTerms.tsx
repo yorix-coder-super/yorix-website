@@ -118,7 +118,11 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
           <li>if paid features remain unavailable, contact us through {form}; activation issues and refunds follow sections 5 and 7 of the offer.</li>
         </ul>
 
-        <h2>Cancellation and refunds</h2>
+        <h2>Purchases billed through the App Store</h2>
+        <p>
+          Apple reviews and processes monetary refunds for subscriptions, programs and AI credits billed through the App Store. Yorix does not issue these refunds, approve or decline requests, or override Apple’s decision, and cannot guarantee the outcome or timing. Submit your request at <a href="https://reportaproblem.apple.com/">reportaproblem.apple.com</a>; if unavailable, contact <a href="https://getsupport.apple.com/">Apple Support</a>. Cancelling a subscription stops future renewal and does not itself refund a charge. Mandatory consumer rights remain unaffected.
+        </p>
+        <h2>Cancellation and refunds for Website purchases</h2>
         <blockquote>
           <p>When paying by bank card through the {bank} system, refunds are made to the same card that was used for the payment.</p>
         </blockquote>
@@ -229,7 +233,11 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         <li>если платные функции остаются недоступны, напишите нам через {form}; устранение проблем активации и возврат регулируются разделами 5 и 7 оферты.</li>
       </ul>
 
-      <h2>Отмена заказа и возврат денежных средств</h2>
+      <h2>Покупки через App Store</h2>
+      <p>
+        Денежные возвраты за подписки, программы и ИИ-кредиты, оплаченные через App Store, рассматривает и осуществляет Apple. Yorix не оформляет такие возвраты, не одобряет и не отклоняет запросы, не может изменить решение Apple и не гарантирует результат или срок возврата. Запрос направляется на <a href="https://reportaproblem.apple.com/">reportaproblem.apple.com</a>; если он недоступен, обратитесь в <a href="https://getsupport.apple.com/">поддержку Apple</a>. Отмена подписки прекращает будущее продление и сама по себе не возвращает оплату. Обязательные права потребителя сохраняются.
+      </p>
+      <h2>Отмена заказа и возврат оплаты на Сайте</h2>
       <blockquote>
         <p>
           При оплате банковской платёжной картой через систему {bank} возврат денежных средств осуществляется на ту же карточку, с которой была
