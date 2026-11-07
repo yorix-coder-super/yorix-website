@@ -90,7 +90,7 @@ function ru({ payment, privacy, seller }: Ctx): LegalSection[] {
         "7.1. Пользователь вправе отказаться от Договора, направив однозначное заявление через форму поддержки или по контакту из раздела 17 с номером заказа и сведениями, необходимыми для поиска платежа. Причину отказа можно не указывать. Законное право на отказ от дистанционного договора в течение 14 календарных дней применяется в предусмотренных законом случаях; эти условия не устанавливают отказ от такого права.",
         "7.2. Если применяется законное право на отказ, размер возврата и допустимость удержаний определяются обязательными нормами. Само включение доступа или принятие общей оферты не означает отказа от права на возврат. Вне обязательных случаев полного возврата при досрочном отказе возвращается стоимость неиспользованных полных суток: цена × оставшиеся полные сутки ÷ сутки оплаченного периода.",
         '7.3. Уплаченная сумма возвращается **полностью**, если: (а) Подписка не была активирована; (б) списание повторное или ошибочное — в размере лишнего платежа; (в) услуга оказана с существенными недостатками или Договор расторгается по вине Исполнителя; (г) в иных случаях, предусмотренных законодательством.',
-        "7.4. Возврат производится на исходное средство оплаты в валюте фактического списания не позднее 14 календарных дней с момента получения заявления, если закон не требует более короткого срока. Срок отражения возврата в выписке зависит от банка. Мы не взимаем отдельную комиссию за возврат и не заменяем обязательный денежный возврат бонусами.",
+        "7.4. Возврат производится в валюте фактического списания не позднее 14 календарных дней с момента получения заявления, если закон не требует более короткого срока. Используется исходное средство оплаты, если оно доступно; иной способ согласуется с Пользователем, когда это допускается законом. Срок отражения возврата в выписке зависит от банка. Мы не взимаем отдельную комиссию за возврат и не заменяем обязательный денежный возврат бонусами.",
         '7.5. Права Пользователя при недостатках услуги (безвозмездное устранение, уменьшение цены, возврат) и сроки их удовлетворения определяются законодательством о защите прав потребителей.',
         '7.6. **Оспаривание платежа (chargeback).** Прежде чем оспаривать платёж в банке, обратитесь к Исполнителю: большинство вопросов решается быстрее напрямую. На время разбирательства Исполнитель вправе приостановить доступ, оплаченный оспариваемым платежом, и передать Платёжному сервису и банку сведения о заказе, активации и использовании Подписки в объёме, необходимом для разбирательства. Если платёж возвращён Пользователю, доступ за соответствующий период прекращается.',
       ],
@@ -152,7 +152,7 @@ function ru({ payment, privacy, seller }: Ctx): LegalSection[] {
           ul: [
             'стихийные бедствия, пожары, наводнения, эпидемии и связанные с ними ограничительные меры;',
             'военные действия, террористические акты, массовые беспорядки, забастовки;',
-            'акты органов власти Грузии, других государств и международных организаций, делающие исполнение невозможным или незаконным, в том числе санкции и иные ограничительные меры, запреты и ограничения платежей, блокировку интернет-ресурсов;',
+            'акты органов власти Республики Беларусь, других государств и международных организаций, делающие исполнение невозможным или незаконным, в том числе санкции и иные ограничительные меры, запреты и ограничения платежей, блокировку интернет-ресурсов;',
             'прекращение, приостановление или существенное ограничение услуг банков, платёжных систем, магазинов приложений, служб авторизации, облачной инфраструктуры и поставщиков технологий искусственного интеллекта по причинам, не зависящим от Исполнителя (санкции, решения органов власти, массовый сбой у поставщика), если Исполнитель не мог в разумный срок обеспечить исполнение иными доступными способами;',
             'крупные аварии и массовые сбои сетей связи, Интернета, электроснабжения, центров обработки данных;',
             'кибератаки (DDoS-атаки, вредоносное программное обеспечение, неправомерный доступ), если Исполнитель принял разумные меры защиты.',
@@ -183,7 +183,7 @@ function ru({ payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '15. Применимое право, претензии и споры',
       blocks: [
-        "15.1. К Договору применяется право Грузии. Этот выбор не лишает потребителя защиты обязательных норм страны его обычного проживания, когда они подлежат применению.",
+        "15.1. К Договору применяется право Республики Беларусь. Этот выбор не лишает потребителя защиты обязательных норм страны его обычного проживания, когда они подлежат применению.",
         `15.2. Претензии направляются через форму «Написать нам» на Сайте, на адрес электронной почты или по почтовому адресу Исполнителя (раздел 17). Исполнитель рассматривает претензию в сроки, установленные законодательством о защите прав потребителей. Претензионный порядок не является обязательным условием обращения потребителя в суд.`,
         "15.3. Спор рассматривается компетентным судом по применимым правилам подсудности. Обращение в поддержку не является обязательным условием обращения в суд или надзорный орган, если закон не предусматривает иное.",
       ],
@@ -283,7 +283,7 @@ function en({ payment, privacy, seller }: Ctx): LegalSection[] {
         "7.1. The User may withdraw by sending a clear statement through support or the contact in section 17, identifying the order and the payment. No reason is required. The statutory 14-calendar-day distance-contract withdrawal right applies where provided by law; these terms do not impose a waiver of that right.",
         "7.2. Where a statutory withdrawal right applies, mandatory law determines the refund and any permitted deduction. Activating access or accepting general terms does not itself waive refund rights. Outside mandatory full-refund cases, early cancellation is refunded for unused full days: price × remaining full days ÷ days in the paid period.",
         '7.3. The payment is refunded **in full** if: (a) the Subscription was never activated; (b) a charge is duplicate or mistaken — the excess amount; (c) the service had material defects or the Agreement ends through the Provider’s fault; (d) in other cases provided by law.',
-        "7.4. Refunds are made to the original payment method in the currency actually charged within 14 calendar days after receiving the request, or sooner where law requires. The bank determines when the credit appears on the statement. We charge no separate refund fee and do not replace a mandatory monetary refund with credits.",
+        "7.4. Refunds are made in the currency actually charged within 14 calendar days after receiving the request, or sooner where law requires. The original payment method is used where available; a different method requires agreement with the User where permitted by law. The bank determines when the credit appears on the statement. We charge no separate refund fee and do not replace a mandatory monetary refund with credits.",
         '7.5. The User’s rights for defects in the service (free remedy, price reduction, refund) and the time limits for them are set by consumer protection law.',
         '7.6. **Chargebacks.** Before disputing a payment with your bank, contact the Provider — most issues are solved faster directly. During a dispute the Provider may suspend the access paid for by the disputed payment and give the Payment Service and the bank the order, activation and usage details needed for the dispute. If the payment is returned to the User, access for the corresponding period ends.',
       ],
@@ -345,7 +345,7 @@ function en({ payment, privacy, seller }: Ctx): LegalSection[] {
           ul: [
             'natural disasters, fires, floods, epidemics and related restrictions;',
             'military action, terrorist acts, riots, strikes;',
-            'acts of the authorities of Georgia, other states and international organisations that make performance impossible or unlawful, including sanctions and other restrictive measures, payment bans and restrictions, blocking of internet resources;',
+            'acts of the authorities of Belarus, other states and international organisations that make performance impossible or unlawful, including sanctions and other restrictive measures, payment bans and restrictions, blocking of internet resources;',
             'termination, suspension or material restriction of services of banks, payment systems, app stores, sign-in services, cloud infrastructure and artificial-intelligence providers for reasons beyond the Provider’s control (sanctions, government decisions, a mass outage at the provider), where the Provider could not perform by other available means within a reasonable time;',
             'major accidents and mass outages of telecom networks, the Internet, power supply or data centres;',
             'cyberattacks (DDoS, malware, unauthorised access) where the Provider had taken reasonable protective measures.',
@@ -376,7 +376,7 @@ function en({ payment, privacy, seller }: Ctx): LegalSection[] {
     {
       title: '15. Governing law, claims and disputes',
       blocks: [
-        "15.1. Georgian law governs this Agreement. This choice does not deprive a consumer of mandatory protections of their habitual residence where those protections apply.",
+        "15.1. Belarusian law governs this Agreement. This choice does not deprive a consumer of mandatory protections of their habitual residence where those protections apply.",
         `15.2. Claims are sent through the “Write to us” form on the Website, to the Provider’s e-mail address or to its postal address (section 17). The Provider considers a claim within the time set by consumer protection law. The claims procedure is not a precondition for a consumer to go to court.`,
         "15.3. Disputes are heard by the competent court under applicable jurisdiction rules. Contacting support is not a prerequisite to a court or regulatory complaint unless the law requires otherwise.",
       ],

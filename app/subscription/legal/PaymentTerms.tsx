@@ -55,7 +55,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
           the AI sleep coach, analytics and daily recommendations. The provider and its business details are identified in the <a href={`${offer}#seller`}>public offer</a>.
         </p>
         {planList}
-        <p>The payment is one-off; there is no automatic renewal and the card is not saved.</p>
+        <p>The payment is one-off, with no automatic renewal. Yorix does not store card details; any card-saving option on the payment service is controlled there.</p>
 
         <h2>Order procedure</h2>
         <ol>
@@ -67,7 +67,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
             account you use in the Yorix app.
           </li>
           <li>The secure {bank} payment page opens: enter your card details and confirm the payment.</li>
-          <li>Right after payment the subscription turns on automatically in the Yorix app on your account — no codes, no manual activation.</li>
+          <li>After receipt of the payment is verified, access is activated automatically on your Yorix account. If confirmation is delayed, the result page keeps showing the payment as unconfirmed.</li>
         </ol>
         <p>
           A month or a year can be given as a gift: on the <a href={subscriptionPath(lang, '/gift')}>gift page</a> sign the card and pay the same way.
@@ -88,6 +88,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         </p>
         {logos}
 
+        <p>If the payment service displays an error, return to Yorix to check your order. An error or missing confirmation does not establish whether a card was charged; check your bank statement before paying again.</p>
         <h2>Payment rules and security</h2>
         <blockquote>
           <p>
@@ -124,9 +125,9 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         </p>
         <h2>Cancellation and refunds for Website purchases</h2>
         <blockquote>
-          <p>When paying by bank card through the {bank} system, refunds are made to the same card that was used for the payment.</p>
+          <p>The seller handles refunds through support. The original payment method is used where available; another method requires agreement with the buyer where permitted by law. The {bank} wallet connection does not issue refunds automatically.</p>
         </blockquote>
-        <p>There is no auto-renewal: the card is not saved, nothing is charged after the payment and there is nothing to cancel.</p>
+        <p>There is no auto-renewal or recurring charge by Yorix. Yorix does not store card details.</p>
         <ul>
           <li>before the subscription is switched on, an order can be cancelled at any time — we refund the full amount;</li>
           <li>
@@ -142,7 +143,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
           confirmation showing the wrong charge. Cash refunds are not made for card payments.
         </p>
         <p>
-          Refunds use the original payment method and currency within 14 calendar days of the request, or sooner where mandatory law requires. The issuing bank determines when the credit appears on the statement.
+          The seller handles refund requests through support within 14 calendar days, or sooner where mandatory law requires. The original payment method is used where available; another method requires agreement with the buyer where permitted by law. This wallet connection does not issue automatic refunds. The issuing bank determines when the credit appears on the statement.
         </p>
 
         <h2>Liability and force majeure</h2>
@@ -169,7 +170,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
         аналитика и ежедневные рекомендации. Исполнитель и его реквизиты указаны в <a href={`${offer}#seller`}>публичном договоре</a>.
       </p>
       {planList}
-      <p>Платёж разовый: автоматического продления нет, карта не сохраняется.</p>
+      <p>Платёж разовый, без автоматического продления. Yorix не хранит реквизиты карты; сохранением карты на стороне платёжного сервиса вы управляете там.</p>
 
       <h2>Процедура оформления заказа</h2>
       <ol>
@@ -181,7 +182,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
           Apple, что и в приложении Yorix.
         </li>
         <li>Откроется защищённая платёжная страница {bank}: введите данные карты и подтвердите оплату.</li>
-        <li>Сразу после оплаты подписка автоматически включится в приложении Yorix на вашем аккаунте — без кодов и ручной активации.</li>
+        <li>После подтверждения поступления оплаты подписка автоматически включится в приложении Yorix на вашем аккаунте. Пока подтверждение не получено, результат оплаты остаётся неподтверждённым.</li>
       </ol>
       <p>
         Подписку на месяц или год можно подарить: на странице <a href={subscriptionPath(lang, '/gift')}>подарка</a> подпишите открытку и оплатите так
@@ -202,6 +203,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
       </p>
       {logos}
 
+      <p>Если платёжный сервис показал ошибку, вернитесь на Yorix и проверьте заказ. Ошибка или отсутствие подтверждения не доказывают отсутствие списания; перед повторной оплатой проверьте выписку банка.</p>
       <h2>Правила оплаты и безопасность платежей</h2>
       <blockquote>
         <p>
@@ -219,7 +221,7 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
 
       <h2>Получение услуги (доставка)</h2>
       <p>
-        Физической доставки нет. Подписка включается удалённо в приложении Yorix на вашем аккаунте сразу после оплаты. Стоимость доставки не
+        Физической доставки нет. Подписка включается удалённо в приложении Yorix на вашем аккаунте после подтверждения поступления оплаты. Стоимость доставки не
         взимается.
       </p>
       <p>
@@ -240,11 +242,10 @@ export async function PaymentTerms({ lang }: { lang: Lang }) {
       <h2>Отмена заказа и возврат оплаты на Сайте</h2>
       <blockquote>
         <p>
-          При оплате банковской платёжной картой через систему {bank} возврат денежных средств осуществляется на ту же карточку, с которой была
-          произведена оплата.
+          Возврат оформляется продавцом через поддержку. Исходный способ оплаты используется, если он доступен; иной способ согласуется с покупателем, когда это допускается законом. Подключение {bank} не выполняет возврат автоматически.
         </p>
       </blockquote>
-      <p>Автопродления нет: карта не сохраняется, после оплаты списаний не будет, и отменять ничего не нужно.</p>
+      <p>Автопродления и повторных списаний со стороны Yorix нет. Yorix не хранит реквизиты карты.</p>
       <ul>
         <li>до включения подписки заказ можно отменить в любой момент — вернём всю сумму;</li>
         <li>

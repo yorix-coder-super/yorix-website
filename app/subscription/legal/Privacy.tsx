@@ -27,6 +27,7 @@ function ru({ operator, offer, contact }: Ctx): LegalSection[] {
       blocks: [
         `1.1. Эта Политика описывает обработку персональных данных в Yorix: на сайте yorix-app.com (Сайт), в приложении для iPhone и iPad (Приложение), поддержке и связанных сервисах. Ответственный за обработку — ${operator} (Оператор, «мы»); реквизиты и контакт указаны в разделе 14. Применяется законодательство Грузии о защите персональных данных и иные обязательные нормы, применимые к конкретной обработке.`,
         '1.2. Политика объясняет, какие данные мы обрабатываем, зачем и на каком основании, кому их передаём, как долго храним и как вы можете реализовать свои права. Политика не является согласием и не требует «принятия». Если обработка основана на согласии, мы просим его отдельно, в момент, когда оно нужно, и вы можете его отозвать.',
+        `1.2a. Для новых покупок на Сайте продавец — физическое лицо, плательщик НПД в Беларуси, указанное в [оферте](${offer}). Продавец обрабатывает сведения о заказе, оплате, выдаче доступа и возврате для исполнения договора, налогового учёта и рассмотрения обращений. К этой обработке применяются обязательные нормы законодательства Беларуси и иные применимые нормы. Оператор Приложения остаётся указанным в разделе 14.`,
         '1.3. Сервис предназначен для взрослых — родителей и других лиц, которые заботятся о ребёнке. Сведения о ребёнке вносит взрослый; дети Сервисом не пользуются, и мы не собираем данные непосредственно у детей.',
         "1.4. Термины используются в значении применимого законодательства о защите персональных данных. Сведения о здоровье относятся к специальным категориям данных. Принятие условий использования само по себе не является согласием на любую обработку или передачу данных.",
       ],
@@ -273,6 +274,7 @@ function en({ operator, offer, contact }: Ctx): LegalSection[] {
       blocks: [
         `1.1. This Policy describes personal-data processing in Yorix: the yorix-app.com website (Website), the iPhone and iPad app (App), support and related services. The controller is ${operator} (we); registration and contact details are in section 14. Georgian personal-data legislation and other mandatory rules applicable to the processing apply.`,
         '1.2. It explains what data we process, why and on what basis, who we share it with, how long we keep it and how you can exercise your rights. The policy is not consent and does not need to be “accepted”. Where processing relies on consent, we ask for it separately, when it is needed, and you can withdraw it.',
+        `1.2a. For new Website purchases, the seller is the individual professional income tax payer in Belarus identified in the [offer](${offer}). The seller processes order, payment, access and refund information to perform the contract, keep tax records and handle requests. Mandatory Belarusian law and other applicable rules govern this processing. The App controller remains the operator identified in section 14.`,
         '1.3. The Service is for adults — parents and others caring for a child. Information about the child is entered by an adult; children do not use the Service and we do not collect data directly from children.',
         "1.4. Terms have the meanings given by applicable data-protection law. Health information is special-category data. Accepting the terms of use does not by itself consent to every form of processing or transfer.",
       ],
@@ -514,7 +516,7 @@ function en({ operator, offer, contact }: Ctx): LegalSection[] {
 
 export function Privacy({ lang }: { lang: Lang }) {
   const ctx: Ctx = {
-    operator: sellerLine(lang),
+    operator: sellerLine(lang, true),
     offer: subscriptionPath(lang, '/offer'),
     contact: `${lang === 'ru' ? '/ru' : ''}/support#contact`,
   };
@@ -522,7 +524,7 @@ export function Privacy({ lang }: { lang: Lang }) {
     <DocumentPage lang={lang} page="/privacy" title={privacyTitle[lang]} updated={editionLabel('privacy', lang)}>
       <LegalBody sections={lang === 'ru' ? ru(ctx) : en(ctx)} />
       <h2>{lang === 'ru' ? '14. Оператор' : '14. Operator'}</h2>
-      <SellerBlock email={false} lang={lang} />
+      <SellerBlock email={false} lang={lang} operator />
       <p>{lang === 'ru' ? 'По вопросам персональных данных напишите нам через форму «Написать нам» на странице поддержки.' : 'For personal data questions use the “Write to us” form on the support page.'}</p>
     </DocumentPage>
   );

@@ -1,25 +1,27 @@
 import type { Lang } from '../i18n';
-import { merchant } from '../merchant';
+import { merchant, serviceOperator } from '../merchant';
 
-export function sellerLine(lang: Lang) {
+export function sellerLine(lang: Lang, operator = false) {
+  if (!operator) return lang === 'ru' ? `${merchant.fullName}, плательщик НПД (Беларусь)` : `${merchant.latinName}, professional income tax payer (Belarus)`;
   return lang === 'ru'
-    ? `ИП ${merchant.fullName} (Грузия)`
-    : `Individual Entrepreneur ${merchant.latinName} (Georgia)`;
+    ? `ИП ${serviceOperator.fullName} (Грузия)`
+    : `Individual Entrepreneur ${serviceOperator.latinName} (Georgia)`;
 }
 
 // The e-mail appears only where a seller's requisites must carry it (the
 // offer); everywhere else people write through the site's form.
-export function SellerBlock({ lang, email = true }: { lang: Lang; email?: boolean }) {
-  const address = [merchant.country[lang], merchant.postalAddress].filter(Boolean).join(', ');
+export function SellerBlock({ lang, email = true, operator = false }: { lang: Lang; email?: boolean; operator?: boolean }) {
+  const identity = operator ? serviceOperator : merchant;
+  const address = [identity.country[lang], identity.postalAddress].filter(Boolean).join(', ');
   return (
     <p>
-      {sellerLine(lang)}
+      {sellerLine(lang, operator)}
       <br />
-      {merchant.status[lang]}
-      {merchant.registrationNumber ? (
+      {identity.status[lang]}
+      {identity.registrationNumber ? (
         <>
           <br />
-          {lang === 'ru' ? 'Регистрационный / налоговый номер' : 'Registration / tax number'} {merchant.registrationNumber}
+          {operator ? (lang === 'ru' ? 'Регистрационный / налоговый номер' : 'Registration / tax number') : (lang === 'ru' ? 'УНП' : 'Taxpayer number')} {identity.registrationNumber}
         </>
       ) : null}
       <br />
@@ -27,17 +29,17 @@ export function SellerBlock({ lang, email = true }: { lang: Lang; email?: boolea
       {email ? (
         <>
           <br />
-          E-mail: {merchant.email}
+          E-mail: {identity.email}
         </>
       ) : null}
-      {merchant.phone ? (
+      {identity.phone ? (
         <>
           <br />
-          {lang === 'ru' ? 'Телефон' : 'Phone'}: {merchant.phone}
+          {lang === 'ru' ? 'Телефон' : 'Phone'}: {identity.phone}
         </>
       ) : null}
       <br />
-      {merchant.hours[lang]}
+      {identity.hours[lang]}
     </p>
   );
 }

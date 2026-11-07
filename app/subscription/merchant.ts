@@ -5,7 +5,7 @@ import { charges, chargesRub, plans, prices, type Plan, type PlanId } from './pr
 // Single source for everything the acquiring bank checks on the site:
 // seller requisites, plan prices and the support promise. Empty fields are
 // not rendered, so the page never shows a placeholder to a buyer.
-export const merchant = {
+export const serviceOperator = {
   fullName: 'Yahor Bazyk',
   latinName: 'Yahor Bazyk',
   status: {
@@ -24,8 +24,20 @@ export const merchant = {
   tradeRegister: '',
 };
 
-export type Acquirer = 'webpay' | 'yookassa';
-export type CheckoutProvider = Acquirer | 'yoomoney';
+export const merchant = {
+  ...serviceOperator,
+  fullName: 'Базык Егор Юрьевич',
+  status: {
+    ru: 'Физическое лицо — плательщик налога на профессиональный доход',
+    en: 'Individual registered as a professional income tax payer',
+  },
+  registrationNumber: 'HE5964401',
+  country: { ru: 'Республика Беларусь', en: 'Republic of Belarus' },
+  postalAddress: '',
+};
+
+export type Acquirer = 'webpay' | 'yookassa' | 'yoomoney';
+export type CheckoutProvider = Acquirer;
 
 type AcquirerProfile = {
   id: Acquirer;
@@ -52,7 +64,21 @@ type AcquirerProfile = {
   recipient: { ru: string; en: string; country: { ru: string; en: string } };
 };
 
-const ACQUIRERS: Record<Acquirer, AcquirerProfile> = {
+export const ACQUIRERS: Record<Acquirer, AcquirerProfile> = {
+  yoomoney: {
+    id: 'yoomoney',
+    name: { ru: 'ЮMoney', en: 'YooMoney' },
+    cards: { ru: ['карты российских банков'], en: ['cards issued by Russian banks'] },
+    wallets: { ru: [], en: [] },
+    note: {
+      ru: 'Перевод через ЮMoney. Поддерживаются только карты, выпущенные в России.',
+      en: 'Transfer through YooMoney. Only cards issued in Russia are supported.',
+    },
+    strip: null,
+    emailsReceipt: false,
+    site: 'https://yoomoney.ru',
+    recipient: { ru: 'ООО НКО «ЮМани»', en: 'YooMoney NBCO LLC', country: { ru: 'Россия', en: 'Russia' } },
+  },
   webpay: {
     id: 'webpay',
     name: { ru: 'WEBPAY', en: 'WEBPAY' },
@@ -92,7 +118,7 @@ const ACQUIRERS: Record<Acquirer, AcquirerProfile> = {
  * Keep it in step with the worker's WEB_PAYMENT_PROVIDER — the site only
  * describes what the worker actually charges through.
  */
-export const ACQUIRER: Acquirer = 'yookassa';
+export const ACQUIRER: Acquirer = 'yoomoney';
 
 export const acquirer = ACQUIRERS[ACQUIRER];
 

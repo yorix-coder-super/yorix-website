@@ -9,6 +9,7 @@ import { subscriptionPath } from '../i18n';
 import { legalVersion } from '../legal/versions';
 import { ACQUIRER, chargeFor, chargeToSpellOut, planCopy } from '../merchant';
 import { Money } from '../Money';
+import { PaymentMethodNote } from '../PaymentMethodNote';
 import { Reveal } from '../Reveal';
 import { Button, Spinner } from '../ui';
 import { cardHasContact } from './cardText';
@@ -267,6 +268,7 @@ export function GiftCheckout() {
             </p>
           ) : null}
 
+          <PaymentMethodNote provider={acquirer} lang={lang} />
           <Button className="w-full whitespace-normal! text-center" disabled={stage !== 'idle'} type="submit" variant="light">
             {stage !== 'idle' ? <Spinner className="h-5 w-5" /> : needsTester ? <AppleGlyph className="h-5 w-5" /> : null}
             <Money text={label} />

@@ -13,6 +13,7 @@ import { formatDate, subscriptionPath, type Lang } from './i18n';
 import { legalVersion } from './legal/versions';
 import { rememberGift } from './gift/keys';
 import { validPaymentHandoff, submitPaymentHandoff, type PaymentHandoff } from './payment-handoff';
+import { PaymentMethodNote } from './PaymentMethodNote';
 import { ACQUIRER, chargeFor, chargeToSpellOut, planCopy, plans, type CheckoutProvider as Acquirer, type Plan } from './merchant';
 import { Money } from './Money';
 import { Button, Spinner } from './ui';
@@ -594,6 +595,9 @@ export function CheckoutDialog() {
             </p>
           ) : null}
 
+          {(config?.provider ?? ACQUIRER) === 'yoomoney' ? <div className="mt-5">
+            <PaymentMethodNote provider={config?.provider ?? ACQUIRER} lang={lang} />
+          </div> : null}
           <div className="mt-6 flex flex-col gap-2 sm:flex-row">
             <Button
               aria-busy={stage !== 'idle'}

@@ -355,7 +355,7 @@ function en({ seller, privacy, offer, payment, contact, web }: Ctx): LegalSectio
 
 export async function Terms({ lang }: { lang: Lang }) {
   const ctx: Ctx = {
-    seller: sellerLine(lang),
+    seller: sellerLine(lang, true),
     privacy: subscriptionPath(lang, '/privacy'),
     offer: subscriptionPath(lang, '/offer'),
     payment: subscriptionPath(lang, '/payment'),
