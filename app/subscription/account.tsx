@@ -12,7 +12,8 @@ import { currencyForVisitor, formatMoney, sellsOnWeb, type WebCurrency } from '.
 import { formatDate, subscriptionPath, type Lang } from './i18n';
 import { legalVersion } from './legal/versions';
 import { rememberGift } from './gift/keys';
-import { ACQUIRER, chargeFor, chargeToSpellOut, planCopy, plans, type Acquirer, type Plan } from './merchant';
+import { validPaymentHandoff, submitPaymentHandoff, type PaymentHandoff } from './payment-handoff';
+import { ACQUIRER, chargeFor, chargeToSpellOut, planCopy, plans, type CheckoutProvider as Acquirer, type Plan } from './merchant';
 import { Money } from './Money';
 import { Button, Spinner } from './ui';
 import { REVIEW_OPEN } from './review';
@@ -124,22 +125,6 @@ function signInErrorFor(code: string): ErrorKey | null {
   if (code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request') return null;
   return 'signInError';
 }
-
-// The acquirer's hosted payment page — the only place an order may send the
-// buyer — for the mode checkout runs in (WebPay's sandbox never in
-// production). The trailing slash matters: without it yoomoney.ru.evil.example
-// and yoomoney.ru@evil.example would both pass.
-const PAYMENT_PAGES: Record<Acquirer, Record<'test' | 'prod', RegExp>> = {
-  webpay: {
-    test: /^https:\/\/securesandbox\.webpay\.by\//,
-    prod: /^https:\/\/payment\.webpay\.by\//,
-  },
-  // ЮKassa hosts both shops' pages on its own yoomoney.ru.
-  yookassa: {
-    test: /^https:\/\/yoomoney\.ru\//,
-    prod: /^https:\/\/yoomoney\.ru\//,
-  },
-};
 
 export function AccountProvider({
   lang,
@@ -301,13 +286,12 @@ export function AccountProvider({
           // no account, so the buyer types the only one there is.
           body: JSON.stringify({ planId, lang, terms, ...(gift ? { gift } : {}), ...(email ? { email } : {}) }),
         });
-        const body = (await res.json().catch(() => ({}))) as { redirectUrl?: string; error?: string; orderId?: string; giftKey?: string };
-        const paymentPage = checkoutMode === 'test' || checkoutMode === 'prod' ? PAYMENT_PAGES[acquirer][checkoutMode] : null;
-        if (res.ok && body.redirectUrl && paymentPage?.test(body.redirectUrl)) {
+        const body = (await res.json().catch(() => ({}))) as PaymentHandoff & { error?: string; orderId?: string; giftKey?: string };
+        if (res.ok && validPaymentHandoff(body, acquirer, checkoutMode)) {
           // Kept before leaving for the bank: the only way back to this gift.
           if (gift && body.orderId && body.giftKey) rememberGift(body.orderId, body.giftKey);
           setState((s) => ({ ...s, busy: 'redirect' }));
-          window.location.assign(body.redirectUrl);
+          submitPaymentHandoff(body, acquirer, checkoutMode);
           return true;
         }
         error = orderErrorFor(res.status, body.error, checkoutMode);

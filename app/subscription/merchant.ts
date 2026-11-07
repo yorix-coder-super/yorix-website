@@ -25,6 +25,7 @@ export const merchant = {
 };
 
 export type Acquirer = 'webpay' | 'yookassa';
+export type CheckoutProvider = Acquirer | 'yoomoney';
 
 type AcquirerProfile = {
   id: Acquirer;
@@ -103,8 +104,8 @@ export { charges, chargesRub, plans, prices };
 export type { Plan, PlanId };
 
 /** What the card is actually charged, and in which currency. */
-export function chargeFor(planId: PlanId, currency: WebCurrency, acquirer: Acquirer): { amount: number; currency: WebCurrency } {
-  return acquirer === 'yookassa'
+export function chargeFor(planId: PlanId, currency: WebCurrency, acquirer: CheckoutProvider): { amount: number; currency: WebCurrency } {
+  return acquirer !== 'webpay'
     ? { amount: chargesRub[planId][currency], currency: 'RUB' }
     : { amount: charges[planId][currency], currency: 'BYN' };
 }
@@ -115,7 +116,7 @@ export function chargeFor(planId: PlanId, currency: WebCurrency, acquirer: Acqui
  * its sentence names that currency, while a rouble amount would only repeat
  * the rouble price the buyer is already reading.
  */
-export function chargeToSpellOut(planId: PlanId, currency: WebCurrency, acquirer: Acquirer): number | null {
+export function chargeToSpellOut(planId: PlanId, currency: WebCurrency, acquirer: CheckoutProvider): number | null {
   const charge = chargeFor(planId, currency, acquirer);
   return charge.currency === 'BYN' && charge.currency !== currency ? charge.amount : null;
 }
