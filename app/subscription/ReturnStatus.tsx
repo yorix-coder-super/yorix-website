@@ -49,6 +49,8 @@ function ReturnStatus() {
   useEffect(() => {
     if (!giftKey && !reviewing && (!ready || !configured || !signedIn)) return;
     let cancelled = false;
+    let activeRequest: AbortController | null = null;
+    let pollTimer: number | undefined;
     let attempts = 0;
     const started = Date.now();
     // Everything below runs after an await, so state updates never cascade
@@ -63,9 +65,13 @@ function ReturnStatus() {
         setStatus('missing');
         return;
       }
+      const controller = new AbortController();
+      activeRequest = controller;
+      const deadline = window.setTimeout(() => controller.abort(), 15_000);
       try {
         const res = await fetch(`${API_BASE}/v1/web/orders/${orderId}`, {
           headers: giftKey ? { 'X-Gift-Key': giftKey } : review ? { 'X-Review-Key': review } : token ? { 'X-Firebase-Token': token } : {},
+          signal: controller.signal,
         });
         if (cancelled) return;
         if (res.ok) {
@@ -97,20 +103,26 @@ function ReturnStatus() {
         }
       } catch {
         // Network hiccup: keep polling.
+      } finally {
+        window.clearTimeout(deadline);
+        if (activeRequest === controller) activeRequest = null;
       }
+      if (cancelled) return;
       attempts += 1;
       if (Date.now() - started >= WAIT_MS) {
         setStatus('late');
         return;
       }
       setStatus(attempts < FAST_POLLS ? 'pending' : 'slow');
-      window.setTimeout(() => {
+      pollTimer = window.setTimeout(() => {
         if (!cancelled) void poll();
       }, attempts < FAST_POLLS ? 2000 : 5000);
     };
     void poll();
     return () => {
       cancelled = true;
+      activeRequest?.abort();
+      window.clearTimeout(pollTimer);
     };
   }, [ready, configured, signedIn, getToken, giftKey, reviewing]);
 
